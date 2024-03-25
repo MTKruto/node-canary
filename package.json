@@ -1,0 +1,34 @@
+{
+  "name": "@mtkruto/node",
+  "version": "0.0.0",
+  "description": "MTKruto for Node.js",
+  "author": "Roj <rojvv@icloud.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MTKruto/MTKruto.git"
+  },
+  "license": "LGPL-3.0-or-later",
+  "main": "./script/mod.js",
+  "module": "./esm/mod.js",
+  "exports": {
+    ".": {
+      "import": "./esm/mod.js",
+      "require": "./script/mod.js"
+    }
+  },
+  "scripts": {
+    "test": "node test_runner.js"
+  },
+  "dependencies": {
+    "@deno/shim-deno": "~0.17.0",
+    "@deno/shim-crypto": "~0.3.1",
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.9.0",
+    "picocolors": "^1.0.0",
+    "@types/ws": "^8.5.4",
+    "@types/object-inspect": "^1.8.1"
+  },
+  "_generatedBy": "dnt@0.39.0"
+}

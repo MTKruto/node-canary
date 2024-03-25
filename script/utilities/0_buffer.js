@@ -1,0 +1,50 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.bufferFromBigInt = exports.concat = void 0;
+function concat(...buffers) {
+    let length = 0;
+    for (const b of buffers) {
+        length += b.length;
+    }
+    const buffer = new Uint8Array(length);
+    let offset = 0;
+    for (const b of buffers) {
+        buffer.set(b, offset);
+        offset += b.length;
+    }
+    return buffer;
+}
+exports.concat = concat;
+const bufferFromHexString = (hexString) => Uint8Array.from(hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16)));
+function bufferFromBigInt(int, byteCount, littleEndian = true, signed = false) {
+    const actualByteCount = Math.ceil(int.toString(2).length / 8);
+    if (byteCount < actualByteCount) {
+        throw new Error("Int too big");
+    }
+    if (byteCount == 4 || byteCount == 2) { // fast path
+        const buffer = new Uint8Array(byteCount);
+        const dataView = new DataView(buffer.buffer);
+        (byteCount == 2 ? signed ? dataView.setInt16 : dataView.setUint16 : signed ? dataView.setInt32 : dataView.setUint32).call(dataView, 0, Number(int), littleEndian);
+        return buffer;
+    }
+    int = BigInt(typeof int === "number" ? Math.ceil(int) : int);
+    if (byteCount == 8) { // fast path
+        const buffer = new Uint8Array(byteCount);
+        const dataView = new DataView(buffer.buffer);
+        (signed ? dataView.setBigInt64 : dataView.setBigUint64).call(dataView, 0, int, littleEndian);
+        return buffer;
+    }
+    if (!signed && int < 0n) {
+        throw new Error("Got unexpected signed int");
+    }
+    if (signed && int < 0n) {
+        int = 2n ** BigInt(byteCount * 8) + int;
+    }
+    const hex = int.toString(16).padStart(byteCount * 2, "0");
+    const buffer = bufferFromHexString(hex);
+    if (littleEndian) {
+        buffer.reverse();
+    }
+    return buffer;
+}
+exports.bufferFromBigInt = bufferFromBigInt;

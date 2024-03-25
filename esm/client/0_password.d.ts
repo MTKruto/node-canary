@@ -1,0 +1,11 @@
+import { sha256 } from "../1_utilities.js";
+import { enums, types } from "../2_tl.js";
+export declare function isSafePrime(primeBytes: Uint8Array, g: number): boolean;
+export declare const h: typeof sha256;
+export declare const sh: (data: Uint8Array, salt: Uint8Array) => Promise<Uint8Array>;
+export declare const ph1: (password: Uint8Array, salt1: Uint8Array, salt2: Uint8Array) => Promise<Uint8Array>;
+export declare function pbkdf2(password: Uint8Array, salt: Uint8Array, iterations: number): Promise<Uint8Array>;
+export declare const ph2: (password: Uint8Array, salt1: Uint8Array, salt2: Uint8Array) => Promise<Uint8Array>;
+export declare function isGoodModExpFirst(modexp: bigint, prime: bigint): boolean;
+export declare function pad(bigint: number | bigint | Uint8Array): Uint8Array;
+export declare function checkPassword(password_: string, ap: enums.account.Password): Promise<types.InputCheckPasswordSRP>;

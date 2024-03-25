@@ -1,0 +1,52 @@
+name: Update
+
+on: workflow_dispatch
+
+permissions:
+    contents: write
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v4
+          with:
+            repository: MTKruto/MTKruto
+            path: MTKruto
+
+        - uses: actions/checkout@v4
+          with:
+            path: main
+  
+        - uses: denoland/setup-deno@v1
+
+        - uses: actions/setup-node@v3
+          with:
+            node-version: 20.x
+
+        - uses: pnpm/action-setup@v2
+          with:
+            version: 8
+
+        - run: |
+            pwd && \
+            ls && \
+            cd MTKruto/ && \
+            deno run -A https://esm.sh/gh/MTKruto/npm@main/transform_node.ts 0.0.0 ./mod.ts && \
+            rm -rf ../main/* && \
+            mv dist/* ../main/ && \
+            mv dist/.npmignore ../main/.gitignore && \
+            echo `git log --format="%H" -n 1` > COMMIT_ID && \
+            echo ls && \
+            pwd && \
+            cd ../main/ && \
+            pwd && \
+            rm -rf node_modules/ README.md && \
+            ls && \
+            git add -A && \
+            git -c "user.name=github-actions[bot]" -c "user.email=41898282+github-actions[bot]@users.noreply.github.com" -c "commit.gpgsign=false" commit -m `cat ../MTKruto/COMMIT_ID` && \
+            git push

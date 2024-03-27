@@ -19,6 +19,7 @@ import { messageSearchFilterToTlObject } from "../types/0_message_search_filter.
 import { parseHtml } from "./0_html.js";
 import { parseMarkdown } from "./0_markdown.js";
 import { getFileContents, isHttpUrl } from "./0_utilities.js";
+const FALLBACK_MIME_TYPE = "application/octet-stream";
 const STICKER_MIME_TYPES = ["image/webp", "video/webp", "application/x-tgsticker"];
 export class MessageManager {
     constructor(c) {
@@ -1066,12 +1067,9 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
         else {
             const [contents, fileName_] = await getFileContents(document);
             const fileName = params?.fileName ?? fileName_;
-            let mimeType = params?.mimeType ?? contentType(fileName.split(".").slice(-1)[0]) ?? "application/octet-stream";
+            const mimeType = params?.mimeType ?? contentType(fileName.split(".").slice(-1)[0]) ?? FALLBACK_MIME_TYPE;
             if (expectedMimeTypes && !expectedMimeTypes.includes(mimeType)) {
                 UNREACHABLE();
-            }
-            if (STICKER_MIME_TYPES.includes(mimeType) && !expectedMimeTypes) {
-                mimeType = "application/octet-stream";
             }
             const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: params?.chunkSize, signal: params?.signal });
             let thumb = undefined;
@@ -1085,6 +1083,7 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
                 spoiler,
                 attributes: [new types.DocumentAttributeFilename({ file_name: fileName }), ...otherAttribs],
                 mime_type: mimeType,
+                force_file: fileType == FileType.Document ? true : undefined,
             });
         }
     }

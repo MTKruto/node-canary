@@ -22,6 +22,7 @@ const _0_message_search_filter_js_1 = require("../types/0_message_search_filter.
 const _0_html_js_1 = require("./0_html.js");
 const _0_markdown_js_1 = require("./0_markdown.js");
 const _0_utilities_js_1 = require("./0_utilities.js");
+const FALLBACK_MIME_TYPE = "application/octet-stream";
 const STICKER_MIME_TYPES = ["image/webp", "video/webp", "application/x-tgsticker"];
 class MessageManager {
     constructor(c) {
@@ -1070,12 +1071,9 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
         else {
             const [contents, fileName_] = await (0, _0_utilities_js_1.getFileContents)(document);
             const fileName = params?.fileName ?? fileName_;
-            let mimeType = params?.mimeType ?? (0, _0_deps_js_1.contentType)(fileName.split(".").slice(-1)[0]) ?? "application/octet-stream";
+            const mimeType = params?.mimeType ?? (0, _0_deps_js_1.contentType)(fileName.split(".").slice(-1)[0]) ?? FALLBACK_MIME_TYPE;
             if (expectedMimeTypes && !expectedMimeTypes.includes(mimeType)) {
                 (0, _1_utilities_js_1.UNREACHABLE)();
-            }
-            if (STICKER_MIME_TYPES.includes(mimeType) && !expectedMimeTypes) {
-                mimeType = "application/octet-stream";
             }
             const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: params?.chunkSize, signal: params?.signal });
             let thumb = undefined;
@@ -1089,6 +1087,7 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
                 spoiler,
                 attributes: [new _2_tl_js_1.types.DocumentAttributeFilename({ file_name: fileName }), ...otherAttribs],
                 mime_type: mimeType,
+                force_file: fileType == _3_types_js_2.FileType.Document ? true : undefined,
             });
         }
     }

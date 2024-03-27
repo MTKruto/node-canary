@@ -1066,10 +1066,13 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
         }
         else {
             const [contents, fileName_] = await getFileContents(document);
-            const fileName = params?.fileName ?? fileName_;
+            let fileName = params?.fileName ?? fileName_;
             const mimeType = params?.mimeType ?? contentType(fileName.split(".").slice(-1)[0]) ?? FALLBACK_MIME_TYPE;
             if (expectedMimeTypes && !expectedMimeTypes.includes(mimeType)) {
                 UNREACHABLE();
+            }
+            if (fileName.endsWith(".tgs") && fileType == FileType.Document) {
+                fileName += "-";
             }
             const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: params?.chunkSize, signal: params?.signal });
             let thumb = undefined;

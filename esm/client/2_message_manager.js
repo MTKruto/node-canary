@@ -402,6 +402,10 @@ export class MessageManager {
         const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_sendDocumentInner).call(this, chatId, document, params, FileType.Document, []);
         return assertMessageType(message, "document");
     }
+    async sendSticker(chatId, document, params) {
+        const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_sendDocumentInner).call(this, chatId, document, params, FileType.Sticker, [new types.DocumentAttributeSticker({ alt: params?.emoji || "", stickerset: new types.InputStickerSetEmpty() })], undefined, ["image/webm", "video/webm", "application/x-tgsticker"]);
+        return assertMessageType(message, "sticker");
+    }
     async sendPhoto(chatId, photo, params) {
         let media = null;
         const spoiler = params?.hasSpoiler ? true : undefined;
@@ -1038,7 +1042,7 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
     const topMsgId = params?.messageThreadId;
     const replyToMsgId = params?.replyToMessageId;
     return replyToMsgId !== undefined ? new types.InputReplyToMessage({ reply_to_msg_id: replyToMsgId, top_msg_id: topMsgId, quote_text: params?.replyQuote?.text, quote_entities: await Promise.all(params?.replyQuote?.entities.map((v) => messageEntityToTlObject(v, __classPrivateFieldGet(this, _MessageManager_c, "f").getEntity)) ?? []), quote_offset: params?.replyQuote?.offset }) : undefined;
-}, _MessageManager_sendDocumentInner = async function _MessageManager_sendDocumentInner(chatId, document, params, fileType, otherAttribs, urlSupported = false) {
+}, _MessageManager_sendDocumentInner = async function _MessageManager_sendDocumentInner(chatId, document, params, fileType, otherAttribs, urlSupported = false, expectedMimeTypes) {
     let media = null;
     const spoiler = params?.hasSpoiler ? true : undefined;
     if (typeof document === "string") {
@@ -1047,6 +1051,7 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
             media = new types.InputMediaDocument({
                 id: new types.InputDocument(fileId),
                 spoiler,
+                query: otherAttribs.find((v) => v instanceof types.DocumentAttributeSticker)?.alt || undefined,
             });
         }
     }
@@ -1061,6 +1066,9 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
             const [contents, fileName_] = await getFileContents(document);
             const fileName = params?.fileName ?? fileName_;
             const mimeType = params?.mimeType ?? contentType(fileName.split(".").slice(-1)[0]) ?? "application/octet-stream";
+            if (expectedMimeTypes && !expectedMimeTypes.includes(mimeType)) {
+                UNREACHABLE();
+            }
             const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: params?.chunkSize, signal: params?.signal });
             let thumb = undefined;
             if (params?.thumbnail) {

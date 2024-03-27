@@ -277,6 +277,11 @@ export class Client extends Composer {
                     const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
                     return this.sendDocument(chatId, document, { ...params, replyToMessageId });
                 },
+                replySticker: (sticker, params) => {
+                    const { chatId, messageId } = mustGetMsg();
+                    const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
+                    return this.sendSticker(chatId, sticker, { ...params, replyToMessageId });
+                },
                 replyContact: (firstName, number, params) => {
                     const { chatId, messageId } = mustGetMsg();
                     const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
@@ -1528,6 +1533,17 @@ export class Client extends Composer {
      */
     async sendDocument(chatId, document, params) {
         return await __classPrivateFieldGet(this, _Client_messageManager, "f").sendDocument(chatId, document, params);
+    }
+    /**
+     * Send a sticker.
+     *
+     * @method ms
+     * @param chatId The chat to send the sticker to.
+     * @param document The sticker to send.
+     * @returns The sent sticker.
+     */
+    async sendSticker(chatId, sticker, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").sendSticker(chatId, sticker, params);
     }
     /**
      * Send a video.

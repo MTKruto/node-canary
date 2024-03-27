@@ -405,6 +405,10 @@ class MessageManager {
         const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_sendDocumentInner).call(this, chatId, document, params, _3_types_js_2.FileType.Document, []);
         return (0, _3_types_js_2.assertMessageType)(message, "document");
     }
+    async sendSticker(chatId, document, params) {
+        const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_sendDocumentInner).call(this, chatId, document, params, _3_types_js_2.FileType.Sticker, [new _2_tl_js_1.types.DocumentAttributeSticker({ alt: params?.emoji || "", stickerset: new _2_tl_js_1.types.InputStickerSetEmpty() })], undefined, ["image/webm", "video/webm", "application/x-tgsticker"]);
+        return (0, _3_types_js_2.assertMessageType)(message, "sticker");
+    }
     async sendPhoto(chatId, photo, params) {
         let media = null;
         const spoiler = params?.hasSpoiler ? true : undefined;
@@ -1042,7 +1046,7 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
     const topMsgId = params?.messageThreadId;
     const replyToMsgId = params?.replyToMessageId;
     return replyToMsgId !== undefined ? new _2_tl_js_1.types.InputReplyToMessage({ reply_to_msg_id: replyToMsgId, top_msg_id: topMsgId, quote_text: params?.replyQuote?.text, quote_entities: await Promise.all(params?.replyQuote?.entities.map((v) => (0, _3_types_js_2.messageEntityToTlObject)(v, __classPrivateFieldGet(this, _MessageManager_c, "f").getEntity)) ?? []), quote_offset: params?.replyQuote?.offset }) : undefined;
-}, _MessageManager_sendDocumentInner = async function _MessageManager_sendDocumentInner(chatId, document, params, fileType, otherAttribs, urlSupported = false) {
+}, _MessageManager_sendDocumentInner = async function _MessageManager_sendDocumentInner(chatId, document, params, fileType, otherAttribs, urlSupported = false, expectedMimeTypes) {
     let media = null;
     const spoiler = params?.hasSpoiler ? true : undefined;
     if (typeof document === "string") {
@@ -1051,6 +1055,7 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
             media = new _2_tl_js_1.types.InputMediaDocument({
                 id: new _2_tl_js_1.types.InputDocument(fileId),
                 spoiler,
+                query: otherAttribs.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeSticker)?.alt || undefined,
             });
         }
     }
@@ -1065,6 +1070,9 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
             const [contents, fileName_] = await (0, _0_utilities_js_1.getFileContents)(document);
             const fileName = params?.fileName ?? fileName_;
             const mimeType = params?.mimeType ?? (0, _0_deps_js_1.contentType)(fileName.split(".").slice(-1)[0]) ?? "application/octet-stream";
+            if (expectedMimeTypes && !expectedMimeTypes.includes(mimeType)) {
+                (0, _1_utilities_js_1.UNREACHABLE)();
+            }
             const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: params?.chunkSize, signal: params?.signal });
             let thumb = undefined;
             if (params?.thumbnail) {

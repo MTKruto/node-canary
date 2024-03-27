@@ -1,6 +1,6 @@
 import { enums, types } from "../2_tl.js";
 import { ChatAction, ChatMember, FileSource, FileType, ID, Message, MessageEntity, ParseMode, Reaction, Update, UsernameResolver } from "../3_types.js";
-import { AddReactionParams, BanChatMemberParams, CreateInviteLinkParams, DeleteMessagesParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetCreatedInviteLinksParams, GetHistoryParams, PinMessageParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetReactionsParams } from "./0_params.js";
+import { AddReactionParams, BanChatMemberParams, CreateInviteLinkParams, DeleteMessagesParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetCreatedInviteLinksParams, GetHistoryParams, PinMessageParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetReactionsParams } from "./0_params.js";
 import { C as C_ } from "./0_types.js";
 import { FileManager } from "./1_file_manager.js";
 interface C extends C_ {
@@ -33,6 +33,7 @@ export declare class MessageManager {
     sendAnimation(chatId: ID, animation: FileSource, params?: SendAnimationParams): Promise<import("../3_types.js").MessageAnimation>;
     sendVideo(chatId: ID, video: FileSource, params?: SendVideoParams): Promise<import("../3_types.js").MessageVideo>;
     sendDocument(chatId: ID, document: FileSource, params?: SendDocumentParams): Promise<import("../3_types.js").MessageDocument>;
+    sendSticker(chatId: ID, document: FileSource, params?: SendStickerParams): Promise<import("../3_types.js").MessageSticker>;
     sendPhoto(chatId: ID, photo: FileSource, params?: SendPhotoParams): Promise<import("../3_types.js").MessagePhoto>;
     resolveFileId(maybeFileId: string, expectedFileType: FileType | FileType[]): {
         id: bigint;

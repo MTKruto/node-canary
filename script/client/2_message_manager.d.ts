@@ -1,6 +1,6 @@
 import { enums, types } from "../2_tl.js";
 import { ChatAction, ChatMember, FileSource, FileType, ID, Message, MessageEntity, ParseMode, Reaction, Update, UsernameResolver } from "../3_types.js";
-import { AddReactionParams, BanChatMemberParams, CreateInviteLinkParams, DeleteMessagesParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetCreatedInviteLinksParams, GetHistoryParams, PinMessageParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetReactionsParams } from "./0_params.js";
+import { AddReactionParams, BanChatMemberParams, CreateInviteLinkParams, DeleteMessagesParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetCreatedInviteLinksParams, GetHistoryParams, PinMessageParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetReactionsParams, StopPollParams } from "./0_params.js";
 import { C as C_ } from "./0_types.js";
 import { FileManager } from "./1_file_manager.js";
 interface C extends C_ {
@@ -78,5 +78,6 @@ export declare class MessageManager {
     getChatMember(chatId: ID, userId: ID): Promise<ChatMember>;
     setChatStickerSet(chatId: ID, setName: string): Promise<void>;
     deleteChatStickerSet(chatId: ID): Promise<void>;
+    stopPoll(chatId: ID, messageId: number, params?: StopPollParams): Promise<import("../3_types.js").Poll>;
 }
 export {};

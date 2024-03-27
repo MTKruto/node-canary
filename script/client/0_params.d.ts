@@ -310,3 +310,6 @@ export interface GetCreatedInviteLinksParams {
     afterDate?: Date;
     afterInviteLink?: string;
 }
+export interface StopPollParams {
+    replyMarkup?: ReplyMarkup;
+}

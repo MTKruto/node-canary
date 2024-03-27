@@ -1006,6 +1006,27 @@ export class MessageManager {
         const channel = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputChannel(chatId);
         await __classPrivateFieldGet(this, _MessageManager_c, "f").api.channels.setStickers({ channel, stickerset: new types.InputStickerSetEmpty() });
     }
+    async stopPoll(chatId, messageId, params) {
+        const message = await this.getMessage(chatId, messageId);
+        if (message && "poll" in message && !message.poll.isClosed) {
+            const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.editMessage({
+                peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),
+                id: messageId,
+                media: new types.InputMediaPoll({
+                    poll: new types.Poll({
+                        id: BigInt(message.poll.id),
+                        closed: true,
+                        question: "",
+                        answers: [],
+                    }),
+                }),
+                reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
+            });
+            const message_ = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result).then((v) => v[0]);
+            return assertMessageType(message_, "poll").poll;
+        }
+        UNREACHABLE();
+    }
 }
 _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(), _MessageManager_instances = new WeakSet(), _MessageManager_updatesToMessages = async function _MessageManager_updatesToMessages(chatId, updates) {
     const messages = new Array();

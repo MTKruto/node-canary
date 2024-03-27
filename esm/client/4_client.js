@@ -1392,6 +1392,17 @@ export class Client extends Composer {
         return await __classPrivateFieldGet(this, _Client_messageManager, "f").sendPoll(chatId, question, options, params);
     }
     /**
+     * Stop a poll.
+     *
+     * @method ms
+     * @param chatId The chat that includes the poll.
+     * @param messageId The idenfifier of the poll's message.
+     * @returns The new state of the poll.
+     */
+    async stopPoll(chatId, messageId, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").stopPoll(chatId, messageId, params);
+    }
+    /**
      * Send a chat action.
      *
      * @method ms

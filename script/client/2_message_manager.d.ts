@@ -33,7 +33,7 @@ export declare class MessageManager {
     sendAnimation(chatId: ID, animation: FileSource, params?: SendAnimationParams): Promise<import("../3_types.js").MessageAnimation>;
     sendVideo(chatId: ID, video: FileSource, params?: SendVideoParams): Promise<import("../3_types.js").MessageVideo>;
     sendDocument(chatId: ID, document: FileSource, params?: SendDocumentParams): Promise<import("../3_types.js").MessageDocument>;
-    sendSticker(chatId: ID, document: FileSource, params?: SendStickerParams): Promise<import("../3_types.js").MessageSticker>;
+    sendSticker(chatId: ID, sticker: FileSource, params?: SendStickerParams): Promise<import("../3_types.js").MessageSticker>;
     sendPhoto(chatId: ID, photo: FileSource, params?: SendPhotoParams): Promise<import("../3_types.js").MessagePhoto>;
     resolveFileId(maybeFileId: string, expectedFileType: FileType | FileType[]): {
         id: bigint;

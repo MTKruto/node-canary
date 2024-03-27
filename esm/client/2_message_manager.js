@@ -19,6 +19,7 @@ import { messageSearchFilterToTlObject } from "../types/0_message_search_filter.
 import { parseHtml } from "./0_html.js";
 import { parseMarkdown } from "./0_markdown.js";
 import { getFileContents, isHttpUrl } from "./0_utilities.js";
+const STICKER_MIME_TYPES = ["image/webp", "video/webp", "application/x-tgsticker"];
 export class MessageManager {
     constructor(c) {
         _MessageManager_instances.add(this);
@@ -402,8 +403,8 @@ export class MessageManager {
         const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_sendDocumentInner).call(this, chatId, document, params, FileType.Document, []);
         return assertMessageType(message, "document");
     }
-    async sendSticker(chatId, document, params) {
-        const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_sendDocumentInner).call(this, chatId, document, params, FileType.Sticker, [new types.DocumentAttributeSticker({ alt: params?.emoji || "", stickerset: new types.InputStickerSetEmpty() })], undefined, ["image/webm", "video/webm", "application/x-tgsticker"]);
+    async sendSticker(chatId, sticker, params) {
+        const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_sendDocumentInner).call(this, chatId, sticker, params, FileType.Sticker, [new types.DocumentAttributeSticker({ alt: params?.emoji || "", stickerset: new types.InputStickerSetEmpty() })], undefined, STICKER_MIME_TYPES);
         return assertMessageType(message, "sticker");
     }
     async sendPhoto(chatId, photo, params) {
@@ -1065,9 +1066,12 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
         else {
             const [contents, fileName_] = await getFileContents(document);
             const fileName = params?.fileName ?? fileName_;
-            const mimeType = params?.mimeType ?? contentType(fileName.split(".").slice(-1)[0]) ?? "application/octet-stream";
+            let mimeType = params?.mimeType ?? contentType(fileName.split(".").slice(-1)[0]) ?? "application/octet-stream";
             if (expectedMimeTypes && !expectedMimeTypes.includes(mimeType)) {
                 UNREACHABLE();
+            }
+            if (STICKER_MIME_TYPES.includes(mimeType) && !expectedMimeTypes) {
+                mimeType = "application/octet-stream";
             }
             const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: params?.chunkSize, signal: params?.signal });
             let thumb = undefined;

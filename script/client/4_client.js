@@ -396,6 +396,10 @@ class Client extends Composer {
                     const inlineMessageId = mustGetInlineMsgId();
                     return this.editInlineMessageText(inlineMessageId, text, params);
                 },
+                editInlineMessageLiveLocation: (latitude, longitude, params) => {
+                    const inlineMessageId = mustGetInlineMsgId();
+                    return this.editInlineMessageLiveLocation(inlineMessageId, latitude, longitude, params);
+                },
                 editInlineMessageReplyMarkup: (params) => {
                     const inlineMessageId = mustGetInlineMsgId();
                     return this.editInlineMessageReplyMarkup(inlineMessageId, params);
@@ -403,6 +407,10 @@ class Client extends Composer {
                 editMessageText: (messageId, text, params) => {
                     const { chatId } = mustGetMsg();
                     return this.editMessageText(chatId, messageId, text, params);
+                },
+                editMessageLiveLocation: (messageId, latitude, longitude, params) => {
+                    const { chatId } = mustGetMsg();
+                    return this.editMessageLiveLocation(chatId, messageId, latitude, longitude, params);
                 },
                 editMessageReplyMarkup: (messageId, params) => {
                     const { chatId } = mustGetMsg();
@@ -1251,7 +1259,7 @@ class Client extends Composer {
      * Edit a message's text.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the messages.
+     * @param chatId The identifier of the chat that contains the message.
      * @param messageId The message's identifier.
      * @param text The new text of the message.
      * @returns The edited text message.
@@ -1273,7 +1281,7 @@ class Client extends Composer {
      * Edit a message's reply markup.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the messages.
+     * @param chatId The identifier of the chat that contains the message.
      * @param messageId The message's identifier.
      * @returns The edited message.
      */
@@ -1288,6 +1296,31 @@ class Client extends Composer {
      */
     async editInlineMessageReplyMarkup(inlineMessageId, params) {
         await __classPrivateFieldGet(this, _Client_messageManager, "f").editInlineMessageReplyMarkup(inlineMessageId, params);
+    }
+    /**
+     * Edit a message's live location.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that contains the messages.
+     * @param messageId The message's identifier.
+     * @param latitude The new latitude.
+     * @param longitude The new longitude.
+     * @returns The edited location message.
+     */
+    async editMessageLiveLocation(chatId, messageId, latitude, longitude, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").editMessageLiveLocation(chatId, messageId, latitude, longitude, params);
+    }
+    /**
+     * Edit an inline message's live location. Bot-only.
+     *
+     * @method ms
+     * @param inlineMessageId The inline message's identifier.
+     * @param latitude The new latitude.
+     * @param longitude The new longitude.
+     * @returns The edited location message.
+     */
+    async editInlineMessageLiveLocation(inlineMessageId, latitude, longitude, params) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").editInlineMessageLiveLocation(inlineMessageId, latitude, longitude, params);
     }
     /**
      * Retrieve multiple messages.

@@ -313,3 +313,13 @@ export interface GetCreatedInviteLinksParams {
 export interface StopPollParams {
     replyMarkup?: ReplyMarkup;
 }
+export interface EditMessageLiveLocationParams {
+    /** The accuracy radius of the location in meters. Must be in the range of 0-1500. */
+    horizontalAccuracy?: number;
+    /** The direction which the user is moving towards. Must be in the range of 1-350. */
+    heading?: number;
+    /** The maximum distance for proximity alerts on approaching another chat member in meters. Must be in the range 1-100,000. */
+    proximityAlertRadius?: number;
+    /** The reply markup of the message. Bot-only. */
+    replyMarkup?: ReplyMarkup;
+}

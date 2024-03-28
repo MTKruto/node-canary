@@ -4,7 +4,7 @@ import { Storage } from "../3_storage.js";
 import { DC } from "../3_transport.js";
 import { BotCommand, Chat, ChatAction, ChatMember, ChatP, FileSource, ID, InactiveChat, InlineQueryResult, InputStoryContent, InviteLink, Message, MessageAnimation, MessageAudio, MessageContact, MessageDice, MessageDocument, MessageLocation, MessagePhoto, MessagePoll, MessageSticker, MessageText, MessageVenue, MessageVideo, MessageVideoNote, MessageVoice, NetworkStatistics, ParseMode, Poll, Reaction, Sticker, Story, Update, User } from "../3_types.js";
 import { Migrate } from "../4_errors.js";
-import { AddReactionParams, AnswerCallbackQueryParams, AnswerInlineQueryParams, AuthorizeUserParams, BanChatMemberParams, CreateInviteLinkParams, CreateStoryParams, DeleteMessageParams, DeleteMessagesParams, DownloadParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetChatsParams, GetCreatedInviteLinksParams, GetHistoryParams, GetMyCommandsParams, PinMessageParams, ReplyParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetMyCommandsParams, SetReactionsParams, StopPollParams, UploadParams } from "./0_params.js";
+import { AddReactionParams, AnswerCallbackQueryParams, AnswerInlineQueryParams, AuthorizeUserParams, BanChatMemberParams, CreateInviteLinkParams, CreateStoryParams, DeleteMessageParams, DeleteMessagesParams, DownloadParams, EditMessageLiveLocationParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetChatsParams, GetCreatedInviteLinksParams, GetHistoryParams, GetMyCommandsParams, PinMessageParams, ReplyParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetMyCommandsParams, SetReactionsParams, StopPollParams, UploadParams } from "./0_params.js";
 import { Api } from "./0_types.js";
 import { ClientPlainParams } from "./1_client_plain.js";
 import { Composer as Composer_, NextFunction } from "./1_composer.js";
@@ -73,10 +73,14 @@ export interface Context {
     }) => Promise<void>;
     /** Context-aware alias for `client.editInlineMessageText()`. */
     editInlineMessageText: (text: string, params?: EditMessageParams) => Promise<void>;
+    /** Context-aware alias for `client.editInlineMessageLiveLocation()`. */
+    editInlineMessageLiveLocation: (latitude: number, longitude: number, params?: EditMessageLiveLocationParams) => Promise<void>;
     /** Context-aware alias for `client.editInlineMessageReplyMarkup()`. */
     editInlineMessageReplyMarkup: (params?: EditMessageReplyMarkupParams) => Promise<void>;
     /** Context-aware alias for `client.editMessageText()`. */
     editMessageText: (messageId: number, text: string, params?: EditMessageParams) => Promise<MessageText>;
+    /** Context-aware alias for `client.editMessageLiveLocation()`. */
+    editMessageLiveLocation: (messageId: number, latitude: number, longitude: number, params?: EditMessageLiveLocationParams) => Promise<MessageLocation>;
     /** Context-aware alias for `client.editMessageReplyMarkup()`. */
     editMessageReplyMarkup: (messageId: number, params?: EditMessageReplyMarkupParams) => Promise<Message>;
     /** Context-aware alias for `client.answerCallbackQuery()`. */
@@ -303,7 +307,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Edit a message's text.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the messages.
+     * @param chatId The identifier of the chat that contains the message.
      * @param messageId The message's identifier.
      * @param text The new text of the message.
      * @returns The edited text message.
@@ -321,7 +325,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Edit a message's reply markup.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the messages.
+     * @param chatId The identifier of the chat that contains the message.
      * @param messageId The message's identifier.
      * @returns The edited message.
      */
@@ -333,6 +337,27 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param inlineMessageId The inline message's identifier.
      */
     editInlineMessageReplyMarkup(inlineMessageId: string, params?: EditMessageReplyMarkupParams): Promise<void>;
+    /**
+     * Edit a message's live location.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that contains the messages.
+     * @param messageId The message's identifier.
+     * @param latitude The new latitude.
+     * @param longitude The new longitude.
+     * @returns The edited location message.
+     */
+    editMessageLiveLocation(chatId: ID, messageId: number, latitude: number, longitude: number, params?: EditMessageLiveLocationParams): Promise<MessageLocation>;
+    /**
+     * Edit an inline message's live location. Bot-only.
+     *
+     * @method ms
+     * @param inlineMessageId The inline message's identifier.
+     * @param latitude The new latitude.
+     * @param longitude The new longitude.
+     * @returns The edited location message.
+     */
+    editInlineMessageLiveLocation(inlineMessageId: string, latitude: number, longitude: number, params?: EditMessageLiveLocationParams): Promise<void>;
     /**
      * Retrieve multiple messages.
      *

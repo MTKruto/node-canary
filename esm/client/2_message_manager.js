@@ -1027,6 +1027,45 @@ export class MessageManager {
         }
         UNREACHABLE();
     }
+    async editMessageLiveLocation(chatId, messageId, latitude, longitude, params) {
+        const message = await this.getMessage(chatId, messageId);
+        if (message && "location" in message && message.location.livePeriod) {
+            const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.editMessage({
+                peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),
+                id: messageId,
+                media: new types.InputMediaGeoLive({
+                    geo_point: new types.InputGeoPoint({
+                        lat: latitude,
+                        long: longitude,
+                        accuracy_radius: params?.horizontalAccuracy,
+                    }),
+                    heading: params?.heading,
+                    proximity_notification_radius: params?.proximityAlertRadius,
+                }),
+                reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
+            });
+            const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result).then((v) => v[0]);
+            return assertMessageType(message, "location");
+        }
+        UNREACHABLE();
+    }
+    async editInlineMessageLiveLocation(inlineMessageId, latitude, longitude, params) {
+        await __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertBot("editInlineMessageLiveLocation");
+        const id = deserializeInlineMessageId(inlineMessageId);
+        await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.editInlineBotMessage({
+            id,
+            media: new types.InputMediaGeoLive({
+                geo_point: new types.InputGeoPoint({
+                    lat: latitude,
+                    long: longitude,
+                    accuracy_radius: params?.horizontalAccuracy,
+                }),
+                heading: params?.heading,
+                proximity_notification_radius: params?.proximityAlertRadius,
+            }),
+            reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
+        });
+    }
 }
 _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(), _MessageManager_instances = new WeakSet(), _MessageManager_updatesToMessages = async function _MessageManager_updatesToMessages(chatId, updates) {
     const messages = new Array();

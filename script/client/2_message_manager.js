@@ -1030,6 +1030,45 @@ class MessageManager {
         }
         (0, _1_utilities_js_1.UNREACHABLE)();
     }
+    async editMessageLiveLocation(chatId, messageId, latitude, longitude, params) {
+        const message = await this.getMessage(chatId, messageId);
+        if (message && "location" in message && message.location.livePeriod) {
+            const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.editMessage({
+                peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),
+                id: messageId,
+                media: new _2_tl_js_1.types.InputMediaGeoLive({
+                    geo_point: new _2_tl_js_1.types.InputGeoPoint({
+                        lat: latitude,
+                        long: longitude,
+                        accuracy_radius: params?.horizontalAccuracy,
+                    }),
+                    heading: params?.heading,
+                    proximity_notification_radius: params?.proximityAlertRadius,
+                }),
+                reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
+            });
+            const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result).then((v) => v[0]);
+            return (0, _3_types_js_2.assertMessageType)(message, "location");
+        }
+        (0, _1_utilities_js_1.UNREACHABLE)();
+    }
+    async editInlineMessageLiveLocation(inlineMessageId, latitude, longitude, params) {
+        await __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertBot("editInlineMessageLiveLocation");
+        const id = (0, _3_types_js_2.deserializeInlineMessageId)(inlineMessageId);
+        await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.editInlineBotMessage({
+            id,
+            media: new _2_tl_js_1.types.InputMediaGeoLive({
+                geo_point: new _2_tl_js_1.types.InputGeoPoint({
+                    lat: latitude,
+                    long: longitude,
+                    accuracy_radius: params?.horizontalAccuracy,
+                }),
+                heading: params?.heading,
+                proximity_notification_radius: params?.proximityAlertRadius,
+            }),
+            reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
+        });
+    }
 }
 exports.MessageManager = MessageManager;
 _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(), _MessageManager_instances = new WeakSet(), _MessageManager_updatesToMessages = async function _MessageManager_updatesToMessages(chatId, updates) {

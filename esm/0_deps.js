@@ -1,7 +1,7 @@
-export * from "./deps/deno.land/std@0.220.1/assert/mod.js";
-export * as path from "./deps/deno.land/std@0.220.1/path/mod.js";
-export { decodeBase64, encodeBase64 } from "./deps/deno.land/std@0.220.1/encoding/base64.js";
-import { contentType as contentType_ } from "./deps/deno.land/std@0.220.1/media_types/content_type.js";
+export * from "./deps/deno.land/std@0.221.0/assert/mod.js";
+export * as path from "./deps/deno.land/std@0.221.0/path/mod.js";
+export { decodeBase64, encodeBase64 } from "./deps/deno.land/std@0.221.0/encoding/base64.js";
+import { contentType as contentType_ } from "./deps/deno.land/std@0.221.0/media_types/content_type.js";
 export const contentType = (extentionOrType) => {
     if (extentionOrType == "tgs") {
         return "application/x-tgsticker";
@@ -10,7 +10,7 @@ export const contentType = (extentionOrType) => {
         return contentType_(extentionOrType);
     }
 };
-import { extension as extension_ } from "./deps/deno.land/std@0.220.1/media_types/extension.js";
+import { extension as extension_ } from "./deps/deno.land/std@0.221.0/media_types/extension.js";
 export function extension(mimeType) {
     if (mimeType == "application/x-tgsticker") {
         return "tgs";

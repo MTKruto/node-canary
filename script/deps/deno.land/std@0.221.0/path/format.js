@@ -7,7 +7,9 @@ const _os_js_1 = require("./_os.js");
 const format_js_1 = require("./posix/format.js");
 const format_js_2 = require("./windows/format.js");
 /**
- * Generate a path from `FormatInputPathObject` object.
+ * Generate a path from `FormatInputPathObject` object. It does the opposite
+ * of `parse`.
+ *
  * @param pathObject with path
  */
 function format(pathObject) {

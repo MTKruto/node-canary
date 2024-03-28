@@ -52,7 +52,7 @@ export const PUBLIC_KEYS = Object.freeze([
 ]);
 export const INITIAL_DC = "2";
 export const LAYER = 176;
-export const APP_VERSION = "MTKruto 0.1.180";
+export const APP_VERSION = "MTKruto 0.1.190";
 // @ts-ignore: lib
 export const DEVICE_MODEL = typeof dntShim.Deno === "undefined" ? typeof navigator === "undefined" ? typeof process === "undefined" ? "Unknown" : process.platform + "-" + process.arch : (navigator.userAgent.split(" ")[0] || "Unknown") : dntShim.Deno.build.os + "-" + dntShim.Deno.build.arch;
 export const LANG_CODE = typeof navigator === "undefined" || typeof navigator.language !== "string" ? "en" : navigator.language.split("-")[0];

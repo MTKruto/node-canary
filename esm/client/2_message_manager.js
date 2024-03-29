@@ -20,7 +20,7 @@ import { parseHtml } from "./0_html.js";
 import { parseMarkdown } from "./0_markdown.js";
 import { getFileContents, isHttpUrl } from "./0_utilities.js";
 const FALLBACK_MIME_TYPE = "application/octet-stream";
-const STICKER_MIME_TYPES = ["image/webp", "video/webp", "application/x-tgsticker"];
+const STICKER_MIME_TYPES = ["image/webp", "video/webm", "application/x-tgsticker"];
 export class MessageManager {
     constructor(c) {
         _MessageManager_instances.add(this);

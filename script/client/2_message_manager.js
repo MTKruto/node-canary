@@ -23,7 +23,7 @@ const _0_html_js_1 = require("./0_html.js");
 const _0_markdown_js_1 = require("./0_markdown.js");
 const _0_utilities_js_1 = require("./0_utilities.js");
 const FALLBACK_MIME_TYPE = "application/octet-stream";
-const STICKER_MIME_TYPES = ["image/webp", "video/webp", "application/x-tgsticker"];
+const STICKER_MIME_TYPES = ["image/webp", "video/webm", "application/x-tgsticker"];
 class MessageManager {
     constructor(c) {
         _MessageManager_instances.add(this);

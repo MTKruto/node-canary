@@ -1,3 +1,4 @@
+import { cleanObject } from "../1_utilities.js";
 import { types } from "../2_tl.js";
 import { FileType, PhotoSourceType, serializeFileId, toUniqueFileId } from "./0__file_id.js";
 export function constructChatPhoto(photo, chatId, chatAccessHash) {
@@ -16,22 +17,24 @@ export function constructChatPhoto(photo, chatId, chatAccessHash) {
     const bigFileId = serializeFileId(bigFileId_);
     const bigFileUniqueId = toUniqueFileId(bigFileId_);
     if (photo instanceof types.ChatPhoto) {
-        return {
+        return cleanObject({
             smallFileId,
             smallFileUniqueId,
             bigFileId,
             bigFileUniqueId,
             hasVideo: photo.has_video || false,
-        };
+            strippedThumbnail: photo.stripped_thumb,
+        });
     }
     else {
-        return {
+        return cleanObject({
             personal: photo.personal ? true : undefined,
             smallFileId,
             smallFileUniqueId,
             bigFileId,
             bigFileUniqueId,
             hasVideo: photo.has_video || false,
-        };
+            strippedThumbnail: photo.stripped_thumb,
+        });
     }
 }

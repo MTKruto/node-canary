@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.constructChatPhoto = void 0;
+const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _0__file_id_js_1 = require("./0__file_id.js");
 function constructChatPhoto(photo, chatId, chatAccessHash) {
@@ -19,23 +20,25 @@ function constructChatPhoto(photo, chatId, chatAccessHash) {
     const bigFileId = (0, _0__file_id_js_1.serializeFileId)(bigFileId_);
     const bigFileUniqueId = (0, _0__file_id_js_1.toUniqueFileId)(bigFileId_);
     if (photo instanceof _2_tl_js_1.types.ChatPhoto) {
-        return {
+        return (0, _1_utilities_js_1.cleanObject)({
             smallFileId,
             smallFileUniqueId,
             bigFileId,
             bigFileUniqueId,
             hasVideo: photo.has_video || false,
-        };
+            strippedThumbnail: photo.stripped_thumb,
+        });
     }
     else {
-        return {
+        return (0, _1_utilities_js_1.cleanObject)({
             personal: photo.personal ? true : undefined,
             smallFileId,
             smallFileUniqueId,
             bigFileId,
             bigFileUniqueId,
             hasVideo: photo.has_video || false,
-        };
+            strippedThumbnail: photo.stripped_thumb,
+        });
     }
 }
 exports.constructChatPhoto = constructChatPhoto;

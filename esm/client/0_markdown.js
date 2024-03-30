@@ -4,6 +4,7 @@
  */
 import { UNREACHABLE } from "../1_utilities.js";
 import { sortMessageEntities } from "../3_types.js";
+import { InputError } from "../0_errors.js";
 const enc = new TextEncoder();
 const dec = new TextDecoder();
 export const CODEPOINTS = {
@@ -165,7 +166,7 @@ export function parseMarkdown(text_) {
                         type = "spoiler";
                     }
                     else {
-                        throw new Error(`Character '${String.fromCharCode(c)}' is reserved and must be escaped with the preceding '\\'`);
+                        throw new InputError(`The character "${String.fromCharCode(c)}" is reserved and must be escaped with a preceding backslash.`);
                     }
                     break;
                 case CODEPOINTS["["]:
@@ -250,7 +251,7 @@ export function parseMarkdown(text_) {
                         }
                         url = Uint8Array.from(url_);
                         if (text[i] !== CODEPOINTS[")"]) {
-                            throw new Error("Can't find end of a URL at byte offset " + urlBeginPos);
+                            throw new Error(`Can't find the end of the URL that starts at offset ${urlBeginPos}.`);
                         }
                     }
                     userId = getLinkUserId(dec.decode(url));
@@ -267,7 +268,7 @@ export function parseMarkdown(text_) {
                 }
                 case "customEmoji": {
                     if (text[i + 1] !== CODEPOINTS["("]) {
-                        throw new Error("Custom emoji entity must contain a tg://emoji URL");
+                        throw new InputError("Custom emoji entities must contain a tg://emoji URL.");
                     }
                     i += 2;
                     const url_ = [];
@@ -282,7 +283,7 @@ export function parseMarkdown(text_) {
                     }
                     const url = Uint8Array.from(url_);
                     if (text[i] !== CODEPOINTS[")"]) {
-                        throw new Error("Can't find end of a custom emoji URL at byte offset " + urlBeginPos);
+                        throw new InputError(`Can't find the end of the custom emoji URL that starts at offset ${urlBeginPos}.`);
                     }
                     customEmojiId = getLinkCustomEmojiId(dec.decode(url));
                     break;
@@ -314,7 +315,7 @@ export function parseMarkdown(text_) {
     }
     if (nestedEntities.length !== 0) {
         const last = nestedEntities[nestedEntities.length - 1];
-        throw new Error(`Can't find end of ${last.type} entity at byte offset ${last.entityByteOffset}`);
+        throw new InputError(`Can't find the end of the ${last.type} entity that starts at offset ${last.entityByteOffset}.`);
     }
     entities = sortMessageEntities(entities);
     return [dec.decode(text.slice(0, resultSize)), entities];

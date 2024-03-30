@@ -13,12 +13,12 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _FileManager_instances, _FileManager_c, _FileManager_Lupload, _FileManager_downloadInner;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FileManager = void 0;
+const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _3_types_js_1 = require("../3_types.js");
 const _4_constants_js_1 = require("../4_constants.js");
 const _4_errors_js_1 = require("../4_errors.js");
-const _0_types_js_1 = require("./0_types.js");
 class FileManager {
     constructor(c) {
         _FileManager_instances.add(this);
@@ -32,7 +32,7 @@ class FileManager {
         const isBig = contents.length > 1048576; // 10 MB
         const chunkSize = params?.chunkSize ?? 512 * 1024;
         if ((0, _1_utilities_js_1.mod)(chunkSize, 1024) != 0) {
-            throw new Error("chunkSize must be divisible by 1024");
+            throw new _0_errors_js_1.InputError("chunkSize must be divisible by 1024.");
         }
         const signal = params?.signal;
         __classPrivateFieldGet(this, _FileManager_Lupload, "f").debug("uploading " + (isBig ? "big " : "") + "file of size " + contents.length + " with chunk size of " + chunkSize);
@@ -70,7 +70,7 @@ class FileManager {
                             __classPrivateFieldGet(this, _FileManager_Lupload, "f").warning("got a flood wait of " + err.seconds + " seconds");
                             await new Promise((r) => setTimeout(r, err.seconds * 1000));
                         }
-                        else if (err instanceof _0_types_js_1.ConnectionError) {
+                        else if (err instanceof _0_errors_js_1.ConnectionError) {
                             while (true) {
                                 try {
                                     await new Promise((r) => setTimeout(r, 3000));
@@ -173,7 +173,7 @@ class FileManager {
     async getCustomEmojiStickers(id) {
         id = Array.isArray(id) ? id : [id];
         if (!id.length) {
-            throw new Error("No custom emoji ID provided");
+            return [];
         }
         const stickers = new Array();
         let shouldFetch = false;
@@ -232,7 +232,7 @@ _FileManager_c = new WeakMap(), _FileManager_Lupload = new WeakMap(), _FileManag
     }
     const chunkSize = params?.chunkSize ?? 1024 * 1024;
     if ((0, _1_utilities_js_1.mod)(chunkSize, 1024) != 0) {
-        throw new Error("chunkSize must be divisible by 1024");
+        throw new _0_errors_js_1.InputError("chunkSize must be divisible by 1024.");
     }
     const { api, connect, disconnect } = __classPrivateFieldGet(this, _FileManager_c, "f").apiFactory(dcId);
     await connect();

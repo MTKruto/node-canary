@@ -11,6 +11,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _StoryManager_instances, _StoryManager_c, _StoryManager_updatesToStory, _StoryManager_togglePinned;
 import { contentType } from "../0_deps.js";
+import { InputError } from "../0_errors.js";
 import { getRandomId, UNREACHABLE } from "../1_utilities.js";
 import { as, inputPeerToPeer, peerToChatId, types } from "../2_tl.js";
 import { constructStory, FileType, storyInteractiveAreaToTlObject, storyPrivacyToTlObject } from "../3_types.js";
@@ -35,7 +36,7 @@ export class StoryManager {
         }
         if (media == null) {
             if (typeof source === "string" && isHttpUrl(source)) {
-                throw new Error("URL not supported");
+                throw new InputError("URL not supported.");
             }
             else {
                 const [contents, fileName_] = await getFileContents(source);

@@ -1,2 +1,1 @@
-export class ConnectionError extends Error {
-}
+export {};

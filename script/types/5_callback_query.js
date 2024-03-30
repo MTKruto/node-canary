@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.constructCallbackQuery = exports.deserializeInlineMessageId = void 0;
+const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _1_user_js_1 = require("./1_user.js");
-const ERR_INVALID_INLINE_MESSAGE_ID = new Error("Invalid inline message ID");
+const ERR_INVALID_INLINE_MESSAGE_ID = new _0_errors_js_1.InputError("Invalid inline message ID");
 function deserializeInlineMessageId(inlineMessageId) {
     try {
         const buffer = (0, _1_utilities_js_1.base64DecodeUrlSafe)(inlineMessageId);

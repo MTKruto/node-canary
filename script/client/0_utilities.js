@@ -26,6 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getChatListId = exports.getUsername = exports.isHttpUrl = exports.getFileContents = exports.isChannelPtsUpdate = exports.isPtsUpdate = exports.resolve = void 0;
 const dntShim = __importStar(require("../_dnt.shims.js"));
 const _0_deps_js_1 = require("../0_deps.js");
+const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const resolve = () => Promise.resolve();
@@ -111,7 +112,7 @@ function isDigit(string) {
     const c = string.charCodeAt(0);
     return "0".charCodeAt(0) <= c && c <= "9".charCodeAt(0);
 }
-const errInvalidUsername = (u) => new Error("Invalid username: " + u);
+const errInvalidUsername = (u) => new _0_errors_js_1.InputError(`Invalid username: ${u}`);
 function validateUsername(string, ignoreAt = false) {
     string = string.trim();
     if (ignoreAt && string.startsWith("@")) {

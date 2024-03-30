@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.toUniqueFileId = exports.serializeFileId = exports.deserializeFileId = exports.PhotoSourceType = exports.FileType = void 0;
+const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const NEXT_VERSION = 53;
@@ -218,7 +219,7 @@ function hasFileReference(fileType) {
 function deserializeFileId(fileId) {
     const reader = new _2_tl_js_1.TLReader((0, _1_utilities_js_1.rleDecode)((0, _1_utilities_js_1.base64DecodeUrlSafe)(fileId)));
     if (reader.buffer[reader.buffer.length - 1] != PERSISTENT_ID_VERSION) {
-        throw new Error("Unsupported version");
+        throw new _0_errors_js_1.InputError("Unsupported file ID format");
     }
     const originalType = reader.readInt32();
     const type = ((originalType & ~WEB_LOCATION_FLAG) & ~FILE_REFERENCE_FLAG);

@@ -13,6 +13,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _ChatListManager_instances, _ChatListManager_c, _ChatListManager_LgetChats, _ChatListManager_sendChatUpdate, _ChatListManager_chats, _ChatListManager_archivedChats, _ChatListManager_chatsLoadedFromStorage, _ChatListManager_tryGetChatId, _ChatListManager_getChatAnywhere, _ChatListManager_getChatList, _ChatListManager_loadChatsFromStorage, _ChatListManager_getLoadedChats, _ChatListManager_pinnedChats, _ChatListManager_pinnedArchiveChats, _ChatListManager_storageHadPinnedChats, _ChatListManager_pinnedChatsLoaded, _ChatListManager_loadPinnedChats, _ChatListManager_fetchPinnedChats, _ChatListManager_getPinnedChats, _ChatListManager_updateOrAddChat, _ChatListManager_removeChat, _ChatListManager_handleUpdateFolderPeers, _ChatListManager_handleUpdatePinnedDialogs, _ChatListManager_handleUpdateChannel, _ChatListManager_handleUpdateChat, _ChatListManager_handleUpdateUser, _ChatListManager_fetchChats;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChatListManager = void 0;
+const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _3_types_js_1 = require("../3_types.js");
@@ -101,7 +102,7 @@ class ChatListManager {
             await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_loadChatsFromStorage).call(this);
         }
         if (after && !__classPrivateFieldGet(this, _ChatListManager_chats, "f").get(after.id)) {
-            throw new Error("Invalid after");
+            throw new _0_errors_js_1.InputError("Invalid after");
         }
         if (limit <= 0 || limit > 100) {
             limit = 100;
@@ -262,7 +263,7 @@ _ChatListManager_c = new WeakMap(), _ChatListManager_LgetChats = new WeakMap(), 
         case 1:
             return __classPrivateFieldGet(this, _ChatListManager_archivedChats, "f");
         default:
-            throw new Error("Invalid chat list: " + listId);
+            throw new Error(`Invalid chat list: ${listId}`);
     }
 }, _ChatListManager_loadChatsFromStorage = async function _ChatListManager_loadChatsFromStorage() {
     const chats = await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.getChats(0);

@@ -1,7 +1,8 @@
+import { InputError } from "../0_errors.js";
 import { base64DecodeUrlSafe, base64EncodeUrlSafe, cleanObject, UNREACHABLE } from "../1_utilities.js";
 import { peerToChatId, serialize, TLReader, types } from "../2_tl.js";
 import { constructUser } from "./1_user.js";
-const ERR_INVALID_INLINE_MESSAGE_ID = new Error("Invalid inline message ID");
+const ERR_INVALID_INLINE_MESSAGE_ID = new InputError("Invalid inline message ID");
 export function deserializeInlineMessageId(inlineMessageId) {
     try {
         const buffer = base64DecodeUrlSafe(inlineMessageId);

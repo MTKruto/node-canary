@@ -1,4 +1,5 @@
 import { Parser } from "../0_deps.js";
+import { InputError } from "../0_errors.js";
 export function parseHtml(html) {
     html = html.trim();
     let text = "";
@@ -26,7 +27,7 @@ export function parseHtml(html) {
                 case "a": {
                     const url = attribs.href;
                     if (!url) {
-                        throw new Error("Missing attribute href");
+                        throw new InputError("Missing attribute: href");
                     }
                     stack.push({ type: "textLink", offset: text.length, length: 0, url });
                     break;
@@ -41,7 +42,7 @@ export function parseHtml(html) {
                     break;
                 case "span":
                     if (attribs.class != "tg-spoiler") {
-                        throw new Error("The class attribute must be tg-spoiler");
+                        throw new InputError('The class attribute must be "tg-spoiler."');
                     }
                 // falls through
                 case "tg-spoiler":
@@ -49,7 +50,7 @@ export function parseHtml(html) {
                     break;
                 case "tg-emoji":
                     if (!attribs["emoji-id"]) {
-                        throw new Error("Missing attribute emoji-id");
+                        throw new InputError("Missing attribute: emoji-id");
                     }
                     stack.push({ type: "spoiler", offset: text.length, length: 0 });
                     break;

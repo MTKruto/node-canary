@@ -14,12 +14,12 @@ var _ClientEncrypted_instances, _ClientEncrypted_authKey, _ClientEncrypted_authK
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClientEncrypted = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
+const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _4_errors_js_1 = require("../4_errors.js");
 const _0_client_abstract_js_1 = require("./0_client_abstract.js");
 const _0_message_js_1 = require("./0_message.js");
-const _0_types_js_1 = require("./0_types.js");
 // global ClientEncrypted ID counter for logs
 let id = 0;
 /**
@@ -233,7 +233,7 @@ _ClientEncrypted_authKey = new WeakMap(), _ClientEncrypted_authKeyId = new WeakM
     }
     if (!this.connected) {
         for (const [key, { reject }] of __classPrivateFieldGet(this, _ClientEncrypted_promises, "f").entries()) {
-            reject?.(new _0_types_js_1.ConnectionError("Connection was closed"));
+            reject?.(new _0_errors_js_1.ConnectionError("Connection was closed"));
             __classPrivateFieldGet(this, _ClientEncrypted_promises, "f").delete(key);
         }
     }

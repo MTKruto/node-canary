@@ -11,12 +11,12 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _ClientEncrypted_instances, _ClientEncrypted_authKey, _ClientEncrypted_authKeyId, _ClientEncrypted_sessionId, _ClientEncrypted_state, _ClientEncrypted_toAcknowledge, _ClientEncrypted_recentAcks, _ClientEncrypted_promises, _ClientEncrypted_L, _ClientEncrypted_LreceiveLoop, _ClientEncrypted_Linvoke, _ClientEncrypted_nextMessageId, _ClientEncrypted_nextSeqNo, _ClientEncrypted_sendMessage, _ClientEncrypted_receiveLoop;
 import { gunzip } from "../0_deps.js";
+import { ConnectionError } from "../0_errors.js";
 import { bigIntFromBuffer, CacheMap, drop, getLogger, getRandomBigInt, sha1, UNREACHABLE } from "../1_utilities.js";
 import { Message_, MessageContainer, name, RPCResult, TLError, TLReader, types } from "../2_tl.js";
 import { upgradeInstance } from "../4_errors.js";
 import { ClientAbstract } from "./0_client_abstract.js";
 import { decryptMessage, encryptMessage, getMessageId } from "./0_message.js";
-import { ConnectionError } from "./0_types.js";
 // global ClientEncrypted ID counter for logs
 let id = 0;
 /**

@@ -11,6 +11,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
 };
 var _ClientAbstract_dc;
 import { initTgCrypto } from "../0_deps.js";
+import { ConnectionError } from "../0_errors.js";
 import { transportProviderWebSocket } from "../3_transport.js";
 import { INITIAL_DC } from "../4_constants.js";
 export class ClientAbstract {
@@ -55,7 +56,7 @@ export class ClientAbstract {
     }
     get dcId() {
         if (!this.transport) {
-            throw new Error("Not connected");
+            throw new ConnectionError("Not connected.");
         }
         return this.transport.dcId;
     }
@@ -82,7 +83,7 @@ export class ClientAbstract {
     }
     async disconnect() {
         if (!this.transport) {
-            throw new Error("Not connected");
+            throw new ConnectionError("Not connected.");
         }
         await this.transport.transport.deinitialize();
         await this.transport.connection.close();

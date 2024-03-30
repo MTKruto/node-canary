@@ -41,6 +41,4 @@ export interface C {
     cdn: boolean;
     dropPendingUpdates?: boolean;
 }
-export declare class ConnectionError extends Error {
-}
 export {};

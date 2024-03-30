@@ -14,6 +14,7 @@ var _ClientAbstract_dc;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClientAbstract = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
+const _0_errors_js_1 = require("../0_errors.js");
 const _3_transport_js_1 = require("../3_transport.js");
 const _4_constants_js_1 = require("../4_constants.js");
 class ClientAbstract {
@@ -58,7 +59,7 @@ class ClientAbstract {
     }
     get dcId() {
         if (!this.transport) {
-            throw new Error("Not connected");
+            throw new _0_errors_js_1.ConnectionError("Not connected.");
         }
         return this.transport.dcId;
     }
@@ -85,7 +86,7 @@ class ClientAbstract {
     }
     async disconnect() {
         if (!this.transport) {
-            throw new Error("Not connected");
+            throw new _0_errors_js_1.ConnectionError("Not connected.");
         }
         await this.transport.transport.deinitialize();
         await this.transport.connection.close();

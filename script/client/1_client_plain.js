@@ -14,6 +14,7 @@ var _ClientPlain_publicKeys, _ClientPlain_lastMsgId;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClientPlain = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
+const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _4_constants_js_1 = require("../4_constants.js");
@@ -33,7 +34,7 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
     }
     async invoke(function_) {
         if (!this.transport) {
-            throw new Error("Not connected");
+            throw new _0_errors_js_1.ConnectionError("Not connected.");
         }
         const msgId = __classPrivateFieldSet(this, _ClientPlain_lastMsgId, (0, _0_message_js_1.getMessageId)(__classPrivateFieldGet(this, _ClientPlain_lastMsgId, "f")), "f");
         const payload = (0, _0_message_js_1.packUnencryptedMessage)(function_[_2_tl_js_1.serialize](), msgId);
@@ -44,9 +45,7 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
         L.inBin(payload);
         if (buffer.length == 4) {
             const int = (0, _1_utilities_js_1.bigIntFromBuffer)(buffer, true, true);
-            if (int == -404n) {
-                throw new Error("-404");
-            }
+            throw new _0_errors_js_1.TransportError(Number(int));
         }
         const { message } = (0, _0_message_js_1.unpackUnencryptedMessage)(buffer);
         const reader = new _2_tl_js_1.TLReader(message);

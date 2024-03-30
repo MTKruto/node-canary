@@ -14,6 +14,7 @@ var _StoryManager_instances, _StoryManager_c, _StoryManager_updatesToStory, _Sto
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StoryManager = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
+const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _3_types_js_1 = require("../3_types.js");
@@ -38,7 +39,7 @@ class StoryManager {
         }
         if (media == null) {
             if (typeof source === "string" && (0, _0_utilities_js_1.isHttpUrl)(source)) {
-                throw new Error("URL not supported");
+                throw new _0_errors_js_1.InputError("URL not supported.");
             }
             else {
                 const [contents, fileName_] = await (0, _0_utilities_js_1.getFileContents)(source);

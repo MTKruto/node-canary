@@ -13,6 +13,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
 var _Composer_handle, _Composer_prefixes;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Composer = exports.skip = exports.concat = exports.flatten = void 0;
+const _0_errors_js_1 = require("../0_errors.js");
 const _0_filters_js_1 = require("./0_filters.js");
 function flatten(mw) {
     return typeof mw === "function" ? mw : (ctx, next) => mw.middleware()(ctx, next);
@@ -40,7 +41,7 @@ exports.skip = skip;
 class Composer {
     set prefixes(value) {
         if (__classPrivateFieldGet(this, _Composer_prefixes, "f") !== undefined) {
-            throw new Error("Prefixes already set");
+            throw new _0_errors_js_1.InputError("Prefixes already set");
         }
         __classPrivateFieldSet(this, _Composer_prefixes, value, "f");
     }
@@ -90,7 +91,7 @@ class Composer {
                     continue;
                 }
                 if (left.startsWith(right) || right.startsWith(left)) {
-                    throw new Error("Intersecting prefixes");
+                    throw new _0_errors_js_1.InputError("Intersecting prefixes");
                 }
             }
         }

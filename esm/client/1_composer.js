@@ -10,6 +10,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
 var _Composer_handle, _Composer_prefixes;
+import { InputError } from "../0_errors.js";
 import { match } from "./0_filters.js";
 export function flatten(mw) {
     return typeof mw === "function" ? mw : (ctx, next) => mw.middleware()(ctx, next);
@@ -34,7 +35,7 @@ export function skip(_ctx, next) {
 export class Composer {
     set prefixes(value) {
         if (__classPrivateFieldGet(this, _Composer_prefixes, "f") !== undefined) {
-            throw new Error("Prefixes already set");
+            throw new InputError("Prefixes already set");
         }
         __classPrivateFieldSet(this, _Composer_prefixes, value, "f");
     }
@@ -84,7 +85,7 @@ export class Composer {
                     continue;
                 }
                 if (left.startsWith(right) || right.startsWith(left)) {
-                    throw new Error("Intersecting prefixes");
+                    throw new InputError("Intersecting prefixes");
                 }
             }
         }

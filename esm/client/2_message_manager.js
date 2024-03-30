@@ -11,6 +11,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _MessageManager_instances, _MessageManager_c, _MessageManager_LresolveFileId, _MessageManager_updatesToMessages, _MessageManager_constructReplyMarkup, _MessageManager_resolveSendAs, _MessageManager_constructReplyTo, _MessageManager_sendDocumentInner, _MessageManager_sendMedia, _MessageManager_sendReaction, _MessageManager_toggleJoinRequests;
 import { contentType } from "../0_deps.js";
+import { InputError } from "../0_errors.js";
 import { getLogger, getRandomId, toUnixTimestamp, UNREACHABLE } from "../1_utilities.js";
 import { as, getChannelChatId, peerToChatId, types } from "../2_tl.js";
 import { constructChatMemberUpdated, constructInviteLink, deserializeFileId } from "../3_types.js";
@@ -573,12 +574,9 @@ export class MessageManager {
         }
     }
     async deleteChatMemberMessages(chatId, memberId) {
-        const channel = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId);
-        if (!(channel instanceof types.InputPeerChannel)) {
-            throw new Error("Invalid chat ID");
-        }
+        const channel = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputChannel(chatId);
         const participant = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(memberId);
-        await __classPrivateFieldGet(this, _MessageManager_c, "f").api.channels.deleteParticipantHistory({ channel: new types.InputChannel(channel), participant });
+        await __classPrivateFieldGet(this, _MessageManager_c, "f").api.channels.deleteParticipantHistory({ channel, participant });
     }
     async pinMessage(chatId, messageId, params) {
         await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.updatePinnedMessage({
@@ -738,7 +736,7 @@ export class MessageManager {
                 action_ = new types.SendMessageUploadRoundAction({ progress: 0 });
                 break;
             default:
-                throw new Error("Invalid chat action: " + action);
+                throw new InputError(`Invalid chat action: ${action}`);
         }
         await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.setTyping({ peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId), action: action_, top_msg_id: params?.messageThreadId });
     }
@@ -772,7 +770,7 @@ export class MessageManager {
     async banChatMember(chatId, memberId, params) {
         const chat = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId);
         if (!(chat instanceof types.InputPeerChannel) && !(chat instanceof types.InputPeerChat)) {
-            throw new Error("Invalid chat ID");
+            throw new InputError("Expected a channel, supergroup, or group ID.");
         }
         const member = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(memberId);
         if (chat instanceof types.InputPeerChannel) {
@@ -802,7 +800,7 @@ export class MessageManager {
         }
         else if (chat instanceof types.InputPeerChat) {
             if (!(member instanceof types.InputPeerUser)) {
-                throw new Error("Invalid user ID");
+                throw new InputError(`Invalid user ID: ${memberId}`);
             }
             await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.deleteChatUser({
                 chat_id: chat.chat_id,
@@ -812,25 +810,19 @@ export class MessageManager {
         }
     }
     async unbanChatMember(chatId, memberId) {
-        const chat = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId);
-        if (!(chat instanceof types.InputPeerChannel)) {
-            throw new Error("Invalid chat ID");
-        }
+        const channel = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputChannel(chatId);
         const member = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(memberId);
         await __classPrivateFieldGet(this, _MessageManager_c, "f").api.channels.editBanned({
-            channel: new types.InputChannel(chat),
+            channel,
             participant: member,
             banned_rights: new types.ChatBannedRights({ until_date: 0 }),
         });
     }
     async setChatMemberRights(chatId, memberId, params) {
-        const chat = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId);
-        if (!(chat instanceof types.InputPeerChannel)) {
-            throw new Error("Invalid chat ID");
-        }
+        const channel = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputChannel(chatId);
         const member = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(memberId);
         await __classPrivateFieldGet(this, _MessageManager_c, "f").api.channels.editBanned({
-            channel: new types.InputChannel(chat),
+            channel,
             participant: member,
             banned_rights: chatMemberRightsToTlObject(params?.rights, params?.untilDate),
         });
@@ -909,7 +901,7 @@ export class MessageManager {
     }
     async createInviteLink(chatId, params) {
         if (params?.requireApproval && params?.limit) {
-            throw new Error("createInviteLink: requireApproval cannot be true while limit is specified");
+            throw new InputError("requireApproval cannot be true while limit is specified.");
         }
         const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.exportChatInvite({
             peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),
@@ -936,7 +928,7 @@ export class MessageManager {
         await __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertUser("joinChat");
         const peer = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId);
         if (peer instanceof types.InputPeerUser) {
-            throw new Error("joinChat: cannot join private chats");
+            throw new InputError("Cannot join private chats.");
         }
         else if (peer instanceof types.InputPeerChannel) {
             await __classPrivateFieldGet(this, _MessageManager_c, "f").api.channels.joinChannel({ channel: new types.InputChannel(peer) });
@@ -951,7 +943,7 @@ export class MessageManager {
     async leaveChat(chatId) {
         const peer = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId);
         if (peer instanceof types.InputPeerUser) {
-            throw new Error("leaveChat: cannot leave private chats");
+            throw new InputError("Cannot leave private chats.");
         }
         else if (peer instanceof types.InputPeerChannel) {
             await __classPrivateFieldGet(this, _MessageManager_c, "f").api.channels.leaveChannel({ channel: new types.InputChannel(peer) });
@@ -967,7 +959,7 @@ export class MessageManager {
         await __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertUser("blockUser");
         const id = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(userId);
         if (!(id instanceof types.User)) {
-            throw new Error("blockUser: only users can be blocked or unblocked");
+            throw new InputError("Only users can be blocked or unblocked.");
         }
         await __classPrivateFieldGet(this, _MessageManager_c, "f").api.contacts.block({ id });
     }
@@ -975,7 +967,7 @@ export class MessageManager {
         await __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertUser("unblockUser");
         const id = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(userId);
         if (!(id instanceof types.User)) {
-            throw new Error("unblockUser: only users can be blocked or unblocked");
+            throw new InputError("Only users can be blocked or unblocked.");
         }
         await __classPrivateFieldGet(this, _MessageManager_c, "f").api.contacts.unblock({ id });
     }
@@ -995,7 +987,7 @@ export class MessageManager {
             return await constructChatMember(participant, __classPrivateFieldGet(this, _MessageManager_c, "f").getEntity);
         }
         else {
-            throw new Error("Invalid chat ID");
+            throw new InputError("Expected a channel, supergroup, or group ID. Got a user ID instead.");
         }
     }
     async setChatStickerSet(chatId, setName) {
@@ -1008,24 +1000,30 @@ export class MessageManager {
     }
     async stopPoll(chatId, messageId, params) {
         const message = await this.getMessage(chatId, messageId);
-        if (message && "poll" in message && !message.poll.isClosed) {
-            const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.editMessage({
-                peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),
-                id: messageId,
-                media: new types.InputMediaPoll({
-                    poll: new types.Poll({
-                        id: BigInt(message.poll.id),
-                        closed: true,
-                        question: "",
-                        answers: [],
-                    }),
-                }),
-                reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
-            });
-            const message_ = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result).then((v) => v[0]);
-            return assertMessageType(message_, "poll").poll;
+        if (!message) {
+            throw new InputError("Message not found.");
         }
-        UNREACHABLE();
+        if (!("poll" in message)) {
+            throw new InputError("Message is not a poll.");
+        }
+        if (message.poll.isClosed) {
+            throw new InputError("Poll is already stopped.");
+        }
+        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.editMessage({
+            peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),
+            id: messageId,
+            media: new types.InputMediaPoll({
+                poll: new types.Poll({
+                    id: BigInt(message.poll.id),
+                    closed: true,
+                    question: "",
+                    answers: [],
+                }),
+            }),
+            reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
+        });
+        const message_ = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result).then((v) => v[0]);
+        return assertMessageType(message_, "poll").poll;
     }
     async editMessageLiveLocation(chatId, messageId, latitude, longitude, params) {
         const message = await this.getMessage(chatId, messageId);
@@ -1120,7 +1118,7 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
     if (media == null) {
         if (typeof document === "string" && isHttpUrl(document)) {
             if (!urlSupported) {
-                throw new Error("URL not supported");
+                throw new InputError("URL not supported.");
             }
             media = new types.InputMediaDocumentExternal({ url: document, spoiler });
         }

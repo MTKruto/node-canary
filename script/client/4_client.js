@@ -13,6 +13,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _Client_instances, _Client_client, _Client_guaranteeUpdateDelivery, _Client_updateManager, _Client_networkStatisticsManager, _Client_botInfoManager, _Client_fileManager, _Client_reactionManager, _Client_messageManager, _Client_storyManager, _Client_callbackQueryManager, _Client_inlineQueryManager, _Client_chatListManager, _Client_accountManager, _Client_parseMode, _Client_publicKeys, _Client_ignoreOutgoing, _Client_storeMessages, _Client_Lauthorize, _Client_LpingLoop, _Client_LhandleMigrationError, _Client_L$initConncetion, _Client_namespaceProxies, _Client_getApiId, _Client_constructContext, _Client_propagateConnectionState, _Client_lastPropagatedConnectionState, _Client_stateChangeHandler, _Client_storageInited, _Client_initStorage, _Client_connectionInited, _Client_lastPropagatedAuthorizationState, _Client_propagateAuthorizationState, _Client_getSelfId, _Client_pingLoopStarted, _Client_pingLoopAbortController, _Client_pingInterval, _Client_lastUpdates, _Client_startPingLoop, _Client_pingLoop, _Client_invoke, _Client_handleInvokeError, _Client_getUserAccessHash, _Client_getChannelAccessHash, _Client_getInputPeerInner, _Client_handleCtxUpdate, _Client_queueHandleCtxUpdate, _Client_handleUpdate, _Client_lastGetMe, _Client_getMe;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Client = exports.handleMigrationError = exports.restartAuth = exports.Composer = void 0;
+const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _3_storage_js_1 = require("../3_storage.js");
@@ -668,6 +669,7 @@ class Client extends Composer {
                         try {
                             const exportedAuth = await this.api.auth.exportAuthorization({ dc_id: dcId });
                             await client.authorize(exportedAuth);
+                            // throw 1;
                             return true;
                         }
                         catch (err) {
@@ -1058,6 +1060,9 @@ class Client extends Composer {
                 inputPeer.access_hash = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getUserAccessHash).call(this, inputPeer.user_id);
             }
         }
+        else {
+            throw new _0_errors_js_1.AccessError(`Cannot access the chat ${id} because there is no access hash for it.`);
+        }
         return inputPeer;
     }
     /**
@@ -1068,7 +1073,7 @@ class Client extends Composer {
     async getInputChannel(id) {
         const inputPeer = await this.getInputPeer(id);
         if (!(inputPeer instanceof _2_tl_js_1.types.InputPeerChannel)) {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            throw new TypeError(`The chat ${id} is not a channel neither a supergroup.`);
         }
         return new _2_tl_js_1.types.InputChannel(inputPeer);
     }
@@ -1080,7 +1085,7 @@ class Client extends Composer {
     async getInputUser(id) {
         const inputPeer = await this.getInputPeer(id);
         if (!(inputPeer instanceof _2_tl_js_1.types.InputPeerUser)) {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            throw new TypeError(`The chat ${id} is not a private chat.`);
         }
         return new _2_tl_js_1.types.InputUser(inputPeer);
     }
@@ -1235,7 +1240,7 @@ class Client extends Composer {
             return new _2_tl_js_1.types.InputPeerChannel({ channel_id: (0, _2_tl_js_1.chatIdToPeerId)(id), access_hash: accessHash ?? 0n });
         }
         else {
-            throw new Error("ID format unknown or not implemented");
+            throw new _0_errors_js_1.InputError("The ID is of an format unknown.");
         }
     }, getEntity)](peer) {
         const id = (0, _2_tl_js_1.peerToChatId)(peer);

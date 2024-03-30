@@ -11,6 +11,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _ClientPlain_publicKeys, _ClientPlain_lastMsgId;
 import { assertEquals, assertInstanceOf, factorize, ige256Decrypt, ige256Encrypt } from "../0_deps.js";
+import { ConnectionError, TransportError } from "../0_errors.js";
 import { bigIntFromBuffer, bufferFromBigInt, concat, getLogger, getRandomBigInt, modExp, rsaPad, sha1, UNREACHABLE } from "../1_utilities.js";
 import { functions, serialize, TLReader, types } from "../2_tl.js";
 import { PUBLIC_KEYS } from "../4_constants.js";
@@ -30,7 +31,7 @@ export class ClientPlain extends ClientAbstract {
     }
     async invoke(function_) {
         if (!this.transport) {
-            throw new Error("Not connected");
+            throw new ConnectionError("Not connected.");
         }
         const msgId = __classPrivateFieldSet(this, _ClientPlain_lastMsgId, getMessageId(__classPrivateFieldGet(this, _ClientPlain_lastMsgId, "f")), "f");
         const payload = packUnencryptedMessage(function_[serialize](), msgId);
@@ -41,9 +42,7 @@ export class ClientPlain extends ClientAbstract {
         L.inBin(payload);
         if (buffer.length == 4) {
             const int = bigIntFromBuffer(buffer, true, true);
-            if (int == -404n) {
-                throw new Error("-404");
-            }
+            throw new TransportError(Number(int));
         }
         const { message } = unpackUnencryptedMessage(buffer);
         const reader = new TLReader(message);

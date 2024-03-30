@@ -10,12 +10,12 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _FileManager_instances, _FileManager_c, _FileManager_Lupload, _FileManager_downloadInner;
+import { ConnectionError, InputError } from "../0_errors.js";
 import { drop, getLogger, getRandomId, mod, UNREACHABLE } from "../1_utilities.js";
 import { as, types } from "../2_tl.js";
 import { constructSticker, deserializeFileId, FileType, PhotoSourceType, serializeFileId, toUniqueFileId } from "../3_types.js";
 import { STICKER_SET_NAME_TTL } from "../4_constants.js";
 import { FloodWait } from "../4_errors.js";
-import { ConnectionError } from "./0_types.js";
 export class FileManager {
     constructor(c) {
         _FileManager_instances.add(this);
@@ -29,7 +29,7 @@ export class FileManager {
         const isBig = contents.length > 1048576; // 10 MB
         const chunkSize = params?.chunkSize ?? 512 * 1024;
         if (mod(chunkSize, 1024) != 0) {
-            throw new Error("chunkSize must be divisible by 1024");
+            throw new InputError("chunkSize must be divisible by 1024.");
         }
         const signal = params?.signal;
         __classPrivateFieldGet(this, _FileManager_Lupload, "f").debug("uploading " + (isBig ? "big " : "") + "file of size " + contents.length + " with chunk size of " + chunkSize);
@@ -170,7 +170,7 @@ export class FileManager {
     async getCustomEmojiStickers(id) {
         id = Array.isArray(id) ? id : [id];
         if (!id.length) {
-            throw new Error("No custom emoji ID provided");
+            return [];
         }
         const stickers = new Array();
         let shouldFetch = false;
@@ -228,7 +228,7 @@ _FileManager_c = new WeakMap(), _FileManager_Lupload = new WeakMap(), _FileManag
     }
     const chunkSize = params?.chunkSize ?? 1024 * 1024;
     if (mod(chunkSize, 1024) != 0) {
-        throw new Error("chunkSize must be divisible by 1024");
+        throw new InputError("chunkSize must be divisible by 1024.");
     }
     const { api, connect, disconnect } = __classPrivateFieldGet(this, _FileManager_c, "f").apiFactory(dcId);
     await connect();

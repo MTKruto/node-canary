@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parseHtml = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
+const _0_errors_js_1 = require("../0_errors.js");
 function parseHtml(html) {
     html = html.trim();
     let text = "";
@@ -29,7 +30,7 @@ function parseHtml(html) {
                 case "a": {
                     const url = attribs.href;
                     if (!url) {
-                        throw new Error("Missing attribute href");
+                        throw new _0_errors_js_1.InputError("Missing attribute: href");
                     }
                     stack.push({ type: "textLink", offset: text.length, length: 0, url });
                     break;
@@ -44,7 +45,7 @@ function parseHtml(html) {
                     break;
                 case "span":
                     if (attribs.class != "tg-spoiler") {
-                        throw new Error("The class attribute must be tg-spoiler");
+                        throw new _0_errors_js_1.InputError('The class attribute must be "tg-spoiler."');
                     }
                 // falls through
                 case "tg-spoiler":
@@ -52,7 +53,7 @@ function parseHtml(html) {
                     break;
                 case "tg-emoji":
                     if (!attribs["emoji-id"]) {
-                        throw new Error("Missing attribute emoji-id");
+                        throw new _0_errors_js_1.InputError("Missing attribute: emoji-id");
                     }
                     stack.push({ type: "spoiler", offset: text.length, length: 0 });
                     break;

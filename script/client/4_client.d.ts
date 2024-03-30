@@ -229,7 +229,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Before establishing the connection, the session is saved.
      */
     connect(): Promise<void>;
-    reconnect(dc: DC): Promise<void>;
+    reconnect(dc?: DC): Promise<void>;
     [handleMigrationError](err: Migrate): Promise<void>;
     disconnect(): Promise<void>;
     /**

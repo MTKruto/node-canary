@@ -1,41 +1,42 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports._MessageMedia_ = exports._Message_ = exports._ChatPhoto_ = exports._ChatParticipants_ = exports._ChatParticipant_ = exports._ChatFull_ = exports._Chat_ = exports._UserStatus_ = exports._UserProfilePhoto_ = exports._User_ = exports._storage_FileType_ = exports._Peer_ = exports._InputFileLocation_ = exports._InputPhoto_ = exports._InputGeoPoint_ = exports._InputChatPhoto_ = exports._InputMedia_ = exports._InputFile_ = exports._InputContact_ = exports._InputUser_ = exports._InputPeer_ = exports._Null_ = exports._Error_ = exports._True_ = exports._HttpWait_ = exports._DestroyAuthKeyRes_ = exports._MsgDetailedInfo_ = exports._MsgsAllInfo_ = exports._MsgsStateInfo_ = exports._MsgsStateReq_ = exports._MsgResendReq_ = exports._BadMsgNotification_ = exports._MsgsAck_ = exports._Object_ = exports._NewSession_ = exports._DestroySessionRes_ = exports._Pong_ = exports._FutureSalts_ = exports._FutureSalt_ = exports._RpcDropAnswer_ = exports._RpcError_ = exports._BindAuthKeyInner_ = exports._Set_client_DH_params_answer_ = exports._Client_DH_Inner_Data_ = exports._Server_DH_inner_data_ = exports._Server_DH_Params_ = exports._P_Q_inner_data_ = exports._ResPQ_ = exports.TypeX_ = exports.Type_ = void 0;
-exports._NotifyPeer_ = exports._help_Support_ = exports._Document_ = exports._InputDocument_ = exports._messages_SentEncryptedMessage_ = exports._messages_DhConfig_ = exports._EncryptedMessage_ = exports._InputEncryptedFile_ = exports._EncryptedFile_ = exports._InputEncryptedChat_ = exports._EncryptedChat_ = exports._help_InviteText_ = exports._help_AppUpdate_ = exports._NearestDc_ = exports._Config_ = exports._DcOption_ = exports._upload_File_ = exports._photos_Photo_ = exports._photos_Photos_ = exports._Updates_ = exports._updates_Difference_ = exports._updates_State_ = exports._Update_ = exports._MessagesFilter_ = exports._messages_AffectedHistory_ = exports._messages_ChatFull_ = exports._messages_Chats_ = exports._messages_Messages_ = exports._messages_Dialogs_ = exports._contacts_Blocked_ = exports._contacts_ImportedContacts_ = exports._contacts_Contacts_ = exports._ContactStatus_ = exports._ImportedContact_ = exports._Contact_ = exports._UserFull_ = exports._ReportReason_ = exports._WallPaper_ = exports._PeerSettings_ = exports._PeerNotifySettings_ = exports._InputPeerNotifySettings_ = exports._InputNotifyPeer_ = exports._auth_ExportedAuthorization_ = exports._auth_Authorization_ = exports._auth_SentCode_ = exports._GeoPoint_ = exports._PhotoSize_ = exports._Photo_ = exports._Dialog_ = exports._MessageAction_ = void 0;
-exports._MessageFwdHeader_ = exports._ExportedMessageLink_ = exports._messages_BotResults_ = exports._BotInlineResult_ = exports._BotInlineMessage_ = exports._InputBotInlineResult_ = exports._InputBotInlineMessage_ = exports._messages_SavedGifs_ = exports._help_TermsOfService_ = exports._channels_ChannelParticipant_ = exports._channels_ChannelParticipants_ = exports._ChannelParticipantsFilter_ = exports._ChannelParticipant_ = exports._ChannelMessagesFilter_ = exports._updates_ChannelDifference_ = exports._MessageRange_ = exports._contacts_ResolvedPeer_ = exports._InputChannel_ = exports._MessageEntity_ = exports._ReplyMarkup_ = exports._KeyboardButtonRow_ = exports._KeyboardButton_ = exports._BotInfo_ = exports._BotCommand_ = exports._messages_StickerSet_ = exports._StickerSet_ = exports._InputStickerSet_ = exports._ChatInvite_ = exports._ExportedChatInvite_ = exports._ReceivedNotifyMessage_ = exports._auth_PasswordRecovery_ = exports._account_PasswordInputSettings_ = exports._account_PasswordSettings_ = exports._account_Password_ = exports._account_Authorizations_ = exports._Authorization_ = exports._WebPage_ = exports._messages_AffectedMessages_ = exports._messages_AllStickers_ = exports._StickerPack_ = exports._messages_Stickers_ = exports._DocumentAttribute_ = exports._AccountDaysTTL_ = exports._account_PrivacyRules_ = exports._PrivacyRule_ = exports._InputPrivacyRule_ = exports._PrivacyKey_ = exports._InputPrivacyKey_ = exports._contacts_Found_ = exports._SendMessageAction_ = void 0;
-exports._PhoneCallProtocol_ = exports._PhoneConnection_ = exports._PhoneCall_ = exports._InputPhoneCall_ = exports._InputStickerSetItem_ = exports._ShippingOption_ = exports._account_TmpPassword_ = exports._InputPaymentCredentials_ = exports._payments_SavedInfo_ = exports._payments_PaymentReceipt_ = exports._payments_PaymentResult_ = exports._payments_ValidatedRequestedInfo_ = exports._payments_PaymentForm_ = exports._upload_WebFile_ = exports._InputWebFileLocation_ = exports._InputWebDocument_ = exports._WebDocument_ = exports._PaymentSavedCredentials_ = exports._PaymentRequestedInfo_ = exports._PostAddress_ = exports._PaymentCharge_ = exports._Invoice_ = exports._LabeledPrice_ = exports._DataJSON_ = exports._PhoneCallDiscardReason_ = exports._PageBlock_ = exports._RichText_ = exports._messages_HighScores_ = exports._HighScore_ = exports._InputGame_ = exports._Game_ = exports._InputStickeredMedia_ = exports._MaskCoords_ = exports._StickerSetCovered_ = exports._messages_StickerSetInstallResult_ = exports._messages_ArchivedStickers_ = exports._messages_RecentStickers_ = exports._messages_FeaturedStickers_ = exports._DraftMessage_ = exports._contacts_TopPeers_ = exports._TopPeerCategoryPeers_ = exports._TopPeerCategory_ = exports._TopPeer_ = exports._messages_PeerDialogs_ = exports._InlineBotSwitchPM_ = exports._InputBotInlineMessageID_ = exports._messages_MessageEditData_ = exports._messages_BotCallbackAnswer_ = exports._auth_SentCodeType_ = exports._auth_CodeType_ = void 0;
-exports._PageTableCell_ = exports._JSONValue_ = exports._JSONObjectValue_ = exports._InputAppEvent_ = exports._help_PassportConfig_ = exports._SecureRequiredType_ = exports._InputCheckPasswordSRP_ = exports._SecureSecretSettings_ = exports._SecurePasswordKdfAlgo_ = exports._PasswordKdfAlgo_ = exports._account_Takeout_ = exports._SavedContact_ = exports._help_DeepLinkInfo_ = exports._account_SentEmailCode_ = exports._account_AuthorizationForm_ = exports._SecureCredentialsEncrypted_ = exports._SecureValueError_ = exports._SecureValueHash_ = exports._InputSecureValue_ = exports._SecureValue_ = exports._SecureValueType_ = exports._SecurePlainData_ = exports._SecureData_ = exports._SecureFile_ = exports._InputSecureFile_ = exports._help_TermsOfServiceUpdate_ = exports._InputClientProxy_ = exports._FileHash_ = exports._messages_FoundStickerSets_ = exports._DialogPeer_ = exports._InputDialogPeer_ = exports._InputMessage_ = exports._account_WebAuthorizations_ = exports._WebAuthorization_ = exports._InputSingleMedia_ = exports._help_RecentMeUrls_ = exports._RecentMeUrl_ = exports._messages_FavedStickers_ = exports._PopularContact_ = exports._ChannelAdminLogEventsFilter_ = exports._channels_AdminLogResults_ = exports._ChannelAdminLogEvent_ = exports._ChannelAdminLogEventAction_ = exports._LangPackLanguage_ = exports._LangPackDifference_ = exports._LangPackString_ = exports._CdnConfig_ = exports._CdnPublicKey_ = exports._upload_CdnFile_ = exports._phone_PhoneCall_ = void 0;
-exports._StatsDateRangeDays_ = exports._DialogFilterSuggested_ = exports._DialogFilter_ = exports._payments_BankCardData_ = exports._BankCardOpenUrl_ = exports._messages_VotesList_ = exports._WebPageAttribute_ = exports._ThemeSettings_ = exports._InputThemeSettings_ = exports._BaseTheme_ = exports._messages_InactiveChats_ = exports._account_ContentSettings_ = exports._auth_LoginToken_ = exports._account_Themes_ = exports._Theme_ = exports._InputTheme_ = exports._RestrictionReason_ = exports._PeerLocated_ = exports._ChannelLocation_ = exports._UrlAuthResult_ = exports._messages_SearchCounter_ = exports._FolderPeer_ = exports._InputFolderPeer_ = exports._Folder_ = exports._EmojiLanguage_ = exports._EmojiURL_ = exports._EmojiKeywordsDifference_ = exports._EmojiKeyword_ = exports._account_AutoDownloadSettings_ = exports._AutoDownloadSettings_ = exports._WallPaperSettings_ = exports._CodeSettings_ = exports._account_WallPapers_ = exports._InputWallPaper_ = exports._ChatBannedRights_ = exports._ChatAdminRights_ = exports._StatsURL_ = exports._ChatOnlines_ = exports._PollResults_ = exports._PollAnswerVoters_ = exports._Poll_ = exports._PollAnswer_ = exports._help_UserInfo_ = exports._help_SupportName_ = exports._Page_ = exports._PageRelatedArticle_ = exports._PageListOrderedItem_ = exports._PageListItem_ = exports._PageCaption_ = exports._PageTableRow_ = void 0;
-exports._messages_SearchResultsPositions_ = exports._SearchResultsPosition_ = exports._messages_SearchResultsCalendar_ = exports._SearchResultsCalendarPeriod_ = exports._messages_SponsoredMessages_ = exports._SponsoredMessage_ = exports._account_ResetPasswordResult_ = exports._BotCommandScope_ = exports._stickers_SuggestedShortName_ = exports._GroupCallParticipantVideo_ = exports._GroupCallParticipantVideoSourceGroup_ = exports._phone_ExportedGroupCallInvite_ = exports._phone_JoinAsPeers_ = exports._messages_CheckedHistoryImportPeer_ = exports._messages_ChatAdminsWithInvites_ = exports._ChatAdminWithInvites_ = exports._messages_ChatInviteImporters_ = exports._messages_ExportedChatInvite_ = exports._messages_ExportedChatInvites_ = exports._ChatInviteImporter_ = exports._messages_AffectedFoundMessages_ = exports._messages_HistoryImportParsed_ = exports._messages_HistoryImport_ = exports._InlineQueryPeerType_ = exports._phone_GroupParticipants_ = exports._phone_GroupCall_ = exports._GroupCallParticipant_ = exports._InputGroupCall_ = exports._GroupCall_ = exports._stats_MessageStats_ = exports._PeerBlocked_ = exports._MessageReplies_ = exports._MessageReplyHeader_ = exports._messages_DiscussionMessage_ = exports._messages_MessageViews_ = exports._MessageViews_ = exports._help_CountriesList_ = exports._help_Country_ = exports._help_CountryCode_ = exports._GlobalPrivacySettings_ = exports._stats_MegagroupStats_ = exports._StatsGroupTopInviter_ = exports._StatsGroupTopAdmin_ = exports._StatsGroupTopPoster_ = exports._VideoSize_ = exports._help_PromoData_ = exports._stats_BroadcastStats_ = exports._StatsGraph_ = exports._StatsPercentValue_ = exports._StatsAbsValueAndPrev_ = void 0;
-exports._ExportedContactToken_ = exports._DefaultHistoryTTL_ = exports._messages_ForumTopics_ = exports._ForumTopic_ = exports._Username_ = exports._StickerKeyword_ = exports._MessageExtendedMedia_ = exports._SendAsPeer_ = exports._PremiumSubscriptionOption_ = exports._account_EmailVerified_ = exports._EmailVerification_ = exports._EmailVerifyPurpose_ = exports._messages_Reactions_ = exports._ChatReactions_ = exports._Reaction_ = exports._account_EmojiStatuses_ = exports._EmojiStatus_ = exports._PaymentFormMethod_ = exports._PremiumGiftOption_ = exports._InputStorePaymentPurpose_ = exports._help_PremiumPromo_ = exports._messages_TranscribedAudio_ = exports._payments_ExportedInvoice_ = exports._InputInvoice_ = exports._AttachMenuPeerType_ = exports._account_SavedRingtone_ = exports._NotificationSound_ = exports._account_SavedRingtones_ = exports._BotMenuButton_ = exports._WebViewMessageSent_ = exports._SimpleWebViewResult_ = exports._WebViewResult_ = exports._AttachMenuBotsBot_ = exports._AttachMenuBots_ = exports._AttachMenuBot_ = exports._AttachMenuBotIcon_ = exports._AttachMenuBotIconColor_ = exports._phone_GroupCallStreamRtmpUrl_ = exports._phone_GroupCallStreamChannels_ = exports._GroupCallStreamChannel_ = exports._MessagePeerReaction_ = exports._messages_AvailableReactions_ = exports._AvailableReaction_ = exports._messages_MessageReactionsList_ = exports._MessageReactions_ = exports._ReactionCount_ = exports._auth_LoggedOut_ = exports._messages_PeerSettings_ = exports._users_UserFull_ = exports._channels_SendAsPeers_ = void 0;
-exports._StoryFwdHeader_ = exports._premium_BoostsStatus_ = exports._premium_MyBoosts_ = exports._MyBoost_ = exports._premium_BoostsList_ = exports._Boost_ = exports._PrepaidGiveaway_ = exports._payments_GiveawayInfo_ = exports._payments_CheckedGiftCode_ = exports._PremiumGiftCodeOption_ = exports._messages_WebPage_ = exports._stories_PeerStories_ = exports._PeerStories_ = exports._MediaArea_ = exports._MediaAreaCoordinates_ = exports._StoriesStealthMode_ = exports._ExportedStoryLink_ = exports._InputReplyTo_ = exports._stories_StoryViews_ = exports._stories_StoryViewsList_ = exports._StoryView_ = exports._stories_Stories_ = exports._stories_AllStories_ = exports._StoryItem_ = exports._StoryViews_ = exports._SponsoredWebPage_ = exports._MessagePeerVote_ = exports._bots_BotInfo_ = exports._chatlists_ChatlistUpdates_ = exports._chatlists_ChatlistInvite_ = exports._chatlists_ExportedInvites_ = exports._chatlists_ExportedChatlistInvite_ = exports._ExportedChatlistInvite_ = exports._InputChatlist_ = exports._ReadParticipantDate_ = exports._InlineBotWebView_ = exports._AppWebViewResult_ = exports._messages_BotApp_ = exports._BotApp_ = exports._InputBotApp_ = exports._help_AppConfig_ = exports._account_AutoSaveSettings_ = exports._AutoSaveException_ = exports._AutoSaveSettings_ = exports._messages_TranslatedText_ = exports._TextWithEntities_ = exports._messages_EmojiGroups_ = exports._EmojiGroup_ = exports._EmojiList_ = exports._RequestPeerType_ = void 0;
-exports.Rpc_answer_dropped_ = exports.Rpc_answer_dropped_running_ = exports.Rpc_answer_unknown_ = exports.Rpc_error_ = exports.Bind_auth_key_inner_ = exports.Dh_gen_fail_ = exports.Dh_gen_retry_ = exports.Dh_gen_ok_ = exports.Client_DH_inner_data_ = exports.Server_DH_inner_data_ = exports.Server_DH_params_ok_ = exports.P_q_inner_data_temp_dc_ = exports.P_q_inner_data_dc_ = exports.ResPQ_ = exports._messages_DialogFilters_ = exports._account_ConnectedBots_ = exports._ConnectedBot_ = exports._messages_QuickReplies_ = exports._InputQuickReplyShortcut_ = exports._QuickReply_ = exports._help_TimezonesList_ = exports._Timezone_ = exports._BusinessAwayMessage_ = exports._InputBusinessAwayMessage_ = exports._BusinessGreetingMessage_ = exports._InputBusinessGreetingMessage_ = exports._BusinessAwayMessageSchedule_ = exports._BusinessRecipients_ = exports._InputBusinessRecipients_ = exports._BusinessLocation_ = exports._BusinessWorkHours_ = exports._BusinessWeeklyOpen_ = exports._SmsJob_ = exports._smsjobs_Status_ = exports._smsjobs_EligibilityToJoin_ = exports._OutboxReadDate_ = exports._messages_SavedReactionTags_ = exports._SavedReactionTag_ = exports._messages_SavedDialogs_ = exports._SavedDialog_ = exports._stories_StoryReactionsList_ = exports._StoryReaction_ = exports._help_PeerColors_ = exports._help_PeerColorOption_ = exports._help_PeerColorSet_ = exports._PeerColor_ = exports._stats_PublicForwards_ = exports._PublicForward_ = exports._stats_StoryStats_ = exports._PostInteractionCounters_ = void 0;
-exports.InputMediaGeoLive_ = exports.InputMediaInvoice_ = exports.InputMediaGame_ = exports.InputMediaDocumentExternal_ = exports.InputMediaPhotoExternal_ = exports.InputMediaVenue_ = exports.InputMediaDocument_ = exports.InputMediaUploadedDocument_ = exports.InputMediaContact_ = exports.InputMediaGeoPoint_ = exports.InputMediaPhoto_ = exports.InputMediaUploadedPhoto_ = exports.InputMediaEmpty_ = exports.InputFileBig_ = exports.InputFile_ = exports.InputPhoneContact_ = exports.InputUserFromMessage_ = exports.InputUser_ = exports.InputUserSelf_ = exports.InputUserEmpty_ = exports.InputPeerChannelFromMessage_ = exports.InputPeerUserFromMessage_ = exports.InputPeerChannel_ = exports.InputPeerUser_ = exports.InputPeerChat_ = exports.InputPeerSelf_ = exports.InputPeerEmpty_ = exports.Null_ = exports.Error_ = exports.True_ = exports.Http_wait_ = exports.Destroy_auth_key_fail_ = exports.Destroy_auth_key_none_ = exports.Destroy_auth_key_ok_ = exports.Msg_new_detailed_info_ = exports.Msg_detailed_info_ = exports.Msgs_all_info_ = exports.Msgs_state_info_ = exports.Msgs_state_req_ = exports.Msg_resend_req_ = exports.Bad_server_salt_ = exports.Bad_msg_notification_ = exports.Msgs_ack_ = exports.Gzip_packed_ = exports.New_session_created_ = exports.Destroy_session_none_ = exports.Destroy_session_ok_ = exports.Pong_ = exports.Future_salts_ = exports.Future_salt_ = void 0;
-exports.ChatFull_ = exports.ChannelForbidden_ = exports.Channel_ = exports.ChatForbidden_ = exports.Chat_ = exports.ChatEmpty_ = exports.UserStatusLastMonth_ = exports.UserStatusLastWeek_ = exports.UserStatusRecently_ = exports.UserStatusOffline_ = exports.UserStatusOnline_ = exports.UserStatusEmpty_ = exports.UserProfilePhoto_ = exports.UserProfilePhotoEmpty_ = exports.User_ = exports.UserEmpty_ = exports.storage_FileWebp_ = exports.storage_FileMp4_ = exports.storage_FileMov_ = exports.storage_FileMp3_ = exports.storage_FilePdf_ = exports.storage_FilePng_ = exports.storage_FileGif_ = exports.storage_FileJpeg_ = exports.storage_FilePartial_ = exports.storage_FileUnknown_ = exports.PeerChannel_ = exports.PeerChat_ = exports.PeerUser_ = exports.InputGroupCallStream_ = exports.InputStickerSetThumb_ = exports.InputPeerPhotoFileLocation_ = exports.InputPhotoLegacyFileLocation_ = exports.InputPhotoFileLocation_ = exports.InputTakeoutFileLocation_ = exports.InputSecureFileLocation_ = exports.InputDocumentFileLocation_ = exports.InputEncryptedFileLocation_ = exports.InputFileLocation_ = exports.InputPhoto_ = exports.InputPhotoEmpty_ = exports.InputGeoPoint_ = exports.InputGeoPointEmpty_ = exports.InputChatPhoto_ = exports.InputChatUploadedPhoto_ = exports.InputChatPhotoEmpty_ = exports.InputMediaWebPage_ = exports.InputMediaStory_ = exports.InputMediaDice_ = exports.InputMediaPoll_ = void 0;
-exports.MessageActionContactSignUp_ = exports.MessageActionSecureValuesSent_ = exports.MessageActionSecureValuesSentMe_ = exports.MessageActionBotAllowed_ = exports.MessageActionCustomAction_ = exports.MessageActionScreenshotTaken_ = exports.MessageActionPhoneCall_ = exports.MessageActionPaymentSent_ = exports.MessageActionPaymentSentMe_ = exports.MessageActionGameScore_ = exports.MessageActionHistoryClear_ = exports.MessageActionPinMessage_ = exports.MessageActionChannelMigrateFrom_ = exports.MessageActionChatMigrateTo_ = exports.MessageActionChannelCreate_ = exports.MessageActionChatJoinedByLink_ = exports.MessageActionChatDeleteUser_ = exports.MessageActionChatAddUser_ = exports.MessageActionChatDeletePhoto_ = exports.MessageActionChatEditPhoto_ = exports.MessageActionChatEditTitle_ = exports.MessageActionChatCreate_ = exports.MessageActionEmpty_ = exports.MessageMediaGiveawayResults_ = exports.MessageMediaGiveaway_ = exports.MessageMediaStory_ = exports.MessageMediaDice_ = exports.MessageMediaPoll_ = exports.MessageMediaGeoLive_ = exports.MessageMediaInvoice_ = exports.MessageMediaGame_ = exports.MessageMediaVenue_ = exports.MessageMediaWebPage_ = exports.MessageMediaDocument_ = exports.MessageMediaUnsupported_ = exports.MessageMediaContact_ = exports.MessageMediaGeo_ = exports.MessageMediaPhoto_ = exports.MessageMediaEmpty_ = exports.MessageService_ = exports.Message_ = exports.MessageEmpty_ = exports.ChatPhoto_ = exports.ChatPhotoEmpty_ = exports.ChatParticipants_ = exports.ChatParticipantsForbidden_ = exports.ChatParticipantAdmin_ = exports.ChatParticipantCreator_ = exports.ChatParticipant_ = exports.ChannelFull_ = void 0;
-exports.InputReportReasonChildAbuse_ = exports.InputReportReasonPornography_ = exports.InputReportReasonViolence_ = exports.InputReportReasonSpam_ = exports.WallPaperNoFile_ = exports.WallPaper_ = exports.PeerSettings_ = exports.PeerNotifySettings_ = exports.InputPeerNotifySettings_ = exports.InputNotifyForumTopic_ = exports.InputNotifyBroadcasts_ = exports.InputNotifyChats_ = exports.InputNotifyUsers_ = exports.InputNotifyPeer_ = exports.auth_ExportedAuthorization_ = exports.auth_AuthorizationSignUpRequired_ = exports.auth_Authorization_ = exports.auth_SentCodeSuccess_ = exports.auth_SentCode_ = exports.GeoPoint_ = exports.GeoPointEmpty_ = exports.PhotoPathSize_ = exports.PhotoSizeProgressive_ = exports.PhotoStrippedSize_ = exports.PhotoCachedSize_ = exports.PhotoSize_ = exports.PhotoSizeEmpty_ = exports.Photo_ = exports.PhotoEmpty_ = exports.DialogFolder_ = exports.Dialog_ = exports.MessageActionBoostApply_ = exports.MessageActionGiveawayResults_ = exports.MessageActionGiveawayLaunch_ = exports.MessageActionGiftCode_ = exports.MessageActionSetChatWallPaper_ = exports.MessageActionRequestedPeer_ = exports.MessageActionSuggestProfilePhoto_ = exports.MessageActionTopicEdit_ = exports.MessageActionTopicCreate_ = exports.MessageActionGiftPremium_ = exports.MessageActionWebViewDataSent_ = exports.MessageActionWebViewDataSentMe_ = exports.MessageActionChatJoinedByRequest_ = exports.MessageActionSetChatTheme_ = exports.MessageActionGroupCallScheduled_ = exports.MessageActionSetMessagesTTL_ = exports.MessageActionInviteToGroupCall_ = exports.MessageActionGroupCall_ = exports.MessageActionGeoProximityReached_ = void 0;
-exports.UpdateUserStatus_ = exports.UpdateChatParticipants_ = exports.UpdateChatUserTyping_ = exports.UpdateUserTyping_ = exports.UpdateDeleteMessages_ = exports.UpdateMessageID_ = exports.UpdateNewMessage_ = exports.InputMessagesFilterPinned_ = exports.InputMessagesFilterContacts_ = exports.InputMessagesFilterGeo_ = exports.InputMessagesFilterMyMentions_ = exports.InputMessagesFilterRoundVideo_ = exports.InputMessagesFilterRoundVoice_ = exports.InputMessagesFilterPhoneCalls_ = exports.InputMessagesFilterChatPhotos_ = exports.InputMessagesFilterMusic_ = exports.InputMessagesFilterVoice_ = exports.InputMessagesFilterGif_ = exports.InputMessagesFilterUrl_ = exports.InputMessagesFilterDocument_ = exports.InputMessagesFilterPhotoVideo_ = exports.InputMessagesFilterVideo_ = exports.InputMessagesFilterPhotos_ = exports.InputMessagesFilterEmpty_ = exports.messages_AffectedHistory_ = exports.messages_ChatFull_ = exports.messages_ChatsSlice_ = exports.messages_Chats_ = exports.messages_MessagesNotModified_ = exports.messages_ChannelMessages_ = exports.messages_MessagesSlice_ = exports.messages_Messages_ = exports.messages_DialogsNotModified_ = exports.messages_DialogsSlice_ = exports.messages_Dialogs_ = exports.contacts_BlockedSlice_ = exports.contacts_Blocked_ = exports.contacts_ImportedContacts_ = exports.contacts_Contacts_ = exports.contacts_ContactsNotModified_ = exports.ContactStatus_ = exports.ImportedContact_ = exports.Contact_ = exports.UserFull_ = exports.InputReportReasonPersonalDetails_ = exports.InputReportReasonIllegalDrugs_ = exports.InputReportReasonFake_ = exports.InputReportReasonGeoIrrelevant_ = exports.InputReportReasonCopyright_ = exports.InputReportReasonOther_ = void 0;
-exports.UpdateLangPack_ = exports.UpdateLangPackTooLong_ = exports.UpdatePhoneCall_ = exports.UpdateBotPrecheckoutQuery_ = exports.UpdateBotShippingQuery_ = exports.UpdateBotWebhookJSONQuery_ = exports.UpdateBotWebhookJSON_ = exports.UpdatePinnedDialogs_ = exports.UpdateDialogPinned_ = exports.UpdateChannelWebPage_ = exports.UpdatePtsChanged_ = exports.UpdateConfig_ = exports.UpdateRecentStickers_ = exports.UpdateReadFeaturedStickers_ = exports.UpdateDraftMessage_ = exports.UpdateReadChannelOutbox_ = exports.UpdateInlineBotCallbackQuery_ = exports.UpdateEditMessage_ = exports.UpdateBotCallbackQuery_ = exports.UpdateEditChannelMessage_ = exports.UpdateBotInlineSend_ = exports.UpdateBotInlineQuery_ = exports.UpdateSavedGifs_ = exports.UpdateStickerSets_ = exports.UpdateStickerSetsOrder_ = exports.UpdateNewStickerSet_ = exports.UpdateChatParticipantAdmin_ = exports.UpdateChannelMessageViews_ = exports.UpdateDeleteChannelMessages_ = exports.UpdateReadChannelInbox_ = exports.UpdateNewChannelMessage_ = exports.UpdateChannel_ = exports.UpdateChannelTooLong_ = exports.UpdateReadMessagesContents_ = exports.UpdateWebPage_ = exports.UpdateReadHistoryOutbox_ = exports.UpdateReadHistoryInbox_ = exports.UpdateUserPhone_ = exports.UpdatePrivacy_ = exports.UpdateServiceNotification_ = exports.UpdateNotifySettings_ = exports.UpdateDcOptions_ = exports.UpdateChatParticipantDelete_ = exports.UpdateChatParticipantAdd_ = exports.UpdateEncryptedMessagesRead_ = exports.UpdateEncryption_ = exports.UpdateEncryptedChatTyping_ = exports.UpdateNewEncryptedMessage_ = exports.UpdateNewAuthorization_ = exports.UpdateUserName_ = void 0;
-exports.UpdateMessageExtendedMedia_ = exports.UpdateMoveStickerSetToTop_ = exports.UpdateRecentReactions_ = exports.UpdateRecentEmojiStatuses_ = exports.UpdateUserEmojiStatus_ = exports.UpdateReadFeaturedEmojiStickers_ = exports.UpdateTranscribedAudio_ = exports.UpdateSavedRingtones_ = exports.UpdateBotMenuButton_ = exports.UpdateWebViewResultSent_ = exports.UpdateAttachMenuBots_ = exports.UpdateMessageReactions_ = exports.UpdateBotChatInviteRequester_ = exports.UpdatePendingJoinRequests_ = exports.UpdateBotCommands_ = exports.UpdateGroupCallConnection_ = exports.UpdateBotStopped_ = exports.UpdateChannelParticipant_ = exports.UpdateChatParticipant_ = exports.UpdatePeerHistoryTTL_ = exports.UpdateGroupCall_ = exports.UpdateGroupCallParticipants_ = exports.UpdateChat_ = exports.UpdatePinnedChannelMessages_ = exports.UpdatePinnedMessages_ = exports.UpdateChannelUserTyping_ = exports.UpdatePeerBlocked_ = exports.UpdateReadChannelDiscussionOutbox_ = exports.UpdateReadChannelDiscussionInbox_ = exports.UpdateChannelMessageForwards_ = exports.UpdatePhoneCallSignalingData_ = exports.UpdateDialogFilters_ = exports.UpdateDialogFilterOrder_ = exports.UpdateDialogFilter_ = exports.UpdateMessagePollVote_ = exports.UpdateLoginToken_ = exports.UpdateGeoLiveViewed_ = exports.UpdateTheme_ = exports.UpdateDeleteScheduledMessages_ = exports.UpdateNewScheduledMessage_ = exports.UpdatePeerLocated_ = exports.UpdatePeerSettings_ = exports.UpdateFolderPeers_ = exports.UpdateChatDefaultBannedRights_ = exports.UpdateMessagePoll_ = exports.UpdateDialogUnreadMark_ = exports.UpdateChannelAvailableMessages_ = exports.UpdateContactsReset_ = exports.UpdateChannelReadMessagesContents_ = exports.UpdateFavedStickers_ = void 0;
-exports.EncryptedChatRequested_ = exports.EncryptedChatWaiting_ = exports.EncryptedChatEmpty_ = exports.help_InviteText_ = exports.help_NoAppUpdate_ = exports.help_AppUpdate_ = exports.NearestDc_ = exports.Config_ = exports.DcOption_ = exports.upload_FileCdnRedirect_ = exports.upload_File_ = exports.photos_Photo_ = exports.photos_PhotosSlice_ = exports.photos_Photos_ = exports.UpdateShortSentMessage_ = exports.Updates_ = exports.UpdatesCombined_ = exports.UpdateShort_ = exports.UpdateShortChatMessage_ = exports.UpdateShortMessage_ = exports.UpdatesTooLong_ = exports.updates_DifferenceTooLong_ = exports.updates_DifferenceSlice_ = exports.updates_Difference_ = exports.updates_DifferenceEmpty_ = exports.updates_State_ = exports.UpdateDeleteQuickReplyMessages_ = exports.UpdateQuickReplyMessage_ = exports.UpdateDeleteQuickReply_ = exports.UpdateNewQuickReply_ = exports.UpdateQuickReplies_ = exports.UpdateSmsJob_ = exports.UpdateSavedReactionTags_ = exports.UpdatePinnedSavedDialogs_ = exports.UpdateSavedDialogPinned_ = exports.UpdateBotMessageReactions_ = exports.UpdateBotMessageReaction_ = exports.UpdatePeerWallpaper_ = exports.UpdateChannelViewForumAsMessages_ = exports.UpdateBotChatBoost_ = exports.UpdateSentStoryReaction_ = exports.UpdateStoriesStealthMode_ = exports.UpdateStoryID_ = exports.UpdateReadStories_ = exports.UpdateStory_ = exports.UpdateGroupInvitePrivacyForbidden_ = exports.UpdateAutoSaveSettings_ = exports.UpdateUser_ = exports.UpdateChannelPinnedTopics_ = exports.UpdateChannelPinnedTopic_ = void 0;
-exports.InputPrivacyKeyProfilePhoto_ = exports.InputPrivacyKeyForwards_ = exports.InputPrivacyKeyPhoneP2P_ = exports.InputPrivacyKeyPhoneCall_ = exports.InputPrivacyKeyChatInvite_ = exports.InputPrivacyKeyStatusTimestamp_ = exports.contacts_Found_ = exports.SendMessageEmojiInteractionSeen_ = exports.SendMessageEmojiInteraction_ = exports.SendMessageChooseStickerAction_ = exports.SendMessageHistoryImportAction_ = exports.SpeakingInGroupCallAction_ = exports.SendMessageUploadRoundAction_ = exports.SendMessageRecordRoundAction_ = exports.SendMessageGamePlayAction_ = exports.SendMessageChooseContactAction_ = exports.SendMessageGeoLocationAction_ = exports.SendMessageUploadDocumentAction_ = exports.SendMessageUploadPhotoAction_ = exports.SendMessageUploadAudioAction_ = exports.SendMessageRecordAudioAction_ = exports.SendMessageUploadVideoAction_ = exports.SendMessageRecordVideoAction_ = exports.SendMessageCancelAction_ = exports.SendMessageTypingAction_ = exports.NotifyForumTopic_ = exports.NotifyBroadcasts_ = exports.NotifyChats_ = exports.NotifyUsers_ = exports.NotifyPeer_ = exports.help_Support_ = exports.Document_ = exports.DocumentEmpty_ = exports.InputDocument_ = exports.InputDocumentEmpty_ = exports.messages_SentEncryptedFile_ = exports.messages_SentEncryptedMessage_ = exports.messages_DhConfig_ = exports.messages_DhConfigNotModified_ = exports.EncryptedMessageService_ = exports.EncryptedMessage_ = exports.InputEncryptedFileBigUploaded_ = exports.InputEncryptedFile_ = exports.InputEncryptedFileUploaded_ = exports.InputEncryptedFileEmpty_ = exports.EncryptedFile_ = exports.EncryptedFileEmpty_ = exports.InputEncryptedChat_ = exports.EncryptedChatDiscarded_ = exports.EncryptedChat_ = void 0;
-exports.WebPagePending_ = exports.WebPageEmpty_ = exports.messages_AffectedMessages_ = exports.messages_AllStickers_ = exports.messages_AllStickersNotModified_ = exports.StickerPack_ = exports.messages_Stickers_ = exports.messages_StickersNotModified_ = exports.DocumentAttributeCustomEmoji_ = exports.DocumentAttributeHasStickers_ = exports.DocumentAttributeFilename_ = exports.DocumentAttributeAudio_ = exports.DocumentAttributeVideo_ = exports.DocumentAttributeSticker_ = exports.DocumentAttributeAnimated_ = exports.DocumentAttributeImageSize_ = exports.AccountDaysTTL_ = exports.account_PrivacyRules_ = exports.PrivacyValueAllowCloseFriends_ = exports.PrivacyValueDisallowChatParticipants_ = exports.PrivacyValueAllowChatParticipants_ = exports.PrivacyValueDisallowUsers_ = exports.PrivacyValueDisallowAll_ = exports.PrivacyValueDisallowContacts_ = exports.PrivacyValueAllowUsers_ = exports.PrivacyValueAllowAll_ = exports.PrivacyValueAllowContacts_ = exports.InputPrivacyValueAllowCloseFriends_ = exports.InputPrivacyValueDisallowChatParticipants_ = exports.InputPrivacyValueAllowChatParticipants_ = exports.InputPrivacyValueDisallowUsers_ = exports.InputPrivacyValueDisallowAll_ = exports.InputPrivacyValueDisallowContacts_ = exports.InputPrivacyValueAllowUsers_ = exports.InputPrivacyValueAllowAll_ = exports.InputPrivacyValueAllowContacts_ = exports.PrivacyKeyAbout_ = exports.PrivacyKeyVoiceMessages_ = exports.PrivacyKeyAddedByPhone_ = exports.PrivacyKeyPhoneNumber_ = exports.PrivacyKeyProfilePhoto_ = exports.PrivacyKeyForwards_ = exports.PrivacyKeyPhoneP2P_ = exports.PrivacyKeyPhoneCall_ = exports.PrivacyKeyChatInvite_ = exports.PrivacyKeyStatusTimestamp_ = exports.InputPrivacyKeyAbout_ = exports.InputPrivacyKeyVoiceMessages_ = exports.InputPrivacyKeyAddedByPhone_ = exports.InputPrivacyKeyPhoneNumber_ = void 0;
-exports.ReplyKeyboardMarkup_ = exports.ReplyKeyboardForceReply_ = exports.ReplyKeyboardHide_ = exports.KeyboardButtonRow_ = exports.KeyboardButtonRequestPeer_ = exports.KeyboardButtonSimpleWebView_ = exports.KeyboardButtonWebView_ = exports.KeyboardButtonUserProfile_ = exports.InputKeyboardButtonUserProfile_ = exports.KeyboardButtonRequestPoll_ = exports.InputKeyboardButtonUrlAuth_ = exports.KeyboardButtonUrlAuth_ = exports.KeyboardButtonBuy_ = exports.KeyboardButtonGame_ = exports.KeyboardButtonSwitchInline_ = exports.KeyboardButtonRequestGeoLocation_ = exports.KeyboardButtonRequestPhone_ = exports.KeyboardButtonCallback_ = exports.KeyboardButtonUrl_ = exports.KeyboardButton_ = exports.BotInfo_ = exports.BotCommand_ = exports.messages_StickerSetNotModified_ = exports.messages_StickerSet_ = exports.StickerSet_ = exports.InputStickerSetEmojiChannelDefaultStatuses_ = exports.InputStickerSetEmojiDefaultTopicIcons_ = exports.InputStickerSetEmojiDefaultStatuses_ = exports.InputStickerSetEmojiGenericAnimations_ = exports.InputStickerSetPremiumGifts_ = exports.InputStickerSetAnimatedEmojiAnimations_ = exports.InputStickerSetDice_ = exports.InputStickerSetAnimatedEmoji_ = exports.InputStickerSetShortName_ = exports.InputStickerSetID_ = exports.InputStickerSetEmpty_ = exports.ChatInvitePeek_ = exports.ChatInvite_ = exports.ChatInviteAlready_ = exports.ChatInvitePublicJoinRequests_ = exports.ChatInviteExported_ = exports.ReceivedNotifyMessage_ = exports.auth_PasswordRecovery_ = exports.account_PasswordInputSettings_ = exports.account_PasswordSettings_ = exports.account_Password_ = exports.account_Authorizations_ = exports.Authorization_ = exports.WebPageNotModified_ = exports.WebPage_ = void 0;
-exports.help_TermsOfService_ = exports.channels_ChannelParticipant_ = exports.channels_ChannelParticipantsNotModified_ = exports.channels_ChannelParticipants_ = exports.ChannelParticipantsMentions_ = exports.ChannelParticipantsContacts_ = exports.ChannelParticipantsSearch_ = exports.ChannelParticipantsBanned_ = exports.ChannelParticipantsBots_ = exports.ChannelParticipantsKicked_ = exports.ChannelParticipantsAdmins_ = exports.ChannelParticipantsRecent_ = exports.ChannelParticipantLeft_ = exports.ChannelParticipantBanned_ = exports.ChannelParticipantAdmin_ = exports.ChannelParticipantCreator_ = exports.ChannelParticipantSelf_ = exports.ChannelParticipant_ = exports.ChannelMessagesFilter_ = exports.ChannelMessagesFilterEmpty_ = exports.updates_ChannelDifference_ = exports.updates_ChannelDifferenceTooLong_ = exports.updates_ChannelDifferenceEmpty_ = exports.MessageRange_ = exports.contacts_ResolvedPeer_ = exports.InputChannelFromMessage_ = exports.InputChannel_ = exports.InputChannelEmpty_ = exports.MessageEntityBlockquote_ = exports.MessageEntityCustomEmoji_ = exports.MessageEntitySpoiler_ = exports.MessageEntityBankCard_ = exports.MessageEntityStrike_ = exports.MessageEntityUnderline_ = exports.MessageEntityCashtag_ = exports.MessageEntityPhone_ = exports.InputMessageEntityMentionName_ = exports.MessageEntityMentionName_ = exports.MessageEntityTextUrl_ = exports.MessageEntityPre_ = exports.MessageEntityCode_ = exports.MessageEntityItalic_ = exports.MessageEntityBold_ = exports.MessageEntityEmail_ = exports.MessageEntityUrl_ = exports.MessageEntityBotCommand_ = exports.MessageEntityHashtag_ = exports.MessageEntityMention_ = exports.MessageEntityUnknown_ = exports.ReplyInlineMarkup_ = void 0;
-exports.TopPeerCategoryCorrespondents_ = exports.TopPeerCategoryBotsInline_ = exports.TopPeerCategoryBotsPM_ = exports.TopPeer_ = exports.messages_PeerDialogs_ = exports.InlineBotSwitchPM_ = exports.InputBotInlineMessageID64_ = exports.InputBotInlineMessageID_ = exports.messages_MessageEditData_ = exports.messages_BotCallbackAnswer_ = exports.auth_SentCodeTypeFirebaseSms_ = exports.auth_SentCodeTypeFragmentSms_ = exports.auth_SentCodeTypeSetUpEmailRequired_ = exports.auth_SentCodeTypeEmailCode_ = exports.auth_SentCodeTypeMissedCall_ = exports.auth_SentCodeTypeFlashCall_ = exports.auth_SentCodeTypeCall_ = exports.auth_SentCodeTypeSms_ = exports.auth_SentCodeTypeApp_ = exports.auth_CodeTypeFragmentSms_ = exports.auth_CodeTypeMissedCall_ = exports.auth_CodeTypeFlashCall_ = exports.auth_CodeTypeCall_ = exports.auth_CodeTypeSms_ = exports.MessageFwdHeader_ = exports.ExportedMessageLink_ = exports.messages_BotResults_ = exports.BotInlineMediaResult_ = exports.BotInlineResult_ = exports.BotInlineMessageMediaWebPage_ = exports.BotInlineMessageMediaInvoice_ = exports.BotInlineMessageMediaContact_ = exports.BotInlineMessageMediaVenue_ = exports.BotInlineMessageMediaGeo_ = exports.BotInlineMessageText_ = exports.BotInlineMessageMediaAuto_ = exports.InputBotInlineResultGame_ = exports.InputBotInlineResultDocument_ = exports.InputBotInlineResultPhoto_ = exports.InputBotInlineResult_ = exports.InputBotInlineMessageMediaWebPage_ = exports.InputBotInlineMessageMediaInvoice_ = exports.InputBotInlineMessageGame_ = exports.InputBotInlineMessageMediaContact_ = exports.InputBotInlineMessageMediaVenue_ = exports.InputBotInlineMessageMediaGeo_ = exports.InputBotInlineMessageText_ = exports.InputBotInlineMessageMediaAuto_ = exports.messages_SavedGifs_ = exports.messages_SavedGifsNotModified_ = void 0;
-exports.PageBlockAuthorDate_ = exports.PageBlockSubtitle_ = exports.PageBlockTitle_ = exports.PageBlockUnsupported_ = exports.TextAnchor_ = exports.TextImage_ = exports.TextPhone_ = exports.TextMarked_ = exports.TextSuperscript_ = exports.TextSubscript_ = exports.TextConcat_ = exports.TextEmail_ = exports.TextUrl_ = exports.TextFixed_ = exports.TextStrike_ = exports.TextUnderline_ = exports.TextItalic_ = exports.TextBold_ = exports.TextPlain_ = exports.TextEmpty_ = exports.messages_HighScores_ = exports.HighScore_ = exports.InputGameShortName_ = exports.InputGameID_ = exports.Game_ = exports.InputStickeredMediaDocument_ = exports.InputStickeredMediaPhoto_ = exports.MaskCoords_ = exports.StickerSetNoCovered_ = exports.StickerSetFullCovered_ = exports.StickerSetMultiCovered_ = exports.StickerSetCovered_ = exports.messages_StickerSetInstallResultArchive_ = exports.messages_StickerSetInstallResultSuccess_ = exports.messages_ArchivedStickers_ = exports.messages_RecentStickers_ = exports.messages_RecentStickersNotModified_ = exports.messages_FeaturedStickers_ = exports.messages_FeaturedStickersNotModified_ = exports.DraftMessage_ = exports.DraftMessageEmpty_ = exports.contacts_TopPeersDisabled_ = exports.contacts_TopPeers_ = exports.contacts_TopPeersNotModified_ = exports.TopPeerCategoryPeers_ = exports.TopPeerCategoryForwardChats_ = exports.TopPeerCategoryForwardUsers_ = exports.TopPeerCategoryPhoneCalls_ = exports.TopPeerCategoryChannels_ = exports.TopPeerCategoryGroups_ = void 0;
-exports.InputPaymentCredentialsSaved_ = exports.payments_SavedInfo_ = exports.payments_PaymentReceipt_ = exports.payments_PaymentVerificationNeeded_ = exports.payments_PaymentResult_ = exports.payments_ValidatedRequestedInfo_ = exports.payments_PaymentForm_ = exports.upload_WebFile_ = exports.InputWebFileAudioAlbumThumbLocation_ = exports.InputWebFileGeoPointLocation_ = exports.InputWebFileLocation_ = exports.InputWebDocument_ = exports.WebDocumentNoProxy_ = exports.WebDocument_ = exports.PaymentSavedCredentialsCard_ = exports.PaymentRequestedInfo_ = exports.PostAddress_ = exports.PaymentCharge_ = exports.Invoice_ = exports.LabeledPrice_ = exports.DataJSON_ = exports.PhoneCallDiscardReasonBusy_ = exports.PhoneCallDiscardReasonHangup_ = exports.PhoneCallDiscardReasonDisconnect_ = exports.PhoneCallDiscardReasonMissed_ = exports.PageBlockMap_ = exports.PageBlockRelatedArticles_ = exports.PageBlockDetails_ = exports.PageBlockOrderedList_ = exports.PageBlockTable_ = exports.PageBlockKicker_ = exports.PageBlockAudio_ = exports.PageBlockChannel_ = exports.PageBlockSlideshow_ = exports.PageBlockCollage_ = exports.PageBlockEmbedPost_ = exports.PageBlockEmbed_ = exports.PageBlockCover_ = exports.PageBlockVideo_ = exports.PageBlockPhoto_ = exports.PageBlockPullquote_ = exports.PageBlockBlockquote_ = exports.PageBlockList_ = exports.PageBlockAnchor_ = exports.PageBlockDivider_ = exports.PageBlockFooter_ = exports.PageBlockPreformatted_ = exports.PageBlockParagraph_ = exports.PageBlockSubheader_ = exports.PageBlockHeader_ = void 0;
-exports.ChannelAdminLogEventActionParticipantMute_ = exports.ChannelAdminLogEventActionDiscardGroupCall_ = exports.ChannelAdminLogEventActionStartGroupCall_ = exports.ChannelAdminLogEventActionToggleSlowMode_ = exports.ChannelAdminLogEventActionChangeLocation_ = exports.ChannelAdminLogEventActionChangeLinkedChat_ = exports.ChannelAdminLogEventActionStopPoll_ = exports.ChannelAdminLogEventActionDefaultBannedRights_ = exports.ChannelAdminLogEventActionTogglePreHistoryHidden_ = exports.ChannelAdminLogEventActionChangeStickerSet_ = exports.ChannelAdminLogEventActionParticipantToggleAdmin_ = exports.ChannelAdminLogEventActionParticipantToggleBan_ = exports.ChannelAdminLogEventActionParticipantInvite_ = exports.ChannelAdminLogEventActionParticipantLeave_ = exports.ChannelAdminLogEventActionParticipantJoin_ = exports.ChannelAdminLogEventActionDeleteMessage_ = exports.ChannelAdminLogEventActionEditMessage_ = exports.ChannelAdminLogEventActionUpdatePinned_ = exports.ChannelAdminLogEventActionToggleSignatures_ = exports.ChannelAdminLogEventActionToggleInvites_ = exports.ChannelAdminLogEventActionChangePhoto_ = exports.ChannelAdminLogEventActionChangeUsername_ = exports.ChannelAdminLogEventActionChangeAbout_ = exports.ChannelAdminLogEventActionChangeTitle_ = exports.LangPackLanguage_ = exports.LangPackDifference_ = exports.LangPackStringDeleted_ = exports.LangPackStringPluralized_ = exports.LangPackString_ = exports.CdnConfig_ = exports.CdnPublicKey_ = exports.upload_CdnFile_ = exports.upload_CdnFileReuploadNeeded_ = exports.phone_PhoneCall_ = exports.PhoneCallProtocol_ = exports.PhoneConnectionWebrtc_ = exports.PhoneConnection_ = exports.PhoneCallDiscarded_ = exports.PhoneCall_ = exports.PhoneCallAccepted_ = exports.PhoneCallRequested_ = exports.PhoneCallWaiting_ = exports.PhoneCallEmpty_ = exports.InputPhoneCall_ = exports.InputStickerSetItem_ = exports.ShippingOption_ = exports.account_TmpPassword_ = exports.InputPaymentCredentialsGooglePay_ = exports.InputPaymentCredentialsApplePay_ = exports.InputPaymentCredentials_ = void 0;
-exports.FileHash_ = exports.messages_FoundStickerSets_ = exports.messages_FoundStickerSetsNotModified_ = exports.DialogPeerFolder_ = exports.DialogPeer_ = exports.InputDialogPeerFolder_ = exports.InputDialogPeer_ = exports.InputMessageCallbackQuery_ = exports.InputMessagePinned_ = exports.InputMessageReplyTo_ = exports.InputMessageID_ = exports.account_WebAuthorizations_ = exports.WebAuthorization_ = exports.InputSingleMedia_ = exports.help_RecentMeUrls_ = exports.RecentMeUrlStickerSet_ = exports.RecentMeUrlChatInvite_ = exports.RecentMeUrlChat_ = exports.RecentMeUrlUser_ = exports.RecentMeUrlUnknown_ = exports.messages_FavedStickers_ = exports.messages_FavedStickersNotModified_ = exports.PopularContact_ = exports.ChannelAdminLogEventsFilter_ = exports.channels_AdminLogResults_ = exports.ChannelAdminLogEvent_ = exports.ChannelAdminLogEventActionChangeEmojiStickerSet_ = exports.ChannelAdminLogEventActionChangeEmojiStatus_ = exports.ChannelAdminLogEventActionChangeWallpaper_ = exports.ChannelAdminLogEventActionChangeProfilePeerColor_ = exports.ChannelAdminLogEventActionChangePeerColor_ = exports.ChannelAdminLogEventActionToggleAntiSpam_ = exports.ChannelAdminLogEventActionPinTopic_ = exports.ChannelAdminLogEventActionDeleteTopic_ = exports.ChannelAdminLogEventActionEditTopic_ = exports.ChannelAdminLogEventActionCreateTopic_ = exports.ChannelAdminLogEventActionToggleForum_ = exports.ChannelAdminLogEventActionChangeUsernames_ = exports.ChannelAdminLogEventActionChangeAvailableReactions_ = exports.ChannelAdminLogEventActionSendMessage_ = exports.ChannelAdminLogEventActionToggleNoForwards_ = exports.ChannelAdminLogEventActionParticipantJoinByRequest_ = exports.ChannelAdminLogEventActionChangeHistoryTTL_ = exports.ChannelAdminLogEventActionParticipantVolume_ = exports.ChannelAdminLogEventActionExportedInviteEdit_ = exports.ChannelAdminLogEventActionExportedInviteRevoke_ = exports.ChannelAdminLogEventActionExportedInviteDelete_ = exports.ChannelAdminLogEventActionParticipantJoinByInvite_ = exports.ChannelAdminLogEventActionToggleGroupCallSetting_ = exports.ChannelAdminLogEventActionParticipantUnmute_ = void 0;
-exports.InputCheckPasswordSRP_ = exports.InputCheckPasswordEmpty_ = exports.SecureSecretSettings_ = exports.SecurePasswordKdfAlgoSHA512_ = exports.SecurePasswordKdfAlgoPBKDF2HMACSHA512iter100000_ = exports.SecurePasswordKdfAlgoUnknown_ = exports.PasswordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow_ = exports.PasswordKdfAlgoUnknown_ = exports.account_Takeout_ = exports.SavedPhoneContact_ = exports.help_DeepLinkInfo_ = exports.help_DeepLinkInfoEmpty_ = exports.account_SentEmailCode_ = exports.account_AuthorizationForm_ = exports.SecureCredentialsEncrypted_ = exports.SecureValueErrorTranslationFiles_ = exports.SecureValueErrorTranslationFile_ = exports.SecureValueError_ = exports.SecureValueErrorFiles_ = exports.SecureValueErrorFile_ = exports.SecureValueErrorSelfie_ = exports.SecureValueErrorReverseSide_ = exports.SecureValueErrorFrontSide_ = exports.SecureValueErrorData_ = exports.SecureValueHash_ = exports.InputSecureValue_ = exports.SecureValue_ = exports.SecureValueTypeEmail_ = exports.SecureValueTypePhone_ = exports.SecureValueTypeTemporaryRegistration_ = exports.SecureValueTypePassportRegistration_ = exports.SecureValueTypeRentalAgreement_ = exports.SecureValueTypeBankStatement_ = exports.SecureValueTypeUtilityBill_ = exports.SecureValueTypeAddress_ = exports.SecureValueTypeInternalPassport_ = exports.SecureValueTypeIdentityCard_ = exports.SecureValueTypeDriverLicense_ = exports.SecureValueTypePassport_ = exports.SecureValueTypePersonalDetails_ = exports.SecurePlainEmail_ = exports.SecurePlainPhone_ = exports.SecureData_ = exports.SecureFile_ = exports.SecureFileEmpty_ = exports.InputSecureFile_ = exports.InputSecureFileUploaded_ = exports.help_TermsOfServiceUpdate_ = exports.help_TermsOfServiceUpdateEmpty_ = exports.InputClientProxy_ = void 0;
-exports.messages_SearchCounter_ = exports.FolderPeer_ = exports.InputFolderPeer_ = exports.Folder_ = exports.EmojiLanguage_ = exports.EmojiURL_ = exports.EmojiKeywordsDifference_ = exports.EmojiKeywordDeleted_ = exports.EmojiKeyword_ = exports.account_AutoDownloadSettings_ = exports.AutoDownloadSettings_ = exports.WallPaperSettings_ = exports.CodeSettings_ = exports.account_WallPapers_ = exports.account_WallPapersNotModified_ = exports.InputWallPaperNoFile_ = exports.InputWallPaperSlug_ = exports.InputWallPaper_ = exports.ChatBannedRights_ = exports.ChatAdminRights_ = exports.StatsURL_ = exports.ChatOnlines_ = exports.PollResults_ = exports.PollAnswerVoters_ = exports.Poll_ = exports.PollAnswer_ = exports.help_UserInfo_ = exports.help_UserInfoEmpty_ = exports.help_SupportName_ = exports.Page_ = exports.PageRelatedArticle_ = exports.PageListOrderedItemBlocks_ = exports.PageListOrderedItemText_ = exports.PageListItemBlocks_ = exports.PageListItemText_ = exports.PageCaption_ = exports.PageTableRow_ = exports.PageTableCell_ = exports.JsonObject_ = exports.JsonArray_ = exports.JsonString_ = exports.JsonNumber_ = exports.JsonBool_ = exports.JsonNull_ = exports.JsonObjectValue_ = exports.InputAppEvent_ = exports.help_PassportConfig_ = exports.help_PassportConfigNotModified_ = exports.SecureRequiredTypeOneOf_ = exports.SecureRequiredType_ = void 0;
-exports.stats_MegagroupStats_ = exports.StatsGroupTopInviter_ = exports.StatsGroupTopAdmin_ = exports.StatsGroupTopPoster_ = exports.VideoSizeStickerMarkup_ = exports.VideoSizeEmojiMarkup_ = exports.VideoSize_ = exports.help_PromoData_ = exports.help_PromoDataEmpty_ = exports.stats_BroadcastStats_ = exports.StatsGraph_ = exports.StatsGraphError_ = exports.StatsGraphAsync_ = exports.StatsPercentValue_ = exports.StatsAbsValueAndPrev_ = exports.StatsDateRangeDays_ = exports.DialogFilterSuggested_ = exports.DialogFilterChatlist_ = exports.DialogFilterDefault_ = exports.DialogFilter_ = exports.payments_BankCardData_ = exports.BankCardOpenUrl_ = exports.messages_VotesList_ = exports.WebPageAttributeStory_ = exports.WebPageAttributeTheme_ = exports.ThemeSettings_ = exports.InputThemeSettings_ = exports.BaseThemeArctic_ = exports.BaseThemeTinted_ = exports.BaseThemeNight_ = exports.BaseThemeDay_ = exports.BaseThemeClassic_ = exports.messages_InactiveChats_ = exports.account_ContentSettings_ = exports.auth_LoginTokenSuccess_ = exports.auth_LoginTokenMigrateTo_ = exports.auth_LoginToken_ = exports.account_Themes_ = exports.account_ThemesNotModified_ = exports.Theme_ = exports.InputThemeSlug_ = exports.InputTheme_ = exports.RestrictionReason_ = exports.PeerSelfLocated_ = exports.PeerLocated_ = exports.ChannelLocation_ = exports.ChannelLocationEmpty_ = exports.UrlAuthResultDefault_ = exports.UrlAuthResultAccepted_ = exports.UrlAuthResultRequest_ = void 0;
-exports.account_ResetPasswordRequestedWait_ = exports.account_ResetPasswordFailedWait_ = exports.BotCommandScopePeerUser_ = exports.BotCommandScopePeerAdmins_ = exports.BotCommandScopePeer_ = exports.BotCommandScopeChatAdmins_ = exports.BotCommandScopeChats_ = exports.BotCommandScopeUsers_ = exports.BotCommandScopeDefault_ = exports.stickers_SuggestedShortName_ = exports.GroupCallParticipantVideo_ = exports.GroupCallParticipantVideoSourceGroup_ = exports.phone_ExportedGroupCallInvite_ = exports.phone_JoinAsPeers_ = exports.messages_CheckedHistoryImportPeer_ = exports.messages_ChatAdminsWithInvites_ = exports.ChatAdminWithInvites_ = exports.messages_ChatInviteImporters_ = exports.messages_ExportedChatInviteReplaced_ = exports.messages_ExportedChatInvite_ = exports.messages_ExportedChatInvites_ = exports.ChatInviteImporter_ = exports.messages_AffectedFoundMessages_ = exports.messages_HistoryImportParsed_ = exports.messages_HistoryImport_ = exports.InlineQueryPeerTypeBotPM_ = exports.InlineQueryPeerTypeBroadcast_ = exports.InlineQueryPeerTypeMegagroup_ = exports.InlineQueryPeerTypeChat_ = exports.InlineQueryPeerTypePM_ = exports.InlineQueryPeerTypeSameBotPM_ = exports.phone_GroupParticipants_ = exports.phone_GroupCall_ = exports.GroupCallParticipant_ = exports.InputGroupCall_ = exports.GroupCall_ = exports.GroupCallDiscarded_ = exports.stats_MessageStats_ = exports.PeerBlocked_ = exports.MessageReplies_ = exports.MessageReplyStoryHeader_ = exports.MessageReplyHeader_ = exports.messages_DiscussionMessage_ = exports.messages_MessageViews_ = exports.MessageViews_ = exports.help_CountriesList_ = exports.help_CountriesListNotModified_ = exports.help_Country_ = exports.help_CountryCode_ = exports.GlobalPrivacySettings_ = void 0;
-exports.InputInvoicePremiumGiftCode_ = exports.InputInvoiceSlug_ = exports.InputInvoiceMessage_ = exports.AttachMenuPeerTypeBroadcast_ = exports.AttachMenuPeerTypeChat_ = exports.AttachMenuPeerTypePM_ = exports.AttachMenuPeerTypeBotPM_ = exports.AttachMenuPeerTypeSameBotPM_ = exports.account_SavedRingtoneConverted_ = exports.account_SavedRingtone_ = exports.NotificationSoundRingtone_ = exports.NotificationSoundLocal_ = exports.NotificationSoundNone_ = exports.NotificationSoundDefault_ = exports.account_SavedRingtones_ = exports.account_SavedRingtonesNotModified_ = exports.BotMenuButton_ = exports.BotMenuButtonCommands_ = exports.BotMenuButtonDefault_ = exports.WebViewMessageSent_ = exports.SimpleWebViewResultUrl_ = exports.WebViewResultUrl_ = exports.AttachMenuBotsBot_ = exports.AttachMenuBots_ = exports.AttachMenuBotsNotModified_ = exports.AttachMenuBot_ = exports.AttachMenuBotIcon_ = exports.AttachMenuBotIconColor_ = exports.phone_GroupCallStreamRtmpUrl_ = exports.phone_GroupCallStreamChannels_ = exports.GroupCallStreamChannel_ = exports.MessagePeerReaction_ = exports.messages_AvailableReactions_ = exports.messages_AvailableReactionsNotModified_ = exports.AvailableReaction_ = exports.messages_MessageReactionsList_ = exports.MessageReactions_ = exports.ReactionCount_ = exports.auth_LoggedOut_ = exports.messages_PeerSettings_ = exports.users_UserFull_ = exports.channels_SendAsPeers_ = exports.messages_SearchResultsPositions_ = exports.SearchResultPosition_ = exports.messages_SearchResultsCalendar_ = exports.SearchResultsCalendarPeriod_ = exports.messages_SponsoredMessagesEmpty_ = exports.messages_SponsoredMessages_ = exports.SponsoredMessage_ = exports.account_ResetPasswordOk_ = void 0;
-exports.TextWithEntities_ = exports.messages_EmojiGroups_ = exports.messages_EmojiGroupsNotModified_ = exports.EmojiGroup_ = exports.EmojiList_ = exports.EmojiListNotModified_ = exports.RequestPeerTypeBroadcast_ = exports.RequestPeerTypeChat_ = exports.RequestPeerTypeUser_ = exports.ExportedContactToken_ = exports.DefaultHistoryTTL_ = exports.messages_ForumTopics_ = exports.ForumTopic_ = exports.ForumTopicDeleted_ = exports.Username_ = exports.StickerKeyword_ = exports.MessageExtendedMedia_ = exports.MessageExtendedMediaPreview_ = exports.SendAsPeer_ = exports.PremiumSubscriptionOption_ = exports.account_EmailVerifiedLogin_ = exports.account_EmailVerified_ = exports.EmailVerificationApple_ = exports.EmailVerificationGoogle_ = exports.EmailVerificationCode_ = exports.EmailVerifyPurposePassport_ = exports.EmailVerifyPurposeLoginChange_ = exports.EmailVerifyPurposeLoginSetup_ = exports.messages_Reactions_ = exports.messages_ReactionsNotModified_ = exports.ChatReactionsSome_ = exports.ChatReactionsAll_ = exports.ChatReactionsNone_ = exports.ReactionCustomEmoji_ = exports.ReactionEmoji_ = exports.ReactionEmpty_ = exports.account_EmojiStatuses_ = exports.account_EmojiStatusesNotModified_ = exports.EmojiStatusUntil_ = exports.EmojiStatus_ = exports.EmojiStatusEmpty_ = exports.PaymentFormMethod_ = exports.PremiumGiftOption_ = exports.InputStorePaymentPremiumGiveaway_ = exports.InputStorePaymentPremiumGiftCode_ = exports.InputStorePaymentGiftPremium_ = exports.InputStorePaymentPremiumSubscription_ = exports.help_PremiumPromo_ = exports.messages_TranscribedAudio_ = exports.payments_ExportedInvoice_ = void 0;
-exports.PeerStories_ = exports.InputMediaAreaChannelPost_ = exports.MediaAreaChannelPost_ = exports.MediaAreaSuggestedReaction_ = exports.MediaAreaGeoPoint_ = exports.InputMediaAreaVenue_ = exports.MediaAreaVenue_ = exports.MediaAreaCoordinates_ = exports.StoriesStealthMode_ = exports.ExportedStoryLink_ = exports.InputReplyToStory_ = exports.InputReplyToMessage_ = exports.stories_StoryViews_ = exports.stories_StoryViewsList_ = exports.StoryViewPublicRepost_ = exports.StoryViewPublicForward_ = exports.StoryView_ = exports.stories_Stories_ = exports.stories_AllStories_ = exports.stories_AllStoriesNotModified_ = exports.StoryItem_ = exports.StoryItemSkipped_ = exports.StoryItemDeleted_ = exports.StoryViews_ = exports.SponsoredWebPage_ = exports.MessagePeerVoteMultiple_ = exports.MessagePeerVoteInputOption_ = exports.MessagePeerVote_ = exports.bots_BotInfo_ = exports.chatlists_ChatlistUpdates_ = exports.chatlists_ChatlistInvite_ = exports.chatlists_ChatlistInviteAlready_ = exports.chatlists_ExportedInvites_ = exports.chatlists_ExportedChatlistInvite_ = exports.ExportedChatlistInvite_ = exports.InputChatlistDialogFilter_ = exports.ReadParticipantDate_ = exports.InlineBotWebView_ = exports.AppWebViewResultUrl_ = exports.messages_BotApp_ = exports.BotApp_ = exports.BotAppNotModified_ = exports.InputBotAppShortName_ = exports.InputBotAppID_ = exports.help_AppConfig_ = exports.help_AppConfigNotModified_ = exports.account_AutoSaveSettings_ = exports.AutoSaveException_ = exports.AutoSaveSettings_ = exports.messages_TranslateResult_ = void 0;
-exports.BusinessGreetingMessage_ = exports.InputBusinessGreetingMessage_ = exports.BusinessAwayMessageScheduleCustom_ = exports.BusinessAwayMessageScheduleOutsideWorkHours_ = exports.BusinessAwayMessageScheduleAlways_ = exports.BusinessRecipients_ = exports.InputBusinessRecipients_ = exports.BusinessLocation_ = exports.BusinessWorkHours_ = exports.BusinessWeeklyOpen_ = exports.SmsJob_ = exports.smsjobs_Status_ = exports.smsjobs_EligibleToJoin_ = exports.OutboxReadDate_ = exports.messages_SavedReactionTags_ = exports.messages_SavedReactionTagsNotModified_ = exports.SavedReactionTag_ = exports.messages_SavedDialogsNotModified_ = exports.messages_SavedDialogsSlice_ = exports.messages_SavedDialogs_ = exports.SavedDialog_ = exports.stories_StoryReactionsList_ = exports.StoryReactionPublicRepost_ = exports.StoryReactionPublicForward_ = exports.StoryReaction_ = exports.help_PeerColors_ = exports.help_PeerColorsNotModified_ = exports.help_PeerColorOption_ = exports.help_PeerColorProfileSet_ = exports.help_PeerColorSet_ = exports.PeerColor_ = exports.stats_PublicForwards_ = exports.PublicForwardStory_ = exports.PublicForwardMessage_ = exports.stats_StoryStats_ = exports.PostInteractionCountersStory_ = exports.PostInteractionCountersMessage_ = exports.StoryFwdHeader_ = exports.premium_BoostsStatus_ = exports.premium_MyBoosts_ = exports.MyBoost_ = exports.premium_BoostsList_ = exports.Boost_ = exports.PrepaidGiveaway_ = exports.payments_GiveawayInfoResults_ = exports.payments_GiveawayInfo_ = exports.payments_CheckedGiftCode_ = exports.PremiumGiftCodeOption_ = exports.messages_WebPage_ = exports.stories_PeerStories_ = void 0;
-exports.map = exports.types = exports.messages_DialogFilters_ = exports.account_ConnectedBots_ = exports.ConnectedBot_ = exports.messages_QuickRepliesNotModified_ = exports.messages_QuickReplies_ = exports.InputQuickReplyShortcutId_ = exports.InputQuickReplyShortcut_ = exports.QuickReply_ = exports.help_TimezonesList_ = exports.help_TimezonesListNotModified_ = exports.Timezone_ = exports.BusinessAwayMessage_ = exports.InputBusinessAwayMessage_ = void 0;
+exports._ChatPhoto_ = exports._ChatParticipants_ = exports._ChatParticipant_ = exports._ChatFull_ = exports._Chat_ = exports._UserStatus_ = exports._UserProfilePhoto_ = exports._User_ = exports._storage_FileType_ = exports._Peer_ = exports._InputPhoto_ = exports._InputGeoPoint_ = exports._InputChatPhoto_ = exports._InputMedia_ = exports._InputFile_ = exports._InputContact_ = exports._InputUser_ = exports._InputPeer_ = exports._InputFileLocation_ = exports._help_ConfigSimple_ = exports._AccessPointRule_ = exports._IpPort_ = exports._Error_ = exports._True_ = exports._HttpWait_ = exports._DestroyAuthKeyRes_ = exports._MsgDetailedInfo_ = exports._MsgsAllInfo_ = exports._MsgsStateInfo_ = exports._MsgsStateReq_ = exports._MsgResendReq_ = exports._BadMsgNotification_ = exports._MsgsAck_ = exports._Object_ = exports._NewSession_ = exports._DestroySessionRes_ = exports._Pong_ = exports._FutureSalts_ = exports._FutureSalt_ = exports._RpcDropAnswer_ = exports._RpcError_ = exports._BindAuthKeyInner_ = exports._Set_client_DH_params_answer_ = exports._Client_DH_Inner_Data_ = exports._Server_DH_inner_data_ = exports._Server_DH_Params_ = exports._P_Q_inner_data_ = exports._ResPQ_ = exports.TypeX_ = exports.Type_ = void 0;
+exports._Document_ = exports._InputDocument_ = exports._messages_SentEncryptedMessage_ = exports._messages_DhConfig_ = exports._EncryptedMessage_ = exports._InputEncryptedFile_ = exports._EncryptedFile_ = exports._InputEncryptedChat_ = exports._EncryptedChat_ = exports._help_InviteText_ = exports._help_AppUpdate_ = exports._NearestDc_ = exports._Config_ = exports._DcOption_ = exports._upload_File_ = exports._photos_Photo_ = exports._photos_Photos_ = exports._Updates_ = exports._updates_Difference_ = exports._updates_State_ = exports._Update_ = exports._MessagesFilter_ = exports._messages_AffectedHistory_ = exports._messages_ChatFull_ = exports._messages_Chats_ = exports._messages_Messages_ = exports._messages_Dialogs_ = exports._contacts_Blocked_ = exports._contacts_ImportedContacts_ = exports._contacts_Contacts_ = exports._ContactStatus_ = exports._ImportedContact_ = exports._Contact_ = exports._UserFull_ = exports._ReportReason_ = exports._WallPaper_ = exports._PeerSettings_ = exports._PeerNotifySettings_ = exports._InputPeerNotifySettings_ = exports._InputNotifyPeer_ = exports._auth_ExportedAuthorization_ = exports._auth_Authorization_ = exports._auth_SentCode_ = exports._GeoPoint_ = exports._PhotoSize_ = exports._Photo_ = exports._Dialog_ = exports._MessageAction_ = exports._MessageMedia_ = exports._Message_ = void 0;
+exports._messages_BotResults_ = exports._BotInlineResult_ = exports._BotInlineMessage_ = exports._InputBotInlineResult_ = exports._InputBotInlineMessage_ = exports._messages_SavedGifs_ = exports._help_TermsOfService_ = exports._channels_ChannelParticipant_ = exports._channels_ChannelParticipants_ = exports._ChannelParticipantsFilter_ = exports._ChannelParticipant_ = exports._ChannelMessagesFilter_ = exports._updates_ChannelDifference_ = exports._MessageRange_ = exports._contacts_ResolvedPeer_ = exports._InputChannel_ = exports._MessageEntity_ = exports._ReplyMarkup_ = exports._KeyboardButtonRow_ = exports._KeyboardButton_ = exports._BotInfo_ = exports._BotCommand_ = exports._messages_StickerSet_ = exports._StickerSet_ = exports._InputStickerSet_ = exports._ChatInvite_ = exports._ExportedChatInvite_ = exports._ReceivedNotifyMessage_ = exports._auth_PasswordRecovery_ = exports._account_PasswordInputSettings_ = exports._account_PasswordSettings_ = exports._account_Password_ = exports._account_Authorizations_ = exports._Authorization_ = exports._WebPage_ = exports._messages_AffectedMessages_ = exports._messages_AllStickers_ = exports._StickerPack_ = exports._messages_Stickers_ = exports._DocumentAttribute_ = exports._AccountDaysTTL_ = exports._account_PrivacyRules_ = exports._PrivacyRule_ = exports._InputPrivacyRule_ = exports._PrivacyKey_ = exports._InputPrivacyKey_ = exports._contacts_Found_ = exports._SendMessageAction_ = exports._NotifyPeer_ = exports._help_Support_ = void 0;
+exports._PhoneCall_ = exports._InputPhoneCall_ = exports._InputStickerSetItem_ = exports._ShippingOption_ = exports._account_TmpPassword_ = exports._InputPaymentCredentials_ = exports._payments_SavedInfo_ = exports._payments_PaymentReceipt_ = exports._payments_PaymentResult_ = exports._payments_ValidatedRequestedInfo_ = exports._payments_PaymentForm_ = exports._upload_WebFile_ = exports._InputWebFileLocation_ = exports._InputWebDocument_ = exports._WebDocument_ = exports._PaymentSavedCredentials_ = exports._PaymentRequestedInfo_ = exports._PostAddress_ = exports._PaymentCharge_ = exports._Invoice_ = exports._LabeledPrice_ = exports._DataJSON_ = exports._PhoneCallDiscardReason_ = exports._PageBlock_ = exports._RichText_ = exports._messages_HighScores_ = exports._HighScore_ = exports._InputGame_ = exports._Game_ = exports._InputStickeredMedia_ = exports._MaskCoords_ = exports._StickerSetCovered_ = exports._messages_StickerSetInstallResult_ = exports._messages_ArchivedStickers_ = exports._messages_RecentStickers_ = exports._messages_FeaturedStickers_ = exports._DraftMessage_ = exports._contacts_TopPeers_ = exports._TopPeerCategoryPeers_ = exports._TopPeerCategory_ = exports._TopPeer_ = exports._messages_PeerDialogs_ = exports._InlineBotSwitchPM_ = exports._InputBotInlineMessageID_ = exports._messages_MessageEditData_ = exports._messages_BotCallbackAnswer_ = exports._auth_SentCodeType_ = exports._auth_CodeType_ = exports._MessageFwdHeader_ = exports._ExportedMessageLink_ = void 0;
+exports._JSONObjectValue_ = exports._InputAppEvent_ = exports._help_PassportConfig_ = exports._SecureRequiredType_ = exports._InputCheckPasswordSRP_ = exports._SecureSecretSettings_ = exports._SecurePasswordKdfAlgo_ = exports._PasswordKdfAlgo_ = exports._account_Takeout_ = exports._SavedContact_ = exports._help_DeepLinkInfo_ = exports._account_SentEmailCode_ = exports._account_AuthorizationForm_ = exports._SecureCredentialsEncrypted_ = exports._SecureValueError_ = exports._SecureValueHash_ = exports._InputSecureValue_ = exports._SecureValue_ = exports._SecureValueType_ = exports._SecurePlainData_ = exports._SecureData_ = exports._SecureFile_ = exports._InputSecureFile_ = exports._help_TermsOfServiceUpdate_ = exports._InputClientProxy_ = exports._FileHash_ = exports._messages_FoundStickerSets_ = exports._DialogPeer_ = exports._InputDialogPeer_ = exports._InputMessage_ = exports._account_WebAuthorizations_ = exports._WebAuthorization_ = exports._InputSingleMedia_ = exports._help_RecentMeUrls_ = exports._RecentMeUrl_ = exports._messages_FavedStickers_ = exports._PopularContact_ = exports._ChannelAdminLogEventsFilter_ = exports._channels_AdminLogResults_ = exports._ChannelAdminLogEvent_ = exports._ChannelAdminLogEventAction_ = exports._LangPackLanguage_ = exports._LangPackDifference_ = exports._LangPackString_ = exports._CdnConfig_ = exports._CdnPublicKey_ = exports._upload_CdnFile_ = exports._phone_PhoneCall_ = exports._PhoneCallProtocol_ = exports._PhoneConnection_ = void 0;
+exports._DialogFilter_ = exports._payments_BankCardData_ = exports._BankCardOpenUrl_ = exports._messages_VotesList_ = exports._WebPageAttribute_ = exports._ThemeSettings_ = exports._InputThemeSettings_ = exports._BaseTheme_ = exports._messages_InactiveChats_ = exports._account_ContentSettings_ = exports._auth_LoginToken_ = exports._account_Themes_ = exports._Theme_ = exports._InputTheme_ = exports._RestrictionReason_ = exports._PeerLocated_ = exports._ChannelLocation_ = exports._UrlAuthResult_ = exports._messages_SearchCounter_ = exports._FolderPeer_ = exports._InputFolderPeer_ = exports._Folder_ = exports._EmojiLanguage_ = exports._EmojiURL_ = exports._EmojiKeywordsDifference_ = exports._EmojiKeyword_ = exports._account_AutoDownloadSettings_ = exports._AutoDownloadSettings_ = exports._WallPaperSettings_ = exports._CodeSettings_ = exports._account_WallPapers_ = exports._InputWallPaper_ = exports._ChatBannedRights_ = exports._ChatAdminRights_ = exports._StatsURL_ = exports._ChatOnlines_ = exports._PollResults_ = exports._PollAnswerVoters_ = exports._Poll_ = exports._PollAnswer_ = exports._help_UserInfo_ = exports._help_SupportName_ = exports._Page_ = exports._PageRelatedArticle_ = exports._PageListOrderedItem_ = exports._PageListItem_ = exports._PageCaption_ = exports._PageTableRow_ = exports._PageTableCell_ = exports._JSONValue_ = void 0;
+exports._messages_SearchResultsCalendar_ = exports._SearchResultsCalendarPeriod_ = exports._messages_SponsoredMessages_ = exports._SponsoredMessage_ = exports._account_ResetPasswordResult_ = exports._BotCommandScope_ = exports._stickers_SuggestedShortName_ = exports._GroupCallParticipantVideo_ = exports._GroupCallParticipantVideoSourceGroup_ = exports._phone_ExportedGroupCallInvite_ = exports._phone_JoinAsPeers_ = exports._messages_CheckedHistoryImportPeer_ = exports._messages_ChatAdminsWithInvites_ = exports._ChatAdminWithInvites_ = exports._messages_ChatInviteImporters_ = exports._messages_ExportedChatInvite_ = exports._messages_ExportedChatInvites_ = exports._ChatInviteImporter_ = exports._messages_AffectedFoundMessages_ = exports._messages_HistoryImportParsed_ = exports._messages_HistoryImport_ = exports._InlineQueryPeerType_ = exports._phone_GroupParticipants_ = exports._phone_GroupCall_ = exports._GroupCallParticipant_ = exports._InputGroupCall_ = exports._GroupCall_ = exports._stats_MessageStats_ = exports._PeerBlocked_ = exports._MessageReplies_ = exports._MessageReplyHeader_ = exports._messages_DiscussionMessage_ = exports._messages_MessageViews_ = exports._MessageViews_ = exports._help_CountriesList_ = exports._help_Country_ = exports._help_CountryCode_ = exports._GlobalPrivacySettings_ = exports._stats_MegagroupStats_ = exports._StatsGroupTopInviter_ = exports._StatsGroupTopAdmin_ = exports._StatsGroupTopPoster_ = exports._VideoSize_ = exports._help_PromoData_ = exports._stats_BroadcastStats_ = exports._StatsGraph_ = exports._StatsPercentValue_ = exports._StatsAbsValueAndPrev_ = exports._StatsDateRangeDays_ = exports._DialogFilterSuggested_ = void 0;
+exports._messages_ForumTopics_ = exports._ForumTopic_ = exports._Username_ = exports._StickerKeyword_ = exports._MessageExtendedMedia_ = exports._SendAsPeer_ = exports._PremiumSubscriptionOption_ = exports._account_EmailVerified_ = exports._EmailVerification_ = exports._EmailVerifyPurpose_ = exports._messages_Reactions_ = exports._ChatReactions_ = exports._Reaction_ = exports._account_EmojiStatuses_ = exports._EmojiStatus_ = exports._PaymentFormMethod_ = exports._PremiumGiftOption_ = exports._InputStorePaymentPurpose_ = exports._help_PremiumPromo_ = exports._messages_TranscribedAudio_ = exports._payments_ExportedInvoice_ = exports._InputInvoice_ = exports._AttachMenuPeerType_ = exports._account_SavedRingtone_ = exports._NotificationSound_ = exports._account_SavedRingtones_ = exports._BotMenuButton_ = exports._WebViewMessageSent_ = exports._SimpleWebViewResult_ = exports._WebViewResult_ = exports._AttachMenuBotsBot_ = exports._AttachMenuBots_ = exports._AttachMenuBot_ = exports._AttachMenuBotIcon_ = exports._AttachMenuBotIconColor_ = exports._phone_GroupCallStreamRtmpUrl_ = exports._phone_GroupCallStreamChannels_ = exports._GroupCallStreamChannel_ = exports._MessagePeerReaction_ = exports._messages_AvailableReactions_ = exports._AvailableReaction_ = exports._messages_MessageReactionsList_ = exports._MessageReactions_ = exports._ReactionCount_ = exports._auth_LoggedOut_ = exports._messages_PeerSettings_ = exports._users_UserFull_ = exports._channels_SendAsPeers_ = exports._messages_SearchResultsPositions_ = exports._SearchResultsPosition_ = void 0;
+exports._premium_MyBoosts_ = exports._MyBoost_ = exports._premium_BoostsList_ = exports._Boost_ = exports._PrepaidGiveaway_ = exports._payments_GiveawayInfo_ = exports._payments_CheckedGiftCode_ = exports._PremiumGiftCodeOption_ = exports._messages_WebPage_ = exports._stories_PeerStories_ = exports._PeerStories_ = exports._MediaArea_ = exports._MediaAreaCoordinates_ = exports._StoriesStealthMode_ = exports._ExportedStoryLink_ = exports._InputReplyTo_ = exports._stories_StoryViews_ = exports._stories_StoryViewsList_ = exports._StoryView_ = exports._stories_Stories_ = exports._stories_AllStories_ = exports._StoryItem_ = exports._StoryViews_ = exports._SponsoredWebPage_ = exports._MessagePeerVote_ = exports._bots_BotInfo_ = exports._chatlists_ChatlistUpdates_ = exports._chatlists_ChatlistInvite_ = exports._chatlists_ExportedInvites_ = exports._chatlists_ExportedChatlistInvite_ = exports._ExportedChatlistInvite_ = exports._InputChatlist_ = exports._ReadParticipantDate_ = exports._InlineBotWebView_ = exports._AppWebViewResult_ = exports._messages_BotApp_ = exports._BotApp_ = exports._InputBotApp_ = exports._help_AppConfig_ = exports._account_AutoSaveSettings_ = exports._AutoSaveException_ = exports._AutoSaveSettings_ = exports._messages_TranslatedText_ = exports._TextWithEntities_ = exports._messages_EmojiGroups_ = exports._EmojiGroup_ = exports._EmojiList_ = exports._RequestPeerType_ = exports._ExportedContactToken_ = exports._DefaultHistoryTTL_ = void 0;
+exports._MissingInvitee_ = exports._contacts_ContactBirthdays_ = exports._ContactBirthday_ = exports._BusinessBotRecipients_ = exports._InputBusinessBotRecipients_ = exports._fragment_CollectibleInfo_ = exports._InputCollectible_ = exports._messages_MyStickers_ = exports._BusinessIntro_ = exports._InputBusinessIntro_ = exports._BotBusinessConnection_ = exports._Birthday_ = exports._messages_DialogFilters_ = exports._account_ConnectedBots_ = exports._ConnectedBot_ = exports._messages_QuickReplies_ = exports._InputQuickReplyShortcut_ = exports._QuickReply_ = exports._help_TimezonesList_ = exports._Timezone_ = exports._BusinessAwayMessage_ = exports._InputBusinessAwayMessage_ = exports._BusinessGreetingMessage_ = exports._InputBusinessGreetingMessage_ = exports._BusinessAwayMessageSchedule_ = exports._BusinessRecipients_ = exports._InputBusinessRecipients_ = exports._BusinessLocation_ = exports._BusinessWorkHours_ = exports._BusinessWeeklyOpen_ = exports._SmsJob_ = exports._smsjobs_Status_ = exports._smsjobs_EligibilityToJoin_ = exports._OutboxReadDate_ = exports._messages_SavedReactionTags_ = exports._SavedReactionTag_ = exports._messages_SavedDialogs_ = exports._SavedDialog_ = exports._stories_StoryReactionsList_ = exports._StoryReaction_ = exports._help_PeerColors_ = exports._help_PeerColorOption_ = exports._help_PeerColorSet_ = exports._PeerColor_ = exports._stats_PublicForwards_ = exports._PublicForward_ = exports._stats_StoryStats_ = exports._PostInteractionCounters_ = exports._StoryFwdHeader_ = exports._premium_BoostsStatus_ = void 0;
+exports.IpPortSecret_ = exports.IpPort_ = exports.Error_ = exports.True_ = exports.Http_wait_ = exports.Destroy_auth_key_fail_ = exports.Destroy_auth_key_none_ = exports.Destroy_auth_key_ok_ = exports.Msg_new_detailed_info_ = exports.Msg_detailed_info_ = exports.Msgs_all_info_ = exports.Msgs_state_info_ = exports.Msgs_state_req_ = exports.Msg_resend_req_ = exports.Bad_server_salt_ = exports.Bad_msg_notification_ = exports.Msgs_ack_ = exports.Gzip_packed_ = exports.New_session_created_ = exports.Destroy_session_none_ = exports.Destroy_session_ok_ = exports.Pong_ = exports.Future_salts_ = exports.Future_salt_ = exports.Rpc_answer_dropped_ = exports.Rpc_answer_dropped_running_ = exports.Rpc_answer_unknown_ = exports.Rpc_error_ = exports.Bind_auth_key_inner_ = exports.Dh_gen_fail_ = exports.Dh_gen_retry_ = exports.Dh_gen_ok_ = exports.Client_DH_inner_data_ = exports.Server_DH_inner_data_ = exports.Server_DH_params_ok_ = exports.P_q_inner_data_temp_dc_ = exports.P_q_inner_data_dc_ = exports.ResPQ_ = exports._stats_BroadcastRevenueTransactions_ = exports._BroadcastRevenueTransaction_ = exports._stats_BroadcastRevenueWithdrawalUrl_ = exports._stats_BroadcastRevenueStats_ = exports._channels_SponsoredMessageReportResult_ = exports._SponsoredMessageReportOption_ = exports._RequestedPeer_ = exports._account_ResolvedBusinessChatLinks_ = exports._account_BusinessChatLinks_ = exports._BusinessChatLink_ = exports._InputBusinessChatLink_ = exports._messages_InvitedUsers_ = void 0;
+exports.InputPeerPhotoFileLocation_ = exports.InputPhotoLegacyFileLocation_ = exports.InputPhotoFileLocation_ = exports.InputTakeoutFileLocation_ = exports.InputSecureFileLocation_ = exports.InputDocumentFileLocation_ = exports.InputEncryptedFileLocation_ = exports.InputFileLocation_ = exports.InputPhoto_ = exports.InputPhotoEmpty_ = exports.InputGeoPoint_ = exports.InputGeoPointEmpty_ = exports.InputChatPhoto_ = exports.InputChatUploadedPhoto_ = exports.InputChatPhotoEmpty_ = exports.InputMediaWebPage_ = exports.InputMediaStory_ = exports.InputMediaDice_ = exports.InputMediaPoll_ = exports.InputMediaGeoLive_ = exports.InputMediaInvoice_ = exports.InputMediaGame_ = exports.InputMediaDocumentExternal_ = exports.InputMediaPhotoExternal_ = exports.InputMediaVenue_ = exports.InputMediaDocument_ = exports.InputMediaUploadedDocument_ = exports.InputMediaContact_ = exports.InputMediaGeoPoint_ = exports.InputMediaPhoto_ = exports.InputMediaUploadedPhoto_ = exports.InputMediaEmpty_ = exports.InputFileBig_ = exports.InputFile_ = exports.InputPhoneContact_ = exports.InputUserFromMessage_ = exports.InputUser_ = exports.InputUserSelf_ = exports.InputUserEmpty_ = exports.InputPeerChannelFromMessage_ = exports.InputPeerUserFromMessage_ = exports.InputPeerChannel_ = exports.InputPeerUser_ = exports.InputPeerChat_ = exports.InputPeerSelf_ = exports.InputPeerEmpty_ = exports.InputStickerSetThumbLegacy_ = exports.InputPeerPhotoFileLocationLegacy_ = exports.help_ConfigSimple_ = exports.AccessPointRule_ = void 0;
+exports.MessageMediaVenue_ = exports.MessageMediaWebPage_ = exports.MessageMediaDocument_ = exports.MessageMediaUnsupported_ = exports.MessageMediaContact_ = exports.MessageMediaGeo_ = exports.MessageMediaPhoto_ = exports.MessageMediaEmpty_ = exports.MessageService_ = exports.Message_ = exports.MessageEmpty_ = exports.ChatPhoto_ = exports.ChatPhotoEmpty_ = exports.ChatParticipants_ = exports.ChatParticipantsForbidden_ = exports.ChatParticipantAdmin_ = exports.ChatParticipantCreator_ = exports.ChatParticipant_ = exports.ChannelFull_ = exports.ChatFull_ = exports.ChannelForbidden_ = exports.Channel_ = exports.ChatForbidden_ = exports.Chat_ = exports.ChatEmpty_ = exports.UserStatusLastMonth_ = exports.UserStatusLastWeek_ = exports.UserStatusRecently_ = exports.UserStatusOffline_ = exports.UserStatusOnline_ = exports.UserStatusEmpty_ = exports.UserProfilePhoto_ = exports.UserProfilePhotoEmpty_ = exports.User_ = exports.UserEmpty_ = exports.storage_FileWebp_ = exports.storage_FileMp4_ = exports.storage_FileMov_ = exports.storage_FileMp3_ = exports.storage_FilePdf_ = exports.storage_FilePng_ = exports.storage_FileGif_ = exports.storage_FileJpeg_ = exports.storage_FilePartial_ = exports.storage_FileUnknown_ = exports.PeerChannel_ = exports.PeerChat_ = exports.PeerUser_ = exports.InputGroupCallStream_ = exports.InputStickerSetThumb_ = void 0;
+exports.MessageActionBoostApply_ = exports.MessageActionGiveawayResults_ = exports.MessageActionGiveawayLaunch_ = exports.MessageActionGiftCode_ = exports.MessageActionSetChatWallPaper_ = exports.MessageActionRequestedPeer_ = exports.MessageActionSuggestProfilePhoto_ = exports.MessageActionTopicEdit_ = exports.MessageActionTopicCreate_ = exports.MessageActionGiftPremium_ = exports.MessageActionWebViewDataSent_ = exports.MessageActionWebViewDataSentMe_ = exports.MessageActionChatJoinedByRequest_ = exports.MessageActionSetChatTheme_ = exports.MessageActionGroupCallScheduled_ = exports.MessageActionSetMessagesTTL_ = exports.MessageActionInviteToGroupCall_ = exports.MessageActionGroupCall_ = exports.MessageActionGeoProximityReached_ = exports.MessageActionContactSignUp_ = exports.MessageActionSecureValuesSent_ = exports.MessageActionSecureValuesSentMe_ = exports.MessageActionBotAllowed_ = exports.MessageActionCustomAction_ = exports.MessageActionScreenshotTaken_ = exports.MessageActionPhoneCall_ = exports.MessageActionPaymentSent_ = exports.MessageActionPaymentSentMe_ = exports.MessageActionGameScore_ = exports.MessageActionHistoryClear_ = exports.MessageActionPinMessage_ = exports.MessageActionChannelMigrateFrom_ = exports.MessageActionChatMigrateTo_ = exports.MessageActionChannelCreate_ = exports.MessageActionChatJoinedByLink_ = exports.MessageActionChatDeleteUser_ = exports.MessageActionChatAddUser_ = exports.MessageActionChatDeletePhoto_ = exports.MessageActionChatEditPhoto_ = exports.MessageActionChatEditTitle_ = exports.MessageActionChatCreate_ = exports.MessageActionEmpty_ = exports.MessageMediaGiveawayResults_ = exports.MessageMediaGiveaway_ = exports.MessageMediaStory_ = exports.MessageMediaDice_ = exports.MessageMediaPoll_ = exports.MessageMediaGeoLive_ = exports.MessageMediaInvoice_ = exports.MessageMediaGame_ = void 0;
+exports.messages_DialogsNotModified_ = exports.messages_DialogsSlice_ = exports.messages_Dialogs_ = exports.contacts_BlockedSlice_ = exports.contacts_Blocked_ = exports.contacts_ImportedContacts_ = exports.contacts_Contacts_ = exports.contacts_ContactsNotModified_ = exports.ContactStatus_ = exports.ImportedContact_ = exports.Contact_ = exports.UserFull_ = exports.InputReportReasonPersonalDetails_ = exports.InputReportReasonIllegalDrugs_ = exports.InputReportReasonFake_ = exports.InputReportReasonGeoIrrelevant_ = exports.InputReportReasonCopyright_ = exports.InputReportReasonOther_ = exports.InputReportReasonChildAbuse_ = exports.InputReportReasonPornography_ = exports.InputReportReasonViolence_ = exports.InputReportReasonSpam_ = exports.WallPaperNoFile_ = exports.WallPaper_ = exports.PeerSettings_ = exports.PeerNotifySettings_ = exports.InputPeerNotifySettings_ = exports.InputNotifyForumTopic_ = exports.InputNotifyBroadcasts_ = exports.InputNotifyChats_ = exports.InputNotifyUsers_ = exports.InputNotifyPeer_ = exports.auth_ExportedAuthorization_ = exports.auth_AuthorizationSignUpRequired_ = exports.auth_Authorization_ = exports.auth_SentCodeSuccess_ = exports.auth_SentCode_ = exports.GeoPoint_ = exports.GeoPointEmpty_ = exports.PhotoPathSize_ = exports.PhotoSizeProgressive_ = exports.PhotoStrippedSize_ = exports.PhotoCachedSize_ = exports.PhotoSize_ = exports.PhotoSizeEmpty_ = exports.Photo_ = exports.PhotoEmpty_ = exports.DialogFolder_ = exports.Dialog_ = exports.MessageActionRequestedPeerSentMe_ = void 0;
+exports.UpdateChannelTooLong_ = exports.UpdateReadMessagesContents_ = exports.UpdateWebPage_ = exports.UpdateReadHistoryOutbox_ = exports.UpdateReadHistoryInbox_ = exports.UpdateUserPhone_ = exports.UpdatePrivacy_ = exports.UpdateServiceNotification_ = exports.UpdateNotifySettings_ = exports.UpdateDcOptions_ = exports.UpdateChatParticipantDelete_ = exports.UpdateChatParticipantAdd_ = exports.UpdateEncryptedMessagesRead_ = exports.UpdateEncryption_ = exports.UpdateEncryptedChatTyping_ = exports.UpdateNewEncryptedMessage_ = exports.UpdateNewAuthorization_ = exports.UpdateUserName_ = exports.UpdateUserStatus_ = exports.UpdateChatParticipants_ = exports.UpdateChatUserTyping_ = exports.UpdateUserTyping_ = exports.UpdateDeleteMessages_ = exports.UpdateMessageID_ = exports.UpdateNewMessage_ = exports.InputMessagesFilterPinned_ = exports.InputMessagesFilterContacts_ = exports.InputMessagesFilterGeo_ = exports.InputMessagesFilterMyMentions_ = exports.InputMessagesFilterRoundVideo_ = exports.InputMessagesFilterRoundVoice_ = exports.InputMessagesFilterPhoneCalls_ = exports.InputMessagesFilterChatPhotos_ = exports.InputMessagesFilterMusic_ = exports.InputMessagesFilterVoice_ = exports.InputMessagesFilterGif_ = exports.InputMessagesFilterUrl_ = exports.InputMessagesFilterDocument_ = exports.InputMessagesFilterPhotoVideo_ = exports.InputMessagesFilterVideo_ = exports.InputMessagesFilterPhotos_ = exports.InputMessagesFilterEmpty_ = exports.messages_AffectedHistory_ = exports.messages_ChatFull_ = exports.messages_ChatsSlice_ = exports.messages_Chats_ = exports.messages_MessagesNotModified_ = exports.messages_ChannelMessages_ = exports.messages_MessagesSlice_ = exports.messages_Messages_ = void 0;
+exports.UpdateDialogFilterOrder_ = exports.UpdateDialogFilter_ = exports.UpdateMessagePollVote_ = exports.UpdateLoginToken_ = exports.UpdateGeoLiveViewed_ = exports.UpdateTheme_ = exports.UpdateDeleteScheduledMessages_ = exports.UpdateNewScheduledMessage_ = exports.UpdatePeerLocated_ = exports.UpdatePeerSettings_ = exports.UpdateFolderPeers_ = exports.UpdateChatDefaultBannedRights_ = exports.UpdateMessagePoll_ = exports.UpdateDialogUnreadMark_ = exports.UpdateChannelAvailableMessages_ = exports.UpdateContactsReset_ = exports.UpdateChannelReadMessagesContents_ = exports.UpdateFavedStickers_ = exports.UpdateLangPack_ = exports.UpdateLangPackTooLong_ = exports.UpdatePhoneCall_ = exports.UpdateBotPrecheckoutQuery_ = exports.UpdateBotShippingQuery_ = exports.UpdateBotWebhookJSONQuery_ = exports.UpdateBotWebhookJSON_ = exports.UpdatePinnedDialogs_ = exports.UpdateDialogPinned_ = exports.UpdateChannelWebPage_ = exports.UpdatePtsChanged_ = exports.UpdateConfig_ = exports.UpdateRecentStickers_ = exports.UpdateReadFeaturedStickers_ = exports.UpdateDraftMessage_ = exports.UpdateReadChannelOutbox_ = exports.UpdateInlineBotCallbackQuery_ = exports.UpdateEditMessage_ = exports.UpdateBotCallbackQuery_ = exports.UpdateEditChannelMessage_ = exports.UpdateBotInlineSend_ = exports.UpdateBotInlineQuery_ = exports.UpdateSavedGifs_ = exports.UpdateStickerSets_ = exports.UpdateStickerSetsOrder_ = exports.UpdateNewStickerSet_ = exports.UpdateChatParticipantAdmin_ = exports.UpdateChannelMessageViews_ = exports.UpdateDeleteChannelMessages_ = exports.UpdateReadChannelInbox_ = exports.UpdateNewChannelMessage_ = exports.UpdateChannel_ = void 0;
+exports.UpdateSmsJob_ = exports.UpdateSavedReactionTags_ = exports.UpdatePinnedSavedDialogs_ = exports.UpdateSavedDialogPinned_ = exports.UpdateBotMessageReactions_ = exports.UpdateBotMessageReaction_ = exports.UpdatePeerWallpaper_ = exports.UpdateChannelViewForumAsMessages_ = exports.UpdateBotChatBoost_ = exports.UpdateSentStoryReaction_ = exports.UpdateStoriesStealthMode_ = exports.UpdateStoryID_ = exports.UpdateReadStories_ = exports.UpdateStory_ = exports.UpdateAutoSaveSettings_ = exports.UpdateUser_ = exports.UpdateChannelPinnedTopics_ = exports.UpdateChannelPinnedTopic_ = exports.UpdateMessageExtendedMedia_ = exports.UpdateMoveStickerSetToTop_ = exports.UpdateRecentReactions_ = exports.UpdateRecentEmojiStatuses_ = exports.UpdateUserEmojiStatus_ = exports.UpdateReadFeaturedEmojiStickers_ = exports.UpdateTranscribedAudio_ = exports.UpdateSavedRingtones_ = exports.UpdateBotMenuButton_ = exports.UpdateWebViewResultSent_ = exports.UpdateAttachMenuBots_ = exports.UpdateMessageReactions_ = exports.UpdateBotChatInviteRequester_ = exports.UpdatePendingJoinRequests_ = exports.UpdateBotCommands_ = exports.UpdateGroupCallConnection_ = exports.UpdateBotStopped_ = exports.UpdateChannelParticipant_ = exports.UpdateChatParticipant_ = exports.UpdatePeerHistoryTTL_ = exports.UpdateGroupCall_ = exports.UpdateGroupCallParticipants_ = exports.UpdateChat_ = exports.UpdatePinnedChannelMessages_ = exports.UpdatePinnedMessages_ = exports.UpdateChannelUserTyping_ = exports.UpdatePeerBlocked_ = exports.UpdateReadChannelDiscussionOutbox_ = exports.UpdateReadChannelDiscussionInbox_ = exports.UpdateChannelMessageForwards_ = exports.UpdatePhoneCallSignalingData_ = exports.UpdateDialogFilters_ = void 0;
+exports.messages_SentEncryptedFile_ = exports.messages_SentEncryptedMessage_ = exports.messages_DhConfig_ = exports.messages_DhConfigNotModified_ = exports.EncryptedMessageService_ = exports.EncryptedMessage_ = exports.InputEncryptedFileBigUploaded_ = exports.InputEncryptedFile_ = exports.InputEncryptedFileUploaded_ = exports.InputEncryptedFileEmpty_ = exports.EncryptedFile_ = exports.EncryptedFileEmpty_ = exports.InputEncryptedChat_ = exports.EncryptedChatDiscarded_ = exports.EncryptedChat_ = exports.EncryptedChatRequested_ = exports.EncryptedChatWaiting_ = exports.EncryptedChatEmpty_ = exports.help_InviteText_ = exports.help_NoAppUpdate_ = exports.help_AppUpdate_ = exports.NearestDc_ = exports.Config_ = exports.DcOption_ = exports.upload_FileCdnRedirect_ = exports.upload_File_ = exports.photos_Photo_ = exports.photos_PhotosSlice_ = exports.photos_Photos_ = exports.UpdateShortSentMessage_ = exports.Updates_ = exports.UpdatesCombined_ = exports.UpdateShort_ = exports.UpdateShortChatMessage_ = exports.UpdateShortMessage_ = exports.UpdatesTooLong_ = exports.updates_DifferenceTooLong_ = exports.updates_DifferenceSlice_ = exports.updates_Difference_ = exports.updates_DifferenceEmpty_ = exports.updates_State_ = exports.UpdateBotDeleteBusinessMessage_ = exports.UpdateBotEditBusinessMessage_ = exports.UpdateBotNewBusinessMessage_ = exports.UpdateBotBusinessConnect_ = exports.UpdateDeleteQuickReplyMessages_ = exports.UpdateQuickReplyMessage_ = exports.UpdateDeleteQuickReply_ = exports.UpdateNewQuickReply_ = exports.UpdateQuickReplies_ = void 0;
+exports.PrivacyKeyAbout_ = exports.PrivacyKeyVoiceMessages_ = exports.PrivacyKeyAddedByPhone_ = exports.PrivacyKeyPhoneNumber_ = exports.PrivacyKeyProfilePhoto_ = exports.PrivacyKeyForwards_ = exports.PrivacyKeyPhoneP2P_ = exports.PrivacyKeyPhoneCall_ = exports.PrivacyKeyChatInvite_ = exports.PrivacyKeyStatusTimestamp_ = exports.InputPrivacyKeyBirthday_ = exports.InputPrivacyKeyAbout_ = exports.InputPrivacyKeyVoiceMessages_ = exports.InputPrivacyKeyAddedByPhone_ = exports.InputPrivacyKeyPhoneNumber_ = exports.InputPrivacyKeyProfilePhoto_ = exports.InputPrivacyKeyForwards_ = exports.InputPrivacyKeyPhoneP2P_ = exports.InputPrivacyKeyPhoneCall_ = exports.InputPrivacyKeyChatInvite_ = exports.InputPrivacyKeyStatusTimestamp_ = exports.contacts_Found_ = exports.SendMessageEmojiInteractionSeen_ = exports.SendMessageEmojiInteraction_ = exports.SendMessageChooseStickerAction_ = exports.SendMessageHistoryImportAction_ = exports.SpeakingInGroupCallAction_ = exports.SendMessageUploadRoundAction_ = exports.SendMessageRecordRoundAction_ = exports.SendMessageGamePlayAction_ = exports.SendMessageChooseContactAction_ = exports.SendMessageGeoLocationAction_ = exports.SendMessageUploadDocumentAction_ = exports.SendMessageUploadPhotoAction_ = exports.SendMessageUploadAudioAction_ = exports.SendMessageRecordAudioAction_ = exports.SendMessageUploadVideoAction_ = exports.SendMessageRecordVideoAction_ = exports.SendMessageCancelAction_ = exports.SendMessageTypingAction_ = exports.NotifyForumTopic_ = exports.NotifyBroadcasts_ = exports.NotifyChats_ = exports.NotifyUsers_ = exports.NotifyPeer_ = exports.help_Support_ = exports.Document_ = exports.DocumentEmpty_ = exports.InputDocument_ = exports.InputDocumentEmpty_ = void 0;
+exports.ChatInvitePublicJoinRequests_ = exports.ChatInviteExported_ = exports.ReceivedNotifyMessage_ = exports.auth_PasswordRecovery_ = exports.account_PasswordInputSettings_ = exports.account_PasswordSettings_ = exports.account_Password_ = exports.account_Authorizations_ = exports.Authorization_ = exports.WebPageNotModified_ = exports.WebPage_ = exports.WebPagePending_ = exports.WebPageEmpty_ = exports.messages_AffectedMessages_ = exports.messages_AllStickers_ = exports.messages_AllStickersNotModified_ = exports.StickerPack_ = exports.messages_Stickers_ = exports.messages_StickersNotModified_ = exports.DocumentAttributeCustomEmoji_ = exports.DocumentAttributeHasStickers_ = exports.DocumentAttributeFilename_ = exports.DocumentAttributeAudio_ = exports.DocumentAttributeVideo_ = exports.DocumentAttributeSticker_ = exports.DocumentAttributeAnimated_ = exports.DocumentAttributeImageSize_ = exports.AccountDaysTTL_ = exports.account_PrivacyRules_ = exports.PrivacyValueAllowPremium_ = exports.PrivacyValueAllowCloseFriends_ = exports.PrivacyValueDisallowChatParticipants_ = exports.PrivacyValueAllowChatParticipants_ = exports.PrivacyValueDisallowUsers_ = exports.PrivacyValueDisallowAll_ = exports.PrivacyValueDisallowContacts_ = exports.PrivacyValueAllowUsers_ = exports.PrivacyValueAllowAll_ = exports.PrivacyValueAllowContacts_ = exports.InputPrivacyValueAllowPremium_ = exports.InputPrivacyValueAllowCloseFriends_ = exports.InputPrivacyValueDisallowChatParticipants_ = exports.InputPrivacyValueAllowChatParticipants_ = exports.InputPrivacyValueDisallowUsers_ = exports.InputPrivacyValueDisallowAll_ = exports.InputPrivacyValueDisallowContacts_ = exports.InputPrivacyValueAllowUsers_ = exports.InputPrivacyValueAllowAll_ = exports.InputPrivacyValueAllowContacts_ = exports.PrivacyKeyBirthday_ = void 0;
+exports.MessageEntityCode_ = exports.MessageEntityItalic_ = exports.MessageEntityBold_ = exports.MessageEntityEmail_ = exports.MessageEntityUrl_ = exports.MessageEntityBotCommand_ = exports.MessageEntityHashtag_ = exports.MessageEntityMention_ = exports.MessageEntityUnknown_ = exports.ReplyInlineMarkup_ = exports.ReplyKeyboardMarkup_ = exports.ReplyKeyboardForceReply_ = exports.ReplyKeyboardHide_ = exports.KeyboardButtonRow_ = exports.InputKeyboardButtonRequestPeer_ = exports.KeyboardButtonRequestPeer_ = exports.KeyboardButtonSimpleWebView_ = exports.KeyboardButtonWebView_ = exports.KeyboardButtonUserProfile_ = exports.InputKeyboardButtonUserProfile_ = exports.KeyboardButtonRequestPoll_ = exports.InputKeyboardButtonUrlAuth_ = exports.KeyboardButtonUrlAuth_ = exports.KeyboardButtonBuy_ = exports.KeyboardButtonGame_ = exports.KeyboardButtonSwitchInline_ = exports.KeyboardButtonRequestGeoLocation_ = exports.KeyboardButtonRequestPhone_ = exports.KeyboardButtonCallback_ = exports.KeyboardButtonUrl_ = exports.KeyboardButton_ = exports.BotInfo_ = exports.BotCommand_ = exports.messages_StickerSetNotModified_ = exports.messages_StickerSet_ = exports.StickerSet_ = exports.InputStickerSetEmojiChannelDefaultStatuses_ = exports.InputStickerSetEmojiDefaultTopicIcons_ = exports.InputStickerSetEmojiDefaultStatuses_ = exports.InputStickerSetEmojiGenericAnimations_ = exports.InputStickerSetPremiumGifts_ = exports.InputStickerSetAnimatedEmojiAnimations_ = exports.InputStickerSetDice_ = exports.InputStickerSetAnimatedEmoji_ = exports.InputStickerSetShortName_ = exports.InputStickerSetID_ = exports.InputStickerSetEmpty_ = exports.ChatInvitePeek_ = exports.ChatInvite_ = exports.ChatInviteAlready_ = void 0;
+exports.InputBotInlineMessageMediaWebPage_ = exports.InputBotInlineMessageMediaInvoice_ = exports.InputBotInlineMessageGame_ = exports.InputBotInlineMessageMediaContact_ = exports.InputBotInlineMessageMediaVenue_ = exports.InputBotInlineMessageMediaGeo_ = exports.InputBotInlineMessageText_ = exports.InputBotInlineMessageMediaAuto_ = exports.messages_SavedGifs_ = exports.messages_SavedGifsNotModified_ = exports.help_TermsOfService_ = exports.channels_ChannelParticipant_ = exports.channels_ChannelParticipantsNotModified_ = exports.channels_ChannelParticipants_ = exports.ChannelParticipantsMentions_ = exports.ChannelParticipantsContacts_ = exports.ChannelParticipantsSearch_ = exports.ChannelParticipantsBanned_ = exports.ChannelParticipantsBots_ = exports.ChannelParticipantsKicked_ = exports.ChannelParticipantsAdmins_ = exports.ChannelParticipantsRecent_ = exports.ChannelParticipantLeft_ = exports.ChannelParticipantBanned_ = exports.ChannelParticipantAdmin_ = exports.ChannelParticipantCreator_ = exports.ChannelParticipantSelf_ = exports.ChannelParticipant_ = exports.ChannelMessagesFilter_ = exports.ChannelMessagesFilterEmpty_ = exports.updates_ChannelDifference_ = exports.updates_ChannelDifferenceTooLong_ = exports.updates_ChannelDifferenceEmpty_ = exports.MessageRange_ = exports.contacts_ResolvedPeer_ = exports.InputChannelFromMessage_ = exports.InputChannel_ = exports.InputChannelEmpty_ = exports.MessageEntityBlockquote_ = exports.MessageEntityCustomEmoji_ = exports.MessageEntitySpoiler_ = exports.MessageEntityBankCard_ = exports.MessageEntityStrike_ = exports.MessageEntityUnderline_ = exports.MessageEntityCashtag_ = exports.MessageEntityPhone_ = exports.InputMessageEntityMentionName_ = exports.MessageEntityMentionName_ = exports.MessageEntityTextUrl_ = exports.MessageEntityPre_ = void 0;
+exports.DraftMessageEmpty_ = exports.contacts_TopPeersDisabled_ = exports.contacts_TopPeers_ = exports.contacts_TopPeersNotModified_ = exports.TopPeerCategoryPeers_ = exports.TopPeerCategoryForwardChats_ = exports.TopPeerCategoryForwardUsers_ = exports.TopPeerCategoryPhoneCalls_ = exports.TopPeerCategoryChannels_ = exports.TopPeerCategoryGroups_ = exports.TopPeerCategoryCorrespondents_ = exports.TopPeerCategoryBotsInline_ = exports.TopPeerCategoryBotsPM_ = exports.TopPeer_ = exports.messages_PeerDialogs_ = exports.InlineBotSwitchPM_ = exports.InputBotInlineMessageID64_ = exports.InputBotInlineMessageID_ = exports.messages_MessageEditData_ = exports.messages_BotCallbackAnswer_ = exports.auth_SentCodeTypeFirebaseSms_ = exports.auth_SentCodeTypeFragmentSms_ = exports.auth_SentCodeTypeSetUpEmailRequired_ = exports.auth_SentCodeTypeEmailCode_ = exports.auth_SentCodeTypeMissedCall_ = exports.auth_SentCodeTypeFlashCall_ = exports.auth_SentCodeTypeCall_ = exports.auth_SentCodeTypeSms_ = exports.auth_SentCodeTypeApp_ = exports.auth_CodeTypeFragmentSms_ = exports.auth_CodeTypeMissedCall_ = exports.auth_CodeTypeFlashCall_ = exports.auth_CodeTypeCall_ = exports.auth_CodeTypeSms_ = exports.MessageFwdHeader_ = exports.ExportedMessageLink_ = exports.messages_BotResults_ = exports.BotInlineMediaResult_ = exports.BotInlineResult_ = exports.BotInlineMessageMediaWebPage_ = exports.BotInlineMessageMediaInvoice_ = exports.BotInlineMessageMediaContact_ = exports.BotInlineMessageMediaVenue_ = exports.BotInlineMessageMediaGeo_ = exports.BotInlineMessageText_ = exports.BotInlineMessageMediaAuto_ = exports.InputBotInlineResultGame_ = exports.InputBotInlineResultDocument_ = exports.InputBotInlineResultPhoto_ = exports.InputBotInlineResult_ = void 0;
+exports.PageBlockPullquote_ = exports.PageBlockBlockquote_ = exports.PageBlockList_ = exports.PageBlockAnchor_ = exports.PageBlockDivider_ = exports.PageBlockFooter_ = exports.PageBlockPreformatted_ = exports.PageBlockParagraph_ = exports.PageBlockSubheader_ = exports.PageBlockHeader_ = exports.PageBlockAuthorDate_ = exports.PageBlockSubtitle_ = exports.PageBlockTitle_ = exports.PageBlockUnsupported_ = exports.TextAnchor_ = exports.TextImage_ = exports.TextPhone_ = exports.TextMarked_ = exports.TextSuperscript_ = exports.TextSubscript_ = exports.TextConcat_ = exports.TextEmail_ = exports.TextUrl_ = exports.TextFixed_ = exports.TextStrike_ = exports.TextUnderline_ = exports.TextItalic_ = exports.TextBold_ = exports.TextPlain_ = exports.TextEmpty_ = exports.messages_HighScores_ = exports.HighScore_ = exports.InputGameShortName_ = exports.InputGameID_ = exports.Game_ = exports.InputStickeredMediaDocument_ = exports.InputStickeredMediaPhoto_ = exports.MaskCoords_ = exports.StickerSetNoCovered_ = exports.StickerSetFullCovered_ = exports.StickerSetMultiCovered_ = exports.StickerSetCovered_ = exports.messages_StickerSetInstallResultArchive_ = exports.messages_StickerSetInstallResultSuccess_ = exports.messages_ArchivedStickers_ = exports.messages_RecentStickers_ = exports.messages_RecentStickersNotModified_ = exports.messages_FeaturedStickers_ = exports.messages_FeaturedStickersNotModified_ = exports.DraftMessage_ = void 0;
+exports.PhoneCallRequested_ = exports.PhoneCallWaiting_ = exports.PhoneCallEmpty_ = exports.InputPhoneCall_ = exports.InputStickerSetItem_ = exports.ShippingOption_ = exports.account_TmpPassword_ = exports.InputPaymentCredentialsGooglePay_ = exports.InputPaymentCredentialsApplePay_ = exports.InputPaymentCredentials_ = exports.InputPaymentCredentialsSaved_ = exports.payments_SavedInfo_ = exports.payments_PaymentReceipt_ = exports.payments_PaymentVerificationNeeded_ = exports.payments_PaymentResult_ = exports.payments_ValidatedRequestedInfo_ = exports.payments_PaymentForm_ = exports.upload_WebFile_ = exports.InputWebFileAudioAlbumThumbLocation_ = exports.InputWebFileGeoPointLocation_ = exports.InputWebFileLocation_ = exports.InputWebDocument_ = exports.WebDocumentNoProxy_ = exports.WebDocument_ = exports.PaymentSavedCredentialsCard_ = exports.PaymentRequestedInfo_ = exports.PostAddress_ = exports.PaymentCharge_ = exports.Invoice_ = exports.LabeledPrice_ = exports.DataJSON_ = exports.PhoneCallDiscardReasonBusy_ = exports.PhoneCallDiscardReasonHangup_ = exports.PhoneCallDiscardReasonDisconnect_ = exports.PhoneCallDiscardReasonMissed_ = exports.PageBlockMap_ = exports.PageBlockRelatedArticles_ = exports.PageBlockDetails_ = exports.PageBlockOrderedList_ = exports.PageBlockTable_ = exports.PageBlockKicker_ = exports.PageBlockAudio_ = exports.PageBlockChannel_ = exports.PageBlockSlideshow_ = exports.PageBlockCollage_ = exports.PageBlockEmbedPost_ = exports.PageBlockEmbed_ = exports.PageBlockCover_ = exports.PageBlockVideo_ = exports.PageBlockPhoto_ = void 0;
+exports.ChannelAdminLogEventActionToggleNoForwards_ = exports.ChannelAdminLogEventActionParticipantJoinByRequest_ = exports.ChannelAdminLogEventActionChangeHistoryTTL_ = exports.ChannelAdminLogEventActionParticipantVolume_ = exports.ChannelAdminLogEventActionExportedInviteEdit_ = exports.ChannelAdminLogEventActionExportedInviteRevoke_ = exports.ChannelAdminLogEventActionExportedInviteDelete_ = exports.ChannelAdminLogEventActionParticipantJoinByInvite_ = exports.ChannelAdminLogEventActionToggleGroupCallSetting_ = exports.ChannelAdminLogEventActionParticipantUnmute_ = exports.ChannelAdminLogEventActionParticipantMute_ = exports.ChannelAdminLogEventActionDiscardGroupCall_ = exports.ChannelAdminLogEventActionStartGroupCall_ = exports.ChannelAdminLogEventActionToggleSlowMode_ = exports.ChannelAdminLogEventActionChangeLocation_ = exports.ChannelAdminLogEventActionChangeLinkedChat_ = exports.ChannelAdminLogEventActionStopPoll_ = exports.ChannelAdminLogEventActionDefaultBannedRights_ = exports.ChannelAdminLogEventActionTogglePreHistoryHidden_ = exports.ChannelAdminLogEventActionChangeStickerSet_ = exports.ChannelAdminLogEventActionParticipantToggleAdmin_ = exports.ChannelAdminLogEventActionParticipantToggleBan_ = exports.ChannelAdminLogEventActionParticipantInvite_ = exports.ChannelAdminLogEventActionParticipantLeave_ = exports.ChannelAdminLogEventActionParticipantJoin_ = exports.ChannelAdminLogEventActionDeleteMessage_ = exports.ChannelAdminLogEventActionEditMessage_ = exports.ChannelAdminLogEventActionUpdatePinned_ = exports.ChannelAdminLogEventActionToggleSignatures_ = exports.ChannelAdminLogEventActionToggleInvites_ = exports.ChannelAdminLogEventActionChangePhoto_ = exports.ChannelAdminLogEventActionChangeUsername_ = exports.ChannelAdminLogEventActionChangeAbout_ = exports.ChannelAdminLogEventActionChangeTitle_ = exports.LangPackLanguage_ = exports.LangPackDifference_ = exports.LangPackStringDeleted_ = exports.LangPackStringPluralized_ = exports.LangPackString_ = exports.CdnConfig_ = exports.CdnPublicKey_ = exports.upload_CdnFile_ = exports.upload_CdnFileReuploadNeeded_ = exports.phone_PhoneCall_ = exports.PhoneCallProtocol_ = exports.PhoneConnectionWebrtc_ = exports.PhoneConnection_ = exports.PhoneCallDiscarded_ = exports.PhoneCall_ = exports.PhoneCallAccepted_ = void 0;
+exports.SecurePlainEmail_ = exports.SecurePlainPhone_ = exports.SecureData_ = exports.SecureFile_ = exports.SecureFileEmpty_ = exports.InputSecureFile_ = exports.InputSecureFileUploaded_ = exports.help_TermsOfServiceUpdate_ = exports.help_TermsOfServiceUpdateEmpty_ = exports.InputClientProxy_ = exports.FileHash_ = exports.messages_FoundStickerSets_ = exports.messages_FoundStickerSetsNotModified_ = exports.DialogPeerFolder_ = exports.DialogPeer_ = exports.InputDialogPeerFolder_ = exports.InputDialogPeer_ = exports.InputMessageCallbackQuery_ = exports.InputMessagePinned_ = exports.InputMessageReplyTo_ = exports.InputMessageID_ = exports.account_WebAuthorizations_ = exports.WebAuthorization_ = exports.InputSingleMedia_ = exports.help_RecentMeUrls_ = exports.RecentMeUrlStickerSet_ = exports.RecentMeUrlChatInvite_ = exports.RecentMeUrlChat_ = exports.RecentMeUrlUser_ = exports.RecentMeUrlUnknown_ = exports.messages_FavedStickers_ = exports.messages_FavedStickersNotModified_ = exports.PopularContact_ = exports.ChannelAdminLogEventsFilter_ = exports.channels_AdminLogResults_ = exports.ChannelAdminLogEvent_ = exports.ChannelAdminLogEventActionChangeEmojiStickerSet_ = exports.ChannelAdminLogEventActionChangeEmojiStatus_ = exports.ChannelAdminLogEventActionChangeWallpaper_ = exports.ChannelAdminLogEventActionChangeProfilePeerColor_ = exports.ChannelAdminLogEventActionChangePeerColor_ = exports.ChannelAdminLogEventActionToggleAntiSpam_ = exports.ChannelAdminLogEventActionPinTopic_ = exports.ChannelAdminLogEventActionDeleteTopic_ = exports.ChannelAdminLogEventActionEditTopic_ = exports.ChannelAdminLogEventActionCreateTopic_ = exports.ChannelAdminLogEventActionToggleForum_ = exports.ChannelAdminLogEventActionChangeUsernames_ = exports.ChannelAdminLogEventActionChangeAvailableReactions_ = exports.ChannelAdminLogEventActionSendMessage_ = void 0;
+exports.JsonString_ = exports.JsonNumber_ = exports.JsonBool_ = exports.JsonNull_ = exports.JsonObjectValue_ = exports.InputAppEvent_ = exports.help_PassportConfig_ = exports.help_PassportConfigNotModified_ = exports.SecureRequiredTypeOneOf_ = exports.SecureRequiredType_ = exports.InputCheckPasswordSRP_ = exports.InputCheckPasswordEmpty_ = exports.SecureSecretSettings_ = exports.SecurePasswordKdfAlgoSHA512_ = exports.SecurePasswordKdfAlgoPBKDF2HMACSHA512iter100000_ = exports.SecurePasswordKdfAlgoUnknown_ = exports.PasswordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow_ = exports.PasswordKdfAlgoUnknown_ = exports.account_Takeout_ = exports.SavedPhoneContact_ = exports.help_DeepLinkInfo_ = exports.help_DeepLinkInfoEmpty_ = exports.account_SentEmailCode_ = exports.account_AuthorizationForm_ = exports.SecureCredentialsEncrypted_ = exports.SecureValueErrorTranslationFiles_ = exports.SecureValueErrorTranslationFile_ = exports.SecureValueError_ = exports.SecureValueErrorFiles_ = exports.SecureValueErrorFile_ = exports.SecureValueErrorSelfie_ = exports.SecureValueErrorReverseSide_ = exports.SecureValueErrorFrontSide_ = exports.SecureValueErrorData_ = exports.SecureValueHash_ = exports.InputSecureValue_ = exports.SecureValue_ = exports.SecureValueTypeEmail_ = exports.SecureValueTypePhone_ = exports.SecureValueTypeTemporaryRegistration_ = exports.SecureValueTypePassportRegistration_ = exports.SecureValueTypeRentalAgreement_ = exports.SecureValueTypeBankStatement_ = exports.SecureValueTypeUtilityBill_ = exports.SecureValueTypeAddress_ = exports.SecureValueTypeInternalPassport_ = exports.SecureValueTypeIdentityCard_ = exports.SecureValueTypeDriverLicense_ = exports.SecureValueTypePassport_ = exports.SecureValueTypePersonalDetails_ = void 0;
+exports.InputThemeSlug_ = exports.InputTheme_ = exports.RestrictionReason_ = exports.PeerSelfLocated_ = exports.PeerLocated_ = exports.ChannelLocation_ = exports.ChannelLocationEmpty_ = exports.UrlAuthResultDefault_ = exports.UrlAuthResultAccepted_ = exports.UrlAuthResultRequest_ = exports.messages_SearchCounter_ = exports.FolderPeer_ = exports.InputFolderPeer_ = exports.Folder_ = exports.EmojiLanguage_ = exports.EmojiURL_ = exports.EmojiKeywordsDifference_ = exports.EmojiKeywordDeleted_ = exports.EmojiKeyword_ = exports.account_AutoDownloadSettings_ = exports.AutoDownloadSettings_ = exports.WallPaperSettings_ = exports.CodeSettings_ = exports.account_WallPapers_ = exports.account_WallPapersNotModified_ = exports.InputWallPaperNoFile_ = exports.InputWallPaperSlug_ = exports.InputWallPaper_ = exports.ChatBannedRights_ = exports.ChatAdminRights_ = exports.StatsURL_ = exports.ChatOnlines_ = exports.PollResults_ = exports.PollAnswerVoters_ = exports.Poll_ = exports.PollAnswer_ = exports.help_UserInfo_ = exports.help_UserInfoEmpty_ = exports.help_SupportName_ = exports.Page_ = exports.PageRelatedArticle_ = exports.PageListOrderedItemBlocks_ = exports.PageListOrderedItemText_ = exports.PageListItemBlocks_ = exports.PageListItemText_ = exports.PageCaption_ = exports.PageTableRow_ = exports.PageTableCell_ = exports.JsonObject_ = exports.JsonArray_ = void 0;
+exports.MessageReplyStoryHeader_ = exports.MessageReplyHeader_ = exports.messages_DiscussionMessage_ = exports.messages_MessageViews_ = exports.MessageViews_ = exports.help_CountriesList_ = exports.help_CountriesListNotModified_ = exports.help_Country_ = exports.help_CountryCode_ = exports.GlobalPrivacySettings_ = exports.stats_MegagroupStats_ = exports.StatsGroupTopInviter_ = exports.StatsGroupTopAdmin_ = exports.StatsGroupTopPoster_ = exports.VideoSizeStickerMarkup_ = exports.VideoSizeEmojiMarkup_ = exports.VideoSize_ = exports.help_PromoData_ = exports.help_PromoDataEmpty_ = exports.stats_BroadcastStats_ = exports.StatsGraph_ = exports.StatsGraphError_ = exports.StatsGraphAsync_ = exports.StatsPercentValue_ = exports.StatsAbsValueAndPrev_ = exports.StatsDateRangeDays_ = exports.DialogFilterSuggested_ = exports.DialogFilterChatlist_ = exports.DialogFilterDefault_ = exports.DialogFilter_ = exports.payments_BankCardData_ = exports.BankCardOpenUrl_ = exports.messages_VotesList_ = exports.WebPageAttributeStory_ = exports.WebPageAttributeTheme_ = exports.ThemeSettings_ = exports.InputThemeSettings_ = exports.BaseThemeArctic_ = exports.BaseThemeTinted_ = exports.BaseThemeNight_ = exports.BaseThemeDay_ = exports.BaseThemeClassic_ = exports.messages_InactiveChats_ = exports.account_ContentSettings_ = exports.auth_LoginTokenSuccess_ = exports.auth_LoginTokenMigrateTo_ = exports.auth_LoginToken_ = exports.account_Themes_ = exports.account_ThemesNotModified_ = exports.Theme_ = void 0;
+exports.users_UserFull_ = exports.channels_SendAsPeers_ = exports.messages_SearchResultsPositions_ = exports.SearchResultPosition_ = exports.messages_SearchResultsCalendar_ = exports.SearchResultsCalendarPeriod_ = exports.messages_SponsoredMessagesEmpty_ = exports.messages_SponsoredMessages_ = exports.SponsoredMessage_ = exports.account_ResetPasswordOk_ = exports.account_ResetPasswordRequestedWait_ = exports.account_ResetPasswordFailedWait_ = exports.BotCommandScopePeerUser_ = exports.BotCommandScopePeerAdmins_ = exports.BotCommandScopePeer_ = exports.BotCommandScopeChatAdmins_ = exports.BotCommandScopeChats_ = exports.BotCommandScopeUsers_ = exports.BotCommandScopeDefault_ = exports.stickers_SuggestedShortName_ = exports.GroupCallParticipantVideo_ = exports.GroupCallParticipantVideoSourceGroup_ = exports.phone_ExportedGroupCallInvite_ = exports.phone_JoinAsPeers_ = exports.messages_CheckedHistoryImportPeer_ = exports.messages_ChatAdminsWithInvites_ = exports.ChatAdminWithInvites_ = exports.messages_ChatInviteImporters_ = exports.messages_ExportedChatInviteReplaced_ = exports.messages_ExportedChatInvite_ = exports.messages_ExportedChatInvites_ = exports.ChatInviteImporter_ = exports.messages_AffectedFoundMessages_ = exports.messages_HistoryImportParsed_ = exports.messages_HistoryImport_ = exports.InlineQueryPeerTypeBotPM_ = exports.InlineQueryPeerTypeBroadcast_ = exports.InlineQueryPeerTypeMegagroup_ = exports.InlineQueryPeerTypeChat_ = exports.InlineQueryPeerTypePM_ = exports.InlineQueryPeerTypeSameBotPM_ = exports.phone_GroupParticipants_ = exports.phone_GroupCall_ = exports.GroupCallParticipant_ = exports.InputGroupCall_ = exports.GroupCall_ = exports.GroupCallDiscarded_ = exports.stats_MessageStats_ = exports.PeerBlocked_ = exports.MessageReplies_ = void 0;
+exports.EmojiStatusEmpty_ = exports.PaymentFormMethod_ = exports.PremiumGiftOption_ = exports.InputStorePaymentPremiumGiveaway_ = exports.InputStorePaymentPremiumGiftCode_ = exports.InputStorePaymentGiftPremium_ = exports.InputStorePaymentPremiumSubscription_ = exports.help_PremiumPromo_ = exports.messages_TranscribedAudio_ = exports.payments_ExportedInvoice_ = exports.InputInvoicePremiumGiftCode_ = exports.InputInvoiceSlug_ = exports.InputInvoiceMessage_ = exports.AttachMenuPeerTypeBroadcast_ = exports.AttachMenuPeerTypeChat_ = exports.AttachMenuPeerTypePM_ = exports.AttachMenuPeerTypeBotPM_ = exports.AttachMenuPeerTypeSameBotPM_ = exports.account_SavedRingtoneConverted_ = exports.account_SavedRingtone_ = exports.NotificationSoundRingtone_ = exports.NotificationSoundLocal_ = exports.NotificationSoundNone_ = exports.NotificationSoundDefault_ = exports.account_SavedRingtones_ = exports.account_SavedRingtonesNotModified_ = exports.BotMenuButton_ = exports.BotMenuButtonCommands_ = exports.BotMenuButtonDefault_ = exports.WebViewMessageSent_ = exports.SimpleWebViewResultUrl_ = exports.WebViewResultUrl_ = exports.AttachMenuBotsBot_ = exports.AttachMenuBots_ = exports.AttachMenuBotsNotModified_ = exports.AttachMenuBot_ = exports.AttachMenuBotIcon_ = exports.AttachMenuBotIconColor_ = exports.phone_GroupCallStreamRtmpUrl_ = exports.phone_GroupCallStreamChannels_ = exports.GroupCallStreamChannel_ = exports.MessagePeerReaction_ = exports.messages_AvailableReactions_ = exports.messages_AvailableReactionsNotModified_ = exports.AvailableReaction_ = exports.messages_MessageReactionsList_ = exports.MessageReactions_ = exports.ReactionCount_ = exports.auth_LoggedOut_ = exports.messages_PeerSettings_ = void 0;
+exports.BotApp_ = exports.BotAppNotModified_ = exports.InputBotAppShortName_ = exports.InputBotAppID_ = exports.help_AppConfig_ = exports.help_AppConfigNotModified_ = exports.account_AutoSaveSettings_ = exports.AutoSaveException_ = exports.AutoSaveSettings_ = exports.messages_TranslateResult_ = exports.TextWithEntities_ = exports.messages_EmojiGroups_ = exports.messages_EmojiGroupsNotModified_ = exports.EmojiGroup_ = exports.EmojiList_ = exports.EmojiListNotModified_ = exports.RequestPeerTypeBroadcast_ = exports.RequestPeerTypeChat_ = exports.RequestPeerTypeUser_ = exports.ExportedContactToken_ = exports.DefaultHistoryTTL_ = exports.messages_ForumTopics_ = exports.ForumTopic_ = exports.ForumTopicDeleted_ = exports.Username_ = exports.StickerKeyword_ = exports.MessageExtendedMedia_ = exports.MessageExtendedMediaPreview_ = exports.SendAsPeer_ = exports.PremiumSubscriptionOption_ = exports.account_EmailVerifiedLogin_ = exports.account_EmailVerified_ = exports.EmailVerificationApple_ = exports.EmailVerificationGoogle_ = exports.EmailVerificationCode_ = exports.EmailVerifyPurposePassport_ = exports.EmailVerifyPurposeLoginChange_ = exports.EmailVerifyPurposeLoginSetup_ = exports.messages_Reactions_ = exports.messages_ReactionsNotModified_ = exports.ChatReactionsSome_ = exports.ChatReactionsAll_ = exports.ChatReactionsNone_ = exports.ReactionCustomEmoji_ = exports.ReactionEmoji_ = exports.ReactionEmpty_ = exports.account_EmojiStatuses_ = exports.account_EmojiStatusesNotModified_ = exports.EmojiStatusUntil_ = exports.EmojiStatus_ = void 0;
+exports.MyBoost_ = exports.premium_BoostsList_ = exports.Boost_ = exports.PrepaidGiveaway_ = exports.payments_GiveawayInfoResults_ = exports.payments_GiveawayInfo_ = exports.payments_CheckedGiftCode_ = exports.PremiumGiftCodeOption_ = exports.messages_WebPage_ = exports.stories_PeerStories_ = exports.PeerStories_ = exports.InputMediaAreaChannelPost_ = exports.MediaAreaChannelPost_ = exports.MediaAreaSuggestedReaction_ = exports.MediaAreaGeoPoint_ = exports.InputMediaAreaVenue_ = exports.MediaAreaVenue_ = exports.MediaAreaCoordinates_ = exports.StoriesStealthMode_ = exports.ExportedStoryLink_ = exports.InputReplyToStory_ = exports.InputReplyToMessage_ = exports.stories_StoryViews_ = exports.stories_StoryViewsList_ = exports.StoryViewPublicRepost_ = exports.StoryViewPublicForward_ = exports.StoryView_ = exports.stories_Stories_ = exports.stories_AllStories_ = exports.stories_AllStoriesNotModified_ = exports.StoryItem_ = exports.StoryItemSkipped_ = exports.StoryItemDeleted_ = exports.StoryViews_ = exports.SponsoredWebPage_ = exports.MessagePeerVoteMultiple_ = exports.MessagePeerVoteInputOption_ = exports.MessagePeerVote_ = exports.bots_BotInfo_ = exports.chatlists_ChatlistUpdates_ = exports.chatlists_ChatlistInvite_ = exports.chatlists_ChatlistInviteAlready_ = exports.chatlists_ExportedInvites_ = exports.chatlists_ExportedChatlistInvite_ = exports.ExportedChatlistInvite_ = exports.InputChatlistDialogFilter_ = exports.ReadParticipantDate_ = exports.InlineBotWebView_ = exports.AppWebViewResultUrl_ = exports.messages_BotApp_ = void 0;
+exports.messages_QuickRepliesNotModified_ = exports.messages_QuickReplies_ = exports.InputQuickReplyShortcutId_ = exports.InputQuickReplyShortcut_ = exports.QuickReply_ = exports.help_TimezonesList_ = exports.help_TimezonesListNotModified_ = exports.Timezone_ = exports.BusinessAwayMessage_ = exports.InputBusinessAwayMessage_ = exports.BusinessGreetingMessage_ = exports.InputBusinessGreetingMessage_ = exports.BusinessAwayMessageScheduleCustom_ = exports.BusinessAwayMessageScheduleOutsideWorkHours_ = exports.BusinessAwayMessageScheduleAlways_ = exports.BusinessRecipients_ = exports.InputBusinessRecipients_ = exports.BusinessLocation_ = exports.BusinessWorkHours_ = exports.BusinessWeeklyOpen_ = exports.SmsJob_ = exports.smsjobs_Status_ = exports.smsjobs_EligibleToJoin_ = exports.OutboxReadDate_ = exports.messages_SavedReactionTags_ = exports.messages_SavedReactionTagsNotModified_ = exports.SavedReactionTag_ = exports.messages_SavedDialogsNotModified_ = exports.messages_SavedDialogsSlice_ = exports.messages_SavedDialogs_ = exports.SavedDialog_ = exports.stories_StoryReactionsList_ = exports.StoryReactionPublicRepost_ = exports.StoryReactionPublicForward_ = exports.StoryReaction_ = exports.help_PeerColors_ = exports.help_PeerColorsNotModified_ = exports.help_PeerColorOption_ = exports.help_PeerColorProfileSet_ = exports.help_PeerColorSet_ = exports.PeerColor_ = exports.stats_PublicForwards_ = exports.PublicForwardStory_ = exports.PublicForwardMessage_ = exports.stats_StoryStats_ = exports.PostInteractionCountersStory_ = exports.PostInteractionCountersMessage_ = exports.StoryFwdHeader_ = exports.premium_BoostsStatus_ = exports.premium_MyBoosts_ = void 0;
+exports.map = exports.types = exports.stats_BroadcastRevenueTransactions_ = exports.BroadcastRevenueTransactionRefund_ = exports.BroadcastRevenueTransactionWithdrawal_ = exports.BroadcastRevenueTransactionProceeds_ = exports.stats_BroadcastRevenueWithdrawalUrl_ = exports.stats_BroadcastRevenueStats_ = exports.channels_SponsoredMessageReportResultReported_ = exports.channels_SponsoredMessageReportResultAdsHidden_ = exports.channels_SponsoredMessageReportResultChooseOption_ = exports.SponsoredMessageReportOption_ = exports.RequestedPeerChannel_ = exports.RequestedPeerChat_ = exports.RequestedPeerUser_ = exports.account_ResolvedBusinessChatLinks_ = exports.account_BusinessChatLinks_ = exports.BusinessChatLink_ = exports.InputBusinessChatLink_ = exports.messages_InvitedUsers_ = exports.MissingInvitee_ = exports.contacts_ContactBirthdays_ = exports.ContactBirthday_ = exports.BusinessBotRecipients_ = exports.InputBusinessBotRecipients_ = exports.fragment_CollectibleInfo_ = exports.InputCollectiblePhone_ = exports.InputCollectibleUsername_ = exports.messages_MyStickers_ = exports.BusinessIntro_ = exports.InputBusinessIntro_ = exports.BotBusinessConnection_ = exports.Birthday_ = exports.messages_DialogFilters_ = exports.account_ConnectedBots_ = exports.ConnectedBot_ = void 0;
 // deno-fmt-ignore-file
 const _1_tl_object_js_1 = require("./1_tl_object.js");
 class Type_ extends _1_tl_object_js_1.TLObject {
@@ -126,9 +127,18 @@ exports._True_ = _True_;
 class _Error_ extends Type_ {
 }
 exports._Error_ = _Error_;
-class _Null_ extends Type_ {
+class _IpPort_ extends Type_ {
 }
-exports._Null_ = _Null_;
+exports._IpPort_ = _IpPort_;
+class _AccessPointRule_ extends Type_ {
+}
+exports._AccessPointRule_ = _AccessPointRule_;
+class _help_ConfigSimple_ extends Type_ {
+}
+exports._help_ConfigSimple_ = _help_ConfigSimple_;
+class _InputFileLocation_ extends Type_ {
+}
+exports._InputFileLocation_ = _InputFileLocation_;
 class _InputPeer_ extends Type_ {
 }
 exports._InputPeer_ = _InputPeer_;
@@ -153,9 +163,6 @@ exports._InputGeoPoint_ = _InputGeoPoint_;
 class _InputPhoto_ extends Type_ {
 }
 exports._InputPhoto_ = _InputPhoto_;
-class _InputFileLocation_ extends Type_ {
-}
-exports._InputFileLocation_ = _InputFileLocation_;
 class _Peer_ extends Type_ {
 }
 exports._Peer_ = _Peer_;
@@ -1500,6 +1507,78 @@ exports._account_ConnectedBots_ = _account_ConnectedBots_;
 class _messages_DialogFilters_ extends Type_ {
 }
 exports._messages_DialogFilters_ = _messages_DialogFilters_;
+class _Birthday_ extends Type_ {
+}
+exports._Birthday_ = _Birthday_;
+class _BotBusinessConnection_ extends Type_ {
+}
+exports._BotBusinessConnection_ = _BotBusinessConnection_;
+class _InputBusinessIntro_ extends Type_ {
+}
+exports._InputBusinessIntro_ = _InputBusinessIntro_;
+class _BusinessIntro_ extends Type_ {
+}
+exports._BusinessIntro_ = _BusinessIntro_;
+class _messages_MyStickers_ extends Type_ {
+}
+exports._messages_MyStickers_ = _messages_MyStickers_;
+class _InputCollectible_ extends Type_ {
+}
+exports._InputCollectible_ = _InputCollectible_;
+class _fragment_CollectibleInfo_ extends Type_ {
+}
+exports._fragment_CollectibleInfo_ = _fragment_CollectibleInfo_;
+class _InputBusinessBotRecipients_ extends Type_ {
+}
+exports._InputBusinessBotRecipients_ = _InputBusinessBotRecipients_;
+class _BusinessBotRecipients_ extends Type_ {
+}
+exports._BusinessBotRecipients_ = _BusinessBotRecipients_;
+class _ContactBirthday_ extends Type_ {
+}
+exports._ContactBirthday_ = _ContactBirthday_;
+class _contacts_ContactBirthdays_ extends Type_ {
+}
+exports._contacts_ContactBirthdays_ = _contacts_ContactBirthdays_;
+class _MissingInvitee_ extends Type_ {
+}
+exports._MissingInvitee_ = _MissingInvitee_;
+class _messages_InvitedUsers_ extends Type_ {
+}
+exports._messages_InvitedUsers_ = _messages_InvitedUsers_;
+class _InputBusinessChatLink_ extends Type_ {
+}
+exports._InputBusinessChatLink_ = _InputBusinessChatLink_;
+class _BusinessChatLink_ extends Type_ {
+}
+exports._BusinessChatLink_ = _BusinessChatLink_;
+class _account_BusinessChatLinks_ extends Type_ {
+}
+exports._account_BusinessChatLinks_ = _account_BusinessChatLinks_;
+class _account_ResolvedBusinessChatLinks_ extends Type_ {
+}
+exports._account_ResolvedBusinessChatLinks_ = _account_ResolvedBusinessChatLinks_;
+class _RequestedPeer_ extends Type_ {
+}
+exports._RequestedPeer_ = _RequestedPeer_;
+class _SponsoredMessageReportOption_ extends Type_ {
+}
+exports._SponsoredMessageReportOption_ = _SponsoredMessageReportOption_;
+class _channels_SponsoredMessageReportResult_ extends Type_ {
+}
+exports._channels_SponsoredMessageReportResult_ = _channels_SponsoredMessageReportResult_;
+class _stats_BroadcastRevenueStats_ extends Type_ {
+}
+exports._stats_BroadcastRevenueStats_ = _stats_BroadcastRevenueStats_;
+class _stats_BroadcastRevenueWithdrawalUrl_ extends Type_ {
+}
+exports._stats_BroadcastRevenueWithdrawalUrl_ = _stats_BroadcastRevenueWithdrawalUrl_;
+class _BroadcastRevenueTransaction_ extends Type_ {
+}
+exports._BroadcastRevenueTransaction_ = _BroadcastRevenueTransaction_;
+class _stats_BroadcastRevenueTransactions_ extends Type_ {
+}
+exports._stats_BroadcastRevenueTransactions_ = _stats_BroadcastRevenueTransactions_;
 class ResPQ_ extends _ResPQ_ {
     get [_1_tl_object_js_1.id]() {
         return 0x05162463;
@@ -3031,25 +3110,290 @@ class Error_ extends _Error_ {
     }
 }
 exports.Error_ = Error_;
-/** Corresponds to an arbitrary empty object. */
-class Null_ extends _Null_ {
+class IpPort_ extends _IpPort_ {
     get [_1_tl_object_js_1.id]() {
-        return 0x56730BCC;
+        return 0xD433AD73;
     }
     static get [_1_tl_object_js_1.name]() {
-        return "null";
+        return "ipPort";
     }
     static get [_1_tl_object_js_1.paramDesc]() {
-        return [];
+        return [
+            ["ipv4", "number", "int"],
+            ["port", "number", "int"],
+        ];
     }
     get [_1_tl_object_js_1.params]() {
-        return [];
+        return [
+            [this.ipv4, "number", "int"],
+            [this.port, "number", "int"],
+        ];
     }
-    constructor() {
+    constructor(params) {
         super();
+        Object.defineProperty(this, "ipv4", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "port", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.ipv4 = params.ipv4;
+        this.port = params.port;
     }
 }
-exports.Null_ = Null_;
+exports.IpPort_ = IpPort_;
+class IpPortSecret_ extends _IpPort_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x37982646;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "ipPortSecret";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["ipv4", "number", "int"],
+            ["port", "number", "int"],
+            ["secret", Uint8Array, "bytes"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.ipv4, "number", "int"],
+            [this.port, "number", "int"],
+            [this.secret, Uint8Array, "bytes"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "ipv4", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "port", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "secret", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.ipv4 = params.ipv4;
+        this.port = params.port;
+        this.secret = params.secret;
+    }
+}
+exports.IpPortSecret_ = IpPortSecret_;
+class AccessPointRule_ extends _AccessPointRule_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x4679B65F;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "accessPointRule";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["phone_prefix_rules", "string", "string"],
+            ["dc_id", "number", "int"],
+            ["ips", [_IpPort_], "vector<IpPort>"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.phone_prefix_rules, "string", "string"],
+            [this.dc_id, "number", "int"],
+            [this.ips, [_IpPort_], "vector<IpPort>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "phone_prefix_rules", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "dc_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "ips", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.phone_prefix_rules = params.phone_prefix_rules;
+        this.dc_id = params.dc_id;
+        this.ips = params.ips;
+    }
+}
+exports.AccessPointRule_ = AccessPointRule_;
+class help_ConfigSimple_ extends _help_ConfigSimple_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x5A592A6C;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "help.configSimple";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["date", "number", "int"],
+            ["expires", "number", "int"],
+            ["rules", [_AccessPointRule_], "vector<AccessPointRule>"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.date, "number", "int"],
+            [this.expires, "number", "int"],
+            [this.rules, [_AccessPointRule_], "vector<AccessPointRule>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "date", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "expires", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "rules", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.date = params.date;
+        this.expires = params.expires;
+        this.rules = params.rules;
+    }
+}
+exports.help_ConfigSimple_ = help_ConfigSimple_;
+class InputPeerPhotoFileLocationLegacy_ extends _InputFileLocation_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x27D69997;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "inputPeerPhotoFileLocationLegacy";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["big", "true", "flags.0?true"],
+            ["peer", _InputPeer_, "InputPeer"],
+            ["volume_id", "bigint", "long"],
+            ["local_id", "number", "int"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.big ?? null, "true", "flags.0?true"],
+            [this.peer, _InputPeer_, "InputPeer"],
+            [this.volume_id, "bigint", "long"],
+            [this.local_id, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "big", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "peer", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "volume_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "local_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.big = params.big;
+        this.peer = params.peer;
+        this.volume_id = params.volume_id;
+        this.local_id = params.local_id;
+    }
+}
+exports.InputPeerPhotoFileLocationLegacy_ = InputPeerPhotoFileLocationLegacy_;
+class InputStickerSetThumbLegacy_ extends _InputFileLocation_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x0DBAEAE9;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "inputStickerSetThumbLegacy";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["stickerset", _InputStickerSet_, "InputStickerSet"],
+            ["volume_id", "bigint", "long"],
+            ["local_id", "number", "int"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.stickerset, _InputStickerSet_, "InputStickerSet"],
+            [this.volume_id, "bigint", "long"],
+            [this.local_id, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "stickerset", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "volume_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "local_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.stickerset = params.stickerset;
+        this.volume_id = params.volume_id;
+        this.local_id = params.local_id;
+    }
+}
+exports.InputStickerSetThumbLegacy_ = InputStickerSetThumbLegacy_;
 /** An empty constructor, no user or chat is defined. */
 class InputPeerEmpty_ extends _InputPeer_ {
     get [_1_tl_object_js_1.id]() {
@@ -5747,6 +6091,7 @@ class User_ extends _User_ {
             ["stories_hidden", "true", "flags2.3?true"],
             ["stories_unavailable", "true", "flags2.4?true"],
             ["contact_require_premium", "true", "flags2.10?true"],
+            ["bot_business", "true", "flags2.11?true"],
             ["id", "bigint", "long"],
             ["access_hash", "bigint", "flags.0?long"],
             ["first_name", "string", "flags.1?string"],
@@ -5793,6 +6138,7 @@ class User_ extends _User_ {
             [this.stories_hidden ?? null, "true", "flags2.3?true"],
             [this.stories_unavailable ?? null, "true", "flags2.4?true"],
             [this.contact_require_premium ?? null, "true", "flags2.10?true"],
+            [this.bot_business ?? null, "true", "flags2.11?true"],
             [this.id, "bigint", "long"],
             [this.access_hash ?? null, "bigint", "flags.0?long"],
             [this.first_name ?? null, "string", "flags.1?string"],
@@ -5974,6 +6320,12 @@ class User_ extends _User_ {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "bot_business", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         /** ID of the user */
         Object.defineProperty(this, "id", {
             enumerable: true,
@@ -6116,6 +6468,7 @@ class User_ extends _User_ {
         this.stories_hidden = params.stories_hidden;
         this.stories_unavailable = params.stories_unavailable;
         this.contact_require_premium = params.contact_require_premium;
+        this.bot_business = params.bot_business;
         this.id = params.id;
         this.access_hash = params.access_hash;
         this.first_name = params.first_name;
@@ -7397,6 +7750,8 @@ class ChannelFull_ extends _ChatFull_ {
             ["translations_disabled", "true", "flags2.3?true"],
             ["stories_pinned_available", "true", "flags2.5?true"],
             ["view_forum_as_messages", "true", "flags2.6?true"],
+            ["restricted_sponsored", "true", "flags2.11?true"],
+            ["can_view_revenue", "true", "flags2.12?true"],
             ["id", "bigint", "long"],
             ["about", "string", "string"],
             ["participants_count", "number", "flags.0?int"],
@@ -7457,6 +7812,8 @@ class ChannelFull_ extends _ChatFull_ {
             [this.translations_disabled ?? null, "true", "flags2.3?true"],
             [this.stories_pinned_available ?? null, "true", "flags2.5?true"],
             [this.view_forum_as_messages ?? null, "true", "flags2.6?true"],
+            [this.restricted_sponsored ?? null, "true", "flags2.11?true"],
+            [this.can_view_revenue ?? null, "true", "flags2.12?true"],
             [this.id, "bigint", "long"],
             [this.about, "string", "string"],
             [this.participants_count ?? null, "number", "flags.0?int"],
@@ -7595,6 +7952,18 @@ class ChannelFull_ extends _ChatFull_ {
         /** Users may also choose to display messages from all topics of a [forum](https://core.telegram.org/api/forum) as if they were sent to a normal group, using a "View as messages" setting in the local client.
         This setting only affects the current account, and is synced to other logged in sessions using the [channels.toggleViewForumAsMessages](https://core.telegram.org/method/channels.toggleViewForumAsMessages) method; invoking this method will update the value of this flag. */
         Object.defineProperty(this, "view_forum_as_messages", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "restricted_sponsored", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "can_view_revenue", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -7891,6 +8260,8 @@ class ChannelFull_ extends _ChatFull_ {
         this.translations_disabled = params.translations_disabled;
         this.stories_pinned_available = params.stories_pinned_available;
         this.view_forum_as_messages = params.view_forum_as_messages;
+        this.restricted_sponsored = params.restricted_sponsored;
+        this.can_view_revenue = params.can_view_revenue;
         this.id = params.id;
         this.about = params.about;
         this.participants_count = params.participants_count;
@@ -8289,7 +8660,7 @@ exports.MessageEmpty_ = MessageEmpty_;
 /** A message */
 class Message_ extends _Message_ {
     get [_1_tl_object_js_1.id]() {
-        return 0xA66C7EFC;
+        return 0x2357BF25;
     }
     static get [_1_tl_object_js_1.name]() {
         return "message";
@@ -8308,6 +8679,8 @@ class Message_ extends _Message_ {
             ["pinned", "true", "flags.24?true"],
             ["noforwards", "true", "flags.26?true"],
             ["invert_media", "true", "flags.27?true"],
+            ["flags2", _1_tl_object_js_1.flags, "#"],
+            ["offline", "true", "flags2.1?true"],
             ["id", "number", "int"],
             ["from_id", _Peer_, "flags.8?Peer"],
             ["from_boosts_applied", "number", "flags.29?int"],
@@ -8315,6 +8688,7 @@ class Message_ extends _Message_ {
             ["saved_peer_id", _Peer_, "flags.28?Peer"],
             ["fwd_from", _MessageFwdHeader_, "flags.2?MessageFwdHeader"],
             ["via_bot_id", "bigint", "flags.11?long"],
+            ["via_business_bot_id", "bigint", "flags2.0?long"],
             ["reply_to", _MessageReplyHeader_, "flags.3?MessageReplyHeader"],
             ["date", "number", "int"],
             ["message", "string", "string"],
@@ -8347,6 +8721,8 @@ class Message_ extends _Message_ {
             [this.pinned ?? null, "true", "flags.24?true"],
             [this.noforwards ?? null, "true", "flags.26?true"],
             [this.invert_media ?? null, "true", "flags.27?true"],
+            ["flags2", _1_tl_object_js_1.flags, "#"],
+            [this.offline ?? null, "true", "flags2.1?true"],
             [this.id, "number", "int"],
             [this.from_id ?? null, _Peer_, "flags.8?Peer"],
             [this.from_boosts_applied ?? null, "number", "flags.29?int"],
@@ -8354,6 +8730,7 @@ class Message_ extends _Message_ {
             [this.saved_peer_id ?? null, _Peer_, "flags.28?Peer"],
             [this.fwd_from ?? null, _MessageFwdHeader_, "flags.2?MessageFwdHeader"],
             [this.via_bot_id ?? null, "bigint", "flags.11?long"],
+            [this.via_business_bot_id ?? null, "bigint", "flags2.0?long"],
             [this.reply_to ?? null, _MessageReplyHeader_, "flags.3?MessageReplyHeader"],
             [this.date, "number", "int"],
             [this.message, "string", "string"],
@@ -8451,6 +8828,12 @@ class Message_ extends _Message_ {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "offline", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         /** ID of the message */
         Object.defineProperty(this, "id", {
             enumerable: true,
@@ -8494,6 +8877,12 @@ class Message_ extends _Message_ {
         });
         /** ID of the inline bot that generated the message */
         Object.defineProperty(this, "via_bot_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "via_business_bot_id", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -8621,6 +9010,7 @@ class Message_ extends _Message_ {
         this.pinned = params.pinned;
         this.noforwards = params.noforwards;
         this.invert_media = params.invert_media;
+        this.offline = params.offline;
         this.id = params.id;
         this.from_id = params.from_id;
         this.from_boosts_applied = params.from_boosts_applied;
@@ -8628,6 +9018,7 @@ class Message_ extends _Message_ {
         this.saved_peer_id = params.saved_peer_id;
         this.fwd_from = params.fwd_from;
         this.via_bot_id = params.via_bot_id;
+        this.via_business_bot_id = params.via_business_bot_id;
         this.reply_to = params.reply_to;
         this.date = params.date;
         this.message = params.message;
@@ -11565,6 +11956,44 @@ class MessageActionBoostApply_ extends _MessageAction_ {
     }
 }
 exports.MessageActionBoostApply_ = MessageActionBoostApply_;
+class MessageActionRequestedPeerSentMe_ extends _MessageAction_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x93B31848;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "messageActionRequestedPeerSentMe";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["button_id", "number", "int"],
+            ["peers", [_RequestedPeer_], "Vector<RequestedPeer>"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.button_id, "number", "int"],
+            [this.peers, [_RequestedPeer_], "Vector<RequestedPeer>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "button_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "peers", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.button_id = params.button_id;
+        this.peers = params.peers;
+    }
+}
+exports.MessageActionRequestedPeerSentMe_ = MessageActionRequestedPeerSentMe_;
 /** Chat */
 class Dialog_ extends _Dialog_ {
     get [_1_tl_object_js_1.id]() {
@@ -12953,7 +13382,7 @@ exports.PeerNotifySettings_ = PeerNotifySettings_;
 /** List of actions that are possible when interacting with this user, to be shown as suggested actions in the [chat action bar »](https://core.telegram.org/api/action-bar), see [here »](https://core.telegram.org/api/action-bar) for more info. */
 class PeerSettings_ extends _PeerSettings_ {
     get [_1_tl_object_js_1.id]() {
-        return 0xA518110D;
+        return 0xACD66C5E;
     }
     static get [_1_tl_object_js_1.name]() {
         return "peerSettings";
@@ -12970,9 +13399,13 @@ class PeerSettings_ extends _PeerSettings_ {
             ["autoarchived", "true", "flags.7?true"],
             ["invite_members", "true", "flags.8?true"],
             ["request_chat_broadcast", "true", "flags.10?true"],
+            ["business_bot_paused", "true", "flags.11?true"],
+            ["business_bot_can_reply", "true", "flags.12?true"],
             ["geo_distance", "number", "flags.6?int"],
             ["request_chat_title", "string", "flags.9?string"],
             ["request_chat_date", "number", "flags.9?int"],
+            ["business_bot_id", "bigint", "flags.13?long"],
+            ["business_bot_manage_url", "string", "flags.13?string"],
         ];
     }
     get [_1_tl_object_js_1.params]() {
@@ -12987,9 +13420,13 @@ class PeerSettings_ extends _PeerSettings_ {
             [this.autoarchived ?? null, "true", "flags.7?true"],
             [this.invite_members ?? null, "true", "flags.8?true"],
             [this.request_chat_broadcast ?? null, "true", "flags.10?true"],
+            [this.business_bot_paused ?? null, "true", "flags.11?true"],
+            [this.business_bot_can_reply ?? null, "true", "flags.12?true"],
             [this.geo_distance ?? null, "number", "flags.6?int"],
             [this.request_chat_title ?? null, "string", "flags.9?string"],
             [this.request_chat_date ?? null, "number", "flags.9?int"],
+            [this.business_bot_id ?? null, "bigint", "flags.13?long"],
+            [this.business_bot_manage_url ?? null, "string", "flags.13?string"],
         ];
     }
     constructor(params) {
@@ -13057,6 +13494,18 @@ class PeerSettings_ extends _PeerSettings_ {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "business_bot_paused", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "business_bot_can_reply", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         /** Distance in meters between us and this peer */
         Object.defineProperty(this, "geo_distance", {
             enumerable: true,
@@ -13078,6 +13527,18 @@ class PeerSettings_ extends _PeerSettings_ {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "business_bot_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "business_bot_manage_url", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         this.report_spam = params?.report_spam;
         this.add_contact = params?.add_contact;
         this.block_contact = params?.block_contact;
@@ -13087,9 +13548,13 @@ class PeerSettings_ extends _PeerSettings_ {
         this.autoarchived = params?.autoarchived;
         this.invite_members = params?.invite_members;
         this.request_chat_broadcast = params?.request_chat_broadcast;
+        this.business_bot_paused = params?.business_bot_paused;
+        this.business_bot_can_reply = params?.business_bot_can_reply;
         this.geo_distance = params?.geo_distance;
         this.request_chat_title = params?.request_chat_title;
         this.request_chat_date = params?.request_chat_date;
+        this.business_bot_id = params?.business_bot_id;
+        this.business_bot_manage_url = params?.business_bot_manage_url;
     }
 }
 exports.PeerSettings_ = PeerSettings_;
@@ -13462,7 +13927,7 @@ exports.InputReportReasonPersonalDetails_ = InputReportReasonPersonalDetails_;
 /** Extended user info */
 class UserFull_ extends _UserFull_ {
     get [_1_tl_object_js_1.id]() {
-        return 0x22FF3E85;
+        return 0xCC997720;
     }
     static get [_1_tl_object_js_1.name]() {
         return "userFull";
@@ -13507,6 +13972,10 @@ class UserFull_ extends _UserFull_ {
             ["business_location", _BusinessLocation_, "flags2.1?BusinessLocation"],
             ["business_greeting_message", _BusinessGreetingMessage_, "flags2.2?BusinessGreetingMessage"],
             ["business_away_message", _BusinessAwayMessage_, "flags2.3?BusinessAwayMessage"],
+            ["business_intro", _BusinessIntro_, "flags2.4?BusinessIntro"],
+            ["birthday", _Birthday_, "flags2.5?Birthday"],
+            ["personal_channel_id", "bigint", "flags2.6?long"],
+            ["personal_channel_message", "number", "flags2.6?int"],
         ];
     }
     get [_1_tl_object_js_1.params]() {
@@ -13549,6 +14018,10 @@ class UserFull_ extends _UserFull_ {
             [this.business_location ?? null, _BusinessLocation_, "flags2.1?BusinessLocation"],
             [this.business_greeting_message ?? null, _BusinessGreetingMessage_, "flags2.2?BusinessGreetingMessage"],
             [this.business_away_message ?? null, _BusinessAwayMessage_, "flags2.3?BusinessAwayMessage"],
+            [this.business_intro ?? null, _BusinessIntro_, "flags2.4?BusinessIntro"],
+            [this.birthday ?? null, _Birthday_, "flags2.5?Birthday"],
+            [this.personal_channel_id ?? null, "bigint", "flags2.6?long"],
+            [this.personal_channel_message ?? null, "number", "flags2.6?int"],
         ];
     }
     constructor(params) {
@@ -13799,6 +14272,30 @@ class UserFull_ extends _UserFull_ {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "business_intro", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "birthday", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "personal_channel_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "personal_channel_message", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         this.blocked = params.blocked;
         this.phone_calls_available = params.phone_calls_available;
         this.phone_calls_private = params.phone_calls_private;
@@ -13835,6 +14332,10 @@ class UserFull_ extends _UserFull_ {
         this.business_location = params.business_location;
         this.business_greeting_message = params.business_greeting_message;
         this.business_away_message = params.business_away_message;
+        this.business_intro = params.business_intro;
+        this.birthday = params.birthday;
+        this.personal_channel_id = params.personal_channel_id;
+        this.personal_channel_message = params.personal_channel_message;
     }
 }
 exports.UserFull_ = UserFull_;
@@ -20459,37 +20960,6 @@ class UpdateAutoSaveSettings_ extends _Update_ {
     }
 }
 exports.UpdateAutoSaveSettings_ = UpdateAutoSaveSettings_;
-/** 0-N updates of this type may be returned only when invoking [messages.addChatUser](https://core.telegram.org/method/messages.addChatUser), [channels.inviteToChannel](https://core.telegram.org/method/channels.inviteToChannel) or [messages.createChat](https://core.telegram.org/method/messages.createChat): it indicates we couldn't add a user to a chat because of their privacy settings; if required, an [invite link](https://core.telegram.org/api/invites) can be shared with the user, instead. */
-class UpdateGroupInvitePrivacyForbidden_ extends _Update_ {
-    get [_1_tl_object_js_1.id]() {
-        return 0xCCF08AD6;
-    }
-    static get [_1_tl_object_js_1.name]() {
-        return "updateGroupInvitePrivacyForbidden";
-    }
-    static get [_1_tl_object_js_1.paramDesc]() {
-        return [
-            ["user_id", "bigint", "long"],
-        ];
-    }
-    get [_1_tl_object_js_1.params]() {
-        return [
-            [this.user_id, "bigint", "long"],
-        ];
-    }
-    constructor(params) {
-        super();
-        /** ID of the user we couldn't add. */
-        Object.defineProperty(this, "user_id", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        this.user_id = params.user_id;
-    }
-}
-exports.UpdateGroupInvitePrivacyForbidden_ = UpdateGroupInvitePrivacyForbidden_;
 /** A new story was posted. */
 class UpdateStory_ extends _Update_ {
     get [_1_tl_object_js_1.id]() {
@@ -21280,6 +21750,216 @@ class UpdateDeleteQuickReplyMessages_ extends _Update_ {
     }
 }
 exports.UpdateDeleteQuickReplyMessages_ = UpdateDeleteQuickReplyMessages_;
+class UpdateBotBusinessConnect_ extends _Update_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x8AE5C97A;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "updateBotBusinessConnect";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["connection", _BotBusinessConnection_, "BotBusinessConnection"],
+            ["qts", "number", "int"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.connection, _BotBusinessConnection_, "BotBusinessConnection"],
+            [this.qts, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "connection", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "qts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.connection = params.connection;
+        this.qts = params.qts;
+    }
+}
+exports.UpdateBotBusinessConnect_ = UpdateBotBusinessConnect_;
+class UpdateBotNewBusinessMessage_ extends _Update_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x9DDB347C;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "updateBotNewBusinessMessage";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["connection_id", "string", "string"],
+            ["message", _Message_, "Message"],
+            ["reply_to_message", _Message_, "flags.0?Message"],
+            ["qts", "number", "int"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.connection_id, "string", "string"],
+            [this.message, _Message_, "Message"],
+            [this.reply_to_message ?? null, _Message_, "flags.0?Message"],
+            [this.qts, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "connection_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "message", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "reply_to_message", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "qts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.connection_id = params.connection_id;
+        this.message = params.message;
+        this.reply_to_message = params.reply_to_message;
+        this.qts = params.qts;
+    }
+}
+exports.UpdateBotNewBusinessMessage_ = UpdateBotNewBusinessMessage_;
+class UpdateBotEditBusinessMessage_ extends _Update_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x07DF587C;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "updateBotEditBusinessMessage";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["connection_id", "string", "string"],
+            ["message", _Message_, "Message"],
+            ["reply_to_message", _Message_, "flags.0?Message"],
+            ["qts", "number", "int"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.connection_id, "string", "string"],
+            [this.message, _Message_, "Message"],
+            [this.reply_to_message ?? null, _Message_, "flags.0?Message"],
+            [this.qts, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "connection_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "message", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "reply_to_message", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "qts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.connection_id = params.connection_id;
+        this.message = params.message;
+        this.reply_to_message = params.reply_to_message;
+        this.qts = params.qts;
+    }
+}
+exports.UpdateBotEditBusinessMessage_ = UpdateBotEditBusinessMessage_;
+class UpdateBotDeleteBusinessMessage_ extends _Update_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xA02A982E;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "updateBotDeleteBusinessMessage";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["connection_id", "string", "string"],
+            ["peer", _Peer_, "Peer"],
+            ["messages", ["number"], "Vector<int>"],
+            ["qts", "number", "int"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.connection_id, "string", "string"],
+            [this.peer, _Peer_, "Peer"],
+            [this.messages, ["number"], "Vector<int>"],
+            [this.qts, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "connection_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "peer", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "messages", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "qts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.connection_id = params.connection_id;
+        this.peer = params.peer;
+        this.messages = params.messages;
+        this.qts = params.qts;
+    }
+}
+exports.UpdateBotDeleteBusinessMessage_ = UpdateBotDeleteBusinessMessage_;
 /** Updates state. */
 class updates_State_ extends _updates_State_ {
     get [_1_tl_object_js_1.id]() {
@@ -25364,6 +26044,24 @@ class InputPrivacyKeyAbout_ extends _InputPrivacyKey_ {
     }
 }
 exports.InputPrivacyKeyAbout_ = InputPrivacyKeyAbout_;
+class InputPrivacyKeyBirthday_ extends _InputPrivacyKey_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xD65A11CC;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "inputPrivacyKeyBirthday";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [];
+    }
+    constructor() {
+        super();
+    }
+}
+exports.InputPrivacyKeyBirthday_ = InputPrivacyKeyBirthday_;
 /** Whether we can see the last online timestamp of this user */
 class PrivacyKeyStatusTimestamp_ extends _PrivacyKey_ {
     get [_1_tl_object_js_1.id]() {
@@ -25554,6 +26252,24 @@ class PrivacyKeyAbout_ extends _PrivacyKey_ {
     }
 }
 exports.PrivacyKeyAbout_ = PrivacyKeyAbout_;
+class PrivacyKeyBirthday_ extends _PrivacyKey_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x2000A518;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "privacyKeyBirthday";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [];
+    }
+    constructor() {
+        super();
+    }
+}
+exports.PrivacyKeyBirthday_ = PrivacyKeyBirthday_;
 /** Allow only contacts */
 class InputPrivacyValueAllowContacts_ extends _InputPrivacyRule_ {
     get [_1_tl_object_js_1.id]() {
@@ -25773,6 +26489,24 @@ class InputPrivacyValueAllowCloseFriends_ extends _InputPrivacyRule_ {
     }
 }
 exports.InputPrivacyValueAllowCloseFriends_ = InputPrivacyValueAllowCloseFriends_;
+class InputPrivacyValueAllowPremium_ extends _InputPrivacyRule_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x77CDC9F1;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "inputPrivacyValueAllowPremium";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [];
+    }
+    constructor() {
+        super();
+    }
+}
+exports.InputPrivacyValueAllowPremium_ = InputPrivacyValueAllowPremium_;
 /** Allow all contacts */
 class PrivacyValueAllowContacts_ extends _PrivacyRule_ {
     get [_1_tl_object_js_1.id]() {
@@ -25992,6 +26726,24 @@ class PrivacyValueAllowCloseFriends_ extends _PrivacyRule_ {
     }
 }
 exports.PrivacyValueAllowCloseFriends_ = PrivacyValueAllowCloseFriends_;
+class PrivacyValueAllowPremium_ extends _PrivacyRule_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xECE9814B;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "privacyValueAllowPremium";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [];
+    }
+    constructor() {
+        super();
+    }
+}
+exports.PrivacyValueAllowPremium_ = PrivacyValueAllowPremium_;
 /** Privacy rules */
 class account_PrivacyRules_ extends _account_PrivacyRules_ {
     get [_1_tl_object_js_1.id]() {
@@ -28273,11 +29025,10 @@ class StickerSet_ extends _StickerSet_ {
             ["archived", "true", "flags.1?true"],
             ["official", "true", "flags.2?true"],
             ["masks", "true", "flags.3?true"],
-            ["animated", "true", "flags.5?true"],
-            ["videos", "true", "flags.6?true"],
             ["emojis", "true", "flags.7?true"],
             ["text_color", "true", "flags.9?true"],
             ["channel_emoji_status", "true", "flags.10?true"],
+            ["creator", "true", "flags.11?true"],
             ["installed_date", "number", "flags.0?int"],
             ["id", "bigint", "long"],
             ["access_hash", "bigint", "long"],
@@ -28297,11 +29048,10 @@ class StickerSet_ extends _StickerSet_ {
             [this.archived ?? null, "true", "flags.1?true"],
             [this.official ?? null, "true", "flags.2?true"],
             [this.masks ?? null, "true", "flags.3?true"],
-            [this.animated ?? null, "true", "flags.5?true"],
-            [this.videos ?? null, "true", "flags.6?true"],
             [this.emojis ?? null, "true", "flags.7?true"],
             [this.text_color ?? null, "true", "flags.9?true"],
             [this.channel_emoji_status ?? null, "true", "flags.10?true"],
+            [this.creator ?? null, "true", "flags.11?true"],
             [this.installed_date ?? null, "number", "flags.0?int"],
             [this.id, "bigint", "long"],
             [this.access_hash, "bigint", "long"],
@@ -28338,20 +29088,6 @@ class StickerSet_ extends _StickerSet_ {
             writable: true,
             value: void 0
         });
-        /** Is this an animated stickerpack */
-        Object.defineProperty(this, "animated", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        /** Is this a video stickerpack */
-        Object.defineProperty(this, "videos", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
         /** This is a custom emoji stickerset */
         Object.defineProperty(this, "emojis", {
             enumerable: true,
@@ -28368,6 +29104,12 @@ class StickerSet_ extends _StickerSet_ {
         });
         /** If set, this custom emoji stickerset can be used in [channel emoji statuses](https://core.telegram.org/api/emoji-status). */
         Object.defineProperty(this, "channel_emoji_status", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "creator", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -28453,11 +29195,10 @@ class StickerSet_ extends _StickerSet_ {
         this.archived = params.archived;
         this.official = params.official;
         this.masks = params.masks;
-        this.animated = params.animated;
-        this.videos = params.videos;
         this.emojis = params.emojis;
         this.text_color = params.text_color;
         this.channel_emoji_status = params.channel_emoji_status;
+        this.creator = params.creator;
         this.installed_date = params.installed_date;
         this.id = params.id;
         this.access_hash = params.access_hash;
@@ -29396,6 +30137,91 @@ class KeyboardButtonRequestPeer_ extends _KeyboardButton_ {
     }
 }
 exports.KeyboardButtonRequestPeer_ = KeyboardButtonRequestPeer_;
+class InputKeyboardButtonRequestPeer_ extends _KeyboardButton_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xC9662D05;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "inputKeyboardButtonRequestPeer";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["name_requested", "true", "flags.0?true"],
+            ["username_requested", "true", "flags.1?true"],
+            ["photo_requested", "true", "flags.2?true"],
+            ["text", "string", "string"],
+            ["button_id", "number", "int"],
+            ["peer_type", _RequestPeerType_, "RequestPeerType"],
+            ["max_quantity", "number", "int"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.name_requested ?? null, "true", "flags.0?true"],
+            [this.username_requested ?? null, "true", "flags.1?true"],
+            [this.photo_requested ?? null, "true", "flags.2?true"],
+            [this.text, "string", "string"],
+            [this.button_id, "number", "int"],
+            [this.peer_type, _RequestPeerType_, "RequestPeerType"],
+            [this.max_quantity, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "name_requested", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "username_requested", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "photo_requested", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "text", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "button_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "peer_type", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "max_quantity", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.name_requested = params.name_requested;
+        this.username_requested = params.username_requested;
+        this.photo_requested = params.photo_requested;
+        this.text = params.text;
+        this.button_id = params.button_id;
+        this.peer_type = params.peer_type;
+        this.max_quantity = params.max_quantity;
+    }
+}
+exports.InputKeyboardButtonRequestPeer_ = InputKeyboardButtonRequestPeer_;
 /** Inline keyboard row */
 class KeyboardButtonRow_ extends _KeyboardButtonRow_ {
     get [_1_tl_object_js_1.id]() {
@@ -39989,7 +40815,7 @@ exports.PhoneCallAccepted_ = PhoneCallAccepted_;
 /** Phone call */
 class PhoneCall_ extends _PhoneCall_ {
     get [_1_tl_object_js_1.id]() {
-        return 0x967F7C67;
+        return 0x30535AF5;
     }
     static get [_1_tl_object_js_1.name]() {
         return "phoneCall";
@@ -40009,6 +40835,7 @@ class PhoneCall_ extends _PhoneCall_ {
             ["protocol", _PhoneCallProtocol_, "PhoneCallProtocol"],
             ["connections", [_PhoneConnection_], "Vector<PhoneConnection>"],
             ["start_date", "number", "int"],
+            ["custom_parameters", _DataJSON_, "flags.7?DataJSON"],
         ];
     }
     get [_1_tl_object_js_1.params]() {
@@ -40026,6 +40853,7 @@ class PhoneCall_ extends _PhoneCall_ {
             [this.protocol, _PhoneCallProtocol_, "PhoneCallProtocol"],
             [this.connections, [_PhoneConnection_], "Vector<PhoneConnection>"],
             [this.start_date, "number", "int"],
+            [this.custom_parameters ?? null, _DataJSON_, "flags.7?DataJSON"],
         ];
     }
     constructor(params) {
@@ -40114,6 +40942,12 @@ class PhoneCall_ extends _PhoneCall_ {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "custom_parameters", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         this.p2p_allowed = params.p2p_allowed;
         this.video = params.video;
         this.id = params.id;
@@ -40126,6 +40960,7 @@ class PhoneCall_ extends _PhoneCall_ {
         this.protocol = params.protocol;
         this.connections = params.connections;
         this.start_date = params.start_date;
+        this.custom_parameters = params.custom_parameters;
     }
 }
 exports.PhoneCall_ = PhoneCall_;
@@ -54148,6 +54983,7 @@ class SponsoredMessage_ extends _SponsoredMessage_ {
             ["flags", _1_tl_object_js_1.flags, "#"],
             ["recommended", "true", "flags.5?true"],
             ["show_peer_photo", "true", "flags.6?true"],
+            ["can_report", "true", "flags.12?true"],
             ["random_id", Uint8Array, "bytes"],
             ["from_id", _Peer_, "flags.3?Peer"],
             ["chat_invite", _ChatInvite_, "flags.4?ChatInvite"],
@@ -54168,6 +55004,7 @@ class SponsoredMessage_ extends _SponsoredMessage_ {
             ["flags", _1_tl_object_js_1.flags, "#"],
             [this.recommended ?? null, "true", "flags.5?true"],
             [this.show_peer_photo ?? null, "true", "flags.6?true"],
+            [this.can_report ?? null, "true", "flags.12?true"],
             [this.random_id, Uint8Array, "bytes"],
             [this.from_id ?? null, _Peer_, "flags.3?Peer"],
             [this.chat_invite ?? null, _ChatInvite_, "flags.4?ChatInvite"],
@@ -54194,6 +55031,12 @@ class SponsoredMessage_ extends _SponsoredMessage_ {
         });
         /** Whether a profile photo bubble should be displayed for this message, like for messages sent in groups. The photo shown in the bubble is obtained either from the peer contained in `from_id`, or from `chat_invite`. */
         Object.defineProperty(this, "show_peer_photo", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "can_report", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -54292,6 +55135,7 @@ class SponsoredMessage_ extends _SponsoredMessage_ {
         });
         this.recommended = params.recommended;
         this.show_peer_photo = params.show_peer_photo;
+        this.can_report = params.can_report;
         this.random_id = params.random_id;
         this.from_id = params.from_id;
         this.chat_invite = params.chat_invite;
@@ -64803,7 +65647,7 @@ class messages_QuickRepliesNotModified_ extends _messages_QuickReplies_ {
 exports.messages_QuickRepliesNotModified_ = messages_QuickRepliesNotModified_;
 class ConnectedBot_ extends _ConnectedBot_ {
     get [_1_tl_object_js_1.id]() {
-        return 0xE7E999E7;
+        return 0xBD068601;
     }
     static get [_1_tl_object_js_1.name]() {
         return "connectedBot";
@@ -64813,7 +65657,7 @@ class ConnectedBot_ extends _ConnectedBot_ {
             ["flags", _1_tl_object_js_1.flags, "#"],
             ["can_reply", "true", "flags.0?true"],
             ["bot_id", "bigint", "long"],
-            ["recipients", _BusinessRecipients_, "BusinessRecipients"],
+            ["recipients", _BusinessBotRecipients_, "BusinessBotRecipients"],
         ];
     }
     get [_1_tl_object_js_1.params]() {
@@ -64821,7 +65665,7 @@ class ConnectedBot_ extends _ConnectedBot_ {
             ["flags", _1_tl_object_js_1.flags, "#"],
             [this.can_reply ?? null, "true", "flags.0?true"],
             [this.bot_id, "bigint", "long"],
-            [this.recipients, _BusinessRecipients_, "BusinessRecipients"],
+            [this.recipients, _BusinessBotRecipients_, "BusinessBotRecipients"],
         ];
     }
     constructor(params) {
@@ -64928,6 +65772,1568 @@ class messages_DialogFilters_ extends _messages_DialogFilters_ {
     }
 }
 exports.messages_DialogFilters_ = messages_DialogFilters_;
+class Birthday_ extends _Birthday_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x6C8E1E06;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "birthday";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["day", "number", "int"],
+            ["month", "number", "int"],
+            ["year", "number", "flags.0?int"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.day, "number", "int"],
+            [this.month, "number", "int"],
+            [this.year ?? null, "number", "flags.0?int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "day", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "month", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "year", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.day = params.day;
+        this.month = params.month;
+        this.year = params.year;
+    }
+}
+exports.Birthday_ = Birthday_;
+class BotBusinessConnection_ extends _BotBusinessConnection_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x896433B4;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "botBusinessConnection";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["can_reply", "true", "flags.0?true"],
+            ["disabled", "true", "flags.1?true"],
+            ["connection_id", "string", "string"],
+            ["user_id", "bigint", "long"],
+            ["dc_id", "number", "int"],
+            ["date", "number", "int"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.can_reply ?? null, "true", "flags.0?true"],
+            [this.disabled ?? null, "true", "flags.1?true"],
+            [this.connection_id, "string", "string"],
+            [this.user_id, "bigint", "long"],
+            [this.dc_id, "number", "int"],
+            [this.date, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "can_reply", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "disabled", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "connection_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "user_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "dc_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "date", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.can_reply = params.can_reply;
+        this.disabled = params.disabled;
+        this.connection_id = params.connection_id;
+        this.user_id = params.user_id;
+        this.dc_id = params.dc_id;
+        this.date = params.date;
+    }
+}
+exports.BotBusinessConnection_ = BotBusinessConnection_;
+class InputBusinessIntro_ extends _InputBusinessIntro_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x09C469CD;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "inputBusinessIntro";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["title", "string", "string"],
+            ["description", "string", "string"],
+            ["sticker", _InputDocument_, "flags.0?InputDocument"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.title, "string", "string"],
+            [this.description, "string", "string"],
+            [this.sticker ?? null, _InputDocument_, "flags.0?InputDocument"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "title", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "description", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "sticker", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.title = params.title;
+        this.description = params.description;
+        this.sticker = params.sticker;
+    }
+}
+exports.InputBusinessIntro_ = InputBusinessIntro_;
+class BusinessIntro_ extends _BusinessIntro_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x5A0A066D;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "businessIntro";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["title", "string", "string"],
+            ["description", "string", "string"],
+            ["sticker", _Document_, "flags.0?Document"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.title, "string", "string"],
+            [this.description, "string", "string"],
+            [this.sticker ?? null, _Document_, "flags.0?Document"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "title", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "description", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "sticker", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.title = params.title;
+        this.description = params.description;
+        this.sticker = params.sticker;
+    }
+}
+exports.BusinessIntro_ = BusinessIntro_;
+class messages_MyStickers_ extends _messages_MyStickers_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xFAFF629D;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "messages.myStickers";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["count", "number", "int"],
+            ["sets", [_StickerSetCovered_], "Vector<StickerSetCovered>"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.count, "number", "int"],
+            [this.sets, [_StickerSetCovered_], "Vector<StickerSetCovered>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "count", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "sets", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.count = params.count;
+        this.sets = params.sets;
+    }
+}
+exports.messages_MyStickers_ = messages_MyStickers_;
+class InputCollectibleUsername_ extends _InputCollectible_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xE39460A9;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "inputCollectibleUsername";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["username", "string", "string"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.username, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "username", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.username = params.username;
+    }
+}
+exports.InputCollectibleUsername_ = InputCollectibleUsername_;
+class InputCollectiblePhone_ extends _InputCollectible_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xA2E214A4;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "inputCollectiblePhone";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["phone", "string", "string"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.phone, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "phone", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.phone = params.phone;
+    }
+}
+exports.InputCollectiblePhone_ = InputCollectiblePhone_;
+class fragment_CollectibleInfo_ extends _fragment_CollectibleInfo_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x6EBDFF91;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "fragment.collectibleInfo";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["purchase_date", "number", "int"],
+            ["currency", "string", "string"],
+            ["amount", "bigint", "long"],
+            ["crypto_currency", "string", "string"],
+            ["crypto_amount", "bigint", "long"],
+            ["url", "string", "string"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.purchase_date, "number", "int"],
+            [this.currency, "string", "string"],
+            [this.amount, "bigint", "long"],
+            [this.crypto_currency, "string", "string"],
+            [this.crypto_amount, "bigint", "long"],
+            [this.url, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "purchase_date", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "currency", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "amount", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "crypto_currency", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "crypto_amount", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "url", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.purchase_date = params.purchase_date;
+        this.currency = params.currency;
+        this.amount = params.amount;
+        this.crypto_currency = params.crypto_currency;
+        this.crypto_amount = params.crypto_amount;
+        this.url = params.url;
+    }
+}
+exports.fragment_CollectibleInfo_ = fragment_CollectibleInfo_;
+class InputBusinessBotRecipients_ extends _InputBusinessBotRecipients_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xC4E5921E;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "inputBusinessBotRecipients";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["existing_chats", "true", "flags.0?true"],
+            ["new_chats", "true", "flags.1?true"],
+            ["contacts", "true", "flags.2?true"],
+            ["non_contacts", "true", "flags.3?true"],
+            ["exclude_selected", "true", "flags.5?true"],
+            ["users", [_InputUser_], "flags.4?Vector<InputUser>"],
+            ["exclude_users", [_InputUser_], "flags.6?Vector<InputUser>"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.existing_chats ?? null, "true", "flags.0?true"],
+            [this.new_chats ?? null, "true", "flags.1?true"],
+            [this.contacts ?? null, "true", "flags.2?true"],
+            [this.non_contacts ?? null, "true", "flags.3?true"],
+            [this.exclude_selected ?? null, "true", "flags.5?true"],
+            [this.users ?? null, [_InputUser_], "flags.4?Vector<InputUser>"],
+            [this.exclude_users ?? null, [_InputUser_], "flags.6?Vector<InputUser>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "existing_chats", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "new_chats", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "contacts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "non_contacts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "exclude_selected", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "users", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "exclude_users", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.existing_chats = params?.existing_chats;
+        this.new_chats = params?.new_chats;
+        this.contacts = params?.contacts;
+        this.non_contacts = params?.non_contacts;
+        this.exclude_selected = params?.exclude_selected;
+        this.users = params?.users;
+        this.exclude_users = params?.exclude_users;
+    }
+}
+exports.InputBusinessBotRecipients_ = InputBusinessBotRecipients_;
+class BusinessBotRecipients_ extends _BusinessBotRecipients_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xB88CF373;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "businessBotRecipients";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["existing_chats", "true", "flags.0?true"],
+            ["new_chats", "true", "flags.1?true"],
+            ["contacts", "true", "flags.2?true"],
+            ["non_contacts", "true", "flags.3?true"],
+            ["exclude_selected", "true", "flags.5?true"],
+            ["users", ["bigint"], "flags.4?Vector<long>"],
+            ["exclude_users", ["bigint"], "flags.6?Vector<long>"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.existing_chats ?? null, "true", "flags.0?true"],
+            [this.new_chats ?? null, "true", "flags.1?true"],
+            [this.contacts ?? null, "true", "flags.2?true"],
+            [this.non_contacts ?? null, "true", "flags.3?true"],
+            [this.exclude_selected ?? null, "true", "flags.5?true"],
+            [this.users ?? null, ["bigint"], "flags.4?Vector<long>"],
+            [this.exclude_users ?? null, ["bigint"], "flags.6?Vector<long>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "existing_chats", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "new_chats", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "contacts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "non_contacts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "exclude_selected", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "users", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "exclude_users", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.existing_chats = params?.existing_chats;
+        this.new_chats = params?.new_chats;
+        this.contacts = params?.contacts;
+        this.non_contacts = params?.non_contacts;
+        this.exclude_selected = params?.exclude_selected;
+        this.users = params?.users;
+        this.exclude_users = params?.exclude_users;
+    }
+}
+exports.BusinessBotRecipients_ = BusinessBotRecipients_;
+class ContactBirthday_ extends _ContactBirthday_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x1D998733;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "contactBirthday";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["contact_id", "bigint", "long"],
+            ["birthday", _Birthday_, "Birthday"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.contact_id, "bigint", "long"],
+            [this.birthday, _Birthday_, "Birthday"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "contact_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "birthday", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.contact_id = params.contact_id;
+        this.birthday = params.birthday;
+    }
+}
+exports.ContactBirthday_ = ContactBirthday_;
+class contacts_ContactBirthdays_ extends _contacts_ContactBirthdays_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x114FF30D;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "contacts.contactBirthdays";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["contacts", [_ContactBirthday_], "Vector<ContactBirthday>"],
+            ["users", [_User_], "Vector<User>"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.contacts, [_ContactBirthday_], "Vector<ContactBirthday>"],
+            [this.users, [_User_], "Vector<User>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "contacts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "users", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.contacts = params.contacts;
+        this.users = params.users;
+    }
+}
+exports.contacts_ContactBirthdays_ = contacts_ContactBirthdays_;
+class MissingInvitee_ extends _MissingInvitee_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x628C9224;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "missingInvitee";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["premium_would_allow_invite", "true", "flags.0?true"],
+            ["premium_required_for_pm", "true", "flags.1?true"],
+            ["user_id", "bigint", "long"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.premium_would_allow_invite ?? null, "true", "flags.0?true"],
+            [this.premium_required_for_pm ?? null, "true", "flags.1?true"],
+            [this.user_id, "bigint", "long"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "premium_would_allow_invite", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "premium_required_for_pm", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "user_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.premium_would_allow_invite = params.premium_would_allow_invite;
+        this.premium_required_for_pm = params.premium_required_for_pm;
+        this.user_id = params.user_id;
+    }
+}
+exports.MissingInvitee_ = MissingInvitee_;
+class messages_InvitedUsers_ extends _messages_InvitedUsers_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x7F5DEFA6;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "messages.invitedUsers";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["updates", _Updates_, "Updates"],
+            ["missing_invitees", [_MissingInvitee_], "Vector<MissingInvitee>"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.updates, _Updates_, "Updates"],
+            [this.missing_invitees, [_MissingInvitee_], "Vector<MissingInvitee>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "updates", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "missing_invitees", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.updates = params.updates;
+        this.missing_invitees = params.missing_invitees;
+    }
+}
+exports.messages_InvitedUsers_ = messages_InvitedUsers_;
+class InputBusinessChatLink_ extends _InputBusinessChatLink_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x11679FA7;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "inputBusinessChatLink";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["message", "string", "string"],
+            ["entities", [_MessageEntity_], "flags.0?Vector<MessageEntity>"],
+            ["title", "string", "flags.1?string"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.message, "string", "string"],
+            [this.entities ?? null, [_MessageEntity_], "flags.0?Vector<MessageEntity>"],
+            [this.title ?? null, "string", "flags.1?string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "message", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "entities", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "title", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.message = params.message;
+        this.entities = params.entities;
+        this.title = params.title;
+    }
+}
+exports.InputBusinessChatLink_ = InputBusinessChatLink_;
+class BusinessChatLink_ extends _BusinessChatLink_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xB4AE666F;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "businessChatLink";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["link", "string", "string"],
+            ["message", "string", "string"],
+            ["entities", [_MessageEntity_], "flags.0?Vector<MessageEntity>"],
+            ["title", "string", "flags.1?string"],
+            ["views", "number", "int"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.link, "string", "string"],
+            [this.message, "string", "string"],
+            [this.entities ?? null, [_MessageEntity_], "flags.0?Vector<MessageEntity>"],
+            [this.title ?? null, "string", "flags.1?string"],
+            [this.views, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "link", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "message", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "entities", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "title", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "views", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.link = params.link;
+        this.message = params.message;
+        this.entities = params.entities;
+        this.title = params.title;
+        this.views = params.views;
+    }
+}
+exports.BusinessChatLink_ = BusinessChatLink_;
+class account_BusinessChatLinks_ extends _account_BusinessChatLinks_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xEC43A2D1;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "account.businessChatLinks";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["links", [_BusinessChatLink_], "Vector<BusinessChatLink>"],
+            ["chats", [_Chat_], "Vector<Chat>"],
+            ["users", [_User_], "Vector<User>"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.links, [_BusinessChatLink_], "Vector<BusinessChatLink>"],
+            [this.chats, [_Chat_], "Vector<Chat>"],
+            [this.users, [_User_], "Vector<User>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "links", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "chats", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "users", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.links = params.links;
+        this.chats = params.chats;
+        this.users = params.users;
+    }
+}
+exports.account_BusinessChatLinks_ = account_BusinessChatLinks_;
+class account_ResolvedBusinessChatLinks_ extends _account_ResolvedBusinessChatLinks_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x9A23AF21;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "account.resolvedBusinessChatLinks";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["peer", _Peer_, "Peer"],
+            ["message", "string", "string"],
+            ["entities", [_MessageEntity_], "flags.0?Vector<MessageEntity>"],
+            ["chats", [_Chat_], "Vector<Chat>"],
+            ["users", [_User_], "Vector<User>"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.peer, _Peer_, "Peer"],
+            [this.message, "string", "string"],
+            [this.entities ?? null, [_MessageEntity_], "flags.0?Vector<MessageEntity>"],
+            [this.chats, [_Chat_], "Vector<Chat>"],
+            [this.users, [_User_], "Vector<User>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "peer", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "message", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "entities", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "chats", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "users", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.peer = params.peer;
+        this.message = params.message;
+        this.entities = params.entities;
+        this.chats = params.chats;
+        this.users = params.users;
+    }
+}
+exports.account_ResolvedBusinessChatLinks_ = account_ResolvedBusinessChatLinks_;
+class RequestedPeerUser_ extends _RequestedPeer_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xD62FF46A;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "requestedPeerUser";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["user_id", "bigint", "long"],
+            ["first_name", "string", "flags.0?string"],
+            ["last_name", "string", "flags.0?string"],
+            ["username", "string", "flags.1?string"],
+            ["photo", _Photo_, "flags.2?Photo"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.user_id, "bigint", "long"],
+            [this.first_name ?? null, "string", "flags.0?string"],
+            [this.last_name ?? null, "string", "flags.0?string"],
+            [this.username ?? null, "string", "flags.1?string"],
+            [this.photo ?? null, _Photo_, "flags.2?Photo"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "user_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "first_name", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "last_name", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "username", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "photo", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.user_id = params.user_id;
+        this.first_name = params.first_name;
+        this.last_name = params.last_name;
+        this.username = params.username;
+        this.photo = params.photo;
+    }
+}
+exports.RequestedPeerUser_ = RequestedPeerUser_;
+class RequestedPeerChat_ extends _RequestedPeer_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x7307544F;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "requestedPeerChat";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["chat_id", "bigint", "long"],
+            ["title", "string", "flags.0?string"],
+            ["photo", _Photo_, "flags.2?Photo"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.chat_id, "bigint", "long"],
+            [this.title ?? null, "string", "flags.0?string"],
+            [this.photo ?? null, _Photo_, "flags.2?Photo"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "chat_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "title", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "photo", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.chat_id = params.chat_id;
+        this.title = params.title;
+        this.photo = params.photo;
+    }
+}
+exports.RequestedPeerChat_ = RequestedPeerChat_;
+class RequestedPeerChannel_ extends _RequestedPeer_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x8BA403E4;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "requestedPeerChannel";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["channel_id", "bigint", "long"],
+            ["title", "string", "flags.0?string"],
+            ["username", "string", "flags.1?string"],
+            ["photo", _Photo_, "flags.2?Photo"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.channel_id, "bigint", "long"],
+            [this.title ?? null, "string", "flags.0?string"],
+            [this.username ?? null, "string", "flags.1?string"],
+            [this.photo ?? null, _Photo_, "flags.2?Photo"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "channel_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "title", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "username", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "photo", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.channel_id = params.channel_id;
+        this.title = params.title;
+        this.username = params.username;
+        this.photo = params.photo;
+    }
+}
+exports.RequestedPeerChannel_ = RequestedPeerChannel_;
+class SponsoredMessageReportOption_ extends _SponsoredMessageReportOption_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x430D3150;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "sponsoredMessageReportOption";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["text", "string", "string"],
+            ["option", Uint8Array, "bytes"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.text, "string", "string"],
+            [this.option, Uint8Array, "bytes"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "text", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "option", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.text = params.text;
+        this.option = params.option;
+    }
+}
+exports.SponsoredMessageReportOption_ = SponsoredMessageReportOption_;
+class channels_SponsoredMessageReportResultChooseOption_ extends _channels_SponsoredMessageReportResult_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x846F9E42;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "channels.sponsoredMessageReportResultChooseOption";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["title", "string", "string"],
+            ["options", [_SponsoredMessageReportOption_], "Vector<SponsoredMessageReportOption>"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.title, "string", "string"],
+            [this.options, [_SponsoredMessageReportOption_], "Vector<SponsoredMessageReportOption>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "title", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "options", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.title = params.title;
+        this.options = params.options;
+    }
+}
+exports.channels_SponsoredMessageReportResultChooseOption_ = channels_SponsoredMessageReportResultChooseOption_;
+class channels_SponsoredMessageReportResultAdsHidden_ extends _channels_SponsoredMessageReportResult_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x3E3BCF2F;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "channels.sponsoredMessageReportResultAdsHidden";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [];
+    }
+    constructor() {
+        super();
+    }
+}
+exports.channels_SponsoredMessageReportResultAdsHidden_ = channels_SponsoredMessageReportResultAdsHidden_;
+class channels_SponsoredMessageReportResultReported_ extends _channels_SponsoredMessageReportResult_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xAD798849;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "channels.sponsoredMessageReportResultReported";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [];
+    }
+    constructor() {
+        super();
+    }
+}
+exports.channels_SponsoredMessageReportResultReported_ = channels_SponsoredMessageReportResultReported_;
+class stats_BroadcastRevenueStats_ extends _stats_BroadcastRevenueStats_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xD07B4BAD;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "stats.broadcastRevenueStats";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["top_hours_graph", _StatsGraph_, "StatsGraph"],
+            ["revenue_graph", _StatsGraph_, "StatsGraph"],
+            ["current_balance", "bigint", "long"],
+            ["available_balance", "bigint", "long"],
+            ["overall_revenue", "bigint", "long"],
+            ["usd_rate", "number", "double"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.top_hours_graph, _StatsGraph_, "StatsGraph"],
+            [this.revenue_graph, _StatsGraph_, "StatsGraph"],
+            [this.current_balance, "bigint", "long"],
+            [this.available_balance, "bigint", "long"],
+            [this.overall_revenue, "bigint", "long"],
+            [this.usd_rate, "number", "double"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "top_hours_graph", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "revenue_graph", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "current_balance", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "available_balance", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "overall_revenue", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "usd_rate", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.top_hours_graph = params.top_hours_graph;
+        this.revenue_graph = params.revenue_graph;
+        this.current_balance = params.current_balance;
+        this.available_balance = params.available_balance;
+        this.overall_revenue = params.overall_revenue;
+        this.usd_rate = params.usd_rate;
+    }
+}
+exports.stats_BroadcastRevenueStats_ = stats_BroadcastRevenueStats_;
+class stats_BroadcastRevenueWithdrawalUrl_ extends _stats_BroadcastRevenueWithdrawalUrl_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xEC659737;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "stats.broadcastRevenueWithdrawalUrl";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["url", "string", "string"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.url, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "url", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.url = params.url;
+    }
+}
+exports.stats_BroadcastRevenueWithdrawalUrl_ = stats_BroadcastRevenueWithdrawalUrl_;
+class BroadcastRevenueTransactionProceeds_ extends _BroadcastRevenueTransaction_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x557E2CC4;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "broadcastRevenueTransactionProceeds";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["amount", "bigint", "long"],
+            ["from_date", "number", "int"],
+            ["to_date", "number", "int"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.amount, "bigint", "long"],
+            [this.from_date, "number", "int"],
+            [this.to_date, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "amount", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "from_date", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "to_date", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.amount = params.amount;
+        this.from_date = params.from_date;
+        this.to_date = params.to_date;
+    }
+}
+exports.BroadcastRevenueTransactionProceeds_ = BroadcastRevenueTransactionProceeds_;
+class BroadcastRevenueTransactionWithdrawal_ extends _BroadcastRevenueTransaction_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x5A590978;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "broadcastRevenueTransactionWithdrawal";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["pending", "true", "flags.0?true"],
+            ["failed", "true", "flags.2?true"],
+            ["amount", "bigint", "long"],
+            ["date", "number", "int"],
+            ["provider", "string", "string"],
+            ["transaction_date", "number", "flags.1?int"],
+            ["transaction_url", "string", "flags.1?string"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.pending ?? null, "true", "flags.0?true"],
+            [this.failed ?? null, "true", "flags.2?true"],
+            [this.amount, "bigint", "long"],
+            [this.date, "number", "int"],
+            [this.provider, "string", "string"],
+            [this.transaction_date ?? null, "number", "flags.1?int"],
+            [this.transaction_url ?? null, "string", "flags.1?string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "pending", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "failed", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "amount", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "date", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "provider", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "transaction_date", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "transaction_url", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.pending = params.pending;
+        this.failed = params.failed;
+        this.amount = params.amount;
+        this.date = params.date;
+        this.provider = params.provider;
+        this.transaction_date = params.transaction_date;
+        this.transaction_url = params.transaction_url;
+    }
+}
+exports.BroadcastRevenueTransactionWithdrawal_ = BroadcastRevenueTransactionWithdrawal_;
+class BroadcastRevenueTransactionRefund_ extends _BroadcastRevenueTransaction_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x42D30D2E;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "broadcastRevenueTransactionRefund";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["amount", "bigint", "long"],
+            ["date", "number", "int"],
+            ["provider", "string", "string"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.amount, "bigint", "long"],
+            [this.date, "number", "int"],
+            [this.provider, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "amount", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "date", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "provider", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.amount = params.amount;
+        this.date = params.date;
+        this.provider = params.provider;
+    }
+}
+exports.BroadcastRevenueTransactionRefund_ = BroadcastRevenueTransactionRefund_;
+class stats_BroadcastRevenueTransactions_ extends _stats_BroadcastRevenueTransactions_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x87158466;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "stats.broadcastRevenueTransactions";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["count", "number", "int"],
+            ["transactions", [_BroadcastRevenueTransaction_], "Vector<BroadcastRevenueTransaction>"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.count, "number", "int"],
+            [this.transactions, [_BroadcastRevenueTransaction_], "Vector<BroadcastRevenueTransaction>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "count", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "transactions", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.count = params.count;
+        this.transactions = params.transactions;
+    }
+}
+exports.stats_BroadcastRevenueTransactions_ = stats_BroadcastRevenueTransactions_;
 exports.types = {
     Type: Type_,
     TypeX: TypeX_,
@@ -64957,7 +67363,10 @@ exports.types = {
     _HttpWait: _HttpWait_,
     _True: _True_,
     _Error: _Error_,
-    _Null: _Null_,
+    _IpPort: _IpPort_,
+    _AccessPointRule: _AccessPointRule_,
+    _help_ConfigSimple: _help_ConfigSimple_,
+    _InputFileLocation: _InputFileLocation_,
     _InputPeer: _InputPeer_,
     _InputUser: _InputUser_,
     _InputContact: _InputContact_,
@@ -64966,7 +67375,6 @@ exports.types = {
     _InputChatPhoto: _InputChatPhoto_,
     _InputGeoPoint: _InputGeoPoint_,
     _InputPhoto: _InputPhoto_,
-    _InputFileLocation: _InputFileLocation_,
     _Peer: _Peer_,
     _storage_FileType: _storage_FileType_,
     _User: _User_,
@@ -65415,6 +67823,30 @@ exports.types = {
     _ConnectedBot: _ConnectedBot_,
     _account_ConnectedBots: _account_ConnectedBots_,
     _messages_DialogFilters: _messages_DialogFilters_,
+    _Birthday: _Birthday_,
+    _BotBusinessConnection: _BotBusinessConnection_,
+    _InputBusinessIntro: _InputBusinessIntro_,
+    _BusinessIntro: _BusinessIntro_,
+    _messages_MyStickers: _messages_MyStickers_,
+    _InputCollectible: _InputCollectible_,
+    _fragment_CollectibleInfo: _fragment_CollectibleInfo_,
+    _InputBusinessBotRecipients: _InputBusinessBotRecipients_,
+    _BusinessBotRecipients: _BusinessBotRecipients_,
+    _ContactBirthday: _ContactBirthday_,
+    _contacts_ContactBirthdays: _contacts_ContactBirthdays_,
+    _MissingInvitee: _MissingInvitee_,
+    _messages_InvitedUsers: _messages_InvitedUsers_,
+    _InputBusinessChatLink: _InputBusinessChatLink_,
+    _BusinessChatLink: _BusinessChatLink_,
+    _account_BusinessChatLinks: _account_BusinessChatLinks_,
+    _account_ResolvedBusinessChatLinks: _account_ResolvedBusinessChatLinks_,
+    _RequestedPeer: _RequestedPeer_,
+    _SponsoredMessageReportOption: _SponsoredMessageReportOption_,
+    _channels_SponsoredMessageReportResult: _channels_SponsoredMessageReportResult_,
+    _stats_BroadcastRevenueStats: _stats_BroadcastRevenueStats_,
+    _stats_BroadcastRevenueWithdrawalUrl: _stats_BroadcastRevenueWithdrawalUrl_,
+    _BroadcastRevenueTransaction: _BroadcastRevenueTransaction_,
+    _stats_BroadcastRevenueTransactions: _stats_BroadcastRevenueTransactions_,
     ResPQ: ResPQ_,
     P_q_inner_data_dc: P_q_inner_data_dc_,
     P_q_inner_data_temp_dc: P_q_inner_data_temp_dc_,
@@ -65451,7 +67883,11 @@ exports.types = {
     Http_wait: Http_wait_,
     True: True_,
     Error: Error_,
-    Null: Null_,
+    IpPort: IpPort_,
+    IpPortSecret: IpPortSecret_,
+    AccessPointRule: AccessPointRule_,
+    InputPeerPhotoFileLocationLegacy: InputPeerPhotoFileLocationLegacy_,
+    InputStickerSetThumbLegacy: InputStickerSetThumbLegacy_,
     InputPeerEmpty: InputPeerEmpty_,
     InputPeerSelf: InputPeerSelf_,
     InputPeerChat: InputPeerChat_,
@@ -65588,6 +68024,7 @@ exports.types = {
     MessageActionGiveawayLaunch: MessageActionGiveawayLaunch_,
     MessageActionGiveawayResults: MessageActionGiveawayResults_,
     MessageActionBoostApply: MessageActionBoostApply_,
+    MessageActionRequestedPeerSentMe: MessageActionRequestedPeerSentMe_,
     Dialog: Dialog_,
     DialogFolder: DialogFolder_,
     PhotoEmpty: PhotoEmpty_,
@@ -65752,7 +68189,6 @@ exports.types = {
     UpdateChannelPinnedTopics: UpdateChannelPinnedTopics_,
     UpdateUser: UpdateUser_,
     UpdateAutoSaveSettings: UpdateAutoSaveSettings_,
-    UpdateGroupInvitePrivacyForbidden: UpdateGroupInvitePrivacyForbidden_,
     UpdateStory: UpdateStory_,
     UpdateReadStories: UpdateReadStories_,
     UpdateStoryID: UpdateStoryID_,
@@ -65772,6 +68208,10 @@ exports.types = {
     UpdateDeleteQuickReply: UpdateDeleteQuickReply_,
     UpdateQuickReplyMessage: UpdateQuickReplyMessage_,
     UpdateDeleteQuickReplyMessages: UpdateDeleteQuickReplyMessages_,
+    UpdateBotBusinessConnect: UpdateBotBusinessConnect_,
+    UpdateBotNewBusinessMessage: UpdateBotNewBusinessMessage_,
+    UpdateBotEditBusinessMessage: UpdateBotEditBusinessMessage_,
+    UpdateBotDeleteBusinessMessage: UpdateBotDeleteBusinessMessage_,
     UpdatesTooLong: UpdatesTooLong_,
     UpdateShortMessage: UpdateShortMessage_,
     UpdateShortChatMessage: UpdateShortChatMessage_,
@@ -65833,6 +68273,7 @@ exports.types = {
     InputPrivacyKeyAddedByPhone: InputPrivacyKeyAddedByPhone_,
     InputPrivacyKeyVoiceMessages: InputPrivacyKeyVoiceMessages_,
     InputPrivacyKeyAbout: InputPrivacyKeyAbout_,
+    InputPrivacyKeyBirthday: InputPrivacyKeyBirthday_,
     PrivacyKeyStatusTimestamp: PrivacyKeyStatusTimestamp_,
     PrivacyKeyChatInvite: PrivacyKeyChatInvite_,
     PrivacyKeyPhoneCall: PrivacyKeyPhoneCall_,
@@ -65843,6 +68284,7 @@ exports.types = {
     PrivacyKeyAddedByPhone: PrivacyKeyAddedByPhone_,
     PrivacyKeyVoiceMessages: PrivacyKeyVoiceMessages_,
     PrivacyKeyAbout: PrivacyKeyAbout_,
+    PrivacyKeyBirthday: PrivacyKeyBirthday_,
     InputPrivacyValueAllowContacts: InputPrivacyValueAllowContacts_,
     InputPrivacyValueAllowAll: InputPrivacyValueAllowAll_,
     InputPrivacyValueAllowUsers: InputPrivacyValueAllowUsers_,
@@ -65852,6 +68294,7 @@ exports.types = {
     InputPrivacyValueAllowChatParticipants: InputPrivacyValueAllowChatParticipants_,
     InputPrivacyValueDisallowChatParticipants: InputPrivacyValueDisallowChatParticipants_,
     InputPrivacyValueAllowCloseFriends: InputPrivacyValueAllowCloseFriends_,
+    InputPrivacyValueAllowPremium: InputPrivacyValueAllowPremium_,
     PrivacyValueAllowContacts: PrivacyValueAllowContacts_,
     PrivacyValueAllowAll: PrivacyValueAllowAll_,
     PrivacyValueAllowUsers: PrivacyValueAllowUsers_,
@@ -65861,6 +68304,7 @@ exports.types = {
     PrivacyValueAllowChatParticipants: PrivacyValueAllowChatParticipants_,
     PrivacyValueDisallowChatParticipants: PrivacyValueDisallowChatParticipants_,
     PrivacyValueAllowCloseFriends: PrivacyValueAllowCloseFriends_,
+    PrivacyValueAllowPremium: PrivacyValueAllowPremium_,
     AccountDaysTTL: AccountDaysTTL_,
     DocumentAttributeImageSize: DocumentAttributeImageSize_,
     DocumentAttributeAnimated: DocumentAttributeAnimated_,
@@ -65912,6 +68356,7 @@ exports.types = {
     KeyboardButtonWebView: KeyboardButtonWebView_,
     KeyboardButtonSimpleWebView: KeyboardButtonSimpleWebView_,
     KeyboardButtonRequestPeer: KeyboardButtonRequestPeer_,
+    InputKeyboardButtonRequestPeer: InputKeyboardButtonRequestPeer_,
     KeyboardButtonRow: KeyboardButtonRow_,
     ReplyKeyboardHide: ReplyKeyboardHide_,
     ReplyKeyboardForceReply: ReplyKeyboardForceReply_,
@@ -66445,6 +68890,59 @@ exports.types = {
     InputQuickReplyShortcut: InputQuickReplyShortcut_,
     InputQuickReplyShortcutId: InputQuickReplyShortcutId_,
     ConnectedBot: ConnectedBot_,
+    Birthday: Birthday_,
+    BotBusinessConnection: BotBusinessConnection_,
+    InputBusinessIntro: InputBusinessIntro_,
+    BusinessIntro: BusinessIntro_,
+    InputCollectibleUsername: InputCollectibleUsername_,
+    InputCollectiblePhone: InputCollectiblePhone_,
+    InputBusinessBotRecipients: InputBusinessBotRecipients_,
+    BusinessBotRecipients: BusinessBotRecipients_,
+    ContactBirthday: ContactBirthday_,
+    MissingInvitee: MissingInvitee_,
+    InputBusinessChatLink: InputBusinessChatLink_,
+    BusinessChatLink: BusinessChatLink_,
+    RequestedPeerUser: RequestedPeerUser_,
+    RequestedPeerChat: RequestedPeerChat_,
+    RequestedPeerChannel: RequestedPeerChannel_,
+    SponsoredMessageReportOption: SponsoredMessageReportOption_,
+    BroadcastRevenueTransactionProceeds: BroadcastRevenueTransactionProceeds_,
+    BroadcastRevenueTransactionWithdrawal: BroadcastRevenueTransactionWithdrawal_,
+    BroadcastRevenueTransactionRefund: BroadcastRevenueTransactionRefund_,
+    help: {
+        ConfigSimple: help_ConfigSimple_,
+        AppUpdate: help_AppUpdate_,
+        NoAppUpdate: help_NoAppUpdate_,
+        InviteText: help_InviteText_,
+        Support: help_Support_,
+        TermsOfService: help_TermsOfService_,
+        RecentMeUrls: help_RecentMeUrls_,
+        TermsOfServiceUpdateEmpty: help_TermsOfServiceUpdateEmpty_,
+        TermsOfServiceUpdate: help_TermsOfServiceUpdate_,
+        DeepLinkInfoEmpty: help_DeepLinkInfoEmpty_,
+        DeepLinkInfo: help_DeepLinkInfo_,
+        PassportConfigNotModified: help_PassportConfigNotModified_,
+        PassportConfig: help_PassportConfig_,
+        SupportName: help_SupportName_,
+        UserInfoEmpty: help_UserInfoEmpty_,
+        UserInfo: help_UserInfo_,
+        PromoDataEmpty: help_PromoDataEmpty_,
+        PromoData: help_PromoData_,
+        CountryCode: help_CountryCode_,
+        Country: help_Country_,
+        CountriesListNotModified: help_CountriesListNotModified_,
+        CountriesList: help_CountriesList_,
+        PremiumPromo: help_PremiumPromo_,
+        AppConfigNotModified: help_AppConfigNotModified_,
+        AppConfig: help_AppConfig_,
+        PeerColorSet: help_PeerColorSet_,
+        PeerColorProfileSet: help_PeerColorProfileSet_,
+        PeerColorOption: help_PeerColorOption_,
+        PeerColorsNotModified: help_PeerColorsNotModified_,
+        PeerColors: help_PeerColors_,
+        TimezonesListNotModified: help_TimezonesListNotModified_,
+        TimezonesList: help_TimezonesList_,
+    },
     storage: {
         FileUnknown: storage_FileUnknown_,
         FilePartial: storage_FilePartial_,
@@ -66494,6 +68992,7 @@ exports.types = {
         TopPeersNotModified: contacts_TopPeersNotModified_,
         TopPeers: contacts_TopPeers_,
         TopPeersDisabled: contacts_TopPeersDisabled_,
+        ContactBirthdays: contacts_ContactBirthdays_,
     },
     messages: {
         Dialogs: messages_Dialogs_,
@@ -66575,6 +69074,8 @@ exports.types = {
         QuickReplies: messages_QuickReplies_,
         QuickRepliesNotModified: messages_QuickRepliesNotModified_,
         DialogFilters: messages_DialogFilters_,
+        MyStickers: messages_MyStickers_,
+        InvitedUsers: messages_InvitedUsers_,
     },
     updates: {
         State: updates_State_,
@@ -66597,39 +69098,6 @@ exports.types = {
         WebFile: upload_WebFile_,
         CdnFileReuploadNeeded: upload_CdnFileReuploadNeeded_,
         CdnFile: upload_CdnFile_,
-    },
-    help: {
-        AppUpdate: help_AppUpdate_,
-        NoAppUpdate: help_NoAppUpdate_,
-        InviteText: help_InviteText_,
-        Support: help_Support_,
-        TermsOfService: help_TermsOfService_,
-        RecentMeUrls: help_RecentMeUrls_,
-        TermsOfServiceUpdateEmpty: help_TermsOfServiceUpdateEmpty_,
-        TermsOfServiceUpdate: help_TermsOfServiceUpdate_,
-        DeepLinkInfoEmpty: help_DeepLinkInfoEmpty_,
-        DeepLinkInfo: help_DeepLinkInfo_,
-        PassportConfigNotModified: help_PassportConfigNotModified_,
-        PassportConfig: help_PassportConfig_,
-        SupportName: help_SupportName_,
-        UserInfoEmpty: help_UserInfoEmpty_,
-        UserInfo: help_UserInfo_,
-        PromoDataEmpty: help_PromoDataEmpty_,
-        PromoData: help_PromoData_,
-        CountryCode: help_CountryCode_,
-        Country: help_Country_,
-        CountriesListNotModified: help_CountriesListNotModified_,
-        CountriesList: help_CountriesList_,
-        PremiumPromo: help_PremiumPromo_,
-        AppConfigNotModified: help_AppConfigNotModified_,
-        AppConfig: help_AppConfig_,
-        PeerColorSet: help_PeerColorSet_,
-        PeerColorProfileSet: help_PeerColorProfileSet_,
-        PeerColorOption: help_PeerColorOption_,
-        PeerColorsNotModified: help_PeerColorsNotModified_,
-        PeerColors: help_PeerColors_,
-        TimezonesListNotModified: help_TimezonesListNotModified_,
-        TimezonesList: help_TimezonesList_,
     },
     account: {
         PrivacyRules: account_PrivacyRules_,
@@ -66661,6 +69129,8 @@ exports.types = {
         EmailVerifiedLogin: account_EmailVerifiedLogin_,
         AutoSaveSettings: account_AutoSaveSettings_,
         ConnectedBots: account_ConnectedBots_,
+        BusinessChatLinks: account_BusinessChatLinks_,
+        ResolvedBusinessChatLinks: account_ResolvedBusinessChatLinks_,
     },
     channels: {
         ChannelParticipants: channels_ChannelParticipants_,
@@ -66668,6 +69138,9 @@ exports.types = {
         ChannelParticipant: channels_ChannelParticipant_,
         AdminLogResults: channels_AdminLogResults_,
         SendAsPeers: channels_SendAsPeers_,
+        SponsoredMessageReportResultChooseOption: channels_SponsoredMessageReportResultChooseOption_,
+        SponsoredMessageReportResultAdsHidden: channels_SponsoredMessageReportResultAdsHidden_,
+        SponsoredMessageReportResultReported: channels_SponsoredMessageReportResultReported_,
     },
     payments: {
         PaymentForm: payments_PaymentForm_,
@@ -66697,6 +69170,9 @@ exports.types = {
         MessageStats: stats_MessageStats_,
         StoryStats: stats_StoryStats_,
         PublicForwards: stats_PublicForwards_,
+        BroadcastRevenueStats: stats_BroadcastRevenueStats_,
+        BroadcastRevenueWithdrawalUrl: stats_BroadcastRevenueWithdrawalUrl_,
+        BroadcastRevenueTransactions: stats_BroadcastRevenueTransactions_,
     },
     stickers: {
         SuggestedShortName: stickers_SuggestedShortName_,
@@ -66731,6 +69207,9 @@ exports.types = {
     smsjobs: {
         EligibleToJoin: smsjobs_EligibleToJoin_,
         Status: smsjobs_Status_,
+    },
+    fragment: {
+        CollectibleInfo: fragment_CollectibleInfo_,
     },
 };
 exports.map = new Map([
@@ -66770,7 +69249,12 @@ exports.map = new Map([
     [0x9299359F, Http_wait_],
     [0x3FEDD339, True_],
     [0xC4B9F9BB, Error_],
-    [0x56730BCC, Null_],
+    [0xD433AD73, IpPort_],
+    [0x37982646, IpPortSecret_],
+    [0x4679B65F, AccessPointRule_],
+    [0x5A592A6C, help_ConfigSimple_],
+    [0x27D69997, InputPeerPhotoFileLocationLegacy_],
+    [0x0DBAEAE9, InputStickerSetThumbLegacy_],
     [0x7F3B18EA, InputPeerEmpty_],
     [0x7DA07EC9, InputPeerSelf_],
     [0x35A95CB9, InputPeerChat_],
@@ -66857,7 +69341,7 @@ exports.map = new Map([
     [0x37C1011C, ChatPhotoEmpty_],
     [0x1C6E1C11, ChatPhoto_],
     [0x90A6CA84, MessageEmpty_],
-    [0xA66C7EFC, Message_],
+    [0x2357BF25, Message_],
     [0x2B085862, MessageService_],
     [0x3DED6320, MessageMediaEmpty_],
     [0x695150D7, MessageMediaPhoto_],
@@ -66917,6 +69401,7 @@ exports.map = new Map([
     [0x332BA9ED, MessageActionGiveawayLaunch_],
     [0x2A9FADC5, MessageActionGiveawayResults_],
     [0xCC02AA6D, MessageActionBoostApply_],
+    [0x93B31848, MessageActionRequestedPeerSentMe_],
     [0xD58A08C6, Dialog_],
     [0x71BD134C, DialogFolder_],
     [0x2331B22D, PhotoEmpty_],
@@ -66941,7 +69426,7 @@ exports.map = new Map([
     [0x5C467992, InputNotifyForumTopic_],
     [0xCACB6AE2, InputPeerNotifySettings_],
     [0x99622C0C, PeerNotifySettings_],
-    [0xA518110D, PeerSettings_],
+    [0xACD66C5E, PeerSettings_],
     [0xA437C3ED, WallPaper_],
     [0xE0804116, WallPaperNoFile_],
     [0x58DBCAB8, InputReportReasonSpam_],
@@ -66954,7 +69439,7 @@ exports.map = new Map([
     [0xF5DDD6E7, InputReportReasonFake_],
     [0x0A8EB2BE, InputReportReasonIllegalDrugs_],
     [0x9EC7863D, InputReportReasonPersonalDetails_],
-    [0x22FF3E85, UserFull_],
+    [0xCC997720, UserFull_],
     [0x145ADE0B, Contact_],
     [0xC13E3C50, ImportedContact_],
     [0x16D9703B, ContactStatus_],
@@ -67102,7 +69587,6 @@ exports.map = new Map([
     [0xFE198602, UpdateChannelPinnedTopics_],
     [0x20529438, UpdateUser_],
     [0xEC05B097, UpdateAutoSaveSettings_],
-    [0xCCF08AD6, UpdateGroupInvitePrivacyForbidden_],
     [0x75B3B798, UpdateStory_],
     [0xF74E932B, UpdateReadStories_],
     [0x1BF335B9, UpdateStoryID_],
@@ -67122,6 +69606,10 @@ exports.map = new Map([
     [0x53E6F1EC, UpdateDeleteQuickReply_],
     [0x3E050D0F, UpdateQuickReplyMessage_],
     [0x566FE7CD, UpdateDeleteQuickReplyMessages_],
+    [0x8AE5C97A, UpdateBotBusinessConnect_],
+    [0x9DDB347C, UpdateBotNewBusinessMessage_],
+    [0x07DF587C, UpdateBotEditBusinessMessage_],
+    [0xA02A982E, UpdateBotDeleteBusinessMessage_],
     [0xA56C2A3E, updates_State_],
     [0x5D75A138, updates_DifferenceEmpty_],
     [0x00F49CA0, updates_Difference_],
@@ -67202,6 +69690,7 @@ exports.map = new Map([
     [0xD1219BDD, InputPrivacyKeyAddedByPhone_],
     [0xAEE69D68, InputPrivacyKeyVoiceMessages_],
     [0x3823CC40, InputPrivacyKeyAbout_],
+    [0xD65A11CC, InputPrivacyKeyBirthday_],
     [0xBC2EAB30, PrivacyKeyStatusTimestamp_],
     [0x500E6DFA, PrivacyKeyChatInvite_],
     [0x3D662B7B, PrivacyKeyPhoneCall_],
@@ -67212,6 +69701,7 @@ exports.map = new Map([
     [0x42FFD42B, PrivacyKeyAddedByPhone_],
     [0x0697F414, PrivacyKeyVoiceMessages_],
     [0xA486B761, PrivacyKeyAbout_],
+    [0x2000A518, PrivacyKeyBirthday_],
     [0x0D09E07B, InputPrivacyValueAllowContacts_],
     [0x184B35CE, InputPrivacyValueAllowAll_],
     [0x131CC67F, InputPrivacyValueAllowUsers_],
@@ -67221,6 +69711,7 @@ exports.map = new Map([
     [0x840649CF, InputPrivacyValueAllowChatParticipants_],
     [0xE94F0F86, InputPrivacyValueDisallowChatParticipants_],
     [0x2F453E49, InputPrivacyValueAllowCloseFriends_],
+    [0x77CDC9F1, InputPrivacyValueAllowPremium_],
     [0xFFFE1BAC, PrivacyValueAllowContacts_],
     [0x65427B82, PrivacyValueAllowAll_],
     [0xB8905FB2, PrivacyValueAllowUsers_],
@@ -67230,6 +69721,7 @@ exports.map = new Map([
     [0x6B134E8E, PrivacyValueAllowChatParticipants_],
     [0x41C87565, PrivacyValueDisallowChatParticipants_],
     [0xF7E8D89B, PrivacyValueAllowCloseFriends_],
+    [0xECE9814B, PrivacyValueAllowPremium_],
     [0x50A04E45, account_PrivacyRules_],
     [0xB8D0AFDF, AccountDaysTTL_],
     [0x6C37C15C, DocumentAttributeImageSize_],
@@ -67294,6 +69786,7 @@ exports.map = new Map([
     [0x13767230, KeyboardButtonWebView_],
     [0xA0C0505C, KeyboardButtonSimpleWebView_],
     [0x53D7BFD8, KeyboardButtonRequestPeer_],
+    [0xC9662D05, InputKeyboardButtonRequestPeer_],
     [0x77608B83, KeyboardButtonRow_],
     [0xA03E5B85, ReplyKeyboardHide_],
     [0x86B40B08, ReplyKeyboardForceReply_],
@@ -67509,7 +70002,7 @@ exports.map = new Map([
     [0xC5226F17, PhoneCallWaiting_],
     [0x14B0ED0C, PhoneCallRequested_],
     [0x3660C311, PhoneCallAccepted_],
-    [0x967F7C67, PhoneCall_],
+    [0x30535AF5, PhoneCall_],
     [0x50CA4DE1, PhoneCallDiscarded_],
     [0x9CC123C7, PhoneConnection_],
     [0x635FE375, PhoneConnectionWebrtc_],
@@ -68008,8 +70501,39 @@ exports.map = new Map([
     [0x01190CF1, InputQuickReplyShortcutId_],
     [0xC68D6695, messages_QuickReplies_],
     [0x5F91EB5B, messages_QuickRepliesNotModified_],
-    [0xE7E999E7, ConnectedBot_],
+    [0xBD068601, ConnectedBot_],
     [0x17D7F87B, account_ConnectedBots_],
     [0x2AD93719, messages_DialogFilters_],
+    [0x6C8E1E06, Birthday_],
+    [0x896433B4, BotBusinessConnection_],
+    [0x09C469CD, InputBusinessIntro_],
+    [0x5A0A066D, BusinessIntro_],
+    [0xFAFF629D, messages_MyStickers_],
+    [0xE39460A9, InputCollectibleUsername_],
+    [0xA2E214A4, InputCollectiblePhone_],
+    [0x6EBDFF91, fragment_CollectibleInfo_],
+    [0xC4E5921E, InputBusinessBotRecipients_],
+    [0xB88CF373, BusinessBotRecipients_],
+    [0x1D998733, ContactBirthday_],
+    [0x114FF30D, contacts_ContactBirthdays_],
+    [0x628C9224, MissingInvitee_],
+    [0x7F5DEFA6, messages_InvitedUsers_],
+    [0x11679FA7, InputBusinessChatLink_],
+    [0xB4AE666F, BusinessChatLink_],
+    [0xEC43A2D1, account_BusinessChatLinks_],
+    [0x9A23AF21, account_ResolvedBusinessChatLinks_],
+    [0xD62FF46A, RequestedPeerUser_],
+    [0x7307544F, RequestedPeerChat_],
+    [0x8BA403E4, RequestedPeerChannel_],
+    [0x430D3150, SponsoredMessageReportOption_],
+    [0x846F9E42, channels_SponsoredMessageReportResultChooseOption_],
+    [0x3E3BCF2F, channels_SponsoredMessageReportResultAdsHidden_],
+    [0xAD798849, channels_SponsoredMessageReportResultReported_],
+    [0xD07B4BAD, stats_BroadcastRevenueStats_],
+    [0xEC659737, stats_BroadcastRevenueWithdrawalUrl_],
+    [0x557E2CC4, BroadcastRevenueTransactionProceeds_],
+    [0x5A590978, BroadcastRevenueTransactionWithdrawal_],
+    [0x42D30D2E, BroadcastRevenueTransactionRefund_],
+    [0x87158466, stats_BroadcastRevenueTransactions_],
     // deno-lint-ignore no-explicit-any
 ]);

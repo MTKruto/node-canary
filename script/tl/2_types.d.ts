@@ -56,7 +56,13 @@ export declare abstract class _True_ extends Type_ {
 }
 export declare abstract class _Error_ extends Type_ {
 }
-export declare abstract class _Null_ extends Type_ {
+export declare abstract class _IpPort_ extends Type_ {
+}
+export declare abstract class _AccessPointRule_ extends Type_ {
+}
+export declare abstract class _help_ConfigSimple_ extends Type_ {
+}
+export declare abstract class _InputFileLocation_ extends Type_ {
 }
 export declare abstract class _InputPeer_ extends Type_ {
 }
@@ -73,8 +79,6 @@ export declare abstract class _InputChatPhoto_ extends Type_ {
 export declare abstract class _InputGeoPoint_ extends Type_ {
 }
 export declare abstract class _InputPhoto_ extends Type_ {
-}
-export declare abstract class _InputFileLocation_ extends Type_ {
 }
 export declare abstract class _Peer_ extends Type_ {
 }
@@ -972,6 +976,54 @@ export declare abstract class _account_ConnectedBots_ extends Type_ {
 }
 export declare abstract class _messages_DialogFilters_ extends Type_ {
 }
+export declare abstract class _Birthday_ extends Type_ {
+}
+export declare abstract class _BotBusinessConnection_ extends Type_ {
+}
+export declare abstract class _InputBusinessIntro_ extends Type_ {
+}
+export declare abstract class _BusinessIntro_ extends Type_ {
+}
+export declare abstract class _messages_MyStickers_ extends Type_ {
+}
+export declare abstract class _InputCollectible_ extends Type_ {
+}
+export declare abstract class _fragment_CollectibleInfo_ extends Type_ {
+}
+export declare abstract class _InputBusinessBotRecipients_ extends Type_ {
+}
+export declare abstract class _BusinessBotRecipients_ extends Type_ {
+}
+export declare abstract class _ContactBirthday_ extends Type_ {
+}
+export declare abstract class _contacts_ContactBirthdays_ extends Type_ {
+}
+export declare abstract class _MissingInvitee_ extends Type_ {
+}
+export declare abstract class _messages_InvitedUsers_ extends Type_ {
+}
+export declare abstract class _InputBusinessChatLink_ extends Type_ {
+}
+export declare abstract class _BusinessChatLink_ extends Type_ {
+}
+export declare abstract class _account_BusinessChatLinks_ extends Type_ {
+}
+export declare abstract class _account_ResolvedBusinessChatLinks_ extends Type_ {
+}
+export declare abstract class _RequestedPeer_ extends Type_ {
+}
+export declare abstract class _SponsoredMessageReportOption_ extends Type_ {
+}
+export declare abstract class _channels_SponsoredMessageReportResult_ extends Type_ {
+}
+export declare abstract class _stats_BroadcastRevenueStats_ extends Type_ {
+}
+export declare abstract class _stats_BroadcastRevenueWithdrawalUrl_ extends Type_ {
+}
+export declare abstract class _BroadcastRevenueTransaction_ extends Type_ {
+}
+export declare abstract class _stats_BroadcastRevenueTransactions_ extends Type_ {
+}
 export declare class ResPQ_ extends _ResPQ_ {
     nonce: bigint;
     server_nonce: bigint;
@@ -1440,13 +1492,89 @@ export declare class Error_ extends _Error_ {
         text: string;
     });
 }
-/** Corresponds to an arbitrary empty object. */
-export declare class Null_ extends _Null_ {
+export declare class IpPort_ extends _IpPort_ {
+    ipv4: number;
+    port: number;
     protected get [id](): number;
     static get [name](): string;
     static get [paramDesc](): ParamDesc;
     protected get [params](): Params;
-    constructor();
+    constructor(params: {
+        ipv4: number;
+        port: number;
+    });
+}
+export declare class IpPortSecret_ extends _IpPort_ {
+    ipv4: number;
+    port: number;
+    secret: Uint8Array;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        ipv4: number;
+        port: number;
+        secret: Uint8Array;
+    });
+}
+export declare class AccessPointRule_ extends _AccessPointRule_ {
+    phone_prefix_rules: string;
+    dc_id: number;
+    ips: Array<enums.IpPort>;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        phone_prefix_rules: string;
+        dc_id: number;
+        ips: Array<enums.IpPort>;
+    });
+}
+export declare class help_ConfigSimple_ extends _help_ConfigSimple_ {
+    date: number;
+    expires: number;
+    rules: Array<enums.AccessPointRule>;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        date: number;
+        expires: number;
+        rules: Array<enums.AccessPointRule>;
+    });
+}
+export declare class InputPeerPhotoFileLocationLegacy_ extends _InputFileLocation_ {
+    big?: true;
+    peer: enums.InputPeer;
+    volume_id: bigint;
+    local_id: number;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        big?: true;
+        peer: enums.InputPeer;
+        volume_id: bigint;
+        local_id: number;
+    });
+}
+export declare class InputStickerSetThumbLegacy_ extends _InputFileLocation_ {
+    stickerset: enums.InputStickerSet;
+    volume_id: bigint;
+    local_id: number;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        stickerset: enums.InputStickerSet;
+        volume_id: bigint;
+        local_id: number;
+    });
 }
 /** An empty constructor, no user or chat is defined. */
 export declare class InputPeerEmpty_ extends _InputPeer_ {
@@ -2445,6 +2573,7 @@ export declare class User_ extends _User_ {
     /** No stories from this user are visible. */
     stories_unavailable?: true;
     contact_require_premium?: true;
+    bot_business?: true;
     /** ID of the user */
     id: bigint;
     /** Access hash of the user */
@@ -2507,6 +2636,7 @@ export declare class User_ extends _User_ {
         stories_hidden?: true;
         stories_unavailable?: true;
         contact_require_premium?: true;
+        bot_business?: true;
         id: bigint;
         access_hash?: bigint;
         first_name?: string;
@@ -2957,6 +3087,8 @@ export declare class ChannelFull_ extends _ChatFull_ {
     /** Users may also choose to display messages from all topics of a [forum](https://core.telegram.org/api/forum) as if they were sent to a normal group, using a "View as messages" setting in the local client.
     This setting only affects the current account, and is synced to other logged in sessions using the [channels.toggleViewForumAsMessages](https://core.telegram.org/method/channels.toggleViewForumAsMessages) method; invoking this method will update the value of this flag. */
     view_forum_as_messages?: true;
+    restricted_sponsored?: true;
+    can_view_revenue?: true;
     /** ID of the channel */
     id: bigint;
     /** Info about the channel */
@@ -3053,6 +3185,8 @@ export declare class ChannelFull_ extends _ChatFull_ {
         translations_disabled?: true;
         stories_pinned_available?: true;
         view_forum_as_messages?: true;
+        restricted_sponsored?: true;
+        can_view_revenue?: true;
         id: bigint;
         about: string;
         participants_count?: number;
@@ -3244,6 +3378,7 @@ export declare class Message_ extends _Message_ {
     noforwards?: true;
     /** If set, any eventual webpage preview will be shown on top of the message instead of at the bottom. */
     invert_media?: true;
+    offline?: true;
     /** ID of the message */
     id: number;
     /** ID of the sender of the message */
@@ -3257,6 +3392,7 @@ export declare class Message_ extends _Message_ {
     fwd_from?: enums.MessageFwdHeader;
     /** ID of the inline bot that generated the message */
     via_bot_id?: bigint;
+    via_business_bot_id?: bigint;
     /** Reply information */
     reply_to?: enums.MessageReplyHeader;
     /** Date of the message */
@@ -3304,6 +3440,7 @@ export declare class Message_ extends _Message_ {
         pinned?: true;
         noforwards?: true;
         invert_media?: true;
+        offline?: true;
         id: number;
         from_id?: enums.Peer;
         from_boosts_applied?: number;
@@ -3311,6 +3448,7 @@ export declare class Message_ extends _Message_ {
         saved_peer_id?: enums.Peer;
         fwd_from?: enums.MessageFwdHeader;
         via_bot_id?: bigint;
+        via_business_bot_id?: bigint;
         reply_to?: enums.MessageReplyHeader;
         date: number;
         message: string;
@@ -4347,6 +4485,18 @@ export declare class MessageActionBoostApply_ extends _MessageAction_ {
         boosts: number;
     });
 }
+export declare class MessageActionRequestedPeerSentMe_ extends _MessageAction_ {
+    button_id: number;
+    peers: Array<enums.RequestedPeer>;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        button_id: number;
+        peers: Array<enums.RequestedPeer>;
+    });
+}
 /** Chat */
 export declare class Dialog_ extends _Dialog_ {
     /** Is the dialog pinned */
@@ -4841,12 +4991,16 @@ export declare class PeerSettings_ extends _PeerSettings_ {
     invite_members?: true;
     /** This flag is set if `request_chat_title` and `request_chat_date` fields are set and the [join request »](https://core.telegram.org/api/invites#join-requests) is related to a channel (otherwise if only the request fields are set, the [join request »](https://core.telegram.org/api/invites#join-requests) is related to a chat). */
     request_chat_broadcast?: true;
+    business_bot_paused?: true;
+    business_bot_can_reply?: true;
     /** Distance in meters between us and this peer */
     geo_distance?: number;
     /** If set, this is a private chat with an administrator of a chat or channel to which the user sent a join request, and this field contains the chat/channel's title. */
     request_chat_title?: string;
     /** If set, this is a private chat with an administrator of a chat or channel to which the user sent a join request, and this field contains the timestamp when the [join request »](https://core.telegram.org/api/invites#join-requests) was sent. */
     request_chat_date?: number;
+    business_bot_id?: bigint;
+    business_bot_manage_url?: string;
     protected get [id](): number;
     static get [name](): string;
     static get [paramDesc](): ParamDesc;
@@ -4861,9 +5015,13 @@ export declare class PeerSettings_ extends _PeerSettings_ {
         autoarchived?: true;
         invite_members?: true;
         request_chat_broadcast?: true;
+        business_bot_paused?: true;
+        business_bot_can_reply?: true;
         geo_distance?: number;
         request_chat_title?: string;
         request_chat_date?: number;
+        business_bot_id?: bigint;
+        business_bot_manage_url?: string;
     });
 }
 /** Represents a [wallpaper](https://core.telegram.org/api/wallpapers) based on an image. */
@@ -5071,6 +5229,10 @@ export declare class UserFull_ extends _UserFull_ {
     business_location?: enums.BusinessLocation;
     business_greeting_message?: enums.BusinessGreetingMessage;
     business_away_message?: enums.BusinessAwayMessage;
+    business_intro?: enums.BusinessIntro;
+    birthday?: enums.Birthday;
+    personal_channel_id?: bigint;
+    personal_channel_message?: number;
     protected get [id](): number;
     static get [name](): string;
     static get [paramDesc](): ParamDesc;
@@ -5112,6 +5274,10 @@ export declare class UserFull_ extends _UserFull_ {
         business_location?: enums.BusinessLocation;
         business_greeting_message?: enums.BusinessGreetingMessage;
         business_away_message?: enums.BusinessAwayMessage;
+        business_intro?: enums.BusinessIntro;
+        birthday?: enums.Birthday;
+        personal_channel_id?: bigint;
+        personal_channel_message?: number;
     });
 }
 /** A contact of the current user that is registered in the system. */
@@ -7465,18 +7631,6 @@ export declare class UpdateAutoSaveSettings_ extends _Update_ {
     protected get [params](): Params;
     constructor();
 }
-/** 0-N updates of this type may be returned only when invoking [messages.addChatUser](https://core.telegram.org/method/messages.addChatUser), [channels.inviteToChannel](https://core.telegram.org/method/channels.inviteToChannel) or [messages.createChat](https://core.telegram.org/method/messages.createChat): it indicates we couldn't add a user to a chat because of their privacy settings; if required, an [invite link](https://core.telegram.org/api/invites) can be shared with the user, instead. */
-export declare class UpdateGroupInvitePrivacyForbidden_ extends _Update_ {
-    /** ID of the user we couldn't add. */
-    user_id: bigint;
-    protected get [id](): number;
-    static get [name](): string;
-    static get [paramDesc](): ParamDesc;
-    protected get [params](): Params;
-    constructor(params: {
-        user_id: bigint;
-    });
-}
 /** A new story was posted. */
 export declare class UpdateStory_ extends _Update_ {
     /** ID of the poster. */
@@ -7752,6 +7906,66 @@ export declare class UpdateDeleteQuickReplyMessages_ extends _Update_ {
     constructor(params: {
         shortcut_id: number;
         messages: Array<number>;
+    });
+}
+export declare class UpdateBotBusinessConnect_ extends _Update_ {
+    connection: enums.BotBusinessConnection;
+    qts: number;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        connection: enums.BotBusinessConnection;
+        qts: number;
+    });
+}
+export declare class UpdateBotNewBusinessMessage_ extends _Update_ {
+    connection_id: string;
+    message: enums.Message;
+    reply_to_message?: enums.Message;
+    qts: number;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        connection_id: string;
+        message: enums.Message;
+        reply_to_message?: enums.Message;
+        qts: number;
+    });
+}
+export declare class UpdateBotEditBusinessMessage_ extends _Update_ {
+    connection_id: string;
+    message: enums.Message;
+    reply_to_message?: enums.Message;
+    qts: number;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        connection_id: string;
+        message: enums.Message;
+        reply_to_message?: enums.Message;
+        qts: number;
+    });
+}
+export declare class UpdateBotDeleteBusinessMessage_ extends _Update_ {
+    connection_id: string;
+    peer: enums.Peer;
+    messages: Array<number>;
+    qts: number;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        connection_id: string;
+        peer: enums.Peer;
+        messages: Array<number>;
+        qts: number;
     });
 }
 /** Updates state. */
@@ -9180,6 +9394,13 @@ export declare class InputPrivacyKeyAbout_ extends _InputPrivacyKey_ {
     protected get [params](): Params;
     constructor();
 }
+export declare class InputPrivacyKeyBirthday_ extends _InputPrivacyKey_ {
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor();
+}
 /** Whether we can see the last online timestamp of this user */
 export declare class PrivacyKeyStatusTimestamp_ extends _PrivacyKey_ {
     protected get [id](): number;
@@ -9254,6 +9475,13 @@ export declare class PrivacyKeyVoiceMessages_ extends _PrivacyKey_ {
 }
 /** Whether people can see your bio */
 export declare class PrivacyKeyAbout_ extends _PrivacyKey_ {
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor();
+}
+export declare class PrivacyKeyBirthday_ extends _PrivacyKey_ {
     protected get [id](): number;
     static get [name](): string;
     static get [paramDesc](): ParamDesc;
@@ -9348,6 +9576,13 @@ export declare class InputPrivacyValueAllowCloseFriends_ extends _InputPrivacyRu
     protected get [params](): Params;
     constructor();
 }
+export declare class InputPrivacyValueAllowPremium_ extends _InputPrivacyRule_ {
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor();
+}
 /** Allow all contacts */
 export declare class PrivacyValueAllowContacts_ extends _PrivacyRule_ {
     protected get [id](): number;
@@ -9430,6 +9665,13 @@ export declare class PrivacyValueDisallowChatParticipants_ extends _PrivacyRule_
 }
 /** Allow only [close friends »](https://core.telegram.org/api/privacy) */
 export declare class PrivacyValueAllowCloseFriends_ extends _PrivacyRule_ {
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor();
+}
+export declare class PrivacyValueAllowPremium_ extends _PrivacyRule_ {
     protected get [id](): number;
     static get [name](): string;
     static get [paramDesc](): ParamDesc;
@@ -10228,16 +10470,13 @@ export declare class StickerSet_ extends _StickerSet_ {
     official?: true;
     /** Is this a mask stickerset */
     masks?: true;
-    /** Is this an animated stickerpack */
-    animated?: true;
-    /** Is this a video stickerpack */
-    videos?: true;
     /** This is a custom emoji stickerset */
     emojis?: true;
     /** Whether the color of this TGS custom emoji stickerset should be changed to the text color when used in messages, the accent color if used as emoji status, white on chat photos, or another appropriate color based on context. */
     text_color?: true;
     /** If set, this custom emoji stickerset can be used in [channel emoji statuses](https://core.telegram.org/api/emoji-status). */
     channel_emoji_status?: true;
+    creator?: true;
     /** When was this stickerset installed */
     installed_date?: number;
     /** ID of the stickerset */
@@ -10268,11 +10507,10 @@ export declare class StickerSet_ extends _StickerSet_ {
         archived?: true;
         official?: true;
         masks?: true;
-        animated?: true;
-        videos?: true;
         emojis?: true;
         text_color?: true;
         channel_emoji_status?: true;
+        creator?: true;
         installed_date?: number;
         id: bigint;
         access_hash: bigint;
@@ -10610,6 +10848,28 @@ export declare class KeyboardButtonRequestPeer_ extends _KeyboardButton_ {
     static get [paramDesc](): ParamDesc;
     protected get [params](): Params;
     constructor(params: {
+        text: string;
+        button_id: number;
+        peer_type: enums.RequestPeerType;
+        max_quantity: number;
+    });
+}
+export declare class InputKeyboardButtonRequestPeer_ extends _KeyboardButton_ {
+    name_requested?: true;
+    username_requested?: true;
+    photo_requested?: true;
+    text: string;
+    button_id: number;
+    peer_type: enums.RequestPeerType;
+    max_quantity: number;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        name_requested?: true;
+        username_requested?: true;
+        photo_requested?: true;
         text: string;
         button_id: number;
         peer_type: enums.RequestPeerType;
@@ -14363,6 +14623,7 @@ export declare class PhoneCall_ extends _PhoneCall_ {
     connections: Array<enums.PhoneConnection>;
     /** When was the call actually started */
     start_date: number;
+    custom_parameters?: enums.DataJSON;
     protected get [id](): number;
     static get [name](): string;
     static get [paramDesc](): ParamDesc;
@@ -14380,6 +14641,7 @@ export declare class PhoneCall_ extends _PhoneCall_ {
         protocol: enums.PhoneCallProtocol;
         connections: Array<enums.PhoneConnection>;
         start_date: number;
+        custom_parameters?: enums.DataJSON;
     });
 }
 /** Indicates a discarded phone call */
@@ -19324,6 +19586,7 @@ export declare class SponsoredMessage_ extends _SponsoredMessage_ {
     recommended?: true;
     /** Whether a profile photo bubble should be displayed for this message, like for messages sent in groups. The photo shown in the bubble is obtained either from the peer contained in `from_id`, or from `chat_invite`. */
     show_peer_photo?: true;
+    can_report?: true;
     /** Message ID */
     random_id: Uint8Array;
     /** ID of the sender of the message */
@@ -19357,6 +19620,7 @@ export declare class SponsoredMessage_ extends _SponsoredMessage_ {
     constructor(params: {
         recommended?: true;
         show_peer_photo?: true;
+        can_report?: true;
         random_id: Uint8Array;
         from_id?: enums.Peer;
         chat_invite?: enums.ChatInvite;
@@ -22978,7 +23242,7 @@ export declare class messages_QuickRepliesNotModified_ extends _messages_QuickRe
 export declare class ConnectedBot_ extends _ConnectedBot_ {
     can_reply?: true;
     bot_id: bigint;
-    recipients: enums.BusinessRecipients;
+    recipients: enums.BusinessBotRecipients;
     protected get [id](): number;
     static get [name](): string;
     static get [paramDesc](): ParamDesc;
@@ -22986,7 +23250,7 @@ export declare class ConnectedBot_ extends _ConnectedBot_ {
     constructor(params: {
         can_reply?: true;
         bot_id: bigint;
-        recipients: enums.BusinessRecipients;
+        recipients: enums.BusinessBotRecipients;
     });
 }
 export declare class account_ConnectedBots_ extends _account_ConnectedBots_ {
@@ -23011,6 +23275,456 @@ export declare class messages_DialogFilters_ extends _messages_DialogFilters_ {
     constructor(params: {
         tags_enabled?: true;
         filters: Array<enums.DialogFilter>;
+    });
+}
+export declare class Birthday_ extends _Birthday_ {
+    day: number;
+    month: number;
+    year?: number;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        day: number;
+        month: number;
+        year?: number;
+    });
+}
+export declare class BotBusinessConnection_ extends _BotBusinessConnection_ {
+    can_reply?: true;
+    disabled?: true;
+    connection_id: string;
+    user_id: bigint;
+    dc_id: number;
+    date: number;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        can_reply?: true;
+        disabled?: true;
+        connection_id: string;
+        user_id: bigint;
+        dc_id: number;
+        date: number;
+    });
+}
+export declare class InputBusinessIntro_ extends _InputBusinessIntro_ {
+    title: string;
+    description: string;
+    sticker?: enums.InputDocument;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        title: string;
+        description: string;
+        sticker?: enums.InputDocument;
+    });
+}
+export declare class BusinessIntro_ extends _BusinessIntro_ {
+    title: string;
+    description: string;
+    sticker?: enums.Document;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        title: string;
+        description: string;
+        sticker?: enums.Document;
+    });
+}
+export declare class messages_MyStickers_ extends _messages_MyStickers_ {
+    count: number;
+    sets: Array<enums.StickerSetCovered>;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        count: number;
+        sets: Array<enums.StickerSetCovered>;
+    });
+}
+export declare class InputCollectibleUsername_ extends _InputCollectible_ {
+    username: string;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        username: string;
+    });
+}
+export declare class InputCollectiblePhone_ extends _InputCollectible_ {
+    phone: string;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        phone: string;
+    });
+}
+export declare class fragment_CollectibleInfo_ extends _fragment_CollectibleInfo_ {
+    purchase_date: number;
+    currency: string;
+    amount: bigint;
+    crypto_currency: string;
+    crypto_amount: bigint;
+    url: string;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        purchase_date: number;
+        currency: string;
+        amount: bigint;
+        crypto_currency: string;
+        crypto_amount: bigint;
+        url: string;
+    });
+}
+export declare class InputBusinessBotRecipients_ extends _InputBusinessBotRecipients_ {
+    existing_chats?: true;
+    new_chats?: true;
+    contacts?: true;
+    non_contacts?: true;
+    exclude_selected?: true;
+    users?: Array<enums.InputUser>;
+    exclude_users?: Array<enums.InputUser>;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params?: {
+        existing_chats?: true;
+        new_chats?: true;
+        contacts?: true;
+        non_contacts?: true;
+        exclude_selected?: true;
+        users?: Array<enums.InputUser>;
+        exclude_users?: Array<enums.InputUser>;
+    });
+}
+export declare class BusinessBotRecipients_ extends _BusinessBotRecipients_ {
+    existing_chats?: true;
+    new_chats?: true;
+    contacts?: true;
+    non_contacts?: true;
+    exclude_selected?: true;
+    users?: Array<bigint>;
+    exclude_users?: Array<bigint>;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params?: {
+        existing_chats?: true;
+        new_chats?: true;
+        contacts?: true;
+        non_contacts?: true;
+        exclude_selected?: true;
+        users?: Array<bigint>;
+        exclude_users?: Array<bigint>;
+    });
+}
+export declare class ContactBirthday_ extends _ContactBirthday_ {
+    contact_id: bigint;
+    birthday: enums.Birthday;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        contact_id: bigint;
+        birthday: enums.Birthday;
+    });
+}
+export declare class contacts_ContactBirthdays_ extends _contacts_ContactBirthdays_ {
+    contacts: Array<enums.ContactBirthday>;
+    users: Array<enums.User>;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        contacts: Array<enums.ContactBirthday>;
+        users: Array<enums.User>;
+    });
+}
+export declare class MissingInvitee_ extends _MissingInvitee_ {
+    premium_would_allow_invite?: true;
+    premium_required_for_pm?: true;
+    user_id: bigint;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        premium_would_allow_invite?: true;
+        premium_required_for_pm?: true;
+        user_id: bigint;
+    });
+}
+export declare class messages_InvitedUsers_ extends _messages_InvitedUsers_ {
+    updates: enums.Updates;
+    missing_invitees: Array<enums.MissingInvitee>;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        updates: enums.Updates;
+        missing_invitees: Array<enums.MissingInvitee>;
+    });
+}
+export declare class InputBusinessChatLink_ extends _InputBusinessChatLink_ {
+    message: string;
+    entities?: Array<enums.MessageEntity>;
+    title?: string;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        message: string;
+        entities?: Array<enums.MessageEntity>;
+        title?: string;
+    });
+}
+export declare class BusinessChatLink_ extends _BusinessChatLink_ {
+    link: string;
+    message: string;
+    entities?: Array<enums.MessageEntity>;
+    title?: string;
+    views: number;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        link: string;
+        message: string;
+        entities?: Array<enums.MessageEntity>;
+        title?: string;
+        views: number;
+    });
+}
+export declare class account_BusinessChatLinks_ extends _account_BusinessChatLinks_ {
+    links: Array<enums.BusinessChatLink>;
+    chats: Array<enums.Chat>;
+    users: Array<enums.User>;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        links: Array<enums.BusinessChatLink>;
+        chats: Array<enums.Chat>;
+        users: Array<enums.User>;
+    });
+}
+export declare class account_ResolvedBusinessChatLinks_ extends _account_ResolvedBusinessChatLinks_ {
+    peer: enums.Peer;
+    message: string;
+    entities?: Array<enums.MessageEntity>;
+    chats: Array<enums.Chat>;
+    users: Array<enums.User>;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        peer: enums.Peer;
+        message: string;
+        entities?: Array<enums.MessageEntity>;
+        chats: Array<enums.Chat>;
+        users: Array<enums.User>;
+    });
+}
+export declare class RequestedPeerUser_ extends _RequestedPeer_ {
+    user_id: bigint;
+    first_name?: string;
+    last_name?: string;
+    username?: string;
+    photo?: enums.Photo;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        user_id: bigint;
+        first_name?: string;
+        last_name?: string;
+        username?: string;
+        photo?: enums.Photo;
+    });
+}
+export declare class RequestedPeerChat_ extends _RequestedPeer_ {
+    chat_id: bigint;
+    title?: string;
+    photo?: enums.Photo;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        chat_id: bigint;
+        title?: string;
+        photo?: enums.Photo;
+    });
+}
+export declare class RequestedPeerChannel_ extends _RequestedPeer_ {
+    channel_id: bigint;
+    title?: string;
+    username?: string;
+    photo?: enums.Photo;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        channel_id: bigint;
+        title?: string;
+        username?: string;
+        photo?: enums.Photo;
+    });
+}
+export declare class SponsoredMessageReportOption_ extends _SponsoredMessageReportOption_ {
+    text: string;
+    option: Uint8Array;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        text: string;
+        option: Uint8Array;
+    });
+}
+export declare class channels_SponsoredMessageReportResultChooseOption_ extends _channels_SponsoredMessageReportResult_ {
+    title: string;
+    options: Array<enums.SponsoredMessageReportOption>;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        title: string;
+        options: Array<enums.SponsoredMessageReportOption>;
+    });
+}
+export declare class channels_SponsoredMessageReportResultAdsHidden_ extends _channels_SponsoredMessageReportResult_ {
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor();
+}
+export declare class channels_SponsoredMessageReportResultReported_ extends _channels_SponsoredMessageReportResult_ {
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor();
+}
+export declare class stats_BroadcastRevenueStats_ extends _stats_BroadcastRevenueStats_ {
+    top_hours_graph: enums.StatsGraph;
+    revenue_graph: enums.StatsGraph;
+    current_balance: bigint;
+    available_balance: bigint;
+    overall_revenue: bigint;
+    usd_rate: number;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        top_hours_graph: enums.StatsGraph;
+        revenue_graph: enums.StatsGraph;
+        current_balance: bigint;
+        available_balance: bigint;
+        overall_revenue: bigint;
+        usd_rate: number;
+    });
+}
+export declare class stats_BroadcastRevenueWithdrawalUrl_ extends _stats_BroadcastRevenueWithdrawalUrl_ {
+    url: string;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        url: string;
+    });
+}
+export declare class BroadcastRevenueTransactionProceeds_ extends _BroadcastRevenueTransaction_ {
+    amount: bigint;
+    from_date: number;
+    to_date: number;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        amount: bigint;
+        from_date: number;
+        to_date: number;
+    });
+}
+export declare class BroadcastRevenueTransactionWithdrawal_ extends _BroadcastRevenueTransaction_ {
+    pending?: true;
+    failed?: true;
+    amount: bigint;
+    date: number;
+    provider: string;
+    transaction_date?: number;
+    transaction_url?: string;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        pending?: true;
+        failed?: true;
+        amount: bigint;
+        date: number;
+        provider: string;
+        transaction_date?: number;
+        transaction_url?: string;
+    });
+}
+export declare class BroadcastRevenueTransactionRefund_ extends _BroadcastRevenueTransaction_ {
+    amount: bigint;
+    date: number;
+    provider: string;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        amount: bigint;
+        date: number;
+        provider: string;
+    });
+}
+export declare class stats_BroadcastRevenueTransactions_ extends _stats_BroadcastRevenueTransactions_ {
+    count: number;
+    transactions: Array<enums.BroadcastRevenueTransaction>;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        count: number;
+        transactions: Array<enums.BroadcastRevenueTransaction>;
     });
 }
 export declare const types: {
@@ -23042,7 +23756,10 @@ export declare const types: {
     _HttpWait: typeof _HttpWait_;
     _True: typeof _True_;
     _Error: typeof _Error_;
-    _Null: typeof _Null_;
+    _IpPort: typeof _IpPort_;
+    _AccessPointRule: typeof _AccessPointRule_;
+    _help_ConfigSimple: typeof _help_ConfigSimple_;
+    _InputFileLocation: typeof _InputFileLocation_;
     _InputPeer: typeof _InputPeer_;
     _InputUser: typeof _InputUser_;
     _InputContact: typeof _InputContact_;
@@ -23051,7 +23768,6 @@ export declare const types: {
     _InputChatPhoto: typeof _InputChatPhoto_;
     _InputGeoPoint: typeof _InputGeoPoint_;
     _InputPhoto: typeof _InputPhoto_;
-    _InputFileLocation: typeof _InputFileLocation_;
     _Peer: typeof _Peer_;
     _storage_FileType: typeof _storage_FileType_;
     _User: typeof _User_;
@@ -23500,6 +24216,30 @@ export declare const types: {
     _ConnectedBot: typeof _ConnectedBot_;
     _account_ConnectedBots: typeof _account_ConnectedBots_;
     _messages_DialogFilters: typeof _messages_DialogFilters_;
+    _Birthday: typeof _Birthday_;
+    _BotBusinessConnection: typeof _BotBusinessConnection_;
+    _InputBusinessIntro: typeof _InputBusinessIntro_;
+    _BusinessIntro: typeof _BusinessIntro_;
+    _messages_MyStickers: typeof _messages_MyStickers_;
+    _InputCollectible: typeof _InputCollectible_;
+    _fragment_CollectibleInfo: typeof _fragment_CollectibleInfo_;
+    _InputBusinessBotRecipients: typeof _InputBusinessBotRecipients_;
+    _BusinessBotRecipients: typeof _BusinessBotRecipients_;
+    _ContactBirthday: typeof _ContactBirthday_;
+    _contacts_ContactBirthdays: typeof _contacts_ContactBirthdays_;
+    _MissingInvitee: typeof _MissingInvitee_;
+    _messages_InvitedUsers: typeof _messages_InvitedUsers_;
+    _InputBusinessChatLink: typeof _InputBusinessChatLink_;
+    _BusinessChatLink: typeof _BusinessChatLink_;
+    _account_BusinessChatLinks: typeof _account_BusinessChatLinks_;
+    _account_ResolvedBusinessChatLinks: typeof _account_ResolvedBusinessChatLinks_;
+    _RequestedPeer: typeof _RequestedPeer_;
+    _SponsoredMessageReportOption: typeof _SponsoredMessageReportOption_;
+    _channels_SponsoredMessageReportResult: typeof _channels_SponsoredMessageReportResult_;
+    _stats_BroadcastRevenueStats: typeof _stats_BroadcastRevenueStats_;
+    _stats_BroadcastRevenueWithdrawalUrl: typeof _stats_BroadcastRevenueWithdrawalUrl_;
+    _BroadcastRevenueTransaction: typeof _BroadcastRevenueTransaction_;
+    _stats_BroadcastRevenueTransactions: typeof _stats_BroadcastRevenueTransactions_;
     ResPQ: typeof ResPQ_;
     P_q_inner_data_dc: typeof P_q_inner_data_dc_;
     P_q_inner_data_temp_dc: typeof P_q_inner_data_temp_dc_;
@@ -23536,7 +24276,11 @@ export declare const types: {
     Http_wait: typeof Http_wait_;
     True: typeof True_;
     Error: typeof Error_;
-    Null: typeof Null_;
+    IpPort: typeof IpPort_;
+    IpPortSecret: typeof IpPortSecret_;
+    AccessPointRule: typeof AccessPointRule_;
+    InputPeerPhotoFileLocationLegacy: typeof InputPeerPhotoFileLocationLegacy_;
+    InputStickerSetThumbLegacy: typeof InputStickerSetThumbLegacy_;
     InputPeerEmpty: typeof InputPeerEmpty_;
     InputPeerSelf: typeof InputPeerSelf_;
     InputPeerChat: typeof InputPeerChat_;
@@ -23673,6 +24417,7 @@ export declare const types: {
     MessageActionGiveawayLaunch: typeof MessageActionGiveawayLaunch_;
     MessageActionGiveawayResults: typeof MessageActionGiveawayResults_;
     MessageActionBoostApply: typeof MessageActionBoostApply_;
+    MessageActionRequestedPeerSentMe: typeof MessageActionRequestedPeerSentMe_;
     Dialog: typeof Dialog_;
     DialogFolder: typeof DialogFolder_;
     PhotoEmpty: typeof PhotoEmpty_;
@@ -23837,7 +24582,6 @@ export declare const types: {
     UpdateChannelPinnedTopics: typeof UpdateChannelPinnedTopics_;
     UpdateUser: typeof UpdateUser_;
     UpdateAutoSaveSettings: typeof UpdateAutoSaveSettings_;
-    UpdateGroupInvitePrivacyForbidden: typeof UpdateGroupInvitePrivacyForbidden_;
     UpdateStory: typeof UpdateStory_;
     UpdateReadStories: typeof UpdateReadStories_;
     UpdateStoryID: typeof UpdateStoryID_;
@@ -23857,6 +24601,10 @@ export declare const types: {
     UpdateDeleteQuickReply: typeof UpdateDeleteQuickReply_;
     UpdateQuickReplyMessage: typeof UpdateQuickReplyMessage_;
     UpdateDeleteQuickReplyMessages: typeof UpdateDeleteQuickReplyMessages_;
+    UpdateBotBusinessConnect: typeof UpdateBotBusinessConnect_;
+    UpdateBotNewBusinessMessage: typeof UpdateBotNewBusinessMessage_;
+    UpdateBotEditBusinessMessage: typeof UpdateBotEditBusinessMessage_;
+    UpdateBotDeleteBusinessMessage: typeof UpdateBotDeleteBusinessMessage_;
     UpdatesTooLong: typeof UpdatesTooLong_;
     UpdateShortMessage: typeof UpdateShortMessage_;
     UpdateShortChatMessage: typeof UpdateShortChatMessage_;
@@ -23918,6 +24666,7 @@ export declare const types: {
     InputPrivacyKeyAddedByPhone: typeof InputPrivacyKeyAddedByPhone_;
     InputPrivacyKeyVoiceMessages: typeof InputPrivacyKeyVoiceMessages_;
     InputPrivacyKeyAbout: typeof InputPrivacyKeyAbout_;
+    InputPrivacyKeyBirthday: typeof InputPrivacyKeyBirthday_;
     PrivacyKeyStatusTimestamp: typeof PrivacyKeyStatusTimestamp_;
     PrivacyKeyChatInvite: typeof PrivacyKeyChatInvite_;
     PrivacyKeyPhoneCall: typeof PrivacyKeyPhoneCall_;
@@ -23928,6 +24677,7 @@ export declare const types: {
     PrivacyKeyAddedByPhone: typeof PrivacyKeyAddedByPhone_;
     PrivacyKeyVoiceMessages: typeof PrivacyKeyVoiceMessages_;
     PrivacyKeyAbout: typeof PrivacyKeyAbout_;
+    PrivacyKeyBirthday: typeof PrivacyKeyBirthday_;
     InputPrivacyValueAllowContacts: typeof InputPrivacyValueAllowContacts_;
     InputPrivacyValueAllowAll: typeof InputPrivacyValueAllowAll_;
     InputPrivacyValueAllowUsers: typeof InputPrivacyValueAllowUsers_;
@@ -23937,6 +24687,7 @@ export declare const types: {
     InputPrivacyValueAllowChatParticipants: typeof InputPrivacyValueAllowChatParticipants_;
     InputPrivacyValueDisallowChatParticipants: typeof InputPrivacyValueDisallowChatParticipants_;
     InputPrivacyValueAllowCloseFriends: typeof InputPrivacyValueAllowCloseFriends_;
+    InputPrivacyValueAllowPremium: typeof InputPrivacyValueAllowPremium_;
     PrivacyValueAllowContacts: typeof PrivacyValueAllowContacts_;
     PrivacyValueAllowAll: typeof PrivacyValueAllowAll_;
     PrivacyValueAllowUsers: typeof PrivacyValueAllowUsers_;
@@ -23946,6 +24697,7 @@ export declare const types: {
     PrivacyValueAllowChatParticipants: typeof PrivacyValueAllowChatParticipants_;
     PrivacyValueDisallowChatParticipants: typeof PrivacyValueDisallowChatParticipants_;
     PrivacyValueAllowCloseFriends: typeof PrivacyValueAllowCloseFriends_;
+    PrivacyValueAllowPremium: typeof PrivacyValueAllowPremium_;
     AccountDaysTTL: typeof AccountDaysTTL_;
     DocumentAttributeImageSize: typeof DocumentAttributeImageSize_;
     DocumentAttributeAnimated: typeof DocumentAttributeAnimated_;
@@ -23997,6 +24749,7 @@ export declare const types: {
     KeyboardButtonWebView: typeof KeyboardButtonWebView_;
     KeyboardButtonSimpleWebView: typeof KeyboardButtonSimpleWebView_;
     KeyboardButtonRequestPeer: typeof KeyboardButtonRequestPeer_;
+    InputKeyboardButtonRequestPeer: typeof InputKeyboardButtonRequestPeer_;
     KeyboardButtonRow: typeof KeyboardButtonRow_;
     ReplyKeyboardHide: typeof ReplyKeyboardHide_;
     ReplyKeyboardForceReply: typeof ReplyKeyboardForceReply_;
@@ -24530,6 +25283,59 @@ export declare const types: {
     InputQuickReplyShortcut: typeof InputQuickReplyShortcut_;
     InputQuickReplyShortcutId: typeof InputQuickReplyShortcutId_;
     ConnectedBot: typeof ConnectedBot_;
+    Birthday: typeof Birthday_;
+    BotBusinessConnection: typeof BotBusinessConnection_;
+    InputBusinessIntro: typeof InputBusinessIntro_;
+    BusinessIntro: typeof BusinessIntro_;
+    InputCollectibleUsername: typeof InputCollectibleUsername_;
+    InputCollectiblePhone: typeof InputCollectiblePhone_;
+    InputBusinessBotRecipients: typeof InputBusinessBotRecipients_;
+    BusinessBotRecipients: typeof BusinessBotRecipients_;
+    ContactBirthday: typeof ContactBirthday_;
+    MissingInvitee: typeof MissingInvitee_;
+    InputBusinessChatLink: typeof InputBusinessChatLink_;
+    BusinessChatLink: typeof BusinessChatLink_;
+    RequestedPeerUser: typeof RequestedPeerUser_;
+    RequestedPeerChat: typeof RequestedPeerChat_;
+    RequestedPeerChannel: typeof RequestedPeerChannel_;
+    SponsoredMessageReportOption: typeof SponsoredMessageReportOption_;
+    BroadcastRevenueTransactionProceeds: typeof BroadcastRevenueTransactionProceeds_;
+    BroadcastRevenueTransactionWithdrawal: typeof BroadcastRevenueTransactionWithdrawal_;
+    BroadcastRevenueTransactionRefund: typeof BroadcastRevenueTransactionRefund_;
+    help: {
+        ConfigSimple: typeof help_ConfigSimple_;
+        AppUpdate: typeof help_AppUpdate_;
+        NoAppUpdate: typeof help_NoAppUpdate_;
+        InviteText: typeof help_InviteText_;
+        Support: typeof help_Support_;
+        TermsOfService: typeof help_TermsOfService_;
+        RecentMeUrls: typeof help_RecentMeUrls_;
+        TermsOfServiceUpdateEmpty: typeof help_TermsOfServiceUpdateEmpty_;
+        TermsOfServiceUpdate: typeof help_TermsOfServiceUpdate_;
+        DeepLinkInfoEmpty: typeof help_DeepLinkInfoEmpty_;
+        DeepLinkInfo: typeof help_DeepLinkInfo_;
+        PassportConfigNotModified: typeof help_PassportConfigNotModified_;
+        PassportConfig: typeof help_PassportConfig_;
+        SupportName: typeof help_SupportName_;
+        UserInfoEmpty: typeof help_UserInfoEmpty_;
+        UserInfo: typeof help_UserInfo_;
+        PromoDataEmpty: typeof help_PromoDataEmpty_;
+        PromoData: typeof help_PromoData_;
+        CountryCode: typeof help_CountryCode_;
+        Country: typeof help_Country_;
+        CountriesListNotModified: typeof help_CountriesListNotModified_;
+        CountriesList: typeof help_CountriesList_;
+        PremiumPromo: typeof help_PremiumPromo_;
+        AppConfigNotModified: typeof help_AppConfigNotModified_;
+        AppConfig: typeof help_AppConfig_;
+        PeerColorSet: typeof help_PeerColorSet_;
+        PeerColorProfileSet: typeof help_PeerColorProfileSet_;
+        PeerColorOption: typeof help_PeerColorOption_;
+        PeerColorsNotModified: typeof help_PeerColorsNotModified_;
+        PeerColors: typeof help_PeerColors_;
+        TimezonesListNotModified: typeof help_TimezonesListNotModified_;
+        TimezonesList: typeof help_TimezonesList_;
+    };
     storage: {
         FileUnknown: typeof storage_FileUnknown_;
         FilePartial: typeof storage_FilePartial_;
@@ -24579,6 +25385,7 @@ export declare const types: {
         TopPeersNotModified: typeof contacts_TopPeersNotModified_;
         TopPeers: typeof contacts_TopPeers_;
         TopPeersDisabled: typeof contacts_TopPeersDisabled_;
+        ContactBirthdays: typeof contacts_ContactBirthdays_;
     };
     messages: {
         Dialogs: typeof messages_Dialogs_;
@@ -24660,6 +25467,8 @@ export declare const types: {
         QuickReplies: typeof messages_QuickReplies_;
         QuickRepliesNotModified: typeof messages_QuickRepliesNotModified_;
         DialogFilters: typeof messages_DialogFilters_;
+        MyStickers: typeof messages_MyStickers_;
+        InvitedUsers: typeof messages_InvitedUsers_;
     };
     updates: {
         State: typeof updates_State_;
@@ -24682,39 +25491,6 @@ export declare const types: {
         WebFile: typeof upload_WebFile_;
         CdnFileReuploadNeeded: typeof upload_CdnFileReuploadNeeded_;
         CdnFile: typeof upload_CdnFile_;
-    };
-    help: {
-        AppUpdate: typeof help_AppUpdate_;
-        NoAppUpdate: typeof help_NoAppUpdate_;
-        InviteText: typeof help_InviteText_;
-        Support: typeof help_Support_;
-        TermsOfService: typeof help_TermsOfService_;
-        RecentMeUrls: typeof help_RecentMeUrls_;
-        TermsOfServiceUpdateEmpty: typeof help_TermsOfServiceUpdateEmpty_;
-        TermsOfServiceUpdate: typeof help_TermsOfServiceUpdate_;
-        DeepLinkInfoEmpty: typeof help_DeepLinkInfoEmpty_;
-        DeepLinkInfo: typeof help_DeepLinkInfo_;
-        PassportConfigNotModified: typeof help_PassportConfigNotModified_;
-        PassportConfig: typeof help_PassportConfig_;
-        SupportName: typeof help_SupportName_;
-        UserInfoEmpty: typeof help_UserInfoEmpty_;
-        UserInfo: typeof help_UserInfo_;
-        PromoDataEmpty: typeof help_PromoDataEmpty_;
-        PromoData: typeof help_PromoData_;
-        CountryCode: typeof help_CountryCode_;
-        Country: typeof help_Country_;
-        CountriesListNotModified: typeof help_CountriesListNotModified_;
-        CountriesList: typeof help_CountriesList_;
-        PremiumPromo: typeof help_PremiumPromo_;
-        AppConfigNotModified: typeof help_AppConfigNotModified_;
-        AppConfig: typeof help_AppConfig_;
-        PeerColorSet: typeof help_PeerColorSet_;
-        PeerColorProfileSet: typeof help_PeerColorProfileSet_;
-        PeerColorOption: typeof help_PeerColorOption_;
-        PeerColorsNotModified: typeof help_PeerColorsNotModified_;
-        PeerColors: typeof help_PeerColors_;
-        TimezonesListNotModified: typeof help_TimezonesListNotModified_;
-        TimezonesList: typeof help_TimezonesList_;
     };
     account: {
         PrivacyRules: typeof account_PrivacyRules_;
@@ -24746,6 +25522,8 @@ export declare const types: {
         EmailVerifiedLogin: typeof account_EmailVerifiedLogin_;
         AutoSaveSettings: typeof account_AutoSaveSettings_;
         ConnectedBots: typeof account_ConnectedBots_;
+        BusinessChatLinks: typeof account_BusinessChatLinks_;
+        ResolvedBusinessChatLinks: typeof account_ResolvedBusinessChatLinks_;
     };
     channels: {
         ChannelParticipants: typeof channels_ChannelParticipants_;
@@ -24753,6 +25531,9 @@ export declare const types: {
         ChannelParticipant: typeof channels_ChannelParticipant_;
         AdminLogResults: typeof channels_AdminLogResults_;
         SendAsPeers: typeof channels_SendAsPeers_;
+        SponsoredMessageReportResultChooseOption: typeof channels_SponsoredMessageReportResultChooseOption_;
+        SponsoredMessageReportResultAdsHidden: typeof channels_SponsoredMessageReportResultAdsHidden_;
+        SponsoredMessageReportResultReported: typeof channels_SponsoredMessageReportResultReported_;
     };
     payments: {
         PaymentForm: typeof payments_PaymentForm_;
@@ -24782,6 +25563,9 @@ export declare const types: {
         MessageStats: typeof stats_MessageStats_;
         StoryStats: typeof stats_StoryStats_;
         PublicForwards: typeof stats_PublicForwards_;
+        BroadcastRevenueStats: typeof stats_BroadcastRevenueStats_;
+        BroadcastRevenueWithdrawalUrl: typeof stats_BroadcastRevenueWithdrawalUrl_;
+        BroadcastRevenueTransactions: typeof stats_BroadcastRevenueTransactions_;
     };
     stickers: {
         SuggestedShortName: typeof stickers_SuggestedShortName_;
@@ -24817,6 +25601,9 @@ export declare const types: {
         EligibleToJoin: typeof smsjobs_EligibleToJoin_;
         Status: typeof smsjobs_Status_;
     };
+    fragment: {
+        CollectibleInfo: typeof fragment_CollectibleInfo_;
+    };
 };
 export declare namespace types {
     type Type = Type_;
@@ -24847,7 +25634,10 @@ export declare namespace types {
     type _HttpWait = _HttpWait_;
     type _True = _True_;
     type _Error = _Error_;
-    type _Null = _Null_;
+    type _IpPort = _IpPort_;
+    type _AccessPointRule = _AccessPointRule_;
+    type _help_ConfigSimple = _help_ConfigSimple_;
+    type _InputFileLocation = _InputFileLocation_;
     type _InputPeer = _InputPeer_;
     type _InputUser = _InputUser_;
     type _InputContact = _InputContact_;
@@ -24856,7 +25646,6 @@ export declare namespace types {
     type _InputChatPhoto = _InputChatPhoto_;
     type _InputGeoPoint = _InputGeoPoint_;
     type _InputPhoto = _InputPhoto_;
-    type _InputFileLocation = _InputFileLocation_;
     type _Peer = _Peer_;
     type _storage_FileType = _storage_FileType_;
     type _User = _User_;
@@ -25305,6 +26094,30 @@ export declare namespace types {
     type _ConnectedBot = _ConnectedBot_;
     type _account_ConnectedBots = _account_ConnectedBots_;
     type _messages_DialogFilters = _messages_DialogFilters_;
+    type _Birthday = _Birthday_;
+    type _BotBusinessConnection = _BotBusinessConnection_;
+    type _InputBusinessIntro = _InputBusinessIntro_;
+    type _BusinessIntro = _BusinessIntro_;
+    type _messages_MyStickers = _messages_MyStickers_;
+    type _InputCollectible = _InputCollectible_;
+    type _fragment_CollectibleInfo = _fragment_CollectibleInfo_;
+    type _InputBusinessBotRecipients = _InputBusinessBotRecipients_;
+    type _BusinessBotRecipients = _BusinessBotRecipients_;
+    type _ContactBirthday = _ContactBirthday_;
+    type _contacts_ContactBirthdays = _contacts_ContactBirthdays_;
+    type _MissingInvitee = _MissingInvitee_;
+    type _messages_InvitedUsers = _messages_InvitedUsers_;
+    type _InputBusinessChatLink = _InputBusinessChatLink_;
+    type _BusinessChatLink = _BusinessChatLink_;
+    type _account_BusinessChatLinks = _account_BusinessChatLinks_;
+    type _account_ResolvedBusinessChatLinks = _account_ResolvedBusinessChatLinks_;
+    type _RequestedPeer = _RequestedPeer_;
+    type _SponsoredMessageReportOption = _SponsoredMessageReportOption_;
+    type _channels_SponsoredMessageReportResult = _channels_SponsoredMessageReportResult_;
+    type _stats_BroadcastRevenueStats = _stats_BroadcastRevenueStats_;
+    type _stats_BroadcastRevenueWithdrawalUrl = _stats_BroadcastRevenueWithdrawalUrl_;
+    type _BroadcastRevenueTransaction = _BroadcastRevenueTransaction_;
+    type _stats_BroadcastRevenueTransactions = _stats_BroadcastRevenueTransactions_;
     type ResPQ = ResPQ_;
     type P_q_inner_data_dc = P_q_inner_data_dc_;
     type P_q_inner_data_temp_dc = P_q_inner_data_temp_dc_;
@@ -25341,7 +26154,11 @@ export declare namespace types {
     type Http_wait = Http_wait_;
     type True = True_;
     type Error = Error_;
-    type Null = Null_;
+    type IpPort = IpPort_;
+    type IpPortSecret = IpPortSecret_;
+    type AccessPointRule = AccessPointRule_;
+    type InputPeerPhotoFileLocationLegacy = InputPeerPhotoFileLocationLegacy_;
+    type InputStickerSetThumbLegacy = InputStickerSetThumbLegacy_;
     type InputPeerEmpty = InputPeerEmpty_;
     type InputPeerSelf = InputPeerSelf_;
     type InputPeerChat = InputPeerChat_;
@@ -25478,6 +26295,7 @@ export declare namespace types {
     type MessageActionGiveawayLaunch = MessageActionGiveawayLaunch_;
     type MessageActionGiveawayResults = MessageActionGiveawayResults_;
     type MessageActionBoostApply = MessageActionBoostApply_;
+    type MessageActionRequestedPeerSentMe = MessageActionRequestedPeerSentMe_;
     type Dialog = Dialog_;
     type DialogFolder = DialogFolder_;
     type PhotoEmpty = PhotoEmpty_;
@@ -25642,7 +26460,6 @@ export declare namespace types {
     type UpdateChannelPinnedTopics = UpdateChannelPinnedTopics_;
     type UpdateUser = UpdateUser_;
     type UpdateAutoSaveSettings = UpdateAutoSaveSettings_;
-    type UpdateGroupInvitePrivacyForbidden = UpdateGroupInvitePrivacyForbidden_;
     type UpdateStory = UpdateStory_;
     type UpdateReadStories = UpdateReadStories_;
     type UpdateStoryID = UpdateStoryID_;
@@ -25662,6 +26479,10 @@ export declare namespace types {
     type UpdateDeleteQuickReply = UpdateDeleteQuickReply_;
     type UpdateQuickReplyMessage = UpdateQuickReplyMessage_;
     type UpdateDeleteQuickReplyMessages = UpdateDeleteQuickReplyMessages_;
+    type UpdateBotBusinessConnect = UpdateBotBusinessConnect_;
+    type UpdateBotNewBusinessMessage = UpdateBotNewBusinessMessage_;
+    type UpdateBotEditBusinessMessage = UpdateBotEditBusinessMessage_;
+    type UpdateBotDeleteBusinessMessage = UpdateBotDeleteBusinessMessage_;
     type UpdatesTooLong = UpdatesTooLong_;
     type UpdateShortMessage = UpdateShortMessage_;
     type UpdateShortChatMessage = UpdateShortChatMessage_;
@@ -25723,6 +26544,7 @@ export declare namespace types {
     type InputPrivacyKeyAddedByPhone = InputPrivacyKeyAddedByPhone_;
     type InputPrivacyKeyVoiceMessages = InputPrivacyKeyVoiceMessages_;
     type InputPrivacyKeyAbout = InputPrivacyKeyAbout_;
+    type InputPrivacyKeyBirthday = InputPrivacyKeyBirthday_;
     type PrivacyKeyStatusTimestamp = PrivacyKeyStatusTimestamp_;
     type PrivacyKeyChatInvite = PrivacyKeyChatInvite_;
     type PrivacyKeyPhoneCall = PrivacyKeyPhoneCall_;
@@ -25733,6 +26555,7 @@ export declare namespace types {
     type PrivacyKeyAddedByPhone = PrivacyKeyAddedByPhone_;
     type PrivacyKeyVoiceMessages = PrivacyKeyVoiceMessages_;
     type PrivacyKeyAbout = PrivacyKeyAbout_;
+    type PrivacyKeyBirthday = PrivacyKeyBirthday_;
     type InputPrivacyValueAllowContacts = InputPrivacyValueAllowContacts_;
     type InputPrivacyValueAllowAll = InputPrivacyValueAllowAll_;
     type InputPrivacyValueAllowUsers = InputPrivacyValueAllowUsers_;
@@ -25742,6 +26565,7 @@ export declare namespace types {
     type InputPrivacyValueAllowChatParticipants = InputPrivacyValueAllowChatParticipants_;
     type InputPrivacyValueDisallowChatParticipants = InputPrivacyValueDisallowChatParticipants_;
     type InputPrivacyValueAllowCloseFriends = InputPrivacyValueAllowCloseFriends_;
+    type InputPrivacyValueAllowPremium = InputPrivacyValueAllowPremium_;
     type PrivacyValueAllowContacts = PrivacyValueAllowContacts_;
     type PrivacyValueAllowAll = PrivacyValueAllowAll_;
     type PrivacyValueAllowUsers = PrivacyValueAllowUsers_;
@@ -25751,6 +26575,7 @@ export declare namespace types {
     type PrivacyValueAllowChatParticipants = PrivacyValueAllowChatParticipants_;
     type PrivacyValueDisallowChatParticipants = PrivacyValueDisallowChatParticipants_;
     type PrivacyValueAllowCloseFriends = PrivacyValueAllowCloseFriends_;
+    type PrivacyValueAllowPremium = PrivacyValueAllowPremium_;
     type AccountDaysTTL = AccountDaysTTL_;
     type DocumentAttributeImageSize = DocumentAttributeImageSize_;
     type DocumentAttributeAnimated = DocumentAttributeAnimated_;
@@ -25802,6 +26627,7 @@ export declare namespace types {
     type KeyboardButtonWebView = KeyboardButtonWebView_;
     type KeyboardButtonSimpleWebView = KeyboardButtonSimpleWebView_;
     type KeyboardButtonRequestPeer = KeyboardButtonRequestPeer_;
+    type InputKeyboardButtonRequestPeer = InputKeyboardButtonRequestPeer_;
     type KeyboardButtonRow = KeyboardButtonRow_;
     type ReplyKeyboardHide = ReplyKeyboardHide_;
     type ReplyKeyboardForceReply = ReplyKeyboardForceReply_;
@@ -26335,6 +27161,59 @@ export declare namespace types {
     type InputQuickReplyShortcut = InputQuickReplyShortcut_;
     type InputQuickReplyShortcutId = InputQuickReplyShortcutId_;
     type ConnectedBot = ConnectedBot_;
+    type Birthday = Birthday_;
+    type BotBusinessConnection = BotBusinessConnection_;
+    type InputBusinessIntro = InputBusinessIntro_;
+    type BusinessIntro = BusinessIntro_;
+    type InputCollectibleUsername = InputCollectibleUsername_;
+    type InputCollectiblePhone = InputCollectiblePhone_;
+    type InputBusinessBotRecipients = InputBusinessBotRecipients_;
+    type BusinessBotRecipients = BusinessBotRecipients_;
+    type ContactBirthday = ContactBirthday_;
+    type MissingInvitee = MissingInvitee_;
+    type InputBusinessChatLink = InputBusinessChatLink_;
+    type BusinessChatLink = BusinessChatLink_;
+    type RequestedPeerUser = RequestedPeerUser_;
+    type RequestedPeerChat = RequestedPeerChat_;
+    type RequestedPeerChannel = RequestedPeerChannel_;
+    type SponsoredMessageReportOption = SponsoredMessageReportOption_;
+    type BroadcastRevenueTransactionProceeds = BroadcastRevenueTransactionProceeds_;
+    type BroadcastRevenueTransactionWithdrawal = BroadcastRevenueTransactionWithdrawal_;
+    type BroadcastRevenueTransactionRefund = BroadcastRevenueTransactionRefund_;
+    namespace help {
+        type ConfigSimple = help_ConfigSimple_;
+        type AppUpdate = help_AppUpdate_;
+        type NoAppUpdate = help_NoAppUpdate_;
+        type InviteText = help_InviteText_;
+        type Support = help_Support_;
+        type TermsOfService = help_TermsOfService_;
+        type RecentMeUrls = help_RecentMeUrls_;
+        type TermsOfServiceUpdateEmpty = help_TermsOfServiceUpdateEmpty_;
+        type TermsOfServiceUpdate = help_TermsOfServiceUpdate_;
+        type DeepLinkInfoEmpty = help_DeepLinkInfoEmpty_;
+        type DeepLinkInfo = help_DeepLinkInfo_;
+        type PassportConfigNotModified = help_PassportConfigNotModified_;
+        type PassportConfig = help_PassportConfig_;
+        type SupportName = help_SupportName_;
+        type UserInfoEmpty = help_UserInfoEmpty_;
+        type UserInfo = help_UserInfo_;
+        type PromoDataEmpty = help_PromoDataEmpty_;
+        type PromoData = help_PromoData_;
+        type CountryCode = help_CountryCode_;
+        type Country = help_Country_;
+        type CountriesListNotModified = help_CountriesListNotModified_;
+        type CountriesList = help_CountriesList_;
+        type PremiumPromo = help_PremiumPromo_;
+        type AppConfigNotModified = help_AppConfigNotModified_;
+        type AppConfig = help_AppConfig_;
+        type PeerColorSet = help_PeerColorSet_;
+        type PeerColorProfileSet = help_PeerColorProfileSet_;
+        type PeerColorOption = help_PeerColorOption_;
+        type PeerColorsNotModified = help_PeerColorsNotModified_;
+        type PeerColors = help_PeerColors_;
+        type TimezonesListNotModified = help_TimezonesListNotModified_;
+        type TimezonesList = help_TimezonesList_;
+    }
     namespace storage {
         type FileUnknown = storage_FileUnknown_;
         type FilePartial = storage_FilePartial_;
@@ -26384,6 +27263,7 @@ export declare namespace types {
         type TopPeersNotModified = contacts_TopPeersNotModified_;
         type TopPeers = contacts_TopPeers_;
         type TopPeersDisabled = contacts_TopPeersDisabled_;
+        type ContactBirthdays = contacts_ContactBirthdays_;
     }
     namespace messages {
         type Dialogs = messages_Dialogs_;
@@ -26465,6 +27345,8 @@ export declare namespace types {
         type QuickReplies = messages_QuickReplies_;
         type QuickRepliesNotModified = messages_QuickRepliesNotModified_;
         type DialogFilters = messages_DialogFilters_;
+        type MyStickers = messages_MyStickers_;
+        type InvitedUsers = messages_InvitedUsers_;
     }
     namespace updates {
         type State = updates_State_;
@@ -26487,39 +27369,6 @@ export declare namespace types {
         type WebFile = upload_WebFile_;
         type CdnFileReuploadNeeded = upload_CdnFileReuploadNeeded_;
         type CdnFile = upload_CdnFile_;
-    }
-    namespace help {
-        type AppUpdate = help_AppUpdate_;
-        type NoAppUpdate = help_NoAppUpdate_;
-        type InviteText = help_InviteText_;
-        type Support = help_Support_;
-        type TermsOfService = help_TermsOfService_;
-        type RecentMeUrls = help_RecentMeUrls_;
-        type TermsOfServiceUpdateEmpty = help_TermsOfServiceUpdateEmpty_;
-        type TermsOfServiceUpdate = help_TermsOfServiceUpdate_;
-        type DeepLinkInfoEmpty = help_DeepLinkInfoEmpty_;
-        type DeepLinkInfo = help_DeepLinkInfo_;
-        type PassportConfigNotModified = help_PassportConfigNotModified_;
-        type PassportConfig = help_PassportConfig_;
-        type SupportName = help_SupportName_;
-        type UserInfoEmpty = help_UserInfoEmpty_;
-        type UserInfo = help_UserInfo_;
-        type PromoDataEmpty = help_PromoDataEmpty_;
-        type PromoData = help_PromoData_;
-        type CountryCode = help_CountryCode_;
-        type Country = help_Country_;
-        type CountriesListNotModified = help_CountriesListNotModified_;
-        type CountriesList = help_CountriesList_;
-        type PremiumPromo = help_PremiumPromo_;
-        type AppConfigNotModified = help_AppConfigNotModified_;
-        type AppConfig = help_AppConfig_;
-        type PeerColorSet = help_PeerColorSet_;
-        type PeerColorProfileSet = help_PeerColorProfileSet_;
-        type PeerColorOption = help_PeerColorOption_;
-        type PeerColorsNotModified = help_PeerColorsNotModified_;
-        type PeerColors = help_PeerColors_;
-        type TimezonesListNotModified = help_TimezonesListNotModified_;
-        type TimezonesList = help_TimezonesList_;
     }
     namespace account {
         type PrivacyRules = account_PrivacyRules_;
@@ -26551,6 +27400,8 @@ export declare namespace types {
         type EmailVerifiedLogin = account_EmailVerifiedLogin_;
         type AutoSaveSettings = account_AutoSaveSettings_;
         type ConnectedBots = account_ConnectedBots_;
+        type BusinessChatLinks = account_BusinessChatLinks_;
+        type ResolvedBusinessChatLinks = account_ResolvedBusinessChatLinks_;
     }
     namespace channels {
         type ChannelParticipants = channels_ChannelParticipants_;
@@ -26558,6 +27409,9 @@ export declare namespace types {
         type ChannelParticipant = channels_ChannelParticipant_;
         type AdminLogResults = channels_AdminLogResults_;
         type SendAsPeers = channels_SendAsPeers_;
+        type SponsoredMessageReportResultChooseOption = channels_SponsoredMessageReportResultChooseOption_;
+        type SponsoredMessageReportResultAdsHidden = channels_SponsoredMessageReportResultAdsHidden_;
+        type SponsoredMessageReportResultReported = channels_SponsoredMessageReportResultReported_;
     }
     namespace payments {
         type PaymentForm = payments_PaymentForm_;
@@ -26587,6 +27441,9 @@ export declare namespace types {
         type MessageStats = stats_MessageStats_;
         type StoryStats = stats_StoryStats_;
         type PublicForwards = stats_PublicForwards_;
+        type BroadcastRevenueStats = stats_BroadcastRevenueStats_;
+        type BroadcastRevenueWithdrawalUrl = stats_BroadcastRevenueWithdrawalUrl_;
+        type BroadcastRevenueTransactions = stats_BroadcastRevenueTransactions_;
     }
     namespace stickers {
         type SuggestedShortName = stickers_SuggestedShortName_;
@@ -26622,6 +27479,9 @@ export declare namespace types {
         type EligibleToJoin = smsjobs_EligibleToJoin_;
         type Status = smsjobs_Status_;
     }
+    namespace fragment {
+        type CollectibleInfo = fragment_CollectibleInfo_;
+    }
 }
 export declare const map: Map<number, TLObjectConstructor<TLObject>>;
 export declare namespace enums {
@@ -26651,7 +27511,9 @@ export declare namespace enums {
     type HttpWait = types.Http_wait;
     type True = types.True;
     type Error = types.Error;
-    type Null = types.Null;
+    type IpPort = types.IpPort | types.IpPortSecret;
+    type AccessPointRule = types.AccessPointRule;
+    type InputFileLocation = types.InputPeerPhotoFileLocationLegacy | types.InputStickerSetThumbLegacy | types.InputFileLocation | types.InputEncryptedFileLocation | types.InputDocumentFileLocation | types.InputSecureFileLocation | types.InputTakeoutFileLocation | types.InputPhotoFileLocation | types.InputPhotoLegacyFileLocation | types.InputPeerPhotoFileLocation | types.InputStickerSetThumb | types.InputGroupCallStream;
     type InputPeer = types.InputPeerEmpty | types.InputPeerSelf | types.InputPeerChat | types.InputPeerUser | types.InputPeerChannel | types.InputPeerUserFromMessage | types.InputPeerChannelFromMessage;
     type InputUser = types.InputUserEmpty | types.InputUserSelf | types.InputUser | types.InputUserFromMessage;
     type InputContact = types.InputPhoneContact;
@@ -26660,7 +27522,6 @@ export declare namespace enums {
     type InputChatPhoto = types.InputChatPhotoEmpty | types.InputChatUploadedPhoto | types.InputChatPhoto;
     type InputGeoPoint = types.InputGeoPointEmpty | types.InputGeoPoint;
     type InputPhoto = types.InputPhotoEmpty | types.InputPhoto;
-    type InputFileLocation = types.InputFileLocation | types.InputEncryptedFileLocation | types.InputDocumentFileLocation | types.InputSecureFileLocation | types.InputTakeoutFileLocation | types.InputPhotoFileLocation | types.InputPhotoLegacyFileLocation | types.InputPeerPhotoFileLocation | types.InputStickerSetThumb | types.InputGroupCallStream;
     type Peer = types.PeerUser | types.PeerChat | types.PeerChannel;
     type User = types.UserEmpty | types.User;
     type UserProfilePhoto = types.UserProfilePhotoEmpty | types.UserProfilePhoto;
@@ -26672,7 +27533,7 @@ export declare namespace enums {
     type ChatPhoto = types.ChatPhotoEmpty | types.ChatPhoto;
     type Message = types.MessageEmpty | types.Message | types.MessageService;
     type MessageMedia = types.MessageMediaEmpty | types.MessageMediaPhoto | types.MessageMediaGeo | types.MessageMediaContact | types.MessageMediaUnsupported | types.MessageMediaDocument | types.MessageMediaWebPage | types.MessageMediaVenue | types.MessageMediaGame | types.MessageMediaInvoice | types.MessageMediaGeoLive | types.MessageMediaPoll | types.MessageMediaDice | types.MessageMediaStory | types.MessageMediaGiveaway | types.MessageMediaGiveawayResults;
-    type MessageAction = types.MessageActionEmpty | types.MessageActionChatCreate | types.MessageActionChatEditTitle | types.MessageActionChatEditPhoto | types.MessageActionChatDeletePhoto | types.MessageActionChatAddUser | types.MessageActionChatDeleteUser | types.MessageActionChatJoinedByLink | types.MessageActionChannelCreate | types.MessageActionChatMigrateTo | types.MessageActionChannelMigrateFrom | types.MessageActionPinMessage | types.MessageActionHistoryClear | types.MessageActionGameScore | types.MessageActionPaymentSentMe | types.MessageActionPaymentSent | types.MessageActionPhoneCall | types.MessageActionScreenshotTaken | types.MessageActionCustomAction | types.MessageActionBotAllowed | types.MessageActionSecureValuesSentMe | types.MessageActionSecureValuesSent | types.MessageActionContactSignUp | types.MessageActionGeoProximityReached | types.MessageActionGroupCall | types.MessageActionInviteToGroupCall | types.MessageActionSetMessagesTTL | types.MessageActionGroupCallScheduled | types.MessageActionSetChatTheme | types.MessageActionChatJoinedByRequest | types.MessageActionWebViewDataSentMe | types.MessageActionWebViewDataSent | types.MessageActionGiftPremium | types.MessageActionTopicCreate | types.MessageActionTopicEdit | types.MessageActionSuggestProfilePhoto | types.MessageActionRequestedPeer | types.MessageActionSetChatWallPaper | types.MessageActionGiftCode | types.MessageActionGiveawayLaunch | types.MessageActionGiveawayResults | types.MessageActionBoostApply;
+    type MessageAction = types.MessageActionEmpty | types.MessageActionChatCreate | types.MessageActionChatEditTitle | types.MessageActionChatEditPhoto | types.MessageActionChatDeletePhoto | types.MessageActionChatAddUser | types.MessageActionChatDeleteUser | types.MessageActionChatJoinedByLink | types.MessageActionChannelCreate | types.MessageActionChatMigrateTo | types.MessageActionChannelMigrateFrom | types.MessageActionPinMessage | types.MessageActionHistoryClear | types.MessageActionGameScore | types.MessageActionPaymentSentMe | types.MessageActionPaymentSent | types.MessageActionPhoneCall | types.MessageActionScreenshotTaken | types.MessageActionCustomAction | types.MessageActionBotAllowed | types.MessageActionSecureValuesSentMe | types.MessageActionSecureValuesSent | types.MessageActionContactSignUp | types.MessageActionGeoProximityReached | types.MessageActionGroupCall | types.MessageActionInviteToGroupCall | types.MessageActionSetMessagesTTL | types.MessageActionGroupCallScheduled | types.MessageActionSetChatTheme | types.MessageActionChatJoinedByRequest | types.MessageActionWebViewDataSentMe | types.MessageActionWebViewDataSent | types.MessageActionGiftPremium | types.MessageActionTopicCreate | types.MessageActionTopicEdit | types.MessageActionSuggestProfilePhoto | types.MessageActionRequestedPeer | types.MessageActionSetChatWallPaper | types.MessageActionGiftCode | types.MessageActionGiveawayLaunch | types.MessageActionGiveawayResults | types.MessageActionBoostApply | types.MessageActionRequestedPeerSentMe;
     type Dialog = types.Dialog | types.DialogFolder;
     type Photo = types.PhotoEmpty | types.Photo;
     type PhotoSize = types.PhotoSizeEmpty | types.PhotoSize | types.PhotoCachedSize | types.PhotoStrippedSize | types.PhotoSizeProgressive | types.PhotoPathSize;
@@ -26688,7 +27549,7 @@ export declare namespace enums {
     type ImportedContact = types.ImportedContact;
     type ContactStatus = types.ContactStatus;
     type MessagesFilter = types.InputMessagesFilterEmpty | types.InputMessagesFilterPhotos | types.InputMessagesFilterVideo | types.InputMessagesFilterPhotoVideo | types.InputMessagesFilterDocument | types.InputMessagesFilterUrl | types.InputMessagesFilterGif | types.InputMessagesFilterVoice | types.InputMessagesFilterMusic | types.InputMessagesFilterChatPhotos | types.InputMessagesFilterPhoneCalls | types.InputMessagesFilterRoundVoice | types.InputMessagesFilterRoundVideo | types.InputMessagesFilterMyMentions | types.InputMessagesFilterGeo | types.InputMessagesFilterContacts | types.InputMessagesFilterPinned;
-    type Update = types.UpdateNewMessage | types.UpdateMessageID | types.UpdateDeleteMessages | types.UpdateUserTyping | types.UpdateChatUserTyping | types.UpdateChatParticipants | types.UpdateUserStatus | types.UpdateUserName | types.UpdateNewAuthorization | types.UpdateNewEncryptedMessage | types.UpdateEncryptedChatTyping | types.UpdateEncryption | types.UpdateEncryptedMessagesRead | types.UpdateChatParticipantAdd | types.UpdateChatParticipantDelete | types.UpdateDcOptions | types.UpdateNotifySettings | types.UpdateServiceNotification | types.UpdatePrivacy | types.UpdateUserPhone | types.UpdateReadHistoryInbox | types.UpdateReadHistoryOutbox | types.UpdateWebPage | types.UpdateReadMessagesContents | types.UpdateChannelTooLong | types.UpdateChannel | types.UpdateNewChannelMessage | types.UpdateReadChannelInbox | types.UpdateDeleteChannelMessages | types.UpdateChannelMessageViews | types.UpdateChatParticipantAdmin | types.UpdateNewStickerSet | types.UpdateStickerSetsOrder | types.UpdateStickerSets | types.UpdateSavedGifs | types.UpdateBotInlineQuery | types.UpdateBotInlineSend | types.UpdateEditChannelMessage | types.UpdateBotCallbackQuery | types.UpdateEditMessage | types.UpdateInlineBotCallbackQuery | types.UpdateReadChannelOutbox | types.UpdateDraftMessage | types.UpdateReadFeaturedStickers | types.UpdateRecentStickers | types.UpdateConfig | types.UpdatePtsChanged | types.UpdateChannelWebPage | types.UpdateDialogPinned | types.UpdatePinnedDialogs | types.UpdateBotWebhookJSON | types.UpdateBotWebhookJSONQuery | types.UpdateBotShippingQuery | types.UpdateBotPrecheckoutQuery | types.UpdatePhoneCall | types.UpdateLangPackTooLong | types.UpdateLangPack | types.UpdateFavedStickers | types.UpdateChannelReadMessagesContents | types.UpdateContactsReset | types.UpdateChannelAvailableMessages | types.UpdateDialogUnreadMark | types.UpdateMessagePoll | types.UpdateChatDefaultBannedRights | types.UpdateFolderPeers | types.UpdatePeerSettings | types.UpdatePeerLocated | types.UpdateNewScheduledMessage | types.UpdateDeleteScheduledMessages | types.UpdateTheme | types.UpdateGeoLiveViewed | types.UpdateLoginToken | types.UpdateMessagePollVote | types.UpdateDialogFilter | types.UpdateDialogFilterOrder | types.UpdateDialogFilters | types.UpdatePhoneCallSignalingData | types.UpdateChannelMessageForwards | types.UpdateReadChannelDiscussionInbox | types.UpdateReadChannelDiscussionOutbox | types.UpdatePeerBlocked | types.UpdateChannelUserTyping | types.UpdatePinnedMessages | types.UpdatePinnedChannelMessages | types.UpdateChat | types.UpdateGroupCallParticipants | types.UpdateGroupCall | types.UpdatePeerHistoryTTL | types.UpdateChatParticipant | types.UpdateChannelParticipant | types.UpdateBotStopped | types.UpdateGroupCallConnection | types.UpdateBotCommands | types.UpdatePendingJoinRequests | types.UpdateBotChatInviteRequester | types.UpdateMessageReactions | types.UpdateAttachMenuBots | types.UpdateWebViewResultSent | types.UpdateBotMenuButton | types.UpdateSavedRingtones | types.UpdateTranscribedAudio | types.UpdateReadFeaturedEmojiStickers | types.UpdateUserEmojiStatus | types.UpdateRecentEmojiStatuses | types.UpdateRecentReactions | types.UpdateMoveStickerSetToTop | types.UpdateMessageExtendedMedia | types.UpdateChannelPinnedTopic | types.UpdateChannelPinnedTopics | types.UpdateUser | types.UpdateAutoSaveSettings | types.UpdateGroupInvitePrivacyForbidden | types.UpdateStory | types.UpdateReadStories | types.UpdateStoryID | types.UpdateStoriesStealthMode | types.UpdateSentStoryReaction | types.UpdateBotChatBoost | types.UpdateChannelViewForumAsMessages | types.UpdatePeerWallpaper | types.UpdateBotMessageReaction | types.UpdateBotMessageReactions | types.UpdateSavedDialogPinned | types.UpdatePinnedSavedDialogs | types.UpdateSavedReactionTags | types.UpdateSmsJob | types.UpdateQuickReplies | types.UpdateNewQuickReply | types.UpdateDeleteQuickReply | types.UpdateQuickReplyMessage | types.UpdateDeleteQuickReplyMessages;
+    type Update = types.UpdateNewMessage | types.UpdateMessageID | types.UpdateDeleteMessages | types.UpdateUserTyping | types.UpdateChatUserTyping | types.UpdateChatParticipants | types.UpdateUserStatus | types.UpdateUserName | types.UpdateNewAuthorization | types.UpdateNewEncryptedMessage | types.UpdateEncryptedChatTyping | types.UpdateEncryption | types.UpdateEncryptedMessagesRead | types.UpdateChatParticipantAdd | types.UpdateChatParticipantDelete | types.UpdateDcOptions | types.UpdateNotifySettings | types.UpdateServiceNotification | types.UpdatePrivacy | types.UpdateUserPhone | types.UpdateReadHistoryInbox | types.UpdateReadHistoryOutbox | types.UpdateWebPage | types.UpdateReadMessagesContents | types.UpdateChannelTooLong | types.UpdateChannel | types.UpdateNewChannelMessage | types.UpdateReadChannelInbox | types.UpdateDeleteChannelMessages | types.UpdateChannelMessageViews | types.UpdateChatParticipantAdmin | types.UpdateNewStickerSet | types.UpdateStickerSetsOrder | types.UpdateStickerSets | types.UpdateSavedGifs | types.UpdateBotInlineQuery | types.UpdateBotInlineSend | types.UpdateEditChannelMessage | types.UpdateBotCallbackQuery | types.UpdateEditMessage | types.UpdateInlineBotCallbackQuery | types.UpdateReadChannelOutbox | types.UpdateDraftMessage | types.UpdateReadFeaturedStickers | types.UpdateRecentStickers | types.UpdateConfig | types.UpdatePtsChanged | types.UpdateChannelWebPage | types.UpdateDialogPinned | types.UpdatePinnedDialogs | types.UpdateBotWebhookJSON | types.UpdateBotWebhookJSONQuery | types.UpdateBotShippingQuery | types.UpdateBotPrecheckoutQuery | types.UpdatePhoneCall | types.UpdateLangPackTooLong | types.UpdateLangPack | types.UpdateFavedStickers | types.UpdateChannelReadMessagesContents | types.UpdateContactsReset | types.UpdateChannelAvailableMessages | types.UpdateDialogUnreadMark | types.UpdateMessagePoll | types.UpdateChatDefaultBannedRights | types.UpdateFolderPeers | types.UpdatePeerSettings | types.UpdatePeerLocated | types.UpdateNewScheduledMessage | types.UpdateDeleteScheduledMessages | types.UpdateTheme | types.UpdateGeoLiveViewed | types.UpdateLoginToken | types.UpdateMessagePollVote | types.UpdateDialogFilter | types.UpdateDialogFilterOrder | types.UpdateDialogFilters | types.UpdatePhoneCallSignalingData | types.UpdateChannelMessageForwards | types.UpdateReadChannelDiscussionInbox | types.UpdateReadChannelDiscussionOutbox | types.UpdatePeerBlocked | types.UpdateChannelUserTyping | types.UpdatePinnedMessages | types.UpdatePinnedChannelMessages | types.UpdateChat | types.UpdateGroupCallParticipants | types.UpdateGroupCall | types.UpdatePeerHistoryTTL | types.UpdateChatParticipant | types.UpdateChannelParticipant | types.UpdateBotStopped | types.UpdateGroupCallConnection | types.UpdateBotCommands | types.UpdatePendingJoinRequests | types.UpdateBotChatInviteRequester | types.UpdateMessageReactions | types.UpdateAttachMenuBots | types.UpdateWebViewResultSent | types.UpdateBotMenuButton | types.UpdateSavedRingtones | types.UpdateTranscribedAudio | types.UpdateReadFeaturedEmojiStickers | types.UpdateUserEmojiStatus | types.UpdateRecentEmojiStatuses | types.UpdateRecentReactions | types.UpdateMoveStickerSetToTop | types.UpdateMessageExtendedMedia | types.UpdateChannelPinnedTopic | types.UpdateChannelPinnedTopics | types.UpdateUser | types.UpdateAutoSaveSettings | types.UpdateStory | types.UpdateReadStories | types.UpdateStoryID | types.UpdateStoriesStealthMode | types.UpdateSentStoryReaction | types.UpdateBotChatBoost | types.UpdateChannelViewForumAsMessages | types.UpdatePeerWallpaper | types.UpdateBotMessageReaction | types.UpdateBotMessageReactions | types.UpdateSavedDialogPinned | types.UpdatePinnedSavedDialogs | types.UpdateSavedReactionTags | types.UpdateSmsJob | types.UpdateQuickReplies | types.UpdateNewQuickReply | types.UpdateDeleteQuickReply | types.UpdateQuickReplyMessage | types.UpdateDeleteQuickReplyMessages | types.UpdateBotBusinessConnect | types.UpdateBotNewBusinessMessage | types.UpdateBotEditBusinessMessage | types.UpdateBotDeleteBusinessMessage;
     type Updates = types.UpdatesTooLong | types.UpdateShortMessage | types.UpdateShortChatMessage | types.UpdateShort | types.UpdatesCombined | types.Updates | types.UpdateShortSentMessage;
     type DcOption = types.DcOption;
     type Config = types.Config;
@@ -26702,10 +27563,10 @@ export declare namespace enums {
     type Document = types.DocumentEmpty | types.Document;
     type NotifyPeer = types.NotifyPeer | types.NotifyUsers | types.NotifyChats | types.NotifyBroadcasts | types.NotifyForumTopic;
     type SendMessageAction = types.SendMessageTypingAction | types.SendMessageCancelAction | types.SendMessageRecordVideoAction | types.SendMessageUploadVideoAction | types.SendMessageRecordAudioAction | types.SendMessageUploadAudioAction | types.SendMessageUploadPhotoAction | types.SendMessageUploadDocumentAction | types.SendMessageGeoLocationAction | types.SendMessageChooseContactAction | types.SendMessageGamePlayAction | types.SendMessageRecordRoundAction | types.SendMessageUploadRoundAction | types.SpeakingInGroupCallAction | types.SendMessageHistoryImportAction | types.SendMessageChooseStickerAction | types.SendMessageEmojiInteraction | types.SendMessageEmojiInteractionSeen;
-    type InputPrivacyKey = types.InputPrivacyKeyStatusTimestamp | types.InputPrivacyKeyChatInvite | types.InputPrivacyKeyPhoneCall | types.InputPrivacyKeyPhoneP2P | types.InputPrivacyKeyForwards | types.InputPrivacyKeyProfilePhoto | types.InputPrivacyKeyPhoneNumber | types.InputPrivacyKeyAddedByPhone | types.InputPrivacyKeyVoiceMessages | types.InputPrivacyKeyAbout;
-    type PrivacyKey = types.PrivacyKeyStatusTimestamp | types.PrivacyKeyChatInvite | types.PrivacyKeyPhoneCall | types.PrivacyKeyPhoneP2P | types.PrivacyKeyForwards | types.PrivacyKeyProfilePhoto | types.PrivacyKeyPhoneNumber | types.PrivacyKeyAddedByPhone | types.PrivacyKeyVoiceMessages | types.PrivacyKeyAbout;
-    type InputPrivacyRule = types.InputPrivacyValueAllowContacts | types.InputPrivacyValueAllowAll | types.InputPrivacyValueAllowUsers | types.InputPrivacyValueDisallowContacts | types.InputPrivacyValueDisallowAll | types.InputPrivacyValueDisallowUsers | types.InputPrivacyValueAllowChatParticipants | types.InputPrivacyValueDisallowChatParticipants | types.InputPrivacyValueAllowCloseFriends;
-    type PrivacyRule = types.PrivacyValueAllowContacts | types.PrivacyValueAllowAll | types.PrivacyValueAllowUsers | types.PrivacyValueDisallowContacts | types.PrivacyValueDisallowAll | types.PrivacyValueDisallowUsers | types.PrivacyValueAllowChatParticipants | types.PrivacyValueDisallowChatParticipants | types.PrivacyValueAllowCloseFriends;
+    type InputPrivacyKey = types.InputPrivacyKeyStatusTimestamp | types.InputPrivacyKeyChatInvite | types.InputPrivacyKeyPhoneCall | types.InputPrivacyKeyPhoneP2P | types.InputPrivacyKeyForwards | types.InputPrivacyKeyProfilePhoto | types.InputPrivacyKeyPhoneNumber | types.InputPrivacyKeyAddedByPhone | types.InputPrivacyKeyVoiceMessages | types.InputPrivacyKeyAbout | types.InputPrivacyKeyBirthday;
+    type PrivacyKey = types.PrivacyKeyStatusTimestamp | types.PrivacyKeyChatInvite | types.PrivacyKeyPhoneCall | types.PrivacyKeyPhoneP2P | types.PrivacyKeyForwards | types.PrivacyKeyProfilePhoto | types.PrivacyKeyPhoneNumber | types.PrivacyKeyAddedByPhone | types.PrivacyKeyVoiceMessages | types.PrivacyKeyAbout | types.PrivacyKeyBirthday;
+    type InputPrivacyRule = types.InputPrivacyValueAllowContacts | types.InputPrivacyValueAllowAll | types.InputPrivacyValueAllowUsers | types.InputPrivacyValueDisallowContacts | types.InputPrivacyValueDisallowAll | types.InputPrivacyValueDisallowUsers | types.InputPrivacyValueAllowChatParticipants | types.InputPrivacyValueDisallowChatParticipants | types.InputPrivacyValueAllowCloseFriends | types.InputPrivacyValueAllowPremium;
+    type PrivacyRule = types.PrivacyValueAllowContacts | types.PrivacyValueAllowAll | types.PrivacyValueAllowUsers | types.PrivacyValueDisallowContacts | types.PrivacyValueDisallowAll | types.PrivacyValueDisallowUsers | types.PrivacyValueAllowChatParticipants | types.PrivacyValueDisallowChatParticipants | types.PrivacyValueAllowCloseFriends | types.PrivacyValueAllowPremium;
     type AccountDaysTTL = types.AccountDaysTTL;
     type DocumentAttribute = types.DocumentAttributeImageSize | types.DocumentAttributeAnimated | types.DocumentAttributeSticker | types.DocumentAttributeVideo | types.DocumentAttributeAudio | types.DocumentAttributeFilename | types.DocumentAttributeHasStickers | types.DocumentAttributeCustomEmoji;
     type StickerPack = types.StickerPack;
@@ -26718,7 +27579,7 @@ export declare namespace enums {
     type StickerSet = types.StickerSet;
     type BotCommand = types.BotCommand;
     type BotInfo = types.BotInfo;
-    type KeyboardButton = types.KeyboardButton | types.KeyboardButtonUrl | types.KeyboardButtonCallback | types.KeyboardButtonRequestPhone | types.KeyboardButtonRequestGeoLocation | types.KeyboardButtonSwitchInline | types.KeyboardButtonGame | types.KeyboardButtonBuy | types.KeyboardButtonUrlAuth | types.InputKeyboardButtonUrlAuth | types.KeyboardButtonRequestPoll | types.InputKeyboardButtonUserProfile | types.KeyboardButtonUserProfile | types.KeyboardButtonWebView | types.KeyboardButtonSimpleWebView | types.KeyboardButtonRequestPeer;
+    type KeyboardButton = types.KeyboardButton | types.KeyboardButtonUrl | types.KeyboardButtonCallback | types.KeyboardButtonRequestPhone | types.KeyboardButtonRequestGeoLocation | types.KeyboardButtonSwitchInline | types.KeyboardButtonGame | types.KeyboardButtonBuy | types.KeyboardButtonUrlAuth | types.InputKeyboardButtonUrlAuth | types.KeyboardButtonRequestPoll | types.InputKeyboardButtonUserProfile | types.KeyboardButtonUserProfile | types.KeyboardButtonWebView | types.KeyboardButtonSimpleWebView | types.KeyboardButtonRequestPeer | types.InputKeyboardButtonRequestPeer;
     type KeyboardButtonRow = types.KeyboardButtonRow;
     type ReplyMarkup = types.ReplyKeyboardHide | types.ReplyKeyboardForceReply | types.ReplyKeyboardMarkup | types.ReplyInlineMarkup;
     type MessageEntity = types.MessageEntityUnknown | types.MessageEntityMention | types.MessageEntityHashtag | types.MessageEntityBotCommand | types.MessageEntityUrl | types.MessageEntityEmail | types.MessageEntityBold | types.MessageEntityItalic | types.MessageEntityCode | types.MessageEntityPre | types.MessageEntityTextUrl | types.MessageEntityMentionName | types.InputMessageEntityMentionName | types.MessageEntityPhone | types.MessageEntityCashtag | types.MessageEntityUnderline | types.MessageEntityStrike | types.MessageEntityBankCard | types.MessageEntitySpoiler | types.MessageEntityCustomEmoji | types.MessageEntityBlockquote;
@@ -26949,6 +27810,43 @@ export declare namespace enums {
     type QuickReply = types.QuickReply;
     type InputQuickReplyShortcut = types.InputQuickReplyShortcut | types.InputQuickReplyShortcutId;
     type ConnectedBot = types.ConnectedBot;
+    type Birthday = types.Birthday;
+    type BotBusinessConnection = types.BotBusinessConnection;
+    type InputBusinessIntro = types.InputBusinessIntro;
+    type BusinessIntro = types.BusinessIntro;
+    type InputCollectible = types.InputCollectibleUsername | types.InputCollectiblePhone;
+    type InputBusinessBotRecipients = types.InputBusinessBotRecipients;
+    type BusinessBotRecipients = types.BusinessBotRecipients;
+    type ContactBirthday = types.ContactBirthday;
+    type MissingInvitee = types.MissingInvitee;
+    type InputBusinessChatLink = types.InputBusinessChatLink;
+    type BusinessChatLink = types.BusinessChatLink;
+    type RequestedPeer = types.RequestedPeerUser | types.RequestedPeerChat | types.RequestedPeerChannel;
+    type SponsoredMessageReportOption = types.SponsoredMessageReportOption;
+    type BroadcastRevenueTransaction = types.BroadcastRevenueTransactionProceeds | types.BroadcastRevenueTransactionWithdrawal | types.BroadcastRevenueTransactionRefund;
+    namespace help {
+        type ConfigSimple = types.help.ConfigSimple;
+        type AppUpdate = types.help.AppUpdate | types.help.NoAppUpdate;
+        type InviteText = types.help.InviteText;
+        type Support = types.help.Support;
+        type TermsOfService = types.help.TermsOfService;
+        type RecentMeUrls = types.help.RecentMeUrls;
+        type TermsOfServiceUpdate = types.help.TermsOfServiceUpdateEmpty | types.help.TermsOfServiceUpdate;
+        type DeepLinkInfo = types.help.DeepLinkInfoEmpty | types.help.DeepLinkInfo;
+        type PassportConfig = types.help.PassportConfigNotModified | types.help.PassportConfig;
+        type SupportName = types.help.SupportName;
+        type UserInfo = types.help.UserInfoEmpty | types.help.UserInfo;
+        type PromoData = types.help.PromoDataEmpty | types.help.PromoData;
+        type CountryCode = types.help.CountryCode;
+        type Country = types.help.Country;
+        type CountriesList = types.help.CountriesListNotModified | types.help.CountriesList;
+        type PremiumPromo = types.help.PremiumPromo;
+        type AppConfig = types.help.AppConfigNotModified | types.help.AppConfig;
+        type PeerColorSet = types.help.PeerColorSet | types.help.PeerColorProfileSet;
+        type PeerColorOption = types.help.PeerColorOption;
+        type PeerColors = types.help.PeerColorsNotModified | types.help.PeerColors;
+        type TimezonesList = types.help.TimezonesListNotModified | types.help.TimezonesList;
+    }
     namespace storage {
         type FileType = types.storage.FileUnknown | types.storage.FilePartial | types.storage.FileJpeg | types.storage.FileGif | types.storage.FilePng | types.storage.FilePdf | types.storage.FileMp3 | types.storage.FileMov | types.storage.FileMp4 | types.storage.FileWebp;
     }
@@ -26969,6 +27867,7 @@ export declare namespace enums {
         type Found = types.contacts.Found;
         type ResolvedPeer = types.contacts.ResolvedPeer;
         type TopPeers = types.contacts.TopPeersNotModified | types.contacts.TopPeers | types.contacts.TopPeersDisabled;
+        type ContactBirthdays = types.contacts.ContactBirthdays;
     }
     namespace messages {
         type Dialogs = types.messages.Dialogs | types.messages.DialogsSlice | types.messages.DialogsNotModified;
@@ -27024,6 +27923,8 @@ export declare namespace enums {
         type SavedReactionTags = types.messages.SavedReactionTagsNotModified | types.messages.SavedReactionTags;
         type QuickReplies = types.messages.QuickReplies | types.messages.QuickRepliesNotModified;
         type DialogFilters = types.messages.DialogFilters;
+        type MyStickers = types.messages.MyStickers;
+        type InvitedUsers = types.messages.InvitedUsers;
     }
     namespace updates {
         type State = types.updates.State;
@@ -27038,28 +27939,6 @@ export declare namespace enums {
         type File = types.upload.File | types.upload.FileCdnRedirect;
         type WebFile = types.upload.WebFile;
         type CdnFile = types.upload.CdnFileReuploadNeeded | types.upload.CdnFile;
-    }
-    namespace help {
-        type AppUpdate = types.help.AppUpdate | types.help.NoAppUpdate;
-        type InviteText = types.help.InviteText;
-        type Support = types.help.Support;
-        type TermsOfService = types.help.TermsOfService;
-        type RecentMeUrls = types.help.RecentMeUrls;
-        type TermsOfServiceUpdate = types.help.TermsOfServiceUpdateEmpty | types.help.TermsOfServiceUpdate;
-        type DeepLinkInfo = types.help.DeepLinkInfoEmpty | types.help.DeepLinkInfo;
-        type PassportConfig = types.help.PassportConfigNotModified | types.help.PassportConfig;
-        type SupportName = types.help.SupportName;
-        type UserInfo = types.help.UserInfoEmpty | types.help.UserInfo;
-        type PromoData = types.help.PromoDataEmpty | types.help.PromoData;
-        type CountryCode = types.help.CountryCode;
-        type Country = types.help.Country;
-        type CountriesList = types.help.CountriesListNotModified | types.help.CountriesList;
-        type PremiumPromo = types.help.PremiumPromo;
-        type AppConfig = types.help.AppConfigNotModified | types.help.AppConfig;
-        type PeerColorSet = types.help.PeerColorSet | types.help.PeerColorProfileSet;
-        type PeerColorOption = types.help.PeerColorOption;
-        type PeerColors = types.help.PeerColorsNotModified | types.help.PeerColors;
-        type TimezonesList = types.help.TimezonesListNotModified | types.help.TimezonesList;
     }
     namespace account {
         type PrivacyRules = types.account.PrivacyRules;
@@ -27083,12 +27962,15 @@ export declare namespace enums {
         type EmailVerified = types.account.EmailVerified | types.account.EmailVerifiedLogin;
         type AutoSaveSettings = types.account.AutoSaveSettings;
         type ConnectedBots = types.account.ConnectedBots;
+        type BusinessChatLinks = types.account.BusinessChatLinks;
+        type ResolvedBusinessChatLinks = types.account.ResolvedBusinessChatLinks;
     }
     namespace channels {
         type ChannelParticipants = types.channels.ChannelParticipants | types.channels.ChannelParticipantsNotModified;
         type ChannelParticipant = types.channels.ChannelParticipant;
         type AdminLogResults = types.channels.AdminLogResults;
         type SendAsPeers = types.channels.SendAsPeers;
+        type SponsoredMessageReportResult = types.channels.SponsoredMessageReportResultChooseOption | types.channels.SponsoredMessageReportResultAdsHidden | types.channels.SponsoredMessageReportResultReported;
     }
     namespace payments {
         type PaymentForm = types.payments.PaymentForm;
@@ -27116,6 +27998,9 @@ export declare namespace enums {
         type MessageStats = types.stats.MessageStats;
         type StoryStats = types.stats.StoryStats;
         type PublicForwards = types.stats.PublicForwards;
+        type BroadcastRevenueStats = types.stats.BroadcastRevenueStats;
+        type BroadcastRevenueWithdrawalUrl = types.stats.BroadcastRevenueWithdrawalUrl;
+        type BroadcastRevenueTransactions = types.stats.BroadcastRevenueTransactions;
     }
     namespace stickers {
         type SuggestedShortName = types.stickers.SuggestedShortName;
@@ -27148,5 +28033,8 @@ export declare namespace enums {
     namespace smsjobs {
         type EligibilityToJoin = types.smsjobs.EligibleToJoin;
         type Status = types.smsjobs.Status;
+    }
+    namespace fragment {
+        type CollectibleInfo = types.fragment.CollectibleInfo;
     }
 }

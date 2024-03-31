@@ -139,6 +139,19 @@ export declare class destroy_auth_key_ extends Function_<enums.DestroyAuthKeyRes
     protected get [params](): Params;
     constructor();
 }
+export declare class invokeWithBusinessConnectionPrefix_ extends Function_<enums.Error> {
+    static __F: (params: {
+        connection_id: string;
+    }) => enums.Error;
+    connection_id: string;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        connection_id: string;
+    });
+}
 /** Invokes a query after successful completion of one of the previous queries. */
 export declare class invokeAfterMsg_<T extends Function_<unknown>> extends Function_<T["__R"]> {
     static __F: <T extends Function_<unknown>>(params: {
@@ -298,6 +311,22 @@ export declare class invokeWithTakeout_<T extends Function_<unknown>> extends Fu
     protected get [params](): Params;
     constructor(params: {
         takeout_id: bigint;
+        query: T;
+    });
+}
+export declare class invokeWithBusinessConnection_<T extends Function_<unknown>> extends Function_<T["__R"]> {
+    static __F: <T extends Function_<unknown>>(params: {
+        connection_id: string;
+        query: T;
+    }) => T["__R"];
+    connection_id: string;
+    query: T;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        connection_id: string;
         query: T;
     });
 }
@@ -2383,12 +2412,12 @@ export declare class account_updateConnectedBot_ extends Function_<enums.Updates
         can_reply?: true;
         deleted?: true;
         bot: enums.InputUser;
-        recipients: enums.InputBusinessRecipients;
+        recipients: enums.InputBusinessBotRecipients;
     }) => enums.Updates;
     can_reply?: true;
     deleted?: true;
     bot: enums.InputUser;
-    recipients: enums.InputBusinessRecipients;
+    recipients: enums.InputBusinessBotRecipients;
     protected get [id](): number;
     static get [name](): string;
     static get [paramDesc](): ParamDesc;
@@ -2397,7 +2426,7 @@ export declare class account_updateConnectedBot_ extends Function_<enums.Updates
         can_reply?: true;
         deleted?: true;
         bot: enums.InputUser;
-        recipients: enums.InputBusinessRecipients;
+        recipients: enums.InputBusinessBotRecipients;
     });
 }
 export declare class account_getConnectedBots_ extends Function_<enums.account.ConnectedBots> {
@@ -2407,6 +2436,150 @@ export declare class account_getConnectedBots_ extends Function_<enums.account.C
     static get [paramDesc](): ParamDesc;
     protected get [params](): Params;
     constructor();
+}
+export declare class account_getBotBusinessConnection_ extends Function_<enums.Updates> {
+    static __F: (params: {
+        connection_id: string;
+    }) => enums.Updates;
+    connection_id: string;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        connection_id: string;
+    });
+}
+export declare class account_updateBusinessIntro_ extends Function_<boolean> {
+    static __F: (params?: {
+        intro?: enums.InputBusinessIntro;
+    }) => boolean;
+    intro?: enums.InputBusinessIntro;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params?: {
+        intro?: enums.InputBusinessIntro;
+    });
+}
+export declare class account_toggleConnectedBotPaused_ extends Function_<boolean> {
+    static __F: (params: {
+        peer: enums.InputPeer;
+        paused: boolean;
+    }) => boolean;
+    peer: enums.InputPeer;
+    paused: boolean;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        peer: enums.InputPeer;
+        paused: boolean;
+    });
+}
+export declare class account_disablePeerConnectedBot_ extends Function_<boolean> {
+    static __F: (params: {
+        peer: enums.InputPeer;
+    }) => boolean;
+    peer: enums.InputPeer;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        peer: enums.InputPeer;
+    });
+}
+export declare class account_updateBirthday_ extends Function_<boolean> {
+    static __F: (params?: {
+        birthday?: enums.Birthday;
+    }) => boolean;
+    birthday?: enums.Birthday;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params?: {
+        birthday?: enums.Birthday;
+    });
+}
+export declare class account_createBusinessChatLink_ extends Function_<enums.BusinessChatLink> {
+    static __F: (params: {
+        link: enums.InputBusinessChatLink;
+    }) => enums.BusinessChatLink;
+    link: enums.InputBusinessChatLink;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        link: enums.InputBusinessChatLink;
+    });
+}
+export declare class account_editBusinessChatLink_ extends Function_<enums.BusinessChatLink> {
+    static __F: (params: {
+        slug: string;
+        link: enums.InputBusinessChatLink;
+    }) => enums.BusinessChatLink;
+    slug: string;
+    link: enums.InputBusinessChatLink;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        slug: string;
+        link: enums.InputBusinessChatLink;
+    });
+}
+export declare class account_deleteBusinessChatLink_ extends Function_<boolean> {
+    static __F: (params: {
+        slug: string;
+    }) => boolean;
+    slug: string;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        slug: string;
+    });
+}
+export declare class account_getBusinessChatLinks_ extends Function_<enums.account.BusinessChatLinks> {
+    static __F: () => enums.account.BusinessChatLinks;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor();
+}
+export declare class account_resolveBusinessChatLink_ extends Function_<enums.account.ResolvedBusinessChatLinks> {
+    static __F: (params: {
+        slug: string;
+    }) => enums.account.ResolvedBusinessChatLinks;
+    slug: string;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        slug: string;
+    });
+}
+export declare class account_updatePersonalChannel_ extends Function_<boolean> {
+    static __F: (params: {
+        channel: enums.InputChannel;
+    }) => boolean;
+    channel: enums.InputChannel;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        channel: enums.InputChannel;
+    });
 }
 /** Returns basic user info according to their identifiers. */
 export declare class users_getUsers_ extends Function_<enums.User[]> {
@@ -2930,6 +3103,14 @@ export declare class contacts_setBlocked_ extends Function_<boolean> {
         id: Array<enums.InputPeer>;
         limit: number;
     });
+}
+export declare class contacts_getBirthdays_ extends Function_<enums.contacts.ContactBirthdays> {
+    static __F: () => enums.contacts.ContactBirthdays;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor();
 }
 /** Returns the list of messages by their IDs. */
 export declare class messages_getMessages_ extends Function_<enums.messages.Messages> {
@@ -3549,12 +3730,12 @@ export declare class messages_editChatPhoto_ extends Function_<enums.Updates> {
     });
 }
 /** Adds a user to a chat and sends a service message on it. */
-export declare class messages_addChatUser_ extends Function_<enums.Updates> {
+export declare class messages_addChatUser_ extends Function_<enums.messages.InvitedUsers> {
     static __F: (params: {
         chat_id: bigint;
         user_id: enums.InputUser;
         fwd_limit: number;
-    }) => enums.Updates;
+    }) => enums.messages.InvitedUsers;
     /** Chat ID */
     chat_id: bigint;
     /** User ID to be added */
@@ -3595,12 +3776,12 @@ export declare class messages_deleteChatUser_ extends Function_<enums.Updates> {
     });
 }
 /** Creates a new chat. */
-export declare class messages_createChat_ extends Function_<enums.Updates> {
+export declare class messages_createChat_ extends Function_<enums.messages.InvitedUsers> {
     static __F: (params: {
         users: Array<enums.InputUser>;
         title: string;
         ttl_period?: number;
-    }) => enums.Updates;
+    }) => enums.messages.InvitedUsers;
     /** List of user IDs to be invited */
     users: Array<enums.InputUser>;
     /** Chat name */
@@ -5023,9 +5204,11 @@ export declare class messages_setBotPrecheckoutResults_ extends Function_<boolea
 /** Upload a file and associate it to a chat (without actually sending it to the chat) */
 export declare class messages_uploadMedia_ extends Function_<enums.MessageMedia> {
     static __F: (params: {
+        business_connection_id?: string;
         peer: enums.InputPeer;
         media: enums.InputMedia;
     }) => enums.MessageMedia;
+    business_connection_id?: string;
     /** The chat, can be [inputPeerEmpty](https://core.telegram.org/constructor/inputPeerEmpty) for bots and [inputPeerSelf](https://core.telegram.org/constructor/inputPeerSelf) for users. */
     peer: enums.InputPeer;
     /** File uploaded in chunks as described in [files »](https://core.telegram.org/api/files) */
@@ -5035,6 +5218,7 @@ export declare class messages_uploadMedia_ extends Function_<enums.MessageMedia>
     static get [paramDesc](): ParamDesc;
     protected get [params](): Params;
     constructor(params: {
+        business_connection_id?: string;
         peer: enums.InputPeer;
         media: enums.InputMedia;
     });
@@ -7642,9 +7826,13 @@ export declare class messages_sendQuickReplyMessages_ extends Function_<enums.Up
     static __F: (params: {
         peer: enums.InputPeer;
         shortcut_id: number;
+        id: Array<number>;
+        random_id: Array<bigint>;
     }) => enums.Updates;
     peer: enums.InputPeer;
     shortcut_id: number;
+    id: Array<number>;
+    random_id: Array<bigint>;
     protected get [id](): number;
     static get [name](): string;
     static get [paramDesc](): ParamDesc;
@@ -7652,6 +7840,8 @@ export declare class messages_sendQuickReplyMessages_ extends Function_<enums.Up
     constructor(params: {
         peer: enums.InputPeer;
         shortcut_id: number;
+        id: Array<number>;
+        random_id: Array<bigint>;
     });
 }
 export declare class messages_deleteQuickReplyMessages_ extends Function_<enums.Updates> {
@@ -7681,6 +7871,22 @@ export declare class messages_toggleDialogFilterTags_ extends Function_<boolean>
     protected get [params](): Params;
     constructor(params: {
         enabled: boolean;
+    });
+}
+export declare class messages_getMyStickers_ extends Function_<enums.messages.MyStickers> {
+    static __F: (params: {
+        offset_id: bigint;
+        limit: number;
+    }) => enums.messages.MyStickers;
+    offset_id: bigint;
+    limit: number;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        offset_id: bigint;
+        limit: number;
     });
 }
 /** Returns a current state of updates. */
@@ -8764,11 +8970,11 @@ export declare class channels_leaveChannel_ extends Function_<enums.Updates> {
     });
 }
 /** Invite users to a channel/supergroup */
-export declare class channels_inviteToChannel_ extends Function_<enums.Updates> {
+export declare class channels_inviteToChannel_ extends Function_<enums.messages.InvitedUsers> {
     static __F: (params: {
         channel: enums.InputChannel;
         users: Array<enums.InputUser>;
-    }) => enums.Updates;
+    }) => enums.messages.InvitedUsers;
     /** Channel/supergroup */
     channel: enums.InputChannel;
     /** Users to invite */
@@ -8848,12 +9054,14 @@ export declare class channels_getAdminedPublicChannels_ extends Function_<enums.
     static __F: (params?: {
         by_location?: true;
         check_limit?: true;
+        for_personal?: true;
     }) => enums.messages.Chats;
     /** Get geogroups */
     by_location?: true;
     /** If set and the user has reached the limit of owned public [channels/supergroups/geogroups](https://core.telegram.org/api/channel), instead of returning the channel list one of the specified [errors](#possible-errors) will be returned.
     Useful to check if a new public channel can indeed be created, even before asking the user to enter a channel username to use in [channels.checkUsername](https://core.telegram.org/method/channels.checkUsername)/[channels.updateUsername](https://core.telegram.org/method/channels.updateUsername). */
     check_limit?: true;
+    for_personal?: true;
     protected get [id](): number;
     static get [name](): string;
     static get [paramDesc](): ParamDesc;
@@ -8861,6 +9069,7 @@ export declare class channels_getAdminedPublicChannels_ extends Function_<enums.
     constructor(params?: {
         by_location?: true;
         check_limit?: true;
+        for_personal?: true;
     });
 }
 /** Ban/unban/kick a user in a [supergroup/channel](https://core.telegram.org/api/channel). */
@@ -9697,6 +9906,41 @@ export declare class channels_setEmojiStickers_ extends Function_<boolean> {
         stickerset: enums.InputStickerSet;
     });
 }
+export declare class channels_reportSponsoredMessage_ extends Function_<enums.channels.SponsoredMessageReportResult> {
+    static __F: (params: {
+        channel: enums.InputChannel;
+        random_id: Uint8Array;
+        option: Uint8Array;
+    }) => enums.channels.SponsoredMessageReportResult;
+    channel: enums.InputChannel;
+    random_id: Uint8Array;
+    option: Uint8Array;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        channel: enums.InputChannel;
+        random_id: Uint8Array;
+        option: Uint8Array;
+    });
+}
+export declare class channels_restrictSponsoredMessages_ extends Function_<enums.Updates> {
+    static __F: (params: {
+        channel: enums.InputChannel;
+        restricted: boolean;
+    }) => enums.Updates;
+    channel: enums.InputChannel;
+    restricted: boolean;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        channel: enums.InputChannel;
+        restricted: boolean;
+    });
+}
 /** Sends a custom request; for bots only */
 export declare class bots_sendCustomRequest_ extends Function_<enums.DataJSON> {
     static __F: (params: {
@@ -10309,8 +10553,6 @@ export declare class payments_launchPrepaidGiveaway_ extends Function_<enums.Upd
 export declare class stickers_createStickerSet_ extends Function_<enums.messages.StickerSet> {
     static __F: (params: {
         masks?: true;
-        animated?: true;
-        videos?: true;
         emojis?: true;
         text_color?: true;
         user_id: enums.InputUser;
@@ -10322,10 +10564,6 @@ export declare class stickers_createStickerSet_ extends Function_<enums.messages
     }) => enums.messages.StickerSet;
     /** Whether this is a mask stickerset */
     masks?: true;
-    /** Whether this is an animated stickerset */
-    animated?: true;
-    /** Whether this is a video stickerset */
-    videos?: true;
     /** Whether this is a [custom emoji](https://core.telegram.org/api/custom-emoji) stickerset. */
     emojis?: true;
     /** Whether the color of TGS custom emojis contained in this set should be changed to the text color when used in messages, the accent color if used as emoji status, white on chat photos, or another appropriate color based on context. For custom emoji stickersets only. */
@@ -10348,8 +10586,6 @@ export declare class stickers_createStickerSet_ extends Function_<enums.messages
     protected get [params](): Params;
     constructor(params: {
         masks?: true;
-        animated?: true;
-        videos?: true;
         emojis?: true;
         text_color?: true;
         user_id: enums.InputUser;
@@ -10525,6 +10761,22 @@ export declare class stickers_deleteStickerSet_ extends Function_<boolean> {
     protected get [params](): Params;
     constructor(params: {
         stickerset: enums.InputStickerSet;
+    });
+}
+export declare class stickers_replaceSticker_ extends Function_<enums.messages.StickerSet> {
+    static __F: (params: {
+        sticker: enums.InputDocument;
+        new_sticker: enums.InputStickerSetItem;
+    }) => enums.messages.StickerSet;
+    sticker: enums.InputDocument;
+    new_sticker: enums.InputStickerSetItem;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        sticker: enums.InputDocument;
+        new_sticker: enums.InputStickerSetItem;
     });
 }
 /** Get phone call configuration to be passed to libtgvoip's shared config */
@@ -11482,6 +11734,57 @@ export declare class stats_getStoryPublicForwards_ extends Function_<enums.stats
         limit: number;
     });
 }
+export declare class stats_getBroadcastRevenueStats_ extends Function_<enums.stats.BroadcastRevenueStats> {
+    static __F: (params: {
+        dark?: true;
+        channel: enums.InputChannel;
+    }) => enums.stats.BroadcastRevenueStats;
+    dark?: true;
+    channel: enums.InputChannel;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        dark?: true;
+        channel: enums.InputChannel;
+    });
+}
+export declare class stats_getBroadcastRevenueWithdrawalUrl_ extends Function_<enums.stats.BroadcastRevenueWithdrawalUrl> {
+    static __F: (params: {
+        channel: enums.InputChannel;
+        password: enums.InputCheckPasswordSRP;
+    }) => enums.stats.BroadcastRevenueWithdrawalUrl;
+    channel: enums.InputChannel;
+    password: enums.InputCheckPasswordSRP;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        channel: enums.InputChannel;
+        password: enums.InputCheckPasswordSRP;
+    });
+}
+export declare class stats_getBroadcastRevenueTransactions_ extends Function_<enums.stats.BroadcastRevenueTransactions> {
+    static __F: (params: {
+        channel: enums.InputChannel;
+        offset: number;
+        limit: number;
+    }) => enums.stats.BroadcastRevenueTransactions;
+    channel: enums.InputChannel;
+    offset: number;
+    limit: number;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        channel: enums.InputChannel;
+        offset: number;
+        limit: number;
+    });
+}
 /** Export a [folder »](https://core.telegram.org/api/folders), creating a [chat folder deep link »](https://core.telegram.org/api/links#chat-folder-links). */
 export declare class chatlists_exportChatlistInvite_ extends Function_<enums.chatlists.ExportedChatlistInvite> {
     static __F: (params: {
@@ -12402,6 +12705,19 @@ export declare class smsjobs_finishJob_ extends Function_<boolean> {
         error?: string;
     });
 }
+export declare class fragment_getCollectibleInfo_ extends Function_<enums.fragment.CollectibleInfo> {
+    static __F: (params: {
+        collectible: enums.InputCollectible;
+    }) => enums.fragment.CollectibleInfo;
+    collectible: enums.InputCollectible;
+    protected get [id](): number;
+    static get [name](): string;
+    static get [paramDesc](): ParamDesc;
+    protected get [params](): Params;
+    constructor(params: {
+        collectible: enums.InputCollectible;
+    });
+}
 export declare const functions: {
     Function: typeof Function_;
     req_pq_multi: typeof req_pq_multi_;
@@ -12413,6 +12729,7 @@ export declare const functions: {
     ping_delay_disconnect: typeof ping_delay_disconnect_;
     destroy_session: typeof destroy_session_;
     destroy_auth_key: typeof destroy_auth_key_;
+    invokeWithBusinessConnectionPrefix: typeof invokeWithBusinessConnectionPrefix_;
     invokeAfterMsg: typeof invokeAfterMsg_;
     invokeAfterMsgs: typeof invokeAfterMsgs_;
     initConnection: typeof initConnection_;
@@ -12420,6 +12737,7 @@ export declare const functions: {
     invokeWithoutUpdates: typeof invokeWithoutUpdates_;
     invokeWithMessagesRange: typeof invokeWithMessagesRange_;
     invokeWithTakeout: typeof invokeWithTakeout_;
+    invokeWithBusinessConnection: typeof invokeWithBusinessConnection_;
     auth: {
         sendCode: typeof auth_sendCode_;
         signUp: typeof auth_signUp_;
@@ -12543,6 +12861,17 @@ export declare const functions: {
         updateBusinessAwayMessage: typeof account_updateBusinessAwayMessage_;
         updateConnectedBot: typeof account_updateConnectedBot_;
         getConnectedBots: typeof account_getConnectedBots_;
+        getBotBusinessConnection: typeof account_getBotBusinessConnection_;
+        updateBusinessIntro: typeof account_updateBusinessIntro_;
+        toggleConnectedBotPaused: typeof account_toggleConnectedBotPaused_;
+        disablePeerConnectedBot: typeof account_disablePeerConnectedBot_;
+        updateBirthday: typeof account_updateBirthday_;
+        createBusinessChatLink: typeof account_createBusinessChatLink_;
+        editBusinessChatLink: typeof account_editBusinessChatLink_;
+        deleteBusinessChatLink: typeof account_deleteBusinessChatLink_;
+        getBusinessChatLinks: typeof account_getBusinessChatLinks_;
+        resolveBusinessChatLink: typeof account_resolveBusinessChatLink_;
+        updatePersonalChannel: typeof account_updatePersonalChannel_;
     };
     users: {
         getUsers: typeof users_getUsers_;
@@ -12576,6 +12905,7 @@ export declare const functions: {
         importContactToken: typeof contacts_importContactToken_;
         editCloseFriends: typeof contacts_editCloseFriends_;
         setBlocked: typeof contacts_setBlocked_;
+        getBirthdays: typeof contacts_getBirthdays_;
     };
     messages: {
         getMessages: typeof messages_getMessages_;
@@ -12785,6 +13115,7 @@ export declare const functions: {
         sendQuickReplyMessages: typeof messages_sendQuickReplyMessages_;
         deleteQuickReplyMessages: typeof messages_deleteQuickReplyMessages_;
         toggleDialogFilterTags: typeof messages_toggleDialogFilterTags_;
+        getMyStickers: typeof messages_getMyStickers_;
     };
     updates: {
         getState: typeof updates_getState_;
@@ -12898,6 +13229,8 @@ export declare const functions: {
         updateEmojiStatus: typeof channels_updateEmojiStatus_;
         setBoostsToUnblockRestrictions: typeof channels_setBoostsToUnblockRestrictions_;
         setEmojiStickers: typeof channels_setEmojiStickers_;
+        reportSponsoredMessage: typeof channels_reportSponsoredMessage_;
+        restrictSponsoredMessages: typeof channels_restrictSponsoredMessages_;
     };
     bots: {
         sendCustomRequest: typeof bots_sendCustomRequest_;
@@ -12946,6 +13279,7 @@ export declare const functions: {
         changeSticker: typeof stickers_changeSticker_;
         renameStickerSet: typeof stickers_renameStickerSet_;
         deleteStickerSet: typeof stickers_deleteStickerSet_;
+        replaceSticker: typeof stickers_replaceSticker_;
     };
     phone: {
         getCallConfig: typeof phone_getCallConfig_;
@@ -12998,6 +13332,9 @@ export declare const functions: {
         getMessageStats: typeof stats_getMessageStats_;
         getStoryStats: typeof stats_getStoryStats_;
         getStoryPublicForwards: typeof stats_getStoryPublicForwards_;
+        getBroadcastRevenueStats: typeof stats_getBroadcastRevenueStats_;
+        getBroadcastRevenueWithdrawalUrl: typeof stats_getBroadcastRevenueWithdrawalUrl_;
+        getBroadcastRevenueTransactions: typeof stats_getBroadcastRevenueTransactions_;
     };
     chatlists: {
         exportChatlistInvite: typeof chatlists_exportChatlistInvite_;
@@ -13054,6 +13391,9 @@ export declare const functions: {
         getSmsJob: typeof smsjobs_getSmsJob_;
         finishJob: typeof smsjobs_finishJob_;
     };
+    fragment: {
+        getCollectibleInfo: typeof fragment_getCollectibleInfo_;
+    };
 };
 export declare namespace functions {
     type Function<T> = Function_<T>;
@@ -13066,6 +13406,7 @@ export declare namespace functions {
     type ping_delay_disconnect = ping_delay_disconnect_;
     type destroy_session = destroy_session_;
     type destroy_auth_key = destroy_auth_key_;
+    type invokeWithBusinessConnectionPrefix = invokeWithBusinessConnectionPrefix_;
     type invokeAfterMsg<T extends Function<unknown>> = invokeAfterMsg_<T>;
     type invokeAfterMsgs<T extends Function<unknown>> = invokeAfterMsgs_<T>;
     type initConnection<T extends Function<unknown>> = initConnection_<T>;
@@ -13073,6 +13414,7 @@ export declare namespace functions {
     type invokeWithoutUpdates<T extends Function<unknown>> = invokeWithoutUpdates_<T>;
     type invokeWithMessagesRange<T extends Function<unknown>> = invokeWithMessagesRange_<T>;
     type invokeWithTakeout<T extends Function<unknown>> = invokeWithTakeout_<T>;
+    type invokeWithBusinessConnection<T extends Function<unknown>> = invokeWithBusinessConnection_<T>;
     namespace auth {
         type sendCode = auth_sendCode_;
         type signUp = auth_signUp_;
@@ -13196,6 +13538,17 @@ export declare namespace functions {
         type updateBusinessAwayMessage = account_updateBusinessAwayMessage_;
         type updateConnectedBot = account_updateConnectedBot_;
         type getConnectedBots = account_getConnectedBots_;
+        type getBotBusinessConnection = account_getBotBusinessConnection_;
+        type updateBusinessIntro = account_updateBusinessIntro_;
+        type toggleConnectedBotPaused = account_toggleConnectedBotPaused_;
+        type disablePeerConnectedBot = account_disablePeerConnectedBot_;
+        type updateBirthday = account_updateBirthday_;
+        type createBusinessChatLink = account_createBusinessChatLink_;
+        type editBusinessChatLink = account_editBusinessChatLink_;
+        type deleteBusinessChatLink = account_deleteBusinessChatLink_;
+        type getBusinessChatLinks = account_getBusinessChatLinks_;
+        type resolveBusinessChatLink = account_resolveBusinessChatLink_;
+        type updatePersonalChannel = account_updatePersonalChannel_;
     }
     namespace users {
         type getUsers = users_getUsers_;
@@ -13229,6 +13582,7 @@ export declare namespace functions {
         type importContactToken = contacts_importContactToken_;
         type editCloseFriends = contacts_editCloseFriends_;
         type setBlocked = contacts_setBlocked_;
+        type getBirthdays = contacts_getBirthdays_;
     }
     namespace messages {
         type getMessages = messages_getMessages_;
@@ -13438,6 +13792,7 @@ export declare namespace functions {
         type sendQuickReplyMessages = messages_sendQuickReplyMessages_;
         type deleteQuickReplyMessages = messages_deleteQuickReplyMessages_;
         type toggleDialogFilterTags = messages_toggleDialogFilterTags_;
+        type getMyStickers = messages_getMyStickers_;
     }
     namespace updates {
         type getState = updates_getState_;
@@ -13551,6 +13906,8 @@ export declare namespace functions {
         type updateEmojiStatus = channels_updateEmojiStatus_;
         type setBoostsToUnblockRestrictions = channels_setBoostsToUnblockRestrictions_;
         type setEmojiStickers = channels_setEmojiStickers_;
+        type reportSponsoredMessage = channels_reportSponsoredMessage_;
+        type restrictSponsoredMessages = channels_restrictSponsoredMessages_;
     }
     namespace bots {
         type sendCustomRequest = bots_sendCustomRequest_;
@@ -13599,6 +13956,7 @@ export declare namespace functions {
         type changeSticker = stickers_changeSticker_;
         type renameStickerSet = stickers_renameStickerSet_;
         type deleteStickerSet = stickers_deleteStickerSet_;
+        type replaceSticker = stickers_replaceSticker_;
     }
     namespace phone {
         type getCallConfig = phone_getCallConfig_;
@@ -13651,6 +14009,9 @@ export declare namespace functions {
         type getMessageStats = stats_getMessageStats_;
         type getStoryStats = stats_getStoryStats_;
         type getStoryPublicForwards = stats_getStoryPublicForwards_;
+        type getBroadcastRevenueStats = stats_getBroadcastRevenueStats_;
+        type getBroadcastRevenueWithdrawalUrl = stats_getBroadcastRevenueWithdrawalUrl_;
+        type getBroadcastRevenueTransactions = stats_getBroadcastRevenueTransactions_;
     }
     namespace chatlists {
         type exportChatlistInvite = chatlists_exportChatlistInvite_;
@@ -13706,5 +14067,8 @@ export declare namespace functions {
         type getStatus = smsjobs_getStatus_;
         type getSmsJob = smsjobs_getSmsJob_;
         type finishJob = smsjobs_finishJob_;
+    }
+    namespace fragment {
+        type getCollectibleInfo = fragment_getCollectibleInfo_;
     }
 }

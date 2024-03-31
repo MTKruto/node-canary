@@ -1,18 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.account_updateUsername_ = exports.account_checkUsername_ = exports.account_reportPeer_ = exports.account_getWallPapers_ = exports.account_updateStatus_ = exports.account_updateProfile_ = exports.account_resetNotifySettings_ = exports.account_getNotifySettings_ = exports.account_updateNotifySettings_ = exports.account_unregisterDevice_ = exports.account_registerDevice_ = exports.auth_resetLoginEmail_ = exports.auth_requestFirebaseSms_ = exports.auth_importWebTokenAuthorization_ = exports.auth_checkRecoveryPassword_ = exports.auth_acceptLoginToken_ = exports.auth_importLoginToken_ = exports.auth_exportLoginToken_ = exports.auth_dropTempAuthKeys_ = exports.auth_cancelCode_ = exports.auth_resendCode_ = exports.auth_recoverPassword_ = exports.auth_requestPasswordRecovery_ = exports.auth_checkPassword_ = exports.auth_importBotAuthorization_ = exports.auth_bindTempAuthKey_ = exports.auth_importAuthorization_ = exports.auth_exportAuthorization_ = exports.auth_resetAuthorizations_ = exports.auth_logOut_ = exports.auth_signIn_ = exports.auth_signUp_ = exports.auth_sendCode_ = exports.invokeWithTakeout_ = exports.invokeWithMessagesRange_ = exports.invokeWithoutUpdates_ = exports.invokeWithLayer_ = exports.initConnection_ = exports.invokeAfterMsgs_ = exports.invokeAfterMsg_ = exports.destroy_auth_key_ = exports.destroy_session_ = exports.ping_delay_disconnect_ = exports.ping_ = exports.get_future_salts_ = exports.rpc_drop_answer_ = exports.set_client_DH_params_ = exports.req_DH_params_ = exports.req_pq_multi_ = exports.Function_ = void 0;
-exports.account_getTheme_ = exports.account_installTheme_ = exports.account_saveTheme_ = exports.account_updateTheme_ = exports.account_createTheme_ = exports.account_uploadTheme_ = exports.account_saveAutoDownloadSettings_ = exports.account_getAutoDownloadSettings_ = exports.account_resetWallPapers_ = exports.account_installWallPaper_ = exports.account_saveWallPaper_ = exports.account_uploadWallPaper_ = exports.account_getWallPaper_ = exports.account_getNotifyExceptions_ = exports.account_setContactSignUpNotification_ = exports.account_getContactSignUpNotification_ = exports.account_cancelPasswordEmail_ = exports.account_resendPasswordEmail_ = exports.account_confirmPasswordEmail_ = exports.account_finishTakeoutSession_ = exports.account_initTakeoutSession_ = exports.account_verifyEmail_ = exports.account_sendVerifyEmailCode_ = exports.account_verifyPhone_ = exports.account_sendVerifyPhoneCode_ = exports.account_acceptAuthorization_ = exports.account_getAuthorizationForm_ = exports.account_deleteSecureValue_ = exports.account_saveSecureValue_ = exports.account_getSecureValue_ = exports.account_getAllSecureValues_ = exports.account_resetWebAuthorizations_ = exports.account_resetWebAuthorization_ = exports.account_getWebAuthorizations_ = exports.account_getTmpPassword_ = exports.account_confirmPhone_ = exports.account_sendConfirmPhoneCode_ = exports.account_updatePasswordSettings_ = exports.account_getPasswordSettings_ = exports.account_getPassword_ = exports.account_resetAuthorization_ = exports.account_getAuthorizations_ = exports.account_updateDeviceLocked_ = exports.account_changePhone_ = exports.account_sendChangePhoneCode_ = exports.account_setAccountTTL_ = exports.account_getAccountTTL_ = exports.account_deleteAccount_ = exports.account_setPrivacy_ = exports.account_getPrivacy_ = void 0;
-exports.contacts_getBlocked_ = exports.contacts_unblock_ = exports.contacts_block_ = exports.contacts_deleteByPhones_ = exports.contacts_deleteContacts_ = exports.contacts_importContacts_ = exports.contacts_getContacts_ = exports.contacts_getStatuses_ = exports.contacts_getContactIDs_ = exports.users_getIsPremiumRequiredToContact_ = exports.users_setSecureValueErrors_ = exports.users_getFullUser_ = exports.users_getUsers_ = exports.account_getConnectedBots_ = exports.account_updateConnectedBot_ = exports.account_updateBusinessAwayMessage_ = exports.account_updateBusinessGreetingMessage_ = exports.account_updateBusinessLocation_ = exports.account_updateBusinessWorkHours_ = exports.account_getChannelRestrictedStatusEmojis_ = exports.account_getChannelDefaultEmojiStatuses_ = exports.account_getDefaultBackgroundEmojis_ = exports.account_updateColor_ = exports.account_invalidateSignInCodes_ = exports.account_deleteAutoSaveExceptions_ = exports.account_saveAutoSaveSettings_ = exports.account_getAutoSaveSettings_ = exports.account_getDefaultGroupPhotoEmojis_ = exports.account_getDefaultProfilePhotoEmojis_ = exports.account_toggleUsername_ = exports.account_reorderUsernames_ = exports.account_clearRecentEmojiStatuses_ = exports.account_getRecentEmojiStatuses_ = exports.account_getDefaultEmojiStatuses_ = exports.account_updateEmojiStatus_ = exports.account_uploadRingtone_ = exports.account_saveRingtone_ = exports.account_getSavedRingtones_ = exports.account_changeAuthorizationSettings_ = exports.account_setAuthorizationTTL_ = exports.account_getChatThemes_ = exports.account_declinePasswordReset_ = exports.account_resetPassword_ = exports.account_reportProfilePhoto_ = exports.account_setGlobalPrivacySettings_ = exports.account_getGlobalPrivacySettings_ = exports.account_getMultiWallPapers_ = exports.account_getContentSettings_ = exports.account_setContentSettings_ = exports.account_getThemes_ = void 0;
-exports.messages_readMessageContents_ = exports.messages_reportEncryptedSpam_ = exports.messages_receivedQueue_ = exports.messages_sendEncryptedService_ = exports.messages_sendEncryptedFile_ = exports.messages_sendEncrypted_ = exports.messages_readEncryptedHistory_ = exports.messages_setEncryptedTyping_ = exports.messages_discardEncryption_ = exports.messages_acceptEncryption_ = exports.messages_requestEncryption_ = exports.messages_getDhConfig_ = exports.messages_createChat_ = exports.messages_deleteChatUser_ = exports.messages_addChatUser_ = exports.messages_editChatPhoto_ = exports.messages_editChatTitle_ = exports.messages_getFullChat_ = exports.messages_getChats_ = exports.messages_report_ = exports.messages_getPeerSettings_ = exports.messages_reportSpam_ = exports.messages_forwardMessages_ = exports.messages_sendMedia_ = exports.messages_sendMessage_ = exports.messages_setTyping_ = exports.messages_receivedMessages_ = exports.messages_deleteMessages_ = exports.messages_deleteHistory_ = exports.messages_readHistory_ = exports.messages_search_ = exports.messages_getHistory_ = exports.messages_getDialogs_ = exports.messages_getMessages_ = exports.contacts_setBlocked_ = exports.contacts_editCloseFriends_ = exports.contacts_importContactToken_ = exports.contacts_exportContactToken_ = exports.contacts_resolvePhone_ = exports.contacts_blockFromReplies_ = exports.contacts_getLocated_ = exports.contacts_acceptContact_ = exports.contacts_addContact_ = exports.contacts_toggleTopPeers_ = exports.contacts_getSaved_ = exports.contacts_resetSaved_ = exports.contacts_resetTopPeerRating_ = exports.contacts_getTopPeers_ = exports.contacts_resolveUsername_ = exports.contacts_search_ = void 0;
-exports.messages_sendScreenshotNotification_ = exports.messages_uploadMedia_ = exports.messages_setBotPrecheckoutResults_ = exports.messages_setBotShippingResults_ = exports.messages_getPinnedDialogs_ = exports.messages_reorderPinnedDialogs_ = exports.messages_toggleDialogPin_ = exports.messages_getWebPage_ = exports.messages_getCommonChats_ = exports.messages_getInlineGameHighScores_ = exports.messages_getGameHighScores_ = exports.messages_setInlineGameScore_ = exports.messages_setGameScore_ = exports.messages_getAttachedStickers_ = exports.messages_getMaskStickers_ = exports.messages_getArchivedStickers_ = exports.messages_clearRecentStickers_ = exports.messages_saveRecentSticker_ = exports.messages_getRecentStickers_ = exports.messages_readFeaturedStickers_ = exports.messages_getFeaturedStickers_ = exports.messages_getAllDrafts_ = exports.messages_saveDraft_ = exports.messages_getPeerDialogs_ = exports.messages_setBotCallbackAnswer_ = exports.messages_getBotCallbackAnswer_ = exports.messages_editInlineBotMessage_ = exports.messages_editMessage_ = exports.messages_getMessageEditData_ = exports.messages_sendInlineBotResult_ = exports.messages_setInlineBotResults_ = exports.messages_getInlineBotResults_ = exports.messages_saveGif_ = exports.messages_getSavedGifs_ = exports.messages_getDocumentByHash_ = exports.messages_reorderStickerSets_ = exports.messages_searchGlobal_ = exports.messages_migrateChat_ = exports.messages_editChatAdmin_ = exports.messages_getMessagesViews_ = exports.messages_startBot_ = exports.messages_uninstallStickerSet_ = exports.messages_installStickerSet_ = exports.messages_getStickerSet_ = exports.messages_importChatInvite_ = exports.messages_checkChatInvite_ = exports.messages_exportChatInvite_ = exports.messages_getWebPagePreview_ = exports.messages_getAllStickers_ = exports.messages_getStickers_ = void 0;
-exports.messages_editExportedChatInvite_ = exports.messages_getExportedChatInvite_ = exports.messages_getExportedChatInvites_ = exports.messages_startHistoryImport_ = exports.messages_uploadImportedMedia_ = exports.messages_initHistoryImport_ = exports.messages_checkHistoryImport_ = exports.messages_deletePhoneCallHistory_ = exports.messages_deleteChat_ = exports.messages_unpinAllMessages_ = exports.messages_readDiscussion_ = exports.messages_getDiscussionMessage_ = exports.messages_getReplies_ = exports.messages_getOldFeaturedStickers_ = exports.messages_updateDialogFiltersOrder_ = exports.messages_updateDialogFilter_ = exports.messages_getSuggestedDialogFilters_ = exports.messages_getDialogFilters_ = exports.messages_toggleStickerSets_ = exports.messages_getPollVotes_ = exports.messages_deleteScheduledMessages_ = exports.messages_sendScheduledMessages_ = exports.messages_getScheduledMessages_ = exports.messages_getScheduledHistory_ = exports.messages_hidePeerSettingsBar_ = exports.messages_acceptUrlAuth_ = exports.messages_requestUrlAuth_ = exports.messages_getSearchCounters_ = exports.messages_getEmojiURL_ = exports.messages_getEmojiKeywordsLanguages_ = exports.messages_getEmojiKeywordsDifference_ = exports.messages_getEmojiKeywords_ = exports.messages_editChatDefaultBannedRights_ = exports.messages_editChatAbout_ = exports.messages_getOnlines_ = exports.messages_getPollResults_ = exports.messages_sendVote_ = exports.messages_updatePinnedMessage_ = exports.messages_clearAllDrafts_ = exports.messages_getDialogUnreadMarks_ = exports.messages_markDialogUnread_ = exports.messages_getSplitRanges_ = exports.messages_searchStickerSets_ = exports.messages_uploadEncryptedFile_ = exports.messages_sendMultiMedia_ = exports.messages_getRecentLocations_ = exports.messages_readMentions_ = exports.messages_getUnreadMentions_ = exports.messages_faveSticker_ = exports.messages_getFavedStickers_ = void 0;
-exports.messages_togglePeerTranslations_ = exports.messages_searchCustomEmoji_ = exports.messages_getEmojiProfilePhotoGroups_ = exports.messages_getEmojiStatusGroups_ = exports.messages_getEmojiGroups_ = exports.messages_sendBotRequestedPeer_ = exports.messages_getDefaultHistoryTTL_ = exports.messages_setDefaultHistoryTTL_ = exports.messages_getExtendedMedia_ = exports.messages_clearRecentReactions_ = exports.messages_getRecentReactions_ = exports.messages_getTopReactions_ = exports.messages_reportReaction_ = exports.messages_getFeaturedEmojiStickers_ = exports.messages_getEmojiStickers_ = exports.messages_getCustomEmojiDocuments_ = exports.messages_rateTranscribedAudio_ = exports.messages_transcribeAudio_ = exports.messages_sendWebViewData_ = exports.messages_sendWebViewResultMessage_ = exports.messages_requestSimpleWebView_ = exports.messages_prolongWebView_ = exports.messages_requestWebView_ = exports.messages_toggleBotInAttachMenu_ = exports.messages_getAttachMenuBot_ = exports.messages_getAttachMenuBots_ = exports.messages_searchSentMedia_ = exports.messages_readReactions_ = exports.messages_getUnreadReactions_ = exports.messages_translateText_ = exports.messages_setDefaultReaction_ = exports.messages_getAvailableReactions_ = exports.messages_setChatAvailableReactions_ = exports.messages_getMessageReactionsList_ = exports.messages_getMessagesReactions_ = exports.messages_sendReaction_ = exports.messages_saveDefaultSendAs_ = exports.messages_toggleNoForwards_ = exports.messages_hideAllChatJoinRequests_ = exports.messages_hideChatJoinRequest_ = exports.messages_getSearchResultsPositions_ = exports.messages_getSearchResultsCalendar_ = exports.messages_getMessageReadParticipants_ = exports.messages_setChatTheme_ = exports.messages_checkHistoryImportPeer_ = exports.messages_setHistoryTTL_ = exports.messages_getChatInviteImporters_ = exports.messages_getAdminsWithInvites_ = exports.messages_deleteExportedChatInvite_ = exports.messages_deleteRevokedExportedChatInvites_ = void 0;
-exports.help_getDeepLinkInfo_ = exports.help_acceptTermsOfService_ = exports.help_getTermsOfServiceUpdate_ = exports.help_getRecentMeUrls_ = exports.help_getCdnConfig_ = exports.help_setBotUpdatesStatus_ = exports.help_getSupport_ = exports.help_getInviteText_ = exports.help_getAppUpdate_ = exports.help_getNearestDc_ = exports.help_getConfig_ = exports.upload_getFileHashes_ = exports.upload_getCdnFileHashes_ = exports.upload_reuploadCdnFile_ = exports.upload_getCdnFile_ = exports.upload_getWebFile_ = exports.upload_saveBigFilePart_ = exports.upload_getFile_ = exports.upload_saveFilePart_ = exports.photos_uploadContactProfilePhoto_ = exports.photos_getUserPhotos_ = exports.photos_deletePhotos_ = exports.photos_uploadProfilePhoto_ = exports.photos_updateProfilePhoto_ = exports.updates_getChannelDifference_ = exports.updates_getDifference_ = exports.updates_getState_ = exports.messages_toggleDialogFilterTags_ = exports.messages_deleteQuickReplyMessages_ = exports.messages_sendQuickReplyMessages_ = exports.messages_getQuickReplyMessages_ = exports.messages_deleteQuickReplyShortcut_ = exports.messages_editQuickReplyShortcut_ = exports.messages_checkQuickReplyShortcut_ = exports.messages_reorderQuickReplies_ = exports.messages_getQuickReplies_ = exports.messages_getOutboxReadDate_ = exports.messages_getDefaultTagReactions_ = exports.messages_updateSavedReactionTag_ = exports.messages_getSavedReactionTags_ = exports.messages_reorderPinnedSavedDialogs_ = exports.messages_toggleSavedDialogPin_ = exports.messages_getPinnedSavedDialogs_ = exports.messages_deleteSavedHistory_ = exports.messages_getSavedHistory_ = exports.messages_getSavedDialogs_ = exports.messages_searchEmojiStickerSets_ = exports.messages_setChatWallPaper_ = exports.messages_requestAppWebView_ = exports.messages_getBotApp_ = void 0;
-exports.channels_viewSponsoredMessage_ = exports.channels_convertToGigagroup_ = exports.channels_getInactiveChannels_ = exports.channels_toggleSlowMode_ = exports.channels_editLocation_ = exports.channels_editCreator_ = exports.channels_setDiscussionGroup_ = exports.channels_getGroupsForDiscussion_ = exports.channels_getLeftChannels_ = exports.channels_togglePreHistoryHidden_ = exports.channels_deleteHistory_ = exports.channels_readMessageContents_ = exports.channels_setStickers_ = exports.channels_getAdminLog_ = exports.channels_editBanned_ = exports.channels_getAdminedPublicChannels_ = exports.channels_toggleSignatures_ = exports.channels_exportMessageLink_ = exports.channels_deleteChannel_ = exports.channels_inviteToChannel_ = exports.channels_leaveChannel_ = exports.channels_joinChannel_ = exports.channels_updateUsername_ = exports.channels_checkUsername_ = exports.channels_editPhoto_ = exports.channels_editTitle_ = exports.channels_editAdmin_ = exports.channels_createChannel_ = exports.channels_getFullChannel_ = exports.channels_getChannels_ = exports.channels_getParticipant_ = exports.channels_getParticipants_ = exports.channels_getMessages_ = exports.channels_reportSpam_ = exports.channels_deleteMessages_ = exports.channels_readHistory_ = exports.help_getTimezonesList_ = exports.help_getPeerProfileColors_ = exports.help_getPeerColors_ = exports.help_getPremiumPromo_ = exports.help_getCountriesList_ = exports.help_dismissSuggestion_ = exports.help_hidePromoData_ = exports.help_getPromoData_ = exports.help_editUserInfo_ = exports.help_getUserInfo_ = exports.help_getSupportName_ = exports.help_getPassportConfig_ = exports.help_saveAppLog_ = exports.help_getAppConfig_ = void 0;
-exports.payments_exportInvoice_ = exports.payments_getBankCardData_ = exports.payments_clearSavedInfo_ = exports.payments_getSavedInfo_ = exports.payments_sendPaymentForm_ = exports.payments_validateRequestedInfo_ = exports.payments_getPaymentReceipt_ = exports.payments_getPaymentForm_ = exports.bots_invokeWebViewCustomMethod_ = exports.bots_allowSendMessage_ = exports.bots_canSendMessage_ = exports.bots_toggleUsername_ = exports.bots_reorderUsernames_ = exports.bots_getBotInfo_ = exports.bots_setBotInfo_ = exports.bots_setBotGroupDefaultAdminRights_ = exports.bots_setBotBroadcastDefaultAdminRights_ = exports.bots_getBotMenuButton_ = exports.bots_setBotMenuButton_ = exports.bots_getBotCommands_ = exports.bots_resetBotCommands_ = exports.bots_setBotCommands_ = exports.bots_answerWebhookJSONQuery_ = exports.bots_sendCustomRequest_ = exports.channels_setEmojiStickers_ = exports.channels_setBoostsToUnblockRestrictions_ = exports.channels_updateEmojiStatus_ = exports.channels_getChannelRecommendations_ = exports.channels_toggleViewForumAsMessages_ = exports.channels_updateColor_ = exports.channels_clickSponsoredMessage_ = exports.channels_toggleParticipantsHidden_ = exports.channels_reportAntiSpamFalsePositive_ = exports.channels_toggleAntiSpam_ = exports.channels_reorderPinnedForumTopics_ = exports.channels_deleteTopicHistory_ = exports.channels_updatePinnedForumTopic_ = exports.channels_editForumTopic_ = exports.channels_getForumTopicsByID_ = exports.channels_getForumTopics_ = exports.channels_createForumTopic_ = exports.channels_toggleForum_ = exports.channels_deactivateAllUsernames_ = exports.channels_toggleUsername_ = exports.channels_reorderUsernames_ = exports.channels_toggleJoinRequest_ = exports.channels_toggleJoinToSend_ = exports.channels_deleteParticipantHistory_ = exports.channels_getSendAs_ = exports.channels_getSponsoredMessages_ = void 0;
-exports.langpack_getLangPack_ = exports.phone_saveCallLog_ = exports.phone_getGroupCallStreamRtmpUrl_ = exports.phone_getGroupCallStreamChannels_ = exports.phone_leaveGroupCallPresentation_ = exports.phone_joinGroupCallPresentation_ = exports.phone_saveDefaultGroupCallJoinAs_ = exports.phone_startScheduledGroupCall_ = exports.phone_toggleGroupCallStartSubscription_ = exports.phone_exportGroupCallInvite_ = exports.phone_getGroupCallJoinAs_ = exports.phone_editGroupCallTitle_ = exports.phone_editGroupCallParticipant_ = exports.phone_toggleGroupCallRecord_ = exports.phone_checkGroupCall_ = exports.phone_getGroupParticipants_ = exports.phone_getGroupCall_ = exports.phone_toggleGroupCallSettings_ = exports.phone_discardGroupCall_ = exports.phone_inviteToGroupCall_ = exports.phone_leaveGroupCall_ = exports.phone_joinGroupCall_ = exports.phone_createGroupCall_ = exports.phone_sendSignalingData_ = exports.phone_saveCallDebug_ = exports.phone_setCallRating_ = exports.phone_discardCall_ = exports.phone_receivedCall_ = exports.phone_confirmCall_ = exports.phone_acceptCall_ = exports.phone_requestCall_ = exports.phone_getCallConfig_ = exports.stickers_deleteStickerSet_ = exports.stickers_renameStickerSet_ = exports.stickers_changeSticker_ = exports.stickers_suggestShortName_ = exports.stickers_checkShortName_ = exports.stickers_setStickerSetThumb_ = exports.stickers_addStickerToSet_ = exports.stickers_changeStickerPosition_ = exports.stickers_removeStickerFromSet_ = exports.stickers_createStickerSet_ = exports.payments_launchPrepaidGiveaway_ = exports.payments_getGiveawayInfo_ = exports.payments_applyGiftCode_ = exports.payments_checkGiftCode_ = exports.payments_getPremiumGiftCodeOptions_ = exports.payments_canPurchasePremium_ = exports.payments_assignPlayMarketTransaction_ = exports.payments_assignAppStoreTransaction_ = void 0;
-exports.premium_applyBoost_ = exports.premium_getMyBoosts_ = exports.premium_getBoostsList_ = exports.stories_getStoryReactionsList_ = exports.stories_togglePeerStoriesHidden_ = exports.stories_getChatsToSend_ = exports.stories_getPeerMaxIDs_ = exports.stories_getAllReadPeerStories_ = exports.stories_getPeerStories_ = exports.stories_sendReaction_ = exports.stories_activateStealthMode_ = exports.stories_report_ = exports.stories_exportStoryLink_ = exports.stories_getStoriesViews_ = exports.stories_getStoryViewsList_ = exports.stories_incrementStoryViews_ = exports.stories_readStories_ = exports.stories_toggleAllStoriesHidden_ = exports.stories_getStoriesByID_ = exports.stories_getStoriesArchive_ = exports.stories_getPinnedStories_ = exports.stories_getAllStories_ = exports.stories_togglePinned_ = exports.stories_deleteStories_ = exports.stories_editStory_ = exports.stories_sendStory_ = exports.stories_canSendStory_ = exports.chatlists_leaveChatlist_ = exports.chatlists_getLeaveChatlistSuggestions_ = exports.chatlists_hideChatlistUpdates_ = exports.chatlists_joinChatlistUpdates_ = exports.chatlists_getChatlistUpdates_ = exports.chatlists_joinChatlistInvite_ = exports.chatlists_checkChatlistInvite_ = exports.chatlists_getExportedInvites_ = exports.chatlists_editExportedInvite_ = exports.chatlists_deleteExportedInvite_ = exports.chatlists_exportChatlistInvite_ = exports.stats_getStoryPublicForwards_ = exports.stats_getStoryStats_ = exports.stats_getMessageStats_ = exports.stats_getMessagePublicForwards_ = exports.stats_getMegagroupStats_ = exports.stats_loadAsyncGraph_ = exports.stats_getBroadcastStats_ = exports.folders_editPeerFolders_ = exports.langpack_getLanguage_ = exports.langpack_getLanguages_ = exports.langpack_getDifference_ = exports.langpack_getStrings_ = void 0;
-exports.functions = exports.smsjobs_finishJob_ = exports.smsjobs_getSmsJob_ = exports.smsjobs_getStatus_ = exports.smsjobs_updateSettings_ = exports.smsjobs_leave_ = exports.smsjobs_join_ = exports.smsjobs_isEligibleToJoin_ = exports.premium_getUserBoosts_ = exports.premium_getBoostsStatus_ = void 0;
+exports.account_reportPeer_ = exports.account_getWallPapers_ = exports.account_updateStatus_ = exports.account_updateProfile_ = exports.account_resetNotifySettings_ = exports.account_getNotifySettings_ = exports.account_updateNotifySettings_ = exports.account_unregisterDevice_ = exports.account_registerDevice_ = exports.auth_resetLoginEmail_ = exports.auth_requestFirebaseSms_ = exports.auth_importWebTokenAuthorization_ = exports.auth_checkRecoveryPassword_ = exports.auth_acceptLoginToken_ = exports.auth_importLoginToken_ = exports.auth_exportLoginToken_ = exports.auth_dropTempAuthKeys_ = exports.auth_cancelCode_ = exports.auth_resendCode_ = exports.auth_recoverPassword_ = exports.auth_requestPasswordRecovery_ = exports.auth_checkPassword_ = exports.auth_importBotAuthorization_ = exports.auth_bindTempAuthKey_ = exports.auth_importAuthorization_ = exports.auth_exportAuthorization_ = exports.auth_resetAuthorizations_ = exports.auth_logOut_ = exports.auth_signIn_ = exports.auth_signUp_ = exports.auth_sendCode_ = exports.invokeWithBusinessConnection_ = exports.invokeWithTakeout_ = exports.invokeWithMessagesRange_ = exports.invokeWithoutUpdates_ = exports.invokeWithLayer_ = exports.initConnection_ = exports.invokeAfterMsgs_ = exports.invokeAfterMsg_ = exports.invokeWithBusinessConnectionPrefix_ = exports.destroy_auth_key_ = exports.destroy_session_ = exports.ping_delay_disconnect_ = exports.ping_ = exports.get_future_salts_ = exports.rpc_drop_answer_ = exports.set_client_DH_params_ = exports.req_DH_params_ = exports.req_pq_multi_ = exports.Function_ = void 0;
+exports.account_saveTheme_ = exports.account_updateTheme_ = exports.account_createTheme_ = exports.account_uploadTheme_ = exports.account_saveAutoDownloadSettings_ = exports.account_getAutoDownloadSettings_ = exports.account_resetWallPapers_ = exports.account_installWallPaper_ = exports.account_saveWallPaper_ = exports.account_uploadWallPaper_ = exports.account_getWallPaper_ = exports.account_getNotifyExceptions_ = exports.account_setContactSignUpNotification_ = exports.account_getContactSignUpNotification_ = exports.account_cancelPasswordEmail_ = exports.account_resendPasswordEmail_ = exports.account_confirmPasswordEmail_ = exports.account_finishTakeoutSession_ = exports.account_initTakeoutSession_ = exports.account_verifyEmail_ = exports.account_sendVerifyEmailCode_ = exports.account_verifyPhone_ = exports.account_sendVerifyPhoneCode_ = exports.account_acceptAuthorization_ = exports.account_getAuthorizationForm_ = exports.account_deleteSecureValue_ = exports.account_saveSecureValue_ = exports.account_getSecureValue_ = exports.account_getAllSecureValues_ = exports.account_resetWebAuthorizations_ = exports.account_resetWebAuthorization_ = exports.account_getWebAuthorizations_ = exports.account_getTmpPassword_ = exports.account_confirmPhone_ = exports.account_sendConfirmPhoneCode_ = exports.account_updatePasswordSettings_ = exports.account_getPasswordSettings_ = exports.account_getPassword_ = exports.account_resetAuthorization_ = exports.account_getAuthorizations_ = exports.account_updateDeviceLocked_ = exports.account_changePhone_ = exports.account_sendChangePhoneCode_ = exports.account_setAccountTTL_ = exports.account_getAccountTTL_ = exports.account_deleteAccount_ = exports.account_setPrivacy_ = exports.account_getPrivacy_ = exports.account_updateUsername_ = exports.account_checkUsername_ = void 0;
+exports.account_updatePersonalChannel_ = exports.account_resolveBusinessChatLink_ = exports.account_getBusinessChatLinks_ = exports.account_deleteBusinessChatLink_ = exports.account_editBusinessChatLink_ = exports.account_createBusinessChatLink_ = exports.account_updateBirthday_ = exports.account_disablePeerConnectedBot_ = exports.account_toggleConnectedBotPaused_ = exports.account_updateBusinessIntro_ = exports.account_getBotBusinessConnection_ = exports.account_getConnectedBots_ = exports.account_updateConnectedBot_ = exports.account_updateBusinessAwayMessage_ = exports.account_updateBusinessGreetingMessage_ = exports.account_updateBusinessLocation_ = exports.account_updateBusinessWorkHours_ = exports.account_getChannelRestrictedStatusEmojis_ = exports.account_getChannelDefaultEmojiStatuses_ = exports.account_getDefaultBackgroundEmojis_ = exports.account_updateColor_ = exports.account_invalidateSignInCodes_ = exports.account_deleteAutoSaveExceptions_ = exports.account_saveAutoSaveSettings_ = exports.account_getAutoSaveSettings_ = exports.account_getDefaultGroupPhotoEmojis_ = exports.account_getDefaultProfilePhotoEmojis_ = exports.account_toggleUsername_ = exports.account_reorderUsernames_ = exports.account_clearRecentEmojiStatuses_ = exports.account_getRecentEmojiStatuses_ = exports.account_getDefaultEmojiStatuses_ = exports.account_updateEmojiStatus_ = exports.account_uploadRingtone_ = exports.account_saveRingtone_ = exports.account_getSavedRingtones_ = exports.account_changeAuthorizationSettings_ = exports.account_setAuthorizationTTL_ = exports.account_getChatThemes_ = exports.account_declinePasswordReset_ = exports.account_resetPassword_ = exports.account_reportProfilePhoto_ = exports.account_setGlobalPrivacySettings_ = exports.account_getGlobalPrivacySettings_ = exports.account_getMultiWallPapers_ = exports.account_getContentSettings_ = exports.account_setContentSettings_ = exports.account_getThemes_ = exports.account_getTheme_ = exports.account_installTheme_ = void 0;
+exports.messages_addChatUser_ = exports.messages_editChatPhoto_ = exports.messages_editChatTitle_ = exports.messages_getFullChat_ = exports.messages_getChats_ = exports.messages_report_ = exports.messages_getPeerSettings_ = exports.messages_reportSpam_ = exports.messages_forwardMessages_ = exports.messages_sendMedia_ = exports.messages_sendMessage_ = exports.messages_setTyping_ = exports.messages_receivedMessages_ = exports.messages_deleteMessages_ = exports.messages_deleteHistory_ = exports.messages_readHistory_ = exports.messages_search_ = exports.messages_getHistory_ = exports.messages_getDialogs_ = exports.messages_getMessages_ = exports.contacts_getBirthdays_ = exports.contacts_setBlocked_ = exports.contacts_editCloseFriends_ = exports.contacts_importContactToken_ = exports.contacts_exportContactToken_ = exports.contacts_resolvePhone_ = exports.contacts_blockFromReplies_ = exports.contacts_getLocated_ = exports.contacts_acceptContact_ = exports.contacts_addContact_ = exports.contacts_toggleTopPeers_ = exports.contacts_getSaved_ = exports.contacts_resetSaved_ = exports.contacts_resetTopPeerRating_ = exports.contacts_getTopPeers_ = exports.contacts_resolveUsername_ = exports.contacts_search_ = exports.contacts_getBlocked_ = exports.contacts_unblock_ = exports.contacts_block_ = exports.contacts_deleteByPhones_ = exports.contacts_deleteContacts_ = exports.contacts_importContacts_ = exports.contacts_getContacts_ = exports.contacts_getStatuses_ = exports.contacts_getContactIDs_ = exports.users_getIsPremiumRequiredToContact_ = exports.users_setSecureValueErrors_ = exports.users_getFullUser_ = exports.users_getUsers_ = void 0;
+exports.messages_getMaskStickers_ = exports.messages_getArchivedStickers_ = exports.messages_clearRecentStickers_ = exports.messages_saveRecentSticker_ = exports.messages_getRecentStickers_ = exports.messages_readFeaturedStickers_ = exports.messages_getFeaturedStickers_ = exports.messages_getAllDrafts_ = exports.messages_saveDraft_ = exports.messages_getPeerDialogs_ = exports.messages_setBotCallbackAnswer_ = exports.messages_getBotCallbackAnswer_ = exports.messages_editInlineBotMessage_ = exports.messages_editMessage_ = exports.messages_getMessageEditData_ = exports.messages_sendInlineBotResult_ = exports.messages_setInlineBotResults_ = exports.messages_getInlineBotResults_ = exports.messages_saveGif_ = exports.messages_getSavedGifs_ = exports.messages_getDocumentByHash_ = exports.messages_reorderStickerSets_ = exports.messages_searchGlobal_ = exports.messages_migrateChat_ = exports.messages_editChatAdmin_ = exports.messages_getMessagesViews_ = exports.messages_startBot_ = exports.messages_uninstallStickerSet_ = exports.messages_installStickerSet_ = exports.messages_getStickerSet_ = exports.messages_importChatInvite_ = exports.messages_checkChatInvite_ = exports.messages_exportChatInvite_ = exports.messages_getWebPagePreview_ = exports.messages_getAllStickers_ = exports.messages_getStickers_ = exports.messages_readMessageContents_ = exports.messages_reportEncryptedSpam_ = exports.messages_receivedQueue_ = exports.messages_sendEncryptedService_ = exports.messages_sendEncryptedFile_ = exports.messages_sendEncrypted_ = exports.messages_readEncryptedHistory_ = exports.messages_setEncryptedTyping_ = exports.messages_discardEncryption_ = exports.messages_acceptEncryption_ = exports.messages_requestEncryption_ = exports.messages_getDhConfig_ = exports.messages_createChat_ = exports.messages_deleteChatUser_ = void 0;
+exports.messages_updateDialogFiltersOrder_ = exports.messages_updateDialogFilter_ = exports.messages_getSuggestedDialogFilters_ = exports.messages_getDialogFilters_ = exports.messages_toggleStickerSets_ = exports.messages_getPollVotes_ = exports.messages_deleteScheduledMessages_ = exports.messages_sendScheduledMessages_ = exports.messages_getScheduledMessages_ = exports.messages_getScheduledHistory_ = exports.messages_hidePeerSettingsBar_ = exports.messages_acceptUrlAuth_ = exports.messages_requestUrlAuth_ = exports.messages_getSearchCounters_ = exports.messages_getEmojiURL_ = exports.messages_getEmojiKeywordsLanguages_ = exports.messages_getEmojiKeywordsDifference_ = exports.messages_getEmojiKeywords_ = exports.messages_editChatDefaultBannedRights_ = exports.messages_editChatAbout_ = exports.messages_getOnlines_ = exports.messages_getPollResults_ = exports.messages_sendVote_ = exports.messages_updatePinnedMessage_ = exports.messages_clearAllDrafts_ = exports.messages_getDialogUnreadMarks_ = exports.messages_markDialogUnread_ = exports.messages_getSplitRanges_ = exports.messages_searchStickerSets_ = exports.messages_uploadEncryptedFile_ = exports.messages_sendMultiMedia_ = exports.messages_getRecentLocations_ = exports.messages_readMentions_ = exports.messages_getUnreadMentions_ = exports.messages_faveSticker_ = exports.messages_getFavedStickers_ = exports.messages_sendScreenshotNotification_ = exports.messages_uploadMedia_ = exports.messages_setBotPrecheckoutResults_ = exports.messages_setBotShippingResults_ = exports.messages_getPinnedDialogs_ = exports.messages_reorderPinnedDialogs_ = exports.messages_toggleDialogPin_ = exports.messages_getWebPage_ = exports.messages_getCommonChats_ = exports.messages_getInlineGameHighScores_ = exports.messages_getGameHighScores_ = exports.messages_setInlineGameScore_ = exports.messages_setGameScore_ = exports.messages_getAttachedStickers_ = void 0;
+exports.messages_getEmojiStickers_ = exports.messages_getCustomEmojiDocuments_ = exports.messages_rateTranscribedAudio_ = exports.messages_transcribeAudio_ = exports.messages_sendWebViewData_ = exports.messages_sendWebViewResultMessage_ = exports.messages_requestSimpleWebView_ = exports.messages_prolongWebView_ = exports.messages_requestWebView_ = exports.messages_toggleBotInAttachMenu_ = exports.messages_getAttachMenuBot_ = exports.messages_getAttachMenuBots_ = exports.messages_searchSentMedia_ = exports.messages_readReactions_ = exports.messages_getUnreadReactions_ = exports.messages_translateText_ = exports.messages_setDefaultReaction_ = exports.messages_getAvailableReactions_ = exports.messages_setChatAvailableReactions_ = exports.messages_getMessageReactionsList_ = exports.messages_getMessagesReactions_ = exports.messages_sendReaction_ = exports.messages_saveDefaultSendAs_ = exports.messages_toggleNoForwards_ = exports.messages_hideAllChatJoinRequests_ = exports.messages_hideChatJoinRequest_ = exports.messages_getSearchResultsPositions_ = exports.messages_getSearchResultsCalendar_ = exports.messages_getMessageReadParticipants_ = exports.messages_setChatTheme_ = exports.messages_checkHistoryImportPeer_ = exports.messages_setHistoryTTL_ = exports.messages_getChatInviteImporters_ = exports.messages_getAdminsWithInvites_ = exports.messages_deleteExportedChatInvite_ = exports.messages_deleteRevokedExportedChatInvites_ = exports.messages_editExportedChatInvite_ = exports.messages_getExportedChatInvite_ = exports.messages_getExportedChatInvites_ = exports.messages_startHistoryImport_ = exports.messages_uploadImportedMedia_ = exports.messages_initHistoryImport_ = exports.messages_checkHistoryImport_ = exports.messages_deletePhoneCallHistory_ = exports.messages_deleteChat_ = exports.messages_unpinAllMessages_ = exports.messages_readDiscussion_ = exports.messages_getDiscussionMessage_ = exports.messages_getReplies_ = exports.messages_getOldFeaturedStickers_ = void 0;
+exports.upload_getWebFile_ = exports.upload_saveBigFilePart_ = exports.upload_getFile_ = exports.upload_saveFilePart_ = exports.photos_uploadContactProfilePhoto_ = exports.photos_getUserPhotos_ = exports.photos_deletePhotos_ = exports.photos_uploadProfilePhoto_ = exports.photos_updateProfilePhoto_ = exports.updates_getChannelDifference_ = exports.updates_getDifference_ = exports.updates_getState_ = exports.messages_getMyStickers_ = exports.messages_toggleDialogFilterTags_ = exports.messages_deleteQuickReplyMessages_ = exports.messages_sendQuickReplyMessages_ = exports.messages_getQuickReplyMessages_ = exports.messages_deleteQuickReplyShortcut_ = exports.messages_editQuickReplyShortcut_ = exports.messages_checkQuickReplyShortcut_ = exports.messages_reorderQuickReplies_ = exports.messages_getQuickReplies_ = exports.messages_getOutboxReadDate_ = exports.messages_getDefaultTagReactions_ = exports.messages_updateSavedReactionTag_ = exports.messages_getSavedReactionTags_ = exports.messages_reorderPinnedSavedDialogs_ = exports.messages_toggleSavedDialogPin_ = exports.messages_getPinnedSavedDialogs_ = exports.messages_deleteSavedHistory_ = exports.messages_getSavedHistory_ = exports.messages_getSavedDialogs_ = exports.messages_searchEmojiStickerSets_ = exports.messages_setChatWallPaper_ = exports.messages_requestAppWebView_ = exports.messages_getBotApp_ = exports.messages_togglePeerTranslations_ = exports.messages_searchCustomEmoji_ = exports.messages_getEmojiProfilePhotoGroups_ = exports.messages_getEmojiStatusGroups_ = exports.messages_getEmojiGroups_ = exports.messages_sendBotRequestedPeer_ = exports.messages_getDefaultHistoryTTL_ = exports.messages_setDefaultHistoryTTL_ = exports.messages_getExtendedMedia_ = exports.messages_clearRecentReactions_ = exports.messages_getRecentReactions_ = exports.messages_getTopReactions_ = exports.messages_reportReaction_ = exports.messages_getFeaturedEmojiStickers_ = void 0;
+exports.channels_getAdminedPublicChannels_ = exports.channels_toggleSignatures_ = exports.channels_exportMessageLink_ = exports.channels_deleteChannel_ = exports.channels_inviteToChannel_ = exports.channels_leaveChannel_ = exports.channels_joinChannel_ = exports.channels_updateUsername_ = exports.channels_checkUsername_ = exports.channels_editPhoto_ = exports.channels_editTitle_ = exports.channels_editAdmin_ = exports.channels_createChannel_ = exports.channels_getFullChannel_ = exports.channels_getChannels_ = exports.channels_getParticipant_ = exports.channels_getParticipants_ = exports.channels_getMessages_ = exports.channels_reportSpam_ = exports.channels_deleteMessages_ = exports.channels_readHistory_ = exports.help_getTimezonesList_ = exports.help_getPeerProfileColors_ = exports.help_getPeerColors_ = exports.help_getPremiumPromo_ = exports.help_getCountriesList_ = exports.help_dismissSuggestion_ = exports.help_hidePromoData_ = exports.help_getPromoData_ = exports.help_editUserInfo_ = exports.help_getUserInfo_ = exports.help_getSupportName_ = exports.help_getPassportConfig_ = exports.help_saveAppLog_ = exports.help_getAppConfig_ = exports.help_getDeepLinkInfo_ = exports.help_acceptTermsOfService_ = exports.help_getTermsOfServiceUpdate_ = exports.help_getRecentMeUrls_ = exports.help_getCdnConfig_ = exports.help_setBotUpdatesStatus_ = exports.help_getSupport_ = exports.help_getInviteText_ = exports.help_getAppUpdate_ = exports.help_getNearestDc_ = exports.help_getConfig_ = exports.upload_getFileHashes_ = exports.upload_getCdnFileHashes_ = exports.upload_reuploadCdnFile_ = exports.upload_getCdnFile_ = void 0;
+exports.bots_getBotMenuButton_ = exports.bots_setBotMenuButton_ = exports.bots_getBotCommands_ = exports.bots_resetBotCommands_ = exports.bots_setBotCommands_ = exports.bots_answerWebhookJSONQuery_ = exports.bots_sendCustomRequest_ = exports.channels_restrictSponsoredMessages_ = exports.channels_reportSponsoredMessage_ = exports.channels_setEmojiStickers_ = exports.channels_setBoostsToUnblockRestrictions_ = exports.channels_updateEmojiStatus_ = exports.channels_getChannelRecommendations_ = exports.channels_toggleViewForumAsMessages_ = exports.channels_updateColor_ = exports.channels_clickSponsoredMessage_ = exports.channels_toggleParticipantsHidden_ = exports.channels_reportAntiSpamFalsePositive_ = exports.channels_toggleAntiSpam_ = exports.channels_reorderPinnedForumTopics_ = exports.channels_deleteTopicHistory_ = exports.channels_updatePinnedForumTopic_ = exports.channels_editForumTopic_ = exports.channels_getForumTopicsByID_ = exports.channels_getForumTopics_ = exports.channels_createForumTopic_ = exports.channels_toggleForum_ = exports.channels_deactivateAllUsernames_ = exports.channels_toggleUsername_ = exports.channels_reorderUsernames_ = exports.channels_toggleJoinRequest_ = exports.channels_toggleJoinToSend_ = exports.channels_deleteParticipantHistory_ = exports.channels_getSendAs_ = exports.channels_getSponsoredMessages_ = exports.channels_viewSponsoredMessage_ = exports.channels_convertToGigagroup_ = exports.channels_getInactiveChannels_ = exports.channels_toggleSlowMode_ = exports.channels_editLocation_ = exports.channels_editCreator_ = exports.channels_setDiscussionGroup_ = exports.channels_getGroupsForDiscussion_ = exports.channels_getLeftChannels_ = exports.channels_togglePreHistoryHidden_ = exports.channels_deleteHistory_ = exports.channels_readMessageContents_ = exports.channels_setStickers_ = exports.channels_getAdminLog_ = exports.channels_editBanned_ = void 0;
+exports.phone_discardGroupCall_ = exports.phone_inviteToGroupCall_ = exports.phone_leaveGroupCall_ = exports.phone_joinGroupCall_ = exports.phone_createGroupCall_ = exports.phone_sendSignalingData_ = exports.phone_saveCallDebug_ = exports.phone_setCallRating_ = exports.phone_discardCall_ = exports.phone_receivedCall_ = exports.phone_confirmCall_ = exports.phone_acceptCall_ = exports.phone_requestCall_ = exports.phone_getCallConfig_ = exports.stickers_replaceSticker_ = exports.stickers_deleteStickerSet_ = exports.stickers_renameStickerSet_ = exports.stickers_changeSticker_ = exports.stickers_suggestShortName_ = exports.stickers_checkShortName_ = exports.stickers_setStickerSetThumb_ = exports.stickers_addStickerToSet_ = exports.stickers_changeStickerPosition_ = exports.stickers_removeStickerFromSet_ = exports.stickers_createStickerSet_ = exports.payments_launchPrepaidGiveaway_ = exports.payments_getGiveawayInfo_ = exports.payments_applyGiftCode_ = exports.payments_checkGiftCode_ = exports.payments_getPremiumGiftCodeOptions_ = exports.payments_canPurchasePremium_ = exports.payments_assignPlayMarketTransaction_ = exports.payments_assignAppStoreTransaction_ = exports.payments_exportInvoice_ = exports.payments_getBankCardData_ = exports.payments_clearSavedInfo_ = exports.payments_getSavedInfo_ = exports.payments_sendPaymentForm_ = exports.payments_validateRequestedInfo_ = exports.payments_getPaymentReceipt_ = exports.payments_getPaymentForm_ = exports.bots_invokeWebViewCustomMethod_ = exports.bots_allowSendMessage_ = exports.bots_canSendMessage_ = exports.bots_toggleUsername_ = exports.bots_reorderUsernames_ = exports.bots_getBotInfo_ = exports.bots_setBotInfo_ = exports.bots_setBotGroupDefaultAdminRights_ = exports.bots_setBotBroadcastDefaultAdminRights_ = void 0;
+exports.stories_getAllStories_ = exports.stories_togglePinned_ = exports.stories_deleteStories_ = exports.stories_editStory_ = exports.stories_sendStory_ = exports.stories_canSendStory_ = exports.chatlists_leaveChatlist_ = exports.chatlists_getLeaveChatlistSuggestions_ = exports.chatlists_hideChatlistUpdates_ = exports.chatlists_joinChatlistUpdates_ = exports.chatlists_getChatlistUpdates_ = exports.chatlists_joinChatlistInvite_ = exports.chatlists_checkChatlistInvite_ = exports.chatlists_getExportedInvites_ = exports.chatlists_editExportedInvite_ = exports.chatlists_deleteExportedInvite_ = exports.chatlists_exportChatlistInvite_ = exports.stats_getBroadcastRevenueTransactions_ = exports.stats_getBroadcastRevenueWithdrawalUrl_ = exports.stats_getBroadcastRevenueStats_ = exports.stats_getStoryPublicForwards_ = exports.stats_getStoryStats_ = exports.stats_getMessageStats_ = exports.stats_getMessagePublicForwards_ = exports.stats_getMegagroupStats_ = exports.stats_loadAsyncGraph_ = exports.stats_getBroadcastStats_ = exports.folders_editPeerFolders_ = exports.langpack_getLanguage_ = exports.langpack_getLanguages_ = exports.langpack_getDifference_ = exports.langpack_getStrings_ = exports.langpack_getLangPack_ = exports.phone_saveCallLog_ = exports.phone_getGroupCallStreamRtmpUrl_ = exports.phone_getGroupCallStreamChannels_ = exports.phone_leaveGroupCallPresentation_ = exports.phone_joinGroupCallPresentation_ = exports.phone_saveDefaultGroupCallJoinAs_ = exports.phone_startScheduledGroupCall_ = exports.phone_toggleGroupCallStartSubscription_ = exports.phone_exportGroupCallInvite_ = exports.phone_getGroupCallJoinAs_ = exports.phone_editGroupCallTitle_ = exports.phone_editGroupCallParticipant_ = exports.phone_toggleGroupCallRecord_ = exports.phone_checkGroupCall_ = exports.phone_getGroupParticipants_ = exports.phone_getGroupCall_ = exports.phone_toggleGroupCallSettings_ = void 0;
+exports.functions = exports.fragment_getCollectibleInfo_ = exports.smsjobs_finishJob_ = exports.smsjobs_getSmsJob_ = exports.smsjobs_getStatus_ = exports.smsjobs_updateSettings_ = exports.smsjobs_leave_ = exports.smsjobs_join_ = exports.smsjobs_isEligibleToJoin_ = exports.premium_getUserBoosts_ = exports.premium_getBoostsStatus_ = exports.premium_applyBoost_ = exports.premium_getMyBoosts_ = exports.premium_getBoostsList_ = exports.stories_getStoryReactionsList_ = exports.stories_togglePeerStoriesHidden_ = exports.stories_getChatsToSend_ = exports.stories_getPeerMaxIDs_ = exports.stories_getAllReadPeerStories_ = exports.stories_getPeerStories_ = exports.stories_sendReaction_ = exports.stories_activateStealthMode_ = exports.stories_report_ = exports.stories_exportStoryLink_ = exports.stories_getStoriesViews_ = exports.stories_getStoryViewsList_ = exports.stories_incrementStoryViews_ = exports.stories_readStories_ = exports.stories_toggleAllStoriesHidden_ = exports.stories_getStoriesByID_ = exports.stories_getStoriesArchive_ = exports.stories_getPinnedStories_ = void 0;
 // deno-fmt-ignore-file
 const _1_tl_object_js_1 = require("./1_tl_object.js");
 const _2_types_js_1 = require("./2_types.js");
@@ -399,6 +399,41 @@ class destroy_auth_key_ extends Function_ {
 }
 exports.destroy_auth_key_ = destroy_auth_key_;
 Object.defineProperty(destroy_auth_key_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class invokeWithBusinessConnectionPrefix_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xDD289F8E;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "invokeWithBusinessConnectionPrefix";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["connection_id", "string", "string"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.connection_id, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "connection_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.connection_id = params.connection_id;
+    }
+}
+exports.invokeWithBusinessConnectionPrefix_ = invokeWithBusinessConnectionPrefix_;
+Object.defineProperty(invokeWithBusinessConnectionPrefix_, "__F", {
     enumerable: true,
     configurable: true,
     writable: true,
@@ -801,6 +836,50 @@ class invokeWithTakeout_ extends Function_ {
 }
 exports.invokeWithTakeout_ = invokeWithTakeout_;
 Object.defineProperty(invokeWithTakeout_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class invokeWithBusinessConnection_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xDD289F8E;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "invokeWithBusinessConnection";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["connection_id", "string", "string"],
+            ["query", _2_types_js_1.types["TypeX"], "!X"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.connection_id, "string", "string"],
+            [this.query, _2_types_js_1.types.TypeX, "!X"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "connection_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "query", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.connection_id = params.connection_id;
+        this.query = params.query;
+    }
+}
+exports.invokeWithBusinessConnection_ = invokeWithBusinessConnection_;
+Object.defineProperty(invokeWithBusinessConnection_, "__F", {
     enumerable: true,
     configurable: true,
     writable: true,
@@ -6063,7 +6142,7 @@ Object.defineProperty(account_updateBusinessAwayMessage_, "__F", {
 });
 class account_updateConnectedBot_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
-        return 0x9C2D527D;
+        return 0x43D8521D;
     }
     static get [_1_tl_object_js_1.name]() {
         return "account.updateConnectedBot";
@@ -6074,7 +6153,7 @@ class account_updateConnectedBot_ extends Function_ {
             ["can_reply", "true", "flags.0?true"],
             ["deleted", "true", "flags.1?true"],
             ["bot", _2_types_js_1.types._InputUser, "InputUser"],
-            ["recipients", _2_types_js_1.types._InputBusinessRecipients, "InputBusinessRecipients"],
+            ["recipients", _2_types_js_1.types._InputBusinessBotRecipients, "InputBusinessBotRecipients"],
         ];
     }
     get [_1_tl_object_js_1.params]() {
@@ -6083,7 +6162,7 @@ class account_updateConnectedBot_ extends Function_ {
             [this.can_reply ?? null, "true", "flags.0?true"],
             [this.deleted ?? null, "true", "flags.1?true"],
             [this.bot, _2_types_js_1.types._InputUser, "InputUser"],
-            [this.recipients, _2_types_js_1.types._InputBusinessRecipients, "InputBusinessRecipients"],
+            [this.recipients, _2_types_js_1.types._InputBusinessBotRecipients, "InputBusinessBotRecipients"],
         ];
     }
     constructor(params) {
@@ -6144,6 +6223,402 @@ class account_getConnectedBots_ extends Function_ {
 }
 exports.account_getConnectedBots_ = account_getConnectedBots_;
 Object.defineProperty(account_getConnectedBots_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class account_getBotBusinessConnection_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x76A86270;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "account.getBotBusinessConnection";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["connection_id", "string", "string"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.connection_id, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "connection_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.connection_id = params.connection_id;
+    }
+}
+exports.account_getBotBusinessConnection_ = account_getBotBusinessConnection_;
+Object.defineProperty(account_getBotBusinessConnection_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class account_updateBusinessIntro_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xA614D034;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "account.updateBusinessIntro";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["intro", _2_types_js_1.types._InputBusinessIntro, "flags.0?InputBusinessIntro"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.intro ?? null, _2_types_js_1.types._InputBusinessIntro, "flags.0?InputBusinessIntro"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "intro", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.intro = params?.intro;
+    }
+}
+exports.account_updateBusinessIntro_ = account_updateBusinessIntro_;
+Object.defineProperty(account_updateBusinessIntro_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class account_toggleConnectedBotPaused_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x646E1097;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "account.toggleConnectedBotPaused";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["peer", _2_types_js_1.types._InputPeer, "InputPeer"],
+            ["paused", "boolean", "Bool"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.peer, _2_types_js_1.types._InputPeer, "InputPeer"],
+            [this.paused, "boolean", "Bool"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "peer", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "paused", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.peer = params.peer;
+        this.paused = params.paused;
+    }
+}
+exports.account_toggleConnectedBotPaused_ = account_toggleConnectedBotPaused_;
+Object.defineProperty(account_toggleConnectedBotPaused_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class account_disablePeerConnectedBot_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x5E437ED9;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "account.disablePeerConnectedBot";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["peer", _2_types_js_1.types._InputPeer, "InputPeer"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.peer, _2_types_js_1.types._InputPeer, "InputPeer"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "peer", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.peer = params.peer;
+    }
+}
+exports.account_disablePeerConnectedBot_ = account_disablePeerConnectedBot_;
+Object.defineProperty(account_disablePeerConnectedBot_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class account_updateBirthday_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xCC6E0C11;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "account.updateBirthday";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["birthday", _2_types_js_1.types._Birthday, "flags.0?Birthday"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.birthday ?? null, _2_types_js_1.types._Birthday, "flags.0?Birthday"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "birthday", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.birthday = params?.birthday;
+    }
+}
+exports.account_updateBirthday_ = account_updateBirthday_;
+Object.defineProperty(account_updateBirthday_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class account_createBusinessChatLink_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x8851E68E;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "account.createBusinessChatLink";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["link", _2_types_js_1.types._InputBusinessChatLink, "InputBusinessChatLink"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.link, _2_types_js_1.types._InputBusinessChatLink, "InputBusinessChatLink"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "link", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.link = params.link;
+    }
+}
+exports.account_createBusinessChatLink_ = account_createBusinessChatLink_;
+Object.defineProperty(account_createBusinessChatLink_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class account_editBusinessChatLink_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x8C3410AF;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "account.editBusinessChatLink";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["slug", "string", "string"],
+            ["link", _2_types_js_1.types._InputBusinessChatLink, "InputBusinessChatLink"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.slug, "string", "string"],
+            [this.link, _2_types_js_1.types._InputBusinessChatLink, "InputBusinessChatLink"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "slug", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "link", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.slug = params.slug;
+        this.link = params.link;
+    }
+}
+exports.account_editBusinessChatLink_ = account_editBusinessChatLink_;
+Object.defineProperty(account_editBusinessChatLink_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class account_deleteBusinessChatLink_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x60073674;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "account.deleteBusinessChatLink";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["slug", "string", "string"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.slug, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "slug", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.slug = params.slug;
+    }
+}
+exports.account_deleteBusinessChatLink_ = account_deleteBusinessChatLink_;
+Object.defineProperty(account_deleteBusinessChatLink_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class account_getBusinessChatLinks_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x6F70DDE1;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "account.getBusinessChatLinks";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [];
+    }
+    constructor() {
+        super();
+    }
+}
+exports.account_getBusinessChatLinks_ = account_getBusinessChatLinks_;
+Object.defineProperty(account_getBusinessChatLinks_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class account_resolveBusinessChatLink_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x5492E5EE;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "account.resolveBusinessChatLink";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["slug", "string", "string"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.slug, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "slug", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.slug = params.slug;
+    }
+}
+exports.account_resolveBusinessChatLink_ = account_resolveBusinessChatLink_;
+Object.defineProperty(account_resolveBusinessChatLink_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class account_updatePersonalChannel_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xD94305E0;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "account.updatePersonalChannel";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["channel", _2_types_js_1.types._InputChannel, "InputChannel"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.channel, _2_types_js_1.types._InputChannel, "InputChannel"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "channel", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.channel = params.channel;
+    }
+}
+exports.account_updatePersonalChannel_ = account_updatePersonalChannel_;
+Object.defineProperty(account_updatePersonalChannel_, "__F", {
     enumerable: true,
     configurable: true,
     writable: true,
@@ -7465,6 +7940,30 @@ class contacts_setBlocked_ extends Function_ {
 }
 exports.contacts_setBlocked_ = contacts_setBlocked_;
 Object.defineProperty(contacts_setBlocked_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class contacts_getBirthdays_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xDAEDA864;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "contacts.getBirthdays";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [];
+    }
+    constructor() {
+        super();
+    }
+}
+exports.contacts_getBirthdays_ = contacts_getBirthdays_;
+Object.defineProperty(contacts_getBirthdays_, "__F", {
     enumerable: true,
     configurable: true,
     writable: true,
@@ -9028,7 +9527,7 @@ Object.defineProperty(messages_editChatPhoto_, "__F", {
 /** Adds a user to a chat and sends a service message on it. */
 class messages_addChatUser_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
-        return 0xF24753E3;
+        return 0xCBC6D107;
     }
     static get [_1_tl_object_js_1.name]() {
         return "messages.addChatUser";
@@ -9144,7 +9643,7 @@ Object.defineProperty(messages_deleteChatUser_, "__F", {
 /** Creates a new chat. */
 class messages_createChat_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
-        return 0x0034A818;
+        return 0x92CEDDD4;
     }
     static get [_1_tl_object_js_1.name]() {
         return "messages.createChat";
@@ -12726,25 +13225,35 @@ Object.defineProperty(messages_setBotPrecheckoutResults_, "__F", {
 /** Upload a file and associate it to a chat (without actually sending it to the chat) */
 class messages_uploadMedia_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
-        return 0x519BC2B1;
+        return 0x14967978;
     }
     static get [_1_tl_object_js_1.name]() {
         return "messages.uploadMedia";
     }
     static get [_1_tl_object_js_1.paramDesc]() {
         return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["business_connection_id", "string", "flags.0?string"],
             ["peer", _2_types_js_1.types._InputPeer, "InputPeer"],
             ["media", _2_types_js_1.types._InputMedia, "InputMedia"],
         ];
     }
     get [_1_tl_object_js_1.params]() {
         return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.business_connection_id ?? null, "string", "flags.0?string"],
             [this.peer, _2_types_js_1.types._InputPeer, "InputPeer"],
             [this.media, _2_types_js_1.types._InputMedia, "InputMedia"],
         ];
     }
     constructor(params) {
         super();
+        Object.defineProperty(this, "business_connection_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         /** The chat, can be [inputPeerEmpty](https://core.telegram.org/constructor/inputPeerEmpty) for bots and [inputPeerSelf](https://core.telegram.org/constructor/inputPeerSelf) for users. */
         Object.defineProperty(this, "peer", {
             enumerable: true,
@@ -12759,6 +13268,7 @@ class messages_uploadMedia_ extends Function_ {
             writable: true,
             value: void 0
         });
+        this.business_connection_id = params.business_connection_id;
         this.peer = params.peer;
         this.media = params.media;
     }
@@ -19351,7 +19861,7 @@ Object.defineProperty(messages_getQuickReplyMessages_, "__F", {
 });
 class messages_sendQuickReplyMessages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
-        return 0x33153AD4;
+        return 0x6C750DE1;
     }
     static get [_1_tl_object_js_1.name]() {
         return "messages.sendQuickReplyMessages";
@@ -19360,12 +19870,16 @@ class messages_sendQuickReplyMessages_ extends Function_ {
         return [
             ["peer", _2_types_js_1.types._InputPeer, "InputPeer"],
             ["shortcut_id", "number", "int"],
+            ["id", ["number"], "Vector<int>"],
+            ["random_id", ["bigint"], "Vector<long>"],
         ];
     }
     get [_1_tl_object_js_1.params]() {
         return [
             [this.peer, _2_types_js_1.types._InputPeer, "InputPeer"],
             [this.shortcut_id, "number", "int"],
+            [this.id, ["number"], "Vector<int>"],
+            [this.random_id, ["bigint"], "Vector<long>"],
         ];
     }
     constructor(params) {
@@ -19382,8 +19896,22 @@ class messages_sendQuickReplyMessages_ extends Function_ {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "random_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         this.peer = params.peer;
         this.shortcut_id = params.shortcut_id;
+        this.id = params.id;
+        this.random_id = params.random_id;
     }
 }
 exports.messages_sendQuickReplyMessages_ = messages_sendQuickReplyMessages_;
@@ -19467,6 +19995,50 @@ class messages_toggleDialogFilterTags_ extends Function_ {
 }
 exports.messages_toggleDialogFilterTags_ = messages_toggleDialogFilterTags_;
 Object.defineProperty(messages_toggleDialogFilterTags_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class messages_getMyStickers_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xD0B5E1FC;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "messages.getMyStickers";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["offset_id", "bigint", "long"],
+            ["limit", "number", "int"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.offset_id, "bigint", "long"],
+            [this.limit, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "offset_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "limit", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.offset_id = params.offset_id;
+        this.limit = params.limit;
+    }
+}
+exports.messages_getMyStickers_ = messages_getMyStickers_;
+Object.defineProperty(messages_getMyStickers_, "__F", {
     enumerable: true,
     configurable: true,
     writable: true,
@@ -22189,7 +22761,7 @@ Object.defineProperty(channels_leaveChannel_, "__F", {
 /** Invite users to a channel/supergroup */
 class channels_inviteToChannel_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
-        return 0x199F3A6C;
+        return 0xC9E33D54;
     }
     static get [_1_tl_object_js_1.name]() {
         return "channels.inviteToChannel";
@@ -22399,6 +22971,7 @@ class channels_getAdminedPublicChannels_ extends Function_ {
             ["flags", _1_tl_object_js_1.flags, "#"],
             ["by_location", "true", "flags.0?true"],
             ["check_limit", "true", "flags.1?true"],
+            ["for_personal", "true", "flags.2?true"],
         ];
     }
     get [_1_tl_object_js_1.params]() {
@@ -22406,6 +22979,7 @@ class channels_getAdminedPublicChannels_ extends Function_ {
             ["flags", _1_tl_object_js_1.flags, "#"],
             [this.by_location ?? null, "true", "flags.0?true"],
             [this.check_limit ?? null, "true", "flags.1?true"],
+            [this.for_personal ?? null, "true", "flags.2?true"],
         ];
     }
     constructor(params) {
@@ -22425,8 +22999,15 @@ class channels_getAdminedPublicChannels_ extends Function_ {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "for_personal", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         this.by_location = params?.by_location;
         this.check_limit = params?.check_limit;
+        this.for_personal = params?.for_personal;
     }
 }
 exports.channels_getAdminedPublicChannels_ = channels_getAdminedPublicChannels_;
@@ -24528,6 +25109,103 @@ Object.defineProperty(channels_setEmojiStickers_, "__F", {
     writable: true,
     value: null
 });
+class channels_reportSponsoredMessage_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xAF8FF6B9;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "channels.reportSponsoredMessage";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["channel", _2_types_js_1.types._InputChannel, "InputChannel"],
+            ["random_id", Uint8Array, "bytes"],
+            ["option", Uint8Array, "bytes"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.channel, _2_types_js_1.types._InputChannel, "InputChannel"],
+            [this.random_id, Uint8Array, "bytes"],
+            [this.option, Uint8Array, "bytes"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "channel", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "random_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "option", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.channel = params.channel;
+        this.random_id = params.random_id;
+        this.option = params.option;
+    }
+}
+exports.channels_reportSponsoredMessage_ = channels_reportSponsoredMessage_;
+Object.defineProperty(channels_reportSponsoredMessage_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class channels_restrictSponsoredMessages_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x9AE91519;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "channels.restrictSponsoredMessages";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["channel", _2_types_js_1.types._InputChannel, "InputChannel"],
+            ["restricted", "boolean", "Bool"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.channel, _2_types_js_1.types._InputChannel, "InputChannel"],
+            [this.restricted, "boolean", "Bool"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "channel", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "restricted", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.channel = params.channel;
+        this.restricted = params.restricted;
+    }
+}
+exports.channels_restrictSponsoredMessages_ = channels_restrictSponsoredMessages_;
+Object.defineProperty(channels_restrictSponsoredMessages_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
 /** Sends a custom request; for bots only */
 class bots_sendCustomRequest_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26052,8 +26730,6 @@ class stickers_createStickerSet_ extends Function_ {
         return [
             ["flags", _1_tl_object_js_1.flags, "#"],
             ["masks", "true", "flags.0?true"],
-            ["animated", "true", "flags.1?true"],
-            ["videos", "true", "flags.4?true"],
             ["emojis", "true", "flags.5?true"],
             ["text_color", "true", "flags.6?true"],
             ["user_id", _2_types_js_1.types._InputUser, "InputUser"],
@@ -26068,8 +26744,6 @@ class stickers_createStickerSet_ extends Function_ {
         return [
             ["flags", _1_tl_object_js_1.flags, "#"],
             [this.masks ?? null, "true", "flags.0?true"],
-            [this.animated ?? null, "true", "flags.1?true"],
-            [this.videos ?? null, "true", "flags.4?true"],
             [this.emojis ?? null, "true", "flags.5?true"],
             [this.text_color ?? null, "true", "flags.6?true"],
             [this.user_id, _2_types_js_1.types._InputUser, "InputUser"],
@@ -26084,20 +26758,6 @@ class stickers_createStickerSet_ extends Function_ {
         super();
         /** Whether this is a mask stickerset */
         Object.defineProperty(this, "masks", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        /** Whether this is an animated stickerset */
-        Object.defineProperty(this, "animated", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        /** Whether this is a video stickerset */
-        Object.defineProperty(this, "videos", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -26160,8 +26820,6 @@ class stickers_createStickerSet_ extends Function_ {
             value: void 0
         });
         this.masks = params.masks;
-        this.animated = params.animated;
-        this.videos = params.videos;
         this.emojis = params.emojis;
         this.text_color = params.text_color;
         this.user_id = params.user_id;
@@ -26591,6 +27249,50 @@ class stickers_deleteStickerSet_ extends Function_ {
 }
 exports.stickers_deleteStickerSet_ = stickers_deleteStickerSet_;
 Object.defineProperty(stickers_deleteStickerSet_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class stickers_replaceSticker_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x4696459A;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "stickers.replaceSticker";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["sticker", _2_types_js_1.types._InputDocument, "InputDocument"],
+            ["new_sticker", _2_types_js_1.types._InputStickerSetItem, "InputStickerSetItem"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.sticker, _2_types_js_1.types._InputDocument, "InputDocument"],
+            [this.new_sticker, _2_types_js_1.types._InputStickerSetItem, "InputStickerSetItem"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "sticker", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "new_sticker", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.sticker = params.sticker;
+        this.new_sticker = params.new_sticker;
+    }
+}
+exports.stickers_replaceSticker_ = stickers_replaceSticker_;
+Object.defineProperty(stickers_replaceSticker_, "__F", {
     enumerable: true,
     configurable: true,
     writable: true,
@@ -28985,6 +29687,149 @@ Object.defineProperty(stats_getStoryPublicForwards_, "__F", {
     writable: true,
     value: null
 });
+class stats_getBroadcastRevenueStats_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x75DFB671;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "stats.getBroadcastRevenueStats";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            ["dark", "true", "flags.0?true"],
+            ["channel", _2_types_js_1.types._InputChannel, "InputChannel"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            ["flags", _1_tl_object_js_1.flags, "#"],
+            [this.dark ?? null, "true", "flags.0?true"],
+            [this.channel, _2_types_js_1.types._InputChannel, "InputChannel"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "dark", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "channel", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.dark = params.dark;
+        this.channel = params.channel;
+    }
+}
+exports.stats_getBroadcastRevenueStats_ = stats_getBroadcastRevenueStats_;
+Object.defineProperty(stats_getBroadcastRevenueStats_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class stats_getBroadcastRevenueWithdrawalUrl_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x2A65EF73;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "stats.getBroadcastRevenueWithdrawalUrl";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["channel", _2_types_js_1.types._InputChannel, "InputChannel"],
+            ["password", _2_types_js_1.types._InputCheckPasswordSRP, "InputCheckPasswordSRP"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.channel, _2_types_js_1.types._InputChannel, "InputChannel"],
+            [this.password, _2_types_js_1.types._InputCheckPasswordSRP, "InputCheckPasswordSRP"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "channel", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "password", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.channel = params.channel;
+        this.password = params.password;
+    }
+}
+exports.stats_getBroadcastRevenueWithdrawalUrl_ = stats_getBroadcastRevenueWithdrawalUrl_;
+Object.defineProperty(stats_getBroadcastRevenueWithdrawalUrl_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+class stats_getBroadcastRevenueTransactions_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0x0069280F;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "stats.getBroadcastRevenueTransactions";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["channel", _2_types_js_1.types._InputChannel, "InputChannel"],
+            ["offset", "number", "int"],
+            ["limit", "number", "int"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.channel, _2_types_js_1.types._InputChannel, "InputChannel"],
+            [this.offset, "number", "int"],
+            [this.limit, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "channel", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "offset", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "limit", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.channel = params.channel;
+        this.offset = params.offset;
+        this.limit = params.limit;
+    }
+}
+exports.stats_getBroadcastRevenueTransactions_ = stats_getBroadcastRevenueTransactions_;
+Object.defineProperty(stats_getBroadcastRevenueTransactions_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
 /** Export a [folder »](https://core.telegram.org/api/folders), creating a [chat folder deep link »](https://core.telegram.org/api/links#chat-folder-links). */
 class chatlists_exportChatlistInvite_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31323,6 +32168,41 @@ Object.defineProperty(smsjobs_finishJob_, "__F", {
     writable: true,
     value: null
 });
+class fragment_getCollectibleInfo_ extends Function_ {
+    get [_1_tl_object_js_1.id]() {
+        return 0xBE1E85BA;
+    }
+    static get [_1_tl_object_js_1.name]() {
+        return "fragment.getCollectibleInfo";
+    }
+    static get [_1_tl_object_js_1.paramDesc]() {
+        return [
+            ["collectible", _2_types_js_1.types._InputCollectible, "InputCollectible"],
+        ];
+    }
+    get [_1_tl_object_js_1.params]() {
+        return [
+            [this.collectible, _2_types_js_1.types._InputCollectible, "InputCollectible"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "collectible", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.collectible = params.collectible;
+    }
+}
+exports.fragment_getCollectibleInfo_ = fragment_getCollectibleInfo_;
+Object.defineProperty(fragment_getCollectibleInfo_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
 exports.functions = {
     Function: Function_,
     req_pq_multi: req_pq_multi_,
@@ -31334,6 +32214,7 @@ exports.functions = {
     ping_delay_disconnect: ping_delay_disconnect_,
     destroy_session: destroy_session_,
     destroy_auth_key: destroy_auth_key_,
+    invokeWithBusinessConnectionPrefix: invokeWithBusinessConnectionPrefix_,
     invokeAfterMsg: invokeAfterMsg_,
     invokeAfterMsgs: invokeAfterMsgs_,
     initConnection: initConnection_,
@@ -31341,6 +32222,7 @@ exports.functions = {
     invokeWithoutUpdates: invokeWithoutUpdates_,
     invokeWithMessagesRange: invokeWithMessagesRange_,
     invokeWithTakeout: invokeWithTakeout_,
+    invokeWithBusinessConnection: invokeWithBusinessConnection_,
     auth: {
         sendCode: auth_sendCode_,
         signUp: auth_signUp_,
@@ -31464,6 +32346,17 @@ exports.functions = {
         updateBusinessAwayMessage: account_updateBusinessAwayMessage_,
         updateConnectedBot: account_updateConnectedBot_,
         getConnectedBots: account_getConnectedBots_,
+        getBotBusinessConnection: account_getBotBusinessConnection_,
+        updateBusinessIntro: account_updateBusinessIntro_,
+        toggleConnectedBotPaused: account_toggleConnectedBotPaused_,
+        disablePeerConnectedBot: account_disablePeerConnectedBot_,
+        updateBirthday: account_updateBirthday_,
+        createBusinessChatLink: account_createBusinessChatLink_,
+        editBusinessChatLink: account_editBusinessChatLink_,
+        deleteBusinessChatLink: account_deleteBusinessChatLink_,
+        getBusinessChatLinks: account_getBusinessChatLinks_,
+        resolveBusinessChatLink: account_resolveBusinessChatLink_,
+        updatePersonalChannel: account_updatePersonalChannel_,
     },
     users: {
         getUsers: users_getUsers_,
@@ -31497,6 +32390,7 @@ exports.functions = {
         importContactToken: contacts_importContactToken_,
         editCloseFriends: contacts_editCloseFriends_,
         setBlocked: contacts_setBlocked_,
+        getBirthdays: contacts_getBirthdays_,
     },
     messages: {
         getMessages: messages_getMessages_,
@@ -31706,6 +32600,7 @@ exports.functions = {
         sendQuickReplyMessages: messages_sendQuickReplyMessages_,
         deleteQuickReplyMessages: messages_deleteQuickReplyMessages_,
         toggleDialogFilterTags: messages_toggleDialogFilterTags_,
+        getMyStickers: messages_getMyStickers_,
     },
     updates: {
         getState: updates_getState_,
@@ -31819,6 +32714,8 @@ exports.functions = {
         updateEmojiStatus: channels_updateEmojiStatus_,
         setBoostsToUnblockRestrictions: channels_setBoostsToUnblockRestrictions_,
         setEmojiStickers: channels_setEmojiStickers_,
+        reportSponsoredMessage: channels_reportSponsoredMessage_,
+        restrictSponsoredMessages: channels_restrictSponsoredMessages_,
     },
     bots: {
         sendCustomRequest: bots_sendCustomRequest_,
@@ -31867,6 +32764,7 @@ exports.functions = {
         changeSticker: stickers_changeSticker_,
         renameStickerSet: stickers_renameStickerSet_,
         deleteStickerSet: stickers_deleteStickerSet_,
+        replaceSticker: stickers_replaceSticker_,
     },
     phone: {
         getCallConfig: phone_getCallConfig_,
@@ -31919,6 +32817,9 @@ exports.functions = {
         getMessageStats: stats_getMessageStats_,
         getStoryStats: stats_getStoryStats_,
         getStoryPublicForwards: stats_getStoryPublicForwards_,
+        getBroadcastRevenueStats: stats_getBroadcastRevenueStats_,
+        getBroadcastRevenueWithdrawalUrl: stats_getBroadcastRevenueWithdrawalUrl_,
+        getBroadcastRevenueTransactions: stats_getBroadcastRevenueTransactions_,
     },
     chatlists: {
         exportChatlistInvite: chatlists_exportChatlistInvite_,
@@ -31974,5 +32875,8 @@ exports.functions = {
         getStatus: smsjobs_getStatus_,
         getSmsJob: smsjobs_getSmsJob_,
         finishJob: smsjobs_finishJob_,
+    },
+    fragment: {
+        getCollectibleInfo: fragment_getCollectibleInfo_,
     },
 };

@@ -379,6 +379,40 @@ Object.defineProperty(destroy_auth_key_, "__F", {
     writable: true,
     value: null
 });
+export class invokeWithBusinessConnectionPrefix_ extends Function_ {
+    get [id]() {
+        return 0xDD289F8E;
+    }
+    static get [name]() {
+        return "invokeWithBusinessConnectionPrefix";
+    }
+    static get [paramDesc]() {
+        return [
+            ["connection_id", "string", "string"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.connection_id, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "connection_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.connection_id = params.connection_id;
+    }
+}
+Object.defineProperty(invokeWithBusinessConnectionPrefix_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
 /** Invokes a query after successful completion of one of the previous queries. */
 export class invokeAfterMsg_ extends Function_ {
     get [id]() {
@@ -769,6 +803,49 @@ export class invokeWithTakeout_ extends Function_ {
     }
 }
 Object.defineProperty(invokeWithTakeout_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class invokeWithBusinessConnection_ extends Function_ {
+    get [id]() {
+        return 0xDD289F8E;
+    }
+    static get [name]() {
+        return "invokeWithBusinessConnection";
+    }
+    static get [paramDesc]() {
+        return [
+            ["connection_id", "string", "string"],
+            ["query", types["TypeX"], "!X"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.connection_id, "string", "string"],
+            [this.query, types.TypeX, "!X"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "connection_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "query", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.connection_id = params.connection_id;
+        this.query = params.query;
+    }
+}
+Object.defineProperty(invokeWithBusinessConnection_, "__F", {
     enumerable: true,
     configurable: true,
     writable: true,
@@ -5913,7 +5990,7 @@ Object.defineProperty(account_updateBusinessAwayMessage_, "__F", {
 });
 export class account_updateConnectedBot_ extends Function_ {
     get [id]() {
-        return 0x9C2D527D;
+        return 0x43D8521D;
     }
     static get [name]() {
         return "account.updateConnectedBot";
@@ -5924,7 +6001,7 @@ export class account_updateConnectedBot_ extends Function_ {
             ["can_reply", "true", "flags.0?true"],
             ["deleted", "true", "flags.1?true"],
             ["bot", types._InputUser, "InputUser"],
-            ["recipients", types._InputBusinessRecipients, "InputBusinessRecipients"],
+            ["recipients", types._InputBusinessBotRecipients, "InputBusinessBotRecipients"],
         ];
     }
     get [params]() {
@@ -5933,7 +6010,7 @@ export class account_updateConnectedBot_ extends Function_ {
             [this.can_reply ?? null, "true", "flags.0?true"],
             [this.deleted ?? null, "true", "flags.1?true"],
             [this.bot, types._InputUser, "InputUser"],
-            [this.recipients, types._InputBusinessRecipients, "InputBusinessRecipients"],
+            [this.recipients, types._InputBusinessBotRecipients, "InputBusinessBotRecipients"],
         ];
     }
     constructor(params) {
@@ -5992,6 +6069,391 @@ export class account_getConnectedBots_ extends Function_ {
     }
 }
 Object.defineProperty(account_getConnectedBots_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class account_getBotBusinessConnection_ extends Function_ {
+    get [id]() {
+        return 0x76A86270;
+    }
+    static get [name]() {
+        return "account.getBotBusinessConnection";
+    }
+    static get [paramDesc]() {
+        return [
+            ["connection_id", "string", "string"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.connection_id, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "connection_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.connection_id = params.connection_id;
+    }
+}
+Object.defineProperty(account_getBotBusinessConnection_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class account_updateBusinessIntro_ extends Function_ {
+    get [id]() {
+        return 0xA614D034;
+    }
+    static get [name]() {
+        return "account.updateBusinessIntro";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["intro", types._InputBusinessIntro, "flags.0?InputBusinessIntro"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.intro ?? null, types._InputBusinessIntro, "flags.0?InputBusinessIntro"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "intro", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.intro = params?.intro;
+    }
+}
+Object.defineProperty(account_updateBusinessIntro_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class account_toggleConnectedBotPaused_ extends Function_ {
+    get [id]() {
+        return 0x646E1097;
+    }
+    static get [name]() {
+        return "account.toggleConnectedBotPaused";
+    }
+    static get [paramDesc]() {
+        return [
+            ["peer", types._InputPeer, "InputPeer"],
+            ["paused", "boolean", "Bool"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.peer, types._InputPeer, "InputPeer"],
+            [this.paused, "boolean", "Bool"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "peer", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "paused", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.peer = params.peer;
+        this.paused = params.paused;
+    }
+}
+Object.defineProperty(account_toggleConnectedBotPaused_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class account_disablePeerConnectedBot_ extends Function_ {
+    get [id]() {
+        return 0x5E437ED9;
+    }
+    static get [name]() {
+        return "account.disablePeerConnectedBot";
+    }
+    static get [paramDesc]() {
+        return [
+            ["peer", types._InputPeer, "InputPeer"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.peer, types._InputPeer, "InputPeer"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "peer", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.peer = params.peer;
+    }
+}
+Object.defineProperty(account_disablePeerConnectedBot_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class account_updateBirthday_ extends Function_ {
+    get [id]() {
+        return 0xCC6E0C11;
+    }
+    static get [name]() {
+        return "account.updateBirthday";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["birthday", types._Birthday, "flags.0?Birthday"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.birthday ?? null, types._Birthday, "flags.0?Birthday"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "birthday", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.birthday = params?.birthday;
+    }
+}
+Object.defineProperty(account_updateBirthday_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class account_createBusinessChatLink_ extends Function_ {
+    get [id]() {
+        return 0x8851E68E;
+    }
+    static get [name]() {
+        return "account.createBusinessChatLink";
+    }
+    static get [paramDesc]() {
+        return [
+            ["link", types._InputBusinessChatLink, "InputBusinessChatLink"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.link, types._InputBusinessChatLink, "InputBusinessChatLink"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "link", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.link = params.link;
+    }
+}
+Object.defineProperty(account_createBusinessChatLink_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class account_editBusinessChatLink_ extends Function_ {
+    get [id]() {
+        return 0x8C3410AF;
+    }
+    static get [name]() {
+        return "account.editBusinessChatLink";
+    }
+    static get [paramDesc]() {
+        return [
+            ["slug", "string", "string"],
+            ["link", types._InputBusinessChatLink, "InputBusinessChatLink"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.slug, "string", "string"],
+            [this.link, types._InputBusinessChatLink, "InputBusinessChatLink"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "slug", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "link", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.slug = params.slug;
+        this.link = params.link;
+    }
+}
+Object.defineProperty(account_editBusinessChatLink_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class account_deleteBusinessChatLink_ extends Function_ {
+    get [id]() {
+        return 0x60073674;
+    }
+    static get [name]() {
+        return "account.deleteBusinessChatLink";
+    }
+    static get [paramDesc]() {
+        return [
+            ["slug", "string", "string"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.slug, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "slug", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.slug = params.slug;
+    }
+}
+Object.defineProperty(account_deleteBusinessChatLink_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class account_getBusinessChatLinks_ extends Function_ {
+    get [id]() {
+        return 0x6F70DDE1;
+    }
+    static get [name]() {
+        return "account.getBusinessChatLinks";
+    }
+    static get [paramDesc]() {
+        return [];
+    }
+    get [params]() {
+        return [];
+    }
+    constructor() {
+        super();
+    }
+}
+Object.defineProperty(account_getBusinessChatLinks_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class account_resolveBusinessChatLink_ extends Function_ {
+    get [id]() {
+        return 0x5492E5EE;
+    }
+    static get [name]() {
+        return "account.resolveBusinessChatLink";
+    }
+    static get [paramDesc]() {
+        return [
+            ["slug", "string", "string"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.slug, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "slug", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.slug = params.slug;
+    }
+}
+Object.defineProperty(account_resolveBusinessChatLink_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class account_updatePersonalChannel_ extends Function_ {
+    get [id]() {
+        return 0xD94305E0;
+    }
+    static get [name]() {
+        return "account.updatePersonalChannel";
+    }
+    static get [paramDesc]() {
+        return [
+            ["channel", types._InputChannel, "InputChannel"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.channel, types._InputChannel, "InputChannel"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "channel", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.channel = params.channel;
+    }
+}
+Object.defineProperty(account_updatePersonalChannel_, "__F", {
     enumerable: true,
     configurable: true,
     writable: true,
@@ -7284,6 +7746,29 @@ export class contacts_setBlocked_ extends Function_ {
     }
 }
 Object.defineProperty(contacts_setBlocked_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class contacts_getBirthdays_ extends Function_ {
+    get [id]() {
+        return 0xDAEDA864;
+    }
+    static get [name]() {
+        return "contacts.getBirthdays";
+    }
+    static get [paramDesc]() {
+        return [];
+    }
+    get [params]() {
+        return [];
+    }
+    constructor() {
+        super();
+    }
+}
+Object.defineProperty(contacts_getBirthdays_, "__F", {
     enumerable: true,
     configurable: true,
     writable: true,
@@ -8828,7 +9313,7 @@ Object.defineProperty(messages_editChatPhoto_, "__F", {
 /** Adds a user to a chat and sends a service message on it. */
 export class messages_addChatUser_ extends Function_ {
     get [id]() {
-        return 0xF24753E3;
+        return 0xCBC6D107;
     }
     static get [name]() {
         return "messages.addChatUser";
@@ -8942,7 +9427,7 @@ Object.defineProperty(messages_deleteChatUser_, "__F", {
 /** Creates a new chat. */
 export class messages_createChat_ extends Function_ {
     get [id]() {
-        return 0x0034A818;
+        return 0x92CEDDD4;
     }
     static get [name]() {
         return "messages.createChat";
@@ -12463,25 +12948,35 @@ Object.defineProperty(messages_setBotPrecheckoutResults_, "__F", {
 /** Upload a file and associate it to a chat (without actually sending it to the chat) */
 export class messages_uploadMedia_ extends Function_ {
     get [id]() {
-        return 0x519BC2B1;
+        return 0x14967978;
     }
     static get [name]() {
         return "messages.uploadMedia";
     }
     static get [paramDesc]() {
         return [
+            ["flags", flags, "#"],
+            ["business_connection_id", "string", "flags.0?string"],
             ["peer", types._InputPeer, "InputPeer"],
             ["media", types._InputMedia, "InputMedia"],
         ];
     }
     get [params]() {
         return [
+            ["flags", flags, "#"],
+            [this.business_connection_id ?? null, "string", "flags.0?string"],
             [this.peer, types._InputPeer, "InputPeer"],
             [this.media, types._InputMedia, "InputMedia"],
         ];
     }
     constructor(params) {
         super();
+        Object.defineProperty(this, "business_connection_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         /** The chat, can be [inputPeerEmpty](https://core.telegram.org/constructor/inputPeerEmpty) for bots and [inputPeerSelf](https://core.telegram.org/constructor/inputPeerSelf) for users. */
         Object.defineProperty(this, "peer", {
             enumerable: true,
@@ -12496,6 +12991,7 @@ export class messages_uploadMedia_ extends Function_ {
             writable: true,
             value: void 0
         });
+        this.business_connection_id = params.business_connection_id;
         this.peer = params.peer;
         this.media = params.media;
     }
@@ -18966,7 +19462,7 @@ Object.defineProperty(messages_getQuickReplyMessages_, "__F", {
 });
 export class messages_sendQuickReplyMessages_ extends Function_ {
     get [id]() {
-        return 0x33153AD4;
+        return 0x6C750DE1;
     }
     static get [name]() {
         return "messages.sendQuickReplyMessages";
@@ -18975,12 +19471,16 @@ export class messages_sendQuickReplyMessages_ extends Function_ {
         return [
             ["peer", types._InputPeer, "InputPeer"],
             ["shortcut_id", "number", "int"],
+            ["id", ["number"], "Vector<int>"],
+            ["random_id", ["bigint"], "Vector<long>"],
         ];
     }
     get [params]() {
         return [
             [this.peer, types._InputPeer, "InputPeer"],
             [this.shortcut_id, "number", "int"],
+            [this.id, ["number"], "Vector<int>"],
+            [this.random_id, ["bigint"], "Vector<long>"],
         ];
     }
     constructor(params) {
@@ -18997,8 +19497,22 @@ export class messages_sendQuickReplyMessages_ extends Function_ {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "random_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         this.peer = params.peer;
         this.shortcut_id = params.shortcut_id;
+        this.id = params.id;
+        this.random_id = params.random_id;
     }
 }
 Object.defineProperty(messages_sendQuickReplyMessages_, "__F", {
@@ -19079,6 +19593,49 @@ export class messages_toggleDialogFilterTags_ extends Function_ {
     }
 }
 Object.defineProperty(messages_toggleDialogFilterTags_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class messages_getMyStickers_ extends Function_ {
+    get [id]() {
+        return 0xD0B5E1FC;
+    }
+    static get [name]() {
+        return "messages.getMyStickers";
+    }
+    static get [paramDesc]() {
+        return [
+            ["offset_id", "bigint", "long"],
+            ["limit", "number", "int"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.offset_id, "bigint", "long"],
+            [this.limit, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "offset_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "limit", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.offset_id = params.offset_id;
+        this.limit = params.limit;
+    }
+}
+Object.defineProperty(messages_getMyStickers_, "__F", {
     enumerable: true,
     configurable: true,
     writable: true,
@@ -21744,7 +22301,7 @@ Object.defineProperty(channels_leaveChannel_, "__F", {
 /** Invite users to a channel/supergroup */
 export class channels_inviteToChannel_ extends Function_ {
     get [id]() {
-        return 0x199F3A6C;
+        return 0xC9E33D54;
     }
     static get [name]() {
         return "channels.inviteToChannel";
@@ -21950,6 +22507,7 @@ export class channels_getAdminedPublicChannels_ extends Function_ {
             ["flags", flags, "#"],
             ["by_location", "true", "flags.0?true"],
             ["check_limit", "true", "flags.1?true"],
+            ["for_personal", "true", "flags.2?true"],
         ];
     }
     get [params]() {
@@ -21957,6 +22515,7 @@ export class channels_getAdminedPublicChannels_ extends Function_ {
             ["flags", flags, "#"],
             [this.by_location ?? null, "true", "flags.0?true"],
             [this.check_limit ?? null, "true", "flags.1?true"],
+            [this.for_personal ?? null, "true", "flags.2?true"],
         ];
     }
     constructor(params) {
@@ -21976,8 +22535,15 @@ export class channels_getAdminedPublicChannels_ extends Function_ {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "for_personal", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         this.by_location = params?.by_location;
         this.check_limit = params?.check_limit;
+        this.for_personal = params?.for_personal;
     }
 }
 Object.defineProperty(channels_getAdminedPublicChannels_, "__F", {
@@ -24037,6 +24603,101 @@ Object.defineProperty(channels_setEmojiStickers_, "__F", {
     writable: true,
     value: null
 });
+export class channels_reportSponsoredMessage_ extends Function_ {
+    get [id]() {
+        return 0xAF8FF6B9;
+    }
+    static get [name]() {
+        return "channels.reportSponsoredMessage";
+    }
+    static get [paramDesc]() {
+        return [
+            ["channel", types._InputChannel, "InputChannel"],
+            ["random_id", Uint8Array, "bytes"],
+            ["option", Uint8Array, "bytes"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.channel, types._InputChannel, "InputChannel"],
+            [this.random_id, Uint8Array, "bytes"],
+            [this.option, Uint8Array, "bytes"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "channel", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "random_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "option", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.channel = params.channel;
+        this.random_id = params.random_id;
+        this.option = params.option;
+    }
+}
+Object.defineProperty(channels_reportSponsoredMessage_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class channels_restrictSponsoredMessages_ extends Function_ {
+    get [id]() {
+        return 0x9AE91519;
+    }
+    static get [name]() {
+        return "channels.restrictSponsoredMessages";
+    }
+    static get [paramDesc]() {
+        return [
+            ["channel", types._InputChannel, "InputChannel"],
+            ["restricted", "boolean", "Bool"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.channel, types._InputChannel, "InputChannel"],
+            [this.restricted, "boolean", "Bool"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "channel", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "restricted", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.channel = params.channel;
+        this.restricted = params.restricted;
+    }
+}
+Object.defineProperty(channels_restrictSponsoredMessages_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
 /** Sends a custom request; for bots only */
 export class bots_sendCustomRequest_ extends Function_ {
     get [id]() {
@@ -25529,8 +26190,6 @@ export class stickers_createStickerSet_ extends Function_ {
         return [
             ["flags", flags, "#"],
             ["masks", "true", "flags.0?true"],
-            ["animated", "true", "flags.1?true"],
-            ["videos", "true", "flags.4?true"],
             ["emojis", "true", "flags.5?true"],
             ["text_color", "true", "flags.6?true"],
             ["user_id", types._InputUser, "InputUser"],
@@ -25545,8 +26204,6 @@ export class stickers_createStickerSet_ extends Function_ {
         return [
             ["flags", flags, "#"],
             [this.masks ?? null, "true", "flags.0?true"],
-            [this.animated ?? null, "true", "flags.1?true"],
-            [this.videos ?? null, "true", "flags.4?true"],
             [this.emojis ?? null, "true", "flags.5?true"],
             [this.text_color ?? null, "true", "flags.6?true"],
             [this.user_id, types._InputUser, "InputUser"],
@@ -25561,20 +26218,6 @@ export class stickers_createStickerSet_ extends Function_ {
         super();
         /** Whether this is a mask stickerset */
         Object.defineProperty(this, "masks", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        /** Whether this is an animated stickerset */
-        Object.defineProperty(this, "animated", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        /** Whether this is a video stickerset */
-        Object.defineProperty(this, "videos", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -25637,8 +26280,6 @@ export class stickers_createStickerSet_ extends Function_ {
             value: void 0
         });
         this.masks = params.masks;
-        this.animated = params.animated;
-        this.videos = params.videos;
         this.emojis = params.emojis;
         this.text_color = params.text_color;
         this.user_id = params.user_id;
@@ -26058,6 +26699,49 @@ export class stickers_deleteStickerSet_ extends Function_ {
     }
 }
 Object.defineProperty(stickers_deleteStickerSet_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class stickers_replaceSticker_ extends Function_ {
+    get [id]() {
+        return 0x4696459A;
+    }
+    static get [name]() {
+        return "stickers.replaceSticker";
+    }
+    static get [paramDesc]() {
+        return [
+            ["sticker", types._InputDocument, "InputDocument"],
+            ["new_sticker", types._InputStickerSetItem, "InputStickerSetItem"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.sticker, types._InputDocument, "InputDocument"],
+            [this.new_sticker, types._InputStickerSetItem, "InputStickerSetItem"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "sticker", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "new_sticker", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.sticker = params.sticker;
+        this.new_sticker = params.new_sticker;
+    }
+}
+Object.defineProperty(stickers_replaceSticker_, "__F", {
     enumerable: true,
     configurable: true,
     writable: true,
@@ -28408,6 +29092,146 @@ Object.defineProperty(stats_getStoryPublicForwards_, "__F", {
     writable: true,
     value: null
 });
+export class stats_getBroadcastRevenueStats_ extends Function_ {
+    get [id]() {
+        return 0x75DFB671;
+    }
+    static get [name]() {
+        return "stats.getBroadcastRevenueStats";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["dark", "true", "flags.0?true"],
+            ["channel", types._InputChannel, "InputChannel"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.dark ?? null, "true", "flags.0?true"],
+            [this.channel, types._InputChannel, "InputChannel"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "dark", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "channel", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.dark = params.dark;
+        this.channel = params.channel;
+    }
+}
+Object.defineProperty(stats_getBroadcastRevenueStats_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class stats_getBroadcastRevenueWithdrawalUrl_ extends Function_ {
+    get [id]() {
+        return 0x2A65EF73;
+    }
+    static get [name]() {
+        return "stats.getBroadcastRevenueWithdrawalUrl";
+    }
+    static get [paramDesc]() {
+        return [
+            ["channel", types._InputChannel, "InputChannel"],
+            ["password", types._InputCheckPasswordSRP, "InputCheckPasswordSRP"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.channel, types._InputChannel, "InputChannel"],
+            [this.password, types._InputCheckPasswordSRP, "InputCheckPasswordSRP"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "channel", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "password", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.channel = params.channel;
+        this.password = params.password;
+    }
+}
+Object.defineProperty(stats_getBroadcastRevenueWithdrawalUrl_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
+export class stats_getBroadcastRevenueTransactions_ extends Function_ {
+    get [id]() {
+        return 0x0069280F;
+    }
+    static get [name]() {
+        return "stats.getBroadcastRevenueTransactions";
+    }
+    static get [paramDesc]() {
+        return [
+            ["channel", types._InputChannel, "InputChannel"],
+            ["offset", "number", "int"],
+            ["limit", "number", "int"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.channel, types._InputChannel, "InputChannel"],
+            [this.offset, "number", "int"],
+            [this.limit, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "channel", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "offset", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "limit", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.channel = params.channel;
+        this.offset = params.offset;
+        this.limit = params.limit;
+    }
+}
+Object.defineProperty(stats_getBroadcastRevenueTransactions_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
 /** Export a [folder »](https://core.telegram.org/api/folders), creating a [chat folder deep link »](https://core.telegram.org/api/links#chat-folder-links). */
 export class chatlists_exportChatlistInvite_ extends Function_ {
     get [id]() {
@@ -30699,6 +31523,40 @@ Object.defineProperty(smsjobs_finishJob_, "__F", {
     writable: true,
     value: null
 });
+export class fragment_getCollectibleInfo_ extends Function_ {
+    get [id]() {
+        return 0xBE1E85BA;
+    }
+    static get [name]() {
+        return "fragment.getCollectibleInfo";
+    }
+    static get [paramDesc]() {
+        return [
+            ["collectible", types._InputCollectible, "InputCollectible"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.collectible, types._InputCollectible, "InputCollectible"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "collectible", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.collectible = params.collectible;
+    }
+}
+Object.defineProperty(fragment_getCollectibleInfo_, "__F", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: null
+});
 export const functions = {
     Function: Function_,
     req_pq_multi: req_pq_multi_,
@@ -30710,6 +31568,7 @@ export const functions = {
     ping_delay_disconnect: ping_delay_disconnect_,
     destroy_session: destroy_session_,
     destroy_auth_key: destroy_auth_key_,
+    invokeWithBusinessConnectionPrefix: invokeWithBusinessConnectionPrefix_,
     invokeAfterMsg: invokeAfterMsg_,
     invokeAfterMsgs: invokeAfterMsgs_,
     initConnection: initConnection_,
@@ -30717,6 +31576,7 @@ export const functions = {
     invokeWithoutUpdates: invokeWithoutUpdates_,
     invokeWithMessagesRange: invokeWithMessagesRange_,
     invokeWithTakeout: invokeWithTakeout_,
+    invokeWithBusinessConnection: invokeWithBusinessConnection_,
     auth: {
         sendCode: auth_sendCode_,
         signUp: auth_signUp_,
@@ -30840,6 +31700,17 @@ export const functions = {
         updateBusinessAwayMessage: account_updateBusinessAwayMessage_,
         updateConnectedBot: account_updateConnectedBot_,
         getConnectedBots: account_getConnectedBots_,
+        getBotBusinessConnection: account_getBotBusinessConnection_,
+        updateBusinessIntro: account_updateBusinessIntro_,
+        toggleConnectedBotPaused: account_toggleConnectedBotPaused_,
+        disablePeerConnectedBot: account_disablePeerConnectedBot_,
+        updateBirthday: account_updateBirthday_,
+        createBusinessChatLink: account_createBusinessChatLink_,
+        editBusinessChatLink: account_editBusinessChatLink_,
+        deleteBusinessChatLink: account_deleteBusinessChatLink_,
+        getBusinessChatLinks: account_getBusinessChatLinks_,
+        resolveBusinessChatLink: account_resolveBusinessChatLink_,
+        updatePersonalChannel: account_updatePersonalChannel_,
     },
     users: {
         getUsers: users_getUsers_,
@@ -30873,6 +31744,7 @@ export const functions = {
         importContactToken: contacts_importContactToken_,
         editCloseFriends: contacts_editCloseFriends_,
         setBlocked: contacts_setBlocked_,
+        getBirthdays: contacts_getBirthdays_,
     },
     messages: {
         getMessages: messages_getMessages_,
@@ -31082,6 +31954,7 @@ export const functions = {
         sendQuickReplyMessages: messages_sendQuickReplyMessages_,
         deleteQuickReplyMessages: messages_deleteQuickReplyMessages_,
         toggleDialogFilterTags: messages_toggleDialogFilterTags_,
+        getMyStickers: messages_getMyStickers_,
     },
     updates: {
         getState: updates_getState_,
@@ -31195,6 +32068,8 @@ export const functions = {
         updateEmojiStatus: channels_updateEmojiStatus_,
         setBoostsToUnblockRestrictions: channels_setBoostsToUnblockRestrictions_,
         setEmojiStickers: channels_setEmojiStickers_,
+        reportSponsoredMessage: channels_reportSponsoredMessage_,
+        restrictSponsoredMessages: channels_restrictSponsoredMessages_,
     },
     bots: {
         sendCustomRequest: bots_sendCustomRequest_,
@@ -31243,6 +32118,7 @@ export const functions = {
         changeSticker: stickers_changeSticker_,
         renameStickerSet: stickers_renameStickerSet_,
         deleteStickerSet: stickers_deleteStickerSet_,
+        replaceSticker: stickers_replaceSticker_,
     },
     phone: {
         getCallConfig: phone_getCallConfig_,
@@ -31295,6 +32171,9 @@ export const functions = {
         getMessageStats: stats_getMessageStats_,
         getStoryStats: stats_getStoryStats_,
         getStoryPublicForwards: stats_getStoryPublicForwards_,
+        getBroadcastRevenueStats: stats_getBroadcastRevenueStats_,
+        getBroadcastRevenueWithdrawalUrl: stats_getBroadcastRevenueWithdrawalUrl_,
+        getBroadcastRevenueTransactions: stats_getBroadcastRevenueTransactions_,
     },
     chatlists: {
         exportChatlistInvite: chatlists_exportChatlistInvite_,
@@ -31350,5 +32229,8 @@ export const functions = {
         getStatus: smsjobs_getStatus_,
         getSmsJob: smsjobs_getSmsJob_,
         finishJob: smsjobs_finishJob_,
+    },
+    fragment: {
+        getCollectibleInfo: fragment_getCollectibleInfo_,
     },
 };

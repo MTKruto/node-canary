@@ -60,7 +60,13 @@ export class _True_ extends Type_ {
 }
 export class _Error_ extends Type_ {
 }
-export class _Null_ extends Type_ {
+export class _IpPort_ extends Type_ {
+}
+export class _AccessPointRule_ extends Type_ {
+}
+export class _help_ConfigSimple_ extends Type_ {
+}
+export class _InputFileLocation_ extends Type_ {
 }
 export class _InputPeer_ extends Type_ {
 }
@@ -77,8 +83,6 @@ export class _InputChatPhoto_ extends Type_ {
 export class _InputGeoPoint_ extends Type_ {
 }
 export class _InputPhoto_ extends Type_ {
-}
-export class _InputFileLocation_ extends Type_ {
 }
 export class _Peer_ extends Type_ {
 }
@@ -975,6 +979,54 @@ export class _ConnectedBot_ extends Type_ {
 export class _account_ConnectedBots_ extends Type_ {
 }
 export class _messages_DialogFilters_ extends Type_ {
+}
+export class _Birthday_ extends Type_ {
+}
+export class _BotBusinessConnection_ extends Type_ {
+}
+export class _InputBusinessIntro_ extends Type_ {
+}
+export class _BusinessIntro_ extends Type_ {
+}
+export class _messages_MyStickers_ extends Type_ {
+}
+export class _InputCollectible_ extends Type_ {
+}
+export class _fragment_CollectibleInfo_ extends Type_ {
+}
+export class _InputBusinessBotRecipients_ extends Type_ {
+}
+export class _BusinessBotRecipients_ extends Type_ {
+}
+export class _ContactBirthday_ extends Type_ {
+}
+export class _contacts_ContactBirthdays_ extends Type_ {
+}
+export class _MissingInvitee_ extends Type_ {
+}
+export class _messages_InvitedUsers_ extends Type_ {
+}
+export class _InputBusinessChatLink_ extends Type_ {
+}
+export class _BusinessChatLink_ extends Type_ {
+}
+export class _account_BusinessChatLinks_ extends Type_ {
+}
+export class _account_ResolvedBusinessChatLinks_ extends Type_ {
+}
+export class _RequestedPeer_ extends Type_ {
+}
+export class _SponsoredMessageReportOption_ extends Type_ {
+}
+export class _channels_SponsoredMessageReportResult_ extends Type_ {
+}
+export class _stats_BroadcastRevenueStats_ extends Type_ {
+}
+export class _stats_BroadcastRevenueWithdrawalUrl_ extends Type_ {
+}
+export class _BroadcastRevenueTransaction_ extends Type_ {
+}
+export class _stats_BroadcastRevenueTransactions_ extends Type_ {
 }
 export class ResPQ_ extends _ResPQ_ {
     get [id]() {
@@ -2471,22 +2523,282 @@ export class Error_ extends _Error_ {
         this.text = params.text;
     }
 }
-/** Corresponds to an arbitrary empty object. */
-export class Null_ extends _Null_ {
+export class IpPort_ extends _IpPort_ {
     get [id]() {
-        return 0x56730BCC;
+        return 0xD433AD73;
     }
     static get [name]() {
-        return "null";
+        return "ipPort";
     }
     static get [paramDesc]() {
-        return [];
+        return [
+            ["ipv4", "number", "int"],
+            ["port", "number", "int"],
+        ];
     }
     get [params]() {
-        return [];
+        return [
+            [this.ipv4, "number", "int"],
+            [this.port, "number", "int"],
+        ];
     }
-    constructor() {
+    constructor(params) {
         super();
+        Object.defineProperty(this, "ipv4", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "port", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.ipv4 = params.ipv4;
+        this.port = params.port;
+    }
+}
+export class IpPortSecret_ extends _IpPort_ {
+    get [id]() {
+        return 0x37982646;
+    }
+    static get [name]() {
+        return "ipPortSecret";
+    }
+    static get [paramDesc]() {
+        return [
+            ["ipv4", "number", "int"],
+            ["port", "number", "int"],
+            ["secret", Uint8Array, "bytes"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.ipv4, "number", "int"],
+            [this.port, "number", "int"],
+            [this.secret, Uint8Array, "bytes"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "ipv4", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "port", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "secret", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.ipv4 = params.ipv4;
+        this.port = params.port;
+        this.secret = params.secret;
+    }
+}
+export class AccessPointRule_ extends _AccessPointRule_ {
+    get [id]() {
+        return 0x4679B65F;
+    }
+    static get [name]() {
+        return "accessPointRule";
+    }
+    static get [paramDesc]() {
+        return [
+            ["phone_prefix_rules", "string", "string"],
+            ["dc_id", "number", "int"],
+            ["ips", [_IpPort_], "vector<IpPort>"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.phone_prefix_rules, "string", "string"],
+            [this.dc_id, "number", "int"],
+            [this.ips, [_IpPort_], "vector<IpPort>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "phone_prefix_rules", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "dc_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "ips", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.phone_prefix_rules = params.phone_prefix_rules;
+        this.dc_id = params.dc_id;
+        this.ips = params.ips;
+    }
+}
+export class help_ConfigSimple_ extends _help_ConfigSimple_ {
+    get [id]() {
+        return 0x5A592A6C;
+    }
+    static get [name]() {
+        return "help.configSimple";
+    }
+    static get [paramDesc]() {
+        return [
+            ["date", "number", "int"],
+            ["expires", "number", "int"],
+            ["rules", [_AccessPointRule_], "vector<AccessPointRule>"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.date, "number", "int"],
+            [this.expires, "number", "int"],
+            [this.rules, [_AccessPointRule_], "vector<AccessPointRule>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "date", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "expires", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "rules", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.date = params.date;
+        this.expires = params.expires;
+        this.rules = params.rules;
+    }
+}
+export class InputPeerPhotoFileLocationLegacy_ extends _InputFileLocation_ {
+    get [id]() {
+        return 0x27D69997;
+    }
+    static get [name]() {
+        return "inputPeerPhotoFileLocationLegacy";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["big", "true", "flags.0?true"],
+            ["peer", _InputPeer_, "InputPeer"],
+            ["volume_id", "bigint", "long"],
+            ["local_id", "number", "int"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.big ?? null, "true", "flags.0?true"],
+            [this.peer, _InputPeer_, "InputPeer"],
+            [this.volume_id, "bigint", "long"],
+            [this.local_id, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "big", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "peer", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "volume_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "local_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.big = params.big;
+        this.peer = params.peer;
+        this.volume_id = params.volume_id;
+        this.local_id = params.local_id;
+    }
+}
+export class InputStickerSetThumbLegacy_ extends _InputFileLocation_ {
+    get [id]() {
+        return 0x0DBAEAE9;
+    }
+    static get [name]() {
+        return "inputStickerSetThumbLegacy";
+    }
+    static get [paramDesc]() {
+        return [
+            ["stickerset", _InputStickerSet_, "InputStickerSet"],
+            ["volume_id", "bigint", "long"],
+            ["local_id", "number", "int"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.stickerset, _InputStickerSet_, "InputStickerSet"],
+            [this.volume_id, "bigint", "long"],
+            [this.local_id, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "stickerset", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "volume_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "local_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.stickerset = params.stickerset;
+        this.volume_id = params.volume_id;
+        this.local_id = params.local_id;
     }
 }
 /** An empty constructor, no user or chat is defined. */
@@ -5124,6 +5436,7 @@ export class User_ extends _User_ {
             ["stories_hidden", "true", "flags2.3?true"],
             ["stories_unavailable", "true", "flags2.4?true"],
             ["contact_require_premium", "true", "flags2.10?true"],
+            ["bot_business", "true", "flags2.11?true"],
             ["id", "bigint", "long"],
             ["access_hash", "bigint", "flags.0?long"],
             ["first_name", "string", "flags.1?string"],
@@ -5170,6 +5483,7 @@ export class User_ extends _User_ {
             [this.stories_hidden ?? null, "true", "flags2.3?true"],
             [this.stories_unavailable ?? null, "true", "flags2.4?true"],
             [this.contact_require_premium ?? null, "true", "flags2.10?true"],
+            [this.bot_business ?? null, "true", "flags2.11?true"],
             [this.id, "bigint", "long"],
             [this.access_hash ?? null, "bigint", "flags.0?long"],
             [this.first_name ?? null, "string", "flags.1?string"],
@@ -5351,6 +5665,12 @@ export class User_ extends _User_ {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "bot_business", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         /** ID of the user */
         Object.defineProperty(this, "id", {
             enumerable: true,
@@ -5493,6 +5813,7 @@ export class User_ extends _User_ {
         this.stories_hidden = params.stories_hidden;
         this.stories_unavailable = params.stories_unavailable;
         this.contact_require_premium = params.contact_require_premium;
+        this.bot_business = params.bot_business;
         this.id = params.id;
         this.access_hash = params.access_hash;
         this.first_name = params.first_name;
@@ -6759,6 +7080,8 @@ export class ChannelFull_ extends _ChatFull_ {
             ["translations_disabled", "true", "flags2.3?true"],
             ["stories_pinned_available", "true", "flags2.5?true"],
             ["view_forum_as_messages", "true", "flags2.6?true"],
+            ["restricted_sponsored", "true", "flags2.11?true"],
+            ["can_view_revenue", "true", "flags2.12?true"],
             ["id", "bigint", "long"],
             ["about", "string", "string"],
             ["participants_count", "number", "flags.0?int"],
@@ -6819,6 +7142,8 @@ export class ChannelFull_ extends _ChatFull_ {
             [this.translations_disabled ?? null, "true", "flags2.3?true"],
             [this.stories_pinned_available ?? null, "true", "flags2.5?true"],
             [this.view_forum_as_messages ?? null, "true", "flags2.6?true"],
+            [this.restricted_sponsored ?? null, "true", "flags2.11?true"],
+            [this.can_view_revenue ?? null, "true", "flags2.12?true"],
             [this.id, "bigint", "long"],
             [this.about, "string", "string"],
             [this.participants_count ?? null, "number", "flags.0?int"],
@@ -6957,6 +7282,18 @@ export class ChannelFull_ extends _ChatFull_ {
         /** Users may also choose to display messages from all topics of a [forum](https://core.telegram.org/api/forum) as if they were sent to a normal group, using a "View as messages" setting in the local client.
         This setting only affects the current account, and is synced to other logged in sessions using the [channels.toggleViewForumAsMessages](https://core.telegram.org/method/channels.toggleViewForumAsMessages) method; invoking this method will update the value of this flag. */
         Object.defineProperty(this, "view_forum_as_messages", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "restricted_sponsored", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "can_view_revenue", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -7253,6 +7590,8 @@ export class ChannelFull_ extends _ChatFull_ {
         this.translations_disabled = params.translations_disabled;
         this.stories_pinned_available = params.stories_pinned_available;
         this.view_forum_as_messages = params.view_forum_as_messages;
+        this.restricted_sponsored = params.restricted_sponsored;
+        this.can_view_revenue = params.can_view_revenue;
         this.id = params.id;
         this.about = params.about;
         this.participants_count = params.participants_count;
@@ -7642,7 +7981,7 @@ export class MessageEmpty_ extends _Message_ {
 /** A message */
 export class Message_ extends _Message_ {
     get [id]() {
-        return 0xA66C7EFC;
+        return 0x2357BF25;
     }
     static get [name]() {
         return "message";
@@ -7661,6 +8000,8 @@ export class Message_ extends _Message_ {
             ["pinned", "true", "flags.24?true"],
             ["noforwards", "true", "flags.26?true"],
             ["invert_media", "true", "flags.27?true"],
+            ["flags2", flags, "#"],
+            ["offline", "true", "flags2.1?true"],
             ["id", "number", "int"],
             ["from_id", _Peer_, "flags.8?Peer"],
             ["from_boosts_applied", "number", "flags.29?int"],
@@ -7668,6 +8009,7 @@ export class Message_ extends _Message_ {
             ["saved_peer_id", _Peer_, "flags.28?Peer"],
             ["fwd_from", _MessageFwdHeader_, "flags.2?MessageFwdHeader"],
             ["via_bot_id", "bigint", "flags.11?long"],
+            ["via_business_bot_id", "bigint", "flags2.0?long"],
             ["reply_to", _MessageReplyHeader_, "flags.3?MessageReplyHeader"],
             ["date", "number", "int"],
             ["message", "string", "string"],
@@ -7700,6 +8042,8 @@ export class Message_ extends _Message_ {
             [this.pinned ?? null, "true", "flags.24?true"],
             [this.noforwards ?? null, "true", "flags.26?true"],
             [this.invert_media ?? null, "true", "flags.27?true"],
+            ["flags2", flags, "#"],
+            [this.offline ?? null, "true", "flags2.1?true"],
             [this.id, "number", "int"],
             [this.from_id ?? null, _Peer_, "flags.8?Peer"],
             [this.from_boosts_applied ?? null, "number", "flags.29?int"],
@@ -7707,6 +8051,7 @@ export class Message_ extends _Message_ {
             [this.saved_peer_id ?? null, _Peer_, "flags.28?Peer"],
             [this.fwd_from ?? null, _MessageFwdHeader_, "flags.2?MessageFwdHeader"],
             [this.via_bot_id ?? null, "bigint", "flags.11?long"],
+            [this.via_business_bot_id ?? null, "bigint", "flags2.0?long"],
             [this.reply_to ?? null, _MessageReplyHeader_, "flags.3?MessageReplyHeader"],
             [this.date, "number", "int"],
             [this.message, "string", "string"],
@@ -7804,6 +8149,12 @@ export class Message_ extends _Message_ {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "offline", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         /** ID of the message */
         Object.defineProperty(this, "id", {
             enumerable: true,
@@ -7847,6 +8198,12 @@ export class Message_ extends _Message_ {
         });
         /** ID of the inline bot that generated the message */
         Object.defineProperty(this, "via_bot_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "via_business_bot_id", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -7974,6 +8331,7 @@ export class Message_ extends _Message_ {
         this.pinned = params.pinned;
         this.noforwards = params.noforwards;
         this.invert_media = params.invert_media;
+        this.offline = params.offline;
         this.id = params.id;
         this.from_id = params.from_id;
         this.from_boosts_applied = params.from_boosts_applied;
@@ -7981,6 +8339,7 @@ export class Message_ extends _Message_ {
         this.saved_peer_id = params.saved_peer_id;
         this.fwd_from = params.fwd_from;
         this.via_bot_id = params.via_bot_id;
+        this.via_business_bot_id = params.via_business_bot_id;
         this.reply_to = params.reply_to;
         this.date = params.date;
         this.message = params.message;
@@ -10858,6 +11217,43 @@ export class MessageActionBoostApply_ extends _MessageAction_ {
         this.boosts = params.boosts;
     }
 }
+export class MessageActionRequestedPeerSentMe_ extends _MessageAction_ {
+    get [id]() {
+        return 0x93B31848;
+    }
+    static get [name]() {
+        return "messageActionRequestedPeerSentMe";
+    }
+    static get [paramDesc]() {
+        return [
+            ["button_id", "number", "int"],
+            ["peers", [_RequestedPeer_], "Vector<RequestedPeer>"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.button_id, "number", "int"],
+            [this.peers, [_RequestedPeer_], "Vector<RequestedPeer>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "button_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "peers", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.button_id = params.button_id;
+        this.peers = params.peers;
+    }
+}
 /** Chat */
 export class Dialog_ extends _Dialog_ {
     get [id]() {
@@ -12222,7 +12618,7 @@ export class PeerNotifySettings_ extends _PeerNotifySettings_ {
 /** List of actions that are possible when interacting with this user, to be shown as suggested actions in the [chat action bar »](https://core.telegram.org/api/action-bar), see [here »](https://core.telegram.org/api/action-bar) for more info. */
 export class PeerSettings_ extends _PeerSettings_ {
     get [id]() {
-        return 0xA518110D;
+        return 0xACD66C5E;
     }
     static get [name]() {
         return "peerSettings";
@@ -12239,9 +12635,13 @@ export class PeerSettings_ extends _PeerSettings_ {
             ["autoarchived", "true", "flags.7?true"],
             ["invite_members", "true", "flags.8?true"],
             ["request_chat_broadcast", "true", "flags.10?true"],
+            ["business_bot_paused", "true", "flags.11?true"],
+            ["business_bot_can_reply", "true", "flags.12?true"],
             ["geo_distance", "number", "flags.6?int"],
             ["request_chat_title", "string", "flags.9?string"],
             ["request_chat_date", "number", "flags.9?int"],
+            ["business_bot_id", "bigint", "flags.13?long"],
+            ["business_bot_manage_url", "string", "flags.13?string"],
         ];
     }
     get [params]() {
@@ -12256,9 +12656,13 @@ export class PeerSettings_ extends _PeerSettings_ {
             [this.autoarchived ?? null, "true", "flags.7?true"],
             [this.invite_members ?? null, "true", "flags.8?true"],
             [this.request_chat_broadcast ?? null, "true", "flags.10?true"],
+            [this.business_bot_paused ?? null, "true", "flags.11?true"],
+            [this.business_bot_can_reply ?? null, "true", "flags.12?true"],
             [this.geo_distance ?? null, "number", "flags.6?int"],
             [this.request_chat_title ?? null, "string", "flags.9?string"],
             [this.request_chat_date ?? null, "number", "flags.9?int"],
+            [this.business_bot_id ?? null, "bigint", "flags.13?long"],
+            [this.business_bot_manage_url ?? null, "string", "flags.13?string"],
         ];
     }
     constructor(params) {
@@ -12326,6 +12730,18 @@ export class PeerSettings_ extends _PeerSettings_ {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "business_bot_paused", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "business_bot_can_reply", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         /** Distance in meters between us and this peer */
         Object.defineProperty(this, "geo_distance", {
             enumerable: true,
@@ -12347,6 +12763,18 @@ export class PeerSettings_ extends _PeerSettings_ {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "business_bot_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "business_bot_manage_url", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         this.report_spam = params?.report_spam;
         this.add_contact = params?.add_contact;
         this.block_contact = params?.block_contact;
@@ -12356,9 +12784,13 @@ export class PeerSettings_ extends _PeerSettings_ {
         this.autoarchived = params?.autoarchived;
         this.invite_members = params?.invite_members;
         this.request_chat_broadcast = params?.request_chat_broadcast;
+        this.business_bot_paused = params?.business_bot_paused;
+        this.business_bot_can_reply = params?.business_bot_can_reply;
         this.geo_distance = params?.geo_distance;
         this.request_chat_title = params?.request_chat_title;
         this.request_chat_date = params?.request_chat_date;
+        this.business_bot_id = params?.business_bot_id;
+        this.business_bot_manage_url = params?.business_bot_manage_url;
     }
 }
 /** Represents a [wallpaper](https://core.telegram.org/api/wallpapers) based on an image. */
@@ -12718,7 +13150,7 @@ export class InputReportReasonPersonalDetails_ extends _ReportReason_ {
 /** Extended user info */
 export class UserFull_ extends _UserFull_ {
     get [id]() {
-        return 0x22FF3E85;
+        return 0xCC997720;
     }
     static get [name]() {
         return "userFull";
@@ -12763,6 +13195,10 @@ export class UserFull_ extends _UserFull_ {
             ["business_location", _BusinessLocation_, "flags2.1?BusinessLocation"],
             ["business_greeting_message", _BusinessGreetingMessage_, "flags2.2?BusinessGreetingMessage"],
             ["business_away_message", _BusinessAwayMessage_, "flags2.3?BusinessAwayMessage"],
+            ["business_intro", _BusinessIntro_, "flags2.4?BusinessIntro"],
+            ["birthday", _Birthday_, "flags2.5?Birthday"],
+            ["personal_channel_id", "bigint", "flags2.6?long"],
+            ["personal_channel_message", "number", "flags2.6?int"],
         ];
     }
     get [params]() {
@@ -12805,6 +13241,10 @@ export class UserFull_ extends _UserFull_ {
             [this.business_location ?? null, _BusinessLocation_, "flags2.1?BusinessLocation"],
             [this.business_greeting_message ?? null, _BusinessGreetingMessage_, "flags2.2?BusinessGreetingMessage"],
             [this.business_away_message ?? null, _BusinessAwayMessage_, "flags2.3?BusinessAwayMessage"],
+            [this.business_intro ?? null, _BusinessIntro_, "flags2.4?BusinessIntro"],
+            [this.birthday ?? null, _Birthday_, "flags2.5?Birthday"],
+            [this.personal_channel_id ?? null, "bigint", "flags2.6?long"],
+            [this.personal_channel_message ?? null, "number", "flags2.6?int"],
         ];
     }
     constructor(params) {
@@ -13055,6 +13495,30 @@ export class UserFull_ extends _UserFull_ {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "business_intro", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "birthday", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "personal_channel_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "personal_channel_message", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         this.blocked = params.blocked;
         this.phone_calls_available = params.phone_calls_available;
         this.phone_calls_private = params.phone_calls_private;
@@ -13091,6 +13555,10 @@ export class UserFull_ extends _UserFull_ {
         this.business_location = params.business_location;
         this.business_greeting_message = params.business_greeting_message;
         this.business_away_message = params.business_away_message;
+        this.business_intro = params.business_intro;
+        this.birthday = params.birthday;
+        this.personal_channel_id = params.personal_channel_id;
+        this.personal_channel_message = params.personal_channel_message;
     }
 }
 /** A contact of the current user that is registered in the system. */
@@ -19567,36 +20035,6 @@ export class UpdateAutoSaveSettings_ extends _Update_ {
         super();
     }
 }
-/** 0-N updates of this type may be returned only when invoking [messages.addChatUser](https://core.telegram.org/method/messages.addChatUser), [channels.inviteToChannel](https://core.telegram.org/method/channels.inviteToChannel) or [messages.createChat](https://core.telegram.org/method/messages.createChat): it indicates we couldn't add a user to a chat because of their privacy settings; if required, an [invite link](https://core.telegram.org/api/invites) can be shared with the user, instead. */
-export class UpdateGroupInvitePrivacyForbidden_ extends _Update_ {
-    get [id]() {
-        return 0xCCF08AD6;
-    }
-    static get [name]() {
-        return "updateGroupInvitePrivacyForbidden";
-    }
-    static get [paramDesc]() {
-        return [
-            ["user_id", "bigint", "long"],
-        ];
-    }
-    get [params]() {
-        return [
-            [this.user_id, "bigint", "long"],
-        ];
-    }
-    constructor(params) {
-        super();
-        /** ID of the user we couldn't add. */
-        Object.defineProperty(this, "user_id", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        this.user_id = params.user_id;
-    }
-}
 /** A new story was posted. */
 export class UpdateStory_ extends _Update_ {
     get [id]() {
@@ -20366,6 +20804,212 @@ export class UpdateDeleteQuickReplyMessages_ extends _Update_ {
         });
         this.shortcut_id = params.shortcut_id;
         this.messages = params.messages;
+    }
+}
+export class UpdateBotBusinessConnect_ extends _Update_ {
+    get [id]() {
+        return 0x8AE5C97A;
+    }
+    static get [name]() {
+        return "updateBotBusinessConnect";
+    }
+    static get [paramDesc]() {
+        return [
+            ["connection", _BotBusinessConnection_, "BotBusinessConnection"],
+            ["qts", "number", "int"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.connection, _BotBusinessConnection_, "BotBusinessConnection"],
+            [this.qts, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "connection", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "qts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.connection = params.connection;
+        this.qts = params.qts;
+    }
+}
+export class UpdateBotNewBusinessMessage_ extends _Update_ {
+    get [id]() {
+        return 0x9DDB347C;
+    }
+    static get [name]() {
+        return "updateBotNewBusinessMessage";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["connection_id", "string", "string"],
+            ["message", _Message_, "Message"],
+            ["reply_to_message", _Message_, "flags.0?Message"],
+            ["qts", "number", "int"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.connection_id, "string", "string"],
+            [this.message, _Message_, "Message"],
+            [this.reply_to_message ?? null, _Message_, "flags.0?Message"],
+            [this.qts, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "connection_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "message", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "reply_to_message", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "qts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.connection_id = params.connection_id;
+        this.message = params.message;
+        this.reply_to_message = params.reply_to_message;
+        this.qts = params.qts;
+    }
+}
+export class UpdateBotEditBusinessMessage_ extends _Update_ {
+    get [id]() {
+        return 0x07DF587C;
+    }
+    static get [name]() {
+        return "updateBotEditBusinessMessage";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["connection_id", "string", "string"],
+            ["message", _Message_, "Message"],
+            ["reply_to_message", _Message_, "flags.0?Message"],
+            ["qts", "number", "int"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.connection_id, "string", "string"],
+            [this.message, _Message_, "Message"],
+            [this.reply_to_message ?? null, _Message_, "flags.0?Message"],
+            [this.qts, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "connection_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "message", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "reply_to_message", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "qts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.connection_id = params.connection_id;
+        this.message = params.message;
+        this.reply_to_message = params.reply_to_message;
+        this.qts = params.qts;
+    }
+}
+export class UpdateBotDeleteBusinessMessage_ extends _Update_ {
+    get [id]() {
+        return 0xA02A982E;
+    }
+    static get [name]() {
+        return "updateBotDeleteBusinessMessage";
+    }
+    static get [paramDesc]() {
+        return [
+            ["connection_id", "string", "string"],
+            ["peer", _Peer_, "Peer"],
+            ["messages", ["number"], "Vector<int>"],
+            ["qts", "number", "int"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.connection_id, "string", "string"],
+            [this.peer, _Peer_, "Peer"],
+            [this.messages, ["number"], "Vector<int>"],
+            [this.qts, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "connection_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "peer", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "messages", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "qts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.connection_id = params.connection_id;
+        this.peer = params.peer;
+        this.messages = params.messages;
+        this.qts = params.qts;
     }
 }
 /** Updates state. */
@@ -24372,6 +25016,23 @@ export class InputPrivacyKeyAbout_ extends _InputPrivacyKey_ {
         super();
     }
 }
+export class InputPrivacyKeyBirthday_ extends _InputPrivacyKey_ {
+    get [id]() {
+        return 0xD65A11CC;
+    }
+    static get [name]() {
+        return "inputPrivacyKeyBirthday";
+    }
+    static get [paramDesc]() {
+        return [];
+    }
+    get [params]() {
+        return [];
+    }
+    constructor() {
+        super();
+    }
+}
 /** Whether we can see the last online timestamp of this user */
 export class PrivacyKeyStatusTimestamp_ extends _PrivacyKey_ {
     get [id]() {
@@ -24541,6 +25202,23 @@ export class PrivacyKeyAbout_ extends _PrivacyKey_ {
     }
     static get [name]() {
         return "privacyKeyAbout";
+    }
+    static get [paramDesc]() {
+        return [];
+    }
+    get [params]() {
+        return [];
+    }
+    constructor() {
+        super();
+    }
+}
+export class PrivacyKeyBirthday_ extends _PrivacyKey_ {
+    get [id]() {
+        return 0x2000A518;
+    }
+    static get [name]() {
+        return "privacyKeyBirthday";
     }
     static get [paramDesc]() {
         return [];
@@ -24762,6 +25440,23 @@ export class InputPrivacyValueAllowCloseFriends_ extends _InputPrivacyRule_ {
         super();
     }
 }
+export class InputPrivacyValueAllowPremium_ extends _InputPrivacyRule_ {
+    get [id]() {
+        return 0x77CDC9F1;
+    }
+    static get [name]() {
+        return "inputPrivacyValueAllowPremium";
+    }
+    static get [paramDesc]() {
+        return [];
+    }
+    get [params]() {
+        return [];
+    }
+    constructor() {
+        super();
+    }
+}
 /** Allow all contacts */
 export class PrivacyValueAllowContacts_ extends _PrivacyRule_ {
     get [id]() {
@@ -24961,6 +25656,23 @@ export class PrivacyValueAllowCloseFriends_ extends _PrivacyRule_ {
     }
     static get [name]() {
         return "privacyValueAllowCloseFriends";
+    }
+    static get [paramDesc]() {
+        return [];
+    }
+    get [params]() {
+        return [];
+    }
+    constructor() {
+        super();
+    }
+}
+export class PrivacyValueAllowPremium_ extends _PrivacyRule_ {
+    get [id]() {
+        return 0xECE9814B;
+    }
+    static get [name]() {
+        return "privacyValueAllowPremium";
     }
     static get [paramDesc]() {
         return [];
@@ -27210,11 +27922,10 @@ export class StickerSet_ extends _StickerSet_ {
             ["archived", "true", "flags.1?true"],
             ["official", "true", "flags.2?true"],
             ["masks", "true", "flags.3?true"],
-            ["animated", "true", "flags.5?true"],
-            ["videos", "true", "flags.6?true"],
             ["emojis", "true", "flags.7?true"],
             ["text_color", "true", "flags.9?true"],
             ["channel_emoji_status", "true", "flags.10?true"],
+            ["creator", "true", "flags.11?true"],
             ["installed_date", "number", "flags.0?int"],
             ["id", "bigint", "long"],
             ["access_hash", "bigint", "long"],
@@ -27234,11 +27945,10 @@ export class StickerSet_ extends _StickerSet_ {
             [this.archived ?? null, "true", "flags.1?true"],
             [this.official ?? null, "true", "flags.2?true"],
             [this.masks ?? null, "true", "flags.3?true"],
-            [this.animated ?? null, "true", "flags.5?true"],
-            [this.videos ?? null, "true", "flags.6?true"],
             [this.emojis ?? null, "true", "flags.7?true"],
             [this.text_color ?? null, "true", "flags.9?true"],
             [this.channel_emoji_status ?? null, "true", "flags.10?true"],
+            [this.creator ?? null, "true", "flags.11?true"],
             [this.installed_date ?? null, "number", "flags.0?int"],
             [this.id, "bigint", "long"],
             [this.access_hash, "bigint", "long"],
@@ -27275,20 +27985,6 @@ export class StickerSet_ extends _StickerSet_ {
             writable: true,
             value: void 0
         });
-        /** Is this an animated stickerpack */
-        Object.defineProperty(this, "animated", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        /** Is this a video stickerpack */
-        Object.defineProperty(this, "videos", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
         /** This is a custom emoji stickerset */
         Object.defineProperty(this, "emojis", {
             enumerable: true,
@@ -27305,6 +28001,12 @@ export class StickerSet_ extends _StickerSet_ {
         });
         /** If set, this custom emoji stickerset can be used in [channel emoji statuses](https://core.telegram.org/api/emoji-status). */
         Object.defineProperty(this, "channel_emoji_status", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "creator", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -27390,11 +28092,10 @@ export class StickerSet_ extends _StickerSet_ {
         this.archived = params.archived;
         this.official = params.official;
         this.masks = params.masks;
-        this.animated = params.animated;
-        this.videos = params.videos;
         this.emojis = params.emojis;
         this.text_color = params.text_color;
         this.channel_emoji_status = params.channel_emoji_status;
+        this.creator = params.creator;
         this.installed_date = params.installed_date;
         this.id = params.id;
         this.access_hash = params.access_hash;
@@ -28306,6 +29007,90 @@ export class KeyboardButtonRequestPeer_ extends _KeyboardButton_ {
             writable: true,
             value: void 0
         });
+        this.text = params.text;
+        this.button_id = params.button_id;
+        this.peer_type = params.peer_type;
+        this.max_quantity = params.max_quantity;
+    }
+}
+export class InputKeyboardButtonRequestPeer_ extends _KeyboardButton_ {
+    get [id]() {
+        return 0xC9662D05;
+    }
+    static get [name]() {
+        return "inputKeyboardButtonRequestPeer";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["name_requested", "true", "flags.0?true"],
+            ["username_requested", "true", "flags.1?true"],
+            ["photo_requested", "true", "flags.2?true"],
+            ["text", "string", "string"],
+            ["button_id", "number", "int"],
+            ["peer_type", _RequestPeerType_, "RequestPeerType"],
+            ["max_quantity", "number", "int"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.name_requested ?? null, "true", "flags.0?true"],
+            [this.username_requested ?? null, "true", "flags.1?true"],
+            [this.photo_requested ?? null, "true", "flags.2?true"],
+            [this.text, "string", "string"],
+            [this.button_id, "number", "int"],
+            [this.peer_type, _RequestPeerType_, "RequestPeerType"],
+            [this.max_quantity, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "name_requested", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "username_requested", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "photo_requested", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "text", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "button_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "peer_type", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "max_quantity", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.name_requested = params.name_requested;
+        this.username_requested = params.username_requested;
+        this.photo_requested = params.photo_requested;
         this.text = params.text;
         this.button_id = params.button_id;
         this.peer_type = params.peer_type;
@@ -38690,7 +39475,7 @@ export class PhoneCallAccepted_ extends _PhoneCall_ {
 /** Phone call */
 export class PhoneCall_ extends _PhoneCall_ {
     get [id]() {
-        return 0x967F7C67;
+        return 0x30535AF5;
     }
     static get [name]() {
         return "phoneCall";
@@ -38710,6 +39495,7 @@ export class PhoneCall_ extends _PhoneCall_ {
             ["protocol", _PhoneCallProtocol_, "PhoneCallProtocol"],
             ["connections", [_PhoneConnection_], "Vector<PhoneConnection>"],
             ["start_date", "number", "int"],
+            ["custom_parameters", _DataJSON_, "flags.7?DataJSON"],
         ];
     }
     get [params]() {
@@ -38727,6 +39513,7 @@ export class PhoneCall_ extends _PhoneCall_ {
             [this.protocol, _PhoneCallProtocol_, "PhoneCallProtocol"],
             [this.connections, [_PhoneConnection_], "Vector<PhoneConnection>"],
             [this.start_date, "number", "int"],
+            [this.custom_parameters ?? null, _DataJSON_, "flags.7?DataJSON"],
         ];
     }
     constructor(params) {
@@ -38815,6 +39602,12 @@ export class PhoneCall_ extends _PhoneCall_ {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "custom_parameters", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         this.p2p_allowed = params.p2p_allowed;
         this.video = params.video;
         this.id = params.id;
@@ -38827,6 +39620,7 @@ export class PhoneCall_ extends _PhoneCall_ {
         this.protocol = params.protocol;
         this.connections = params.connections;
         this.start_date = params.start_date;
+        this.custom_parameters = params.custom_parameters;
     }
 }
 /** Indicates a discarded phone call */
@@ -52559,6 +53353,7 @@ export class SponsoredMessage_ extends _SponsoredMessage_ {
             ["flags", flags, "#"],
             ["recommended", "true", "flags.5?true"],
             ["show_peer_photo", "true", "flags.6?true"],
+            ["can_report", "true", "flags.12?true"],
             ["random_id", Uint8Array, "bytes"],
             ["from_id", _Peer_, "flags.3?Peer"],
             ["chat_invite", _ChatInvite_, "flags.4?ChatInvite"],
@@ -52579,6 +53374,7 @@ export class SponsoredMessage_ extends _SponsoredMessage_ {
             ["flags", flags, "#"],
             [this.recommended ?? null, "true", "flags.5?true"],
             [this.show_peer_photo ?? null, "true", "flags.6?true"],
+            [this.can_report ?? null, "true", "flags.12?true"],
             [this.random_id, Uint8Array, "bytes"],
             [this.from_id ?? null, _Peer_, "flags.3?Peer"],
             [this.chat_invite ?? null, _ChatInvite_, "flags.4?ChatInvite"],
@@ -52605,6 +53401,12 @@ export class SponsoredMessage_ extends _SponsoredMessage_ {
         });
         /** Whether a profile photo bubble should be displayed for this message, like for messages sent in groups. The photo shown in the bubble is obtained either from the peer contained in `from_id`, or from `chat_invite`. */
         Object.defineProperty(this, "show_peer_photo", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "can_report", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -52703,6 +53505,7 @@ export class SponsoredMessage_ extends _SponsoredMessage_ {
         });
         this.recommended = params.recommended;
         this.show_peer_photo = params.show_peer_photo;
+        this.can_report = params.can_report;
         this.random_id = params.random_id;
         this.from_id = params.from_id;
         this.chat_invite = params.chat_invite;
@@ -63005,7 +63808,7 @@ export class messages_QuickRepliesNotModified_ extends _messages_QuickReplies_ {
 }
 export class ConnectedBot_ extends _ConnectedBot_ {
     get [id]() {
-        return 0xE7E999E7;
+        return 0xBD068601;
     }
     static get [name]() {
         return "connectedBot";
@@ -63015,7 +63818,7 @@ export class ConnectedBot_ extends _ConnectedBot_ {
             ["flags", flags, "#"],
             ["can_reply", "true", "flags.0?true"],
             ["bot_id", "bigint", "long"],
-            ["recipients", _BusinessRecipients_, "BusinessRecipients"],
+            ["recipients", _BusinessBotRecipients_, "BusinessBotRecipients"],
         ];
     }
     get [params]() {
@@ -63023,7 +63826,7 @@ export class ConnectedBot_ extends _ConnectedBot_ {
             ["flags", flags, "#"],
             [this.can_reply ?? null, "true", "flags.0?true"],
             [this.bot_id, "bigint", "long"],
-            [this.recipients, _BusinessRecipients_, "BusinessRecipients"],
+            [this.recipients, _BusinessBotRecipients_, "BusinessBotRecipients"],
         ];
     }
     constructor(params) {
@@ -63127,6 +63930,1537 @@ export class messages_DialogFilters_ extends _messages_DialogFilters_ {
         this.filters = params.filters;
     }
 }
+export class Birthday_ extends _Birthday_ {
+    get [id]() {
+        return 0x6C8E1E06;
+    }
+    static get [name]() {
+        return "birthday";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["day", "number", "int"],
+            ["month", "number", "int"],
+            ["year", "number", "flags.0?int"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.day, "number", "int"],
+            [this.month, "number", "int"],
+            [this.year ?? null, "number", "flags.0?int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "day", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "month", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "year", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.day = params.day;
+        this.month = params.month;
+        this.year = params.year;
+    }
+}
+export class BotBusinessConnection_ extends _BotBusinessConnection_ {
+    get [id]() {
+        return 0x896433B4;
+    }
+    static get [name]() {
+        return "botBusinessConnection";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["can_reply", "true", "flags.0?true"],
+            ["disabled", "true", "flags.1?true"],
+            ["connection_id", "string", "string"],
+            ["user_id", "bigint", "long"],
+            ["dc_id", "number", "int"],
+            ["date", "number", "int"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.can_reply ?? null, "true", "flags.0?true"],
+            [this.disabled ?? null, "true", "flags.1?true"],
+            [this.connection_id, "string", "string"],
+            [this.user_id, "bigint", "long"],
+            [this.dc_id, "number", "int"],
+            [this.date, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "can_reply", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "disabled", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "connection_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "user_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "dc_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "date", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.can_reply = params.can_reply;
+        this.disabled = params.disabled;
+        this.connection_id = params.connection_id;
+        this.user_id = params.user_id;
+        this.dc_id = params.dc_id;
+        this.date = params.date;
+    }
+}
+export class InputBusinessIntro_ extends _InputBusinessIntro_ {
+    get [id]() {
+        return 0x09C469CD;
+    }
+    static get [name]() {
+        return "inputBusinessIntro";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["title", "string", "string"],
+            ["description", "string", "string"],
+            ["sticker", _InputDocument_, "flags.0?InputDocument"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.title, "string", "string"],
+            [this.description, "string", "string"],
+            [this.sticker ?? null, _InputDocument_, "flags.0?InputDocument"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "title", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "description", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "sticker", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.title = params.title;
+        this.description = params.description;
+        this.sticker = params.sticker;
+    }
+}
+export class BusinessIntro_ extends _BusinessIntro_ {
+    get [id]() {
+        return 0x5A0A066D;
+    }
+    static get [name]() {
+        return "businessIntro";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["title", "string", "string"],
+            ["description", "string", "string"],
+            ["sticker", _Document_, "flags.0?Document"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.title, "string", "string"],
+            [this.description, "string", "string"],
+            [this.sticker ?? null, _Document_, "flags.0?Document"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "title", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "description", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "sticker", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.title = params.title;
+        this.description = params.description;
+        this.sticker = params.sticker;
+    }
+}
+export class messages_MyStickers_ extends _messages_MyStickers_ {
+    get [id]() {
+        return 0xFAFF629D;
+    }
+    static get [name]() {
+        return "messages.myStickers";
+    }
+    static get [paramDesc]() {
+        return [
+            ["count", "number", "int"],
+            ["sets", [_StickerSetCovered_], "Vector<StickerSetCovered>"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.count, "number", "int"],
+            [this.sets, [_StickerSetCovered_], "Vector<StickerSetCovered>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "count", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "sets", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.count = params.count;
+        this.sets = params.sets;
+    }
+}
+export class InputCollectibleUsername_ extends _InputCollectible_ {
+    get [id]() {
+        return 0xE39460A9;
+    }
+    static get [name]() {
+        return "inputCollectibleUsername";
+    }
+    static get [paramDesc]() {
+        return [
+            ["username", "string", "string"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.username, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "username", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.username = params.username;
+    }
+}
+export class InputCollectiblePhone_ extends _InputCollectible_ {
+    get [id]() {
+        return 0xA2E214A4;
+    }
+    static get [name]() {
+        return "inputCollectiblePhone";
+    }
+    static get [paramDesc]() {
+        return [
+            ["phone", "string", "string"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.phone, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "phone", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.phone = params.phone;
+    }
+}
+export class fragment_CollectibleInfo_ extends _fragment_CollectibleInfo_ {
+    get [id]() {
+        return 0x6EBDFF91;
+    }
+    static get [name]() {
+        return "fragment.collectibleInfo";
+    }
+    static get [paramDesc]() {
+        return [
+            ["purchase_date", "number", "int"],
+            ["currency", "string", "string"],
+            ["amount", "bigint", "long"],
+            ["crypto_currency", "string", "string"],
+            ["crypto_amount", "bigint", "long"],
+            ["url", "string", "string"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.purchase_date, "number", "int"],
+            [this.currency, "string", "string"],
+            [this.amount, "bigint", "long"],
+            [this.crypto_currency, "string", "string"],
+            [this.crypto_amount, "bigint", "long"],
+            [this.url, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "purchase_date", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "currency", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "amount", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "crypto_currency", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "crypto_amount", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "url", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.purchase_date = params.purchase_date;
+        this.currency = params.currency;
+        this.amount = params.amount;
+        this.crypto_currency = params.crypto_currency;
+        this.crypto_amount = params.crypto_amount;
+        this.url = params.url;
+    }
+}
+export class InputBusinessBotRecipients_ extends _InputBusinessBotRecipients_ {
+    get [id]() {
+        return 0xC4E5921E;
+    }
+    static get [name]() {
+        return "inputBusinessBotRecipients";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["existing_chats", "true", "flags.0?true"],
+            ["new_chats", "true", "flags.1?true"],
+            ["contacts", "true", "flags.2?true"],
+            ["non_contacts", "true", "flags.3?true"],
+            ["exclude_selected", "true", "flags.5?true"],
+            ["users", [_InputUser_], "flags.4?Vector<InputUser>"],
+            ["exclude_users", [_InputUser_], "flags.6?Vector<InputUser>"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.existing_chats ?? null, "true", "flags.0?true"],
+            [this.new_chats ?? null, "true", "flags.1?true"],
+            [this.contacts ?? null, "true", "flags.2?true"],
+            [this.non_contacts ?? null, "true", "flags.3?true"],
+            [this.exclude_selected ?? null, "true", "flags.5?true"],
+            [this.users ?? null, [_InputUser_], "flags.4?Vector<InputUser>"],
+            [this.exclude_users ?? null, [_InputUser_], "flags.6?Vector<InputUser>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "existing_chats", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "new_chats", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "contacts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "non_contacts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "exclude_selected", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "users", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "exclude_users", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.existing_chats = params?.existing_chats;
+        this.new_chats = params?.new_chats;
+        this.contacts = params?.contacts;
+        this.non_contacts = params?.non_contacts;
+        this.exclude_selected = params?.exclude_selected;
+        this.users = params?.users;
+        this.exclude_users = params?.exclude_users;
+    }
+}
+export class BusinessBotRecipients_ extends _BusinessBotRecipients_ {
+    get [id]() {
+        return 0xB88CF373;
+    }
+    static get [name]() {
+        return "businessBotRecipients";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["existing_chats", "true", "flags.0?true"],
+            ["new_chats", "true", "flags.1?true"],
+            ["contacts", "true", "flags.2?true"],
+            ["non_contacts", "true", "flags.3?true"],
+            ["exclude_selected", "true", "flags.5?true"],
+            ["users", ["bigint"], "flags.4?Vector<long>"],
+            ["exclude_users", ["bigint"], "flags.6?Vector<long>"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.existing_chats ?? null, "true", "flags.0?true"],
+            [this.new_chats ?? null, "true", "flags.1?true"],
+            [this.contacts ?? null, "true", "flags.2?true"],
+            [this.non_contacts ?? null, "true", "flags.3?true"],
+            [this.exclude_selected ?? null, "true", "flags.5?true"],
+            [this.users ?? null, ["bigint"], "flags.4?Vector<long>"],
+            [this.exclude_users ?? null, ["bigint"], "flags.6?Vector<long>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "existing_chats", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "new_chats", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "contacts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "non_contacts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "exclude_selected", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "users", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "exclude_users", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.existing_chats = params?.existing_chats;
+        this.new_chats = params?.new_chats;
+        this.contacts = params?.contacts;
+        this.non_contacts = params?.non_contacts;
+        this.exclude_selected = params?.exclude_selected;
+        this.users = params?.users;
+        this.exclude_users = params?.exclude_users;
+    }
+}
+export class ContactBirthday_ extends _ContactBirthday_ {
+    get [id]() {
+        return 0x1D998733;
+    }
+    static get [name]() {
+        return "contactBirthday";
+    }
+    static get [paramDesc]() {
+        return [
+            ["contact_id", "bigint", "long"],
+            ["birthday", _Birthday_, "Birthday"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.contact_id, "bigint", "long"],
+            [this.birthday, _Birthday_, "Birthday"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "contact_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "birthday", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.contact_id = params.contact_id;
+        this.birthday = params.birthday;
+    }
+}
+export class contacts_ContactBirthdays_ extends _contacts_ContactBirthdays_ {
+    get [id]() {
+        return 0x114FF30D;
+    }
+    static get [name]() {
+        return "contacts.contactBirthdays";
+    }
+    static get [paramDesc]() {
+        return [
+            ["contacts", [_ContactBirthday_], "Vector<ContactBirthday>"],
+            ["users", [_User_], "Vector<User>"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.contacts, [_ContactBirthday_], "Vector<ContactBirthday>"],
+            [this.users, [_User_], "Vector<User>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "contacts", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "users", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.contacts = params.contacts;
+        this.users = params.users;
+    }
+}
+export class MissingInvitee_ extends _MissingInvitee_ {
+    get [id]() {
+        return 0x628C9224;
+    }
+    static get [name]() {
+        return "missingInvitee";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["premium_would_allow_invite", "true", "flags.0?true"],
+            ["premium_required_for_pm", "true", "flags.1?true"],
+            ["user_id", "bigint", "long"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.premium_would_allow_invite ?? null, "true", "flags.0?true"],
+            [this.premium_required_for_pm ?? null, "true", "flags.1?true"],
+            [this.user_id, "bigint", "long"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "premium_would_allow_invite", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "premium_required_for_pm", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "user_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.premium_would_allow_invite = params.premium_would_allow_invite;
+        this.premium_required_for_pm = params.premium_required_for_pm;
+        this.user_id = params.user_id;
+    }
+}
+export class messages_InvitedUsers_ extends _messages_InvitedUsers_ {
+    get [id]() {
+        return 0x7F5DEFA6;
+    }
+    static get [name]() {
+        return "messages.invitedUsers";
+    }
+    static get [paramDesc]() {
+        return [
+            ["updates", _Updates_, "Updates"],
+            ["missing_invitees", [_MissingInvitee_], "Vector<MissingInvitee>"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.updates, _Updates_, "Updates"],
+            [this.missing_invitees, [_MissingInvitee_], "Vector<MissingInvitee>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "updates", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "missing_invitees", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.updates = params.updates;
+        this.missing_invitees = params.missing_invitees;
+    }
+}
+export class InputBusinessChatLink_ extends _InputBusinessChatLink_ {
+    get [id]() {
+        return 0x11679FA7;
+    }
+    static get [name]() {
+        return "inputBusinessChatLink";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["message", "string", "string"],
+            ["entities", [_MessageEntity_], "flags.0?Vector<MessageEntity>"],
+            ["title", "string", "flags.1?string"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.message, "string", "string"],
+            [this.entities ?? null, [_MessageEntity_], "flags.0?Vector<MessageEntity>"],
+            [this.title ?? null, "string", "flags.1?string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "message", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "entities", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "title", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.message = params.message;
+        this.entities = params.entities;
+        this.title = params.title;
+    }
+}
+export class BusinessChatLink_ extends _BusinessChatLink_ {
+    get [id]() {
+        return 0xB4AE666F;
+    }
+    static get [name]() {
+        return "businessChatLink";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["link", "string", "string"],
+            ["message", "string", "string"],
+            ["entities", [_MessageEntity_], "flags.0?Vector<MessageEntity>"],
+            ["title", "string", "flags.1?string"],
+            ["views", "number", "int"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.link, "string", "string"],
+            [this.message, "string", "string"],
+            [this.entities ?? null, [_MessageEntity_], "flags.0?Vector<MessageEntity>"],
+            [this.title ?? null, "string", "flags.1?string"],
+            [this.views, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "link", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "message", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "entities", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "title", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "views", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.link = params.link;
+        this.message = params.message;
+        this.entities = params.entities;
+        this.title = params.title;
+        this.views = params.views;
+    }
+}
+export class account_BusinessChatLinks_ extends _account_BusinessChatLinks_ {
+    get [id]() {
+        return 0xEC43A2D1;
+    }
+    static get [name]() {
+        return "account.businessChatLinks";
+    }
+    static get [paramDesc]() {
+        return [
+            ["links", [_BusinessChatLink_], "Vector<BusinessChatLink>"],
+            ["chats", [_Chat_], "Vector<Chat>"],
+            ["users", [_User_], "Vector<User>"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.links, [_BusinessChatLink_], "Vector<BusinessChatLink>"],
+            [this.chats, [_Chat_], "Vector<Chat>"],
+            [this.users, [_User_], "Vector<User>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "links", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "chats", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "users", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.links = params.links;
+        this.chats = params.chats;
+        this.users = params.users;
+    }
+}
+export class account_ResolvedBusinessChatLinks_ extends _account_ResolvedBusinessChatLinks_ {
+    get [id]() {
+        return 0x9A23AF21;
+    }
+    static get [name]() {
+        return "account.resolvedBusinessChatLinks";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["peer", _Peer_, "Peer"],
+            ["message", "string", "string"],
+            ["entities", [_MessageEntity_], "flags.0?Vector<MessageEntity>"],
+            ["chats", [_Chat_], "Vector<Chat>"],
+            ["users", [_User_], "Vector<User>"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.peer, _Peer_, "Peer"],
+            [this.message, "string", "string"],
+            [this.entities ?? null, [_MessageEntity_], "flags.0?Vector<MessageEntity>"],
+            [this.chats, [_Chat_], "Vector<Chat>"],
+            [this.users, [_User_], "Vector<User>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "peer", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "message", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "entities", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "chats", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "users", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.peer = params.peer;
+        this.message = params.message;
+        this.entities = params.entities;
+        this.chats = params.chats;
+        this.users = params.users;
+    }
+}
+export class RequestedPeerUser_ extends _RequestedPeer_ {
+    get [id]() {
+        return 0xD62FF46A;
+    }
+    static get [name]() {
+        return "requestedPeerUser";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["user_id", "bigint", "long"],
+            ["first_name", "string", "flags.0?string"],
+            ["last_name", "string", "flags.0?string"],
+            ["username", "string", "flags.1?string"],
+            ["photo", _Photo_, "flags.2?Photo"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.user_id, "bigint", "long"],
+            [this.first_name ?? null, "string", "flags.0?string"],
+            [this.last_name ?? null, "string", "flags.0?string"],
+            [this.username ?? null, "string", "flags.1?string"],
+            [this.photo ?? null, _Photo_, "flags.2?Photo"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "user_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "first_name", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "last_name", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "username", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "photo", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.user_id = params.user_id;
+        this.first_name = params.first_name;
+        this.last_name = params.last_name;
+        this.username = params.username;
+        this.photo = params.photo;
+    }
+}
+export class RequestedPeerChat_ extends _RequestedPeer_ {
+    get [id]() {
+        return 0x7307544F;
+    }
+    static get [name]() {
+        return "requestedPeerChat";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["chat_id", "bigint", "long"],
+            ["title", "string", "flags.0?string"],
+            ["photo", _Photo_, "flags.2?Photo"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.chat_id, "bigint", "long"],
+            [this.title ?? null, "string", "flags.0?string"],
+            [this.photo ?? null, _Photo_, "flags.2?Photo"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "chat_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "title", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "photo", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.chat_id = params.chat_id;
+        this.title = params.title;
+        this.photo = params.photo;
+    }
+}
+export class RequestedPeerChannel_ extends _RequestedPeer_ {
+    get [id]() {
+        return 0x8BA403E4;
+    }
+    static get [name]() {
+        return "requestedPeerChannel";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["channel_id", "bigint", "long"],
+            ["title", "string", "flags.0?string"],
+            ["username", "string", "flags.1?string"],
+            ["photo", _Photo_, "flags.2?Photo"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.channel_id, "bigint", "long"],
+            [this.title ?? null, "string", "flags.0?string"],
+            [this.username ?? null, "string", "flags.1?string"],
+            [this.photo ?? null, _Photo_, "flags.2?Photo"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "channel_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "title", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "username", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "photo", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.channel_id = params.channel_id;
+        this.title = params.title;
+        this.username = params.username;
+        this.photo = params.photo;
+    }
+}
+export class SponsoredMessageReportOption_ extends _SponsoredMessageReportOption_ {
+    get [id]() {
+        return 0x430D3150;
+    }
+    static get [name]() {
+        return "sponsoredMessageReportOption";
+    }
+    static get [paramDesc]() {
+        return [
+            ["text", "string", "string"],
+            ["option", Uint8Array, "bytes"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.text, "string", "string"],
+            [this.option, Uint8Array, "bytes"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "text", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "option", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.text = params.text;
+        this.option = params.option;
+    }
+}
+export class channels_SponsoredMessageReportResultChooseOption_ extends _channels_SponsoredMessageReportResult_ {
+    get [id]() {
+        return 0x846F9E42;
+    }
+    static get [name]() {
+        return "channels.sponsoredMessageReportResultChooseOption";
+    }
+    static get [paramDesc]() {
+        return [
+            ["title", "string", "string"],
+            ["options", [_SponsoredMessageReportOption_], "Vector<SponsoredMessageReportOption>"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.title, "string", "string"],
+            [this.options, [_SponsoredMessageReportOption_], "Vector<SponsoredMessageReportOption>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "title", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "options", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.title = params.title;
+        this.options = params.options;
+    }
+}
+export class channels_SponsoredMessageReportResultAdsHidden_ extends _channels_SponsoredMessageReportResult_ {
+    get [id]() {
+        return 0x3E3BCF2F;
+    }
+    static get [name]() {
+        return "channels.sponsoredMessageReportResultAdsHidden";
+    }
+    static get [paramDesc]() {
+        return [];
+    }
+    get [params]() {
+        return [];
+    }
+    constructor() {
+        super();
+    }
+}
+export class channels_SponsoredMessageReportResultReported_ extends _channels_SponsoredMessageReportResult_ {
+    get [id]() {
+        return 0xAD798849;
+    }
+    static get [name]() {
+        return "channels.sponsoredMessageReportResultReported";
+    }
+    static get [paramDesc]() {
+        return [];
+    }
+    get [params]() {
+        return [];
+    }
+    constructor() {
+        super();
+    }
+}
+export class stats_BroadcastRevenueStats_ extends _stats_BroadcastRevenueStats_ {
+    get [id]() {
+        return 0xD07B4BAD;
+    }
+    static get [name]() {
+        return "stats.broadcastRevenueStats";
+    }
+    static get [paramDesc]() {
+        return [
+            ["top_hours_graph", _StatsGraph_, "StatsGraph"],
+            ["revenue_graph", _StatsGraph_, "StatsGraph"],
+            ["current_balance", "bigint", "long"],
+            ["available_balance", "bigint", "long"],
+            ["overall_revenue", "bigint", "long"],
+            ["usd_rate", "number", "double"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.top_hours_graph, _StatsGraph_, "StatsGraph"],
+            [this.revenue_graph, _StatsGraph_, "StatsGraph"],
+            [this.current_balance, "bigint", "long"],
+            [this.available_balance, "bigint", "long"],
+            [this.overall_revenue, "bigint", "long"],
+            [this.usd_rate, "number", "double"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "top_hours_graph", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "revenue_graph", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "current_balance", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "available_balance", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "overall_revenue", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "usd_rate", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.top_hours_graph = params.top_hours_graph;
+        this.revenue_graph = params.revenue_graph;
+        this.current_balance = params.current_balance;
+        this.available_balance = params.available_balance;
+        this.overall_revenue = params.overall_revenue;
+        this.usd_rate = params.usd_rate;
+    }
+}
+export class stats_BroadcastRevenueWithdrawalUrl_ extends _stats_BroadcastRevenueWithdrawalUrl_ {
+    get [id]() {
+        return 0xEC659737;
+    }
+    static get [name]() {
+        return "stats.broadcastRevenueWithdrawalUrl";
+    }
+    static get [paramDesc]() {
+        return [
+            ["url", "string", "string"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.url, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "url", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.url = params.url;
+    }
+}
+export class BroadcastRevenueTransactionProceeds_ extends _BroadcastRevenueTransaction_ {
+    get [id]() {
+        return 0x557E2CC4;
+    }
+    static get [name]() {
+        return "broadcastRevenueTransactionProceeds";
+    }
+    static get [paramDesc]() {
+        return [
+            ["amount", "bigint", "long"],
+            ["from_date", "number", "int"],
+            ["to_date", "number", "int"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.amount, "bigint", "long"],
+            [this.from_date, "number", "int"],
+            [this.to_date, "number", "int"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "amount", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "from_date", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "to_date", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.amount = params.amount;
+        this.from_date = params.from_date;
+        this.to_date = params.to_date;
+    }
+}
+export class BroadcastRevenueTransactionWithdrawal_ extends _BroadcastRevenueTransaction_ {
+    get [id]() {
+        return 0x5A590978;
+    }
+    static get [name]() {
+        return "broadcastRevenueTransactionWithdrawal";
+    }
+    static get [paramDesc]() {
+        return [
+            ["flags", flags, "#"],
+            ["pending", "true", "flags.0?true"],
+            ["failed", "true", "flags.2?true"],
+            ["amount", "bigint", "long"],
+            ["date", "number", "int"],
+            ["provider", "string", "string"],
+            ["transaction_date", "number", "flags.1?int"],
+            ["transaction_url", "string", "flags.1?string"],
+        ];
+    }
+    get [params]() {
+        return [
+            ["flags", flags, "#"],
+            [this.pending ?? null, "true", "flags.0?true"],
+            [this.failed ?? null, "true", "flags.2?true"],
+            [this.amount, "bigint", "long"],
+            [this.date, "number", "int"],
+            [this.provider, "string", "string"],
+            [this.transaction_date ?? null, "number", "flags.1?int"],
+            [this.transaction_url ?? null, "string", "flags.1?string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "pending", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "failed", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "amount", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "date", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "provider", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "transaction_date", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "transaction_url", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.pending = params.pending;
+        this.failed = params.failed;
+        this.amount = params.amount;
+        this.date = params.date;
+        this.provider = params.provider;
+        this.transaction_date = params.transaction_date;
+        this.transaction_url = params.transaction_url;
+    }
+}
+export class BroadcastRevenueTransactionRefund_ extends _BroadcastRevenueTransaction_ {
+    get [id]() {
+        return 0x42D30D2E;
+    }
+    static get [name]() {
+        return "broadcastRevenueTransactionRefund";
+    }
+    static get [paramDesc]() {
+        return [
+            ["amount", "bigint", "long"],
+            ["date", "number", "int"],
+            ["provider", "string", "string"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.amount, "bigint", "long"],
+            [this.date, "number", "int"],
+            [this.provider, "string", "string"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "amount", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "date", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "provider", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.amount = params.amount;
+        this.date = params.date;
+        this.provider = params.provider;
+    }
+}
+export class stats_BroadcastRevenueTransactions_ extends _stats_BroadcastRevenueTransactions_ {
+    get [id]() {
+        return 0x87158466;
+    }
+    static get [name]() {
+        return "stats.broadcastRevenueTransactions";
+    }
+    static get [paramDesc]() {
+        return [
+            ["count", "number", "int"],
+            ["transactions", [_BroadcastRevenueTransaction_], "Vector<BroadcastRevenueTransaction>"],
+        ];
+    }
+    get [params]() {
+        return [
+            [this.count, "number", "int"],
+            [this.transactions, [_BroadcastRevenueTransaction_], "Vector<BroadcastRevenueTransaction>"],
+        ];
+    }
+    constructor(params) {
+        super();
+        Object.defineProperty(this, "count", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "transactions", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.count = params.count;
+        this.transactions = params.transactions;
+    }
+}
 export const types = {
     Type: Type_,
     TypeX: TypeX_,
@@ -63156,7 +65490,10 @@ export const types = {
     _HttpWait: _HttpWait_,
     _True: _True_,
     _Error: _Error_,
-    _Null: _Null_,
+    _IpPort: _IpPort_,
+    _AccessPointRule: _AccessPointRule_,
+    _help_ConfigSimple: _help_ConfigSimple_,
+    _InputFileLocation: _InputFileLocation_,
     _InputPeer: _InputPeer_,
     _InputUser: _InputUser_,
     _InputContact: _InputContact_,
@@ -63165,7 +65502,6 @@ export const types = {
     _InputChatPhoto: _InputChatPhoto_,
     _InputGeoPoint: _InputGeoPoint_,
     _InputPhoto: _InputPhoto_,
-    _InputFileLocation: _InputFileLocation_,
     _Peer: _Peer_,
     _storage_FileType: _storage_FileType_,
     _User: _User_,
@@ -63614,6 +65950,30 @@ export const types = {
     _ConnectedBot: _ConnectedBot_,
     _account_ConnectedBots: _account_ConnectedBots_,
     _messages_DialogFilters: _messages_DialogFilters_,
+    _Birthday: _Birthday_,
+    _BotBusinessConnection: _BotBusinessConnection_,
+    _InputBusinessIntro: _InputBusinessIntro_,
+    _BusinessIntro: _BusinessIntro_,
+    _messages_MyStickers: _messages_MyStickers_,
+    _InputCollectible: _InputCollectible_,
+    _fragment_CollectibleInfo: _fragment_CollectibleInfo_,
+    _InputBusinessBotRecipients: _InputBusinessBotRecipients_,
+    _BusinessBotRecipients: _BusinessBotRecipients_,
+    _ContactBirthday: _ContactBirthday_,
+    _contacts_ContactBirthdays: _contacts_ContactBirthdays_,
+    _MissingInvitee: _MissingInvitee_,
+    _messages_InvitedUsers: _messages_InvitedUsers_,
+    _InputBusinessChatLink: _InputBusinessChatLink_,
+    _BusinessChatLink: _BusinessChatLink_,
+    _account_BusinessChatLinks: _account_BusinessChatLinks_,
+    _account_ResolvedBusinessChatLinks: _account_ResolvedBusinessChatLinks_,
+    _RequestedPeer: _RequestedPeer_,
+    _SponsoredMessageReportOption: _SponsoredMessageReportOption_,
+    _channels_SponsoredMessageReportResult: _channels_SponsoredMessageReportResult_,
+    _stats_BroadcastRevenueStats: _stats_BroadcastRevenueStats_,
+    _stats_BroadcastRevenueWithdrawalUrl: _stats_BroadcastRevenueWithdrawalUrl_,
+    _BroadcastRevenueTransaction: _BroadcastRevenueTransaction_,
+    _stats_BroadcastRevenueTransactions: _stats_BroadcastRevenueTransactions_,
     ResPQ: ResPQ_,
     P_q_inner_data_dc: P_q_inner_data_dc_,
     P_q_inner_data_temp_dc: P_q_inner_data_temp_dc_,
@@ -63650,7 +66010,11 @@ export const types = {
     Http_wait: Http_wait_,
     True: True_,
     Error: Error_,
-    Null: Null_,
+    IpPort: IpPort_,
+    IpPortSecret: IpPortSecret_,
+    AccessPointRule: AccessPointRule_,
+    InputPeerPhotoFileLocationLegacy: InputPeerPhotoFileLocationLegacy_,
+    InputStickerSetThumbLegacy: InputStickerSetThumbLegacy_,
     InputPeerEmpty: InputPeerEmpty_,
     InputPeerSelf: InputPeerSelf_,
     InputPeerChat: InputPeerChat_,
@@ -63787,6 +66151,7 @@ export const types = {
     MessageActionGiveawayLaunch: MessageActionGiveawayLaunch_,
     MessageActionGiveawayResults: MessageActionGiveawayResults_,
     MessageActionBoostApply: MessageActionBoostApply_,
+    MessageActionRequestedPeerSentMe: MessageActionRequestedPeerSentMe_,
     Dialog: Dialog_,
     DialogFolder: DialogFolder_,
     PhotoEmpty: PhotoEmpty_,
@@ -63951,7 +66316,6 @@ export const types = {
     UpdateChannelPinnedTopics: UpdateChannelPinnedTopics_,
     UpdateUser: UpdateUser_,
     UpdateAutoSaveSettings: UpdateAutoSaveSettings_,
-    UpdateGroupInvitePrivacyForbidden: UpdateGroupInvitePrivacyForbidden_,
     UpdateStory: UpdateStory_,
     UpdateReadStories: UpdateReadStories_,
     UpdateStoryID: UpdateStoryID_,
@@ -63971,6 +66335,10 @@ export const types = {
     UpdateDeleteQuickReply: UpdateDeleteQuickReply_,
     UpdateQuickReplyMessage: UpdateQuickReplyMessage_,
     UpdateDeleteQuickReplyMessages: UpdateDeleteQuickReplyMessages_,
+    UpdateBotBusinessConnect: UpdateBotBusinessConnect_,
+    UpdateBotNewBusinessMessage: UpdateBotNewBusinessMessage_,
+    UpdateBotEditBusinessMessage: UpdateBotEditBusinessMessage_,
+    UpdateBotDeleteBusinessMessage: UpdateBotDeleteBusinessMessage_,
     UpdatesTooLong: UpdatesTooLong_,
     UpdateShortMessage: UpdateShortMessage_,
     UpdateShortChatMessage: UpdateShortChatMessage_,
@@ -64032,6 +66400,7 @@ export const types = {
     InputPrivacyKeyAddedByPhone: InputPrivacyKeyAddedByPhone_,
     InputPrivacyKeyVoiceMessages: InputPrivacyKeyVoiceMessages_,
     InputPrivacyKeyAbout: InputPrivacyKeyAbout_,
+    InputPrivacyKeyBirthday: InputPrivacyKeyBirthday_,
     PrivacyKeyStatusTimestamp: PrivacyKeyStatusTimestamp_,
     PrivacyKeyChatInvite: PrivacyKeyChatInvite_,
     PrivacyKeyPhoneCall: PrivacyKeyPhoneCall_,
@@ -64042,6 +66411,7 @@ export const types = {
     PrivacyKeyAddedByPhone: PrivacyKeyAddedByPhone_,
     PrivacyKeyVoiceMessages: PrivacyKeyVoiceMessages_,
     PrivacyKeyAbout: PrivacyKeyAbout_,
+    PrivacyKeyBirthday: PrivacyKeyBirthday_,
     InputPrivacyValueAllowContacts: InputPrivacyValueAllowContacts_,
     InputPrivacyValueAllowAll: InputPrivacyValueAllowAll_,
     InputPrivacyValueAllowUsers: InputPrivacyValueAllowUsers_,
@@ -64051,6 +66421,7 @@ export const types = {
     InputPrivacyValueAllowChatParticipants: InputPrivacyValueAllowChatParticipants_,
     InputPrivacyValueDisallowChatParticipants: InputPrivacyValueDisallowChatParticipants_,
     InputPrivacyValueAllowCloseFriends: InputPrivacyValueAllowCloseFriends_,
+    InputPrivacyValueAllowPremium: InputPrivacyValueAllowPremium_,
     PrivacyValueAllowContacts: PrivacyValueAllowContacts_,
     PrivacyValueAllowAll: PrivacyValueAllowAll_,
     PrivacyValueAllowUsers: PrivacyValueAllowUsers_,
@@ -64060,6 +66431,7 @@ export const types = {
     PrivacyValueAllowChatParticipants: PrivacyValueAllowChatParticipants_,
     PrivacyValueDisallowChatParticipants: PrivacyValueDisallowChatParticipants_,
     PrivacyValueAllowCloseFriends: PrivacyValueAllowCloseFriends_,
+    PrivacyValueAllowPremium: PrivacyValueAllowPremium_,
     AccountDaysTTL: AccountDaysTTL_,
     DocumentAttributeImageSize: DocumentAttributeImageSize_,
     DocumentAttributeAnimated: DocumentAttributeAnimated_,
@@ -64111,6 +66483,7 @@ export const types = {
     KeyboardButtonWebView: KeyboardButtonWebView_,
     KeyboardButtonSimpleWebView: KeyboardButtonSimpleWebView_,
     KeyboardButtonRequestPeer: KeyboardButtonRequestPeer_,
+    InputKeyboardButtonRequestPeer: InputKeyboardButtonRequestPeer_,
     KeyboardButtonRow: KeyboardButtonRow_,
     ReplyKeyboardHide: ReplyKeyboardHide_,
     ReplyKeyboardForceReply: ReplyKeyboardForceReply_,
@@ -64644,6 +67017,59 @@ export const types = {
     InputQuickReplyShortcut: InputQuickReplyShortcut_,
     InputQuickReplyShortcutId: InputQuickReplyShortcutId_,
     ConnectedBot: ConnectedBot_,
+    Birthday: Birthday_,
+    BotBusinessConnection: BotBusinessConnection_,
+    InputBusinessIntro: InputBusinessIntro_,
+    BusinessIntro: BusinessIntro_,
+    InputCollectibleUsername: InputCollectibleUsername_,
+    InputCollectiblePhone: InputCollectiblePhone_,
+    InputBusinessBotRecipients: InputBusinessBotRecipients_,
+    BusinessBotRecipients: BusinessBotRecipients_,
+    ContactBirthday: ContactBirthday_,
+    MissingInvitee: MissingInvitee_,
+    InputBusinessChatLink: InputBusinessChatLink_,
+    BusinessChatLink: BusinessChatLink_,
+    RequestedPeerUser: RequestedPeerUser_,
+    RequestedPeerChat: RequestedPeerChat_,
+    RequestedPeerChannel: RequestedPeerChannel_,
+    SponsoredMessageReportOption: SponsoredMessageReportOption_,
+    BroadcastRevenueTransactionProceeds: BroadcastRevenueTransactionProceeds_,
+    BroadcastRevenueTransactionWithdrawal: BroadcastRevenueTransactionWithdrawal_,
+    BroadcastRevenueTransactionRefund: BroadcastRevenueTransactionRefund_,
+    help: {
+        ConfigSimple: help_ConfigSimple_,
+        AppUpdate: help_AppUpdate_,
+        NoAppUpdate: help_NoAppUpdate_,
+        InviteText: help_InviteText_,
+        Support: help_Support_,
+        TermsOfService: help_TermsOfService_,
+        RecentMeUrls: help_RecentMeUrls_,
+        TermsOfServiceUpdateEmpty: help_TermsOfServiceUpdateEmpty_,
+        TermsOfServiceUpdate: help_TermsOfServiceUpdate_,
+        DeepLinkInfoEmpty: help_DeepLinkInfoEmpty_,
+        DeepLinkInfo: help_DeepLinkInfo_,
+        PassportConfigNotModified: help_PassportConfigNotModified_,
+        PassportConfig: help_PassportConfig_,
+        SupportName: help_SupportName_,
+        UserInfoEmpty: help_UserInfoEmpty_,
+        UserInfo: help_UserInfo_,
+        PromoDataEmpty: help_PromoDataEmpty_,
+        PromoData: help_PromoData_,
+        CountryCode: help_CountryCode_,
+        Country: help_Country_,
+        CountriesListNotModified: help_CountriesListNotModified_,
+        CountriesList: help_CountriesList_,
+        PremiumPromo: help_PremiumPromo_,
+        AppConfigNotModified: help_AppConfigNotModified_,
+        AppConfig: help_AppConfig_,
+        PeerColorSet: help_PeerColorSet_,
+        PeerColorProfileSet: help_PeerColorProfileSet_,
+        PeerColorOption: help_PeerColorOption_,
+        PeerColorsNotModified: help_PeerColorsNotModified_,
+        PeerColors: help_PeerColors_,
+        TimezonesListNotModified: help_TimezonesListNotModified_,
+        TimezonesList: help_TimezonesList_,
+    },
     storage: {
         FileUnknown: storage_FileUnknown_,
         FilePartial: storage_FilePartial_,
@@ -64693,6 +67119,7 @@ export const types = {
         TopPeersNotModified: contacts_TopPeersNotModified_,
         TopPeers: contacts_TopPeers_,
         TopPeersDisabled: contacts_TopPeersDisabled_,
+        ContactBirthdays: contacts_ContactBirthdays_,
     },
     messages: {
         Dialogs: messages_Dialogs_,
@@ -64774,6 +67201,8 @@ export const types = {
         QuickReplies: messages_QuickReplies_,
         QuickRepliesNotModified: messages_QuickRepliesNotModified_,
         DialogFilters: messages_DialogFilters_,
+        MyStickers: messages_MyStickers_,
+        InvitedUsers: messages_InvitedUsers_,
     },
     updates: {
         State: updates_State_,
@@ -64796,39 +67225,6 @@ export const types = {
         WebFile: upload_WebFile_,
         CdnFileReuploadNeeded: upload_CdnFileReuploadNeeded_,
         CdnFile: upload_CdnFile_,
-    },
-    help: {
-        AppUpdate: help_AppUpdate_,
-        NoAppUpdate: help_NoAppUpdate_,
-        InviteText: help_InviteText_,
-        Support: help_Support_,
-        TermsOfService: help_TermsOfService_,
-        RecentMeUrls: help_RecentMeUrls_,
-        TermsOfServiceUpdateEmpty: help_TermsOfServiceUpdateEmpty_,
-        TermsOfServiceUpdate: help_TermsOfServiceUpdate_,
-        DeepLinkInfoEmpty: help_DeepLinkInfoEmpty_,
-        DeepLinkInfo: help_DeepLinkInfo_,
-        PassportConfigNotModified: help_PassportConfigNotModified_,
-        PassportConfig: help_PassportConfig_,
-        SupportName: help_SupportName_,
-        UserInfoEmpty: help_UserInfoEmpty_,
-        UserInfo: help_UserInfo_,
-        PromoDataEmpty: help_PromoDataEmpty_,
-        PromoData: help_PromoData_,
-        CountryCode: help_CountryCode_,
-        Country: help_Country_,
-        CountriesListNotModified: help_CountriesListNotModified_,
-        CountriesList: help_CountriesList_,
-        PremiumPromo: help_PremiumPromo_,
-        AppConfigNotModified: help_AppConfigNotModified_,
-        AppConfig: help_AppConfig_,
-        PeerColorSet: help_PeerColorSet_,
-        PeerColorProfileSet: help_PeerColorProfileSet_,
-        PeerColorOption: help_PeerColorOption_,
-        PeerColorsNotModified: help_PeerColorsNotModified_,
-        PeerColors: help_PeerColors_,
-        TimezonesListNotModified: help_TimezonesListNotModified_,
-        TimezonesList: help_TimezonesList_,
     },
     account: {
         PrivacyRules: account_PrivacyRules_,
@@ -64860,6 +67256,8 @@ export const types = {
         EmailVerifiedLogin: account_EmailVerifiedLogin_,
         AutoSaveSettings: account_AutoSaveSettings_,
         ConnectedBots: account_ConnectedBots_,
+        BusinessChatLinks: account_BusinessChatLinks_,
+        ResolvedBusinessChatLinks: account_ResolvedBusinessChatLinks_,
     },
     channels: {
         ChannelParticipants: channels_ChannelParticipants_,
@@ -64867,6 +67265,9 @@ export const types = {
         ChannelParticipant: channels_ChannelParticipant_,
         AdminLogResults: channels_AdminLogResults_,
         SendAsPeers: channels_SendAsPeers_,
+        SponsoredMessageReportResultChooseOption: channels_SponsoredMessageReportResultChooseOption_,
+        SponsoredMessageReportResultAdsHidden: channels_SponsoredMessageReportResultAdsHidden_,
+        SponsoredMessageReportResultReported: channels_SponsoredMessageReportResultReported_,
     },
     payments: {
         PaymentForm: payments_PaymentForm_,
@@ -64896,6 +67297,9 @@ export const types = {
         MessageStats: stats_MessageStats_,
         StoryStats: stats_StoryStats_,
         PublicForwards: stats_PublicForwards_,
+        BroadcastRevenueStats: stats_BroadcastRevenueStats_,
+        BroadcastRevenueWithdrawalUrl: stats_BroadcastRevenueWithdrawalUrl_,
+        BroadcastRevenueTransactions: stats_BroadcastRevenueTransactions_,
     },
     stickers: {
         SuggestedShortName: stickers_SuggestedShortName_,
@@ -64930,6 +67334,9 @@ export const types = {
     smsjobs: {
         EligibleToJoin: smsjobs_EligibleToJoin_,
         Status: smsjobs_Status_,
+    },
+    fragment: {
+        CollectibleInfo: fragment_CollectibleInfo_,
     },
 };
 export const map = new Map([
@@ -64969,7 +67376,12 @@ export const map = new Map([
     [0x9299359F, Http_wait_],
     [0x3FEDD339, True_],
     [0xC4B9F9BB, Error_],
-    [0x56730BCC, Null_],
+    [0xD433AD73, IpPort_],
+    [0x37982646, IpPortSecret_],
+    [0x4679B65F, AccessPointRule_],
+    [0x5A592A6C, help_ConfigSimple_],
+    [0x27D69997, InputPeerPhotoFileLocationLegacy_],
+    [0x0DBAEAE9, InputStickerSetThumbLegacy_],
     [0x7F3B18EA, InputPeerEmpty_],
     [0x7DA07EC9, InputPeerSelf_],
     [0x35A95CB9, InputPeerChat_],
@@ -65056,7 +67468,7 @@ export const map = new Map([
     [0x37C1011C, ChatPhotoEmpty_],
     [0x1C6E1C11, ChatPhoto_],
     [0x90A6CA84, MessageEmpty_],
-    [0xA66C7EFC, Message_],
+    [0x2357BF25, Message_],
     [0x2B085862, MessageService_],
     [0x3DED6320, MessageMediaEmpty_],
     [0x695150D7, MessageMediaPhoto_],
@@ -65116,6 +67528,7 @@ export const map = new Map([
     [0x332BA9ED, MessageActionGiveawayLaunch_],
     [0x2A9FADC5, MessageActionGiveawayResults_],
     [0xCC02AA6D, MessageActionBoostApply_],
+    [0x93B31848, MessageActionRequestedPeerSentMe_],
     [0xD58A08C6, Dialog_],
     [0x71BD134C, DialogFolder_],
     [0x2331B22D, PhotoEmpty_],
@@ -65140,7 +67553,7 @@ export const map = new Map([
     [0x5C467992, InputNotifyForumTopic_],
     [0xCACB6AE2, InputPeerNotifySettings_],
     [0x99622C0C, PeerNotifySettings_],
-    [0xA518110D, PeerSettings_],
+    [0xACD66C5E, PeerSettings_],
     [0xA437C3ED, WallPaper_],
     [0xE0804116, WallPaperNoFile_],
     [0x58DBCAB8, InputReportReasonSpam_],
@@ -65153,7 +67566,7 @@ export const map = new Map([
     [0xF5DDD6E7, InputReportReasonFake_],
     [0x0A8EB2BE, InputReportReasonIllegalDrugs_],
     [0x9EC7863D, InputReportReasonPersonalDetails_],
-    [0x22FF3E85, UserFull_],
+    [0xCC997720, UserFull_],
     [0x145ADE0B, Contact_],
     [0xC13E3C50, ImportedContact_],
     [0x16D9703B, ContactStatus_],
@@ -65301,7 +67714,6 @@ export const map = new Map([
     [0xFE198602, UpdateChannelPinnedTopics_],
     [0x20529438, UpdateUser_],
     [0xEC05B097, UpdateAutoSaveSettings_],
-    [0xCCF08AD6, UpdateGroupInvitePrivacyForbidden_],
     [0x75B3B798, UpdateStory_],
     [0xF74E932B, UpdateReadStories_],
     [0x1BF335B9, UpdateStoryID_],
@@ -65321,6 +67733,10 @@ export const map = new Map([
     [0x53E6F1EC, UpdateDeleteQuickReply_],
     [0x3E050D0F, UpdateQuickReplyMessage_],
     [0x566FE7CD, UpdateDeleteQuickReplyMessages_],
+    [0x8AE5C97A, UpdateBotBusinessConnect_],
+    [0x9DDB347C, UpdateBotNewBusinessMessage_],
+    [0x07DF587C, UpdateBotEditBusinessMessage_],
+    [0xA02A982E, UpdateBotDeleteBusinessMessage_],
     [0xA56C2A3E, updates_State_],
     [0x5D75A138, updates_DifferenceEmpty_],
     [0x00F49CA0, updates_Difference_],
@@ -65401,6 +67817,7 @@ export const map = new Map([
     [0xD1219BDD, InputPrivacyKeyAddedByPhone_],
     [0xAEE69D68, InputPrivacyKeyVoiceMessages_],
     [0x3823CC40, InputPrivacyKeyAbout_],
+    [0xD65A11CC, InputPrivacyKeyBirthday_],
     [0xBC2EAB30, PrivacyKeyStatusTimestamp_],
     [0x500E6DFA, PrivacyKeyChatInvite_],
     [0x3D662B7B, PrivacyKeyPhoneCall_],
@@ -65411,6 +67828,7 @@ export const map = new Map([
     [0x42FFD42B, PrivacyKeyAddedByPhone_],
     [0x0697F414, PrivacyKeyVoiceMessages_],
     [0xA486B761, PrivacyKeyAbout_],
+    [0x2000A518, PrivacyKeyBirthday_],
     [0x0D09E07B, InputPrivacyValueAllowContacts_],
     [0x184B35CE, InputPrivacyValueAllowAll_],
     [0x131CC67F, InputPrivacyValueAllowUsers_],
@@ -65420,6 +67838,7 @@ export const map = new Map([
     [0x840649CF, InputPrivacyValueAllowChatParticipants_],
     [0xE94F0F86, InputPrivacyValueDisallowChatParticipants_],
     [0x2F453E49, InputPrivacyValueAllowCloseFriends_],
+    [0x77CDC9F1, InputPrivacyValueAllowPremium_],
     [0xFFFE1BAC, PrivacyValueAllowContacts_],
     [0x65427B82, PrivacyValueAllowAll_],
     [0xB8905FB2, PrivacyValueAllowUsers_],
@@ -65429,6 +67848,7 @@ export const map = new Map([
     [0x6B134E8E, PrivacyValueAllowChatParticipants_],
     [0x41C87565, PrivacyValueDisallowChatParticipants_],
     [0xF7E8D89B, PrivacyValueAllowCloseFriends_],
+    [0xECE9814B, PrivacyValueAllowPremium_],
     [0x50A04E45, account_PrivacyRules_],
     [0xB8D0AFDF, AccountDaysTTL_],
     [0x6C37C15C, DocumentAttributeImageSize_],
@@ -65493,6 +67913,7 @@ export const map = new Map([
     [0x13767230, KeyboardButtonWebView_],
     [0xA0C0505C, KeyboardButtonSimpleWebView_],
     [0x53D7BFD8, KeyboardButtonRequestPeer_],
+    [0xC9662D05, InputKeyboardButtonRequestPeer_],
     [0x77608B83, KeyboardButtonRow_],
     [0xA03E5B85, ReplyKeyboardHide_],
     [0x86B40B08, ReplyKeyboardForceReply_],
@@ -65708,7 +68129,7 @@ export const map = new Map([
     [0xC5226F17, PhoneCallWaiting_],
     [0x14B0ED0C, PhoneCallRequested_],
     [0x3660C311, PhoneCallAccepted_],
-    [0x967F7C67, PhoneCall_],
+    [0x30535AF5, PhoneCall_],
     [0x50CA4DE1, PhoneCallDiscarded_],
     [0x9CC123C7, PhoneConnection_],
     [0x635FE375, PhoneConnectionWebrtc_],
@@ -66207,8 +68628,39 @@ export const map = new Map([
     [0x01190CF1, InputQuickReplyShortcutId_],
     [0xC68D6695, messages_QuickReplies_],
     [0x5F91EB5B, messages_QuickRepliesNotModified_],
-    [0xE7E999E7, ConnectedBot_],
+    [0xBD068601, ConnectedBot_],
     [0x17D7F87B, account_ConnectedBots_],
     [0x2AD93719, messages_DialogFilters_],
+    [0x6C8E1E06, Birthday_],
+    [0x896433B4, BotBusinessConnection_],
+    [0x09C469CD, InputBusinessIntro_],
+    [0x5A0A066D, BusinessIntro_],
+    [0xFAFF629D, messages_MyStickers_],
+    [0xE39460A9, InputCollectibleUsername_],
+    [0xA2E214A4, InputCollectiblePhone_],
+    [0x6EBDFF91, fragment_CollectibleInfo_],
+    [0xC4E5921E, InputBusinessBotRecipients_],
+    [0xB88CF373, BusinessBotRecipients_],
+    [0x1D998733, ContactBirthday_],
+    [0x114FF30D, contacts_ContactBirthdays_],
+    [0x628C9224, MissingInvitee_],
+    [0x7F5DEFA6, messages_InvitedUsers_],
+    [0x11679FA7, InputBusinessChatLink_],
+    [0xB4AE666F, BusinessChatLink_],
+    [0xEC43A2D1, account_BusinessChatLinks_],
+    [0x9A23AF21, account_ResolvedBusinessChatLinks_],
+    [0xD62FF46A, RequestedPeerUser_],
+    [0x7307544F, RequestedPeerChat_],
+    [0x8BA403E4, RequestedPeerChannel_],
+    [0x430D3150, SponsoredMessageReportOption_],
+    [0x846F9E42, channels_SponsoredMessageReportResultChooseOption_],
+    [0x3E3BCF2F, channels_SponsoredMessageReportResultAdsHidden_],
+    [0xAD798849, channels_SponsoredMessageReportResultReported_],
+    [0xD07B4BAD, stats_BroadcastRevenueStats_],
+    [0xEC659737, stats_BroadcastRevenueWithdrawalUrl_],
+    [0x557E2CC4, BroadcastRevenueTransactionProceeds_],
+    [0x5A590978, BroadcastRevenueTransactionWithdrawal_],
+    [0x42D30D2E, BroadcastRevenueTransactionRefund_],
+    [0x87158466, stats_BroadcastRevenueTransactions_],
     // deno-lint-ignore no-explicit-any
 ]);

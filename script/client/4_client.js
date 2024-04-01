@@ -204,7 +204,7 @@ class Client extends Composer {
             const reactions = "messageInteractions" in update ? update.messageInteractions : undefined;
             const mustGetMsg = () => {
                 if (msg !== undefined) {
-                    return { chatId: msg.chat.id, messageId: msg.id, senderId: (msg.from ?? msg.senderChat)?.id };
+                    return { chatId: msg.chat.id, messageId: msg.id, businessConnectionId: msg.businessConnectionId, senderId: (msg.from ?? msg.senderChat)?.id };
                 }
                 else if (reactions !== undefined) {
                     return { chatId: reactions.chatId, messageId: reactions.messageId };
@@ -263,74 +263,74 @@ class Client extends Composer {
                     return () => update;
                 },
                 reply: (text, params) => {
-                    const { chatId, messageId } = mustGetMsg();
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
                     const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendMessage(chatId, text, { ...params, replyToMessageId });
+                    return this.sendMessage(chatId, text, { ...params, replyToMessageId, businessConnectionId });
                 },
                 replyPoll: (question, options, params) => {
-                    const { chatId, messageId } = mustGetMsg();
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
                     const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendPoll(chatId, question, options, { ...params, replyToMessageId });
+                    return this.sendPoll(chatId, question, options, { ...params, replyToMessageId, businessConnectionId });
                 },
                 replyPhoto: (photo, params) => {
-                    const { chatId, messageId } = mustGetMsg();
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
                     const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendPhoto(chatId, photo, { ...params, replyToMessageId });
+                    return this.sendPhoto(chatId, photo, { ...params, replyToMessageId, businessConnectionId });
                 },
                 replyDocument: (document, params) => {
-                    const { chatId, messageId } = mustGetMsg();
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
                     const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendDocument(chatId, document, { ...params, replyToMessageId });
+                    return this.sendDocument(chatId, document, { ...params, replyToMessageId, businessConnectionId });
                 },
                 replySticker: (sticker, params) => {
-                    const { chatId, messageId } = mustGetMsg();
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
                     const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendSticker(chatId, sticker, { ...params, replyToMessageId });
+                    return this.sendSticker(chatId, sticker, { ...params, replyToMessageId, businessConnectionId });
                 },
                 replyContact: (firstName, number, params) => {
-                    const { chatId, messageId } = mustGetMsg();
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
                     const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendContact(chatId, firstName, number, { ...params, replyToMessageId });
+                    return this.sendContact(chatId, firstName, number, { ...params, replyToMessageId, businessConnectionId });
                 },
                 replyLocation: (latitude, longitude, params) => {
-                    const { chatId, messageId } = mustGetMsg();
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
                     const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendLocation(chatId, latitude, longitude, { ...params, replyToMessageId });
+                    return this.sendLocation(chatId, latitude, longitude, { ...params, replyToMessageId, businessConnectionId });
                 },
                 replyDice: (params) => {
-                    const { chatId, messageId } = mustGetMsg();
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
                     const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendDice(chatId, { ...params, replyToMessageId });
+                    return this.sendDice(chatId, { ...params, replyToMessageId, businessConnectionId });
                 },
                 replyVenue: (latitude, longitude, title, address, params) => {
-                    const { chatId, messageId } = mustGetMsg();
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
                     const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendVenue(chatId, latitude, longitude, title, address, { ...params, replyToMessageId });
+                    return this.sendVenue(chatId, latitude, longitude, title, address, { ...params, replyToMessageId, businessConnectionId });
                 },
                 replyVideo: (video, params) => {
-                    const { chatId, messageId } = mustGetMsg();
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
                     const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendVideo(chatId, video, { ...params, replyToMessageId });
+                    return this.sendVideo(chatId, video, { ...params, replyToMessageId, businessConnectionId });
                 },
                 replyAnimation: (document, params) => {
-                    const { chatId, messageId } = mustGetMsg();
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
                     const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendAnimation(chatId, document, { ...params, replyToMessageId });
+                    return this.sendAnimation(chatId, document, { ...params, replyToMessageId, businessConnectionId });
                 },
                 replyVoice: (document, params) => {
-                    const { chatId, messageId } = mustGetMsg();
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
                     const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendVoice(chatId, document, { ...params, replyToMessageId });
+                    return this.sendVoice(chatId, document, { ...params, replyToMessageId, businessConnectionId });
                 },
                 replyAudio: (document, params) => {
-                    const { chatId, messageId } = mustGetMsg();
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
                     const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendAudio(chatId, document, { ...params, replyToMessageId });
+                    return this.sendAudio(chatId, document, { ...params, replyToMessageId, businessConnectionId });
                 },
                 replyVideoNote: (videoNote, params) => {
-                    const { chatId, messageId } = mustGetMsg();
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
                     const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendVideoNote(chatId, videoNote, { ...params, replyToMessageId });
+                    return this.sendVideoNote(chatId, videoNote, { ...params, replyToMessageId, businessConnectionId });
                 },
                 delete: () => {
                     const { chatId, messageId } = mustGetMsg();
@@ -640,6 +640,14 @@ class Client extends Composer {
         const c = {
             id,
             api: this.api,
+            invoke: async (function_, businessConnectionId) => {
+                if (businessConnectionId) {
+                    return await this.api.invokeWithBusinessConnection({ connection_id: businessConnectionId, query: function_ });
+                }
+                else {
+                    return await this.invoke(function_);
+                }
+            },
             storage: this.storage,
             messageStorage: this.messageStorage,
             guaranteeUpdateDelivery: __classPrivateFieldGet(this, _Client_guaranteeUpdateDelivery, "f"),

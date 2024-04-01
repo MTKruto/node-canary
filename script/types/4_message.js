@@ -253,7 +253,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage) {
     }
     return { ...message, unsupported: true };
 }
-async function constructMessage(message_, getEntity, getMessage, getStickerSetName, getReply_ = true) {
+async function constructMessage(message_, getEntity, getMessage, getStickerSetName, getReply_ = true, business) {
     if (!(message_ instanceof _2_tl_js_1.types.Message) && !(message_ instanceof _2_tl_js_1.types.MessageService)) {
         (0, _1_utilities_js_1.UNREACHABLE)();
     }
@@ -314,7 +314,14 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
         }
         message.replyToMessageId = message_.reply_to.reply_to_msg_id;
     }
-    if (getReply_) {
+    if (business) {
+        message.businessConnectionId = business.connectionId;
+        if (business.replyToMessage) {
+            message.replyToMessageId = business.replyToMessage.id;
+            message.replyToMessage = await constructMessage(business.replyToMessage, getEntity, getMessage, getStickerSetName, false, { connectionId: business.connectionId });
+        }
+    }
+    else if (getReply_) {
         Object.assign(message, await getReply(message_, chat_, getMessage));
     }
     Object.assign(message, await getSender(message_, getEntity));

@@ -1,12 +1,12 @@
 import { enums, types } from "../2_tl.js";
 import { ChatAction, ChatMember, FileSource, FileType, ID, Message, MessageEntity, ParseMode, Reaction, Update, UsernameResolver } from "../3_types.js";
-import { AddReactionParams, BanChatMemberParams, CreateInviteLinkParams, DeleteMessagesParams, EditMessageLiveLocationParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetCreatedInviteLinksParams, GetHistoryParams, PinMessageParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetReactionsParams, StopPollParams } from "./0_params.js";
+import { AddReactionParams, BanChatMemberParams, CreateInviteLinkParams, DeleteMessagesParams, EditMessageLiveLocationParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetCreatedInviteLinksParams, GetHistoryParams, PinMessageParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendChatActionParams, SendContactParams, SendDiceParams, SendDocumentParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetReactionsParams, StopPollParams } from "./0_params.js";
 import { C as C_ } from "./0_types.js";
 import { FileManager } from "./1_file_manager.js";
 interface C extends C_ {
     fileManager: FileManager;
 }
-type MessageManagerUpdate = types.UpdateNewMessage | types.UpdateNewChannelMessage | types.UpdateEditMessage | types.UpdateEditChannelMessage | types.UpdateDeleteMessages | types.UpdateDeleteChannelMessages | types.UpdateChannelParticipant | types.UpdateChatParticipant;
+type MessageManagerUpdate = types.UpdateNewMessage | types.UpdateNewChannelMessage | types.UpdateEditMessage | types.UpdateEditChannelMessage | types.UpdateBotNewBusinessMessage | types.UpdateBotEditBusinessMessage | types.UpdateDeleteMessages | types.UpdateDeleteChannelMessages | types.UpdateChannelParticipant | types.UpdateChatParticipant;
 export declare class MessageManager {
     #private;
     constructor(c: C);
@@ -18,7 +18,10 @@ export declare class MessageManager {
         parseMode?: ParseMode;
         entities?: MessageEntity[];
     }): Promise<readonly [string, enums.MessageEntity[] | undefined]>;
-    constructMessage(message_: enums.Message, r?: boolean): Promise<Message>;
+    constructMessage(message_: enums.Message, r?: boolean, business?: {
+        connectionId: string;
+        replyToMessage?: enums.Message;
+    }): Promise<Message>;
     forwardMessages(from: ID, to: ID, messageIds: number[], params?: ForwardMessagesParams): Promise<Message[]>;
     getHistory(chatId: ID, params?: GetHistoryParams): Promise<Message[]>;
     usernameResolver: UsernameResolver;
@@ -56,9 +59,7 @@ export declare class MessageManager {
     removeReaction(chatId: number, messageId: number, reaction: Reaction): Promise<void>;
     static canHandleUpdate(update: enums.Update): update is MessageManagerUpdate;
     handleUpdate(update: MessageManagerUpdate): Promise<Update | null>;
-    sendChatAction(chatId: ID, action: ChatAction, params?: {
-        messageThreadId?: number;
-    }): Promise<void>;
+    sendChatAction(chatId: ID, action: ChatAction, params?: SendChatActionParams): Promise<void>;
     deleteChatPhoto(chatId: number): Promise<void>;
     setChatPhoto(chatId: number, photo: FileSource, params?: SetChatPhotoParams): Promise<void>;
     banChatMember(chatId: ID, memberId: ID, params?: BanChatMemberParams): Promise<void>;

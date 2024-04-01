@@ -84,6 +84,7 @@ export interface _MessageBase {
     forwards?: number;
     /** The message's reply markup. */
     replyMarkup?: ReplyMarkup;
+    businessConnectionId?: string;
 }
 /**
  * Properties shared between media message types.
@@ -464,5 +465,8 @@ export interface MessageGetter {
     (chatId: number, messageId: number): MaybePromise<Message | null>;
 }
 type Message_MessageGetter = MessageGetter | null;
-export declare function constructMessage(message_: enums.Message, getEntity: EntityGetter, getMessage: Message_MessageGetter, getStickerSetName: StickerSetNameGetter, getReply_?: boolean): Promise<Message>;
+export declare function constructMessage(message_: enums.Message, getEntity: EntityGetter, getMessage: Message_MessageGetter, getStickerSetName: StickerSetNameGetter, getReply_?: boolean, business?: {
+    connectionId: string;
+    replyToMessage?: enums.Message;
+}): Promise<Message>;
 export {};

@@ -129,8 +129,8 @@ class MessageManager {
         const entities = entities_?.length > 0 ? await Promise.all(entities_.map((v) => (0, _3_types_js_2.messageEntityToTlObject)(v, __classPrivateFieldGet(this, _MessageManager_c, "f").getEntity))) : undefined;
         return [text, entities];
     }
-    async constructMessage(message_, r) {
-        return await (0, _3_types_js_2.constructMessage)(message_, __classPrivateFieldGet(this, _MessageManager_c, "f").getEntity, this.getMessage.bind(this), __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.getStickerSetName.bind(__classPrivateFieldGet(this, _MessageManager_c, "f").fileManager), r);
+    async constructMessage(message_, r, business) {
+        return await (0, _3_types_js_2.constructMessage)(message_, __classPrivateFieldGet(this, _MessageManager_c, "f").getEntity, this.getMessage.bind(this), __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.getStickerSetName.bind(__classPrivateFieldGet(this, _MessageManager_c, "f").fileManager), r, business);
     }
     async forwardMessages(from, to, messageIds, params) {
         const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.forwardMessages({
@@ -196,7 +196,7 @@ class MessageManager {
         const sendAs = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveSendAs).call(this, params);
         let result;
         if (!noWebpage && params?.linkPreview?.url) {
-            result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.sendMedia({
+            result = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke(new _2_tl_js_1.functions.messages.sendMedia({
                 peer,
                 random_id: randomId,
                 media: new _2_tl_js_1.types.InputMediaWebPage({
@@ -213,10 +213,10 @@ class MessageManager {
                 send_as: sendAs,
                 entities,
                 reply_markup: replyMarkup,
-            });
+            }), params?.businessConnectionId);
         }
         else {
-            result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.sendMessage({
+            result = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke(new _2_tl_js_1.functions.messages.sendMessage({
                 peer,
                 random_id: randomId,
                 message,
@@ -228,9 +228,9 @@ class MessageManager {
                 send_as: sendAs,
                 entities,
                 reply_markup: replyMarkup,
-            });
+            }), params?.businessConnectionId);
         }
-        const message_ = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result).then((v) => v[0]);
+        const message_ = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result, params?.businessConnectionId).then((v) => v[0]);
         return (0, _3_types_js_2.assertMessageType)(message_, "text");
     }
     async sendVenue(chatId, latitude, longitude, title, address, params) {
@@ -240,7 +240,7 @@ class MessageManager {
         const noforwards = params?.protectContent ? true : undefined;
         const sendAs = params?.sendAs ? await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(params.sendAs) : undefined; // TODO: check default sendAs
         const replyMarkup = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params);
-        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.sendMedia({
+        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke(new _2_tl_js_1.functions.messages.sendMedia({
             peer,
             random_id: randomId,
             silent,
@@ -260,8 +260,8 @@ class MessageManager {
                 provider: "foursquare",
             }),
             message: "",
-        });
-        const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result).then((v) => v[0]);
+        }), params?.businessConnectionId);
+        const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result, params?.businessConnectionId).then((v) => v[0]);
         return (0, _3_types_js_2.assertMessageType)(message, "venue");
     }
     async sendContact(chatId, firstName, number, params) {
@@ -271,7 +271,7 @@ class MessageManager {
         const noforwards = params?.protectContent ? true : undefined;
         const sendAs = params?.sendAs ? await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(params.sendAs) : undefined; // TODO: check default sendAs
         const replyMarkup = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params);
-        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.sendMedia({
+        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke(new _2_tl_js_1.functions.messages.sendMedia({
             peer,
             random_id: randomId,
             silent,
@@ -286,8 +286,8 @@ class MessageManager {
                 vcard: params?.vcard ?? "",
             }),
             message: "",
-        });
-        const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result).then((v) => v[0]);
+        }), params?.businessConnectionId);
+        const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result, params?.businessConnectionId).then((v) => v[0]);
         return (0, _3_types_js_2.assertMessageType)(message, "contact");
     }
     async sendDice(chatId, params) {
@@ -297,7 +297,7 @@ class MessageManager {
         const noforwards = params?.protectContent ? true : undefined;
         const sendAs = params?.sendAs ? await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(params.sendAs) : undefined; // TODO: check default sendAs
         const replyMarkup = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params);
-        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.sendMedia({
+        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke(new _2_tl_js_1.functions.messages.sendMedia({
             peer,
             random_id: randomId,
             silent,
@@ -309,8 +309,8 @@ class MessageManager {
                 emoticon: params?.emoji ?? "🎲",
             }),
             message: "",
-        });
-        const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result).then((v) => v[0]);
+        }), params?.businessConnectionId);
+        const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result, params?.businessConnectionId).then((v) => v[0]);
         return (0, _3_types_js_2.assertMessageType)(message, "dice");
     }
     async sendLocation(chatId, latitude, longitude, params) {
@@ -320,7 +320,7 @@ class MessageManager {
         const noforwards = params?.protectContent ? true : undefined;
         const sendAs = params?.sendAs ? await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(params.sendAs) : undefined; // TODO: check default sendAs
         const replyMarkup = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params);
-        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.sendMedia({
+        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke(new _2_tl_js_1.functions.messages.sendMedia({
             peer,
             random_id: randomId,
             silent,
@@ -347,8 +347,8 @@ class MessageManager {
                     }),
                 }),
             message: "",
-        });
-        const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result).then((v) => v[0]);
+        }), params?.businessConnectionId);
+        const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result, params?.businessConnectionId).then((v) => v[0]);
         return (0, _3_types_js_2.assertMessageType)(message, "location");
     }
     async sendVideoNote(chatId, audio, params) {
@@ -487,7 +487,7 @@ class MessageManager {
             solution,
             solution_entities: solutionEntities,
         });
-        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.sendMedia({
+        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke(new _2_tl_js_1.functions.messages.sendMedia({
             peer,
             random_id: randomId,
             silent,
@@ -497,8 +497,8 @@ class MessageManager {
             send_as: sendAs,
             media,
             message: "",
-        });
-        const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result).then((v) => v[0]);
+        }), params?.businessConnectionId);
+        const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result, params?.businessConnectionId).then((v) => v[0]);
         return (0, _3_types_js_2.assertMessageType)(message, "poll");
     }
     async editMessageReplyMarkup(chatId, messageId, params) {
@@ -634,6 +634,8 @@ class MessageManager {
             update instanceof _2_tl_js_1.types.UpdateNewChannelMessage ||
             update instanceof _2_tl_js_1.types.UpdateEditMessage ||
             update instanceof _2_tl_js_1.types.UpdateEditChannelMessage ||
+            update instanceof _2_tl_js_1.types.UpdateBotNewBusinessMessage ||
+            update instanceof _2_tl_js_1.types.UpdateBotEditBusinessMessage ||
             update instanceof _2_tl_js_1.types.UpdateDeleteMessages ||
             update instanceof _2_tl_js_1.types.UpdateDeleteChannelMessages ||
             update instanceof _2_tl_js_1.types.UpdateChannelParticipant ||
@@ -649,7 +651,9 @@ class MessageManager {
         if (update instanceof _2_tl_js_1.types.UpdateNewMessage ||
             update instanceof _2_tl_js_1.types.UpdateNewChannelMessage ||
             update instanceof _2_tl_js_1.types.UpdateEditMessage ||
-            update instanceof _2_tl_js_1.types.UpdateEditChannelMessage) {
+            update instanceof _2_tl_js_1.types.UpdateEditChannelMessage ||
+            update instanceof _2_tl_js_1.types.UpdateBotNewBusinessMessage ||
+            update instanceof _2_tl_js_1.types.UpdateBotEditBusinessMessage) {
             if (!(update.message instanceof _2_tl_js_1.types.MessageEmpty)) {
                 const isOutgoing = update.message.out;
                 let shouldIgnore = isOutgoing ? (await __classPrivateFieldGet(this, _MessageManager_c, "f").storage.getAccountType()) == "user" ? false : true : false;
@@ -657,8 +661,9 @@ class MessageManager {
                     shouldIgnore = __classPrivateFieldGet(this, _MessageManager_c, "f").ignoreOutgoing;
                 }
                 if (!shouldIgnore) {
-                    const message = await this.constructMessage(update.message);
-                    if (update instanceof _2_tl_js_1.types.UpdateNewMessage || update instanceof _2_tl_js_1.types.UpdateNewChannelMessage) {
+                    const business = "connection_id" in update ? { connectionId: update.connection_id, replyToMessage: update.reply_to_message } : undefined;
+                    const message = await this.constructMessage(update.message, undefined, business);
+                    if (update instanceof _2_tl_js_1.types.UpdateNewMessage || update instanceof _2_tl_js_1.types.UpdateNewChannelMessage || update instanceof _2_tl_js_1.types.UpdateBotNewBusinessMessage) {
                         return ({ message });
                     }
                     else {
@@ -741,7 +746,7 @@ class MessageManager {
             default:
                 throw new _0_errors_js_1.InputError(`Invalid chat action: ${action}`);
         }
-        await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.setTyping({ peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId), action: action_, top_msg_id: params?.messageThreadId });
+        await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke(new _2_tl_js_1.functions.messages.setTyping({ peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId), action: action_, top_msg_id: params?.messageThreadId }), params?.businessConnectionId);
     }
     async deleteChatPhoto(chatId) {
         const peer = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId);
@@ -1069,7 +1074,7 @@ class MessageManager {
     }
 }
 exports.MessageManager = MessageManager;
-_MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(), _MessageManager_instances = new WeakSet(), _MessageManager_updatesToMessages = async function _MessageManager_updatesToMessages(chatId, updates) {
+_MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(), _MessageManager_instances = new WeakSet(), _MessageManager_updatesToMessages = async function _MessageManager_updatesToMessages(chatId, updates, businessConnectionId) {
     const messages = new Array();
     if (updates instanceof _2_tl_js_1.types.Updates) {
         for (const update of updates.updates) {
@@ -1081,6 +1086,12 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
             }
             else if (update instanceof _2_tl_js_1.types.UpdateNewChannelMessage || update instanceof _2_tl_js_1.types.UpdateEditChannelMessage) {
                 messages.push(await this.constructMessage(update.message));
+            }
+            else if (update instanceof _2_tl_js_1.types.UpdateBotNewBusinessMessage) {
+                messages.push(await this.constructMessage(update.message, false, { connectionId: businessConnectionId ?? update.connection_id, replyToMessage: update.reply_to_message }));
+            }
+            else if (update instanceof _2_tl_js_1.types.UpdateBotEditBusinessMessage) {
+                messages.push(await this.constructMessage(update.message, false, { connectionId: businessConnectionId ?? update.connection_id, replyToMessage: update.reply_to_message }));
             }
         }
     }
@@ -1165,7 +1176,7 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
     const parseResult = caption_ !== undefined ? await this.parseText(caption_, { parseMode: params?.parseMode, entities: params?.captionEntities }) : undefined;
     const caption = parseResult === undefined ? undefined : parseResult[0];
     const captionEntities = parseResult === undefined ? undefined : parseResult[1];
-    const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.sendMedia({
+    const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke(new _2_tl_js_1.functions.messages.sendMedia({
         peer,
         random_id: randomId,
         silent,
@@ -1176,8 +1187,8 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
         media,
         message: caption ?? "",
         entities: captionEntities,
-    });
-    return await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result).then((v) => v[0]);
+    }), params?.businessConnectionId);
+    return await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result, params?.businessConnectionId).then((v) => v[0]);
 }, _MessageManager_sendReaction = async function _MessageManager_sendReaction(chatId, messageId, reactions, params) {
     await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.sendReaction({
         peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),

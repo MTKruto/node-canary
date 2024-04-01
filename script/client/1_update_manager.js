@@ -16,7 +16,6 @@ exports.UpdateManager = void 0;
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _4_constants_js_1 = require("../4_constants.js");
-const _0_utilities_js_1 = require("./0_utilities.js");
 class UpdateManager {
     constructor(c) {
         _UpdateManager_instances.add(this);
@@ -44,6 +43,40 @@ class UpdateManager {
         __classPrivateFieldSet(this, _UpdateManager_L$handleUpdate, L.branch("#handleUpdate"), "f");
         __classPrivateFieldSet(this, _UpdateManager_L$processUpdates, L.branch("#processUpdates"), "f");
         __classPrivateFieldSet(this, _UpdateManager_LfetchState, L.branch("fetchState"), "f");
+    }
+    static isPtsUpdate(v) {
+        return v instanceof _2_tl_js_1.types.UpdateNewMessage ||
+            v instanceof _2_tl_js_1.types.UpdateDeleteMessages ||
+            v instanceof _2_tl_js_1.types.UpdateReadHistoryInbox ||
+            v instanceof _2_tl_js_1.types.UpdateReadHistoryOutbox ||
+            v instanceof _2_tl_js_1.types.UpdatePinnedChannelMessages ||
+            v instanceof _2_tl_js_1.types.UpdatePinnedMessages ||
+            v instanceof _2_tl_js_1.types.UpdateFolderPeers ||
+            v instanceof _2_tl_js_1.types.UpdateChannelWebPage ||
+            v instanceof _2_tl_js_1.types.UpdateEditMessage ||
+            v instanceof _2_tl_js_1.types.UpdateReadMessagesContents ||
+            v instanceof _2_tl_js_1.types.UpdateWebPage;
+    }
+    static isQtsUpdate(v) {
+        return v instanceof _2_tl_js_1.types.UpdateNewEncryptedMessage ||
+            v instanceof _2_tl_js_1.types.UpdateMessagePollVote ||
+            v instanceof _2_tl_js_1.types.UpdateBotStopped ||
+            v instanceof _2_tl_js_1.types.UpdateChatParticipant ||
+            v instanceof _2_tl_js_1.types.UpdateChannelParticipant ||
+            v instanceof _2_tl_js_1.types.UpdateBotChatInviteRequester ||
+            v instanceof _2_tl_js_1.types.UpdateBotChatBoost ||
+            v instanceof _2_tl_js_1.types.UpdateBotMessageReaction ||
+            v instanceof _2_tl_js_1.types.UpdateBotMessageReactions ||
+            v instanceof _2_tl_js_1.types.UpdateBotBusinessConnect ||
+            v instanceof _2_tl_js_1.types.UpdateBotNewBusinessMessage ||
+            v instanceof _2_tl_js_1.types.UpdateBotEditBusinessMessage ||
+            v instanceof _2_tl_js_1.types.UpdateBotDeleteBusinessMessage;
+    }
+    static isChannelPtsUpdate(v) {
+        return v instanceof _2_tl_js_1.types.UpdateNewChannelMessage ||
+            v instanceof _2_tl_js_1.types.UpdateEditChannelMessage ||
+            v instanceof _2_tl_js_1.types.UpdateDeleteChannelMessages ||
+            v instanceof _2_tl_js_1.types.UpdateChannelTooLong;
     }
     async fetchState(source) {
         let state = await __classPrivateFieldGet(this, _UpdateManager_c, "f").api.updates.getState();
@@ -536,13 +569,13 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
                 (0, _1_utilities_js_1.UNREACHABLE)();
             }
         }
-        else if ((0, _0_utilities_js_1.isPtsUpdate)(update)) {
+        else if (_a.isPtsUpdate(update)) {
             __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_processPtsUpdate).call(this, update, checkGap);
         }
-        else if ((0, _0_utilities_js_1.isChannelPtsUpdate)(update)) {
+        else if (_a.isChannelPtsUpdate(update)) {
             __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_processChannelPtsUpdate).call(this, update, checkGap);
         }
-        else if ((0, _0_utilities_js_1.isQtsUpdate)(update)) {
+        else if (_a.isQtsUpdate(update)) {
             __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_processQtsUpdate).call(this, update, checkGap);
         }
         else {

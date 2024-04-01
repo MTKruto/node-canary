@@ -23,51 +23,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getChatListId = exports.getUsername = exports.isHttpUrl = exports.getFileContents = exports.isQtsUpdate = exports.isChannelPtsUpdate = exports.isPtsUpdate = exports.resolve = void 0;
+exports.getChatListId = exports.getUsername = exports.isHttpUrl = exports.getFileContents = exports.resolve = void 0;
 const dntShim = __importStar(require("../_dnt.shims.js"));
 const _0_deps_js_1 = require("../0_deps.js");
 const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
-const _2_tl_js_1 = require("../2_tl.js");
 const resolve = () => Promise.resolve();
 exports.resolve = resolve;
-function isPtsUpdate(v) {
-    return v instanceof _2_tl_js_1.types.UpdateNewMessage ||
-        v instanceof _2_tl_js_1.types.UpdateDeleteMessages ||
-        v instanceof _2_tl_js_1.types.UpdateReadHistoryInbox ||
-        v instanceof _2_tl_js_1.types.UpdateReadHistoryOutbox ||
-        v instanceof _2_tl_js_1.types.UpdatePinnedChannelMessages ||
-        v instanceof _2_tl_js_1.types.UpdatePinnedMessages ||
-        v instanceof _2_tl_js_1.types.UpdateFolderPeers ||
-        v instanceof _2_tl_js_1.types.UpdateChannelWebPage ||
-        v instanceof _2_tl_js_1.types.UpdateEditMessage ||
-        v instanceof _2_tl_js_1.types.UpdateReadMessagesContents ||
-        v instanceof _2_tl_js_1.types.UpdateWebPage;
-}
-exports.isPtsUpdate = isPtsUpdate;
-function isChannelPtsUpdate(v) {
-    return v instanceof _2_tl_js_1.types.UpdateNewChannelMessage ||
-        v instanceof _2_tl_js_1.types.UpdateEditChannelMessage ||
-        v instanceof _2_tl_js_1.types.UpdateDeleteChannelMessages ||
-        v instanceof _2_tl_js_1.types.UpdateChannelTooLong;
-}
-exports.isChannelPtsUpdate = isChannelPtsUpdate;
-function isQtsUpdate(v) {
-    return v instanceof _2_tl_js_1.types.UpdateNewEncryptedMessage ||
-        v instanceof _2_tl_js_1.types.UpdateMessagePollVote ||
-        v instanceof _2_tl_js_1.types.UpdateBotStopped ||
-        v instanceof _2_tl_js_1.types.UpdateChatParticipant ||
-        v instanceof _2_tl_js_1.types.UpdateChannelParticipant ||
-        v instanceof _2_tl_js_1.types.UpdateBotChatInviteRequester ||
-        v instanceof _2_tl_js_1.types.UpdateBotChatBoost ||
-        v instanceof _2_tl_js_1.types.UpdateBotMessageReaction ||
-        v instanceof _2_tl_js_1.types.UpdateBotMessageReactions ||
-        v instanceof _2_tl_js_1.types.UpdateBotBusinessConnect ||
-        v instanceof _2_tl_js_1.types.UpdateBotNewBusinessMessage ||
-        v instanceof _2_tl_js_1.types.UpdateBotEditBusinessMessage ||
-        v instanceof _2_tl_js_1.types.UpdateBotDeleteBusinessMessage;
-}
-exports.isQtsUpdate = isQtsUpdate;
 async function getFileContents(source, fileName = "") {
     fileName = fileName.trim() || "file";
     let contents;

@@ -13,7 +13,6 @@ var _UpdateManager_instances, _a, _UpdateManager_c, _UpdateManager_updateState, 
 import { getLogger, Queue, UNREACHABLE, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { as, functions, inputPeerToPeer, peerToChatId, types } from "../2_tl.js";
 import { CHANNEL_DIFFERENCE_LIMIT_BOT, CHANNEL_DIFFERENCE_LIMIT_USER } from "../4_constants.js";
-import { isChannelPtsUpdate, isPtsUpdate, isQtsUpdate } from "./0_utilities.js";
 export class UpdateManager {
     constructor(c) {
         _UpdateManager_instances.add(this);
@@ -41,6 +40,40 @@ export class UpdateManager {
         __classPrivateFieldSet(this, _UpdateManager_L$handleUpdate, L.branch("#handleUpdate"), "f");
         __classPrivateFieldSet(this, _UpdateManager_L$processUpdates, L.branch("#processUpdates"), "f");
         __classPrivateFieldSet(this, _UpdateManager_LfetchState, L.branch("fetchState"), "f");
+    }
+    static isPtsUpdate(v) {
+        return v instanceof types.UpdateNewMessage ||
+            v instanceof types.UpdateDeleteMessages ||
+            v instanceof types.UpdateReadHistoryInbox ||
+            v instanceof types.UpdateReadHistoryOutbox ||
+            v instanceof types.UpdatePinnedChannelMessages ||
+            v instanceof types.UpdatePinnedMessages ||
+            v instanceof types.UpdateFolderPeers ||
+            v instanceof types.UpdateChannelWebPage ||
+            v instanceof types.UpdateEditMessage ||
+            v instanceof types.UpdateReadMessagesContents ||
+            v instanceof types.UpdateWebPage;
+    }
+    static isQtsUpdate(v) {
+        return v instanceof types.UpdateNewEncryptedMessage ||
+            v instanceof types.UpdateMessagePollVote ||
+            v instanceof types.UpdateBotStopped ||
+            v instanceof types.UpdateChatParticipant ||
+            v instanceof types.UpdateChannelParticipant ||
+            v instanceof types.UpdateBotChatInviteRequester ||
+            v instanceof types.UpdateBotChatBoost ||
+            v instanceof types.UpdateBotMessageReaction ||
+            v instanceof types.UpdateBotMessageReactions ||
+            v instanceof types.UpdateBotBusinessConnect ||
+            v instanceof types.UpdateBotNewBusinessMessage ||
+            v instanceof types.UpdateBotEditBusinessMessage ||
+            v instanceof types.UpdateBotDeleteBusinessMessage;
+    }
+    static isChannelPtsUpdate(v) {
+        return v instanceof types.UpdateNewChannelMessage ||
+            v instanceof types.UpdateEditChannelMessage ||
+            v instanceof types.UpdateDeleteChannelMessages ||
+            v instanceof types.UpdateChannelTooLong;
     }
     async fetchState(source) {
         let state = await __classPrivateFieldGet(this, _UpdateManager_c, "f").api.updates.getState();
@@ -532,13 +565,13 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
                 UNREACHABLE();
             }
         }
-        else if (isPtsUpdate(update)) {
+        else if (_a.isPtsUpdate(update)) {
             __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_processPtsUpdate).call(this, update, checkGap);
         }
-        else if (isChannelPtsUpdate(update)) {
+        else if (_a.isChannelPtsUpdate(update)) {
             __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_processChannelPtsUpdate).call(this, update, checkGap);
         }
-        else if (isQtsUpdate(update)) {
+        else if (_a.isQtsUpdate(update)) {
             __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_processQtsUpdate).call(this, update, checkGap);
         }
         else {

@@ -1,12 +1,5 @@
-import { enums, types } from "../2_tl.js";
 import { FileSource } from "../3_types.js";
 export declare const resolve: () => Promise<void>;
-export type PtsUpdate = types.UpdateNewMessage | types.UpdateDeleteMessages | types.UpdateReadHistoryInbox | types.UpdateReadHistoryOutbox | types.UpdatePinnedChannelMessages | types.UpdatePinnedMessages | types.UpdateFolderPeers | types.UpdateChannelWebPage | types.UpdateEditMessage | types.UpdateReadMessagesContents | types.UpdateWebPage;
-export declare function isPtsUpdate(v: enums.Update): v is PtsUpdate;
-export type ChannelPtsUpdate = types.UpdateNewChannelMessage | types.UpdateEditChannelMessage | types.UpdateDeleteChannelMessages | types.UpdateChannelTooLong;
-export declare function isChannelPtsUpdate(v: enums.Update | enums.Updates): v is ChannelPtsUpdate;
-export type QtsUpdate = types.UpdateNewEncryptedMessage | types.UpdateMessagePollVote | types.UpdateBotStopped | types.UpdateChatParticipant | types.UpdateChannelParticipant | types.UpdateBotChatInviteRequester | types.UpdateBotChatBoost | types.UpdateBotMessageReaction | types.UpdateBotMessageReactions | types.UpdateBotBusinessConnect | types.UpdateBotNewBusinessMessage | types.UpdateBotEditBusinessMessage | types.UpdateBotDeleteBusinessMessage;
-export declare function isQtsUpdate(v: enums.Update): v is QtsUpdate;
 export declare function getFileContents(source: FileSource, fileName?: string): Promise<readonly [Uint8Array, string]>;
 export declare function isHttpUrl(string: string): boolean;
 export declare function getUsername(string: string): string;

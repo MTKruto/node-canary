@@ -2,42 +2,7 @@ import * as dntShim from "../_dnt.shims.js";
 import { path } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { UNREACHABLE } from "../1_utilities.js";
-import { types } from "../2_tl.js";
 export const resolve = () => Promise.resolve();
-export function isPtsUpdate(v) {
-    return v instanceof types.UpdateNewMessage ||
-        v instanceof types.UpdateDeleteMessages ||
-        v instanceof types.UpdateReadHistoryInbox ||
-        v instanceof types.UpdateReadHistoryOutbox ||
-        v instanceof types.UpdatePinnedChannelMessages ||
-        v instanceof types.UpdatePinnedMessages ||
-        v instanceof types.UpdateFolderPeers ||
-        v instanceof types.UpdateChannelWebPage ||
-        v instanceof types.UpdateEditMessage ||
-        v instanceof types.UpdateReadMessagesContents ||
-        v instanceof types.UpdateWebPage;
-}
-export function isChannelPtsUpdate(v) {
-    return v instanceof types.UpdateNewChannelMessage ||
-        v instanceof types.UpdateEditChannelMessage ||
-        v instanceof types.UpdateDeleteChannelMessages ||
-        v instanceof types.UpdateChannelTooLong;
-}
-export function isQtsUpdate(v) {
-    return v instanceof types.UpdateNewEncryptedMessage ||
-        v instanceof types.UpdateMessagePollVote ||
-        v instanceof types.UpdateBotStopped ||
-        v instanceof types.UpdateChatParticipant ||
-        v instanceof types.UpdateChannelParticipant ||
-        v instanceof types.UpdateBotChatInviteRequester ||
-        v instanceof types.UpdateBotChatBoost ||
-        v instanceof types.UpdateBotMessageReaction ||
-        v instanceof types.UpdateBotMessageReactions ||
-        v instanceof types.UpdateBotBusinessConnect ||
-        v instanceof types.UpdateBotNewBusinessMessage ||
-        v instanceof types.UpdateBotEditBusinessMessage ||
-        v instanceof types.UpdateBotDeleteBusinessMessage;
-}
 export async function getFileContents(source, fileName = "") {
     fileName = fileName.trim() || "file";
     let contents;

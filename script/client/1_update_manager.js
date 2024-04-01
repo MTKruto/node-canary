@@ -10,7 +10,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _UpdateManager_instances, _a, _UpdateManager_c, _UpdateManager_updateState, _UpdateManager_updateHandler, _UpdateManager_LrecoverUpdateGap, _UpdateManager_LrecoverChannelUpdateGap, _UpdateManager_L$handleUpdate, _UpdateManager_L$processUpdates, _UpdateManager_LfetchState, _UpdateManager_defaultDropPendingUpdates, _UpdateManager_mustDropPendingUpdates, _UpdateManager_state, _UpdateManager_getState, _UpdateManager_setState, _UpdateManager_handleUpdateQueues, _UpdateManager_nonFirst, _UpdateManager_getChannelPtsWithDropPendingUpdatesCheck, _UpdateManager_checkGap, _UpdateManager_checkChannelGap, _UpdateManager_channelUpdateQueues, _UpdateManager_processChannelPtsUpdateInner, _UpdateManager_queueUpdate, _UpdateManager_processChannelPtsUpdate, _UpdateManager_processPtsUpdateInner, _UpdateManager_ptsUpdateQueue, _UpdateManager_processPtsUpdate, _UpdateManager_processUpdatesQueue, _UpdateManager_processUpdates, _UpdateManager_setUpdateStateDate, _UpdateManager_setUpdatePts, _UpdateManager_getLocalState, _UpdateManager_recoverChannelUpdateGap, _UpdateManager_handleUpdatesSet, _UpdateManager_handleStoredUpdates, _UpdateManager_handleUpdate;
+var _UpdateManager_instances, _a, _UpdateManager_c, _UpdateManager_updateState, _UpdateManager_updateHandler, _UpdateManager_LrecoverUpdateGap, _UpdateManager_LrecoverChannelUpdateGap, _UpdateManager_L$handleUpdate, _UpdateManager_L$processUpdates, _UpdateManager_LfetchState, _UpdateManager_defaultDropPendingUpdates, _UpdateManager_mustDropPendingUpdates, _UpdateManager_state, _UpdateManager_getState, _UpdateManager_setState, _UpdateManager_handleUpdateQueues, _UpdateManager_nonFirst, _UpdateManager_getChannelPtsWithDropPendingUpdatesCheck, _UpdateManager_checkGap, _UpdateManager_checkGapQts, _UpdateManager_checkChannelGap, _UpdateManager_channelUpdateQueues, _UpdateManager_processChannelPtsUpdateInner, _UpdateManager_queueUpdate, _UpdateManager_processChannelPtsUpdate, _UpdateManager_processPtsUpdateInner, _UpdateManager_ptsUpdateQueue, _UpdateManager_processPtsUpdate, _UpdateManager_processQtsUpdateInner, _UpdateManager_qtsUpdateQueue, _UpdateManager_processQtsUpdate, _UpdateManager_processUpdatesQueue, _UpdateManager_processUpdates, _UpdateManager_setUpdateStateDate, _UpdateManager_setUpdatePts, _UpdateManager_setUpdateQts, _UpdateManager_getLocalState, _UpdateManager_recoverChannelUpdateGap, _UpdateManager_handleUpdatesSet, _UpdateManager_handleStoredUpdates, _UpdateManager_handleUpdate;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateManager = void 0;
 const _1_utilities_js_1 = require("../1_utilities.js");
@@ -34,6 +34,7 @@ class UpdateManager {
         _UpdateManager_nonFirst.set(this, new Set());
         _UpdateManager_channelUpdateQueues.set(this, new Map());
         _UpdateManager_ptsUpdateQueue.set(this, new _1_utilities_js_1.Queue("ptsUpdate"));
+        _UpdateManager_qtsUpdateQueue.set(this, new _1_utilities_js_1.Queue("qtsUpdate"));
         _UpdateManager_processUpdatesQueue.set(this, new _1_utilities_js_1.Queue("UpdateManager/processUpdates"));
         _UpdateManager_handleUpdatesSet.set(this, new Set());
         __classPrivateFieldSet(this, _UpdateManager_c, c, "f");
@@ -45,7 +46,14 @@ class UpdateManager {
         __classPrivateFieldSet(this, _UpdateManager_LfetchState, L.branch("fetchState"), "f");
     }
     async fetchState(source) {
-        const state = await __classPrivateFieldGet(this, _UpdateManager_c, "f").api.updates.getState();
+        let state = await __classPrivateFieldGet(this, _UpdateManager_c, "f").api.updates.getState();
+        const difference = await __classPrivateFieldGet(this, _UpdateManager_c, "f").api.updates.getDifference(state);
+        if (difference instanceof _2_tl_js_1.types.updates.Difference) {
+            state = difference.state;
+        }
+        else if (difference instanceof _2_tl_js_1.types.updates.DifferenceSlice) {
+            state = difference.intermediate_state;
+        }
         __classPrivateFieldSet(this, _UpdateManager_updateState, state, "f");
         __classPrivateFieldGet(this, _UpdateManager_LfetchState, "f").debug(`state fetched [${source}]`);
         if (await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_mustDropPendingUpdates).call(this)) {
@@ -241,7 +249,7 @@ class UpdateManager {
     }
 }
 exports.UpdateManager = UpdateManager;
-_a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState = new WeakMap(), _UpdateManager_updateHandler = new WeakMap(), _UpdateManager_LrecoverUpdateGap = new WeakMap(), _UpdateManager_LrecoverChannelUpdateGap = new WeakMap(), _UpdateManager_L$handleUpdate = new WeakMap(), _UpdateManager_L$processUpdates = new WeakMap(), _UpdateManager_LfetchState = new WeakMap(), _UpdateManager_defaultDropPendingUpdates = new WeakMap(), _UpdateManager_state = new WeakMap(), _UpdateManager_handleUpdateQueues = new WeakMap(), _UpdateManager_nonFirst = new WeakMap(), _UpdateManager_channelUpdateQueues = new WeakMap(), _UpdateManager_ptsUpdateQueue = new WeakMap(), _UpdateManager_processUpdatesQueue = new WeakMap(), _UpdateManager_handleUpdatesSet = new WeakMap(), _UpdateManager_instances = new WeakSet(), _UpdateManager_mustDropPendingUpdates = async function _UpdateManager_mustDropPendingUpdates() {
+_a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState = new WeakMap(), _UpdateManager_updateHandler = new WeakMap(), _UpdateManager_LrecoverUpdateGap = new WeakMap(), _UpdateManager_LrecoverChannelUpdateGap = new WeakMap(), _UpdateManager_L$handleUpdate = new WeakMap(), _UpdateManager_L$processUpdates = new WeakMap(), _UpdateManager_LfetchState = new WeakMap(), _UpdateManager_defaultDropPendingUpdates = new WeakMap(), _UpdateManager_state = new WeakMap(), _UpdateManager_handleUpdateQueues = new WeakMap(), _UpdateManager_nonFirst = new WeakMap(), _UpdateManager_channelUpdateQueues = new WeakMap(), _UpdateManager_ptsUpdateQueue = new WeakMap(), _UpdateManager_qtsUpdateQueue = new WeakMap(), _UpdateManager_processUpdatesQueue = new WeakMap(), _UpdateManager_handleUpdatesSet = new WeakMap(), _UpdateManager_instances = new WeakSet(), _UpdateManager_mustDropPendingUpdates = async function _UpdateManager_mustDropPendingUpdates() {
     if (typeof __classPrivateFieldGet(this, _UpdateManager_c, "f").dropPendingUpdates === "boolean") {
         return __classPrivateFieldGet(this, _UpdateManager_c, "f").dropPendingUpdates;
     }
@@ -278,7 +286,12 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
 }, _UpdateManager_checkGap = async function _UpdateManager_checkGap(pts, ptsCount) {
     const localState = await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_getLocalState).call(this);
     if (localState.pts + ptsCount < pts) {
-        await this.recoverUpdateGap("processUpdates");
+        await this.recoverUpdateGap("processUpdates[pts]");
+    }
+}, _UpdateManager_checkGapQts = async function _UpdateManager_checkGapQts(qts) {
+    const localState = await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_getLocalState).call(this);
+    if (localState.qts + _a.QTS_COUNT < qts) {
+        await this.recoverUpdateGap("processUpdates[qts]");
     }
 }, _UpdateManager_checkChannelGap = async function _UpdateManager_checkChannelGap(channelId, pts, ptsCount) {
     let localPts = await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_getChannelPtsWithDropPendingUpdatesCheck).call(this, channelId);
@@ -350,10 +363,31 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
     if (update.pts != 0) {
         await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_setUpdatePts).call(this, update.pts);
     }
-    __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_queueUpdate).call(this, update, 0n, true);
+    __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_queueUpdate).call(this, update, 1n, false);
 }, _UpdateManager_processPtsUpdate = function _UpdateManager_processPtsUpdate(update, checkGap) {
     __classPrivateFieldGet(this, _UpdateManager_ptsUpdateQueue, "f").add(async () => {
         await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_processPtsUpdateInner).call(this, update, checkGap);
+    });
+}, _UpdateManager_processQtsUpdateInner = async function _UpdateManager_processQtsUpdateInner(update, checkGap) {
+    const localState = await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_getLocalState).call(this);
+    if (update.qts != 0) {
+        if (checkGap) {
+            await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_checkGapQts).call(this, update.qts);
+        }
+        if (localState.qts + _a.QTS_COUNT > update.qts) {
+            return;
+        }
+    }
+    if (__classPrivateFieldGet(this, _UpdateManager_c, "f").guaranteeUpdateDelivery) {
+        await __classPrivateFieldGet(this, _UpdateManager_c, "f").storage.setUpdate(_a.MAIN_BOX_ID, update);
+    }
+    if (update.qts != 0) {
+        await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_setUpdateQts).call(this, update.qts);
+    }
+    __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_queueUpdate).call(this, update, 0n, true);
+}, _UpdateManager_processQtsUpdate = function _UpdateManager_processQtsUpdate(update, checkGap) {
+    __classPrivateFieldGet(this, _UpdateManager_qtsUpdateQueue, "f").add(async () => {
+        await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_processQtsUpdateInner).call(this, update, checkGap);
     });
 }, _UpdateManager_processUpdates = async function _UpdateManager_processUpdates(updates_, checkGap, call = null) {
     /// First, individual updates (Update[1]) are extracted from Updates.[2]
@@ -508,6 +542,9 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
         else if ((0, _0_utilities_js_1.isChannelPtsUpdate)(update)) {
             __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_processChannelPtsUpdate).call(this, update, checkGap);
         }
+        else if ((0, _0_utilities_js_1.isQtsUpdate)(update)) {
+            __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_processQtsUpdate).call(this, update, checkGap);
+        }
         else {
             __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_queueUpdate).call(this, update, 0n, false);
         }
@@ -519,6 +556,10 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
 }, _UpdateManager_setUpdatePts = async function _UpdateManager_setUpdatePts(pts) {
     const localState = await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_getLocalState).call(this);
     localState.pts = pts;
+    await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_setState).call(this, localState);
+}, _UpdateManager_setUpdateQts = async function _UpdateManager_setUpdateQts(qts) {
+    const localState = await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_getLocalState).call(this);
+    localState.qts = qts;
     await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_setState).call(this, localState);
 }, _UpdateManager_getLocalState = async function _UpdateManager_getLocalState() {
     let localState = await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_getState).call(this);
@@ -627,6 +668,12 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
         return () => Promise.resolve();
     }
 };
+Object.defineProperty(UpdateManager, "QTS_COUNT", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: 1
+});
 Object.defineProperty(UpdateManager, "MAIN_BOX_ID", {
     enumerable: true,
     configurable: true,

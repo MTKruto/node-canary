@@ -4,6 +4,7 @@ import { C } from "./0_types.js";
 type UpdateHandler = (update: enums.Update) => Promise<(() => Promise<unknown>)>;
 export declare class UpdateManager {
     #private;
+    static readonly QTS_COUNT = 1;
     static readonly MAIN_BOX_ID = 0n;
     constructor(c: C);
     fetchState(source: string): Promise<void>;

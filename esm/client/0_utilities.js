@@ -23,6 +23,21 @@ export function isChannelPtsUpdate(v) {
         v instanceof types.UpdateDeleteChannelMessages ||
         v instanceof types.UpdateChannelTooLong;
 }
+export function isQtsUpdate(v) {
+    return v instanceof types.UpdateNewEncryptedMessage ||
+        v instanceof types.UpdateMessagePollVote ||
+        v instanceof types.UpdateBotStopped ||
+        v instanceof types.UpdateChatParticipant ||
+        v instanceof types.UpdateChannelParticipant ||
+        v instanceof types.UpdateBotChatInviteRequester ||
+        v instanceof types.UpdateBotChatBoost ||
+        v instanceof types.UpdateBotMessageReaction ||
+        v instanceof types.UpdateBotMessageReactions ||
+        v instanceof types.UpdateBotBusinessConnect ||
+        v instanceof types.UpdateBotNewBusinessMessage ||
+        v instanceof types.UpdateBotEditBusinessMessage ||
+        v instanceof types.UpdateBotDeleteBusinessMessage;
+}
 export async function getFileContents(source, fileName = "") {
     fileName = fileName.trim() || "file";
     let contents;

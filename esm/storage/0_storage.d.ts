@@ -39,6 +39,8 @@ export declare const K: {
         filePart: (fileId: bigint, n: number) => StorageKeyPart[];
         customEmojiDocuments: () => StorageKeyPart[];
         customEmojiDocument: (id: bigint) => StorageKeyPart[];
+        businessConnections: () => StorageKeyPart[];
+        businessConnection: (id: string) => StorageKeyPart[];
     };
     messages: {
         P: (string: string) => string;
@@ -126,6 +128,8 @@ export declare abstract class Storage {
     setFilePartCount(id: bigint, partCount: number, chunkSize: number): Promise<void>;
     setCustomEmojiDocument(id: bigint, document: types.Document): Promise<void>;
     getCustomEmojiDocument(id: bigint): Promise<[types.Document, Date] | null>;
+    setBusinessConnection(id: string, connection: types.BotBusinessConnection): Promise<void>;
+    getBusinessConnection(id: string): Promise<types.BotBusinessConnection | null>;
     setUpdate(boxId: bigint, update: enums.Update): Promise<void>;
     deleteUpdates(): Promise<void>;
     getFirstUpdate(boxId: bigint): Promise<[readonly StorageKeyPart[], enums.Update] | null>;
@@ -133,6 +137,7 @@ export declare abstract class Storage {
     assertBot(source: string): Promise<void>;
     deleteFiles(): Promise<void>;
     deleteCustomEmojiDocuments(): Promise<void>;
+    deleteBusinessConnections(): Promise<void>;
     deleteStickerSetNames(): Promise<void>;
     deletePeers(): Promise<void>;
     deleteUsernames(): Promise<void>;

@@ -54,6 +54,8 @@ exports.K = {
         filePart: (fileId, n) => [...exports.K.cache.fileParts(), fileId, n],
         customEmojiDocuments: () => [exports.K.cache.P("customEmojiDocuments")],
         customEmojiDocument: (id) => [...exports.K.cache.customEmojiDocuments(), id],
+        businessConnections: () => [exports.K.cache.P("businessConnections")],
+        businessConnection: (id) => [...exports.K.cache.businessConnections(), id],
     },
     messages: {
         P: (string) => `messages.${string}`,
@@ -370,6 +372,18 @@ class Storage {
             return null;
         }
     }
+    async setBusinessConnection(id, connection) {
+        await this.set(exports.K.cache.businessConnection(id), this.isMemoryStorage ? connection : (0, _1_utilities_js_1.rleEncode)(connection[_2_tl_js_1.serialize]()));
+    }
+    async getBusinessConnection(id) {
+        const v = await this.get(exports.K.cache.businessConnection(id));
+        if (v != null) {
+            return await this.getTlObject(v);
+        }
+        else {
+            return null;
+        }
+    }
     async setUpdate(boxId, update) {
         await this.setTlObject(exports.K.updates.update(boxId, __classPrivateFieldGet(this, _Storage_instances, "m", _Storage_getUpdateId).call(this, update)), update);
     }
@@ -412,6 +426,11 @@ class Storage {
             await this.set(key, null);
         }
     }
+    async deleteBusinessConnections() {
+        for await (const [key] of await this.getMany({ prefix: exports.K.cache.businessConnections() })) {
+            await this.set(key, null);
+        }
+    }
     async deleteStickerSetNames() {
         for await (const [key] of await this.getMany({ prefix: exports.K.cache.stickerSetNames() })) {
             await this.set(key, null);
@@ -435,6 +454,7 @@ class Storage {
             this.deleteUpdates(),
             this.deleteFiles(),
             this.deleteCustomEmojiDocuments(),
+            this.deleteBusinessConnections(),
             this.deleteStickerSetNames(),
             this.deletePeers(),
             this.deleteUsernames(),

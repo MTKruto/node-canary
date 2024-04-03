@@ -54,6 +54,7 @@ export * from "./types/1_story_reaction.js";
 export * from "./types/1_user.js";
 export * from "./types/1_video_note.js";
 export * from "./types/1_video.js";
+export * from "./types/2_business_connection.js";
 export * from "./types/2_chat_member.js";
 export * from "./types/2_chosen_inline_result.js";
 export * from "./types/2_game.js";

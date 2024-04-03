@@ -51,6 +51,8 @@ export const K = {
         filePart: (fileId, n) => [...K.cache.fileParts(), fileId, n],
         customEmojiDocuments: () => [K.cache.P("customEmojiDocuments")],
         customEmojiDocument: (id) => [...K.cache.customEmojiDocuments(), id],
+        businessConnections: () => [K.cache.P("businessConnections")],
+        businessConnection: (id) => [...K.cache.businessConnections(), id],
     },
     messages: {
         P: (string) => `messages.${string}`,
@@ -367,6 +369,18 @@ export class Storage {
             return null;
         }
     }
+    async setBusinessConnection(id, connection) {
+        await this.set(K.cache.businessConnection(id), this.isMemoryStorage ? connection : rleEncode(connection[serialize]()));
+    }
+    async getBusinessConnection(id) {
+        const v = await this.get(K.cache.businessConnection(id));
+        if (v != null) {
+            return await this.getTlObject(v);
+        }
+        else {
+            return null;
+        }
+    }
     async setUpdate(boxId, update) {
         await this.setTlObject(K.updates.update(boxId, __classPrivateFieldGet(this, _Storage_instances, "m", _Storage_getUpdateId).call(this, update)), update);
     }
@@ -409,6 +423,11 @@ export class Storage {
             await this.set(key, null);
         }
     }
+    async deleteBusinessConnections() {
+        for await (const [key] of await this.getMany({ prefix: K.cache.businessConnections() })) {
+            await this.set(key, null);
+        }
+    }
     async deleteStickerSetNames() {
         for await (const [key] of await this.getMany({ prefix: K.cache.stickerSetNames() })) {
             await this.set(key, null);
@@ -432,6 +451,7 @@ export class Storage {
             this.deleteUpdates(),
             this.deleteFiles(),
             this.deleteCustomEmojiDocuments(),
+            this.deleteBusinessConnections(),
             this.deleteStickerSetNames(),
             this.deletePeers(),
             this.deleteUsernames(),

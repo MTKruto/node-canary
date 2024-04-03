@@ -2,7 +2,7 @@ import { MaybePromise } from "../1_utilities.js";
 import { enums, functions, types } from "../2_tl.js";
 import { Storage } from "../3_storage.js";
 import { DC } from "../3_transport.js";
-import { BotCommand, Chat, ChatAction, ChatMember, ChatP, FileSource, ID, InactiveChat, InlineQueryResult, InputStoryContent, InviteLink, Message, MessageAnimation, MessageAudio, MessageContact, MessageDice, MessageDocument, MessageLocation, MessagePhoto, MessagePoll, MessageSticker, MessageText, MessageVenue, MessageVideo, MessageVideoNote, MessageVoice, NetworkStatistics, ParseMode, Poll, Reaction, Sticker, Story, Update, User } from "../3_types.js";
+import { BotCommand, BusinessConnection, Chat, ChatAction, ChatMember, ChatP, FileSource, ID, InactiveChat, InlineQueryResult, InputStoryContent, InviteLink, Message, MessageAnimation, MessageAudio, MessageContact, MessageDice, MessageDocument, MessageLocation, MessagePhoto, MessagePoll, MessageSticker, MessageText, MessageVenue, MessageVideo, MessageVideoNote, MessageVoice, NetworkStatistics, ParseMode, Poll, Reaction, Sticker, Story, Update, User } from "../3_types.js";
 import { Migrate } from "../4_errors.js";
 import { AddReactionParams, AnswerCallbackQueryParams, AnswerInlineQueryParams, AuthorizeUserParams, BanChatMemberParams, CreateInviteLinkParams, CreateStoryParams, DeleteMessageParams, DeleteMessagesParams, DownloadParams, EditMessageLiveLocationParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetChatsParams, GetCreatedInviteLinksParams, GetHistoryParams, GetMyCommandsParams, PinMessageParams, ReplyParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetMyCommandsParams, SetReactionsParams, StopPollParams, UploadParams } from "./0_params.js";
 import { Api } from "./0_types.js";
@@ -1033,5 +1033,12 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param chatId The identifier of the chat. Must be a supergroup.
      */
     deleteChatStickerSet(chatId: ID): Promise<void>;
+    /**
+     * Get a business connection.
+     *
+     * @method ac
+     * @param id The identifier of the business connection.
+     */
+    getBusinessConnection(id: string): Promise<BusinessConnection>;
 }
 export {};

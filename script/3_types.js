@@ -70,6 +70,7 @@ __exportStar(require("./types/1_story_reaction.js"), exports);
 __exportStar(require("./types/1_user.js"), exports);
 __exportStar(require("./types/1_video_note.js"), exports);
 __exportStar(require("./types/1_video.js"), exports);
+__exportStar(require("./types/2_business_connection.js"), exports);
 __exportStar(require("./types/2_chat_member.js"), exports);
 __exportStar(require("./types/2_chosen_inline_result.js"), exports);
 __exportStar(require("./types/2_game.js"), exports);

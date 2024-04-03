@@ -10,7 +10,6 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _StorageMemory_instances, _StorageMemory_id, _StorageMemory_authString, _StorageMemory_fixKey, _StorageMemory_getEntries;
-import { CacheMap } from "../1_utilities.js";
 import { Storage } from "./0_storage.js";
 import { fromString, isInRange, toString } from "./0_utilities.js";
 export class StorageMemory extends Storage {
@@ -22,12 +21,6 @@ export class StorageMemory extends Storage {
             configurable: true,
             writable: true,
             value: new Map()
-        });
-        Object.defineProperty(this, "messageMap", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: new CacheMap(30000)
         });
         _StorageMemory_id.set(this, null);
         _StorageMemory_authString.set(this, void 0);
@@ -41,17 +34,6 @@ export class StorageMemory extends Storage {
             await this.importAuthString(__classPrivateFieldGet(this, _StorageMemory_authString, "f"));
         }
     }
-    getMap(key) {
-        if (key[0] == "messages.messages") {
-            return this.messageMap;
-        }
-        else {
-            return this.map;
-        }
-    }
-    getMaps() {
-        return [this.map, this.messageMap];
-    }
     branch(id) {
         const storage = new StorageMemory();
         __classPrivateFieldSet(storage, _StorageMemory_id, id, "f");
@@ -62,7 +44,7 @@ export class StorageMemory extends Storage {
     }
     get(key) {
         key = __classPrivateFieldGet(this, _StorageMemory_instances, "m", _StorageMemory_fixKey).call(this, key);
-        return this.getMap(key).get(toString(key)) ?? null;
+        return this.map.get(toString(key)) ?? null;
     }
     *getMany(filter, params) {
         let entries = __classPrivateFieldGet(this, _StorageMemory_instances, "m", _StorageMemory_getEntries).call(this);
@@ -95,10 +77,10 @@ export class StorageMemory extends Storage {
         key_ = __classPrivateFieldGet(this, _StorageMemory_instances, "m", _StorageMemory_fixKey).call(this, key_);
         const key = toString(key_);
         if (value != null) {
-            this.getMap(key_).set(key, value);
+            this.map.set(key, value);
         }
         else {
-            this.getMap(key_).delete(key);
+            this.map.delete(key);
         }
     }
     incr(key, by) {
@@ -114,13 +96,11 @@ _StorageMemory_id = new WeakMap(), _StorageMemory_authString = new WeakMap(), _S
     }
 }, _StorageMemory_getEntries = function _StorageMemory_getEntries() {
     const entries = new Array();
-    for (const map of this.getMaps()) {
-        for (const entry of map.entries()) {
-            if (__classPrivateFieldGet(this, _StorageMemory_id, "f") !== null && !entry[0].startsWith("__S" + __classPrivateFieldGet(this, _StorageMemory_id, "f"))) {
-                continue;
-            }
-            entries.push(entry);
+    for (const entry of this.map.entries()) {
+        if (__classPrivateFieldGet(this, _StorageMemory_id, "f") !== null && !entry[0].startsWith("__S" + __classPrivateFieldGet(this, _StorageMemory_id, "f"))) {
+            continue;
         }
+        entries.push(entry);
     }
     return entries;
 };

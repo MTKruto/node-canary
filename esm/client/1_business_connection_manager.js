@@ -30,5 +30,11 @@ export class BusinessConnectionManager {
             return await constructBusinessConnection(connection_, __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").getEntity);
         }
     }
+    static canHandleUpdate(update) {
+        return update instanceof types.UpdateBotBusinessConnect;
+    }
+    async handleUpdate(update) {
+        await __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").messageStorage.setBusinessConnection(update.connection.connection_id, update.connection);
+    }
 }
 _BusinessConnectionManager_c = new WeakMap();

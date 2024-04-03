@@ -370,7 +370,7 @@ export class Storage {
         }
     }
     async setBusinessConnection(id, connection) {
-        await this.set(K.cache.businessConnection(id), this.isMemoryStorage ? connection : rleEncode(connection[serialize]()));
+        await this.set(K.cache.businessConnection(id), connection == null ? null : this.isMemoryStorage ? connection : rleEncode(connection[serialize]()));
     }
     async getBusinessConnection(id) {
         const v = await this.get(K.cache.businessConnection(id));

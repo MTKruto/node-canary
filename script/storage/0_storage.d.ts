@@ -128,7 +128,7 @@ export declare abstract class Storage {
     setFilePartCount(id: bigint, partCount: number, chunkSize: number): Promise<void>;
     setCustomEmojiDocument(id: bigint, document: types.Document): Promise<void>;
     getCustomEmojiDocument(id: bigint): Promise<[types.Document, Date] | null>;
-    setBusinessConnection(id: string, connection: types.BotBusinessConnection): Promise<void>;
+    setBusinessConnection(id: string, connection: types.BotBusinessConnection | null): Promise<void>;
     getBusinessConnection(id: string): Promise<types.BotBusinessConnection | null>;
     setUpdate(boxId: bigint, update: enums.Update): Promise<void>;
     deleteUpdates(): Promise<void>;

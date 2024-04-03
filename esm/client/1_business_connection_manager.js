@@ -34,7 +34,14 @@ export class BusinessConnectionManager {
         return update instanceof types.UpdateBotBusinessConnect;
     }
     async handleUpdate(update) {
-        await __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").messageStorage.setBusinessConnection(update.connection.connection_id, update.connection);
+        if (update.connection.disabled) {
+            await __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").messageStorage.setBusinessConnection(update.connection.connection_id, null);
+        }
+        else {
+            await __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").messageStorage.setBusinessConnection(update.connection.connection_id, update.connection);
+        }
+        const businessConnection = await constructBusinessConnection(update.connection, __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").getEntity);
+        return { businessConnection };
     }
 }
 _BusinessConnectionManager_c = new WeakMap();

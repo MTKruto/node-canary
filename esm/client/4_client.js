@@ -2242,7 +2242,7 @@ _Client_handleCtxUpdate = async function _Client_handleCtxUpdate(update) {
         }
     }
     if (BusinessConnectionManager.canHandleUpdate(update)) {
-        await __classPrivateFieldGet(this, _Client_businessConnectionManager, "f").handleUpdate(update);
+        promises.push(__classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, await __classPrivateFieldGet(this, _Client_businessConnectionManager, "f").handleUpdate(update)));
     }
     return () => Promise.all(promises);
 }, _Client_getMe = async function _Client_getMe() {

@@ -37,7 +37,14 @@ class BusinessConnectionManager {
         return update instanceof _2_tl_js_1.types.UpdateBotBusinessConnect;
     }
     async handleUpdate(update) {
-        await __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").messageStorage.setBusinessConnection(update.connection.connection_id, update.connection);
+        if (update.connection.disabled) {
+            await __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").messageStorage.setBusinessConnection(update.connection.connection_id, null);
+        }
+        else {
+            await __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").messageStorage.setBusinessConnection(update.connection.connection_id, update.connection);
+        }
+        const businessConnection = await (0, _3_types_js_1.constructBusinessConnection)(update.connection, __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").getEntity);
+        return { businessConnection };
     }
 }
 exports.BusinessConnectionManager = BusinessConnectionManager;

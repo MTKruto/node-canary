@@ -533,6 +533,13 @@ export class Client extends Composer {
                     const { chatId } = mustGetMsg();
                     return this.deleteChatStickerSet(chatId);
                 },
+                getBusinessConnection: () => {
+                    const { businessConnectionId } = mustGetMsg();
+                    if (!businessConnectionId) {
+                        UNREACHABLE();
+                    }
+                    return this.getBusinessConnection(businessConnectionId);
+                },
             };
             return cleanObject(context);
         });
@@ -1465,17 +1472,6 @@ export class Client extends Composer {
      */
     async sendChatAction(chatId, action, params) {
         await __classPrivateFieldGet(this, _Client_messageManager, "f").sendChatAction(chatId, action, params);
-    }
-    /**
-     * Upload a file.
-     *
-     * @method fs
-     * @param contents The contents of the file.
-     * @returns The uploaded file.
-     */
-    // deno-lint-ignore no-explicit-any
-    async upload(contents, params) {
-        return await __classPrivateFieldGet(this, _Client_fileManager, "f").upload(contents, params);
     }
     /**
      * Set the bot's commands in the given scope and/or language. Bot-only.

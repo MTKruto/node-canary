@@ -4,7 +4,7 @@ import { Storage } from "../3_storage.js";
 import { DC } from "../3_transport.js";
 import { BotCommand, BusinessConnection, Chat, ChatAction, ChatMember, ChatP, FileSource, ID, InactiveChat, InlineQueryResult, InputStoryContent, InviteLink, Message, MessageAnimation, MessageAudio, MessageContact, MessageDice, MessageDocument, MessageLocation, MessagePhoto, MessagePoll, MessageSticker, MessageText, MessageVenue, MessageVideo, MessageVideoNote, MessageVoice, NetworkStatistics, ParseMode, Poll, Reaction, Sticker, Story, Update, User } from "../3_types.js";
 import { Migrate } from "../4_errors.js";
-import { AddReactionParams, AnswerCallbackQueryParams, AnswerInlineQueryParams, AuthorizeUserParams, BanChatMemberParams, CreateInviteLinkParams, CreateStoryParams, DeleteMessageParams, DeleteMessagesParams, DownloadParams, EditMessageLiveLocationParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetChatsParams, GetCreatedInviteLinksParams, GetHistoryParams, GetMyCommandsParams, PinMessageParams, ReplyParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetMyCommandsParams, SetReactionsParams, StopPollParams, UploadParams } from "./0_params.js";
+import { AddReactionParams, AnswerCallbackQueryParams, AnswerInlineQueryParams, AuthorizeUserParams, BanChatMemberParams, CreateInviteLinkParams, CreateStoryParams, DeleteMessageParams, DeleteMessagesParams, DownloadParams, EditMessageLiveLocationParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetChatsParams, GetCreatedInviteLinksParams, GetHistoryParams, GetMyCommandsParams, PinMessageParams, ReplyParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetMyCommandsParams, SetReactionsParams, StopPollParams } from "./0_params.js";
 import { Api } from "./0_types.js";
 import { ClientPlainParams } from "./1_client_plain.js";
 import { Composer as Composer_, NextFunction } from "./1_composer.js";
@@ -21,6 +21,7 @@ export interface Context {
     from?: User;
     /** Resolves to `msg?.senderChat`. */
     senderChat?: ChatP;
+    toJSON: () => Update;
     /** Context-aware alias for `client.sendMessage()`. */
     reply: (text: string, params?: Omit<SendMessageParams, "replyToMessageId" | "businessConnectionId"> & ReplyParams) => Promise<MessageText>;
     /** Context-aware alias for `client.sendPoll()`. */
@@ -147,7 +148,8 @@ export interface Context {
     setChatStickerSet: (setName: string) => Promise<void>;
     /** Context-aware alias for `client.deleteChatStickerSet()`. */
     deleteChatStickerSet: () => Promise<void>;
-    toJSON: () => Update;
+    /** Context-aware alias for `client.getBusinessConnection()`. */
+    getBusinessConnection: () => Promise<BusinessConnection>;
 }
 export declare class Composer<C extends Context = Context> extends Composer_<C> {
 }
@@ -458,14 +460,6 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
     sendChatAction(chatId: ID, action: ChatAction, params?: {
         messageThreadId?: number;
     }): Promise<void>;
-    /**
-     * Upload a file.
-     *
-     * @method fs
-     * @param contents The contents of the file.
-     * @returns The uploaded file.
-     */
-    upload(contents: Uint8Array, params?: UploadParams): Promise<any>;
     /**
      * Set the bot's commands in the given scope and/or language. Bot-only.
      *

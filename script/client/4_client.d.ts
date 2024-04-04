@@ -303,7 +303,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      */
     getMe(): Promise<User>;
     /**
-     * Show a username in the current account, a bot account, sa upergroup, or a channel's profile. User-only.
+     * Show a username in the current account, a bot account, a supergroup, or a channel's profile. User-only.
      *
      * @method ac
      * @param id `"me"`, a bot ID, a supergroup ID, or a channel ID.

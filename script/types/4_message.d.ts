@@ -85,6 +85,8 @@ export interface _MessageBase {
     /** The message's reply markup. */
     replyMarkup?: ReplyMarkup;
     businessConnectionId?: string;
+    senderBoostCount?: number;
+    viaBusinessBot?: User;
 }
 /**
  * Properties shared between media message types.

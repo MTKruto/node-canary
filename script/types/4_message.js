@@ -303,6 +303,7 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
         forwards: message_.forwards,
         isTopicMessage: false,
         hasProtectedContent: message_.noforwards || false,
+        senderBoostCount: message_.from_boosts_applied,
     };
     if (message_.reactions) {
         const recentReactions = message_.reactions.recent_reactions ?? [];
@@ -332,6 +333,15 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
         const viaBot = await getEntity(new _2_tl_js_1.types.PeerUser({ user_id: message_.via_bot_id }));
         if (viaBot) {
             message.viaBot = (0, _1_user_js_1.constructUser)(viaBot);
+        }
+        else {
+            (0, _1_utilities_js_1.UNREACHABLE)();
+        }
+    }
+    if (message_.via_business_bot_id != undefined) {
+        const viaBusinessBot = await getEntity(new _2_tl_js_1.types.PeerUser({ user_id: message_.via_business_bot_id }));
+        if (viaBusinessBot) {
+            message.viaBusinessBot = (0, _1_user_js_1.constructUser)(viaBusinessBot);
         }
         else {
             (0, _1_utilities_js_1.UNREACHABLE)();

@@ -235,27 +235,24 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
     [handleMigrationError](err: Migrate): Promise<void>;
     disconnect(): Promise<void>;
     /**
-     * Calls [initConnection](1) and authorizes the client with one of the following:
+     * Authorizes the client with one of the following:
      *
      * - Bot token (`string`)
-     * - Exported authorization (`types.AuthExportedAuthorization`)
      * - User authorization handlers (`AuthorizeUserParams`)
      *
-     * if the current auth key doesn't throw AUTH_KEY_UNREGISTERED when calling [updates.getState](2).
+     * if the current auth key doesn't throw AUTH_KEY_UNREGISTERED when calling [updates.getState](1).
      *
      * Notes:
      * 1. Requires the `apiId` and `apiHash` paramters to be passed when constructing the client.
      * 2. Reconnects the client to the appropriate DC in case of MIGRATE_X errors.
-     * 3. The parameters passed to the [initConnection][1] call can be configured with the last parameter of the constructor.
      *
-     * [1]: https://core.telegram.org/method/initConnection
-     * [2]: https://core.telegram.org/method/updates.getState
+     * [1]: https://core.telegram.org/method/updates.getState
      */
-    authorize(params?: string | types.auth.ExportedAuthorization | AuthorizeUserParams): Promise<void>;
+    authorize(params?: string | AuthorizeUserParams): Promise<void>;
     /**
      * Same as calling `.connect()` followed by `.authorize(params)`.
      */
-    start(params?: string | types.auth.ExportedAuthorization | AuthorizeUserParams): Promise<void>;
+    start(params?: string | AuthorizeUserParams): Promise<void>;
     /**
      * Invokes a function waiting and returning its reply if the second parameter is not `true`. Requires the client
      * to be connected.

@@ -685,7 +685,7 @@ class Client extends Composer {
                     if (ctx.error instanceof _4_errors_js_1.AuthKeyUnregistered && dcId) {
                         try {
                             const exportedAuth = await this.api.auth.exportAuthorization({ dc_id: dcId });
-                            await client.authorize(exportedAuth);
+                            await client.api.auth.importAuthorization(exportedAuth);
                             return true;
                         }
                         catch (err) {
@@ -866,21 +866,18 @@ class Client extends Composer {
         __classPrivateFieldGet(this, _Client_pingLoopAbortController, "f")?.abort();
     }
     /**
-     * Calls [initConnection](1) and authorizes the client with one of the following:
+     * Authorizes the client with one of the following:
      *
      * - Bot token (`string`)
-     * - Exported authorization (`types.AuthExportedAuthorization`)
      * - User authorization handlers (`AuthorizeUserParams`)
      *
-     * if the current auth key doesn't throw AUTH_KEY_UNREGISTERED when calling [updates.getState](2).
+     * if the current auth key doesn't throw AUTH_KEY_UNREGISTERED when calling [updates.getState](1).
      *
      * Notes:
      * 1. Requires the `apiId` and `apiHash` paramters to be passed when constructing the client.
      * 2. Reconnects the client to the appropriate DC in case of MIGRATE_X errors.
-     * 3. The parameters passed to the [initConnection][1] call can be configured with the last parameter of the constructor.
      *
-     * [1]: https://core.telegram.org/method/initConnection
-     * [2]: https://core.telegram.org/method/updates.getState
+     * [1]: https://core.telegram.org/method/updates.getState
      */
     async authorize(params) {
         try {
@@ -930,11 +927,6 @@ class Client extends Composer {
             __classPrivateFieldGet(this, _Client_Lauthorize, "f").debug("authorized as bot");
             await __classPrivateFieldGet(this, _Client_instances, "m", _Client_propagateAuthorizationState).call(this, true);
             await __classPrivateFieldGet(this, _Client_updateManager, "f").fetchState("authorize");
-            return;
-        }
-        if (params instanceof _2_tl_js_1.types.auth.ExportedAuthorization) {
-            await this.api.auth.importAuthorization({ id: params.id, bytes: params.bytes });
-            __classPrivateFieldGet(this, _Client_Lauthorize, "f").debug("authorization imported");
             return;
         }
         auth: while (true) {

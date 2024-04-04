@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.constructPhoto = void 0;
 const _2_tl_js_1 = require("../2_tl.js");
-const _0__file_id_js_1 = require("./0__file_id.js");
-const _0__file_id_js_2 = require("./0__file_id.js");
+const _file_id_js_1 = require("./_file_id.js");
+const _file_id_js_2 = require("./_file_id.js");
 const _0_thumbnail_js_1 = require("./0_thumbnail.js");
 function constructPhoto(photo) {
     const sizes = photo.sizes
@@ -20,7 +20,7 @@ function constructPhoto(photo) {
     const largest = sizes.slice(-1)[0];
     const { dc_id: dcId, id, access_hash: accessHash, file_reference: fileReference } = photo;
     const fileId_ = {
-        type: _0__file_id_js_2.FileType.Photo,
+        type: _file_id_js_2.FileType.Photo,
         dcId,
         fileReference,
         location: {
@@ -28,15 +28,15 @@ function constructPhoto(photo) {
             id,
             accessHash,
             source: {
-                type: _0__file_id_js_1.PhotoSourceType.Thumbnail,
-                fileType: _0__file_id_js_2.FileType.Photo,
+                type: _file_id_js_1.PhotoSourceType.Thumbnail,
+                fileType: _file_id_js_2.FileType.Photo,
                 thumbnailType: largest.type.charCodeAt(0),
             },
         },
     };
     return {
-        fileId: (0, _0__file_id_js_2.serializeFileId)(fileId_),
-        fileUniqueId: (0, _0__file_id_js_2.toUniqueFileId)(fileId_),
+        fileId: (0, _file_id_js_2.serializeFileId)(fileId_),
+        fileUniqueId: (0, _file_id_js_2.toUniqueFileId)(fileId_),
         width: largest.w,
         height: largest.h,
         fileSize: largest.size,

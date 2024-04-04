@@ -1,5 +1,5 @@
 import { enums } from "../2_tl.js";
-import { UsernameResolver } from "./1__getters.js";
+import { UsernameResolver } from "./_getters.js";
 import { KeyboardButton } from "./1_keyboard_button.js";
 import { InlineKeyboardButton } from "./2_inline_keyboard_button.js";
 /** @unlisted */

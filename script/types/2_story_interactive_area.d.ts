@@ -1,9 +1,9 @@
 import { enums } from "../2_tl.js";
+import { EntityGetter } from "./_getters.js";
 import { Location } from "./0_location.js";
 import { MessageReference } from "./0_message_reference.js";
 import { Reaction } from "./0_reaction.js";
-import { Venue } from "./0_venue.js";
-import { EntityGetter } from "./1__getters.js";
+import { Venue } from "./1_venue.js";
 /** @unlisted */
 export interface StoryInteractiveAreaPosition {
     xPercentage: number;

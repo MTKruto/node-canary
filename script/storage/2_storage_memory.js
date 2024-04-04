@@ -1,3 +1,4 @@
+"use strict";
 var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
@@ -10,9 +11,11 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _StorageMemory_instances, _StorageMemory_id, _StorageMemory_authString, _StorageMemory_fixKey, _StorageMemory_getEntries;
-import { Storage } from "./0_storage.js";
-import { fromString, isInRange, toString } from "./0_utilities.js";
-export class StorageMemory extends Storage {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StorageMemory = void 0;
+const _0_storage_js_1 = require("./0_storage.js");
+const _1_utilities_js_1 = require("./1_utilities.js");
+class StorageMemory extends _0_storage_js_1.Storage {
     constructor(authString) {
         super();
         _StorageMemory_instances.add(this);
@@ -44,7 +47,7 @@ export class StorageMemory extends Storage {
     }
     get(key) {
         key = __classPrivateFieldGet(this, _StorageMemory_instances, "m", _StorageMemory_fixKey).call(this, key);
-        return this.map.get(toString(key)) ?? null;
+        return this.map.get((0, _1_utilities_js_1.toString)(key)) ?? null;
     }
     *getMany(filter, params) {
         let entries = __classPrivateFieldGet(this, _StorageMemory_instances, "m", _StorageMemory_getEntries).call(this);
@@ -55,17 +58,17 @@ export class StorageMemory extends Storage {
             entries = entries.slice(0, params.limit <= 0 ? 1 : params.limit);
         }
         entries: for (const [key, value] of entries) {
-            const parts = fromString(key);
+            const parts = (0, _1_utilities_js_1.fromString)(key);
             if (Array.isArray(parts)) {
                 if ("prefix" in filter) {
                     for (const [i, p] of filter.prefix.entries()) {
-                        if (toString(p) != toString(parts[i])) {
+                        if ((0, _1_utilities_js_1.toString)(p) != (0, _1_utilities_js_1.toString)(parts[i])) {
                             continue entries;
                         }
                     }
                 }
                 else {
-                    if (!isInRange(parts, filter.start, filter.end)) {
+                    if (!(0, _1_utilities_js_1.isInRange)(parts, filter.start, filter.end)) {
                         continue;
                     }
                 }
@@ -75,7 +78,7 @@ export class StorageMemory extends Storage {
     }
     set(key_, value) {
         key_ = __classPrivateFieldGet(this, _StorageMemory_instances, "m", _StorageMemory_fixKey).call(this, key_);
-        const key = toString(key_);
+        const key = (0, _1_utilities_js_1.toString)(key_);
         if (value != null) {
             this.map.set(key, value);
         }
@@ -87,6 +90,7 @@ export class StorageMemory extends Storage {
         this.set(key, (this.get(key) || 0) + by);
     }
 }
+exports.StorageMemory = StorageMemory;
 _StorageMemory_id = new WeakMap(), _StorageMemory_authString = new WeakMap(), _StorageMemory_instances = new WeakSet(), _StorageMemory_fixKey = function _StorageMemory_fixKey(key) {
     if (__classPrivateFieldGet(this, _StorageMemory_id, "f") !== null) {
         return ["__S" + __classPrivateFieldGet(this, _StorageMemory_id, "f"), ...key];

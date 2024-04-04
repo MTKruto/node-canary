@@ -1,7 +1,7 @@
 import { enums } from "../2_tl.js";
+import { UsernameResolver } from "./_getters.js";
 import { MessageEntity } from "./0_message_entity.js";
 import { ParseMode } from "./0_parse_mode.js";
-import { UsernameResolver } from "./1__getters.js";
 import { InputMessageContent } from "./1_input_message_content.js";
 import { ReplyMarkupInlineKeyboard } from "./3_reply_markup.js";
 /** @unlisted */

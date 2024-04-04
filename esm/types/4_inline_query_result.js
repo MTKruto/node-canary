@@ -1,6 +1,6 @@
 import { UNREACHABLE } from "../1_utilities.js";
 import { types } from "../2_tl.js";
-import { deserializeFileId } from "./0__file_id.js";
+import { deserializeFileId } from "./_file_id.js";
 import { replyMarkupToTlObject } from "./3_reply_markup.js";
 // deno-lint-ignore no-explicit-any
 export async function inlineQueryResultToTlObject(result_, parseText, usernameResolver) {

@@ -3,14 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.constructMessage = exports.assertMessageType = void 0;
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
-const _0__file_id_js_1 = require("./0__file_id.js");
-const _0__file_id_js_2 = require("./0__file_id.js");
+const _file_id_js_1 = require("./_file_id.js");
+const _file_id_js_2 = require("./_file_id.js");
 const _0_contact_js_1 = require("./0_contact.js");
 const _0_dice_js_1 = require("./0_dice.js");
 const _0_link_preview_js_1 = require("./0_link_preview.js");
 const _0_location_js_1 = require("./0_location.js");
 const _0_message_entity_js_1 = require("./0_message_entity.js");
-const _0_venue_js_1 = require("./0_venue.js");
 const _0_voice_js_1 = require("./0_voice.js");
 const _1_animation_js_1 = require("./1_animation.js");
 const _1_audio_js_1 = require("./1_audio.js");
@@ -23,6 +22,7 @@ const _1_poll_js_1 = require("./1_poll.js");
 const _1_reply_quote_js_1 = require("./1_reply_quote.js");
 const _1_sticker_js_1 = require("./1_sticker.js");
 const _1_user_js_1 = require("./1_user.js");
+const _1_venue_js_1 = require("./1_venue.js");
 const _1_video_note_js_1 = require("./1_video_note.js");
 const _1_video_js_1 = require("./1_video.js");
 const _2_game_js_1 = require("./2_game.js");
@@ -414,42 +414,42 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
             const sticker = document.attributes.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeSticker);
             const video = document.attributes.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeVideo);
             if (animated) {
-                const fileId = getFileId(_0__file_id_js_1.FileType.Animation);
-                const animation = (0, _1_animation_js_1.constructAnimation)(document, video, fileName, (0, _0__file_id_js_2.serializeFileId)(fileId), (0, _0__file_id_js_1.toUniqueFileId)(fileId));
+                const fileId = getFileId(_file_id_js_1.FileType.Animation);
+                const animation = (0, _1_animation_js_1.constructAnimation)(document, video, fileName, (0, _file_id_js_2.serializeFileId)(fileId), (0, _file_id_js_1.toUniqueFileId)(fileId));
                 m = { ...messageMedia, animation };
             }
             else if (video) {
                 if (video.round_message) {
-                    const fileId = getFileId(_0__file_id_js_1.FileType.VideoNote);
-                    const videoNote = (0, _1_video_note_js_1.constructVideoNote)(document, video, (0, _0__file_id_js_2.serializeFileId)(fileId), (0, _0__file_id_js_1.toUniqueFileId)(fileId));
+                    const fileId = getFileId(_file_id_js_1.FileType.VideoNote);
+                    const videoNote = (0, _1_video_note_js_1.constructVideoNote)(document, video, (0, _file_id_js_2.serializeFileId)(fileId), (0, _file_id_js_1.toUniqueFileId)(fileId));
                     m = { ...message, videoNote };
                 }
                 else {
-                    const fileId = getFileId(_0__file_id_js_1.FileType.Video);
-                    const video_ = (0, _1_video_js_1.constructVideo)(document, video, fileName?.file_name, (0, _0__file_id_js_2.serializeFileId)(fileId), (0, _0__file_id_js_1.toUniqueFileId)(fileId));
+                    const fileId = getFileId(_file_id_js_1.FileType.Video);
+                    const video_ = (0, _1_video_js_1.constructVideo)(document, video, fileName?.file_name, (0, _file_id_js_2.serializeFileId)(fileId), (0, _file_id_js_1.toUniqueFileId)(fileId));
                     m = { ...messageMedia, video: video_ };
                 }
             }
             else if (audio) {
                 if (audio.voice) {
-                    const fileId = getFileId(_0__file_id_js_1.FileType.VoiceNote);
-                    const voice = (0, _0_voice_js_1.constructVoice)(document, audio, (0, _0__file_id_js_2.serializeFileId)(fileId), (0, _0__file_id_js_1.toUniqueFileId)(fileId));
+                    const fileId = getFileId(_file_id_js_1.FileType.VoiceNote);
+                    const voice = (0, _0_voice_js_1.constructVoice)(document, audio, (0, _file_id_js_2.serializeFileId)(fileId), (0, _file_id_js_1.toUniqueFileId)(fileId));
                     m = { ...messageMedia, voice };
                 }
                 else {
-                    const fileId = getFileId(_0__file_id_js_1.FileType.Audio);
-                    const audio_ = (0, _1_audio_js_1.constructAudio)(document, audio, (0, _0__file_id_js_2.serializeFileId)(fileId), (0, _0__file_id_js_1.toUniqueFileId)(fileId));
+                    const fileId = getFileId(_file_id_js_1.FileType.Audio);
+                    const audio_ = (0, _1_audio_js_1.constructAudio)(document, audio, (0, _file_id_js_2.serializeFileId)(fileId), (0, _file_id_js_1.toUniqueFileId)(fileId));
                     m = { ...messageMedia, audio: audio_ };
                 }
             }
             else if (sticker) {
-                const fileId = getFileId(_0__file_id_js_1.FileType.Sticker);
-                const sticker = await (0, _1_sticker_js_1.constructSticker)(document, (0, _0__file_id_js_2.serializeFileId)(fileId), (0, _0__file_id_js_1.toUniqueFileId)(fileId), getStickerSetName);
+                const fileId = getFileId(_file_id_js_1.FileType.Sticker);
+                const sticker = await (0, _1_sticker_js_1.constructSticker)(document, (0, _file_id_js_2.serializeFileId)(fileId), (0, _file_id_js_1.toUniqueFileId)(fileId), getStickerSetName);
                 m = { ...message, sticker };
             }
             else {
-                const fileId = getFileId(_0__file_id_js_1.FileType.Document);
-                const document_ = (0, _1_document_js_1.constructDocument)(document, fileName ?? new _2_tl_js_1.types.DocumentAttributeFilename({ file_name: "Unknown" }), (0, _0__file_id_js_2.serializeFileId)(fileId), (0, _0__file_id_js_1.toUniqueFileId)(fileId));
+                const fileId = getFileId(_file_id_js_1.FileType.Document);
+                const document_ = (0, _1_document_js_1.constructDocument)(document, fileName ?? new _2_tl_js_1.types.DocumentAttributeFilename({ file_name: "Unknown" }), (0, _file_id_js_2.serializeFileId)(fileId), (0, _file_id_js_1.toUniqueFileId)(fileId));
                 m = { ...messageMedia, document: document_ };
             }
         }
@@ -467,7 +467,7 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
         m = { ...message, poll };
     }
     else if (message_.media instanceof _2_tl_js_1.types.MessageMediaVenue) {
-        const venue = (0, _0_venue_js_1.constructVenue)(message_.media);
+        const venue = (0, _1_venue_js_1.constructVenue)(message_.media);
         m = { ...message, venue };
     }
     else if (message_.media instanceof _2_tl_js_1.types.MessageMediaGeo || message_.media instanceof _2_tl_js_1.types.MessageMediaGeoLive) {

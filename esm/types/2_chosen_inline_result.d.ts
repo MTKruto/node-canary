@@ -1,6 +1,6 @@
 import { types } from "../2_tl.js";
+import { EntityGetter } from "./_getters.js";
 import { Location } from "./0_location.js";
-import { EntityGetter } from "./1__getters.js";
 import { User } from "./1_user.js";
 /** A chosen inline result. */
 export interface ChosenInlineResult {

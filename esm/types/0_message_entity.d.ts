@@ -1,5 +1,5 @@
 import { enums } from "../2_tl.js";
-import { EntityGetter } from "./1__getters.js";
+import { EntityGetter } from "./_getters.js";
 /** @unlisted */
 export type MessageEntityType = "mention" | "hashtag" | "botCommand" | "url" | "email" | "bold" | "italic" | "code" | "pre" | "textLink" | "textMention" | "cashtag" | "phoneNumber" | "underline" | "strikethrough" | "blockquote" | "bankCard" | "spoiler" | "customEmoji";
 /** @unlisted */

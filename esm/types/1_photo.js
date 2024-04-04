@@ -1,6 +1,6 @@
 import { types } from "../2_tl.js";
-import { PhotoSourceType } from "./0__file_id.js";
-import { FileType, serializeFileId, toUniqueFileId } from "./0__file_id.js";
+import { PhotoSourceType } from "./_file_id.js";
+import { FileType, serializeFileId, toUniqueFileId } from "./_file_id.js";
 import { constructThumbnail } from "./0_thumbnail.js";
 export function constructPhoto(photo) {
     const sizes = photo.sizes

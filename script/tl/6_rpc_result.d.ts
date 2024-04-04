@@ -1,5 +1,5 @@
 import { id, name } from "./1_tl_object.js";
-import { ReadObject } from "./3_tl_reader.js";
+import { ReadObject } from "./4_tl_reader.js";
 export declare class RPCResult {
     readonly messageId: bigint;
     readonly result: ReadObject;

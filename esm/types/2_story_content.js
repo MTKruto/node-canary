@@ -1,6 +1,6 @@
 import { UNREACHABLE } from "../1_utilities.js";
 import { as, types } from "../2_tl.js";
-import { FileType, serializeFileId, toUniqueFileId } from "./0__file_id.js";
+import { FileType, serializeFileId, toUniqueFileId } from "./_file_id.js";
 import { constructPhoto } from "./1_photo.js";
 import { constructVideo } from "./1_video.js";
 export function constructStoryContent(media) {

@@ -1,5 +1,5 @@
 import { types } from "../2_tl.js";
-import { FileType, PhotoSourceType, serializeFileId, toUniqueFileId } from "./0__file_id.js";
+import { FileType, PhotoSourceType, serializeFileId, toUniqueFileId } from "./_file_id.js";
 export function constructThumbnail(size, file) {
     const type = file instanceof types.Photo ? FileType.Photo : FileType.Thumbnail;
     const fileType = file instanceof types.Photo ? FileType.Photo : FileType.Document;

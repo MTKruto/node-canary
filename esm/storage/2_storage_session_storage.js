@@ -11,7 +11,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _StorageSessionStorage_prefix;
 import { Storage } from "./0_storage.js";
-import { fromString, isInRange, toString, WEB_STORAGE_PREFIX_EXP } from "./0_utilities.js";
+import { fromString, isInRange, toString, WEB_STORAGE_PREFIX_EXP } from "./1_utilities.js";
 export class StorageSessionStorage extends Storage {
     constructor(prefix) {
         if (typeof sessionStorage === "undefined") {

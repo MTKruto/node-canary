@@ -2,7 +2,7 @@ import { UNREACHABLE } from "../1_utilities.js";
 import { chatIdToPeer, peerToChatId, types } from "../2_tl.js";
 import { constructLocation } from "./0_location.js";
 import { constructReaction, reactionToTlObject } from "./0_reaction.js";
-import { constructVenue } from "./0_venue.js";
+import { constructVenue } from "./1_venue.js";
 function constructStoryInteractiveAreaPosition(position) {
     return {
         xPercentage: position.x,

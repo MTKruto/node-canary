@@ -1,7 +1,7 @@
 import { id, name, serialize } from "./1_tl_object.js";
-import { TLReader } from "./3_tl_reader.js";
-import { TLWriter } from "./4_tl_writer.js";
-import { calculateLength, Message_ } from "./6_message.js";
+import { TLReader } from "./4_tl_reader.js";
+import { TLWriter } from "./5_tl_writer.js";
+import { calculateLength, Message_ } from "./7_message.js";
 export class MessageContainer {
     static get [id]() {
         return 0x73F1F8DC;

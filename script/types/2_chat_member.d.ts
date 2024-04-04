@@ -1,7 +1,7 @@
 import { enums } from "../2_tl.js";
+import { EntityGetter } from "./_getters.js";
 import { ChatAdministratorRights } from "./0_chat_administrator_rights.js";
 import { ChatMemberRights } from "./0_chat_member_rights.js";
-import { EntityGetter } from "./1__getters.js";
 import { User } from "./1_user.js";
 /** @unlisted */
 export type ChatMemberStatus = "creator" | "administrator" | "member" | "restricted" | "left" | "banned";

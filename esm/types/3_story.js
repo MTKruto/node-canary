@@ -1,10 +1,10 @@
 import { cleanObject, fromUnixTimestamp, UNREACHABLE } from "../1_utilities.js";
 import { constructMessageEntity } from "./0_message_entity.js";
 import { constructChatP } from "./1_chat_p.js";
-import { constructStoryInteractiveArea } from "./1_story_interactive_area.js";
 import { constructStoryPrivacy } from "./1_story_privacy.js";
 import { constructStoryContent } from "./2_story_content.js";
 import { constructStoryInteractions } from "./2_story_interactions.js";
+import { constructStoryInteractiveArea } from "./2_story_interactive_area.js";
 export async function constructStory(story, peer, getEntity) {
     const id = story.id;
     const entity = await getEntity(peer);

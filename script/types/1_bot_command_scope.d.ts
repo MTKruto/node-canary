@@ -1,6 +1,6 @@
 import { enums } from "../2_tl.js";
+import { InputPeerGetter } from "./_getters.js";
 import { ID } from "./0_id.js";
-import { InputPeerGetter } from "./1__getters.js";
 /** @unlisted */
 export interface BotCommandScopeDefault {
     type: "default";

@@ -15,8 +15,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./storage/0_storage.js"), exports);
-__exportStar(require("./storage/0_utilities.js"), exports);
-__exportStar(require("./storage/1_storage_indexed_db.js"), exports);
-__exportStar(require("./storage/1_storage_local_storage.js"), exports);
-__exportStar(require("./storage/1_storage_memory.js"), exports);
-__exportStar(require("./storage/1_storage_session_storage.js"), exports);
+__exportStar(require("./storage/1_utilities.js"), exports);
+__exportStar(require("./storage/2_storage_indexed_db.js"), exports);
+__exportStar(require("./storage/2_storage_local_storage.js"), exports);
+__exportStar(require("./storage/2_storage_memory.js"), exports);
+__exportStar(require("./storage/2_storage_session_storage.js"), exports);

@@ -5,7 +5,7 @@ const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _0_location_js_1 = require("./0_location.js");
 const _0_reaction_js_1 = require("./0_reaction.js");
-const _0_venue_js_1 = require("./0_venue.js");
+const _1_venue_js_1 = require("./1_venue.js");
 function constructStoryInteractiveAreaPosition(position) {
     return {
         xPercentage: position.x,
@@ -25,7 +25,7 @@ function constructStoryInteractiveArea(area) {
         return { position, location };
     }
     else if (area instanceof _2_tl_js_1.types.MediaAreaVenue) {
-        const venue = (0, _0_venue_js_1.constructVenue)(area);
+        const venue = (0, _1_venue_js_1.constructVenue)(area);
         return { position, venue };
     }
     else if (area instanceof _2_tl_js_1.types.MediaAreaSuggestedReaction) {

@@ -11,7 +11,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _StorageIndexedDB_instances, _StorageIndexedDB_name, _StorageIndexedDB_id, _StorageIndexedDB_supportsFiles, _StorageIndexedDB_fixKey;
 import { Storage } from "./0_storage.js";
-import { fixKey, getPrefixKeyRange, restoreKey } from "./0_utilities.js";
+import { fixKey, getPrefixKeyRange, restoreKey } from "./1_utilities.js";
 const VERSION = 1;
 const KV_OBJECT_STORE = "kv";
 export class StorageIndexedDB extends Storage {

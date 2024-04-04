@@ -1,5 +1,5 @@
 import { enums, types } from "../2_tl.js";
-import { EntityGetter } from "./1__getters.js";
+import { EntityGetter } from "./_getters.js";
 import { User } from "./1_user.js";
 import { Message, MessageGetter } from "./4_message.js";
 /** A received callback query. */

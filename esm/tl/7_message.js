@@ -1,11 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Message_ = exports.calculateLength = void 0;
-const _1_tl_object_js_1 = require("./1_tl_object.js");
-const _3_tl_reader_js_1 = require("./3_tl_reader.js");
-const _4_rpc_result_js_1 = require("./4_rpc_result.js");
-const _4_tl_writer_js_1 = require("./4_tl_writer.js");
-function calculateLength(object) {
+import { id, serialize } from "./1_tl_object.js";
+import { TLReader } from "./4_tl_reader.js";
+import { TLWriter } from "./5_tl_writer.js";
+import { RPCResult } from "./6_rpc_result.js";
+export function calculateLength(object) {
     let length = 0;
     if (Array.isArray(object)) {
         length += 32 / 8; // vector constructor
@@ -18,12 +15,11 @@ function calculateLength(object) {
         length += 32 / 8; // constructor
     }
     else {
-        length += object[_1_tl_object_js_1.serialize]().length;
+        length += object[serialize]().length;
     }
     return length;
 }
-exports.calculateLength = calculateLength;
-class Message_ {
+export class Message_ {
     constructor(id, seqNo, body) {
         Object.defineProperty(this, "id", {
             enumerable: true,
@@ -44,11 +40,11 @@ class Message_ {
             value: body
         });
     }
-    [_1_tl_object_js_1.serialize]() {
-        if (this.body instanceof _4_rpc_result_js_1.RPCResult) {
+    [serialize]() {
+        if (this.body instanceof RPCResult) {
             throw new Error("Not applicable");
         }
-        return new _4_tl_writer_js_1.TLWriter()
+        return new TLWriter()
             .writeInt64(this.id)
             .writeInt32(this.seqNo)
             .writeInt32(calculateLength(this.body))
@@ -59,12 +55,12 @@ class Message_ {
         const id_ = reader.readInt64();
         const seqNo = reader.readInt32();
         const length = reader.readInt32();
-        reader = new _3_tl_reader_js_1.TLReader(reader.read(length));
+        reader = new TLReader(reader.read(length));
         const cid = reader.readInt32(false);
         let body;
         {
-            if (cid == _4_rpc_result_js_1.RPCResult[_1_tl_object_js_1.id]) {
-                body = _4_rpc_result_js_1.RPCResult.deserialize(reader.buffer);
+            if (cid == RPCResult[id]) {
+                body = RPCResult.deserialize(reader.buffer);
             }
             else {
                 body = reader.readObject(cid);
@@ -73,4 +69,3 @@ class Message_ {
         return new Message_(id_, seqNo, body);
     }
 }
-exports.Message_ = Message_;

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.inlineQueryResultToTlObject = void 0;
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
-const _0__file_id_js_1 = require("./0__file_id.js");
+const _file_id_js_1 = require("./_file_id.js");
 const _3_reply_markup_js_1 = require("./3_reply_markup.js");
 // deno-lint-ignore no-explicit-any
 async function inlineQueryResultToTlObject(result_, parseText, usernameResolver) {
@@ -178,7 +178,7 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
         });
     }
     else if (fileId_ != null) {
-        const fileId = (0, _0__file_id_js_1.deserializeFileId)(fileId_);
+        const fileId = (0, _file_id_js_1.deserializeFileId)(fileId_);
         return new _2_tl_js_1.types.InputBotInlineResultDocument({
             id,
             type: type == "document" ? "file" : type,

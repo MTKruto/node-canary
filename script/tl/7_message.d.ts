@@ -1,6 +1,6 @@
 import { serialize } from "./1_tl_object.js";
-import { ReadObject, TLReader } from "./3_tl_reader.js";
-import { RPCResult } from "./4_rpc_result.js";
+import { ReadObject, TLReader } from "./4_tl_reader.js";
+import { RPCResult } from "./6_rpc_result.js";
 export declare function calculateLength(object: Message_ | ReadObject): number;
 export declare class Message_ {
     readonly id: bigint;

@@ -1,5 +1,5 @@
 import { types } from "../2_tl.js";
-import { EntityGetter } from "./1__getters.js";
+import { EntityGetter } from "./_getters.js";
 import { User } from "./1_user.js";
 /** A chat invite link. */
 export interface InviteLink {

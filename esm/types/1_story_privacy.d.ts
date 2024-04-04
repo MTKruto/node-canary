@@ -1,5 +1,5 @@
 import { enums } from "../2_tl.js";
-import { EntityGetter } from "./1__getters.js";
+import { EntityGetter } from "./_getters.js";
 /** @unlisted */
 export interface StoryPrivacyEveryone {
     everyoneExcept: number[];

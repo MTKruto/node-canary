@@ -1,6 +1,6 @@
 import { enums, types } from "../2_tl.js";
+import { EntityGetter } from "./_getters.js";
 import { ChatPhotoChat, ChatPhotoUser } from "./0_chat_photo.js";
-import { EntityGetter } from "./1__getters.js";
 import { ChatPChannel, ChatPGroup, ChatPPrivate, ChatPSupergroup } from "./1_chat_p.js";
 import { StickerSetNameGetter } from "./1_sticker.js";
 import { Message, MessageGetter } from "./4_message.js";

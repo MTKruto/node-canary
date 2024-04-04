@@ -1,5 +1,5 @@
 import { id, name, serialize } from "./1_tl_object.js";
-import { Message_ } from "./6_message.js";
+import { Message_ } from "./7_message.js";
 export declare class MessageContainer {
     readonly id: bigint;
     readonly seqNo: number;

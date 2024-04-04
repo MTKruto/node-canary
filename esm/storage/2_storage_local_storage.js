@@ -1,4 +1,3 @@
-"use strict";
 var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
@@ -11,11 +10,9 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _StorageLocalStorage_prefix;
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.StorageLocalStorage = void 0;
-const _0_storage_js_1 = require("./0_storage.js");
-const _0_utilities_js_1 = require("./0_utilities.js");
-class StorageLocalStorage extends _0_storage_js_1.Storage {
+import { Storage } from "./0_storage.js";
+import { fromString, isInRange, toString, WEB_STORAGE_PREFIX_EXP } from "./1_utilities.js";
+export class StorageLocalStorage extends Storage {
     constructor(prefix) {
         if (typeof localStorage === "undefined") {
             throw new Error("Unavailable in current environment");
@@ -23,7 +20,7 @@ class StorageLocalStorage extends _0_storage_js_1.Storage {
         if (prefix.length <= 0) {
             throw new Error("Empty prefix");
         }
-        else if (!_0_utilities_js_1.WEB_STORAGE_PREFIX_EXP.test(prefix)) {
+        else if (!WEB_STORAGE_PREFIX_EXP.test(prefix)) {
             throw new Error("Unallowed prefix");
         }
         super();
@@ -42,10 +39,10 @@ class StorageLocalStorage extends _0_storage_js_1.Storage {
         return false;
     }
     get(key_) {
-        const key = this.prefix + (0, _0_utilities_js_1.toString)(key_);
+        const key = this.prefix + toString(key_);
         const value = localStorage.getItem(key);
         if (value != null) {
-            return (0, _0_utilities_js_1.fromString)(value);
+            return fromString(value);
         }
         else {
             return null;
@@ -63,28 +60,28 @@ class StorageLocalStorage extends _0_storage_js_1.Storage {
             if (key.startsWith(this.prefix)) {
                 key = key.slice(this.prefix.length);
             }
-            const parts = (0, _0_utilities_js_1.fromString)(key);
+            const parts = fromString(key);
             if (Array.isArray(parts)) {
                 if ("prefix" in filter) {
                     for (const [i, p] of filter.prefix.entries()) {
-                        if ((0, _0_utilities_js_1.toString)(p) != (0, _0_utilities_js_1.toString)(parts[i])) {
+                        if (toString(p) != toString(parts[i])) {
                             continue entries;
                         }
                     }
                 }
                 else {
-                    if (!(0, _0_utilities_js_1.isInRange)(parts, filter.start, filter.end)) {
+                    if (!isInRange(parts, filter.start, filter.end)) {
                         continue;
                     }
                 }
-                yield [parts, (0, _0_utilities_js_1.fromString)(value)];
+                yield [parts, fromString(value)];
             }
         }
     }
     set(key_, value) {
-        const key = this.prefix + (0, _0_utilities_js_1.toString)(key_);
+        const key = this.prefix + toString(key_);
         if (value != null) {
-            localStorage.setItem(key, (0, _0_utilities_js_1.toString)(value));
+            localStorage.setItem(key, toString(value));
         }
         else {
             localStorage.removeItem(key);
@@ -94,5 +91,4 @@ class StorageLocalStorage extends _0_storage_js_1.Storage {
         this.set(key, (this.get(key) || 0) + by);
     }
 }
-exports.StorageLocalStorage = StorageLocalStorage;
 _StorageLocalStorage_prefix = new WeakMap();

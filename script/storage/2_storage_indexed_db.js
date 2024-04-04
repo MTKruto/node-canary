@@ -14,7 +14,7 @@ var _StorageIndexedDB_instances, _StorageIndexedDB_name, _StorageIndexedDB_id, _
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StorageIndexedDB = void 0;
 const _0_storage_js_1 = require("./0_storage.js");
-const _0_utilities_js_1 = require("./0_utilities.js");
+const _1_utilities_js_1 = require("./1_utilities.js");
 const VERSION = 1;
 const KV_OBJECT_STORE = "kv";
 class StorageIndexedDB extends _0_storage_js_1.Storage {
@@ -72,10 +72,10 @@ class StorageIndexedDB extends _0_storage_js_1.Storage {
         // deno-lint-ignore no-explicit-any
         let tx;
         if (v == null) {
-            tx = store.delete((0, _0_utilities_js_1.fixKey)(k));
+            tx = store.delete((0, _1_utilities_js_1.fixKey)(k));
         }
         else {
-            tx = store.put(v, (0, _0_utilities_js_1.fixKey)(k));
+            tx = store.put(v, (0, _1_utilities_js_1.fixKey)(k));
         }
         return new Promise((res, rej) => {
             tx.onerror = rej;
@@ -94,7 +94,7 @@ class StorageIndexedDB extends _0_storage_js_1.Storage {
         const tx = (tx_ ?? this.database
             .transaction(KV_OBJECT_STORE, "readonly"))
             .objectStore(KV_OBJECT_STORE)
-            .get((0, _0_utilities_js_1.fixKey)(k));
+            .get((0, _1_utilities_js_1.fixKey)(k));
         return new Promise((res, rej) => {
             tx.onerror = rej;
             tx.onsuccess = () => {
@@ -120,10 +120,10 @@ class StorageIndexedDB extends _0_storage_js_1.Storage {
         }
         let keyRange;
         if ("prefix" in filter) {
-            keyRange = (0, _0_utilities_js_1.getPrefixKeyRange)((0, _0_utilities_js_1.fixKey)(filter.prefix));
+            keyRange = (0, _1_utilities_js_1.getPrefixKeyRange)((0, _1_utilities_js_1.fixKey)(filter.prefix));
         }
         else {
-            keyRange = IDBKeyRange.bound((0, _0_utilities_js_1.fixKey)(filter.start), (0, _0_utilities_js_1.fixKey)(filter.end), true, true);
+            keyRange = IDBKeyRange.bound((0, _1_utilities_js_1.fixKey)(filter.start), (0, _1_utilities_js_1.fixKey)(filter.end), true, true);
         }
         const keys = await new Promise((res, rej) => {
             const items = new Array();
@@ -137,7 +137,7 @@ class StorageIndexedDB extends _0_storage_js_1.Storage {
                     res(items);
                     return;
                 }
-                items.push((0, _0_utilities_js_1.restoreKey)(cursor.key));
+                items.push((0, _1_utilities_js_1.restoreKey)(cursor.key));
                 if (params?.limit !== undefined && items.length >= params.limit) {
                     res(items);
                 }

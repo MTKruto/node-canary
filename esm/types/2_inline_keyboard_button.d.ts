@@ -1,7 +1,7 @@
 import { enums } from "../2_tl.js";
+import { UsernameResolver } from "./_getters.js";
 import { LoginUrl } from "./0_login_url.js";
 import { MiniAppInfo } from "./0_mini_app_info.js";
-import { UsernameResolver } from "./1__getters.js";
 /** @unlisted */
 export interface _InlineKeyboardButtonBase {
     text: string;

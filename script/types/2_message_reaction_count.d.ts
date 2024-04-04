@@ -1,5 +1,5 @@
 import { types } from "../2_tl.js";
-import { EntityGetter } from "./1__getters.js";
+import { EntityGetter } from "./_getters.js";
 import { ChatP } from "./1_chat_p.js";
 import { ReactionCount } from "./1_reaction_count.js";
 /** Information on the reactions made to a channel post. */

@@ -1,6 +1,6 @@
 import { types } from "../2_tl.js";
+import { EntityGetter } from "./_getters.js";
 import { Reaction } from "./0_reaction.js";
-import { EntityGetter } from "./1__getters.js";
 import { ChatP } from "./1_chat_p.js";
 import { User } from "./1_user.js";
 /** The reactions of a user to a messages in a group. */

@@ -4,10 +4,10 @@ exports.constructStory = void 0;
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _0_message_entity_js_1 = require("./0_message_entity.js");
 const _1_chat_p_js_1 = require("./1_chat_p.js");
-const _1_story_interactive_area_js_1 = require("./1_story_interactive_area.js");
 const _1_story_privacy_js_1 = require("./1_story_privacy.js");
 const _2_story_content_js_1 = require("./2_story_content.js");
 const _2_story_interactions_js_1 = require("./2_story_interactions.js");
+const _2_story_interactive_area_js_1 = require("./2_story_interactive_area.js");
 async function constructStory(story, peer, getEntity) {
     const id = story.id;
     const entity = await getEntity(peer);
@@ -16,7 +16,7 @@ async function constructStory(story, peer, getEntity) {
     }
     const chat = (0, _1_chat_p_js_1.constructChatP)(entity);
     const date = (0, _1_utilities_js_1.fromUnixTimestamp)(story.date);
-    const interactiveAreas = (story.media_areas ?? []).map(_1_story_interactive_area_js_1.constructStoryInteractiveArea);
+    const interactiveAreas = (story.media_areas ?? []).map(_2_story_interactive_area_js_1.constructStoryInteractiveArea);
     const highlighted = story.pinned ? true : false;
     const content = (0, _2_story_content_js_1.constructStoryContent)(story.media);
     const caption = story.caption;

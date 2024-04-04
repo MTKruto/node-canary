@@ -78,7 +78,7 @@ exports.PUBLIC_KEYS = Object.freeze([
 ]);
 exports.INITIAL_DC = "2";
 exports.LAYER = 177;
-exports.APP_VERSION = "MTKruto 0.1.190";
+exports.APP_VERSION = "MTKruto";
 // @ts-ignore: lib
 exports.DEVICE_MODEL = typeof dntShim.Deno === "undefined" ? typeof navigator === "undefined" ? typeof process === "undefined" ? "Unknown" : process.platform + "-" + process.arch : (navigator.userAgent.split(" ")[0] || "Unknown") : dntShim.Deno.build.os + "-" + dntShim.Deno.build.arch;
 exports.LANG_CODE = typeof navigator === "undefined" || typeof navigator.language !== "string" ? "en" : navigator.language.split("-")[0];

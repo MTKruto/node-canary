@@ -297,6 +297,51 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
     private [getEntity];
     private [getEntity];
     /**
+     * Get information on the currently authorized user.
+     *
+     * @method ac
+     */
+    getMe(): Promise<User>;
+    /**
+     * Show a username in the current account, a bot account, sa upergroup, or a channel's profile. User-only.
+     *
+     * @method ac
+     * @param id `"me"`, a bot ID, a supergroup ID, or a channel ID.
+     * @param username The username to show.
+     */
+    showUsername(id: ID, username: string): Promise<void>;
+    /**
+     * Hide a username from the current account, a bot account, a supergroup, or a channel's profile. User-only.
+     *
+     * @method ac
+     * @param id `"me"`, a bot ID, a supergroup ID, or a channel ID.
+     * @param username The username to hide.
+     */
+    hideUsername(id: ID, username: string): Promise<void>;
+    /**
+     * Reorder the usernames of the current account, a bot account, a supergroup, or a channel's profile. User-only.
+     *
+     * @method ac
+     * @param id `"me"`, a bot ID, a supergroup ID, or a channel ID.
+     * @param order The new order to use.
+     * @returns Whether the order was changed.
+     */
+    reorderUsernames(id: ID, order: string[]): Promise<boolean>;
+    /**
+     * Hide all usernames from the a supergroup or a channel's profile. User-only.
+     *
+     * @method ac
+     * @param id A supergroup ID or a channel ID.
+     */
+    hideUsernames(id: ID): Promise<boolean>;
+    /**
+     * Get a business connection. Bot-only.
+     *
+     * @method ac
+     * @param id The identifier of the business connection.
+     */
+    getBusinessConnection(id: string): Promise<BusinessConnection>;
+    /**
      * Send a text message.
      *
      * @method ms
@@ -305,253 +350,6 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @returns The sent text message.
      */
     sendMessage(chatId: ID, text: string, params?: SendMessageParams): Promise<MessageText>;
-    /**
-     * Edit a message's text.
-     *
-     * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The message's identifier.
-     * @param text The new text of the message.
-     * @returns The edited text message.
-     */
-    editMessageText(chatId: ID, messageId: number, text: string, params?: EditMessageParams): Promise<MessageText>;
-    /**
-     * Edit an inline message's text. Bot-only.
-     *
-     * @method ms
-     * @param inlineMessageId The inline message's identifier.
-     * @param text The new text of the message.
-     */
-    editInlineMessageText(inlineMessageId: string, text: string, params?: EditMessageParams): Promise<void>;
-    /**
-     * Edit a message's reply markup.
-     *
-     * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The message's identifier.
-     * @returns The edited message.
-     */
-    editMessageReplyMarkup(chatId: ID, messageId: number, params?: EditMessageReplyMarkupParams): Promise<Message>;
-    /**
-     * Edit an inline message's reply markup. Bot-only.
-     *
-     * @method ms
-     * @param inlineMessageId The inline message's identifier.
-     */
-    editInlineMessageReplyMarkup(inlineMessageId: string, params?: EditMessageReplyMarkupParams): Promise<void>;
-    /**
-     * Edit a message's live location.
-     *
-     * @method ms
-     * @param chatId The identifier of the chat that contains the messages.
-     * @param messageId The message's identifier.
-     * @param latitude The new latitude.
-     * @param longitude The new longitude.
-     * @returns The edited location message.
-     */
-    editMessageLiveLocation(chatId: ID, messageId: number, latitude: number, longitude: number, params?: EditMessageLiveLocationParams): Promise<MessageLocation>;
-    /**
-     * Edit an inline message's live location. Bot-only.
-     *
-     * @method ms
-     * @param inlineMessageId The inline message's identifier.
-     * @param latitude The new latitude.
-     * @param longitude The new longitude.
-     * @returns The edited location message.
-     */
-    editInlineMessageLiveLocation(inlineMessageId: string, latitude: number, longitude: number, params?: EditMessageLiveLocationParams): Promise<void>;
-    /**
-     * Retrieve multiple messages.
-     *
-     * @method ms
-     * @param chatId The identifier of the chat to retrieve the messages from.
-     * @param messageIds The identifiers of the messages to retrieve.
-     * @example ```ts
-     * const message = await client.getMessages("@MTKruto", [210, 212]);
-     * ```
-     * @returns The retrieved messages.
-     */
-    getMessages(chatId: ID, messageIds: number[]): Promise<Message[]>;
-    /**
-     * Retrieve a single message.
-     *
-     * @method ms
-     * @param chatId The identifier of the chat to retrieve the message from.
-     * @param messageId The identifier of the message to retrieve.
-     * @example ```ts
-     * const message = await client.getMessage("@MTKruto", 212);
-     * ```
-     * @returns The retrieved message.
-     */
-    getMessage(chatId: ID, messageId: number): Promise<Message | null>;
-    /**
-     * Download a file.
-     *
-     * @method fs
-     * @param fileId The identifier of the file to download.
-     * @example ```ts
-     * for await (const chunk of client.download(fileId, { chunkSize: 256 * 1024 })) {
-     *   await outFile.write(chunk);
-     * }
-     * ```
-     * @returns A generator yielding the contents of the file.
-     */
-    download(fileId: string, params?: DownloadParams): AsyncGenerator<Uint8Array, void, unknown>;
-    /**
-     * Forward multiple messages.
-     *
-     * @method ms
-     * @param from The identifier of the chat to forward the messages from.
-     * @param to The identifier of the chat to forward the messages to.
-     * @param messageIds The identifiers of the messages to forward.
-     * @returns The forwarded messages.
-     */
-    forwardMessages(from: ID, to: ID, messageIds: number[], params?: ForwardMessagesParams): Promise<Message[]>;
-    /**
-     * Forward a single message.
-     *
-     * @method ms
-     * @param from The identifier of the chat to forward the message from.
-     * @param to The identifier of the chat to forward the message to.
-     * @param messageId The identifier of the message to forward.
-     * @returns The forwarded message.
-     */
-    forwardMessage(from: ID, to: ID, messageId: number, params?: ForwardMessagesParams): Promise<Message>;
-    /**
-     * Get information on the currently authorized user.
-     *
-     * @method ac
-     */
-    getMe(): Promise<User>;
-    /**
-     * Answer a callback query. Bot-only.
-     *
-     * @method cq
-     * @param id ID of the callback query to answer.
-     */
-    answerCallbackQuery(id: string, params?: AnswerCallbackQueryParams): Promise<void>;
-    /**
-     * Send a poll.
-     *
-     * @method ms
-     * @param chatId The chat to send the poll to.
-     * @param question The poll's question.
-     * @param options The poll's options.
-     * @returns The sent poll.
-     */
-    sendPoll(chatId: ID, question: string, options: [string, string, ...string[]], params?: SendPollParams): Promise<MessagePoll>;
-    /**
-     * Stop a poll.
-     *
-     * @method ms
-     * @param chatId The chat that includes the poll.
-     * @param messageId The idenfifier of the poll's message.
-     * @returns The new state of the poll.
-     */
-    stopPoll(chatId: ID, messageId: number, params?: StopPollParams): Promise<Poll>;
-    /**
-     * Send a chat action.
-     *
-     * @method ms
-     * @param chatId The chat to send the chat action to.
-     * @param action The chat action.
-     * @param messageThreadId The thread to send the chat action to.
-     */
-    sendChatAction(chatId: ID, action: ChatAction, params?: {
-        messageThreadId?: number;
-    }): Promise<void>;
-    /**
-     * Set the bot's commands in the given scope and/or language. Bot-only.
-     *
-     * @method bs
-     * @param commands The commands to set.
-     */
-    setMyCommands(commands: BotCommand[], params?: SetMyCommandsParams): Promise<void>;
-    /**
-     * Get the bot's commands in the given scope and/or language. Bot-only.
-     *
-     * @method bs
-     * @returns The current bot's commands in the specified language.
-     */
-    getMyCommands(params?: GetMyCommandsParams): Promise<BotCommand[]>;
-    /**
-     * Answer an inline query. Bot-only.
-     *
-     * @method iq
-     * @param id The ID of the inline query to answer.
-     * @param results The results to answer with.
-     */
-    answerInlineQuery(id: string, results: InlineQueryResult[], params?: AnswerInlineQueryParams): Promise<void>;
-    /**
-     * Set the bot's description in the given language. Bot-only.
-     *
-     * @method bs
-     */
-    setMyDescription(params?: {
-        description?: string;
-        languageCode?: string;
-    }): Promise<void>;
-    /**
-     * Set the bot's name in the given language. Bot-only.
-     *
-     * @method bs
-     */
-    setMyName(params?: {
-        name?: string;
-        languageCode?: string;
-    }): Promise<void>;
-    /**
-     * Set the bot's short description in the given language. Bot-only.
-     *
-     * @method bs
-     */
-    setMyShortDescription(params?: {
-        shortDescription?: string;
-        languageCode?: string;
-    }): Promise<void>;
-    /**
-     * Get the bot's description in the given language. Bot-only.
-     *
-     * @method bs
-     * @returns The current bot's description in the specified language.
-     */
-    getMyDescription(params?: {
-        languageCode?: string;
-    }): Promise<string>;
-    /**
-     * Get the bot's name in the given language. Bot-only.
-     *
-     * @method bs
-     * @returns The current bot's name in the specified language.
-     */
-    getMyName(params?: {
-        languageCode?: string;
-    }): Promise<string>;
-    /**
-     * Get the bot's short description in the given language. Bot-only.
-     *
-     * @method bs
-     * @returns The current bot's short description in the specified language.
-     */
-    getMyShortDescription(params?: {
-        languageCode?: string;
-    }): Promise<string>;
-    /**
-     * Delete multiple messages.
-     *
-     * @method ms
-     * @param chatId The identifier of the chat that contains the messages.
-     * @param messageIds The identifiers of the messages to delete.
-     */
-    deleteMessages(chatId: ID, messageIds: number[], params?: DeleteMessagesParams): Promise<void>;
-    /**
-     * Delete a single message.
-     *
-     * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The identifier of the message to delete.
-     */
-    deleteMessage(chatId: ID, messageId: number, params?: DeleteMessageParams): Promise<void>;
     /**
      * Send a photo.
      *
@@ -665,88 +463,110 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      */
     sendVenue(chatId: ID, latitude: number, longitude: number, title: string, address: string, params?: SendVenueParams): Promise<MessageVenue>;
     /**
-     * Get network statistics. This might not always be available.
+     * Send a poll.
      *
-     * @method mc
+     * @method ms
+     * @param chatId The chat to send the poll to.
+     * @param question The poll's question.
+     * @param options The poll's options.
+     * @returns The sent poll.
      */
-    getNetworkStatistics(): Promise<NetworkStatistics>;
+    sendPoll(chatId: ID, question: string, options: [string, string, ...string[]], params?: SendPollParams): Promise<MessagePoll>;
     /**
-     * Get chats from a chat list. User-only.
+     * Edit a message's text.
      *
-     * @method ch
+     * @method ms
+     * @param chatId The identifier of the chat that contains the message.
+     * @param messageId The message's identifier.
+     * @param text The new text of the message.
+     * @returns The edited text message.
      */
-    getChats(params?: GetChatsParams): Promise<Chat[]>;
+    editMessageText(chatId: ID, messageId: number, text: string, params?: EditMessageParams): Promise<MessageText>;
     /**
-     * Get a chat.
+     * Edit an inline message's text. Bot-only.
      *
-     * @method ch
+     * @method ms
+     * @param inlineMessageId The inline message's identifier.
+     * @param text The new text of the message.
      */
-    getChat(chatId: ID): Promise<Chat>;
+    editInlineMessageText(inlineMessageId: string, text: string, params?: EditMessageParams): Promise<void>;
     /**
-     * Get chat history. User-only.
+     * Edit a message's reply markup.
      *
-     * @method ch
-     * @param chatId The identifier of the chat to get its history.
+     * @method ms
+     * @param chatId The identifier of the chat that contains the message.
+     * @param messageId The message's identifier.
+     * @returns The edited message.
      */
-    getHistory(chatId: ID, params?: GetHistoryParams): Promise<Message[]>;
+    editMessageReplyMarkup(chatId: ID, messageId: number, params?: EditMessageReplyMarkupParams): Promise<Message>;
     /**
-     * Get custom emoji documents for download.
+     * Edit an inline message's reply markup. Bot-only.
      *
-     * @method fs
-     * @param id Identifier of one or more of custom emojis.
-     * @returns The custom emoji documents.
+     * @method ms
+     * @param inlineMessageId The inline message's identifier.
      */
-    getCustomEmojiStickers(id: string | string[]): Promise<Sticker[]>;
+    editInlineMessageReplyMarkup(inlineMessageId: string, params?: EditMessageReplyMarkupParams): Promise<void>;
     /**
-     * Set a chat's available reactions. User-only.
+     * Edit a message's live location.
      *
-     * @method ch
-     * @param chatId The identifier of the chat.
-     * @param availableReactions The new available reactions.
+     * @method ms
+     * @param chatId The identifier of the chat that contains the messages.
+     * @param messageId The message's identifier.
+     * @param latitude The new latitude.
+     * @param longitude The new longitude.
+     * @returns The edited location message.
      */
-    setAvailableReactions(chatId: ID, availableReactions: "none" | "all" | Reaction[]): Promise<void>;
+    editMessageLiveLocation(chatId: ID, messageId: number, latitude: number, longitude: number, params?: EditMessageLiveLocationParams): Promise<MessageLocation>;
     /**
-     * Change reactions made to a message.
+     * Edit an inline message's live location. Bot-only.
      *
-     * @method re
-     * @param chatId The identifier of the chat which the message belongs to.
-     * @param messageId The identifier of the message to add the reaction to.
-     * @param reactions The new reactions.
+     * @method ms
+     * @param inlineMessageId The inline message's identifier.
+     * @param latitude The new latitude.
+     * @param longitude The new longitude.
+     * @returns The edited location message.
      */
-    setReactions(chatId: number, messageId: number, reactions: Reaction[], params?: SetReactionsParams): Promise<void>;
+    editInlineMessageLiveLocation(inlineMessageId: string, latitude: number, longitude: number, params?: EditMessageLiveLocationParams): Promise<void>;
     /**
-     * Make a reaction to a message.
+     * Retrieve multiple messages.
      *
-     * @method re
-     * @param chatId The identifier of the chat which the message belongs to.
-     * @param messageId The identifier of the message to add the reaction to.
-     * @param reaction The reaction to add.
+     * @method ms
+     * @param chatId The identifier of the chat to retrieve the messages from.
+     * @param messageIds The identifiers of the messages to retrieve.
+     * @example ```ts
+     * const message = await client.getMessages("@MTKruto", [210, 212]);
+     * ```
+     * @returns The retrieved messages.
      */
-    addReaction(chatId: number, messageId: number, reaction: Reaction, params?: AddReactionParams): Promise<void>;
+    getMessages(chatId: ID, messageIds: number[]): Promise<Message[]>;
     /**
-     * Undo a reaction made to a message.
+     * Retrieve a single message.
      *
-     * @method re
-     * @param chatId The identifier of the chat which the message belongs to.
-     * @param messageId The identifier of the message which the reaction was made to.
-     * @param reaction The reaction to remove.
+     * @method ms
+     * @param chatId The identifier of the chat to retrieve the message from.
+     * @param messageId The identifier of the message to retrieve.
+     * @example ```ts
+     * const message = await client.getMessage("@MTKruto", 212);
+     * ```
+     * @returns The retrieved message.
      */
-    removeReaction(chatId: number, messageId: number, reaction: Reaction): Promise<void>;
+    getMessage(chatId: ID, messageId: number): Promise<Message | null>;
     /**
-     * Set a chat's photo.
+     * Delete multiple messages.
      *
-     * @method ch
-     * @param chatId The identifier of the chat.
-     * @param photo A photo to set as the chat's photo.
+     * @method ms
+     * @param chatId The identifier of the chat that contains the messages.
+     * @param messageIds The identifiers of the messages to delete.
      */
-    setChatPhoto(chatId: number, photo: FileSource, params?: SetChatPhotoParams): Promise<void>;
+    deleteMessages(chatId: ID, messageIds: number[], params?: DeleteMessagesParams): Promise<void>;
     /**
-     * Delete a chat's photo.
+     * Delete a single message.
      *
-     * @method ch
-     * @param chatId The identifier of the chat.
+     * @method ms
+     * @param chatId The identifier of the chat that contains the message.
+     * @param messageId The identifier of the message to delete.
      */
-    deleteChatPhoto(chatId: number): Promise<void>;
+    deleteMessage(chatId: ID, messageId: number, params?: DeleteMessageParams): Promise<void>;
     /**
      * Delete all messages sent by a specific member of a chat. User-only.
      *
@@ -778,6 +598,117 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param chatId The identifier of the chat.
      */
     unpinMessages(chatId: ID): Promise<void>;
+    /**
+     * Forward multiple messages.
+     *
+     * @method ms
+     * @param from The identifier of the chat to forward the messages from.
+     * @param to The identifier of the chat to forward the messages to.
+     * @param messageIds The identifiers of the messages to forward.
+     * @returns The forwarded messages.
+     */
+    forwardMessages(from: ID, to: ID, messageIds: number[], params?: ForwardMessagesParams): Promise<Message[]>;
+    /**
+     * Forward a single message.
+     *
+     * @method ms
+     * @param from The identifier of the chat to forward the message from.
+     * @param to The identifier of the chat to forward the message to.
+     * @param messageId The identifier of the message to forward.
+     * @returns The forwarded message.
+     */
+    forwardMessage(from: ID, to: ID, messageId: number, params?: ForwardMessagesParams): Promise<Message>;
+    /**
+     * Stop a poll.
+     *
+     * @method ms
+     * @param chatId The chat that includes the poll.
+     * @param messageId The idenfifier of the poll's message.
+     * @returns The new state of the poll.
+     */
+    stopPoll(chatId: ID, messageId: number, params?: StopPollParams): Promise<Poll>;
+    /**
+     * Send a chat action.
+     *
+     * @method ms
+     * @param chatId The chat to send the chat action to.
+     * @param action The chat action.
+     * @param messageThreadId The thread to send the chat action to.
+     */
+    sendChatAction(chatId: ID, action: ChatAction, params?: {
+        messageThreadId?: number;
+    }): Promise<void>;
+    /**
+     * Search the messages of a chat. User-only.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat to search the messages in.
+     * @param query The message search query.
+     */
+    searchMessages(chatId: ID, query: string, params?: SearchMessagesParams): Promise<Message[]>;
+    /**
+     * Download a file.
+     *
+     * @method fs
+     * @param fileId The identifier of the file to download.
+     * @example ```ts
+     * for await (const chunk of client.download(fileId, { chunkSize: 256 * 1024 })) {
+     *   await outFile.write(chunk);
+     * }
+     * ```
+     * @returns A generator yielding the contents of the file.
+     */
+    download(fileId: string, params?: DownloadParams): AsyncGenerator<Uint8Array, void, unknown>;
+    /**
+     * Get custom emoji documents for download.
+     *
+     * @method fs
+     * @param id Identifier of one or more of custom emojis.
+     * @returns The custom emoji documents.
+     */
+    getCustomEmojiStickers(id: string | string[]): Promise<Sticker[]>;
+    /**
+     * Get chats from a chat list. User-only.
+     *
+     * @method ch
+     */
+    getChats(params?: GetChatsParams): Promise<Chat[]>;
+    /**
+     * Get a chat.
+     *
+     * @method ch
+     */
+    getChat(chatId: ID): Promise<Chat>;
+    /**
+     * Get chat history. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to get its history.
+     */
+    getHistory(chatId: ID, params?: GetHistoryParams): Promise<Message[]>;
+    /**
+     * Set a chat's available reactions. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat.
+     * @param availableReactions The new available reactions.
+     */
+    setAvailableReactions(chatId: ID, availableReactions: "none" | "all" | Reaction[]): Promise<void>;
+    /**
+     * Set a chat's photo.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat.
+     * @param photo A photo to set as the chat's photo.
+     */
+    setChatPhoto(chatId: number, photo: FileSource, params?: SetChatPhotoParams): Promise<void>;
+    /**
+     * Delete a chat's photo.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat.
+     */
+    deleteChatPhoto(chatId: number): Promise<void>;
     /**
      * Ban a member from a chat.
      *
@@ -818,6 +749,198 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @returns The chat's administrators.
      */
     getChatAdministrators(chatId: ID): Promise<ChatMember[]>;
+    /**
+     * Enable join requests in a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat. Must be a channel or a supergroup.
+     */
+    enableJoinRequests(chatId: ID): Promise<void>;
+    /**
+     * Disable join requests in a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat. Must be a channel or a supergroup.
+     */
+    disableJoinRequests(chatId: ID): Promise<void>;
+    /**
+     * Get inactive chats. User-only.
+     *
+     * @method ch
+     * @retuns A list of inactive chats the current user is member of.
+     */
+    getInactiveChats(): Promise<InactiveChat[]>;
+    /**
+     * Get the invite links created for a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat.
+     * @returns The invite links created for the chat. This might be a subset of the results if they were less than `limit`. The parameters `afterDate` and `afterInviteLink` can be used for pagination.
+     */
+    getCreatedInviteLinks(chatId: ID, params?: GetCreatedInviteLinksParams): Promise<InviteLink[]>;
+    /**
+     * Join a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to join.
+     */
+    joinChat(chatId: ID): Promise<void>;
+    /**
+     * Leave a chat.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to leave.
+     */
+    leaveChat(chatId: ID): Promise<void>;
+    /**
+     * Get information on a user's chat membership.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat that includes the user.
+     * @param userId The identifier of the user.
+     */
+    getChatMember(chatId: ID, userId: ID): Promise<ChatMember>;
+    /**
+     * Set a chat's sticker set.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat. Must be a supergroup.
+     * @param setName The name of the set.
+     */
+    setChatStickerSet(chatId: ID, setName: string): Promise<void>;
+    /**
+     * Delete a chat's sticker set.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat. Must be a supergroup.
+     */
+    deleteChatStickerSet(chatId: ID): Promise<void>;
+    /**
+     * Set the number of boosts required to circument a chat's default restrictions. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat.
+     * @param boosts The number of boosts required to circumvent its restrictions.
+     */
+    setBoostsRequiredToCircumventRestrictions(chatId: ID, boosts: number): Promise<void>;
+    /**
+     * Create an invite link.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to create the invite link for.
+     * @returns The newly created invite link.
+     */
+    createInviteLink(chatId: ID, params?: CreateInviteLinkParams): Promise<InviteLink>;
+    /**
+     * Answer a callback query. Bot-only.
+     *
+     * @method cq
+     * @param id ID of the callback query to answer.
+     */
+    answerCallbackQuery(id: string, params?: AnswerCallbackQueryParams): Promise<void>;
+    /**
+     * Answer an inline query. Bot-only.
+     *
+     * @method iq
+     * @param id The ID of the inline query to answer.
+     * @param results The results to answer with.
+     */
+    answerInlineQuery(id: string, results: InlineQueryResult[], params?: AnswerInlineQueryParams): Promise<void>;
+    /**
+     * Set the bot's description in the given language. Bot-only.
+     *
+     * @method bs
+     */
+    setMyDescription(params?: {
+        description?: string;
+        languageCode?: string;
+    }): Promise<void>;
+    /**
+     * Set the bot's name in the given language. Bot-only.
+     *
+     * @method bs
+     */
+    setMyName(params?: {
+        name?: string;
+        languageCode?: string;
+    }): Promise<void>;
+    /**
+     * Set the bot's short description in the given language. Bot-only.
+     *
+     * @method bs
+     */
+    setMyShortDescription(params?: {
+        shortDescription?: string;
+        languageCode?: string;
+    }): Promise<void>;
+    /**
+     * Get the bot's description in the given language. Bot-only.
+     *
+     * @method bs
+     * @returns The current bot's description in the specified language.
+     */
+    getMyDescription(params?: {
+        languageCode?: string;
+    }): Promise<string>;
+    /**
+     * Get the bot's name in the given language. Bot-only.
+     *
+     * @method bs
+     * @returns The current bot's name in the specified language.
+     */
+    getMyName(params?: {
+        languageCode?: string;
+    }): Promise<string>;
+    /**
+     * Get the bot's short description in the given language. Bot-only.
+     *
+     * @method bs
+     * @returns The current bot's short description in the specified language.
+     */
+    getMyShortDescription(params?: {
+        languageCode?: string;
+    }): Promise<string>;
+    /**
+     * Set the bot's commands in the given scope and/or language. Bot-only.
+     *
+     * @method bs
+     * @param commands The commands to set.
+     */
+    setMyCommands(commands: BotCommand[], params?: SetMyCommandsParams): Promise<void>;
+    /**
+     * Get the bot's commands in the given scope and/or language. Bot-only.
+     *
+     * @method bs
+     * @returns The current bot's commands in the specified language.
+     */
+    getMyCommands(params?: GetMyCommandsParams): Promise<BotCommand[]>;
+    /**
+     * Change reactions made to a message.
+     *
+     * @method re
+     * @param chatId The identifier of the chat which the message belongs to.
+     * @param messageId The identifier of the message to add the reaction to.
+     * @param reactions The new reactions.
+     */
+    setReactions(chatId: number, messageId: number, reactions: Reaction[], params?: SetReactionsParams): Promise<void>;
+    /**
+     * Make a reaction to a message.
+     *
+     * @method re
+     * @param chatId The identifier of the chat which the message belongs to.
+     * @param messageId The identifier of the message to add the reaction to.
+     * @param reaction The reaction to add.
+     */
+    addReaction(chatId: number, messageId: number, reaction: Reaction, params?: AddReactionParams): Promise<void>;
+    /**
+     * Undo a reaction made to a message.
+     *
+     * @method re
+     * @param chatId The identifier of the chat which the message belongs to.
+     * @param messageId The identifier of the message which the reaction was made to.
+     * @param reaction The reaction to remove.
+     */
+    removeReaction(chatId: number, messageId: number, reaction: Reaction): Promise<void>;
     /**
      * Create a story. User-only.
      *
@@ -892,104 +1015,11 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      */
     removeStoryFromHighlights(chatId: ID, storyId: number): Promise<void>;
     /**
-     * Enable join requests in a chat. User-only.
+     * Get network statistics. This might not always be available.
      *
-     * @method ch
-     * @param chatId The identifier of the chat. Must be a channel or a supergroup.
+     * @method mc
      */
-    enableJoinRequests(chatId: ID): Promise<void>;
-    /**
-     * Disable join requests in a chat. User-only.
-     *
-     * @method ch
-     * @param chatId The identifier of the chat. Must be a channel or a supergroup.
-     */
-    disableJoinRequests(chatId: ID): Promise<void>;
-    /**
-     * Show a username in the current account, a bot account, sa upergroup, or a channel's profile. User-only.
-     *
-     * @method ac
-     * @param id `"me"`, a bot ID, a supergroup ID, or a channel ID.
-     * @param username The username to show.
-     */
-    showUsername(id: ID, username: string): Promise<void>;
-    /**
-     * Hide a username from the current account, a bot account, a supergroup, or a channel's profile. User-only.
-     *
-     * @method ac
-     * @param id `"me"`, a bot ID, a supergroup ID, or a channel ID.
-     * @param username The username to hide.
-     */
-    hideUsername(id: ID, username: string): Promise<void>;
-    /**
-     * Reorder the usernames of the current account, a bot account, a supergroup, or a channel's profile. User-only.
-     *
-     * @method ac
-     * @param id `"me"`, a bot ID, a supergroup ID, or a channel ID.
-     * @param order The new order to use.
-     * @returns Whether the order was changed.
-     */
-    reorderUsernames(id: ID, order: string[]): Promise<boolean>;
-    /**
-     * Hide all usernames from the a supergroup or a channel's profile. User-only.
-     *
-     * @method ac
-     * @param id A supergroup ID or a channel ID.
-     */
-    hideUsernames(id: ID): Promise<boolean>;
-    /**
-     * Get inactive chats. User-only.
-     *
-     * @method ch
-     * @retuns A list of inactive chats the current user is member of.
-     */
-    getInactiveChats(): Promise<InactiveChat[]>;
-    /**
-     * Search the messages of a chat. User-only.
-     *
-     * @method ms
-     * @param chatId The identifier of the chat to search the messages in.
-     * @param query The message search query.
-     */
-    searchMessages(chatId: ID, query: string, params?: SearchMessagesParams): Promise<Message[]>;
-    /**
-     * Set the number of boosts required to circument a chat's default restrictions. User-only.
-     *
-     * @method ch
-     * @param chatId The identifier of the chat.
-     * @param boosts The number of boosts required to circumvent its restrictions.
-     */
-    setBoostsRequiredToCircumventRestrictions(chatId: ID, boosts: number): Promise<void>;
-    /**
-     * Create an invite link.
-     *
-     * @method ch
-     * @param chatId The identifier of the chat to create the invite link for.
-     * @returns The newly created invite link.
-     */
-    createInviteLink(chatId: ID, params?: CreateInviteLinkParams): Promise<InviteLink>;
-    /**
-     * Get the invite links created for a chat. User-only.
-     *
-     * @method ch
-     * @param chatId The identifier of the chat.
-     * @returns The invite links created for the chat. This might be a subset of the results if they were less than `limit`. The parameters `afterDate` and `afterInviteLink` can be used for pagination.
-     */
-    getCreatedInviteLinks(chatId: ID, params?: GetCreatedInviteLinksParams): Promise<InviteLink[]>;
-    /**
-     * Join a chat. User-only.
-     *
-     * @method ch
-     * @param chatId The identifier of the chat to join.
-     */
-    joinChat(chatId: ID): Promise<void>;
-    /**
-     * Leave a chat.
-     *
-     * @method ch
-     * @param chatId The identifier of the chat to leave.
-     */
-    leaveChat(chatId: ID): Promise<void>;
+    getNetworkStatistics(): Promise<NetworkStatistics>;
     /**
      * Block a user. User-only.
      *
@@ -1004,35 +1034,5 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param userId The identifier of the user to unblock.
      */
     unblockUser(userId: ID): Promise<void>;
-    /**
-     * Get information on a user's chat membership.
-     *
-     * @method ch
-     * @param chatId The identifier of a chat that includes the user.
-     * @param userId The identifier of the user.
-     */
-    getChatMember(chatId: ID, userId: ID): Promise<ChatMember>;
-    /**
-     * Set a chat's sticker set.
-     *
-     * @method ch
-     * @param chatId The identifier of the chat. Must be a supergroup.
-     * @param setName The name of the set.
-     */
-    setChatStickerSet(chatId: ID, setName: string): Promise<void>;
-    /**
-     * Delete a chat's sticker set.
-     *
-     * @method ch
-     * @param chatId The identifier of the chat. Must be a supergroup.
-     */
-    deleteChatStickerSet(chatId: ID): Promise<void>;
-    /**
-     * Get a business connection.
-     *
-     * @method ac
-     * @param id The identifier of the business connection.
-     */
-    getBusinessConnection(id: string): Promise<BusinessConnection>;
 }
 export {};

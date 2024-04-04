@@ -1267,153 +1267,9 @@ export class Client extends Composer {
         }
         return await this.messageStorage.getEntity(id);
     }
-    /**
-     * Send a text message.
-     *
-     * @method ms
-     * @param chatId The chat to send the message to.
-     * @param text The message's text.
-     * @returns The sent text message.
-     */
-    async sendMessage(chatId, text, params) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").sendMessage(chatId, text, params);
-    }
-    /**
-     * Edit a message's text.
-     *
-     * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The message's identifier.
-     * @param text The new text of the message.
-     * @returns The edited text message.
-     */
-    async editMessageText(chatId, messageId, text, params) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").editMessageText(chatId, messageId, text, params);
-    }
-    /**
-     * Edit an inline message's text. Bot-only.
-     *
-     * @method ms
-     * @param inlineMessageId The inline message's identifier.
-     * @param text The new text of the message.
-     */
-    async editInlineMessageText(inlineMessageId, text, params) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").editInlineMessageText(inlineMessageId, text, params);
-    }
-    /**
-     * Edit a message's reply markup.
-     *
-     * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The message's identifier.
-     * @returns The edited message.
-     */
-    async editMessageReplyMarkup(chatId, messageId, params) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").editMessageReplyMarkup(chatId, messageId, params);
-    }
-    /**
-     * Edit an inline message's reply markup. Bot-only.
-     *
-     * @method ms
-     * @param inlineMessageId The inline message's identifier.
-     */
-    async editInlineMessageReplyMarkup(inlineMessageId, params) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").editInlineMessageReplyMarkup(inlineMessageId, params);
-    }
-    /**
-     * Edit a message's live location.
-     *
-     * @method ms
-     * @param chatId The identifier of the chat that contains the messages.
-     * @param messageId The message's identifier.
-     * @param latitude The new latitude.
-     * @param longitude The new longitude.
-     * @returns The edited location message.
-     */
-    async editMessageLiveLocation(chatId, messageId, latitude, longitude, params) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").editMessageLiveLocation(chatId, messageId, latitude, longitude, params);
-    }
-    /**
-     * Edit an inline message's live location. Bot-only.
-     *
-     * @method ms
-     * @param inlineMessageId The inline message's identifier.
-     * @param latitude The new latitude.
-     * @param longitude The new longitude.
-     * @returns The edited location message.
-     */
-    async editInlineMessageLiveLocation(inlineMessageId, latitude, longitude, params) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").editInlineMessageLiveLocation(inlineMessageId, latitude, longitude, params);
-    }
-    /**
-     * Retrieve multiple messages.
-     *
-     * @method ms
-     * @param chatId The identifier of the chat to retrieve the messages from.
-     * @param messageIds The identifiers of the messages to retrieve.
-     * @example ```ts
-     * const message = await client.getMessages("@MTKruto", [210, 212]);
-     * ```
-     * @returns The retrieved messages.
-     */
-    async getMessages(chatId, messageIds) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").getMessages(chatId, messageIds);
-    }
-    /**
-     * Retrieve a single message.
-     *
-     * @method ms
-     * @param chatId The identifier of the chat to retrieve the message from.
-     * @param messageId The identifier of the message to retrieve.
-     * @example ```ts
-     * const message = await client.getMessage("@MTKruto", 212);
-     * ```
-     * @returns The retrieved message.
-     */
-    async getMessage(chatId, messageId) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").getMessage(chatId, messageId);
-    }
-    /**
-     * Download a file.
-     *
-     * @method fs
-     * @param fileId The identifier of the file to download.
-     * @example ```ts
-     * for await (const chunk of client.download(fileId, { chunkSize: 256 * 1024 })) {
-     *   await outFile.write(chunk);
-     * }
-     * ```
-     * @returns A generator yielding the contents of the file.
-     */
-    async *download(fileId, params) {
-        for await (const chunk of __classPrivateFieldGet(this, _Client_fileManager, "f").download(fileId, params)) {
-            yield chunk;
-        }
-    }
-    /**
-     * Forward multiple messages.
-     *
-     * @method ms
-     * @param from The identifier of the chat to forward the messages from.
-     * @param to The identifier of the chat to forward the messages to.
-     * @param messageIds The identifiers of the messages to forward.
-     * @returns The forwarded messages.
-     */
-    async forwardMessages(from, to, messageIds, params) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").forwardMessages(from, to, messageIds, params);
-    }
-    /**
-     * Forward a single message.
-     *
-     * @method ms
-     * @param from The identifier of the chat to forward the message from.
-     * @param to The identifier of the chat to forward the message to.
-     * @param messageId The identifier of the message to forward.
-     * @returns The forwarded message.
-     */
-    async forwardMessage(from, to, messageId, params) {
-        return await this.forwardMessages(from, to, [messageId], params).then((v) => v[0]);
-    }
+    //
+    // ========================= ACCOUNT ========================= //
+    //
     /**
      * Get information on the currently authorized user.
      *
@@ -1431,146 +1287,67 @@ export class Client extends Composer {
         return user;
     }
     /**
-     * Answer a callback query. Bot-only.
+     * Show a username in the current account, a bot account, sa upergroup, or a channel's profile. User-only.
      *
-     * @method cq
-     * @param id ID of the callback query to answer.
+     * @method ac
+     * @param id `"me"`, a bot ID, a supergroup ID, or a channel ID.
+     * @param username The username to show.
      */
-    async answerCallbackQuery(id, params) {
-        await __classPrivateFieldGet(this, _Client_callbackQueryManager, "f").answerCallbackQuery(id, params);
+    async showUsername(id, username) {
+        await __classPrivateFieldGet(this, _Client_accountManager, "f").showUsername(id, username);
     }
     /**
-     * Send a poll.
+     * Hide a username from the current account, a bot account, a supergroup, or a channel's profile. User-only.
+     *
+     * @method ac
+     * @param id `"me"`, a bot ID, a supergroup ID, or a channel ID.
+     * @param username The username to hide.
+     */
+    async hideUsername(id, username) {
+        await __classPrivateFieldGet(this, _Client_accountManager, "f").hideUsername(id, username);
+    }
+    /**
+     * Reorder the usernames of the current account, a bot account, a supergroup, or a channel's profile. User-only.
+     *
+     * @method ac
+     * @param id `"me"`, a bot ID, a supergroup ID, or a channel ID.
+     * @param order The new order to use.
+     * @returns Whether the order was changed.
+     */
+    async reorderUsernames(id, order) {
+        return await __classPrivateFieldGet(this, _Client_accountManager, "f").reorderUsernames(id, order);
+    }
+    /**
+     * Hide all usernames from the a supergroup or a channel's profile. User-only.
+     *
+     * @method ac
+     * @param id A supergroup ID or a channel ID.
+     */
+    async hideUsernames(id) {
+        return await __classPrivateFieldGet(this, _Client_accountManager, "f").hideUsernames(id);
+    }
+    /**
+     * Get a business connection. Bot-only.
+     *
+     * @method ac
+     * @param id The identifier of the business connection.
+     */
+    async getBusinessConnection(id) {
+        return await __classPrivateFieldGet(this, _Client_businessConnectionManager, "f").getBusinessConnection(id);
+    }
+    //
+    // ========================= MESSAGES ========================= //
+    //
+    /**
+     * Send a text message.
      *
      * @method ms
-     * @param chatId The chat to send the poll to.
-     * @param question The poll's question.
-     * @param options The poll's options.
-     * @returns The sent poll.
+     * @param chatId The chat to send the message to.
+     * @param text The message's text.
+     * @returns The sent text message.
      */
-    async sendPoll(chatId, question, options, params) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").sendPoll(chatId, question, options, params);
-    }
-    /**
-     * Stop a poll.
-     *
-     * @method ms
-     * @param chatId The chat that includes the poll.
-     * @param messageId The idenfifier of the poll's message.
-     * @returns The new state of the poll.
-     */
-    async stopPoll(chatId, messageId, params) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").stopPoll(chatId, messageId, params);
-    }
-    /**
-     * Send a chat action.
-     *
-     * @method ms
-     * @param chatId The chat to send the chat action to.
-     * @param action The chat action.
-     * @param messageThreadId The thread to send the chat action to.
-     */
-    async sendChatAction(chatId, action, params) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").sendChatAction(chatId, action, params);
-    }
-    /**
-     * Set the bot's commands in the given scope and/or language. Bot-only.
-     *
-     * @method bs
-     * @param commands The commands to set.
-     */
-    async setMyCommands(commands, params) {
-        await __classPrivateFieldGet(this, _Client_botInfoManager, "f").setMyCommands(commands, params);
-    }
-    /**
-     * Get the bot's commands in the given scope and/or language. Bot-only.
-     *
-     * @method bs
-     * @returns The current bot's commands in the specified language.
-     */
-    async getMyCommands(params) {
-        return await __classPrivateFieldGet(this, _Client_botInfoManager, "f").getMyCommands(params);
-    }
-    /**
-     * Answer an inline query. Bot-only.
-     *
-     * @method iq
-     * @param id The ID of the inline query to answer.
-     * @param results The results to answer with.
-     */
-    async answerInlineQuery(id, results, params) {
-        await __classPrivateFieldGet(this, _Client_inlineQueryManager, "f").answerInlineQuery(id, results, params);
-    }
-    /**
-     * Set the bot's description in the given language. Bot-only.
-     *
-     * @method bs
-     */
-    async setMyDescription(params) {
-        await __classPrivateFieldGet(this, _Client_botInfoManager, "f").setMyDescription(params);
-    }
-    /**
-     * Set the bot's name in the given language. Bot-only.
-     *
-     * @method bs
-     */
-    async setMyName(params) {
-        await __classPrivateFieldGet(this, _Client_botInfoManager, "f").setMyName(params);
-    }
-    /**
-     * Set the bot's short description in the given language. Bot-only.
-     *
-     * @method bs
-     */
-    async setMyShortDescription(params) {
-        await __classPrivateFieldGet(this, _Client_botInfoManager, "f").setMyShortDescription(params);
-    }
-    /**
-     * Get the bot's description in the given language. Bot-only.
-     *
-     * @method bs
-     * @returns The current bot's description in the specified language.
-     */
-    async getMyDescription(params) {
-        return await __classPrivateFieldGet(this, _Client_botInfoManager, "f").getMyDescription(params);
-    }
-    /**
-     * Get the bot's name in the given language. Bot-only.
-     *
-     * @method bs
-     * @returns The current bot's name in the specified language.
-     */
-    async getMyName(params) {
-        return await __classPrivateFieldGet(this, _Client_botInfoManager, "f").getMyName(params);
-    }
-    /**
-     * Get the bot's short description in the given language. Bot-only.
-     *
-     * @method bs
-     * @returns The current bot's short description in the specified language.
-     */
-    async getMyShortDescription(params) {
-        return await __classPrivateFieldGet(this, _Client_botInfoManager, "f").getMyShortDescription(params);
-    }
-    /**
-     * Delete multiple messages.
-     *
-     * @method ms
-     * @param chatId The identifier of the chat that contains the messages.
-     * @param messageIds The identifiers of the messages to delete.
-     */
-    async deleteMessages(chatId, messageIds, params) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").deleteMessages(chatId, messageIds, params);
-    }
-    /**
-     * Delete a single message.
-     *
-     * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The identifier of the message to delete.
-     */
-    async deleteMessage(chatId, messageId, params) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").deleteMessages(chatId, [messageId], params);
+    async sendMessage(chatId, text, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").sendMessage(chatId, text, params);
     }
     /**
      * Send a photo.
@@ -1709,109 +1486,131 @@ export class Client extends Composer {
         return await __classPrivateFieldGet(this, _Client_messageManager, "f").sendVenue(chatId, latitude, longitude, title, address, params);
     }
     /**
-     * Get network statistics. This might not always be available.
+     * Send a poll.
      *
-     * @method mc
+     * @method ms
+     * @param chatId The chat to send the poll to.
+     * @param question The poll's question.
+     * @param options The poll's options.
+     * @returns The sent poll.
      */
-    async getNetworkStatistics() {
-        return await __classPrivateFieldGet(this, _Client_networkStatisticsManager, "f").getNetworkStatistics();
+    async sendPoll(chatId, question, options, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").sendPoll(chatId, question, options, params);
     }
     /**
-     * Get chats from a chat list. User-only.
+     * Edit a message's text.
      *
-     * @method ch
+     * @method ms
+     * @param chatId The identifier of the chat that contains the message.
+     * @param messageId The message's identifier.
+     * @param text The new text of the message.
+     * @returns The edited text message.
      */
-    async getChats(params) {
-        return await __classPrivateFieldGet(this, _Client_chatListManager, "f").getChats(params?.from, params?.after, params?.limit);
+    async editMessageText(chatId, messageId, text, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").editMessageText(chatId, messageId, text, params);
     }
     /**
-     * Get a chat.
+     * Edit an inline message's text. Bot-only.
      *
-     * @method ch
+     * @method ms
+     * @param inlineMessageId The inline message's identifier.
+     * @param text The new text of the message.
      */
-    async getChat(chatId) {
-        return await __classPrivateFieldGet(this, _Client_chatListManager, "f").getChat(chatId);
+    async editInlineMessageText(inlineMessageId, text, params) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").editInlineMessageText(inlineMessageId, text, params);
     }
     /**
-     * Get chat history. User-only.
+     * Edit a message's reply markup.
      *
-     * @method ch
-     * @param chatId The identifier of the chat to get its history.
+     * @method ms
+     * @param chatId The identifier of the chat that contains the message.
+     * @param messageId The message's identifier.
+     * @returns The edited message.
      */
-    async getHistory(chatId, params) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").getHistory(chatId, params);
+    async editMessageReplyMarkup(chatId, messageId, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").editMessageReplyMarkup(chatId, messageId, params);
     }
     /**
-     * Get custom emoji documents for download.
+     * Edit an inline message's reply markup. Bot-only.
      *
-     * @method fs
-     * @param id Identifier of one or more of custom emojis.
-     * @returns The custom emoji documents.
+     * @method ms
+     * @param inlineMessageId The inline message's identifier.
      */
-    async getCustomEmojiStickers(id) {
-        return await __classPrivateFieldGet(this, _Client_fileManager, "f").getCustomEmojiStickers(id);
+    async editInlineMessageReplyMarkup(inlineMessageId, params) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").editInlineMessageReplyMarkup(inlineMessageId, params);
     }
     /**
-     * Set a chat's available reactions. User-only.
+     * Edit a message's live location.
      *
-     * @method ch
-     * @param chatId The identifier of the chat.
-     * @param availableReactions The new available reactions.
+     * @method ms
+     * @param chatId The identifier of the chat that contains the messages.
+     * @param messageId The message's identifier.
+     * @param latitude The new latitude.
+     * @param longitude The new longitude.
+     * @returns The edited location message.
      */
-    async setAvailableReactions(chatId, availableReactions) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").setAvailableReactions(chatId, availableReactions);
+    async editMessageLiveLocation(chatId, messageId, latitude, longitude, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").editMessageLiveLocation(chatId, messageId, latitude, longitude, params);
     }
     /**
-     * Change reactions made to a message.
+     * Edit an inline message's live location. Bot-only.
      *
-     * @method re
-     * @param chatId The identifier of the chat which the message belongs to.
-     * @param messageId The identifier of the message to add the reaction to.
-     * @param reactions The new reactions.
+     * @method ms
+     * @param inlineMessageId The inline message's identifier.
+     * @param latitude The new latitude.
+     * @param longitude The new longitude.
+     * @returns The edited location message.
      */
-    async setReactions(chatId, messageId, reactions, params) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").setReactions(chatId, messageId, reactions, params);
+    async editInlineMessageLiveLocation(inlineMessageId, latitude, longitude, params) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").editInlineMessageLiveLocation(inlineMessageId, latitude, longitude, params);
     }
     /**
-     * Make a reaction to a message.
+     * Retrieve multiple messages.
      *
-     * @method re
-     * @param chatId The identifier of the chat which the message belongs to.
-     * @param messageId The identifier of the message to add the reaction to.
-     * @param reaction The reaction to add.
+     * @method ms
+     * @param chatId The identifier of the chat to retrieve the messages from.
+     * @param messageIds The identifiers of the messages to retrieve.
+     * @example ```ts
+     * const message = await client.getMessages("@MTKruto", [210, 212]);
+     * ```
+     * @returns The retrieved messages.
      */
-    async addReaction(chatId, messageId, reaction, params) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").addReaction(chatId, messageId, reaction, params);
+    async getMessages(chatId, messageIds) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").getMessages(chatId, messageIds);
     }
     /**
-     * Undo a reaction made to a message.
+     * Retrieve a single message.
      *
-     * @method re
-     * @param chatId The identifier of the chat which the message belongs to.
-     * @param messageId The identifier of the message which the reaction was made to.
-     * @param reaction The reaction to remove.
+     * @method ms
+     * @param chatId The identifier of the chat to retrieve the message from.
+     * @param messageId The identifier of the message to retrieve.
+     * @example ```ts
+     * const message = await client.getMessage("@MTKruto", 212);
+     * ```
+     * @returns The retrieved message.
      */
-    async removeReaction(chatId, messageId, reaction) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").removeReaction(chatId, messageId, reaction);
+    async getMessage(chatId, messageId) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").getMessage(chatId, messageId);
     }
     /**
-     * Set a chat's photo.
+     * Delete multiple messages.
      *
-     * @method ch
-     * @param chatId The identifier of the chat.
-     * @param photo A photo to set as the chat's photo.
+     * @method ms
+     * @param chatId The identifier of the chat that contains the messages.
+     * @param messageIds The identifiers of the messages to delete.
      */
-    async setChatPhoto(chatId, photo, params) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").setChatPhoto(chatId, photo, params);
+    async deleteMessages(chatId, messageIds, params) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").deleteMessages(chatId, messageIds, params);
     }
     /**
-     * Delete a chat's photo.
+     * Delete a single message.
      *
-     * @method ch
-     * @param chatId The identifier of the chat.
+     * @method ms
+     * @param chatId The identifier of the chat that contains the message.
+     * @param messageId The identifier of the message to delete.
      */
-    async deleteChatPhoto(chatId) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").deleteChatPhoto(chatId);
+    async deleteMessage(chatId, messageId, params) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").deleteMessages(chatId, [messageId], params);
     }
     /**
      * Delete all messages sent by a specific member of a chat. User-only.
@@ -1851,6 +1650,149 @@ export class Client extends Composer {
      */
     async unpinMessages(chatId) {
         await __classPrivateFieldGet(this, _Client_messageManager, "f").unpinMessages(chatId);
+    }
+    /**
+     * Forward multiple messages.
+     *
+     * @method ms
+     * @param from The identifier of the chat to forward the messages from.
+     * @param to The identifier of the chat to forward the messages to.
+     * @param messageIds The identifiers of the messages to forward.
+     * @returns The forwarded messages.
+     */
+    async forwardMessages(from, to, messageIds, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").forwardMessages(from, to, messageIds, params);
+    }
+    /**
+     * Forward a single message.
+     *
+     * @method ms
+     * @param from The identifier of the chat to forward the message from.
+     * @param to The identifier of the chat to forward the message to.
+     * @param messageId The identifier of the message to forward.
+     * @returns The forwarded message.
+     */
+    async forwardMessage(from, to, messageId, params) {
+        return await this.forwardMessages(from, to, [messageId], params).then((v) => v[0]);
+    }
+    /**
+     * Stop a poll.
+     *
+     * @method ms
+     * @param chatId The chat that includes the poll.
+     * @param messageId The idenfifier of the poll's message.
+     * @returns The new state of the poll.
+     */
+    async stopPoll(chatId, messageId, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").stopPoll(chatId, messageId, params);
+    }
+    /**
+     * Send a chat action.
+     *
+     * @method ms
+     * @param chatId The chat to send the chat action to.
+     * @param action The chat action.
+     * @param messageThreadId The thread to send the chat action to.
+     */
+    async sendChatAction(chatId, action, params) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").sendChatAction(chatId, action, params);
+    }
+    /**
+     * Search the messages of a chat. User-only.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat to search the messages in.
+     * @param query The message search query.
+     */
+    async searchMessages(chatId, query, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").searchMessages(chatId, query, params);
+    }
+    //
+    // ========================= FILES ========================= //
+    //
+    /**
+     * Download a file.
+     *
+     * @method fs
+     * @param fileId The identifier of the file to download.
+     * @example ```ts
+     * for await (const chunk of client.download(fileId, { chunkSize: 256 * 1024 })) {
+     *   await outFile.write(chunk);
+     * }
+     * ```
+     * @returns A generator yielding the contents of the file.
+     */
+    async *download(fileId, params) {
+        for await (const chunk of __classPrivateFieldGet(this, _Client_fileManager, "f").download(fileId, params)) {
+            yield chunk;
+        }
+    }
+    /**
+     * Get custom emoji documents for download.
+     *
+     * @method fs
+     * @param id Identifier of one or more of custom emojis.
+     * @returns The custom emoji documents.
+     */
+    async getCustomEmojiStickers(id) {
+        return await __classPrivateFieldGet(this, _Client_fileManager, "f").getCustomEmojiStickers(id);
+    }
+    //
+    // ========================= CHATS ========================= //
+    //
+    /**
+     * Get chats from a chat list. User-only.
+     *
+     * @method ch
+     */
+    async getChats(params) {
+        return await __classPrivateFieldGet(this, _Client_chatListManager, "f").getChats(params?.from, params?.after, params?.limit);
+    }
+    /**
+     * Get a chat.
+     *
+     * @method ch
+     */
+    async getChat(chatId) {
+        return await __classPrivateFieldGet(this, _Client_chatListManager, "f").getChat(chatId);
+    }
+    /**
+     * Get chat history. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to get its history.
+     */
+    async getHistory(chatId, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").getHistory(chatId, params);
+    }
+    /**
+     * Set a chat's available reactions. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat.
+     * @param availableReactions The new available reactions.
+     */
+    async setAvailableReactions(chatId, availableReactions) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").setAvailableReactions(chatId, availableReactions);
+    }
+    /**
+     * Set a chat's photo.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat.
+     * @param photo A photo to set as the chat's photo.
+     */
+    async setChatPhoto(chatId, photo, params) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").setChatPhoto(chatId, photo, params);
+    }
+    /**
+     * Delete a chat's photo.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat.
+     */
+    async deleteChatPhoto(chatId) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").deleteChatPhoto(chatId);
     }
     /**
      * Ban a member from a chat.
@@ -1903,6 +1845,246 @@ export class Client extends Composer {
     async getChatAdministrators(chatId) {
         return await __classPrivateFieldGet(this, _Client_messageManager, "f").getChatAdministrators(chatId);
     }
+    /**
+     * Enable join requests in a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat. Must be a channel or a supergroup.
+     */
+    async enableJoinRequests(chatId) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").enableJoinRequests(chatId);
+    }
+    /**
+     * Disable join requests in a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat. Must be a channel or a supergroup.
+     */
+    async disableJoinRequests(chatId) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").disableJoinRequests(chatId);
+    }
+    /**
+     * Get inactive chats. User-only.
+     *
+     * @method ch
+     * @retuns A list of inactive chats the current user is member of.
+     */
+    async getInactiveChats() {
+        return await __classPrivateFieldGet(this, _Client_accountManager, "f").getInactiveChats();
+    }
+    /**
+     * Get the invite links created for a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat.
+     * @returns The invite links created for the chat. This might be a subset of the results if they were less than `limit`. The parameters `afterDate` and `afterInviteLink` can be used for pagination.
+     */
+    async getCreatedInviteLinks(chatId, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").getCreatedInviteLinks(chatId, params);
+    }
+    /**
+     * Join a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to join.
+     */
+    async joinChat(chatId) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").joinChat(chatId);
+    }
+    /**
+     * Leave a chat.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to leave.
+     */
+    async leaveChat(chatId) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").leaveChat(chatId);
+    }
+    /**
+     * Get information on a user's chat membership.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat that includes the user.
+     * @param userId The identifier of the user.
+     */
+    async getChatMember(chatId, userId) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").getChatMember(chatId, userId);
+    }
+    /**
+     * Set a chat's sticker set.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat. Must be a supergroup.
+     * @param setName The name of the set.
+     */
+    async setChatStickerSet(chatId, setName) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").setChatStickerSet(chatId, setName);
+    }
+    /**
+     * Delete a chat's sticker set.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat. Must be a supergroup.
+     */
+    async deleteChatStickerSet(chatId) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").deleteChatStickerSet(chatId);
+    }
+    /**
+     * Set the number of boosts required to circument a chat's default restrictions. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat.
+     * @param boosts The number of boosts required to circumvent its restrictions.
+     */
+    async setBoostsRequiredToCircumventRestrictions(chatId, boosts) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").setBoostsRequiredToCircumventRestrictions(chatId, boosts);
+    }
+    /**
+     * Create an invite link.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to create the invite link for.
+     * @returns The newly created invite link.
+     */
+    async createInviteLink(chatId, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").createInviteLink(chatId, params);
+    }
+    //
+    // ========================= CALLBACK QUERIES ========================= //
+    //
+    /**
+     * Answer a callback query. Bot-only.
+     *
+     * @method cq
+     * @param id ID of the callback query to answer.
+     */
+    async answerCallbackQuery(id, params) {
+        await __classPrivateFieldGet(this, _Client_callbackQueryManager, "f").answerCallbackQuery(id, params);
+    }
+    //
+    // ========================= INLINE QUERIES ========================= //
+    //
+    /**
+     * Answer an inline query. Bot-only.
+     *
+     * @method iq
+     * @param id The ID of the inline query to answer.
+     * @param results The results to answer with.
+     */
+    async answerInlineQuery(id, results, params) {
+        await __classPrivateFieldGet(this, _Client_inlineQueryManager, "f").answerInlineQuery(id, results, params);
+    }
+    //
+    // ========================= BOTS ========================= //
+    //
+    /**
+     * Set the bot's description in the given language. Bot-only.
+     *
+     * @method bs
+     */
+    async setMyDescription(params) {
+        await __classPrivateFieldGet(this, _Client_botInfoManager, "f").setMyDescription(params);
+    }
+    /**
+     * Set the bot's name in the given language. Bot-only.
+     *
+     * @method bs
+     */
+    async setMyName(params) {
+        await __classPrivateFieldGet(this, _Client_botInfoManager, "f").setMyName(params);
+    }
+    /**
+     * Set the bot's short description in the given language. Bot-only.
+     *
+     * @method bs
+     */
+    async setMyShortDescription(params) {
+        await __classPrivateFieldGet(this, _Client_botInfoManager, "f").setMyShortDescription(params);
+    }
+    /**
+     * Get the bot's description in the given language. Bot-only.
+     *
+     * @method bs
+     * @returns The current bot's description in the specified language.
+     */
+    async getMyDescription(params) {
+        return await __classPrivateFieldGet(this, _Client_botInfoManager, "f").getMyDescription(params);
+    }
+    /**
+     * Get the bot's name in the given language. Bot-only.
+     *
+     * @method bs
+     * @returns The current bot's name in the specified language.
+     */
+    async getMyName(params) {
+        return await __classPrivateFieldGet(this, _Client_botInfoManager, "f").getMyName(params);
+    }
+    /**
+     * Get the bot's short description in the given language. Bot-only.
+     *
+     * @method bs
+     * @returns The current bot's short description in the specified language.
+     */
+    async getMyShortDescription(params) {
+        return await __classPrivateFieldGet(this, _Client_botInfoManager, "f").getMyShortDescription(params);
+    }
+    /**
+     * Set the bot's commands in the given scope and/or language. Bot-only.
+     *
+     * @method bs
+     * @param commands The commands to set.
+     */
+    async setMyCommands(commands, params) {
+        await __classPrivateFieldGet(this, _Client_botInfoManager, "f").setMyCommands(commands, params);
+    }
+    /**
+     * Get the bot's commands in the given scope and/or language. Bot-only.
+     *
+     * @method bs
+     * @returns The current bot's commands in the specified language.
+     */
+    async getMyCommands(params) {
+        return await __classPrivateFieldGet(this, _Client_botInfoManager, "f").getMyCommands(params);
+    }
+    //
+    // ========================= REACTIONS ========================= //
+    //
+    /**
+     * Change reactions made to a message.
+     *
+     * @method re
+     * @param chatId The identifier of the chat which the message belongs to.
+     * @param messageId The identifier of the message to add the reaction to.
+     * @param reactions The new reactions.
+     */
+    async setReactions(chatId, messageId, reactions, params) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").setReactions(chatId, messageId, reactions, params);
+    }
+    /**
+     * Make a reaction to a message.
+     *
+     * @method re
+     * @param chatId The identifier of the chat which the message belongs to.
+     * @param messageId The identifier of the message to add the reaction to.
+     * @param reaction The reaction to add.
+     */
+    async addReaction(chatId, messageId, reaction, params) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").addReaction(chatId, messageId, reaction, params);
+    }
+    /**
+     * Undo a reaction made to a message.
+     *
+     * @method re
+     * @param chatId The identifier of the chat which the message belongs to.
+     * @param messageId The identifier of the message which the reaction was made to.
+     * @param reaction The reaction to remove.
+     */
+    async removeReaction(chatId, messageId, reaction) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").removeReaction(chatId, messageId, reaction);
+    }
+    //
+    // ========================= STORIES ========================= //
+    //
     /**
      * Create a story. User-only.
      *
@@ -1997,130 +2179,16 @@ export class Client extends Composer {
     async removeStoryFromHighlights(chatId, storyId) {
         await __classPrivateFieldGet(this, _Client_storyManager, "f").removeStoryFromHighlights(chatId, storyId);
     }
+    //
+    // ========================= MISC ========================= //
+    //
     /**
-     * Enable join requests in a chat. User-only.
+     * Get network statistics. This might not always be available.
      *
-     * @method ch
-     * @param chatId The identifier of the chat. Must be a channel or a supergroup.
+     * @method mc
      */
-    async enableJoinRequests(chatId) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").enableJoinRequests(chatId);
-    }
-    /**
-     * Disable join requests in a chat. User-only.
-     *
-     * @method ch
-     * @param chatId The identifier of the chat. Must be a channel or a supergroup.
-     */
-    async disableJoinRequests(chatId) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").disableJoinRequests(chatId);
-    }
-    /**
-     * Show a username in the current account, a bot account, sa upergroup, or a channel's profile. User-only.
-     *
-     * @method ac
-     * @param id `"me"`, a bot ID, a supergroup ID, or a channel ID.
-     * @param username The username to show.
-     */
-    async showUsername(id, username) {
-        await __classPrivateFieldGet(this, _Client_accountManager, "f").showUsername(id, username);
-    }
-    /**
-     * Hide a username from the current account, a bot account, a supergroup, or a channel's profile. User-only.
-     *
-     * @method ac
-     * @param id `"me"`, a bot ID, a supergroup ID, or a channel ID.
-     * @param username The username to hide.
-     */
-    async hideUsername(id, username) {
-        await __classPrivateFieldGet(this, _Client_accountManager, "f").hideUsername(id, username);
-    }
-    /**
-     * Reorder the usernames of the current account, a bot account, a supergroup, or a channel's profile. User-only.
-     *
-     * @method ac
-     * @param id `"me"`, a bot ID, a supergroup ID, or a channel ID.
-     * @param order The new order to use.
-     * @returns Whether the order was changed.
-     */
-    async reorderUsernames(id, order) {
-        return await __classPrivateFieldGet(this, _Client_accountManager, "f").reorderUsernames(id, order);
-    }
-    /**
-     * Hide all usernames from the a supergroup or a channel's profile. User-only.
-     *
-     * @method ac
-     * @param id A supergroup ID or a channel ID.
-     */
-    async hideUsernames(id) {
-        return await __classPrivateFieldGet(this, _Client_accountManager, "f").hideUsernames(id);
-    }
-    /**
-     * Get inactive chats. User-only.
-     *
-     * @method ch
-     * @retuns A list of inactive chats the current user is member of.
-     */
-    async getInactiveChats() {
-        return await __classPrivateFieldGet(this, _Client_accountManager, "f").getInactiveChats();
-    }
-    /**
-     * Search the messages of a chat. User-only.
-     *
-     * @method ms
-     * @param chatId The identifier of the chat to search the messages in.
-     * @param query The message search query.
-     */
-    async searchMessages(chatId, query, params) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").searchMessages(chatId, query, params);
-    }
-    /**
-     * Set the number of boosts required to circument a chat's default restrictions. User-only.
-     *
-     * @method ch
-     * @param chatId The identifier of the chat.
-     * @param boosts The number of boosts required to circumvent its restrictions.
-     */
-    async setBoostsRequiredToCircumventRestrictions(chatId, boosts) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").setBoostsRequiredToCircumventRestrictions(chatId, boosts);
-    }
-    /**
-     * Create an invite link.
-     *
-     * @method ch
-     * @param chatId The identifier of the chat to create the invite link for.
-     * @returns The newly created invite link.
-     */
-    async createInviteLink(chatId, params) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").createInviteLink(chatId, params);
-    }
-    /**
-     * Get the invite links created for a chat. User-only.
-     *
-     * @method ch
-     * @param chatId The identifier of the chat.
-     * @returns The invite links created for the chat. This might be a subset of the results if they were less than `limit`. The parameters `afterDate` and `afterInviteLink` can be used for pagination.
-     */
-    async getCreatedInviteLinks(chatId, params) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").getCreatedInviteLinks(chatId, params);
-    }
-    /**
-     * Join a chat. User-only.
-     *
-     * @method ch
-     * @param chatId The identifier of the chat to join.
-     */
-    async joinChat(chatId) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").joinChat(chatId);
-    }
-    /**
-     * Leave a chat.
-     *
-     * @method ch
-     * @param chatId The identifier of the chat to leave.
-     */
-    async leaveChat(chatId) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").leaveChat(chatId);
+    async getNetworkStatistics() {
+        return await __classPrivateFieldGet(this, _Client_networkStatisticsManager, "f").getNetworkStatistics();
     }
     /**
      * Block a user. User-only.
@@ -2139,44 +2207,6 @@ export class Client extends Composer {
      */
     async unblockUser(userId) {
         await __classPrivateFieldGet(this, _Client_messageManager, "f").unblockUser(userId);
-    }
-    /**
-     * Get information on a user's chat membership.
-     *
-     * @method ch
-     * @param chatId The identifier of a chat that includes the user.
-     * @param userId The identifier of the user.
-     */
-    async getChatMember(chatId, userId) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").getChatMember(chatId, userId);
-    }
-    /**
-     * Set a chat's sticker set.
-     *
-     * @method ch
-     * @param chatId The identifier of the chat. Must be a supergroup.
-     * @param setName The name of the set.
-     */
-    async setChatStickerSet(chatId, setName) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").setChatStickerSet(chatId, setName);
-    }
-    /**
-     * Delete a chat's sticker set.
-     *
-     * @method ch
-     * @param chatId The identifier of the chat. Must be a supergroup.
-     */
-    async deleteChatStickerSet(chatId) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").deleteChatStickerSet(chatId);
-    }
-    /**
-     * Get a business connection.
-     *
-     * @method ac
-     * @param id The identifier of the business connection.
-     */
-    async getBusinessConnection(id) {
-        return await __classPrivateFieldGet(this, _Client_businessConnectionManager, "f").getBusinessConnection(id);
     }
 }
 _Client_handleCtxUpdate = async function _Client_handleCtxUpdate(update) {

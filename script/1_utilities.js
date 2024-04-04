@@ -14,7 +14,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./utilities/1_base64.js"), exports);
 __exportStar(require("./utilities/0_bigint.js"), exports);
 __exportStar(require("./utilities/0_buffer.js"), exports);
 __exportStar(require("./utilities/0_cache_map.js"), exports);
@@ -28,5 +27,6 @@ __exportStar(require("./utilities/0_object.js"), exports);
 __exportStar(require("./utilities/0_rle.js"), exports);
 __exportStar(require("./utilities/0_types.js"), exports);
 __exportStar(require("./utilities/1_auth.js"), exports);
+__exportStar(require("./utilities/1_base64.js"), exports);
 __exportStar(require("./utilities/1_misc.js"), exports);
 __exportStar(require("./utilities/1_queue.js"), exports);

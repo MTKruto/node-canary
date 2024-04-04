@@ -1,9 +1,9 @@
 export { TLError } from "./tl/0_tl_raw_reader.js";
 export * from "./tl/1_tl_object.js";
 export { types } from "./tl/2_types.js";
+export * from "./tl/3_utilities.js";
 export { functions } from "./tl/3_functions.js";
 export * from "./tl/4_tl_reader.js";
-export * from "./tl/3_utilities.js";
 export * from "./tl/5_tl_writer.js";
 export * from "./tl/6_rpc_result.js";
 export * from "./tl/7_message.js";

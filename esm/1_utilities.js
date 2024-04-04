@@ -1,4 +1,3 @@
-export * from "./utilities/1_base64.js";
 export * from "./utilities/0_bigint.js";
 export * from "./utilities/0_buffer.js";
 export * from "./utilities/0_cache_map.js";
@@ -12,5 +11,6 @@ export * from "./utilities/0_object.js";
 export * from "./utilities/0_rle.js";
 export * from "./utilities/0_types.js";
 export * from "./utilities/1_auth.js";
+export * from "./utilities/1_base64.js";
 export * from "./utilities/1_misc.js";
 export * from "./utilities/1_queue.js";

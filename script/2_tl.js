@@ -20,10 +20,10 @@ Object.defineProperty(exports, "TLError", { enumerable: true, get: function () {
 __exportStar(require("./tl/1_tl_object.js"), exports);
 var _2_types_js_1 = require("./tl/2_types.js");
 Object.defineProperty(exports, "types", { enumerable: true, get: function () { return _2_types_js_1.types; } });
+__exportStar(require("./tl/3_utilities.js"), exports);
 var _3_functions_js_1 = require("./tl/3_functions.js");
 Object.defineProperty(exports, "functions", { enumerable: true, get: function () { return _3_functions_js_1.functions; } });
 __exportStar(require("./tl/4_tl_reader.js"), exports);
-__exportStar(require("./tl/3_utilities.js"), exports);
 __exportStar(require("./tl/5_tl_writer.js"), exports);
 __exportStar(require("./tl/6_rpc_result.js"), exports);
 __exportStar(require("./tl/7_message.js"), exports);

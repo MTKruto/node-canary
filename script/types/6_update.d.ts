@@ -101,6 +101,7 @@ export interface UpdateEditedMessage {
 export interface UpdateDeletedMessages {
     /** The deleted messages. */
     deletedMessages: MessageReference[];
+    businessConnectionId?: string;
 }
 /**
  * A callback query was made (a user presses an inline button). Bot-only.

@@ -636,6 +636,7 @@ class MessageManager {
             update instanceof _2_tl_js_1.types.UpdateEditChannelMessage ||
             update instanceof _2_tl_js_1.types.UpdateBotNewBusinessMessage ||
             update instanceof _2_tl_js_1.types.UpdateBotEditBusinessMessage ||
+            update instanceof _2_tl_js_1.types.UpdateBotDeleteBusinessMessage ||
             update instanceof _2_tl_js_1.types.UpdateDeleteMessages ||
             update instanceof _2_tl_js_1.types.UpdateDeleteChannelMessages ||
             update instanceof _2_tl_js_1.types.UpdateChannelParticipant ||
@@ -694,6 +695,11 @@ class MessageManager {
                 }
             }
             return { deletedMessages };
+        }
+        else if (update instanceof _2_tl_js_1.types.UpdateBotDeleteBusinessMessage) {
+            const chatId = (0, _2_tl_js_1.peerToChatId)(update.peer);
+            const deletedMessages = update.messages.map((v) => ({ chatId, messageId: v }));
+            return { deletedMessages, businessConnectionId: update.connection_id };
         }
         if (update instanceof _2_tl_js_1.types.UpdateChannelParticipant || update instanceof _2_tl_js_1.types.UpdateChatParticipant) {
             const chatMember = await (0, _3_types_js_1.constructChatMemberUpdated)(update, __classPrivateFieldGet(this, _MessageManager_c, "f").getEntity);

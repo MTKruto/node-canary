@@ -6,7 +6,7 @@ import { FileManager } from "./1_file_manager.js";
 interface C extends C_ {
     fileManager: FileManager;
 }
-type MessageManagerUpdate = types.UpdateNewMessage | types.UpdateNewChannelMessage | types.UpdateEditMessage | types.UpdateEditChannelMessage | types.UpdateBotNewBusinessMessage | types.UpdateBotEditBusinessMessage | types.UpdateDeleteMessages | types.UpdateDeleteChannelMessages | types.UpdateChannelParticipant | types.UpdateChatParticipant;
+type MessageManagerUpdate = types.UpdateNewMessage | types.UpdateNewChannelMessage | types.UpdateEditMessage | types.UpdateEditChannelMessage | types.UpdateBotNewBusinessMessage | types.UpdateBotEditBusinessMessage | types.UpdateBotDeleteBusinessMessage | types.UpdateDeleteMessages | types.UpdateDeleteChannelMessages | types.UpdateChannelParticipant | types.UpdateChatParticipant;
 export declare class MessageManager {
     #private;
     constructor(c: C);

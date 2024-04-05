@@ -8,7 +8,6 @@ export declare enum ValueType {
     Uint8Array = 5,
     Array = 6
 }
-export declare const WEB_STORAGE_PREFIX_EXP: RegExp;
 export declare function toString(value: unknown): string;
 export declare function fromString<T>(string: string): T;
 export declare function fixKey(key: readonly StorageKeyPart[]): IDBValidKey[];

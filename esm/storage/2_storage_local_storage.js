@@ -11,7 +11,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _StorageLocalStorage_prefix;
 import { Storage } from "./0_storage.js";
-import { fromString, isInRange, toString, WEB_STORAGE_PREFIX_EXP } from "./1_utilities.js";
+import { fromString, isInRange, toString } from "./1_utilities.js";
 export class StorageLocalStorage extends Storage {
     constructor(prefix) {
         if (typeof localStorage === "undefined") {
@@ -19,9 +19,6 @@ export class StorageLocalStorage extends Storage {
         }
         if (prefix.length <= 0) {
             throw new Error("Empty prefix");
-        }
-        else if (!WEB_STORAGE_PREFIX_EXP.test(prefix)) {
-            throw new Error("Unallowed prefix");
         }
         super();
         _StorageLocalStorage_prefix.set(this, void 0);

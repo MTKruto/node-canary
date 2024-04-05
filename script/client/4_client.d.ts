@@ -293,6 +293,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
     private [getEntity];
     private [getEntity];
     private [getEntity];
+    protected handleUpdate: (update: Update) => Promise<void>;
     /**
      * Get information on the currently authorized user.
      *

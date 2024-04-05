@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isInRange = exports.getPrefixKeyRange = exports.restoreKey = exports.fixKey = exports.fromString = exports.toString = exports.WEB_STORAGE_PREFIX_EXP = exports.ValueType = void 0;
+exports.isInRange = exports.getPrefixKeyRange = exports.restoreKey = exports.fixKey = exports.fromString = exports.toString = exports.ValueType = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
 const _0_deps_js_2 = require("../0_deps.js");
 var ValueType;
@@ -13,7 +13,6 @@ var ValueType;
     ValueType[ValueType["Uint8Array"] = 5] = "Uint8Array";
     ValueType[ValueType["Array"] = 6] = "Array";
 })(ValueType || (exports.ValueType = ValueType = {}));
-exports.WEB_STORAGE_PREFIX_EXP = /^[\d\w]+$/;
 function toString(value) {
     if (typeof value === "boolean") {
         return `${ValueType.Boolean}${Number(value)}`;

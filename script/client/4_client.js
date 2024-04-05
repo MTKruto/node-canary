@@ -588,6 +588,12 @@ class Client extends Composer {
                 },
             })
         });
+        Object.defineProperty(this, "handleUpdate", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate)
+        });
         _Client_lastGetMe.set(this, null);
         __classPrivateFieldSet(this, _Client_client, new _1_client_encrypted_js_1.ClientEncrypted(params), "f");
         __classPrivateFieldGet(this, _Client_client, "f").stateChangeHandler = __classPrivateFieldGet(this, _Client_stateChangeHandler, "f").bind(this);

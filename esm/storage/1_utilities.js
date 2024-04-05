@@ -10,7 +10,6 @@ export var ValueType;
     ValueType[ValueType["Uint8Array"] = 5] = "Uint8Array";
     ValueType[ValueType["Array"] = 6] = "Array";
 })(ValueType || (ValueType = {}));
-export const WEB_STORAGE_PREFIX_EXP = /^[\d\w]+$/;
 export function toString(value) {
     if (typeof value === "boolean") {
         return `${ValueType.Boolean}${Number(value)}`;

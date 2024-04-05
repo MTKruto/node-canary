@@ -23,9 +23,6 @@ class StorageSessionStorage extends _0_storage_js_1.Storage {
         if (prefix.length <= 0) {
             throw new Error("Empty prefix");
         }
-        else if (!_1_utilities_js_1.WEB_STORAGE_PREFIX_EXP.test(prefix)) {
-            throw new Error("Unallowed prefix");
-        }
         super();
         _StorageSessionStorage_prefix.set(this, void 0);
         __classPrivateFieldSet(this, _StorageSessionStorage_prefix, prefix, "f");

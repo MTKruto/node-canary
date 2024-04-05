@@ -1,4 +1,4 @@
-import { UNREACHABLE } from "./1_utilities.js";
+import { unreachable } from "./0_deps.js";
 import { ErrorWithCall, map } from "./3_errors.js";
 export * from "./3_errors.js";
 export class FloodWait extends ErrorWithCall {
@@ -13,7 +13,7 @@ export class FloodWait extends ErrorWithCall {
         const p = params.error_message.split("_");
         this.seconds = Number(p[p.length - 1]);
         if (isNaN(this.seconds)) {
-            UNREACHABLE();
+            unreachable();
         }
     }
 }
@@ -29,7 +29,7 @@ export class Migrate extends ErrorWithCall {
         const p = params.error_message.split("_");
         this.dc = Number(p[p.length - 1]);
         if (isNaN(this.dc)) {
-            UNREACHABLE();
+            unreachable();
         }
     }
 }

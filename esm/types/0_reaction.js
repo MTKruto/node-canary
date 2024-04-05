@@ -1,4 +1,4 @@
-import { UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
 import { types } from "../2_tl.js";
 export function constructReaction(reaction) {
     if (reaction instanceof types.ReactionEmoji) {
@@ -8,7 +8,7 @@ export function constructReaction(reaction) {
         return { type: "customEmoji", id: String(reaction.document_id) };
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
 }
 export function reactionToTlObject(reaction) {

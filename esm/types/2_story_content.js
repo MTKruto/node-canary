@@ -1,4 +1,4 @@
-import { UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
 import { as, types } from "../2_tl.js";
 import { FileType, serializeFileId, toUniqueFileId } from "./_file_id.js";
 import { constructPhoto } from "./1_photo.js";
@@ -6,7 +6,7 @@ import { constructVideo } from "./1_video.js";
 export function constructStoryContent(media) {
     if (media instanceof types.MessageMediaPhoto) {
         if (!media.photo) {
-            UNREACHABLE();
+            unreachable();
         }
         const photo = constructPhoto(media.photo[as](types.Photo));
         return { photo };
@@ -14,11 +14,11 @@ export function constructStoryContent(media) {
     else if (media instanceof types.MessageMediaDocument) {
         const document = media.document;
         if (!(document instanceof types.Document)) {
-            UNREACHABLE();
+            unreachable();
         }
         const video = document.attributes.find((v) => v instanceof types.DocumentAttributeVideo);
         if (!video) {
-            UNREACHABLE();
+            unreachable();
         }
         const fileId_ = { type: FileType.Video, dcId: document.dc_id, fileReference: document.file_reference, location: { type: "common", id: document.id, accessHash: document.access_hash } };
         const fileUniqueId = toUniqueFileId(fileId_);
@@ -27,6 +27,6 @@ export function constructStoryContent(media) {
         return { video: video_ };
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
 }

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.keyboardButtonToTlObject = exports.constructKeyboardButton = void 0;
-const _1_utilities_js_1 = require("../1_utilities.js");
+const _0_deps_js_1 = require("../0_deps.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _0_chat_administrator_rights_js_1 = require("./0_chat_administrator_rights.js");
 function constructKeyboardButton(button_) {
@@ -58,7 +58,7 @@ function constructKeyboardButton(button_) {
             return button;
         }
         else {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
     }
     else if (button_ instanceof _2_tl_js_1.types.KeyboardButtonRequestPhone) {
@@ -78,7 +78,7 @@ function constructKeyboardButton(button_) {
         return { text: button_.text, miniApp: { url: button_.url } };
     }
     else {
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
 }
 exports.constructKeyboardButton = constructKeyboardButton;

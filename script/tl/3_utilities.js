@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.inputPeerToPeer = exports.getChatIdPeerType = exports.chatIdToPeerId = exports.chatIdToPeer = exports.peerToChatId = exports.getChannelChatId = void 0;
+const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_types_js_1 = require("./2_types.js");
 function getChannelChatId(channelId) {
@@ -18,7 +19,7 @@ function peerToChatId(peer) {
         return getChannelChatId("id" in peer ? peer.id : peer.channel_id);
     }
     else {
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
 }
 exports.peerToChatId = peerToChatId;
@@ -46,7 +47,7 @@ function chatIdToPeerId(chatId) {
         return peer.channel_id;
     }
     else {
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
 }
 exports.chatIdToPeerId = chatIdToPeerId;
@@ -73,7 +74,7 @@ function inputPeerToPeer(inputPeer) {
         return new _2_types_js_1.types.PeerChannel(inputPeer);
     }
     else {
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
 }
 exports.inputPeerToPeer = inputPeerToPeer;

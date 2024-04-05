@@ -1,11 +1,11 @@
-import { UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
 import { types } from "../2_tl.js";
 import { constructLocation } from "./0_location.js";
 import { constructUser } from "./1_user.js";
 export async function constructInlineQuery(query_, getEntity) {
     const user_ = await getEntity(new types.PeerUser({ user_id: query_.user_id }));
     if (user_ == null) {
-        UNREACHABLE();
+        unreachable();
     }
     const user = constructUser(user_);
     let chatType;
@@ -26,7 +26,7 @@ export async function constructInlineQuery(query_, getEntity) {
             chatType = "channel";
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     }
     const location = query_.geo !== undefined && query_.geo instanceof types.GeoPoint ? constructLocation(query_.geo) : undefined;

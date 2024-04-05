@@ -1,11 +1,11 @@
-import { UNREACHABLE } from "./0_control.js";
+import { unreachable } from "../0_deps.js";
 export function drop(promise) {
     promise.catch(() => { });
 }
 export function mustPrompt(message) {
     const result = prompt(message);
     if (result == null) {
-        throw UNREACHABLE();
+        throw unreachable();
     }
     else {
         return result;

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.storyInteractiveAreaToTlObject = exports.constructStoryInteractiveArea = void 0;
-const _1_utilities_js_1 = require("../1_utilities.js");
+const _0_deps_js_1 = require("../0_deps.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _0_location_js_1 = require("./0_location.js");
 const _0_reaction_js_1 = require("./0_reaction.js");
@@ -19,7 +19,7 @@ function constructStoryInteractiveArea(area) {
     const position = constructStoryInteractiveAreaPosition(area.coordinates);
     if (area instanceof _2_tl_js_1.types.MediaAreaGeoPoint) {
         if (area.geo instanceof _2_tl_js_1.types.GeoPointEmpty) {
-            (0, _1_utilities_js_1.UNREACHABLE)(); // will this ever be empty?
+            (0, _0_deps_js_1.unreachable)(); // will this ever be empty?
         }
         const location = (0, _0_location_js_1.constructLocation)(area.geo);
         return { position, location };
@@ -48,7 +48,7 @@ function constructStoryInteractiveArea(area) {
         };
     }
     else {
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
 }
 exports.constructStoryInteractiveArea = constructStoryInteractiveArea;
@@ -91,13 +91,13 @@ async function storyInteractiveAreaToTlObject(area, getEntity) {
     else if ("messageReference" in area) {
         const entity = await getEntity((0, _2_tl_js_1.chatIdToPeer)(area.messageReference.chatId));
         if (!(entity instanceof _2_tl_js_1.types.Channel)) {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
         const channel = new _2_tl_js_1.types.InputChannel({ channel_id: entity.id, access_hash: entity.access_hash ?? 0n });
         return new _2_tl_js_1.types.InputMediaAreaChannelPost({ coordinates, channel, msg_id: area.messageReference.messageId });
     }
     else {
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
 }
 exports.storyInteractiveAreaToTlObject = storyInteractiveAreaToTlObject;

@@ -1,11 +1,11 @@
-import { UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
 import { types } from "../2_tl.js";
 async function resolveUsers(ids, getEntity) {
     const users = new Array();
     for (const id of ids) {
         const entity = await getEntity(new types.PeerUser({ user_id: BigInt(id) }));
         if (!(entity instanceof types.User)) {
-            UNREACHABLE();
+            unreachable();
         }
         else {
             users.push(new types.InputUser({ user_id: entity.id, access_hash: entity.access_hash ?? 0n }));
@@ -34,7 +34,7 @@ export async function storyPrivacyToTlObject(privacy, getEntity) {
     }
     else if ("only" in privacy) {
         if (!privacy.only.length) {
-            UNREACHABLE();
+            unreachable();
         }
         const users = await resolveUsers(privacy.only, getEntity);
         rules.push(new types.InputPrivacyValueAllowUsers({ users }));

@@ -2,7 +2,7 @@
  * Copyright (c) 2023 Dunkan
  * Copyright (c) 2024 Roj
  */
-import { UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
 import { sortMessageEntities } from "../3_types.js";
 import { InputError } from "../0_errors.js";
 const enc = new TextEncoder();
@@ -136,7 +136,7 @@ export function parseMarkdown(text_) {
                     case "customEmoji":
                         return c === CODEPOINTS["]"];
                     default:
-                        UNREACHABLE();
+                        unreachable();
                 }
             })();
         }
@@ -289,7 +289,7 @@ export function parseMarkdown(text_) {
                     break;
                 }
                 default:
-                    UNREACHABLE();
+                    unreachable();
             }
             if (!skipEntity) {
                 const entityOffset = nestedEntities.at(-1).entityOffset;

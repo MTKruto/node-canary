@@ -1,4 +1,4 @@
-import { UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
 import { peerToChatId, types } from "../2_tl.js";
 import { constructReaction } from "./0_reaction.js";
 export function constructMessageReaction(reaction_, recentReactions) {
@@ -11,7 +11,7 @@ export function constructMessageReaction(reaction_, recentReactions) {
             return v.reaction instanceof types.ReactionCustomEmoji && v.reaction.document_id == reaction_.reaction.document_id;
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     })
         .map((v) => peerToChatId(v.peer_id));

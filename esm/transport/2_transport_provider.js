@@ -1,4 +1,4 @@
-import { UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
 export function getDcIps(dc, version) {
     switch (version) {
         case "ipv4":
@@ -20,7 +20,7 @@ export function getDcIps(dc, version) {
                 case "3-test":
                     return ["149.154.175.117"];
                 default:
-                    UNREACHABLE();
+                    unreachable();
             }
             break;
         case "ipv6":
@@ -42,11 +42,11 @@ export function getDcIps(dc, version) {
                 case "3-test":
                     return ["2001:b28:f23d:f003::e"];
                 default:
-                    UNREACHABLE();
+                    unreachable();
             }
             break;
         default:
-            UNREACHABLE();
+            unreachable();
     }
 }
 export function getDcId(dc, cdn) {

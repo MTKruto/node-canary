@@ -10,7 +10,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _AccountManager_instances, _AccountManager_c, _AccountManager_toggleUsername;
-import { UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
 import { types } from "../2_tl.js";
 import { constructInactiveChat } from "../3_types.js";
 export class AccountManager {
@@ -40,7 +40,7 @@ export class AccountManager {
             return await __classPrivateFieldGet(this, _AccountManager_c, "f").api.channels.reorderUsernames({ channel: new types.InputChannel(peer), order });
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     }
     async hideUsernames(id) {
@@ -50,7 +50,7 @@ export class AccountManager {
             return await __classPrivateFieldGet(this, _AccountManager_c, "f").api.channels.deactivateAllUsernames({ channel: new types.InputChannel(peer) });
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     }
     async getInactiveChats() {
@@ -71,6 +71,6 @@ _AccountManager_c = new WeakMap(), _AccountManager_instances = new WeakSet(), _A
         await __classPrivateFieldGet(this, _AccountManager_c, "f").api.channels.toggleUsername({ channel: new types.InputChannel(peer), username, active });
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
 };

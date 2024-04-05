@@ -10,9 +10,9 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _ClientPlain_publicKeys, _ClientPlain_lastMsgId;
-import { assertEquals, assertInstanceOf, factorize, ige256Decrypt, ige256Encrypt } from "../0_deps.js";
+import { assertEquals, assertInstanceOf, factorize, ige256Decrypt, ige256Encrypt, unreachable } from "../0_deps.js";
 import { ConnectionError, TransportError } from "../0_errors.js";
-import { bigIntFromBuffer, bufferFromBigInt, concat, getLogger, getRandomBigInt, modExp, rsaPad, sha1, UNREACHABLE } from "../1_utilities.js";
+import { bigIntFromBuffer, bufferFromBigInt, concat, getLogger, getRandomBigInt, modExp, rsaPad, sha1 } from "../1_utilities.js";
 import { functions, serialize, TLReader, types } from "../2_tl.js";
 import { PUBLIC_KEYS } from "../4_constants.js";
 import { ClientAbstract } from "./0_client_abstract.js";
@@ -68,7 +68,7 @@ export class ClientPlain extends ClientAbstract {
             }
         }
         if (!resPq) {
-            UNREACHABLE();
+            unreachable();
         }
         const pq_ = bigIntFromBuffer(resPq.pq, false, false);
         LcreateAuthKey.debug(`pq=${pq_}`);

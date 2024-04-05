@@ -1,4 +1,4 @@
-import { UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
 import { types } from "../2_tl.js";
 import { chatAdministratorRightsToTlObject, constructChatAdministratorRights } from "./0_chat_administrator_rights.js";
 export function constructKeyboardButton(button_) {
@@ -55,7 +55,7 @@ export function constructKeyboardButton(button_) {
             return button;
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     }
     else if (button_ instanceof types.KeyboardButtonRequestPhone) {
@@ -75,7 +75,7 @@ export function constructKeyboardButton(button_) {
         return { text: button_.text, miniApp: { url: button_.url } };
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
 }
 export function keyboardButtonToTlObject(button) {

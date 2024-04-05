@@ -1,4 +1,5 @@
-import { UNREACHABLE, ZERO_CHANNEL_ID } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
+import { ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { types } from "./2_types.js";
 export function getChannelChatId(channelId) {
     return ZERO_CHANNEL_ID + -Number(channelId);
@@ -14,7 +15,7 @@ export function peerToChatId(peer) {
         return getChannelChatId("id" in peer ? peer.id : peer.channel_id);
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
 }
 export function chatIdToPeer(chatId) {
@@ -40,7 +41,7 @@ export function chatIdToPeerId(chatId) {
         return peer.channel_id;
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
 }
 export function getChatIdPeerType(chatId) {
@@ -65,6 +66,6 @@ export function inputPeerToPeer(inputPeer) {
         return new types.PeerChannel(inputPeer);
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
 }

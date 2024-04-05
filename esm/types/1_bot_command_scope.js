@@ -1,4 +1,4 @@
-import { UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
 import { types } from "../2_tl.js";
 export async function botCommandScopeToTlObject(scope, getInputPeer) {
     switch (scope.type) {
@@ -17,11 +17,11 @@ export async function botCommandScopeToTlObject(scope, getInputPeer) {
         case "chatMember": {
             const user = await getInputPeer(scope.userId);
             if (!(user instanceof types.InputPeerUser)) {
-                UNREACHABLE();
+                unreachable();
             }
             return new types.BotCommandScopePeerUser({ peer: await getInputPeer(scope.chatId), user_id: new types.InputUser({ user_id: user.user_id, access_hash: user.access_hash }) });
         }
         default:
-            UNREACHABLE();
+            unreachable();
     }
 }

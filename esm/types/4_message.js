@@ -1,3 +1,4 @@
+import { unreachable } from "../0_deps.js";
 import { cleanObject, fromUnixTimestamp, getLogger, UNREACHABLE, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { as, types } from "../2_tl.js";
 import { FileType, toUniqueFileId } from "./_file_id.js";
@@ -69,7 +70,7 @@ const keys = {
 export function assertMessageType(message, type) {
     for (const key of keys[type]) {
         if (!(key in message) || message[key] === undefined) {
-            UNREACHABLE();
+            unreachable();
         }
     }
     return message;
@@ -81,7 +82,7 @@ async function getSender(message_, getEntity) {
             return { from: constructUser(entity) };
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     }
     else if (message_.from_id instanceof types.PeerChannel) {
@@ -90,7 +91,7 @@ async function getSender(message_, getEntity) {
             return { senderChat: constructChatP(entity) };
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     }
 }
@@ -129,7 +130,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage) {
                 newChatMembers.push(user);
             }
             else {
-                UNREACHABLE();
+                unreachable();
             }
         }
         return { ...message, newChatMembers };
@@ -176,7 +177,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage) {
             return { ...message, supergroupCreated };
         }
         else {
-            // UNREACHABLE();
+            // unreachable();
         }
     }
     else if (message_.action instanceof types.MessageActionChatMigrateTo) {
@@ -251,7 +252,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage) {
 }
 export async function constructMessage(message_, getEntity, getMessage, getStickerSetName, getReply_ = true, business) {
     if (!(message_ instanceof types.Message) && !(message_ instanceof types.MessageService)) {
-        UNREACHABLE();
+        unreachable();
     }
     let link;
     let chat_ = null;
@@ -261,7 +262,7 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
             chat_ = constructChatP(entity);
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     }
     else if (message_.peer_id instanceof types.PeerChat) {
@@ -270,7 +271,7 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
             chat_ = constructChatP(entity);
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     }
     else if (message_.peer_id instanceof types.PeerChannel) {
@@ -280,11 +281,11 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
             chat_ = constructChatP(entity);
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
     if (message_ instanceof types.MessageService) {
         return await constructServiceMessage(message_, chat_, getEntity, getMessage);
@@ -331,7 +332,7 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
             message.viaBot = constructUser(viaBot);
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     }
     if (message_.via_business_bot_id != undefined) {
@@ -340,7 +341,7 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
             message.viaBusinessBot = constructUser(viaBusinessBot);
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     }
     if (message_.post_author != undefined) {
@@ -396,7 +397,7 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
     let m = null;
     if (message_.media instanceof types.MessageMediaPhoto) {
         if (!message_.media.photo) {
-            UNREACHABLE();
+            unreachable();
         }
         const photo = constructPhoto(message_.media.photo[as](types.Photo));
         m = { ...messageMedia, photo };

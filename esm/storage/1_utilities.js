@@ -1,5 +1,5 @@
 import { decodeBase64, encodeBase64 } from "../0_deps.js";
-import { UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
 export var ValueType;
 (function (ValueType) {
     ValueType[ValueType["Boolean"] = 0] = "Boolean";
@@ -43,7 +43,7 @@ export function toString(value) {
         return `${ValueType.Array}${items.join("\n")}`;
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
 }
 export function fromString(string) {

@@ -122,7 +122,7 @@ _ClientEncrypted_authKey = new WeakMap(), _ClientEncrypted_authKeyId = new WeakM
     __classPrivateFieldGet(this, _ClientEncrypted_L, "f").outBin(payload);
 }, _ClientEncrypted_receiveLoop = async function _ClientEncrypted_receiveLoop() {
     if (!this.transport) {
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
     while (this.connected) {
         try {
@@ -238,6 +238,6 @@ _ClientEncrypted_authKey = new WeakMap(), _ClientEncrypted_authKeyId = new WeakM
         }
     }
     else {
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
 };

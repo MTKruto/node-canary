@@ -13,6 +13,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _FileManager_instances, _FileManager_c, _FileManager_Lupload, _FileManager_downloadInner;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FileManager = void 0;
+const _0_deps_js_1 = require("../0_deps.js");
 const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
@@ -107,7 +108,7 @@ class FileManager {
             switch (fileId_.type) {
                 case _3_types_js_1.FileType.ProfilePhoto: {
                     if (fileId_.location.source.type != _3_types_js_1.PhotoSourceType.ChatPhotoBig && fileId_.location.source.type != _3_types_js_1.PhotoSourceType.ChatPhotoSmall) {
-                        (0, _1_utilities_js_1.UNREACHABLE)();
+                        (0, _0_deps_js_1.unreachable)();
                     }
                     const big = fileId_.location.source.type == _3_types_js_1.PhotoSourceType.ChatPhotoBig;
                     const peer = await __classPrivateFieldGet(this, _FileManager_c, "f").getInputPeer(Number(fileId_.location.source.chatId)); // TODO: use access hash from source?
@@ -134,7 +135,7 @@ class FileManager {
                         id: fileId_.location.id,
                         access_hash: fileId_.location.accessHash,
                         file_reference: fileId_.fileReference ?? new Uint8Array(),
-                        thumb_size: "thumbnailType" in fileId_.location.source ? String.fromCharCode(fileId_.location.source.thumbnailType) : (0, _1_utilities_js_1.UNREACHABLE)(),
+                        thumb_size: "thumbnailType" in fileId_.location.source ? String.fromCharCode(fileId_.location.source.thumbnailType) : (0, _0_deps_js_1.unreachable)(),
                     });
                     for await (const chunk of __classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_downloadInner).call(this, location, fileId_.dcId, params)) {
                         yield chunk;
@@ -155,7 +156,7 @@ class FileManager {
             }
         }
         else {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
     }
     async getStickerSetName(inputStickerSet, hash = 0) {
@@ -259,7 +260,7 @@ _FileManager_c = new WeakMap(), _FileManager_Lupload = new WeakMap(), _FileManag
                 }
             }
             else {
-                (0, _1_utilities_js_1.UNREACHABLE)();
+                (0, _0_deps_js_1.unreachable)();
             }
         }
     }

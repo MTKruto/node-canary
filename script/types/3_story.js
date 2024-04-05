@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.constructStory = void 0;
+const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _0_message_entity_js_1 = require("./0_message_entity.js");
 const _1_chat_p_js_1 = require("./1_chat_p.js");
@@ -12,7 +13,7 @@ async function constructStory(story, peer, getEntity) {
     const id = story.id;
     const entity = await getEntity(peer);
     if (!entity) {
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
     const chat = (0, _1_chat_p_js_1.constructChatP)(entity);
     const date = (0, _1_utilities_js_1.fromUnixTimestamp)(story.date);

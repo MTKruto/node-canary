@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.constructChatMemberUpdated = void 0;
+const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _1_chat_p_js_1 = require("./1_chat_p.js");
@@ -9,12 +10,12 @@ const _2_chat_member_js_1 = require("./2_chat_member.js");
 const _2_invite_link_js_1 = require("./2_invite_link.js");
 async function constructChatMemberUpdated(update, getEntity) {
     if (!update.prev_participant && !update.new_participant) {
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
     const chat_ = await getEntity("channel_id" in update ? new _2_tl_js_1.types.PeerChannel(update) : new _2_tl_js_1.types.PeerChat(update));
     const from_ = await getEntity(new _2_tl_js_1.types.PeerUser({ user_id: update.actor_id }));
     if (!chat_ || !from_) {
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
     const userPeer = new _2_tl_js_1.types.PeerUser(update);
     const chat = (0, _1_chat_p_js_1.constructChatP)(chat_);

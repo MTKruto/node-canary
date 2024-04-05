@@ -10,7 +10,8 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _UpdateManager_instances, _a, _UpdateManager_c, _UpdateManager_updateState, _UpdateManager_updateHandler, _UpdateManager_LrecoverUpdateGap, _UpdateManager_LrecoverChannelUpdateGap, _UpdateManager_L$handleUpdate, _UpdateManager_L$processUpdates, _UpdateManager_LfetchState, _UpdateManager_defaultDropPendingUpdates, _UpdateManager_mustDropPendingUpdates, _UpdateManager_state, _UpdateManager_getState, _UpdateManager_setState, _UpdateManager_handleUpdateQueues, _UpdateManager_nonFirst, _UpdateManager_getChannelPtsWithDropPendingUpdatesCheck, _UpdateManager_checkGap, _UpdateManager_checkGapQts, _UpdateManager_checkChannelGap, _UpdateManager_channelUpdateQueues, _UpdateManager_processChannelPtsUpdateInner, _UpdateManager_queueUpdate, _UpdateManager_processChannelPtsUpdate, _UpdateManager_processPtsUpdateInner, _UpdateManager_ptsUpdateQueue, _UpdateManager_processPtsUpdate, _UpdateManager_processQtsUpdateInner, _UpdateManager_qtsUpdateQueue, _UpdateManager_processQtsUpdate, _UpdateManager_processUpdatesQueue, _UpdateManager_processUpdates, _UpdateManager_setUpdateStateDate, _UpdateManager_setUpdatePts, _UpdateManager_setUpdateQts, _UpdateManager_getLocalState, _UpdateManager_recoverChannelUpdateGap, _UpdateManager_handleUpdatesSet, _UpdateManager_handleStoredUpdates, _UpdateManager_handleUpdate;
-import { getLogger, Queue, UNREACHABLE, ZERO_CHANNEL_ID } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
+import { getLogger, Queue, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { as, functions, inputPeerToPeer, peerToChatId, types } from "../2_tl.js";
 import { CHANNEL_DIFFERENCE_LIMIT_BOT, CHANNEL_DIFFERENCE_LIMIT_USER } from "../4_constants.js";
 export class UpdateManager {
@@ -250,7 +251,7 @@ export class UpdateManager {
                         state = difference.intermediate_state;
                     }
                     else {
-                        UNREACHABLE();
+                        unreachable();
                     }
                 }
                 else if (difference instanceof types.updates.DifferenceTooLong) {
@@ -266,7 +267,7 @@ export class UpdateManager {
                     break;
                 }
                 else {
-                    UNREACHABLE();
+                    unreachable();
                 }
             }
         }
@@ -511,7 +512,7 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
     }
     else if (updates_ instanceof types.UpdateShortSentMessage) {
         if (!(call instanceof functions.messages.sendMessage)) {
-            UNREACHABLE();
+            unreachable();
         }
         updates = [
             new types.UpdateNewMessage({
@@ -541,7 +542,7 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
         updates = [updates_];
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
     /// We process the updates when we are sure there is no gap.
     if (updates_ instanceof types.Updates || updates_ instanceof types.UpdatesCombined) {
@@ -562,7 +563,7 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
                 await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_setState).call(this, __classPrivateFieldGet(this, _UpdateManager_updateState, "f"));
             }
             else {
-                UNREACHABLE();
+                unreachable();
             }
         }
         else if (_a.isPtsUpdate(update)) {
@@ -604,7 +605,7 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
                 await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_setState).call(this, localState);
             }
             else {
-                UNREACHABLE();
+                unreachable();
             }
         }
     }
@@ -647,7 +648,7 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
                 pts = pts_;
             }
             else {
-                UNREACHABLE();
+                unreachable();
             }
             __classPrivateFieldGet(this, _UpdateManager_LrecoverChannelUpdateGap, "f").debug("processed channelDifferenceTooLong");
         }

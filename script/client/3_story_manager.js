@@ -28,7 +28,7 @@ class StoryManager {
     async createStory(chatId, content, params) {
         await __classPrivateFieldGet(this, _StoryManager_c, "f").storage.assertUser("createStory");
         let media = null;
-        const source = "video" in content ? content.video : "photo" in content ? content.photo : (0, _1_utilities_js_1.UNREACHABLE)();
+        const source = "video" in content ? content.video : "photo" in content ? content.photo : (0, _0_deps_js_1.unreachable)();
         if (typeof source === "string") {
             const fileId = __classPrivateFieldGet(this, _StoryManager_c, "f").messageManager.resolveFileId(source, _3_types_js_1.FileType.Photo);
             if (fileId != null) {
@@ -151,7 +151,7 @@ _StoryManager_c = new WeakMap(), _StoryManager_instances = new WeakSet(), _Story
             return await (0, _3_types_js_1.constructStory)(updateStory.story, updateStory.peer, __classPrivateFieldGet(this, _StoryManager_c, "f").getEntity);
         }
     }
-    (0, _1_utilities_js_1.UNREACHABLE)();
+    (0, _0_deps_js_1.unreachable)();
 }, _StoryManager_togglePinned = async function _StoryManager_togglePinned(chatId, storyIds, pinned) {
     (0, _0_utilities_js_1.checkArray)(storyIds, _0_utilities_js_1.checkStoryId);
     const peer = await __classPrivateFieldGet(this, _StoryManager_c, "f").getInputPeer(chatId);

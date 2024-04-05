@@ -1,4 +1,5 @@
-import { cleanObject, UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
+import { cleanObject } from "../1_utilities.js";
 import { chatIdToPeer, peerToChatId, types } from "../2_tl.js";
 import { constructChatPhoto } from "./0_chat_photo.js";
 import { constructChatP } from "./1_chat_p.js";
@@ -18,7 +19,7 @@ function getChatPAlsoPhoto(entity) {
         also = "usernames" in entity ? entity.usernames?.map((v) => v.username).filter((v) => v != ("username" in chatP ? chatP.username : "")) : undefined;
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
     let photo = undefined;
     if (entity.photo instanceof types.UserProfilePhoto) {
@@ -39,7 +40,7 @@ export function getChatOrder(lastMessage, pinned) {
 export async function constructChat(dialog, dialogs, pinnedChats, getEntity, getMessage, getStickerSetName) {
     const topMessage_ = dialogs.messages.find((v) => "id" in v && v.id == dialog.top_message);
     if (!topMessage_) {
-        UNREACHABLE();
+        unreachable();
     }
     const pinned = pinnedChats.indexOf(peerToChatId(dialog.peer));
     const lastMessage = await constructMessage(topMessage_, getEntity, getMessage, getStickerSetName, false);
@@ -47,9 +48,9 @@ export async function constructChat(dialog, dialogs, pinnedChats, getEntity, get
     const userId = "user_id" in dialog.peer ? dialog.peer.user_id : null;
     const chatId = "chat_id" in dialog.peer ? dialog.peer.chat_id : null;
     const channelId = "channel_id" in dialog.peer ? dialog.peer.channel_id : null;
-    const chat__ = chatId != null ? dialogs.chats.find((v) => v instanceof types.Chat && v.id == chatId) : channelId != null ? dialogs.chats.find((v) => v instanceof types.Channel && v.id == channelId) : userId != null ? dialogs.users.find((v) => v instanceof types.User && v.id == userId) : UNREACHABLE();
+    const chat__ = chatId != null ? dialogs.chats.find((v) => v instanceof types.Chat && v.id == chatId) : channelId != null ? dialogs.chats.find((v) => v instanceof types.Channel && v.id == channelId) : userId != null ? dialogs.users.find((v) => v instanceof types.User && v.id == userId) : unreachable();
     if (!chat__) {
-        UNREACHABLE();
+        unreachable();
     }
     const chat_ = chat__;
     const { chatP, also, photo } = getChatPAlsoPhoto(chat_);
@@ -66,7 +67,7 @@ export async function constructChat(dialog, dialogs, pinnedChats, getEntity, get
         return cleanObject({ ...chatP, order, lastMessage, also, photo: photo, pinned });
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
 }
 export function constructChat2(entity, pinned, lastMessage) {
@@ -86,7 +87,7 @@ export function constructChat2(entity, pinned, lastMessage) {
         return cleanObject({ ...chatP, order, lastMessage, also, photo: photo, pinned });
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
 }
 export async function constructChat3(chatId, pinned, lastMessage, getEntity) {

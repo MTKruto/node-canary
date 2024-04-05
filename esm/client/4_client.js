@@ -10,8 +10,9 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _Client_instances, _Client_client, _Client_guaranteeUpdateDelivery, _Client_updateManager, _Client_networkStatisticsManager, _Client_botInfoManager, _Client_fileManager, _Client_reactionManager, _Client_businessConnectionManager, _Client_messageManager, _Client_storyManager, _Client_callbackQueryManager, _Client_inlineQueryManager, _Client_chatListManager, _Client_accountManager, _Client_parseMode, _Client_publicKeys, _Client_ignoreOutgoing, _Client_storeMessages, _Client_Lauthorize, _Client_LpingLoop, _Client_LhandleMigrationError, _Client_L$initConncetion, _Client_namespaceProxies, _Client_getApiId, _Client_constructContext, _Client_propagateConnectionState, _Client_lastPropagatedConnectionState, _Client_stateChangeHandler, _Client_storageInited, _Client_initStorage, _Client_connectionInited, _Client_lastPropagatedAuthorizationState, _Client_propagateAuthorizationState, _Client_getSelfId, _Client_pingLoopStarted, _Client_pingLoopAbortController, _Client_pingInterval, _Client_lastUpdates, _Client_startPingLoop, _Client_pingLoop, _Client_invoke, _Client_handleInvokeError, _Client_getUserAccessHash, _Client_getChannelAccessHash, _Client_getInputPeerInner, _Client_handleCtxUpdate, _Client_queueHandleCtxUpdate, _Client_handleUpdate, _Client_lastGetMe, _Client_getMe;
+import { unreachable } from "../0_deps.js";
 import { AccessError, InputError } from "../0_errors.js";
-import { cleanObject, drop, getLogger, getRandomId, mustPrompt, mustPromptOneOf, UNREACHABLE, ZERO_CHANNEL_ID } from "../1_utilities.js";
+import { cleanObject, drop, getLogger, getRandomId, mustPrompt, mustPromptOneOf, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { as, chatIdToPeerId, functions, getChatIdPeerType, name, peerToChatId, types } from "../2_tl.js";
 import { StorageMemory } from "../3_storage.js";
 import { constructUser } from "../3_types.js";
@@ -160,7 +161,7 @@ export class Client extends Composer {
                                 };
                             }
                             else {
-                                UNREACHABLE();
+                                unreachable();
                             }
                         }
                     },
@@ -208,7 +209,7 @@ export class Client extends Composer {
                     return { chatId: reactions.chatId, messageId: reactions.messageId };
                 }
                 else {
-                    UNREACHABLE();
+                    unreachable();
                 }
             };
             const mustGetUserId = () => {
@@ -222,7 +223,7 @@ export class Client extends Composer {
                     return update.chosenInlineResult.from.id;
                 }
                 else {
-                    UNREACHABLE();
+                    unreachable();
                 }
             };
             const mustGetInlineMsgId = () => {
@@ -236,7 +237,7 @@ export class Client extends Composer {
                         return update.callbackQuery.inlineMessageId;
                     }
                 }
-                UNREACHABLE();
+                unreachable();
             };
             const chat_ = "messageReactions" in update ? update.messageReactions.chat : "messageReactionCount" in update ? update.messageReactionCount.chat : undefined;
             const chat = chat_ ?? msg?.chat;
@@ -349,21 +350,21 @@ export class Client extends Composer {
                 banSender: (params) => {
                     const { chatId, senderId } = mustGetMsg();
                     if (!senderId) {
-                        UNREACHABLE();
+                        unreachable();
                     }
                     return this.banChatMember(chatId, senderId, params);
                 },
                 kickSender: () => {
                     const { chatId, senderId } = mustGetMsg();
                     if (!senderId) {
-                        UNREACHABLE();
+                        unreachable();
                     }
                     return this.kickChatMember(chatId, senderId);
                 },
                 setSenderRights: (params) => {
                     const { chatId, senderId } = mustGetMsg();
                     if (!senderId) {
-                        UNREACHABLE();
+                        unreachable();
                     }
                     return this.setChatMemberRights(chatId, senderId, params);
                 },
@@ -377,13 +378,13 @@ export class Client extends Composer {
                 },
                 answerCallbackQuery: (params) => {
                     if (!("callbackQuery" in update)) {
-                        UNREACHABLE();
+                        unreachable();
                     }
                     return this.answerCallbackQuery(update.callbackQuery.id, params);
                 },
                 answerInlineQuery: (results, params) => {
                     if (!("inlineQuery" in update)) {
-                        UNREACHABLE();
+                        unreachable();
                     }
                     return this.answerInlineQuery(update.inlineQuery.id, results, params);
                 },
@@ -536,7 +537,7 @@ export class Client extends Composer {
                 getBusinessConnection: () => {
                     const { businessConnectionId } = mustGetMsg();
                     if (!businessConnectionId) {
-                        UNREACHABLE();
+                        unreachable();
                     }
                     return this.getBusinessConnection(businessConnectionId);
                 },
@@ -1217,7 +1218,7 @@ export class Client extends Composer {
                     resolvedId = peerToChatId(resolved.peer);
                 }
                 else {
-                    UNREACHABLE();
+                    unreachable();
                 }
             }
             const resolvedIdType = getChatIdPeerType(resolvedId);
@@ -1230,7 +1231,7 @@ export class Client extends Composer {
                 return new types.InputPeerChannel({ channel_id: chatIdToPeerId(resolvedId), access_hash: accessHash ?? 0n });
             }
             else {
-                UNREACHABLE();
+                unreachable();
             }
         }
         else if (id > 0) {

@@ -13,6 +13,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _Client_instances, _Client_client, _Client_guaranteeUpdateDelivery, _Client_updateManager, _Client_networkStatisticsManager, _Client_botInfoManager, _Client_fileManager, _Client_reactionManager, _Client_businessConnectionManager, _Client_messageManager, _Client_storyManager, _Client_callbackQueryManager, _Client_inlineQueryManager, _Client_chatListManager, _Client_accountManager, _Client_parseMode, _Client_publicKeys, _Client_ignoreOutgoing, _Client_storeMessages, _Client_Lauthorize, _Client_LpingLoop, _Client_LhandleMigrationError, _Client_L$initConncetion, _Client_namespaceProxies, _Client_getApiId, _Client_constructContext, _Client_propagateConnectionState, _Client_lastPropagatedConnectionState, _Client_stateChangeHandler, _Client_storageInited, _Client_initStorage, _Client_connectionInited, _Client_lastPropagatedAuthorizationState, _Client_propagateAuthorizationState, _Client_getSelfId, _Client_pingLoopStarted, _Client_pingLoopAbortController, _Client_pingInterval, _Client_lastUpdates, _Client_startPingLoop, _Client_pingLoop, _Client_invoke, _Client_handleInvokeError, _Client_getUserAccessHash, _Client_getChannelAccessHash, _Client_getInputPeerInner, _Client_handleCtxUpdate, _Client_queueHandleCtxUpdate, _Client_handleUpdate, _Client_lastGetMe, _Client_getMe;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Client = exports.handleMigrationError = exports.restartAuth = exports.Composer = void 0;
+const _0_deps_js_1 = require("../0_deps.js");
 const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
@@ -164,7 +165,7 @@ class Client extends Composer {
                                 };
                             }
                             else {
-                                (0, _1_utilities_js_1.UNREACHABLE)();
+                                (0, _0_deps_js_1.unreachable)();
                             }
                         }
                     },
@@ -212,7 +213,7 @@ class Client extends Composer {
                     return { chatId: reactions.chatId, messageId: reactions.messageId };
                 }
                 else {
-                    (0, _1_utilities_js_1.UNREACHABLE)();
+                    (0, _0_deps_js_1.unreachable)();
                 }
             };
             const mustGetUserId = () => {
@@ -226,7 +227,7 @@ class Client extends Composer {
                     return update.chosenInlineResult.from.id;
                 }
                 else {
-                    (0, _1_utilities_js_1.UNREACHABLE)();
+                    (0, _0_deps_js_1.unreachable)();
                 }
             };
             const mustGetInlineMsgId = () => {
@@ -240,7 +241,7 @@ class Client extends Composer {
                         return update.callbackQuery.inlineMessageId;
                     }
                 }
-                (0, _1_utilities_js_1.UNREACHABLE)();
+                (0, _0_deps_js_1.unreachable)();
             };
             const chat_ = "messageReactions" in update ? update.messageReactions.chat : "messageReactionCount" in update ? update.messageReactionCount.chat : undefined;
             const chat = chat_ ?? msg?.chat;
@@ -353,21 +354,21 @@ class Client extends Composer {
                 banSender: (params) => {
                     const { chatId, senderId } = mustGetMsg();
                     if (!senderId) {
-                        (0, _1_utilities_js_1.UNREACHABLE)();
+                        (0, _0_deps_js_1.unreachable)();
                     }
                     return this.banChatMember(chatId, senderId, params);
                 },
                 kickSender: () => {
                     const { chatId, senderId } = mustGetMsg();
                     if (!senderId) {
-                        (0, _1_utilities_js_1.UNREACHABLE)();
+                        (0, _0_deps_js_1.unreachable)();
                     }
                     return this.kickChatMember(chatId, senderId);
                 },
                 setSenderRights: (params) => {
                     const { chatId, senderId } = mustGetMsg();
                     if (!senderId) {
-                        (0, _1_utilities_js_1.UNREACHABLE)();
+                        (0, _0_deps_js_1.unreachable)();
                     }
                     return this.setChatMemberRights(chatId, senderId, params);
                 },
@@ -381,13 +382,13 @@ class Client extends Composer {
                 },
                 answerCallbackQuery: (params) => {
                     if (!("callbackQuery" in update)) {
-                        (0, _1_utilities_js_1.UNREACHABLE)();
+                        (0, _0_deps_js_1.unreachable)();
                     }
                     return this.answerCallbackQuery(update.callbackQuery.id, params);
                 },
                 answerInlineQuery: (results, params) => {
                     if (!("inlineQuery" in update)) {
-                        (0, _1_utilities_js_1.UNREACHABLE)();
+                        (0, _0_deps_js_1.unreachable)();
                     }
                     return this.answerInlineQuery(update.inlineQuery.id, results, params);
                 },
@@ -540,7 +541,7 @@ class Client extends Composer {
                 getBusinessConnection: () => {
                     const { businessConnectionId } = mustGetMsg();
                     if (!businessConnectionId) {
-                        (0, _1_utilities_js_1.UNREACHABLE)();
+                        (0, _0_deps_js_1.unreachable)();
                     }
                     return this.getBusinessConnection(businessConnectionId);
                 },
@@ -1221,7 +1222,7 @@ class Client extends Composer {
                     resolvedId = (0, _2_tl_js_1.peerToChatId)(resolved.peer);
                 }
                 else {
-                    (0, _1_utilities_js_1.UNREACHABLE)();
+                    (0, _0_deps_js_1.unreachable)();
                 }
             }
             const resolvedIdType = (0, _2_tl_js_1.getChatIdPeerType)(resolvedId);
@@ -1234,7 +1235,7 @@ class Client extends Composer {
                 return new _2_tl_js_1.types.InputPeerChannel({ channel_id: (0, _2_tl_js_1.chatIdToPeerId)(resolvedId), access_hash: accessHash ?? 0n });
             }
             else {
-                (0, _1_utilities_js_1.UNREACHABLE)();
+                (0, _0_deps_js_1.unreachable)();
             }
         }
         else if (id > 0) {

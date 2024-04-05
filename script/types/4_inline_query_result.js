@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.inlineQueryResultToTlObject = void 0;
+const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _file_id_js_1 = require("./_file_id.js");
@@ -226,7 +227,7 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
     }
     else if (result_.type == "article") {
         if (!("messageText" in result_.inputMessageContent)) {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
         const [message, entities] = await parseText(result_.inputMessageContent.messageText, { entities: result_.inputMessageContent.entities, parseMode: result_.inputMessageContent.parseMode });
         const noWebpage = result_.inputMessageContent?.linkPreview?.disable ? true : undefined;
@@ -264,7 +265,7 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
     }
     else if (result_.type == "venue") {
         if (!result_.fourSquareId || !result_.foursquareType) {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
         return new _2_tl_js_1.types.InputBotInlineResult({
             id,
@@ -284,7 +285,7 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
         });
     }
     else {
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
 }
 exports.inlineQueryResultToTlObject = inlineQueryResultToTlObject;

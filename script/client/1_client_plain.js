@@ -71,7 +71,7 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
             }
         }
         if (!resPq) {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
         const pq_ = (0, _1_utilities_js_1.bigIntFromBuffer)(resPq.pq, false, false);
         LcreateAuthKey.debug(`pq=${pq_}`);

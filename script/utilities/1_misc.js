@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fromUnixTimestamp = exports.toUnixTimestamp = exports.VECTOR_CONSTRUCTOR = exports.ZERO_CHANNEL_ID = exports.mustPromptOneOf = exports.mustPromptNumber = exports.mustPrompt = exports.drop = void 0;
-const _0_control_js_1 = require("./0_control.js");
+const _0_deps_js_1 = require("../0_deps.js");
 function drop(promise) {
     promise.catch(() => { });
 }
@@ -9,7 +9,7 @@ exports.drop = drop;
 function mustPrompt(message) {
     const result = prompt(message);
     if (result == null) {
-        throw (0, _0_control_js_1.UNREACHABLE)();
+        throw (0, _0_deps_js_1.unreachable)();
     }
     else {
         return result;

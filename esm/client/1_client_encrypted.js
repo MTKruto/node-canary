@@ -10,9 +10,9 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _ClientEncrypted_instances, _ClientEncrypted_authKey, _ClientEncrypted_authKeyId, _ClientEncrypted_sessionId, _ClientEncrypted_state, _ClientEncrypted_toAcknowledge, _ClientEncrypted_recentAcks, _ClientEncrypted_promises, _ClientEncrypted_L, _ClientEncrypted_LreceiveLoop, _ClientEncrypted_Linvoke, _ClientEncrypted_nextMessageId, _ClientEncrypted_nextSeqNo, _ClientEncrypted_sendMessage, _ClientEncrypted_receiveLoop;
-import { gunzip } from "../0_deps.js";
+import { gunzip, unreachable } from "../0_deps.js";
 import { ConnectionError } from "../0_errors.js";
-import { bigIntFromBuffer, CacheMap, drop, getLogger, getRandomBigInt, sha1, UNREACHABLE } from "../1_utilities.js";
+import { bigIntFromBuffer, CacheMap, drop, getLogger, getRandomBigInt, sha1 } from "../1_utilities.js";
 import { Message_, MessageContainer, name, RPCResult, TLError, TLReader, types } from "../2_tl.js";
 import { upgradeInstance } from "../4_errors.js";
 import { ClientAbstract } from "./0_client_abstract.js";
@@ -118,7 +118,7 @@ _ClientEncrypted_authKey = new WeakMap(), _ClientEncrypted_authKeyId = new WeakM
     __classPrivateFieldGet(this, _ClientEncrypted_L, "f").outBin(payload);
 }, _ClientEncrypted_receiveLoop = async function _ClientEncrypted_receiveLoop() {
     if (!this.transport) {
-        UNREACHABLE();
+        unreachable();
     }
     while (this.connected) {
         try {
@@ -234,6 +234,6 @@ _ClientEncrypted_authKey = new WeakMap(), _ClientEncrypted_authKeyId = new WeakM
         }
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
 };

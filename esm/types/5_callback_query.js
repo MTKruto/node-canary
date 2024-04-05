@@ -1,5 +1,6 @@
+import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
-import { base64DecodeUrlSafe, base64EncodeUrlSafe, cleanObject, UNREACHABLE } from "../1_utilities.js";
+import { base64DecodeUrlSafe, base64EncodeUrlSafe, cleanObject } from "../1_utilities.js";
 import { peerToChatId, serialize, TLReader, types } from "../2_tl.js";
 import { constructUser } from "./1_user.js";
 const ERR_INVALID_INLINE_MESSAGE_ID = new InputError("Invalid inline message ID");
@@ -20,7 +21,7 @@ export function deserializeInlineMessageId(inlineMessageId) {
 export async function constructCallbackQuery(callbackQuery, getEntity, getMessage) {
     const user_ = await getEntity(new types.PeerUser({ user_id: callbackQuery.user_id }));
     if (!user_) {
-        UNREACHABLE();
+        unreachable();
     }
     const user = constructUser(user_);
     const id = String(callbackQuery.query_id);
@@ -30,7 +31,7 @@ export async function constructCallbackQuery(callbackQuery, getEntity, getMessag
     if (callbackQuery instanceof types.UpdateBotCallbackQuery) {
         const message = await getMessage(peerToChatId(callbackQuery.peer), Number(callbackQuery.msg_id));
         if (message == null) {
-            UNREACHABLE();
+            unreachable();
         }
         return cleanObject({ id, from: user, message, chatInstance, data, gameShortName });
     }

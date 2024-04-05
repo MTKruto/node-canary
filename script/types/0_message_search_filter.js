@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.messageSearchFilterToTlObject = void 0;
-const _1_utilities_js_1 = require("../1_utilities.js");
+const _0_deps_js_1 = require("../0_deps.js");
 const _2_tl_js_1 = require("../2_tl.js");
 function messageSearchFilterToTlObject(filter) {
     switch (filter) {
@@ -34,7 +34,7 @@ function messageSearchFilterToTlObject(filter) {
         case "pinned":
             return new _2_tl_js_1.types.InputMessagesFilterPinned();
         default:
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
     }
 }
 exports.messageSearchFilterToTlObject = messageSearchFilterToTlObject;

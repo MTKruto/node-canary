@@ -15,7 +15,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.upgradeInstance = exports.StatsMigrate = exports.FileMigrate = exports.PhoneMigrate = exports.UserMigrate = exports.Migrate = exports.FloodWait = void 0;
-const _1_utilities_js_1 = require("./1_utilities.js");
+const _0_deps_js_1 = require("./0_deps.js");
 const _3_errors_js_1 = require("./3_errors.js");
 __exportStar(require("./3_errors.js"), exports);
 class FloodWait extends _3_errors_js_1.ErrorWithCall {
@@ -30,7 +30,7 @@ class FloodWait extends _3_errors_js_1.ErrorWithCall {
         const p = params.error_message.split("_");
         this.seconds = Number(p[p.length - 1]);
         if (isNaN(this.seconds)) {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
     }
 }
@@ -47,7 +47,7 @@ class Migrate extends _3_errors_js_1.ErrorWithCall {
         const p = params.error_message.split("_");
         this.dc = Number(p[p.length - 1]);
         if (isNaN(this.dc)) {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
     }
 }

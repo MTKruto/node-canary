@@ -13,6 +13,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _UpdateManager_instances, _a, _UpdateManager_c, _UpdateManager_updateState, _UpdateManager_updateHandler, _UpdateManager_LrecoverUpdateGap, _UpdateManager_LrecoverChannelUpdateGap, _UpdateManager_L$handleUpdate, _UpdateManager_L$processUpdates, _UpdateManager_LfetchState, _UpdateManager_defaultDropPendingUpdates, _UpdateManager_mustDropPendingUpdates, _UpdateManager_state, _UpdateManager_getState, _UpdateManager_setState, _UpdateManager_handleUpdateQueues, _UpdateManager_nonFirst, _UpdateManager_getChannelPtsWithDropPendingUpdatesCheck, _UpdateManager_checkGap, _UpdateManager_checkGapQts, _UpdateManager_checkChannelGap, _UpdateManager_channelUpdateQueues, _UpdateManager_processChannelPtsUpdateInner, _UpdateManager_queueUpdate, _UpdateManager_processChannelPtsUpdate, _UpdateManager_processPtsUpdateInner, _UpdateManager_ptsUpdateQueue, _UpdateManager_processPtsUpdate, _UpdateManager_processQtsUpdateInner, _UpdateManager_qtsUpdateQueue, _UpdateManager_processQtsUpdate, _UpdateManager_processUpdatesQueue, _UpdateManager_processUpdates, _UpdateManager_setUpdateStateDate, _UpdateManager_setUpdatePts, _UpdateManager_setUpdateQts, _UpdateManager_getLocalState, _UpdateManager_recoverChannelUpdateGap, _UpdateManager_handleUpdatesSet, _UpdateManager_handleStoredUpdates, _UpdateManager_handleUpdate;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateManager = void 0;
+const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _4_constants_js_1 = require("../4_constants.js");
@@ -253,7 +254,7 @@ class UpdateManager {
                         state = difference.intermediate_state;
                     }
                     else {
-                        (0, _1_utilities_js_1.UNREACHABLE)();
+                        (0, _0_deps_js_1.unreachable)();
                     }
                 }
                 else if (difference instanceof _2_tl_js_1.types.updates.DifferenceTooLong) {
@@ -269,7 +270,7 @@ class UpdateManager {
                     break;
                 }
                 else {
-                    (0, _1_utilities_js_1.UNREACHABLE)();
+                    (0, _0_deps_js_1.unreachable)();
                 }
             }
         }
@@ -515,7 +516,7 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
     }
     else if (updates_ instanceof _2_tl_js_1.types.UpdateShortSentMessage) {
         if (!(call instanceof _2_tl_js_1.functions.messages.sendMessage)) {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
         updates = [
             new _2_tl_js_1.types.UpdateNewMessage({
@@ -545,7 +546,7 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
         updates = [updates_];
     }
     else {
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
     /// We process the updates when we are sure there is no gap.
     if (updates_ instanceof _2_tl_js_1.types.Updates || updates_ instanceof _2_tl_js_1.types.UpdatesCombined) {
@@ -566,7 +567,7 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
                 await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_setState).call(this, __classPrivateFieldGet(this, _UpdateManager_updateState, "f"));
             }
             else {
-                (0, _1_utilities_js_1.UNREACHABLE)();
+                (0, _0_deps_js_1.unreachable)();
             }
         }
         else if (_a.isPtsUpdate(update)) {
@@ -608,7 +609,7 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
                 await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_setState).call(this, localState);
             }
             else {
-                (0, _1_utilities_js_1.UNREACHABLE)();
+                (0, _0_deps_js_1.unreachable)();
             }
         }
     }
@@ -651,7 +652,7 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
                 pts = pts_;
             }
             else {
-                (0, _1_utilities_js_1.UNREACHABLE)();
+                (0, _0_deps_js_1.unreachable)();
             }
             __classPrivateFieldGet(this, _UpdateManager_LrecoverChannelUpdateGap, "f").debug("processed channelDifferenceTooLong");
         }

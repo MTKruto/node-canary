@@ -13,6 +13,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _Storage_instances, _Storage_authKeyId, _Storage_resetAuthKeyId, _Storage_accountId, _Storage_accountType, _Storage_getUpdateId;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Storage = exports.K = void 0;
+const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 // key parts
@@ -135,7 +136,7 @@ class Storage {
         const channel = await this.getEntity(id);
         if (channel) {
             if (!(channel instanceof _2_tl_js_1.types.Channel) && !(channel instanceof _2_tl_js_1.types.ChannelForbidden)) {
-                (0, _1_utilities_js_1.UNREACHABLE)();
+                (0, _0_deps_js_1.unreachable)();
             }
             return typeof channel.access_hash === "bigint" ? channel.access_hash : null;
         }
@@ -147,7 +148,7 @@ class Storage {
         const user = await this.getEntity(id);
         if (user) {
             if (!(user instanceof _2_tl_js_1.types.User)) {
-                (0, _1_utilities_js_1.UNREACHABLE)();
+                (0, _0_deps_js_1.unreachable)();
             }
             return typeof user.access_hash === "bigint" ? user.access_hash : null;
         }
@@ -251,7 +252,7 @@ class Storage {
     async setAccountType(type) {
         try {
             await this.getAccountType();
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
         catch (err) {
             if (!(err instanceof Error) || !(err.message == "Unreachable")) {

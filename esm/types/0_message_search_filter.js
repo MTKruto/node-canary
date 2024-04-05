@@ -1,4 +1,4 @@
-import { UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
 import { types } from "../2_tl.js";
 export function messageSearchFilterToTlObject(filter) {
     switch (filter) {
@@ -31,6 +31,6 @@ export function messageSearchFilterToTlObject(filter) {
         case "pinned":
             return new types.InputMessagesFilterPinned();
         default:
-            UNREACHABLE();
+            unreachable();
     }
 }

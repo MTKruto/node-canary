@@ -10,9 +10,9 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _StoryManager_instances, _StoryManager_c, _StoryManager_updatesToStory, _StoryManager_togglePinned;
-import { contentType } from "../0_deps.js";
+import { contentType, unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
-import { getRandomId, UNREACHABLE } from "../1_utilities.js";
+import { getRandomId } from "../1_utilities.js";
 import { as, inputPeerToPeer, peerToChatId, types } from "../2_tl.js";
 import { constructStory, FileType, storyInteractiveAreaToTlObject, storyPrivacyToTlObject } from "../3_types.js";
 import { checkArray, checkStoryId, getFileContents, isHttpUrl } from "./0_utilities.js";
@@ -25,7 +25,7 @@ export class StoryManager {
     async createStory(chatId, content, params) {
         await __classPrivateFieldGet(this, _StoryManager_c, "f").storage.assertUser("createStory");
         let media = null;
-        const source = "video" in content ? content.video : "photo" in content ? content.photo : UNREACHABLE();
+        const source = "video" in content ? content.video : "photo" in content ? content.photo : unreachable();
         if (typeof source === "string") {
             const fileId = __classPrivateFieldGet(this, _StoryManager_c, "f").messageManager.resolveFileId(source, FileType.Photo);
             if (fileId != null) {
@@ -147,7 +147,7 @@ _StoryManager_c = new WeakMap(), _StoryManager_instances = new WeakSet(), _Story
             return await constructStory(updateStory.story, updateStory.peer, __classPrivateFieldGet(this, _StoryManager_c, "f").getEntity);
         }
     }
-    UNREACHABLE();
+    unreachable();
 }, _StoryManager_togglePinned = async function _StoryManager_togglePinned(chatId, storyIds, pinned) {
     checkArray(storyIds, checkStoryId);
     const peer = await __classPrivateFieldGet(this, _StoryManager_c, "f").getInputPeer(chatId);

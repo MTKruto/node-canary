@@ -10,7 +10,8 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _Storage_instances, _Storage_authKeyId, _Storage_resetAuthKeyId, _Storage_accountId, _Storage_accountType, _Storage_getUpdateId;
-import { base64DecodeUrlSafe, base64EncodeUrlSafe, bigIntFromBuffer, rleDecode, rleEncode, sha1, UNREACHABLE, ZERO_CHANNEL_ID } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
+import { base64DecodeUrlSafe, base64EncodeUrlSafe, bigIntFromBuffer, rleDecode, rleEncode, sha1, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { peerToChatId, serialize, TLObject, TLReader, TLWriter, types } from "../2_tl.js";
 // key parts
 export const K = {
@@ -132,7 +133,7 @@ export class Storage {
         const channel = await this.getEntity(id);
         if (channel) {
             if (!(channel instanceof types.Channel) && !(channel instanceof types.ChannelForbidden)) {
-                UNREACHABLE();
+                unreachable();
             }
             return typeof channel.access_hash === "bigint" ? channel.access_hash : null;
         }
@@ -144,7 +145,7 @@ export class Storage {
         const user = await this.getEntity(id);
         if (user) {
             if (!(user instanceof types.User)) {
-                UNREACHABLE();
+                unreachable();
             }
             return typeof user.access_hash === "bigint" ? user.access_hash : null;
         }
@@ -248,7 +249,7 @@ export class Storage {
     async setAccountType(type) {
         try {
             await this.getAccountType();
-            UNREACHABLE();
+            unreachable();
         }
         catch (err) {
             if (!(err instanceof Error) || !(err.message == "Unreachable")) {

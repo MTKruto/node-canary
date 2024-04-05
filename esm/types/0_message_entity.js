@@ -1,4 +1,4 @@
-import { UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
 import { types } from "../2_tl.js";
 export function constructMessageEntity(obj) {
     if (obj instanceof types.MessageEntityMention) {
@@ -91,7 +91,7 @@ export async function messageEntityToTlObject(entity, getEntity) {
                     if (!isNaN(id)) {
                         const entity_ = await getEntity(new types.PeerUser({ user_id: BigInt(id) }));
                         if (!entity_) {
-                            UNREACHABLE();
+                            unreachable();
                         }
                         return new types.InputMessageEntityMentionName({ offset, length, user_id: new types.InputUser({ user_id: entity_.id, access_hash: entity_.access_hash ?? 0n }) });
                     }
@@ -105,7 +105,7 @@ export async function messageEntityToTlObject(entity, getEntity) {
         case "textMention": {
             const entity_ = await getEntity(new types.PeerUser({ user_id: BigInt(entity.userId) }));
             if (!entity_) {
-                UNREACHABLE();
+                unreachable();
             }
             return new types.InputMessageEntityMentionName({ offset, length, user_id: new types.InputUser({ user_id: entity_.id, access_hash: entity_.access_hash ?? 0n }) });
         }

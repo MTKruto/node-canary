@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.constructMessage = exports.assertMessageType = void 0;
+const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _file_id_js_1 = require("./_file_id.js");
@@ -72,7 +73,7 @@ const keys = {
 function assertMessageType(message, type) {
     for (const key of keys[type]) {
         if (!(key in message) || message[key] === undefined) {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
     }
     return message;
@@ -85,7 +86,7 @@ async function getSender(message_, getEntity) {
             return { from: (0, _1_user_js_1.constructUser)(entity) };
         }
         else {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
     }
     else if (message_.from_id instanceof _2_tl_js_1.types.PeerChannel) {
@@ -94,7 +95,7 @@ async function getSender(message_, getEntity) {
             return { senderChat: (0, _1_chat_p_js_1.constructChatP)(entity) };
         }
         else {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
     }
 }
@@ -133,7 +134,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage) {
                 newChatMembers.push(user);
             }
             else {
-                (0, _1_utilities_js_1.UNREACHABLE)();
+                (0, _0_deps_js_1.unreachable)();
             }
         }
         return { ...message, newChatMembers };
@@ -180,7 +181,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage) {
             return { ...message, supergroupCreated };
         }
         else {
-            // UNREACHABLE();
+            // unreachable();
         }
     }
     else if (message_.action instanceof _2_tl_js_1.types.MessageActionChatMigrateTo) {
@@ -255,7 +256,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage) {
 }
 async function constructMessage(message_, getEntity, getMessage, getStickerSetName, getReply_ = true, business) {
     if (!(message_ instanceof _2_tl_js_1.types.Message) && !(message_ instanceof _2_tl_js_1.types.MessageService)) {
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
     let link;
     let chat_ = null;
@@ -265,7 +266,7 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
             chat_ = (0, _1_chat_p_js_1.constructChatP)(entity);
         }
         else {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
     }
     else if (message_.peer_id instanceof _2_tl_js_1.types.PeerChat) {
@@ -274,7 +275,7 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
             chat_ = (0, _1_chat_p_js_1.constructChatP)(entity);
         }
         else {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
     }
     else if (message_.peer_id instanceof _2_tl_js_1.types.PeerChannel) {
@@ -284,11 +285,11 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
             chat_ = (0, _1_chat_p_js_1.constructChatP)(entity);
         }
         else {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
     }
     else {
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
     if (message_ instanceof _2_tl_js_1.types.MessageService) {
         return await constructServiceMessage(message_, chat_, getEntity, getMessage);
@@ -335,7 +336,7 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
             message.viaBot = (0, _1_user_js_1.constructUser)(viaBot);
         }
         else {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
     }
     if (message_.via_business_bot_id != undefined) {
@@ -344,7 +345,7 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
             message.viaBusinessBot = (0, _1_user_js_1.constructUser)(viaBusinessBot);
         }
         else {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
     }
     if (message_.post_author != undefined) {
@@ -400,7 +401,7 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
     let m = null;
     if (message_.media instanceof _2_tl_js_1.types.MessageMediaPhoto) {
         if (!message_.media.photo) {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
         const photo = (0, _1_photo_js_1.constructPhoto)(message_.media.photo[_2_tl_js_1.as](_2_tl_js_1.types.Photo));
         m = { ...messageMedia, photo };

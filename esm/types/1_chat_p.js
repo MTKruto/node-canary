@@ -1,4 +1,5 @@
-import { cleanObject, getColorFromPeerId, UNREACHABLE, ZERO_CHANNEL_ID } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
+import { cleanObject, getColorFromPeerId, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { types } from "../2_tl.js";
 import { constructRestrictionReason } from "./0_restriction_reason.js";
 export function constructChatP(chat) {
@@ -82,6 +83,6 @@ export function constructChatP(chat) {
         return cleanObject(chat_);
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
 }

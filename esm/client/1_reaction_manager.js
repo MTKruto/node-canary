@@ -10,7 +10,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _ReactionManager_c;
-import { UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
 import { peerToChatId, types } from "../2_tl.js";
 import { constructMessageReaction, constructMessageReactionCount, constructMessageReactions } from "../3_types.js";
 export class ReactionManager {
@@ -77,7 +77,7 @@ export class ReactionManager {
             }
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     }
 }

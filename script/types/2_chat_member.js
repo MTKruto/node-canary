@@ -1,15 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.constructChatMember = void 0;
+const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _0_chat_administrator_rights_js_1 = require("./0_chat_administrator_rights.js");
 const _0_chat_member_rights_js_1 = require("./0_chat_member_rights.js");
 const _1_user_js_1 = require("./1_user.js");
 async function constructChatMember(participant, getEntity) {
-    const user_ = "user_id" in participant ? await getEntity(new _2_tl_js_1.types.PeerUser(participant)) : "peer" in participant ? participant.peer instanceof _2_tl_js_1.types.PeerUser ? await getEntity(participant.peer) : (0, _1_utilities_js_1.UNREACHABLE)() : (0, _1_utilities_js_1.UNREACHABLE)(); // TODO: support other peer types
+    const user_ = "user_id" in participant ? await getEntity(new _2_tl_js_1.types.PeerUser(participant)) : "peer" in participant ? participant.peer instanceof _2_tl_js_1.types.PeerUser ? await getEntity(participant.peer) : (0, _1_utilities_js_1.UNREACHABLE)() : (0, _0_deps_js_1.unreachable)(); // TODO: support other peer types
     if (user_ == null)
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     const user = (0, _1_user_js_1.constructUser)(user_);
     if (participant instanceof _2_tl_js_1.types.ChannelParticipant || participant instanceof _2_tl_js_1.types.ChatParticipant) {
         return {
@@ -54,7 +55,7 @@ async function constructChatMember(participant, getEntity) {
         });
     }
     else if (participant instanceof _2_tl_js_1.types.ChannelParticipantSelf) {
-        (0, _1_utilities_js_1.UNREACHABLE)(); // TODO: implement
+        (0, _0_deps_js_1.unreachable)(); // TODO: implement
     }
     else if (participant instanceof _2_tl_js_1.types.ChannelParticipantLeft) {
         return { status: "left", user };
@@ -87,7 +88,7 @@ async function constructChatMember(participant, getEntity) {
         });
     }
     else {
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
 }
 exports.constructChatMember = constructChatMember;

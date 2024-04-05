@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.constructCallbackQuery = exports.deserializeInlineMessageId = void 0;
+const _0_deps_js_1 = require("../0_deps.js");
 const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
@@ -24,7 +25,7 @@ exports.deserializeInlineMessageId = deserializeInlineMessageId;
 async function constructCallbackQuery(callbackQuery, getEntity, getMessage) {
     const user_ = await getEntity(new _2_tl_js_1.types.PeerUser({ user_id: callbackQuery.user_id }));
     if (!user_) {
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
     const user = (0, _1_user_js_1.constructUser)(user_);
     const id = String(callbackQuery.query_id);
@@ -34,7 +35,7 @@ async function constructCallbackQuery(callbackQuery, getEntity, getMessage) {
     if (callbackQuery instanceof _2_tl_js_1.types.UpdateBotCallbackQuery) {
         const message = await getMessage((0, _2_tl_js_1.peerToChatId)(callbackQuery.peer), Number(callbackQuery.msg_id));
         if (message == null) {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
         return (0, _1_utilities_js_1.cleanObject)({ id, from: user, message, chatInstance, data, gameShortName });
     }

@@ -1,4 +1,5 @@
-import { cleanObject, UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
+import { cleanObject } from "../1_utilities.js";
 import { types } from "../2_tl.js";
 import { constructKeyboardButton, keyboardButtonToTlObject } from "./1_keyboard_button.js";
 import { constructInlineKeyboardButton, inlineKeyboardButtonToTlObject } from "./2_inline_keyboard_button.js";
@@ -95,7 +96,7 @@ export function constructReplyMarkup(replyMarkup) {
         return constructForceReply(replyMarkup);
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
 }
 export async function replyMarkupToTlObject(replyMarkup, usernameResolver) {
@@ -112,6 +113,6 @@ export async function replyMarkupToTlObject(replyMarkup, usernameResolver) {
         return forceReplyToTlObject(replyMarkup);
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
 }

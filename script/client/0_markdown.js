@@ -5,7 +5,7 @@ exports.parseMarkdown = exports.CODEPOINTS = void 0;
  * Copyright (c) 2023 Dunkan
  * Copyright (c) 2024 Roj
  */
-const _1_utilities_js_1 = require("../1_utilities.js");
+const _0_deps_js_1 = require("../0_deps.js");
 const _3_types_js_1 = require("../3_types.js");
 const _0_errors_js_1 = require("../0_errors.js");
 const enc = new TextEncoder();
@@ -139,7 +139,7 @@ function parseMarkdown(text_) {
                     case "customEmoji":
                         return c === exports.CODEPOINTS["]"];
                     default:
-                        (0, _1_utilities_js_1.UNREACHABLE)();
+                        (0, _0_deps_js_1.unreachable)();
                 }
             })();
         }
@@ -292,7 +292,7 @@ function parseMarkdown(text_) {
                     break;
                 }
                 default:
-                    (0, _1_utilities_js_1.UNREACHABLE)();
+                    (0, _0_deps_js_1.unreachable)();
             }
             if (!skipEntity) {
                 const entityOffset = nestedEntities.at(-1).entityOffset;

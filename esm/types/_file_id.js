@@ -1,5 +1,6 @@
+import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
-import { base64DecodeUrlSafe, base64EncodeUrlSafe, rleDecode, rleEncode, UNREACHABLE } from "../1_utilities.js";
+import { base64DecodeUrlSafe, base64EncodeUrlSafe, rleDecode, rleEncode } from "../1_utilities.js";
 import { TLReader, TLWriter } from "../2_tl.js";
 const NEXT_VERSION = 53;
 const PERSISTENT_ID_VERSION = 4;
@@ -122,7 +123,7 @@ function serializePhotoSource(photoSource, writer) {
             writer.writeInt32(photoSource.version);
             break;
         default:
-            UNREACHABLE();
+            unreachable();
     }
 }
 function getPhotoSourceCompareType(source) {
@@ -132,7 +133,7 @@ function getPhotoSourceCompareType(source) {
         case PhotoSourceType.Thumbnail: {
             const type = source.thumbnailType;
             if (!(0 <= type && type <= 127)) {
-                UNREACHABLE();
+                unreachable();
             }
             if (type == "a".charCodeAt(0)) {
                 return 0;
@@ -158,7 +159,7 @@ function getPhotoSourceCompareType(source) {
         default:
             break;
     }
-    UNREACHABLE();
+    unreachable();
 }
 function writePhotoSourceUniqueId(photoSource, writer) {
     const compareType = getPhotoSourceCompareType(photoSource);
@@ -169,8 +170,8 @@ function writePhotoSourceUniqueId(photoSource, writer) {
     if (compareType == 2) {
         writer.write(new Uint8Array([0x02]));
     }
-    writer.writeInt64("volumeId" in photoSource ? photoSource.volumeId : "stickerSetId" in photoSource ? photoSource.stickerSetId : UNREACHABLE());
-    writer.writeInt32("localId" in photoSource ? photoSource.localId : "version" in photoSource ? photoSource.version : UNREACHABLE());
+    writer.writeInt64("volumeId" in photoSource ? photoSource.volumeId : "stickerSetId" in photoSource ? photoSource.stickerSetId : unreachable());
+    writer.writeInt32("localId" in photoSource ? photoSource.localId : "version" in photoSource ? photoSource.version : unreachable());
 }
 function getFileTypeClass(fileType) {
     switch (fileType) {
@@ -204,7 +205,7 @@ function getFileTypeClass(fileType) {
         case FileType.None:
         case FileType.Size:
         default:
-            UNREACHABLE();
+            unreachable();
     }
 }
 function isWeb(fileType) {
@@ -279,7 +280,7 @@ export function toUniqueFileId(fileId) {
         switch (fileId.location.source.type) {
             case PhotoSourceType.Legacy:
             case PhotoSourceType.StickerSetThumbnail:
-                UNREACHABLE();
+                unreachable();
             /* falls through */
             case PhotoSourceType.FullLegacy:
             case PhotoSourceType.ChatPhotoSmallLegacy:

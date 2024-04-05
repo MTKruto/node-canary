@@ -1,4 +1,5 @@
-import { cleanObject, fromUnixTimestamp, UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
+import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
 import { constructMessageEntity } from "./0_message_entity.js";
 import { constructChatP } from "./1_chat_p.js";
 import { constructStoryPrivacy } from "./1_story_privacy.js";
@@ -9,7 +10,7 @@ export async function constructStory(story, peer, getEntity) {
     const id = story.id;
     const entity = await getEntity(peer);
     if (!entity) {
-        UNREACHABLE();
+        unreachable();
     }
     const chat = constructChatP(entity);
     const date = fromUnixTimestamp(story.date);

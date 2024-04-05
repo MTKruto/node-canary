@@ -1,3 +1,4 @@
+import { unreachable } from "../0_deps.js";
 import { UNREACHABLE } from "../1_utilities.js";
 import { types } from "../2_tl.js";
 import { deserializeFileId } from "./_file_id.js";
@@ -223,7 +224,7 @@ export async function inlineQueryResultToTlObject(result_, parseText, usernameRe
     }
     else if (result_.type == "article") {
         if (!("messageText" in result_.inputMessageContent)) {
-            UNREACHABLE();
+            unreachable();
         }
         const [message, entities] = await parseText(result_.inputMessageContent.messageText, { entities: result_.inputMessageContent.entities, parseMode: result_.inputMessageContent.parseMode });
         const noWebpage = result_.inputMessageContent?.linkPreview?.disable ? true : undefined;
@@ -261,7 +262,7 @@ export async function inlineQueryResultToTlObject(result_, parseText, usernameRe
     }
     else if (result_.type == "venue") {
         if (!result_.fourSquareId || !result_.foursquareType) {
-            UNREACHABLE();
+            unreachable();
         }
         return new types.InputBotInlineResult({
             id,
@@ -281,6 +282,6 @@ export async function inlineQueryResultToTlObject(result_, parseText, usernameRe
         });
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
 }

@@ -1,4 +1,4 @@
-import { UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
 import { types } from "../2_tl.js";
 import { constructMiniAppInfo } from "./0_mini_app_info.js";
 export function constructInlineKeyboardButton(button_) {
@@ -29,7 +29,7 @@ export function constructInlineKeyboardButton(button_) {
         return { text: button_.text, callbackGame: {} };
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
 }
 export async function inlineKeyboardButtonToTlObject(button, usernameResolver) {
@@ -61,6 +61,6 @@ export async function inlineKeyboardButtonToTlObject(button, usernameResolver) {
         return new types.KeyboardButtonBuy({ text: button.text });
     }
     else {
-        UNREACHABLE();
+        unreachable();
     }
 }

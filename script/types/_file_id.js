@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.toUniqueFileId = exports.serializeFileId = exports.deserializeFileId = exports.PhotoSourceType = exports.FileType = void 0;
+const _0_deps_js_1 = require("../0_deps.js");
 const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
@@ -125,7 +126,7 @@ function serializePhotoSource(photoSource, writer) {
             writer.writeInt32(photoSource.version);
             break;
         default:
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
     }
 }
 function getPhotoSourceCompareType(source) {
@@ -135,7 +136,7 @@ function getPhotoSourceCompareType(source) {
         case PhotoSourceType.Thumbnail: {
             const type = source.thumbnailType;
             if (!(0 <= type && type <= 127)) {
-                (0, _1_utilities_js_1.UNREACHABLE)();
+                (0, _0_deps_js_1.unreachable)();
             }
             if (type == "a".charCodeAt(0)) {
                 return 0;
@@ -161,7 +162,7 @@ function getPhotoSourceCompareType(source) {
         default:
             break;
     }
-    (0, _1_utilities_js_1.UNREACHABLE)();
+    (0, _0_deps_js_1.unreachable)();
 }
 function writePhotoSourceUniqueId(photoSource, writer) {
     const compareType = getPhotoSourceCompareType(photoSource);
@@ -172,8 +173,8 @@ function writePhotoSourceUniqueId(photoSource, writer) {
     if (compareType == 2) {
         writer.write(new Uint8Array([0x02]));
     }
-    writer.writeInt64("volumeId" in photoSource ? photoSource.volumeId : "stickerSetId" in photoSource ? photoSource.stickerSetId : (0, _1_utilities_js_1.UNREACHABLE)());
-    writer.writeInt32("localId" in photoSource ? photoSource.localId : "version" in photoSource ? photoSource.version : (0, _1_utilities_js_1.UNREACHABLE)());
+    writer.writeInt64("volumeId" in photoSource ? photoSource.volumeId : "stickerSetId" in photoSource ? photoSource.stickerSetId : (0, _0_deps_js_1.unreachable)());
+    writer.writeInt32("localId" in photoSource ? photoSource.localId : "version" in photoSource ? photoSource.version : (0, _0_deps_js_1.unreachable)());
 }
 function getFileTypeClass(fileType) {
     switch (fileType) {
@@ -207,7 +208,7 @@ function getFileTypeClass(fileType) {
         case FileType.None:
         case FileType.Size:
         default:
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
     }
 }
 function isWeb(fileType) {
@@ -284,7 +285,7 @@ function toUniqueFileId(fileId) {
         switch (fileId.location.source.type) {
             case PhotoSourceType.Legacy:
             case PhotoSourceType.StickerSetThumbnail:
-                (0, _1_utilities_js_1.UNREACHABLE)();
+                (0, _0_deps_js_1.unreachable)();
             /* falls through */
             case PhotoSourceType.FullLegacy:
             case PhotoSourceType.ChatPhotoSmallLegacy:

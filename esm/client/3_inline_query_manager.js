@@ -10,7 +10,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _InlineQueryManager_c;
-import { UNREACHABLE } from "../1_utilities.js";
+import { unreachable } from "../0_deps.js";
 import { types } from "../2_tl.js";
 import { constructChosenInlineResult, constructInlineQuery, inlineQueryResultToTlObject } from "../3_types.js";
 import { checkInlineQueryId } from "./0_utilities.js";
@@ -44,7 +44,7 @@ export class InlineQueryManager {
             return { chosenInlineResult: await constructChosenInlineResult(update, __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getEntity) };
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     }
 }

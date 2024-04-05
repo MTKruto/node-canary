@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.constructMessageReaction = void 0;
-const _1_utilities_js_1 = require("../1_utilities.js");
+const _0_deps_js_1 = require("../0_deps.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _0_reaction_js_1 = require("./0_reaction.js");
 function constructMessageReaction(reaction_, recentReactions) {
@@ -14,7 +14,7 @@ function constructMessageReaction(reaction_, recentReactions) {
             return v.reaction instanceof _2_tl_js_1.types.ReactionCustomEmoji && v.reaction.document_id == reaction_.reaction.document_id;
         }
         else {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
     })
         .map((v) => (0, _2_tl_js_1.peerToChatId)(v.peer_id));

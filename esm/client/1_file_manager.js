@@ -10,8 +10,9 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _FileManager_instances, _FileManager_c, _FileManager_Lupload, _FileManager_downloadInner;
+import { unreachable } from "../0_deps.js";
 import { ConnectionError, InputError } from "../0_errors.js";
-import { drop, getLogger, getRandomId, mod, UNREACHABLE } from "../1_utilities.js";
+import { drop, getLogger, getRandomId, mod } from "../1_utilities.js";
 import { as, types } from "../2_tl.js";
 import { constructSticker, deserializeFileId, FileType, PhotoSourceType, serializeFileId, toUniqueFileId } from "../3_types.js";
 import { STICKER_SET_NAME_TTL } from "../4_constants.js";
@@ -104,7 +105,7 @@ export class FileManager {
             switch (fileId_.type) {
                 case FileType.ProfilePhoto: {
                     if (fileId_.location.source.type != PhotoSourceType.ChatPhotoBig && fileId_.location.source.type != PhotoSourceType.ChatPhotoSmall) {
-                        UNREACHABLE();
+                        unreachable();
                     }
                     const big = fileId_.location.source.type == PhotoSourceType.ChatPhotoBig;
                     const peer = await __classPrivateFieldGet(this, _FileManager_c, "f").getInputPeer(Number(fileId_.location.source.chatId)); // TODO: use access hash from source?
@@ -131,7 +132,7 @@ export class FileManager {
                         id: fileId_.location.id,
                         access_hash: fileId_.location.accessHash,
                         file_reference: fileId_.fileReference ?? new Uint8Array(),
-                        thumb_size: "thumbnailType" in fileId_.location.source ? String.fromCharCode(fileId_.location.source.thumbnailType) : UNREACHABLE(),
+                        thumb_size: "thumbnailType" in fileId_.location.source ? String.fromCharCode(fileId_.location.source.thumbnailType) : unreachable(),
                     });
                     for await (const chunk of __classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_downloadInner).call(this, location, fileId_.dcId, params)) {
                         yield chunk;
@@ -152,7 +153,7 @@ export class FileManager {
             }
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     }
     async getStickerSetName(inputStickerSet, hash = 0) {
@@ -255,7 +256,7 @@ _FileManager_c = new WeakMap(), _FileManager_Lupload = new WeakMap(), _FileManag
                 }
             }
             else {
-                UNREACHABLE();
+                unreachable();
             }
         }
     }

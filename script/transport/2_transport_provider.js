@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getDcId = exports.getDcIps = void 0;
-const _1_utilities_js_1 = require("../1_utilities.js");
+const _0_deps_js_1 = require("../0_deps.js");
 function getDcIps(dc, version) {
     switch (version) {
         case "ipv4":
@@ -23,7 +23,7 @@ function getDcIps(dc, version) {
                 case "3-test":
                     return ["149.154.175.117"];
                 default:
-                    (0, _1_utilities_js_1.UNREACHABLE)();
+                    (0, _0_deps_js_1.unreachable)();
             }
             break;
         case "ipv6":
@@ -45,11 +45,11 @@ function getDcIps(dc, version) {
                 case "3-test":
                     return ["2001:b28:f23d:f003::e"];
                 default:
-                    (0, _1_utilities_js_1.UNREACHABLE)();
+                    (0, _0_deps_js_1.unreachable)();
             }
             break;
         default:
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
     }
 }
 exports.getDcIps = getDcIps;

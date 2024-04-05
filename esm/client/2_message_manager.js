@@ -10,9 +10,9 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _MessageManager_instances, _MessageManager_c, _MessageManager_LresolveFileId, _MessageManager_updatesToMessages, _MessageManager_constructReplyMarkup, _MessageManager_resolveSendAs, _MessageManager_constructReplyTo, _MessageManager_sendDocumentInner, _MessageManager_sendMedia, _MessageManager_sendReaction, _MessageManager_toggleJoinRequests;
-import { contentType } from "../0_deps.js";
+import { contentType, unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
-import { getLogger, getRandomId, toUnixTimestamp, UNREACHABLE } from "../1_utilities.js";
+import { getLogger, getRandomId, toUnixTimestamp } from "../1_utilities.js";
 import { as, functions, getChannelChatId, peerToChatId, types } from "../2_tl.js";
 import { constructChatMemberUpdated, constructInviteLink, deserializeFileId } from "../3_types.js";
 import { assertMessageType, chatMemberRightsToTlObject, constructChatMember, constructMessage as constructMessage_, deserializeInlineMessageId, FileType, messageEntityToTlObject, reactionEqual, reactionToTlObject, replyMarkupToTlObject } from "../3_types.js";
@@ -114,7 +114,7 @@ export class MessageManager {
                 break;
             }
             default:
-                UNREACHABLE();
+                unreachable();
         }
         text = text.trimEnd();
         for (const entity of entities) {
@@ -180,7 +180,7 @@ export class MessageManager {
             hash: 0n,
         });
         if (!("messages" in result)) {
-            UNREACHABLE();
+            unreachable();
         }
         for (const message_ of result.messages) {
             const message = await this.constructMessage(message_, false);
@@ -452,10 +452,10 @@ export class MessageManager {
         }
         if (fileId != null) {
             if (!expectedFileType.includes(fileId.type)) {
-                UNREACHABLE();
+                unreachable();
             }
             return {
-                id: "id" in fileId.location ? fileId.location.id : UNREACHABLE(),
+                id: "id" in fileId.location ? fileId.location.id : unreachable(),
                 access_hash: fileId.location.accessHash,
                 file_reference: fileId.fileReference ?? new Uint8Array(),
             };
@@ -615,7 +615,7 @@ export class MessageManager {
         // TODO: sync with storage
         await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.setChatAvailableReactions({
             peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),
-            available_reactions: availableReactions == "none" ? new types.ChatReactionsNone() : availableReactions == "all" ? new types.ChatReactionsAll() : Array.isArray(availableReactions) ? new types.ChatReactionsSome({ reactions: availableReactions.map((v) => v.type == "emoji" ? new types.ReactionEmoji({ emoticon: v.emoji }) : new types.ReactionCustomEmoji({ document_id: BigInt(v.id) })) }) : UNREACHABLE(),
+            available_reactions: availableReactions == "none" ? new types.ChatReactionsNone() : availableReactions == "all" ? new types.ChatReactionsAll() : Array.isArray(availableReactions) ? new types.ChatReactionsSome({ reactions: availableReactions.map((v) => v.type == "emoji" ? new types.ReactionEmoji({ emoticon: v.emoji }) : new types.ReactionCustomEmoji({ document_id: BigInt(v.id) })) }) : unreachable(),
         });
     }
     async setReactions(chatId, messageId, reactions, params) {
@@ -777,7 +777,7 @@ export class MessageManager {
     async deleteChatPhoto(chatId) {
         const peer = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId);
         if (!(peer instanceof types.InputPeerChannel) && !(peer instanceof types.InputPeerChat)) {
-            UNREACHABLE();
+            unreachable();
         }
         if (peer instanceof types.InputPeerChannel) {
             await __classPrivateFieldGet(this, _MessageManager_c, "f").api.channels.editPhoto({ channel: new types.InputChannel(peer), photo: new types.InputChatPhotoEmpty() });
@@ -789,7 +789,7 @@ export class MessageManager {
     async setChatPhoto(chatId, photo, params) {
         const peer = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId);
         if (!(peer instanceof types.InputPeerChannel) && !(peer instanceof types.InputPeerChat)) {
-            UNREACHABLE();
+            unreachable();
         }
         const [contents, fileName] = await getFileContents(photo);
         const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName: params?.fileName ?? fileName, chunkSize: params?.chunkSize, signal: params?.signal });
@@ -873,7 +873,7 @@ export class MessageManager {
                 hash: 0n,
             });
             if (participants instanceof types.channels.ChannelParticipantsNotModified) {
-                UNREACHABLE();
+                unreachable();
             }
             const chatMembers = new Array();
             for (const p of participants.participants) {
@@ -884,7 +884,7 @@ export class MessageManager {
         else if (peer instanceof types.InputPeerChat) {
             const fullChat = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.getFullChat(peer); // TODO: full chat cache
             if (!(fullChat.full_chat instanceof types.ChatFull) || !(fullChat.full_chat.participants instanceof types.ChatParticipants)) {
-                UNREACHABLE();
+                unreachable();
             }
             const chatMembers = new Array();
             for (const p of fullChat.full_chat.participants.participants) {
@@ -893,7 +893,7 @@ export class MessageManager {
             return chatMembers;
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     }
     async enableJoinRequests(chatId) {
@@ -920,7 +920,7 @@ export class MessageManager {
             from_id: params?.from ? await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(params.from) : undefined,
         });
         if (!("messages" in result)) {
-            UNREACHABLE();
+            unreachable();
         }
         const messages = new Array();
         for (const message_ of result.messages) {
@@ -971,7 +971,7 @@ export class MessageManager {
             await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.addChatUser({ chat_id: peer.chat_id, user_id: new types.InputUserSelf(), fwd_limit: 0 }); // TODO: use potential high-level method for adding participants to chats
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     }
     async leaveChat(chatId) {
@@ -986,7 +986,7 @@ export class MessageManager {
             await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.deleteChatUser({ chat_id: peer.chat_id, user_id: new types.InputUserSelf() }); // TODO: use potential high-level method for adding participants to chats
         }
         else {
-            UNREACHABLE();
+            unreachable();
         }
     }
     async blockUser(userId) {
@@ -1079,7 +1079,7 @@ export class MessageManager {
             const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result).then((v) => v[0]);
             return assertMessageType(message, "location");
         }
-        UNREACHABLE();
+        unreachable();
     }
     async editInlineMessageLiveLocation(inlineMessageId, latitude, longitude, params) {
         await __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertBot("editInlineMessageLiveLocation");
@@ -1167,7 +1167,7 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
             let fileName = params?.fileName ?? fileName_;
             const mimeType = params?.mimeType ?? contentType(fileName.split(".").slice(-1)[0]) ?? FALLBACK_MIME_TYPE;
             if (expectedMimeTypes && !expectedMimeTypes.includes(mimeType)) {
-                UNREACHABLE();
+                unreachable();
             }
             if (fileName.endsWith(".tgs") && fileType == FileType.Document) {
                 fileName += "-";

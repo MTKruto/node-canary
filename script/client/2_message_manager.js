@@ -117,7 +117,7 @@ class MessageManager {
                 break;
             }
             default:
-                (0, _1_utilities_js_1.UNREACHABLE)();
+                (0, _0_deps_js_1.unreachable)();
         }
         text = text.trimEnd();
         for (const entity of entities) {
@@ -183,7 +183,7 @@ class MessageManager {
             hash: 0n,
         });
         if (!("messages" in result)) {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
         for (const message_ of result.messages) {
             const message = await this.constructMessage(message_, false);
@@ -455,10 +455,10 @@ class MessageManager {
         }
         if (fileId != null) {
             if (!expectedFileType.includes(fileId.type)) {
-                (0, _1_utilities_js_1.UNREACHABLE)();
+                (0, _0_deps_js_1.unreachable)();
             }
             return {
-                id: "id" in fileId.location ? fileId.location.id : (0, _1_utilities_js_1.UNREACHABLE)(),
+                id: "id" in fileId.location ? fileId.location.id : (0, _0_deps_js_1.unreachable)(),
                 access_hash: fileId.location.accessHash,
                 file_reference: fileId.fileReference ?? new Uint8Array(),
             };
@@ -618,7 +618,7 @@ class MessageManager {
         // TODO: sync with storage
         await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.setChatAvailableReactions({
             peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),
-            available_reactions: availableReactions == "none" ? new _2_tl_js_1.types.ChatReactionsNone() : availableReactions == "all" ? new _2_tl_js_1.types.ChatReactionsAll() : Array.isArray(availableReactions) ? new _2_tl_js_1.types.ChatReactionsSome({ reactions: availableReactions.map((v) => v.type == "emoji" ? new _2_tl_js_1.types.ReactionEmoji({ emoticon: v.emoji }) : new _2_tl_js_1.types.ReactionCustomEmoji({ document_id: BigInt(v.id) })) }) : (0, _1_utilities_js_1.UNREACHABLE)(),
+            available_reactions: availableReactions == "none" ? new _2_tl_js_1.types.ChatReactionsNone() : availableReactions == "all" ? new _2_tl_js_1.types.ChatReactionsAll() : Array.isArray(availableReactions) ? new _2_tl_js_1.types.ChatReactionsSome({ reactions: availableReactions.map((v) => v.type == "emoji" ? new _2_tl_js_1.types.ReactionEmoji({ emoticon: v.emoji }) : new _2_tl_js_1.types.ReactionCustomEmoji({ document_id: BigInt(v.id) })) }) : (0, _0_deps_js_1.unreachable)(),
         });
     }
     async setReactions(chatId, messageId, reactions, params) {
@@ -780,7 +780,7 @@ class MessageManager {
     async deleteChatPhoto(chatId) {
         const peer = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId);
         if (!(peer instanceof _2_tl_js_1.types.InputPeerChannel) && !(peer instanceof _2_tl_js_1.types.InputPeerChat)) {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
         if (peer instanceof _2_tl_js_1.types.InputPeerChannel) {
             await __classPrivateFieldGet(this, _MessageManager_c, "f").api.channels.editPhoto({ channel: new _2_tl_js_1.types.InputChannel(peer), photo: new _2_tl_js_1.types.InputChatPhotoEmpty() });
@@ -792,7 +792,7 @@ class MessageManager {
     async setChatPhoto(chatId, photo, params) {
         const peer = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId);
         if (!(peer instanceof _2_tl_js_1.types.InputPeerChannel) && !(peer instanceof _2_tl_js_1.types.InputPeerChat)) {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
         const [contents, fileName] = await (0, _0_utilities_js_3.getFileContents)(photo);
         const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName: params?.fileName ?? fileName, chunkSize: params?.chunkSize, signal: params?.signal });
@@ -876,7 +876,7 @@ class MessageManager {
                 hash: 0n,
             });
             if (participants instanceof _2_tl_js_1.types.channels.ChannelParticipantsNotModified) {
-                (0, _1_utilities_js_1.UNREACHABLE)();
+                (0, _0_deps_js_1.unreachable)();
             }
             const chatMembers = new Array();
             for (const p of participants.participants) {
@@ -887,7 +887,7 @@ class MessageManager {
         else if (peer instanceof _2_tl_js_1.types.InputPeerChat) {
             const fullChat = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.getFullChat(peer); // TODO: full chat cache
             if (!(fullChat.full_chat instanceof _2_tl_js_1.types.ChatFull) || !(fullChat.full_chat.participants instanceof _2_tl_js_1.types.ChatParticipants)) {
-                (0, _1_utilities_js_1.UNREACHABLE)();
+                (0, _0_deps_js_1.unreachable)();
             }
             const chatMembers = new Array();
             for (const p of fullChat.full_chat.participants.participants) {
@@ -896,7 +896,7 @@ class MessageManager {
             return chatMembers;
         }
         else {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
     }
     async enableJoinRequests(chatId) {
@@ -923,7 +923,7 @@ class MessageManager {
             from_id: params?.from ? await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(params.from) : undefined,
         });
         if (!("messages" in result)) {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
         const messages = new Array();
         for (const message_ of result.messages) {
@@ -974,7 +974,7 @@ class MessageManager {
             await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.addChatUser({ chat_id: peer.chat_id, user_id: new _2_tl_js_1.types.InputUserSelf(), fwd_limit: 0 }); // TODO: use potential high-level method for adding participants to chats
         }
         else {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
     }
     async leaveChat(chatId) {
@@ -989,7 +989,7 @@ class MessageManager {
             await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.deleteChatUser({ chat_id: peer.chat_id, user_id: new _2_tl_js_1.types.InputUserSelf() }); // TODO: use potential high-level method for adding participants to chats
         }
         else {
-            (0, _1_utilities_js_1.UNREACHABLE)();
+            (0, _0_deps_js_1.unreachable)();
         }
     }
     async blockUser(userId) {
@@ -1082,7 +1082,7 @@ class MessageManager {
             const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result).then((v) => v[0]);
             return (0, _3_types_js_2.assertMessageType)(message, "location");
         }
-        (0, _1_utilities_js_1.UNREACHABLE)();
+        (0, _0_deps_js_1.unreachable)();
     }
     async editInlineMessageLiveLocation(inlineMessageId, latitude, longitude, params) {
         await __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertBot("editInlineMessageLiveLocation");
@@ -1171,7 +1171,7 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
             let fileName = params?.fileName ?? fileName_;
             const mimeType = params?.mimeType ?? (0, _0_deps_js_1.contentType)(fileName.split(".").slice(-1)[0]) ?? FALLBACK_MIME_TYPE;
             if (expectedMimeTypes && !expectedMimeTypes.includes(mimeType)) {
-                (0, _1_utilities_js_1.UNREACHABLE)();
+                (0, _0_deps_js_1.unreachable)();
             }
             if (fileName.endsWith(".tgs") && fileType == _3_types_js_2.FileType.Document) {
                 fileName += "-";

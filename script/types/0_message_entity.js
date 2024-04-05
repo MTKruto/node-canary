@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sortMessageEntities = exports.messageEntityToTlObject = exports.constructMessageEntity = void 0;
-const _1_utilities_js_1 = require("../1_utilities.js");
+const _0_deps_js_1 = require("../0_deps.js");
 const _2_tl_js_1 = require("../2_tl.js");
 function constructMessageEntity(obj) {
     if (obj instanceof _2_tl_js_1.types.MessageEntityMention) {
@@ -95,7 +95,7 @@ async function messageEntityToTlObject(entity, getEntity) {
                     if (!isNaN(id)) {
                         const entity_ = await getEntity(new _2_tl_js_1.types.PeerUser({ user_id: BigInt(id) }));
                         if (!entity_) {
-                            (0, _1_utilities_js_1.UNREACHABLE)();
+                            (0, _0_deps_js_1.unreachable)();
                         }
                         return new _2_tl_js_1.types.InputMessageEntityMentionName({ offset, length, user_id: new _2_tl_js_1.types.InputUser({ user_id: entity_.id, access_hash: entity_.access_hash ?? 0n }) });
                     }
@@ -109,7 +109,7 @@ async function messageEntityToTlObject(entity, getEntity) {
         case "textMention": {
             const entity_ = await getEntity(new _2_tl_js_1.types.PeerUser({ user_id: BigInt(entity.userId) }));
             if (!entity_) {
-                (0, _1_utilities_js_1.UNREACHABLE)();
+                (0, _0_deps_js_1.unreachable)();
             }
             return new _2_tl_js_1.types.InputMessageEntityMentionName({ offset, length, user_id: new _2_tl_js_1.types.InputUser({ user_id: entity_.id, access_hash: entity_.access_hash ?? 0n }) });
         }

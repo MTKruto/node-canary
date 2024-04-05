@@ -15,7 +15,7 @@ import { InputError } from "../0_errors.js";
 import { getRandomId, UNREACHABLE } from "../1_utilities.js";
 import { as, inputPeerToPeer, peerToChatId, types } from "../2_tl.js";
 import { constructStory, FileType, storyInteractiveAreaToTlObject, storyPrivacyToTlObject } from "../3_types.js";
-import { getFileContents, isHttpUrl } from "./0_utilities.js";
+import { checkArray, checkStoryId, getFileContents, isHttpUrl } from "./0_utilities.js";
 export class StoryManager {
     constructor(c) {
         _StoryManager_instances.add(this);
@@ -84,6 +84,7 @@ export class StoryManager {
     }
     async getStories(chatId, storyIds) {
         await __classPrivateFieldGet(this, _StoryManager_c, "f").storage.assertUser("getStories");
+        checkArray(storyIds, checkStoryId);
         const peer = await __classPrivateFieldGet(this, _StoryManager_c, "f").getInputPeer(chatId);
         const stories_ = await __classPrivateFieldGet(this, _StoryManager_c, "f").api.stories.getStoriesByID({ peer, id: storyIds });
         const stories = new Array();
@@ -148,6 +149,7 @@ _StoryManager_c = new WeakMap(), _StoryManager_instances = new WeakSet(), _Story
     }
     UNREACHABLE();
 }, _StoryManager_togglePinned = async function _StoryManager_togglePinned(chatId, storyIds, pinned) {
+    checkArray(storyIds, checkStoryId);
     const peer = await __classPrivateFieldGet(this, _StoryManager_c, "f").getInputPeer(chatId);
     await __classPrivateFieldGet(this, _StoryManager_c, "f").api.stories.togglePinned({ peer, id: storyIds, pinned });
 };

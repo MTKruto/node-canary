@@ -16,6 +16,7 @@ exports.InlineQueryManager = void 0;
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _3_types_js_1 = require("../3_types.js");
+const _0_utilities_js_1 = require("./0_utilities.js");
 class InlineQueryManager {
     constructor(c) {
         _InlineQueryManager_c.set(this, void 0);
@@ -23,6 +24,7 @@ class InlineQueryManager {
     }
     async answerInlineQuery(id, results, params) {
         await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").storage.assertBot("answerInlineQuery");
+        (0, _0_utilities_js_1.checkInlineQueryId)(id);
         await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").api.messages.setInlineBotResults({
             query_id: BigInt(id),
             results: await Promise.all(results.map((v) => (0, _3_types_js_1.inlineQueryResultToTlObject)(v, __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager.parseText.bind(__classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager), __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager.usernameResolver.bind(__classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager)))),

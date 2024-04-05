@@ -87,6 +87,7 @@ class StoryManager {
     }
     async getStories(chatId, storyIds) {
         await __classPrivateFieldGet(this, _StoryManager_c, "f").storage.assertUser("getStories");
+        (0, _0_utilities_js_1.checkArray)(storyIds, _0_utilities_js_1.checkStoryId);
         const peer = await __classPrivateFieldGet(this, _StoryManager_c, "f").getInputPeer(chatId);
         const stories_ = await __classPrivateFieldGet(this, _StoryManager_c, "f").api.stories.getStoriesByID({ peer, id: storyIds });
         const stories = new Array();
@@ -152,6 +153,7 @@ _StoryManager_c = new WeakMap(), _StoryManager_instances = new WeakSet(), _Story
     }
     (0, _1_utilities_js_1.UNREACHABLE)();
 }, _StoryManager_togglePinned = async function _StoryManager_togglePinned(chatId, storyIds, pinned) {
+    (0, _0_utilities_js_1.checkArray)(storyIds, _0_utilities_js_1.checkStoryId);
     const peer = await __classPrivateFieldGet(this, _StoryManager_c, "f").getInputPeer(chatId);
     await __classPrivateFieldGet(this, _StoryManager_c, "f").api.stories.togglePinned({ peer, id: storyIds, pinned });
 };

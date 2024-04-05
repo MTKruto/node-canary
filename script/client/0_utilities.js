@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getChatListId = exports.getUsername = exports.isHttpUrl = exports.getFileContents = exports.resolve = void 0;
+exports.checkInlineQueryId = exports.checkCallbackQueryId = exports.checkArray = exports.checkPollOption = exports.checkStoryId = exports.checkMessageId = exports.getChatListId = exports.getUsername = exports.isHttpUrl = exports.getFileContents = exports.resolve = void 0;
 const dntShim = __importStar(require("../_dnt.shims.js"));
 const _0_deps_js_1 = require("../0_deps.js");
 const _0_errors_js_1 = require("../0_errors.js");
@@ -157,3 +157,41 @@ function getChatListId(chatList) {
     }
 }
 exports.getChatListId = getChatListId;
+function checkMessageId(messageId) {
+    if (typeof messageId !== "number" || isNaN(messageId) || !messageId) {
+        throw new _0_errors_js_1.InputError("Invalid message ID");
+    }
+    return messageId;
+}
+exports.checkMessageId = checkMessageId;
+function checkStoryId(storyId) {
+    if (typeof storyId !== "number" || isNaN(storyId) || !storyId) {
+        throw new _0_errors_js_1.InputError("Invalid story ID");
+    }
+    return storyId;
+}
+exports.checkStoryId = checkStoryId;
+function checkPollOption(option) {
+    if (!option.trim()) {
+        throw new _0_errors_js_1.InputError("Poll option must not be empty.");
+    }
+}
+exports.checkPollOption = checkPollOption;
+function checkArray(array, check) {
+    for (const item of array) {
+        check(item);
+    }
+}
+exports.checkArray = checkArray;
+function checkCallbackQueryId(id) {
+    if (typeof id !== "string" || !id.trim()) {
+        throw new _0_errors_js_1.InputError("Invalid callback query ID.");
+    }
+}
+exports.checkCallbackQueryId = checkCallbackQueryId;
+function checkInlineQueryId(id) {
+    if (typeof id !== "string" || !id.trim()) {
+        throw new _0_errors_js_1.InputError("Invalid inline query ID.");
+    }
+}
+exports.checkInlineQueryId = checkInlineQueryId;

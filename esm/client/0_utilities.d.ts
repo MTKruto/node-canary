@@ -4,3 +4,9 @@ export declare function getFileContents(source: FileSource, fileName?: string): 
 export declare function isHttpUrl(string: string): boolean;
 export declare function getUsername(string: string): string;
 export declare function getChatListId(chatList: string): 0 | 1;
+export declare function checkMessageId(messageId: number): number;
+export declare function checkStoryId(storyId: number): number;
+export declare function checkPollOption(option: string): void;
+export declare function checkArray<T>(array: T[], check: (value: T) => void): void;
+export declare function checkCallbackQueryId(id: string): void;
+export declare function checkInlineQueryId(id: string): void;

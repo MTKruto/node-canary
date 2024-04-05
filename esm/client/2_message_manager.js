@@ -19,6 +19,8 @@ import { assertMessageType, chatMemberRightsToTlObject, constructChatMember, con
 import { messageSearchFilterToTlObject } from "../types/0_message_search_filter.js";
 import { parseHtml } from "./0_html.js";
 import { parseMarkdown } from "./0_markdown.js";
+import { checkMessageId } from "./0_utilities.js";
+import { checkArray } from "./0_utilities.js";
 import { getFileContents, isHttpUrl } from "./0_utilities.js";
 const FALLBACK_MIME_TYPE = "application/octet-stream";
 const STICKER_MIME_TYPES = ["image/webp", "video/webm", "application/x-tgsticker"];
@@ -41,6 +43,7 @@ export class MessageManager {
         __classPrivateFieldSet(this, _MessageManager_LresolveFileId, L.branch("resolveFileId"), "f");
     }
     async getMessages(chatId, messageIds) {
+        checkArray(messageIds, checkMessageId);
         const peer = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId);
         let messages_ = new Array();
         const chatId_ = peerToChatId(peer);
@@ -119,6 +122,9 @@ export class MessageManager {
                 --entity.length;
             }
         }
+        if (!text.length) {
+            throw new InputError("Text must not be empty.");
+        }
         return [text, entities];
     }
     async parseText(text_, params) {
@@ -130,6 +136,7 @@ export class MessageManager {
         return await constructMessage_(message_, __classPrivateFieldGet(this, _MessageManager_c, "f").getEntity, this.getMessage.bind(this), __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.getStickerSetName.bind(__classPrivateFieldGet(this, _MessageManager_c, "f").fileManager), r, business);
     }
     async forwardMessages(from, to, messageIds, params) {
+        checkArray(messageIds, checkMessageId);
         const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.forwardMessages({
             from_peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(from),
             to_peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(to),
@@ -456,6 +463,13 @@ export class MessageManager {
         return null;
     }
     async sendPoll(chatId, question, options, params) {
+        question = question?.trim();
+        if (!question) {
+            throw new Error("Question must not be empty.");
+        }
+        if (!Array.isArray(options) || options.length < 2) {
+            throw new Error("There must be at least two options.");
+        }
         const peer = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId);
         const randomId = getRandomId();
         const silent = params?.disableNotification ? true : undefined;
@@ -500,7 +514,7 @@ export class MessageManager {
     }
     async editMessageReplyMarkup(chatId, messageId, params) {
         const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.editMessage({
-            id: messageId,
+            id: checkMessageId(messageId),
             peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),
             reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
         });
@@ -528,7 +542,7 @@ export class MessageManager {
             });
         }
         const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.editMessage({
-            id: messageId,
+            id: checkMessageId(messageId),
             peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),
             entities,
             message,
@@ -565,6 +579,7 @@ export class MessageManager {
         });
     }
     async deleteMessages(chatId, messageIds, params) {
+        checkArray(messageIds, checkMessageId);
         const peer = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId);
         if (peer instanceof types.InputPeerChannel) {
             await __classPrivateFieldGet(this, _MessageManager_c, "f").api.channels.deleteMessages({ channel: new types.InputChannel(peer), id: messageIds });
@@ -581,7 +596,7 @@ export class MessageManager {
     async pinMessage(chatId, messageId, params) {
         await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.updatePinnedMessage({
             peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),
-            id: messageId,
+            id: checkMessageId(messageId),
             silent: params?.disableNotification ? true : undefined,
             pm_oneside: params?.bothSides ? undefined : true,
         });
@@ -589,7 +604,7 @@ export class MessageManager {
     async unpinMessage(chatId, messageId) {
         await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.updatePinnedMessage({
             peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),
-            id: messageId,
+            id: checkMessageId(messageId),
             unpin: true,
         });
     }
@@ -607,7 +622,11 @@ export class MessageManager {
         await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_sendReaction).call(this, chatId, messageId, reactions, params);
     }
     async addReaction(chatId, messageId, reaction, params) {
-        const chosenReactions = await this.getMessage(chatId, messageId).then((v) => v?.reactions ?? []).then((v) => v.filter((v) => v.chosen));
+        const message = await this.getMessage(chatId, messageId);
+        if (!message) {
+            throw new InputError("Message not found.");
+        }
+        const chosenReactions = (message.reactions ?? []).filter((v) => v.chosen);
         for (const r of chosenReactions) {
             if (reactionEqual(r.reaction, reaction)) {
                 return;
@@ -617,7 +636,11 @@ export class MessageManager {
         await this.setReactions(chatId, messageId, reactions, params);
     }
     async removeReaction(chatId, messageId, reaction) {
-        const chosenReactions = await this.getMessage(chatId, messageId).then((v) => v?.reactions ?? []).then((v) => v.filter((v) => v.chosen));
+        const message = await this.getMessage(chatId, messageId);
+        if (!message) {
+            throw new InputError("Message not found.");
+        }
+        const chosenReactions = (message.reactions ?? []).filter((v) => v.chosen);
         for (const r of chosenReactions) {
             if (reactionEqual(r.reaction, reaction)) {
                 const reactions = chosenReactions.filter((v) => v != r).map((v) => v.reaction);
@@ -1194,7 +1217,7 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
 }, _MessageManager_sendReaction = async function _MessageManager_sendReaction(chatId, messageId, reactions, params) {
     await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.sendReaction({
         peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),
-        msg_id: messageId,
+        msg_id: checkMessageId(messageId),
         reaction: reactions.map((v) => reactionToTlObject(v)),
         big: params?.big ? true : undefined,
         add_to_recent: params?.addToRecents ? true : undefined,

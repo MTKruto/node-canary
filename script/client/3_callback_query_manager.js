@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CallbackQueryManager = void 0;
 const _2_tl_js_1 = require("../2_tl.js");
 const _3_types_js_1 = require("../3_types.js");
+const _0_utilities_js_1 = require("./0_utilities.js");
 class CallbackQueryManager {
     constructor(c) {
         _CallbackQueryManager_c.set(this, void 0);
@@ -22,6 +23,7 @@ class CallbackQueryManager {
     }
     async answerCallbackQuery(id, params) {
         await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").storage.assertBot("answerCallbackQuery");
+        (0, _0_utilities_js_1.checkCallbackQueryId)(id);
         await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").api.messages.setBotCallbackAnswer({
             query_id: BigInt(id),
             cache_time: params?.cacheTime ?? 0,

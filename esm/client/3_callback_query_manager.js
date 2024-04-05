@@ -12,6 +12,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _CallbackQueryManager_c;
 import { types } from "../2_tl.js";
 import { constructCallbackQuery } from "../3_types.js";
+import { checkCallbackQueryId } from "./0_utilities.js";
 export class CallbackQueryManager {
     constructor(c) {
         _CallbackQueryManager_c.set(this, void 0);
@@ -19,6 +20,7 @@ export class CallbackQueryManager {
     }
     async answerCallbackQuery(id, params) {
         await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").storage.assertBot("answerCallbackQuery");
+        checkCallbackQueryId(id);
         await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").api.messages.setBotCallbackAnswer({
             query_id: BigInt(id),
             cache_time: params?.cacheTime ?? 0,

@@ -126,3 +126,35 @@ export function getChatListId(chatList) {
             UNREACHABLE();
     }
 }
+export function checkMessageId(messageId) {
+    if (typeof messageId !== "number" || isNaN(messageId) || !messageId) {
+        throw new InputError("Invalid message ID");
+    }
+    return messageId;
+}
+export function checkStoryId(storyId) {
+    if (typeof storyId !== "number" || isNaN(storyId) || !storyId) {
+        throw new InputError("Invalid story ID");
+    }
+    return storyId;
+}
+export function checkPollOption(option) {
+    if (!option.trim()) {
+        throw new InputError("Poll option must not be empty.");
+    }
+}
+export function checkArray(array, check) {
+    for (const item of array) {
+        check(item);
+    }
+}
+export function checkCallbackQueryId(id) {
+    if (typeof id !== "string" || !id.trim()) {
+        throw new InputError("Invalid callback query ID.");
+    }
+}
+export function checkInlineQueryId(id) {
+    if (typeof id !== "string" || !id.trim()) {
+        throw new InputError("Invalid inline query ID.");
+    }
+}

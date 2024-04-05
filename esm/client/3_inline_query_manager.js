@@ -13,6 +13,7 @@ var _InlineQueryManager_c;
 import { UNREACHABLE } from "../1_utilities.js";
 import { types } from "../2_tl.js";
 import { constructChosenInlineResult, constructInlineQuery, inlineQueryResultToTlObject } from "../3_types.js";
+import { checkInlineQueryId } from "./0_utilities.js";
 export class InlineQueryManager {
     constructor(c) {
         _InlineQueryManager_c.set(this, void 0);
@@ -20,6 +21,7 @@ export class InlineQueryManager {
     }
     async answerInlineQuery(id, results, params) {
         await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").storage.assertBot("answerInlineQuery");
+        checkInlineQueryId(id);
         await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").api.messages.setInlineBotResults({
             query_id: BigInt(id),
             results: await Promise.all(results.map((v) => inlineQueryResultToTlObject(v, __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager.parseText.bind(__classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager), __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager.usernameResolver.bind(__classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager)))),

@@ -126,7 +126,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage) {
     Object.assign(message, await getSender(message_, getEntity));
     if (message_.action instanceof _2_tl_js_1.types.MessageActionChatAddUser || message_.action instanceof _2_tl_js_1.types.MessageActionChatJoinedByLink || message_.action instanceof _2_tl_js_1.types.MessageActionChatJoinedByRequest) {
         const newChatMembers = new Array();
-        const users = "users" in message_.action ? message_.action.users : [message_.from_id && "user_id" in message_.from_id ? message_.from_id.user_id : (0, _1_utilities_js_1.UNREACHABLE)()];
+        const users = "users" in message_.action ? message_.action.users : [message_.from_id && "user_id" in message_.from_id ? message_.from_id.user_id : (0, _0_deps_js_1.unreachable)()];
         for (const user_ of users) {
             const entity = await getEntity(new _2_tl_js_1.types.PeerUser({ user_id: user_ }));
             if (entity) {
@@ -491,7 +491,7 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
             m = { ...messageText, linkPreview };
         }
         else {
-            m = { ...message, linkPreview: { ...linkPreview, url: linkPreview.url ? linkPreview.url : (0, _1_utilities_js_1.UNREACHABLE)() } };
+            m = { ...message, linkPreview: { ...linkPreview, url: linkPreview.url ? linkPreview.url : (0, _0_deps_js_1.unreachable)() } };
         }
     }
     else if (message_.media instanceof _2_tl_js_1.types.MessageMediaGiveaway) {

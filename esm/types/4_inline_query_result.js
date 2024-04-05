@@ -1,5 +1,4 @@
 import { unreachable } from "../0_deps.js";
-import { UNREACHABLE } from "../1_utilities.js";
 import { types } from "../2_tl.js";
 import { deserializeFileId } from "./_file_id.js";
 import { replyMarkupToTlObject } from "./3_reply_markup.js";
@@ -183,7 +182,7 @@ export async function inlineQueryResultToTlObject(result_, parseText, usernameRe
             title,
             description,
             document: new types.InputDocument({
-                id: "id" in fileId.location ? fileId.location.id : UNREACHABLE(),
+                id: "id" in fileId.location ? fileId.location.id : unreachable(),
                 access_hash: fileId.location.accessHash,
                 file_reference: fileId.fileReference ?? new Uint8Array(),
             }),

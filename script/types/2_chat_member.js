@@ -8,7 +8,7 @@ const _0_chat_administrator_rights_js_1 = require("./0_chat_administrator_rights
 const _0_chat_member_rights_js_1 = require("./0_chat_member_rights.js");
 const _1_user_js_1 = require("./1_user.js");
 async function constructChatMember(participant, getEntity) {
-    const user_ = "user_id" in participant ? await getEntity(new _2_tl_js_1.types.PeerUser(participant)) : "peer" in participant ? participant.peer instanceof _2_tl_js_1.types.PeerUser ? await getEntity(participant.peer) : (0, _1_utilities_js_1.UNREACHABLE)() : (0, _0_deps_js_1.unreachable)(); // TODO: support other peer types
+    const user_ = "user_id" in participant ? await getEntity(new _2_tl_js_1.types.PeerUser(participant)) : "peer" in participant ? participant.peer instanceof _2_tl_js_1.types.PeerUser ? await getEntity(participant.peer) : (0, _0_deps_js_1.unreachable)() : (0, _0_deps_js_1.unreachable)(); // TODO: support other peer types
     if (user_ == null)
         (0, _0_deps_js_1.unreachable)();
     const user = (0, _1_user_js_1.constructUser)(user_);

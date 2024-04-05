@@ -18,7 +18,6 @@ __exportStar(require("./utilities/0_bigint.js"), exports);
 __exportStar(require("./utilities/0_buffer.js"), exports);
 __exportStar(require("./utilities/0_cache_map.js"), exports);
 __exportStar(require("./utilities/0_color.js"), exports);
-__exportStar(require("./utilities/0_control.js"), exports);
 __exportStar(require("./utilities/0_crypto.js"), exports);
 __exportStar(require("./utilities/0_hash.js"), exports);
 __exportStar(require("./utilities/0_logger.js"), exports);

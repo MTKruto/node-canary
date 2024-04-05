@@ -2,7 +2,6 @@ export * from "./utilities/0_bigint.js";
 export * from "./utilities/0_buffer.js";
 export * from "./utilities/0_cache_map.js";
 export * from "./utilities/0_color.js";
-export * from "./utilities/0_control.js";
 export * from "./utilities/0_crypto.js";
 export * from "./utilities/0_hash.js";
 export * from "./utilities/0_logger.js";

@@ -255,7 +255,7 @@ class Storage {
             (0, _0_deps_js_1.unreachable)();
         }
         catch (err) {
-            if (!(err instanceof Error) || !(err.message == "Unreachable")) {
+            if (!(err instanceof _0_deps_js_1.AssertionError)) {
                 throw err;
             }
             else {

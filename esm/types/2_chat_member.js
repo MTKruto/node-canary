@@ -1,11 +1,11 @@
 import { unreachable } from "../0_deps.js";
-import { cleanObject, fromUnixTimestamp, UNREACHABLE } from "../1_utilities.js";
+import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
 import { types } from "../2_tl.js";
 import { constructChatAdministratorRights } from "./0_chat_administrator_rights.js";
 import { constructChatMemberRights } from "./0_chat_member_rights.js";
 import { constructUser } from "./1_user.js";
 export async function constructChatMember(participant, getEntity) {
-    const user_ = "user_id" in participant ? await getEntity(new types.PeerUser(participant)) : "peer" in participant ? participant.peer instanceof types.PeerUser ? await getEntity(participant.peer) : UNREACHABLE() : unreachable(); // TODO: support other peer types
+    const user_ = "user_id" in participant ? await getEntity(new types.PeerUser(participant)) : "peer" in participant ? participant.peer instanceof types.PeerUser ? await getEntity(participant.peer) : unreachable() : unreachable(); // TODO: support other peer types
     if (user_ == null)
         unreachable();
     const user = constructUser(user_);

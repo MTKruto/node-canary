@@ -1,5 +1,5 @@
 import { unreachable } from "../0_deps.js";
-import { cleanObject, fromUnixTimestamp, getLogger, UNREACHABLE, ZERO_CHANNEL_ID } from "../1_utilities.js";
+import { cleanObject, fromUnixTimestamp, getLogger, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { as, types } from "../2_tl.js";
 import { FileType, toUniqueFileId } from "./_file_id.js";
 import { serializeFileId } from "./_file_id.js";
@@ -122,7 +122,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage) {
     Object.assign(message, await getSender(message_, getEntity));
     if (message_.action instanceof types.MessageActionChatAddUser || message_.action instanceof types.MessageActionChatJoinedByLink || message_.action instanceof types.MessageActionChatJoinedByRequest) {
         const newChatMembers = new Array();
-        const users = "users" in message_.action ? message_.action.users : [message_.from_id && "user_id" in message_.from_id ? message_.from_id.user_id : UNREACHABLE()];
+        const users = "users" in message_.action ? message_.action.users : [message_.from_id && "user_id" in message_.from_id ? message_.from_id.user_id : unreachable()];
         for (const user_ of users) {
             const entity = await getEntity(new types.PeerUser({ user_id: user_ }));
             if (entity) {
@@ -487,7 +487,7 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
             m = { ...messageText, linkPreview };
         }
         else {
-            m = { ...message, linkPreview: { ...linkPreview, url: linkPreview.url ? linkPreview.url : UNREACHABLE() } };
+            m = { ...message, linkPreview: { ...linkPreview, url: linkPreview.url ? linkPreview.url : unreachable() } };
         }
     }
     else if (message_.media instanceof types.MessageMediaGiveaway) {

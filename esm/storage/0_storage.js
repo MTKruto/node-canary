@@ -10,7 +10,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _Storage_instances, _Storage_authKeyId, _Storage_resetAuthKeyId, _Storage_accountId, _Storage_accountType, _Storage_getUpdateId;
-import { unreachable } from "../0_deps.js";
+import { AssertionError, unreachable } from "../0_deps.js";
 import { base64DecodeUrlSafe, base64EncodeUrlSafe, bigIntFromBuffer, rleDecode, rleEncode, sha1, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { peerToChatId, serialize, TLObject, TLReader, TLWriter, types } from "../2_tl.js";
 // key parts
@@ -252,7 +252,7 @@ export class Storage {
             unreachable();
         }
         catch (err) {
-            if (!(err instanceof Error) || !(err.message == "Unreachable")) {
+            if (!(err instanceof AssertionError)) {
                 throw err;
             }
             else {

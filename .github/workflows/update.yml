@@ -38,6 +38,7 @@ jobs:
             cd MTKruto/ && \
             deno run -A https://esm.sh/gh/MTKruto/npm@main/transform_node.ts 0.0.0 ./mod.ts && \
             rm -rf ../main/* && \
+            ls -R dist && \
             mv dist/* ../main/ && \
             mv dist/.npmignore ../main/.gitignore && \
             echo `git log --format="%H" -n 1` > COMMIT_ID && \

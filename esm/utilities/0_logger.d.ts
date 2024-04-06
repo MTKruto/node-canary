@@ -1,4 +1,12 @@
 export declare function setLogVerbosity(verbosity_: number): void;
+export interface LoggingProvider {
+    error(...args: any[]): void;
+    warn(...args: any[]): void;
+    info(...args: any[]): void;
+    debug(...args: any[]): void;
+    log(...args: any[]): void;
+}
+export declare function setLoggingProvider(provider_: LoggingProvider): void;
 export declare const ERROR = 1;
 export declare const WARNING = 2;
 export declare const INFO = 3;

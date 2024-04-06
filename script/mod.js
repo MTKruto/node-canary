@@ -26,12 +26,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.errors = exports.SYSTEM_VERSION = exports.SYSTEM_LANG_CODE = exports.LAYER = exports.LANG_PACK = exports.LANG_CODE = exports.INITIAL_DC = exports.DEVICE_MODEL = exports.APP_VERSION = exports.checkPassword = exports.setLogVerbosity = exports.getRandomId = exports.getColorName = exports.getColorFromPeerId = void 0;
+exports.errors = exports.SYSTEM_VERSION = exports.SYSTEM_LANG_CODE = exports.LAYER = exports.LANG_PACK = exports.LANG_CODE = exports.INITIAL_DC = exports.DEVICE_MODEL = exports.APP_VERSION = exports.checkPassword = exports.setLogVerbosity = exports.setLoggingProvider = exports.getRandomId = exports.getColorName = exports.getColorFromPeerId = void 0;
 __exportStar(require("./0_errors.js"), exports);
 var _1_utilities_js_1 = require("./1_utilities.js");
 Object.defineProperty(exports, "getColorFromPeerId", { enumerable: true, get: function () { return _1_utilities_js_1.getColorFromPeerId; } });
 Object.defineProperty(exports, "getColorName", { enumerable: true, get: function () { return _1_utilities_js_1.getColorName; } });
 Object.defineProperty(exports, "getRandomId", { enumerable: true, get: function () { return _1_utilities_js_1.getRandomId; } });
+Object.defineProperty(exports, "setLoggingProvider", { enumerable: true, get: function () { return _1_utilities_js_1.setLoggingProvider; } });
 Object.defineProperty(exports, "setLogVerbosity", { enumerable: true, get: function () { return _1_utilities_js_1.setLogVerbosity; } });
 var _0_password_js_1 = require("./client/0_password.js");
 Object.defineProperty(exports, "checkPassword", { enumerable: true, get: function () { return _0_password_js_1.checkPassword; } });

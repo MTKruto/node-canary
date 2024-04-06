@@ -1,5 +1,5 @@
 export * from "./0_errors.js";
-export { getColorFromPeerId, getColorName, getRandomId, setLogVerbosity } from "./1_utilities.js";
+export { getColorFromPeerId, getColorName, getRandomId, setLoggingProvider, setLogVerbosity } from "./1_utilities.js";
 export { checkPassword } from "./client/0_password.js";
 export * from "./2_connection.js";
 export * from "./3_storage.js";

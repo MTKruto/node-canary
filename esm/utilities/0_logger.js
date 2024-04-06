@@ -4,6 +4,10 @@ let verbosity = Number("LOG_VERBOSITY" in dntShim.dntGlobalThis ? dntShim.dntGlo
 export function setLogVerbosity(verbosity_) {
     verbosity = verbosity_;
 }
+let provider = console;
+export function setLoggingProvider(provider_) {
+    provider = provider_;
+}
 export const ERROR = 1;
 export const WARNING = 2;
 export const INFO = 3;
@@ -70,19 +74,19 @@ export function getLogger(scope) {
             let fn;
             switch (verbosity_) {
                 case ERROR:
-                    fn = console.error;
+                    fn = provider.error;
                     break;
                 case WARNING:
-                    fn = console.warn;
+                    fn = provider.warn;
                     break;
                 case INFO:
-                    fn = console.info;
+                    fn = provider.info;
                     break;
                 case DEBUG:
-                    fn = console.debug;
+                    fn = provider.debug;
                     break;
                 default:
-                    fn = console.log;
+                    fn = provider.log;
             }
             fn(`[${verbosity_} ${scope}]`, ...args);
         },

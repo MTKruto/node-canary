@@ -27,6 +27,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Parser = exports.gzip = exports.gunzip = exports.initTgCrypto = exports.ige256Encrypt = exports.ige256Decrypt = exports.factorize = exports.ctr256 = exports.extension = exports.contentType = exports.encodeBase64 = exports.decodeBase64 = exports.path = void 0;
+// connection/1_connection_tcp.ts must be updated too when updating std.
 __exportStar(require("./deps/deno.land/std@0.221.0/assert/mod.js"), exports);
 exports.path = __importStar(require("./deps/deno.land/std@0.221.0/path/mod.js"));
 var base64_js_1 = require("./deps/deno.land/std@0.221.0/encoding/base64.js");

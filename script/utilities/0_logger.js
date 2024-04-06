@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getLogger = exports.OUT_BIN = exports.IN_BIN = exports.OUT = exports.IN = exports.TRACE = exports.DEBUG = exports.INFO = exports.WARNING = exports.ERROR = exports.setLogVerbosity = void 0;
+exports.getLogger = exports.OUT_BIN = exports.IN_BIN = exports.OUT = exports.IN = exports.TRACE = exports.DEBUG = exports.INFO = exports.WARNING = exports.ERROR = exports.setLoggingProvider = exports.setLogVerbosity = void 0;
 // deno-lint-ignore-file no-explicit-any
 const dntShim = __importStar(require("../_dnt.shims.js"));
 let verbosity = Number("LOG_VERBOSITY" in dntShim.dntGlobalThis ? dntShim.dntGlobalThis.LOG_VERBOSITY : "Deno" in dntShim.dntGlobalThis ? dntShim.dntGlobalThis.Deno.env.get("LOG_VERBOSITY") : "process" in dntShim.dntGlobalThis ? dntShim.dntGlobalThis.process.env.LOG : "") || 0;
@@ -31,6 +31,11 @@ function setLogVerbosity(verbosity_) {
     verbosity = verbosity_;
 }
 exports.setLogVerbosity = setLogVerbosity;
+let provider = console;
+function setLoggingProvider(provider_) {
+    provider = provider_;
+}
+exports.setLoggingProvider = setLoggingProvider;
 exports.ERROR = 1;
 exports.WARNING = 2;
 exports.INFO = 3;
@@ -97,19 +102,19 @@ function getLogger(scope) {
             let fn;
             switch (verbosity_) {
                 case exports.ERROR:
-                    fn = console.error;
+                    fn = provider.error;
                     break;
                 case exports.WARNING:
-                    fn = console.warn;
+                    fn = provider.warn;
                     break;
                 case exports.INFO:
-                    fn = console.info;
+                    fn = provider.info;
                     break;
                 case exports.DEBUG:
-                    fn = console.debug;
+                    fn = provider.debug;
                     break;
                 default:
-                    fn = console.log;
+                    fn = provider.log;
             }
             fn(`[${verbosity_} ${scope}]`, ...args);
         },

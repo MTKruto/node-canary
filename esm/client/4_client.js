@@ -19,7 +19,7 @@ import { constructUser } from "../3_types.js";
 import { APP_VERSION, DEVICE_MODEL, LANG_CODE, LANG_PACK, LAYER, MAX_CHANNEL_ID, MAX_CHAT_ID, SYSTEM_LANG_CODE, SYSTEM_VERSION, USERNAME_TTL } from "../4_constants.js";
 import { AuthKeyUnregistered, ConnectionNotInited, FloodWait, Migrate, PasswordHashInvalid, PhoneNumberInvalid, SessionPasswordNeeded } from "../4_errors.js";
 import { checkPassword } from "./0_password.js";
-import { getUsername, resolve } from "./0_utilities.js";
+import { getUsername, isMtprotoFunction, resolve } from "./0_utilities.js";
 import { AccountManager } from "./1_account_manager.js";
 import { BotInfoManager } from "./1_bot_info_manager.js";
 import { BusinessConnectionManager } from "./1_business_connection_manager.js";
@@ -1139,7 +1139,7 @@ export class Client extends Composer {
         let n = 1;
         while (true) {
             try {
-                if (function_ instanceof functions.Function && !__classPrivateFieldGet(this, _Client_connectionInited, "f")) {
+                if (function_ instanceof functions.Function && !__classPrivateFieldGet(this, _Client_connectionInited, "f") && !isMtprotoFunction(function_)) {
                     const result = await __classPrivateFieldGet(this, _Client_client, "f").invoke(new functions.initConnection({
                         api_id: await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getApiId).call(this),
                         app_version: this.appVersion,

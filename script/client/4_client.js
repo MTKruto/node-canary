@@ -1143,7 +1143,7 @@ class Client extends Composer {
         let n = 1;
         while (true) {
             try {
-                if (function_ instanceof _2_tl_js_1.functions.Function && !__classPrivateFieldGet(this, _Client_connectionInited, "f")) {
+                if (function_ instanceof _2_tl_js_1.functions.Function && !__classPrivateFieldGet(this, _Client_connectionInited, "f") && !(0, _0_utilities_js_1.isMtprotoFunction)(function_)) {
                     const result = await __classPrivateFieldGet(this, _Client_client, "f").invoke(new _2_tl_js_1.functions.initConnection({
                         api_id: await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getApiId).call(this),
                         app_version: this.appVersion,

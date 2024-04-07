@@ -1,6 +1,7 @@
 import * as dntShim from "../_dnt.shims.js";
 import { path, unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
+import { functions } from "../2_tl.js";
 export const resolve = () => Promise.resolve();
 export async function getFileContents(source, fileName = "") {
     fileName = fileName.trim() || "file";
@@ -156,4 +157,15 @@ export function checkInlineQueryId(id) {
     if (typeof id !== "string" || !id.trim()) {
         throw new InputError("Invalid inline query ID.");
     }
+}
+export function isMtprotoFunction(value) {
+    return value instanceof functions.ping ||
+        value instanceof functions.ping_delay_disconnect ||
+        value instanceof functions.req_pq_multi ||
+        value instanceof functions.rpc_drop_answer ||
+        value instanceof functions.get_future_salts ||
+        value instanceof functions.destroy_session ||
+        value instanceof functions.destroy_auth_key ||
+        value instanceof functions.req_DH_params ||
+        value instanceof functions.set_client_DH_params;
 }

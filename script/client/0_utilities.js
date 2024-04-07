@@ -23,10 +23,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkInlineQueryId = exports.checkCallbackQueryId = exports.checkArray = exports.checkPollOption = exports.checkStoryId = exports.checkMessageId = exports.getChatListId = exports.getUsername = exports.isHttpUrl = exports.getFileContents = exports.resolve = void 0;
+exports.isMtprotoFunction = exports.checkInlineQueryId = exports.checkCallbackQueryId = exports.checkArray = exports.checkPollOption = exports.checkStoryId = exports.checkMessageId = exports.getChatListId = exports.getUsername = exports.isHttpUrl = exports.getFileContents = exports.resolve = void 0;
 const dntShim = __importStar(require("../_dnt.shims.js"));
 const _0_deps_js_1 = require("../0_deps.js");
 const _0_errors_js_1 = require("../0_errors.js");
+const _2_tl_js_1 = require("../2_tl.js");
 const resolve = () => Promise.resolve();
 exports.resolve = resolve;
 async function getFileContents(source, fileName = "") {
@@ -194,3 +195,15 @@ function checkInlineQueryId(id) {
     }
 }
 exports.checkInlineQueryId = checkInlineQueryId;
+function isMtprotoFunction(value) {
+    return value instanceof _2_tl_js_1.functions.ping ||
+        value instanceof _2_tl_js_1.functions.ping_delay_disconnect ||
+        value instanceof _2_tl_js_1.functions.req_pq_multi ||
+        value instanceof _2_tl_js_1.functions.rpc_drop_answer ||
+        value instanceof _2_tl_js_1.functions.get_future_salts ||
+        value instanceof _2_tl_js_1.functions.destroy_session ||
+        value instanceof _2_tl_js_1.functions.destroy_auth_key ||
+        value instanceof _2_tl_js_1.functions.req_DH_params ||
+        value instanceof _2_tl_js_1.functions.set_client_DH_params;
+}
+exports.isMtprotoFunction = isMtprotoFunction;

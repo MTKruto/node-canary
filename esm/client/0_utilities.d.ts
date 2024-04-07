@@ -10,3 +10,4 @@ export declare function checkPollOption(option: string): void;
 export declare function checkArray<T>(array: T[], check: (value: T) => void): void;
 export declare function checkCallbackQueryId(id: string): void;
 export declare function checkInlineQueryId(id: string): void;
+export declare function isMtprotoFunction(value: unknown): boolean;

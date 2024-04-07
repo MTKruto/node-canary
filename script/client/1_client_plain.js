@@ -75,7 +75,7 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
         }
         const pq_ = (0, _1_utilities_js_1.bigIntFromBuffer)(resPq.pq, false, false);
         LcreateAuthKey.debug(`pq=${pq_}`);
-        const [p_, q_] = (0, _0_deps_js_1.factorize)(pq_);
+        const [p_, q_] = (0, _1_utilities_js_1.factorize)(pq_);
         LcreateAuthKey.debug("factorized pq");
         LcreateAuthKey.debug(`p=${p_}, q=${q_}`);
         const p = (0, _1_utilities_js_1.bufferFromBigInt)(p_, 4, false, false);

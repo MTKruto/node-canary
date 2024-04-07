@@ -27,5 +27,6 @@ __exportStar(require("./utilities/0_rle.js"), exports);
 __exportStar(require("./utilities/0_types.js"), exports);
 __exportStar(require("./utilities/1_auth.js"), exports);
 __exportStar(require("./utilities/1_base64.js"), exports);
+__exportStar(require("./utilities/1_math.js"), exports);
 __exportStar(require("./utilities/1_misc.js"), exports);
 __exportStar(require("./utilities/1_queue.js"), exports);

@@ -1,34 +1,7 @@
-// Source: https://github.com/tdlib/td/blob/master/tdutils/td/utils/crypto.cpp
-// Copyright (C) 2014-2024 Aliaksei Levin <levlam@telegram.org>, Arseny Smirnov <arseny30@gmail.com>
 import { unreachable } from "../0_deps.js";
-import { getRandomId, mod } from "./0_bigint.js";
+import { gcd, getRandomId, mod } from "./0_bigint.js";
 function getRandomNumberInRange(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
-}
-function gcd(a, b) {
-    if (a == 0n) {
-        return b;
-    }
-    while ((a & 1n) == 0n) {
-        a >>= 1n;
-    }
-    while (true) {
-        if (a > b) {
-            a = (a - b) >> 1n;
-            while ((a & 1n) == 0n) {
-                a >>= 1n;
-            }
-        }
-        else if (b > a) {
-            b = (b - a) >> 1n;
-            while ((b & 1n) == 0n) {
-                b >>= 1n;
-            }
-        }
-        else {
-            return a;
-        }
-    }
 }
 export function factorize(pq) {
     let a;
@@ -44,7 +17,6 @@ export function factorize(pq) {
         const lim = 1 << (i + 23);
         for (let j = 1; j < lim; j++) {
             iter++;
-            //   (a*b) mod m
             a = mod(a * a, pq);
             a += t;
             if (a >= pq) {

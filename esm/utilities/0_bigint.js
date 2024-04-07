@@ -41,3 +41,28 @@ export function getRandomBigInt(byteLength, little, signed) {
 export function getRandomId() {
     return getRandomBigInt(8, true, true);
 }
+export function gcd(a, b) {
+    if (a == 0n) {
+        return b;
+    }
+    while ((a & 1n) == 0n) {
+        a >>= 1n;
+    }
+    while (true) {
+        if (a > b) {
+            a = (a - b) >> 1n;
+            while ((a & 1n) == 0n) {
+                a >>= 1n;
+            }
+        }
+        else if (b > a) {
+            b = (b - a) >> 1n;
+            while ((b & 1n) == 0n) {
+                b >>= 1n;
+            }
+        }
+        else {
+            return a;
+        }
+    }
+}

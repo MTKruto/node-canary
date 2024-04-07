@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parseMarkdown = exports.CODEPOINTS = void 0;
 /**
- * Copyright (c) 2023 Dunkan
- * Copyright (c) 2024 Roj
+ * Copyright (C) 2023 Dunkan
+ * Copyright (C) 2024 Roj
  */
 const _0_deps_js_1 = require("../0_deps.js");
 const _3_types_js_1 = require("../3_types.js");

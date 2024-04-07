@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.factorize = exports.cbc256Decrypt = exports.cbc256Encrypt = exports.ctr256 = exports.ige256Decrypt = exports.ige256Encrypt = exports.init = void 0;
+exports.cbc256Decrypt = exports.cbc256Encrypt = exports.ctr256 = exports.ige256Decrypt = exports.ige256Encrypt = exports.init = void 0;
 const tgcrypto_js_1 = __importDefault(require("./tgcrypto.js"));
 // deno-lint-ignore no-explicit-any
 let module_;
@@ -163,15 +163,3 @@ function cbc256Decrypt(data, key, iv) {
     }
 }
 exports.cbc256Decrypt = cbc256Decrypt;
-function factorize(pq) {
-    const pqp = module_._malloc(16);
-    module_.ccall("factorize", "void", ["number", "pointer"], [pq, pqp]);
-    try {
-        const pqp_ = module_.HEAP64.slice(pqp / 8, pqp / 8 + 2);
-        return [pqp_[0], pqp_[1]];
-    }
-    finally {
-        module_._free(pqp);
-    }
-}
-exports.factorize = factorize;

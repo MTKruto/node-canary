@@ -40,4 +40,3 @@ export declare function cbc256Encrypt(data: Uint8Array, key: Uint8Array, iv: Uin
  * @param iv 16-byte initialization vector
  */
 export declare function cbc256Decrypt(data: Uint8Array, key: Uint8Array, iv: Uint8Array): Uint8Array;
-export declare function factorize(pq: bigint): [bigint, bigint];

@@ -20,6 +20,6 @@ export function extension(mimeType) {
         return extension_(mimeType) || "unknown";
     }
 }
-export { ctr256, factorize, ige256Decrypt, ige256Encrypt, init as initTgCrypto } from "./deps/deno.land/x/tgcrypto@0.3.3/mod.js";
+export { ctr256, ige256Decrypt, ige256Encrypt, init as initTgCrypto } from "./deps/deno.land/x/tgcrypto@0.4.0/mod.js";
 export { gunzip, gzip } from "./deps/raw.githubusercontent.com/MTKruto/compress/main/mod.js";
 export { Parser } from "./deps/deno.land/x/html_parser@v0.1.3/src/mod.js";

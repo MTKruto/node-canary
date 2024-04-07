@@ -26,7 +26,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Parser = exports.gzip = exports.gunzip = exports.initTgCrypto = exports.ige256Encrypt = exports.ige256Decrypt = exports.factorize = exports.ctr256 = exports.extension = exports.contentType = exports.encodeBase64 = exports.decodeBase64 = exports.path = void 0;
+exports.Parser = exports.gzip = exports.gunzip = exports.initTgCrypto = exports.ige256Encrypt = exports.ige256Decrypt = exports.ctr256 = exports.extension = exports.contentType = exports.encodeBase64 = exports.decodeBase64 = exports.path = void 0;
 // connection/1_connection_tcp.ts must be updated too when updating std.
 __exportStar(require("./deps/deno.land/std@0.221.0/assert/mod.js"), exports);
 exports.path = __importStar(require("./deps/deno.land/std@0.221.0/path/mod.js"));
@@ -53,9 +53,8 @@ function extension(mimeType) {
     }
 }
 exports.extension = extension;
-var mod_js_1 = require("./deps/deno.land/x/tgcrypto@0.3.3/mod.js");
+var mod_js_1 = require("./deps/deno.land/x/tgcrypto@0.4.0/mod.js");
 Object.defineProperty(exports, "ctr256", { enumerable: true, get: function () { return mod_js_1.ctr256; } });
-Object.defineProperty(exports, "factorize", { enumerable: true, get: function () { return mod_js_1.factorize; } });
 Object.defineProperty(exports, "ige256Decrypt", { enumerable: true, get: function () { return mod_js_1.ige256Decrypt; } });
 Object.defineProperty(exports, "ige256Encrypt", { enumerable: true, get: function () { return mod_js_1.ige256Encrypt; } });
 Object.defineProperty(exports, "initTgCrypto", { enumerable: true, get: function () { return mod_js_1.init; } });

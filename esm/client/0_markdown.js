@@ -1,6 +1,6 @@
 /**
- * Copyright (c) 2023 Dunkan
- * Copyright (c) 2024 Roj
+ * Copyright (C) 2023 Dunkan
+ * Copyright (C) 2024 Roj
  */
 import { unreachable } from "../0_deps.js";
 import { sortMessageEntities } from "../3_types.js";

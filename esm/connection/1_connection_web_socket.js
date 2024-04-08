@@ -10,6 +10,25 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
 var _ConnectionWebSocket_instances, _ConnectionWebSocket_webSocket, _ConnectionWebSocket_rMutex, _ConnectionWebSocket_wMutex, _ConnectionWebSocket_buffer, _ConnectionWebSocket_nextResolve, _ConnectionWebSocket_initWs, _ConnectionWebSocket_wasConnected, _ConnectionWebSocket_isConnecting, _ConnectionWebSocket_connectionError, _ConnectionWebSocket_assertConnected, _ConnectionWebSocket_rejectRead;
+/**
+ * MTKruto - Cross-runtime JavaScript library for building Telegram clients
+ * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ *
+ * This file is part of MTKruto.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 import * as dntShim from "../_dnt.shims.js";
 import { unreachable } from "../0_deps.js";
 import { concat, getLogger, Mutex } from "../1_utilities.js";

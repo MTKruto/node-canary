@@ -1,4 +1,23 @@
 "use strict";
+/**
+ * MTKruto - Cross-runtime JavaScript library for building Telegram clients
+ * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ *
+ * This file is part of MTKruto.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.account_reportPeer_ = exports.account_getWallPapers_ = exports.account_updateStatus_ = exports.account_updateProfile_ = exports.account_resetNotifySettings_ = exports.account_getNotifySettings_ = exports.account_updateNotifySettings_ = exports.account_unregisterDevice_ = exports.account_registerDevice_ = exports.auth_resetLoginEmail_ = exports.auth_requestFirebaseSms_ = exports.auth_importWebTokenAuthorization_ = exports.auth_checkRecoveryPassword_ = exports.auth_acceptLoginToken_ = exports.auth_importLoginToken_ = exports.auth_exportLoginToken_ = exports.auth_dropTempAuthKeys_ = exports.auth_cancelCode_ = exports.auth_resendCode_ = exports.auth_recoverPassword_ = exports.auth_requestPasswordRecovery_ = exports.auth_checkPassword_ = exports.auth_importBotAuthorization_ = exports.auth_bindTempAuthKey_ = exports.auth_importAuthorization_ = exports.auth_exportAuthorization_ = exports.auth_resetAuthorizations_ = exports.auth_logOut_ = exports.auth_signIn_ = exports.auth_signUp_ = exports.auth_sendCode_ = exports.invokeWithBusinessConnection_ = exports.invokeWithTakeout_ = exports.invokeWithMessagesRange_ = exports.invokeWithoutUpdates_ = exports.invokeWithLayer_ = exports.initConnection_ = exports.invokeAfterMsgs_ = exports.invokeAfterMsg_ = exports.invokeWithBusinessConnectionPrefix_ = exports.destroy_auth_key_ = exports.destroy_session_ = exports.ping_delay_disconnect_ = exports.ping_ = exports.get_future_salts_ = exports.rpc_drop_answer_ = exports.set_client_DH_params_ = exports.req_DH_params_ = exports.req_pq_multi_ = exports.Function_ = void 0;
 exports.account_saveTheme_ = exports.account_updateTheme_ = exports.account_createTheme_ = exports.account_uploadTheme_ = exports.account_saveAutoDownloadSettings_ = exports.account_getAutoDownloadSettings_ = exports.account_resetWallPapers_ = exports.account_installWallPaper_ = exports.account_saveWallPaper_ = exports.account_uploadWallPaper_ = exports.account_getWallPaper_ = exports.account_getNotifyExceptions_ = exports.account_setContactSignUpNotification_ = exports.account_getContactSignUpNotification_ = exports.account_cancelPasswordEmail_ = exports.account_resendPasswordEmail_ = exports.account_confirmPasswordEmail_ = exports.account_finishTakeoutSession_ = exports.account_initTakeoutSession_ = exports.account_verifyEmail_ = exports.account_sendVerifyEmailCode_ = exports.account_verifyPhone_ = exports.account_sendVerifyPhoneCode_ = exports.account_acceptAuthorization_ = exports.account_getAuthorizationForm_ = exports.account_deleteSecureValue_ = exports.account_saveSecureValue_ = exports.account_getSecureValue_ = exports.account_getAllSecureValues_ = exports.account_resetWebAuthorizations_ = exports.account_resetWebAuthorization_ = exports.account_getWebAuthorizations_ = exports.account_getTmpPassword_ = exports.account_confirmPhone_ = exports.account_sendConfirmPhoneCode_ = exports.account_updatePasswordSettings_ = exports.account_getPasswordSettings_ = exports.account_getPassword_ = exports.account_resetAuthorization_ = exports.account_getAuthorizations_ = exports.account_updateDeviceLocked_ = exports.account_changePhone_ = exports.account_sendChangePhoneCode_ = exports.account_setAccountTTL_ = exports.account_getAccountTTL_ = exports.account_deleteAccount_ = exports.account_setPrivacy_ = exports.account_getPrivacy_ = exports.account_updateUsername_ = exports.account_checkUsername_ = void 0;

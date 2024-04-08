@@ -1,4 +1,23 @@
 "use strict";
+/**
+ * MTKruto - Cross-runtime JavaScript library for building Telegram clients
+ * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ *
+ * This file is part of MTKruto.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports._ChatPhoto_ = exports._ChatParticipants_ = exports._ChatParticipant_ = exports._ChatFull_ = exports._Chat_ = exports._UserStatus_ = exports._UserProfilePhoto_ = exports._User_ = exports._storage_FileType_ = exports._Peer_ = exports._InputPhoto_ = exports._InputGeoPoint_ = exports._InputChatPhoto_ = exports._InputMedia_ = exports._InputFile_ = exports._InputContact_ = exports._InputUser_ = exports._InputPeer_ = exports._InputFileLocation_ = exports._help_ConfigSimple_ = exports._AccessPointRule_ = exports._IpPort_ = exports._Error_ = exports._True_ = exports._HttpWait_ = exports._DestroyAuthKeyRes_ = exports._MsgDetailedInfo_ = exports._MsgsAllInfo_ = exports._MsgsStateInfo_ = exports._MsgsStateReq_ = exports._MsgResendReq_ = exports._BadMsgNotification_ = exports._MsgsAck_ = exports._Object_ = exports._NewSession_ = exports._DestroySessionRes_ = exports._Pong_ = exports._FutureSalts_ = exports._FutureSalt_ = exports._RpcDropAnswer_ = exports._RpcError_ = exports._BindAuthKeyInner_ = exports._Set_client_DH_params_answer_ = exports._Client_DH_Inner_Data_ = exports._Server_DH_inner_data_ = exports._Server_DH_Params_ = exports._P_Q_inner_data_ = exports._ResPQ_ = exports.TypeX_ = exports.Type_ = void 0;
 exports._Document_ = exports._InputDocument_ = exports._messages_SentEncryptedMessage_ = exports._messages_DhConfig_ = exports._EncryptedMessage_ = exports._InputEncryptedFile_ = exports._EncryptedFile_ = exports._InputEncryptedChat_ = exports._EncryptedChat_ = exports._help_InviteText_ = exports._help_AppUpdate_ = exports._NearestDc_ = exports._Config_ = exports._DcOption_ = exports._upload_File_ = exports._photos_Photo_ = exports._photos_Photos_ = exports._Updates_ = exports._updates_Difference_ = exports._updates_State_ = exports._Update_ = exports._MessagesFilter_ = exports._messages_AffectedHistory_ = exports._messages_ChatFull_ = exports._messages_Chats_ = exports._messages_Messages_ = exports._messages_Dialogs_ = exports._contacts_Blocked_ = exports._contacts_ImportedContacts_ = exports._contacts_Contacts_ = exports._ContactStatus_ = exports._ImportedContact_ = exports._Contact_ = exports._UserFull_ = exports._ReportReason_ = exports._WallPaper_ = exports._PeerSettings_ = exports._PeerNotifySettings_ = exports._InputPeerNotifySettings_ = exports._InputNotifyPeer_ = exports._auth_ExportedAuthorization_ = exports._auth_Authorization_ = exports._auth_SentCode_ = exports._GeoPoint_ = exports._PhotoSize_ = exports._Photo_ = exports._Dialog_ = exports._MessageAction_ = exports._MessageMedia_ = exports._Message_ = void 0;

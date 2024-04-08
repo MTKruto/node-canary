@@ -1070,7 +1070,7 @@ class Client extends Composer {
                 inputPeer.access_hash = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getUserAccessHash).call(this, inputPeer.user_id);
             }
         }
-        if ((inputPeer instanceof _2_tl_js_1.types.InputPeerUser || inputPeer instanceof _2_tl_js_1.types.InputPeerChannel && inputPeer.access_hash == 0n) && await this.storage.getAccountType() == "user") {
+        if ((inputPeer instanceof _2_tl_js_1.types.InputPeerUser || inputPeer instanceof _2_tl_js_1.types.InputPeerChannel) && inputPeer.access_hash == 0n && await this.storage.getAccountType() == "user") {
             throw new _0_errors_js_1.AccessError(`Cannot access the chat ${id} because there is no access hash for it.`);
         }
         return inputPeer;

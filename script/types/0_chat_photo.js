@@ -45,7 +45,6 @@ function constructChatPhoto(photo, chatId, chatAccessHash) {
             bigFileId,
             bigFileUniqueId,
             hasVideo: photo.has_video || false,
-            strippedThumbnail: photo.stripped_thumb,
         });
     }
     else {
@@ -56,7 +55,6 @@ function constructChatPhoto(photo, chatId, chatAccessHash) {
             bigFileId,
             bigFileUniqueId,
             hasVideo: photo.has_video || false,
-            strippedThumbnail: photo.stripped_thumb,
         });
     }
 }

@@ -30,7 +30,6 @@ export interface _ChatPhotoBase {
     bigFileUniqueId: string;
     /** Whether the chat photo is animated. */
     hasVideo: boolean;
-    strippedThumbnail?: Uint8Array;
 }
 /** @unlisted */
 export interface ChatPhotoUser extends _ChatPhotoBase {

@@ -18,32 +18,35 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _CTR_key, _CTR_state;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CTR = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
 class CTR {
     constructor(key, iv) {
-        Object.defineProperty(this, "key", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: key
-        });
-        Object.defineProperty(this, "iv", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: iv
-        });
-        Object.defineProperty(this, "state", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: new Uint8Array(1)
-        });
+        _CTR_key.set(this, void 0);
+        _CTR_state.set(this, void 0);
+        __classPrivateFieldSet(this, _CTR_state, (0, _0_deps_js_1.createCtr256State)(iv), "f");
+        __classPrivateFieldSet(this, _CTR_key, key, "f");
     }
+    /** This must not be called after destroying. */
     call(data) {
-        (0, _0_deps_js_1.ctr256)(data, this.key, this.iv, this.state);
+        (0, _0_deps_js_1.ctr256)(data, __classPrivateFieldGet(this, _CTR_key, "f"), __classPrivateFieldGet(this, _CTR_state, "f"));
+    }
+    destroy() {
+        (0, _0_deps_js_1.destroyCtr256State)(__classPrivateFieldGet(this, _CTR_state, "f"));
     }
 }
 exports.CTR = CTR;
+_CTR_key = new WeakMap(), _CTR_state = new WeakMap();

@@ -45,14 +45,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Parser = exports.gzip = exports.gunzip = exports.initTgCrypto = exports.ige256Encrypt = exports.ige256Decrypt = exports.ctr256 = exports.extension = exports.contentType = exports.encodeBase64 = exports.decodeBase64 = exports.path = void 0;
+exports.Parser = exports.gzip = exports.gunzip = exports.initTgCrypto = exports.ige256Encrypt = exports.ige256Decrypt = exports.destroyCtr256State = exports.ctr256 = exports.createCtr256State = exports.extension = exports.contentType = exports.encodeBase64 = exports.decodeBase64 = exports.path = void 0;
 // connection/1_connection_tcp.ts must be updated too when updating std.
-__exportStar(require("./deps/deno.land/std@0.221.0/assert/mod.js"), exports);
-exports.path = __importStar(require("./deps/deno.land/std@0.221.0/path/mod.js"));
-var base64_js_1 = require("./deps/deno.land/std@0.221.0/encoding/base64.js");
+__exportStar(require("./deps/deno.land/std@0.222.1/assert/mod.js"), exports);
+exports.path = __importStar(require("./deps/deno.land/std@0.222.1/path/mod.js"));
+var base64_js_1 = require("./deps/deno.land/std@0.222.1/encoding/base64.js");
 Object.defineProperty(exports, "decodeBase64", { enumerable: true, get: function () { return base64_js_1.decodeBase64; } });
 Object.defineProperty(exports, "encodeBase64", { enumerable: true, get: function () { return base64_js_1.encodeBase64; } });
-const content_type_js_1 = require("./deps/deno.land/std@0.221.0/media_types/content_type.js");
+const content_type_js_1 = require("./deps/deno.land/std@0.222.1/media_types/content_type.js");
 const contentType = (extentionOrType) => {
     if (extentionOrType == "tgs") {
         return "application/x-tgsticker";
@@ -62,7 +62,7 @@ const contentType = (extentionOrType) => {
     }
 };
 exports.contentType = contentType;
-const extension_js_1 = require("./deps/deno.land/std@0.221.0/media_types/extension.js");
+const extension_js_1 = require("./deps/deno.land/std@0.222.1/media_types/extension.js");
 function extension(mimeType) {
     if (mimeType == "application/x-tgsticker") {
         return "tgs";
@@ -72,8 +72,10 @@ function extension(mimeType) {
     }
 }
 exports.extension = extension;
-var mod_js_1 = require("./deps/deno.land/x/tgcrypto@0.4.0/mod.js");
+var mod_js_1 = require("./deps/deno.land/x/tgcrypto@0.4.1/mod.js");
+Object.defineProperty(exports, "createCtr256State", { enumerable: true, get: function () { return mod_js_1.createCtr256State; } });
 Object.defineProperty(exports, "ctr256", { enumerable: true, get: function () { return mod_js_1.ctr256; } });
+Object.defineProperty(exports, "destroyCtr256State", { enumerable: true, get: function () { return mod_js_1.destroyCtr256State; } });
 Object.defineProperty(exports, "ige256Decrypt", { enumerable: true, get: function () { return mod_js_1.ige256Decrypt; } });
 Object.defineProperty(exports, "ige256Encrypt", { enumerable: true, get: function () { return mod_js_1.ige256Encrypt; } });
 Object.defineProperty(exports, "initTgCrypto", { enumerable: true, get: function () { return mod_js_1.init; } });

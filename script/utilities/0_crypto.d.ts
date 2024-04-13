@@ -18,9 +18,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 export declare class CTR {
-    readonly key: Uint8Array;
-    iv: Uint8Array;
-    state: Uint8Array;
+    #private;
     constructor(key: Uint8Array, iv: Uint8Array);
+    /** This must not be called after destroying. */
     call(data: Uint8Array): void;
+    destroy(): void;
 }

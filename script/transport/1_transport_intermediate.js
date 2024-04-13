@@ -82,6 +82,7 @@ class TransportIntermediate extends _0_transport_js_1.Transport {
         await __classPrivateFieldGet(this, _TransportIntermediate_connection, "f").write(data);
     }
     deinitialize() {
+        super.deinitialize();
         __classPrivateFieldSet(this, _TransportIntermediate_initialized, false, "f");
     }
     get initialized() {

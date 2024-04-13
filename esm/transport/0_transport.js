@@ -36,4 +36,11 @@ export class Transport {
             this.obfuscationParameters.decryptionCTR.call(buffer);
         }
     }
+    deinitialize() {
+        if (this.obfuscationParameters) {
+            this.obfuscationParameters.encryptionCTR.destroy();
+            this.obfuscationParameters.decryptionCTR.destroy();
+            this.obfuscationParameters = null;
+        }
+    }
 }

@@ -20,7 +20,7 @@
     "test": "node test_runner.js"
   },
   "dependencies": {
-    "@deno/shim-deno": "~0.17.0",
+    "@deno/shim-deno": "~0.18.0",
     "@deno/shim-crypto": "~0.3.1",
     "ws": "^8.13.0"
   },
@@ -30,5 +30,5 @@
     "@types/ws": "^8.5.4",
     "@types/object-inspect": "^1.8.1"
   },
-  "_generatedBy": "dnt@0.39.0"
+  "_generatedBy": "dnt@0.40.0"
 }

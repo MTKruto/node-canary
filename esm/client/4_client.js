@@ -1537,6 +1537,7 @@ export class Client extends Composer {
      *
      * @method ms
      * @param inlineMessageId The inline message's identifier.
+     * @param media The new media of the message.
      */
     async editInlineMessageMedia(inlineMessageId, media, params) {
         await __classPrivateFieldGet(this, _Client_messageManager, "f").editInlineMessageMedia(inlineMessageId, media, params);

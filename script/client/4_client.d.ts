@@ -513,6 +513,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      *
      * @method ms
      * @param inlineMessageId The inline message's identifier.
+     * @param media The new media of the message.
      */
     editInlineMessageMedia(inlineMessageId: string, media: InputMedia, params?: EditMessageMediaParams): Promise<void>;
     /**

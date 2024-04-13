@@ -1346,7 +1346,8 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
                 media_ = new _2_tl_js_1.types.InputMediaPhotoExternal({ url: media.photo, spoiler });
             }
             else {
-                const [contents, fileName] = await (0, _0_utilities_js_3.getFileContents)(media.photo);
+                const [contents, fileName_] = await (0, _0_utilities_js_3.getFileContents)(media.photo);
+                const fileName = media?.fileName ?? fileName_;
                 const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: media?.chunkSize, signal: media?.signal });
                 media_ = new _2_tl_js_1.types.InputMediaUploadedPhoto({ file, spoiler });
             }

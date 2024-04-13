@@ -1342,7 +1342,8 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
                 media_ = new types.InputMediaPhotoExternal({ url: media.photo, spoiler });
             }
             else {
-                const [contents, fileName] = await getFileContents(media.photo);
+                const [contents, fileName_] = await getFileContents(media.photo);
+                const fileName = media?.fileName ?? fileName_;
                 const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: media?.chunkSize, signal: media?.signal });
                 media_ = new types.InputMediaUploadedPhoto({ file, spoiler });
             }

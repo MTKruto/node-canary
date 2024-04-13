@@ -28,7 +28,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _MessageManager_instances, _MessageManager_c, _MessageManager_LresolveFileId, _MessageManager_updatesToMessages, _MessageManager_constructReplyMarkup, _MessageManager_resolveSendAs, _MessageManager_constructReplyTo, _MessageManager_sendDocumentInner, _MessageManager_sendMedia, _MessageManager_sendReaction, _MessageManager_toggleJoinRequests;
+var _MessageManager_instances, _MessageManager_c, _MessageManager_LresolveFileId, _MessageManager_updatesToMessages, _MessageManager_constructReplyMarkup, _MessageManager_resolveSendAs, _MessageManager_constructReplyTo, _MessageManager_sendDocumentInner, _MessageManager_sendMedia, _MessageManager_resolveInputMediaInner, _MessageManager_resolveInputMedia, _MessageManager_sendReaction, _MessageManager_toggleJoinRequests;
 import { contentType, unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { getLogger, getRandomId, toUnixTimestamp } from "../1_utilities.js";
@@ -452,7 +452,8 @@ export class MessageManager {
                 media = new types.InputMediaPhotoExternal({ url: photo, spoiler });
             }
             else {
-                const [contents, fileName] = await getFileContents(photo);
+                const [contents, fileName_] = await getFileContents(photo);
+                const fileName = params?.fileName ?? fileName_;
                 const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: params?.chunkSize, signal: params?.signal });
                 media = new types.InputMediaUploadedPhoto({ file, spoiler });
             }
@@ -594,6 +595,32 @@ export class MessageManager {
             media,
             no_webpage: noWebpage,
             invert_media: invertMedia,
+            reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
+        });
+    }
+    async editMessageMedia(chatId, messageId, media, params) {
+        const message = await this.getMessage(chatId, messageId);
+        if (!message) {
+            throw new InputError("Message not found.");
+        }
+        if (!("animation" in message) && !("audio" in message) && !("document" in message) && !("photo" in message) && !("video" in message)) {
+            throw new InputError("Unexpected message type.");
+        }
+        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.editMessage({
+            peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),
+            id: messageId,
+            media: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveInputMedia).call(this, media),
+            reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
+        });
+        const message_ = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result).then((v) => v[0]);
+        return message_;
+    }
+    async editInlineMessageMedia(inlineMessageId, media, params) {
+        await __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertBot("editInlineMessageMedia");
+        const id = deserializeInlineMessageId(inlineMessageId);
+        await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.editInlineBotMessage({
+            id,
+            media: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveInputMedia).call(this, media),
             reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
         });
     }
@@ -1233,6 +1260,108 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
         entities: captionEntities,
     }), params?.businessConnectionId);
     return await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result, params?.businessConnectionId).then((v) => v[0]);
+}, _MessageManager_resolveInputMediaInner = async function _MessageManager_resolveInputMediaInner(document, media, fileType, otherAttribs) {
+    let media_ = null;
+    const spoiler = "hasSpoiler" in media && media.hasSpoiler ? true : undefined;
+    if (typeof document === "string") {
+        const fileId = this.resolveFileId(document, fileType);
+        if (fileId != null) {
+            media_ = new types.InputMediaDocument({
+                id: new types.InputDocument(fileId),
+                spoiler,
+                query: otherAttribs.find((v) => v instanceof types.DocumentAttributeSticker)?.alt || undefined,
+            });
+        }
+    }
+    if (media_ == null) {
+        if (typeof document === "string" && isHttpUrl(document)) {
+            media_ = new types.InputMediaDocumentExternal({ url: document, spoiler });
+        }
+        else {
+            const [contents, fileName_] = await getFileContents(document);
+            let fileName = media?.fileName ?? fileName_;
+            const mimeType = media?.mimeType ?? contentType(fileName.split(".").slice(-1)[0]) ?? FALLBACK_MIME_TYPE;
+            if (fileName.endsWith(".tgs") && fileType == FileType.Document) {
+                fileName += "-";
+            }
+            const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: media?.chunkSize, signal: media?.signal });
+            let thumb = undefined;
+            if ("thumbnail" in media && media.thumbnail) {
+                const [thumbContents, fileName__] = await getFileContents(media.thumbnail);
+                thumb = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(thumbContents, { fileName: fileName__, chunkSize: media?.chunkSize, signal: media?.signal });
+            }
+            media_ = new types.InputMediaUploadedDocument({
+                file,
+                thumb,
+                spoiler,
+                attributes: [new types.DocumentAttributeFilename({ file_name: fileName }), ...otherAttribs],
+                mime_type: mimeType,
+                force_file: fileType == FileType.Document ? true : undefined,
+            });
+        }
+    }
+    return media_;
+}, _MessageManager_resolveInputMedia = async function _MessageManager_resolveInputMedia(media) {
+    if ("animation" in media) {
+        return await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveInputMediaInner).call(this, media.animation, media, FileType.Animation, [
+            new types.DocumentAttributeAnimated(),
+            new types.DocumentAttributeVideo({
+                supports_streaming: true,
+                w: media?.width ?? 0,
+                h: media?.height ?? 0,
+                duration: media?.duration ?? 0,
+            }),
+        ]);
+    }
+    else if ("audio" in media) {
+        return await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveInputMediaInner).call(this, media.audio, media, FileType.Audio, [
+            new types.DocumentAttributeAudio({
+                duration: media?.duration ?? 0,
+                performer: media?.performer,
+                title: media?.title,
+            }),
+        ]);
+    }
+    else if ("document" in media) {
+        return await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveInputMediaInner).call(this, media.document, media, FileType.Document, []);
+    }
+    else if ("photo" in media) {
+        let media_ = null;
+        const spoiler = media.hasSpoiler ? true : undefined;
+        if (typeof media.photo === "string") {
+            const fileId = this.resolveFileId(media.photo, [FileType.Photo, FileType.ProfilePhoto]);
+            if (fileId != null) {
+                media_ = new types.InputMediaPhoto({
+                    id: new types.InputPhoto(fileId),
+                    spoiler,
+                });
+            }
+        }
+        if (media_ == null) {
+            if (typeof media.photo === "string" && isHttpUrl(media.photo)) {
+                media_ = new types.InputMediaPhotoExternal({ url: media.photo, spoiler });
+            }
+            else {
+                const [contents, fileName] = await getFileContents(media.photo);
+                const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: media?.chunkSize, signal: media?.signal });
+                media_ = new types.InputMediaUploadedPhoto({ file, spoiler });
+            }
+        }
+        return media_;
+    }
+    else if ("video" in media) {
+        return await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveInputMediaInner).call(this, media.video, media, FileType.Video, [
+            new types.DocumentAttributeVideo({
+                supports_streaming: media?.supportsStreaming ? true : undefined,
+                w: media?.width ?? 0,
+                h: media?.height ?? 0,
+                duration: media?.duration ?? 0,
+            }),
+        ]);
+    }
+    else {
+        unreachable();
+    }
 }, _MessageManager_sendReaction = async function _MessageManager_sendReaction(chatId, messageId, reactions, params) {
     await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.sendReaction({
         peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),

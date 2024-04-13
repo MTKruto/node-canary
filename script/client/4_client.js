@@ -1525,6 +1525,27 @@ class Client extends Composer {
         return await __classPrivateFieldGet(this, _Client_messageManager, "f").editMessageText(chatId, messageId, text, params);
     }
     /**
+     * Edit a message's media.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that contains the message.
+     * @param messageId The message's identifier.
+     * @param media The new media of the message.
+     * @returns The edited message.
+     */
+    async editMessageMedia(chatId, messageId, media, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").editMessageMedia(chatId, messageId, media, params);
+    }
+    /**
+     * Edit an inline message's media.
+     *
+     * @method ms
+     * @param inlineMessageId The inline message's identifier.
+     */
+    async editInlineMessageMedia(inlineMessageId, media, params) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").editInlineMessageMedia(inlineMessageId, media, params);
+    }
+    /**
      * Edit an inline message's text. Bot-only.
      *
      * @method ms

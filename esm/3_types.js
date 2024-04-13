@@ -56,6 +56,7 @@ export * from "./types/1_chat_p.js";
 export * from "./types/1_document.js";
 export * from "./types/1_giveaway.js";
 export * from "./types/1_inline_query_result_button.js";
+export * from "./types/1_input_media.js";
 export * from "./types/1_input_message_content.js";
 export * from "./types/1_input_story_content.js";
 export * from "./types/1_keyboard_button.js";

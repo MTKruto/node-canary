@@ -72,6 +72,7 @@ __exportStar(require("./types/1_chat_p.js"), exports);
 __exportStar(require("./types/1_document.js"), exports);
 __exportStar(require("./types/1_giveaway.js"), exports);
 __exportStar(require("./types/1_inline_query_result_button.js"), exports);
+__exportStar(require("./types/1_input_media.js"), exports);
 __exportStar(require("./types/1_input_message_content.js"), exports);
 __exportStar(require("./types/1_input_story_content.js"), exports);
 __exportStar(require("./types/1_keyboard_button.js"), exports);

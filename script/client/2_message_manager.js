@@ -29,7 +29,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _MessageManager_instances, _MessageManager_c, _MessageManager_LresolveFileId, _MessageManager_updatesToMessages, _MessageManager_constructReplyMarkup, _MessageManager_resolveSendAs, _MessageManager_constructReplyTo, _MessageManager_sendDocumentInner, _MessageManager_sendMedia, _MessageManager_sendReaction, _MessageManager_toggleJoinRequests;
+var _MessageManager_instances, _MessageManager_c, _MessageManager_LresolveFileId, _MessageManager_updatesToMessages, _MessageManager_constructReplyMarkup, _MessageManager_resolveSendAs, _MessageManager_constructReplyTo, _MessageManager_sendDocumentInner, _MessageManager_sendMedia, _MessageManager_resolveInputMediaInner, _MessageManager_resolveInputMedia, _MessageManager_sendReaction, _MessageManager_toggleJoinRequests;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MessageManager = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
@@ -455,7 +455,8 @@ class MessageManager {
                 media = new _2_tl_js_1.types.InputMediaPhotoExternal({ url: photo, spoiler });
             }
             else {
-                const [contents, fileName] = await (0, _0_utilities_js_3.getFileContents)(photo);
+                const [contents, fileName_] = await (0, _0_utilities_js_3.getFileContents)(photo);
+                const fileName = params?.fileName ?? fileName_;
                 const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: params?.chunkSize, signal: params?.signal });
                 media = new _2_tl_js_1.types.InputMediaUploadedPhoto({ file, spoiler });
             }
@@ -597,6 +598,32 @@ class MessageManager {
             media,
             no_webpage: noWebpage,
             invert_media: invertMedia,
+            reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
+        });
+    }
+    async editMessageMedia(chatId, messageId, media, params) {
+        const message = await this.getMessage(chatId, messageId);
+        if (!message) {
+            throw new _0_errors_js_1.InputError("Message not found.");
+        }
+        if (!("animation" in message) && !("audio" in message) && !("document" in message) && !("photo" in message) && !("video" in message)) {
+            throw new _0_errors_js_1.InputError("Unexpected message type.");
+        }
+        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.editMessage({
+            peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),
+            id: messageId,
+            media: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveInputMedia).call(this, media),
+            reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
+        });
+        const message_ = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result).then((v) => v[0]);
+        return message_;
+    }
+    async editInlineMessageMedia(inlineMessageId, media, params) {
+        await __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertBot("editInlineMessageMedia");
+        const id = (0, _3_types_js_2.deserializeInlineMessageId)(inlineMessageId);
+        await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.editInlineBotMessage({
+            id,
+            media: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveInputMedia).call(this, media),
             reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
         });
     }
@@ -1237,6 +1264,108 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
         entities: captionEntities,
     }), params?.businessConnectionId);
     return await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_updatesToMessages).call(this, chatId, result, params?.businessConnectionId).then((v) => v[0]);
+}, _MessageManager_resolveInputMediaInner = async function _MessageManager_resolveInputMediaInner(document, media, fileType, otherAttribs) {
+    let media_ = null;
+    const spoiler = "hasSpoiler" in media && media.hasSpoiler ? true : undefined;
+    if (typeof document === "string") {
+        const fileId = this.resolveFileId(document, fileType);
+        if (fileId != null) {
+            media_ = new _2_tl_js_1.types.InputMediaDocument({
+                id: new _2_tl_js_1.types.InputDocument(fileId),
+                spoiler,
+                query: otherAttribs.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeSticker)?.alt || undefined,
+            });
+        }
+    }
+    if (media_ == null) {
+        if (typeof document === "string" && (0, _0_utilities_js_3.isHttpUrl)(document)) {
+            media_ = new _2_tl_js_1.types.InputMediaDocumentExternal({ url: document, spoiler });
+        }
+        else {
+            const [contents, fileName_] = await (0, _0_utilities_js_3.getFileContents)(document);
+            let fileName = media?.fileName ?? fileName_;
+            const mimeType = media?.mimeType ?? (0, _0_deps_js_1.contentType)(fileName.split(".").slice(-1)[0]) ?? FALLBACK_MIME_TYPE;
+            if (fileName.endsWith(".tgs") && fileType == _3_types_js_2.FileType.Document) {
+                fileName += "-";
+            }
+            const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: media?.chunkSize, signal: media?.signal });
+            let thumb = undefined;
+            if ("thumbnail" in media && media.thumbnail) {
+                const [thumbContents, fileName__] = await (0, _0_utilities_js_3.getFileContents)(media.thumbnail);
+                thumb = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(thumbContents, { fileName: fileName__, chunkSize: media?.chunkSize, signal: media?.signal });
+            }
+            media_ = new _2_tl_js_1.types.InputMediaUploadedDocument({
+                file,
+                thumb,
+                spoiler,
+                attributes: [new _2_tl_js_1.types.DocumentAttributeFilename({ file_name: fileName }), ...otherAttribs],
+                mime_type: mimeType,
+                force_file: fileType == _3_types_js_2.FileType.Document ? true : undefined,
+            });
+        }
+    }
+    return media_;
+}, _MessageManager_resolveInputMedia = async function _MessageManager_resolveInputMedia(media) {
+    if ("animation" in media) {
+        return await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveInputMediaInner).call(this, media.animation, media, _3_types_js_2.FileType.Animation, [
+            new _2_tl_js_1.types.DocumentAttributeAnimated(),
+            new _2_tl_js_1.types.DocumentAttributeVideo({
+                supports_streaming: true,
+                w: media?.width ?? 0,
+                h: media?.height ?? 0,
+                duration: media?.duration ?? 0,
+            }),
+        ]);
+    }
+    else if ("audio" in media) {
+        return await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveInputMediaInner).call(this, media.audio, media, _3_types_js_2.FileType.Audio, [
+            new _2_tl_js_1.types.DocumentAttributeAudio({
+                duration: media?.duration ?? 0,
+                performer: media?.performer,
+                title: media?.title,
+            }),
+        ]);
+    }
+    else if ("document" in media) {
+        return await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveInputMediaInner).call(this, media.document, media, _3_types_js_2.FileType.Document, []);
+    }
+    else if ("photo" in media) {
+        let media_ = null;
+        const spoiler = media.hasSpoiler ? true : undefined;
+        if (typeof media.photo === "string") {
+            const fileId = this.resolveFileId(media.photo, [_3_types_js_2.FileType.Photo, _3_types_js_2.FileType.ProfilePhoto]);
+            if (fileId != null) {
+                media_ = new _2_tl_js_1.types.InputMediaPhoto({
+                    id: new _2_tl_js_1.types.InputPhoto(fileId),
+                    spoiler,
+                });
+            }
+        }
+        if (media_ == null) {
+            if (typeof media.photo === "string" && (0, _0_utilities_js_3.isHttpUrl)(media.photo)) {
+                media_ = new _2_tl_js_1.types.InputMediaPhotoExternal({ url: media.photo, spoiler });
+            }
+            else {
+                const [contents, fileName] = await (0, _0_utilities_js_3.getFileContents)(media.photo);
+                const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: media?.chunkSize, signal: media?.signal });
+                media_ = new _2_tl_js_1.types.InputMediaUploadedPhoto({ file, spoiler });
+            }
+        }
+        return media_;
+    }
+    else if ("video" in media) {
+        return await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveInputMediaInner).call(this, media.video, media, _3_types_js_2.FileType.Video, [
+            new _2_tl_js_1.types.DocumentAttributeVideo({
+                supports_streaming: media?.supportsStreaming ? true : undefined,
+                w: media?.width ?? 0,
+                h: media?.height ?? 0,
+                duration: media?.duration ?? 0,
+            }),
+        ]);
+    }
+    else {
+        (0, _0_deps_js_1.unreachable)();
+    }
 }, _MessageManager_sendReaction = async function _MessageManager_sendReaction(chatId, messageId, reactions, params) {
     await __classPrivateFieldGet(this, _MessageManager_c, "f").api.messages.sendReaction({
         peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),

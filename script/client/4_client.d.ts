@@ -21,9 +21,9 @@ import { MaybePromise } from "../1_utilities.js";
 import { enums, functions, types } from "../2_tl.js";
 import { Storage } from "../3_storage.js";
 import { DC } from "../3_transport.js";
-import { BotCommand, BusinessConnection, Chat, ChatAction, ChatMember, ChatP, FileSource, ID, InactiveChat, InlineQueryResult, InputStoryContent, InviteLink, Message, MessageAnimation, MessageAudio, MessageContact, MessageDice, MessageDocument, MessageLocation, MessagePhoto, MessagePoll, MessageSticker, MessageText, MessageVenue, MessageVideo, MessageVideoNote, MessageVoice, NetworkStatistics, ParseMode, Poll, Reaction, Sticker, Story, Update, User } from "../3_types.js";
+import { BotCommand, BusinessConnection, Chat, ChatAction, ChatMember, ChatP, FileSource, ID, InactiveChat, InlineQueryResult, InputMedia, InputStoryContent, InviteLink, Message, MessageAnimation, MessageAudio, MessageContact, MessageDice, MessageDocument, MessageLocation, MessagePhoto, MessagePoll, MessageSticker, MessageText, MessageVenue, MessageVideo, MessageVideoNote, MessageVoice, NetworkStatistics, ParseMode, Poll, Reaction, Sticker, Story, Update, User } from "../3_types.js";
 import { Migrate } from "../4_errors.js";
-import { AddReactionParams, AnswerCallbackQueryParams, AnswerInlineQueryParams, AuthorizeUserParams, BanChatMemberParams, CreateInviteLinkParams, CreateStoryParams, DeleteMessageParams, DeleteMessagesParams, DownloadParams, EditMessageLiveLocationParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetChatsParams, GetCreatedInviteLinksParams, GetHistoryParams, GetMyCommandsParams, PinMessageParams, ReplyParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetMyCommandsParams, SetReactionsParams, StopPollParams } from "./0_params.js";
+import { AddReactionParams, AnswerCallbackQueryParams, AnswerInlineQueryParams, AuthorizeUserParams, BanChatMemberParams, CreateInviteLinkParams, CreateStoryParams, DeleteMessageParams, DeleteMessagesParams, DownloadParams, EditMessageLiveLocationParams, EditMessageMediaParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetChatsParams, GetCreatedInviteLinksParams, GetHistoryParams, GetMyCommandsParams, PinMessageParams, ReplyParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetMyCommandsParams, SetReactionsParams, StopPollParams } from "./0_params.js";
 import { Api } from "./0_types.js";
 import { ClientPlainParams } from "./1_client_plain.js";
 import { Composer as Composer_, NextFunction } from "./1_composer.js";
@@ -498,6 +498,23 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @returns The edited text message.
      */
     editMessageText(chatId: ID, messageId: number, text: string, params?: EditMessageParams): Promise<MessageText>;
+    /**
+     * Edit a message's media.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that contains the message.
+     * @param messageId The message's identifier.
+     * @param media The new media of the message.
+     * @returns The edited message.
+     */
+    editMessageMedia(chatId: ID, messageId: number, media: InputMedia, params?: EditMessageMediaParams): Promise<Message>;
+    /**
+     * Edit an inline message's media.
+     *
+     * @method ms
+     * @param inlineMessageId The inline message's identifier.
+     */
+    editInlineMessageMedia(inlineMessageId: string, media: InputMedia, params?: EditMessageMediaParams): Promise<void>;
     /**
      * Edit an inline message's text. Bot-only.
      *

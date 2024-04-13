@@ -1,4 +1,5 @@
 import { FileSource } from "./0_file_source.js";
+/** @unlisted */
 export interface _InputMediaCommon {
     /** The file name to assign if applicable. */
     fileName?: string;

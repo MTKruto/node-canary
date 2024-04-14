@@ -40,7 +40,7 @@ import { parseHtml } from "./0_html.js";
 import { parseMarkdown } from "./0_markdown.js";
 import { checkMessageId } from "./0_utilities.js";
 import { checkArray } from "./0_utilities.js";
-import { getFileContents, isHttpUrl } from "./0_utilities.js";
+import { isHttpUrl } from "./0_utilities.js";
 const FALLBACK_MIME_TYPE = "application/octet-stream";
 const STICKER_MIME_TYPES = ["image/webp", "video/webm", "application/x-tgsticker"];
 export class MessageManager {
@@ -452,9 +452,7 @@ export class MessageManager {
                 media = new types.InputMediaPhotoExternal({ url: photo, spoiler });
             }
             else {
-                const [contents, fileName_] = await getFileContents(photo);
-                const fileName = params?.fileName ?? fileName_;
-                const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: params?.chunkSize, signal: params?.signal });
+                const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(photo, params, null, false);
                 media = new types.InputMediaUploadedPhoto({ file, spoiler });
             }
         }
@@ -837,8 +835,7 @@ export class MessageManager {
         if (!(peer instanceof types.InputPeerChannel) && !(peer instanceof types.InputPeerChat)) {
             unreachable();
         }
-        const [contents, fileName] = await getFileContents(photo);
-        const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName: params?.fileName ?? fileName, chunkSize: params?.chunkSize, signal: params?.signal });
+        const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(photo, params);
         const photo_ = new types.InputChatUploadedPhoto({ file });
         if (peer instanceof types.InputPeerChannel) {
             await __classPrivateFieldGet(this, _MessageManager_c, "f").api.channels.editPhoto({ channel: new types.InputChannel(peer), photo: photo_ });
@@ -1209,26 +1206,26 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
             media = new types.InputMediaDocumentExternal({ url: document, spoiler });
         }
         else {
-            const [contents, fileName_] = await getFileContents(document);
-            let fileName = params?.fileName ?? fileName_;
-            const mimeType = params?.mimeType ?? contentType(fileName.split(".").slice(-1)[0]) ?? FALLBACK_MIME_TYPE;
-            if (expectedMimeTypes && !expectedMimeTypes.includes(mimeType)) {
-                unreachable();
-            }
-            if (fileName.endsWith(".tgs") && fileType == FileType.Document) {
-                fileName += "-";
-            }
-            const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: params?.chunkSize, signal: params?.signal });
+            let mimeType;
+            const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(document, params, (name) => {
+                mimeType = params?.mimeType ?? contentType(name.split(".").slice(-1)[0]) ?? FALLBACK_MIME_TYPE;
+                if (expectedMimeTypes && !expectedMimeTypes.includes(mimeType)) {
+                    unreachable();
+                }
+                if (name.endsWith(".tgs") && fileType == FileType.Document) {
+                    name += "-";
+                }
+                return name;
+            });
             let thumb = undefined;
             if (params?.thumbnail) {
-                const [thumbContents, fileName__] = await getFileContents(params.thumbnail);
-                thumb = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(thumbContents, { fileName: fileName__, chunkSize: params?.chunkSize, signal: params?.signal });
+                thumb = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(params.thumbnail, { chunkSize: params?.chunkSize, signal: params?.signal });
             }
             media = new types.InputMediaUploadedDocument({
                 file,
                 thumb,
                 spoiler,
-                attributes: [new types.DocumentAttributeFilename({ file_name: fileName }), ...otherAttribs],
+                attributes: [new types.DocumentAttributeFilename({ file_name: file.name }), ...otherAttribs],
                 mime_type: mimeType,
                 force_file: fileType == FileType.Document ? true : undefined,
             });
@@ -1278,23 +1275,23 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
             media_ = new types.InputMediaDocumentExternal({ url: document, spoiler });
         }
         else {
-            const [contents, fileName_] = await getFileContents(document);
-            let fileName = media?.fileName ?? fileName_;
-            const mimeType = media?.mimeType ?? contentType(fileName.split(".").slice(-1)[0]) ?? FALLBACK_MIME_TYPE;
-            if (fileName.endsWith(".tgs") && fileType == FileType.Document) {
-                fileName += "-";
-            }
-            const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: media?.chunkSize, signal: media?.signal });
+            let mimeType;
+            const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(document, media, (name) => {
+                mimeType = media?.mimeType ?? contentType(name.split(".").slice(-1)[0]) ?? FALLBACK_MIME_TYPE;
+                if (name.endsWith(".tgs") && fileType == FileType.Document) {
+                    name += "-";
+                }
+                return name;
+            });
             let thumb = undefined;
             if ("thumbnail" in media && media.thumbnail) {
-                const [thumbContents, fileName__] = await getFileContents(media.thumbnail);
-                thumb = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(thumbContents, { fileName: fileName__, chunkSize: media?.chunkSize, signal: media?.signal });
+                thumb = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(media.thumbnail, { chunkSize: media?.chunkSize, signal: media?.signal });
             }
             media_ = new types.InputMediaUploadedDocument({
                 file,
                 thumb,
                 spoiler,
-                attributes: [new types.DocumentAttributeFilename({ file_name: fileName }), ...otherAttribs],
+                attributes: [new types.DocumentAttributeFilename({ file_name: file.name }), ...otherAttribs],
                 mime_type: mimeType,
                 force_file: fileType == FileType.Document ? true : undefined,
             });
@@ -1342,9 +1339,7 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
                 media_ = new types.InputMediaPhotoExternal({ url: media.photo, spoiler });
             }
             else {
-                const [contents, fileName_] = await getFileContents(media.photo);
-                const fileName = media?.fileName ?? fileName_;
-                const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: media?.chunkSize, signal: media?.signal });
+                const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(media.photo, media, null, false);
                 media_ = new types.InputMediaUploadedPhoto({ file, spoiler });
             }
         }

@@ -1,29 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.isMtprotoFunction = exports.checkInlineQueryId = exports.checkCallbackQueryId = exports.checkArray = exports.checkPollOption = exports.checkStoryId = exports.checkMessageId = exports.getChatListId = exports.getUsername = exports.isHttpUrl = exports.getFileContents = exports.resolve = void 0;
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
  * Copyright (C) 2023-2024 Roj <https://roj.im/>
@@ -43,55 +18,13 @@ exports.isMtprotoFunction = exports.checkInlineQueryId = exports.checkCallbackQu
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-const dntShim = __importStar(require("../_dnt.shims.js"));
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isMtprotoFunction = exports.checkInlineQueryId = exports.checkCallbackQueryId = exports.checkArray = exports.checkPollOption = exports.checkStoryId = exports.checkMessageId = exports.getChatListId = exports.getUsername = exports.isHttpUrl = exports.resolve = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
 const _0_errors_js_1 = require("../0_errors.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const resolve = () => Promise.resolve();
 exports.resolve = resolve;
-async function getFileContents(source, fileName = "") {
-    fileName = fileName.trim() || "file";
-    let contents;
-    if (source instanceof Uint8Array) {
-        contents = source;
-    }
-    else {
-        let url;
-        try {
-            url = new URL(source).toString();
-        }
-        catch {
-            if (typeof source === "string") {
-                let path_;
-                if (_0_deps_js_1.path.isAbsolute(source)) {
-                    path_ = source;
-                }
-                else {
-                    // @ts-ignore: lib
-                    path_ = _0_deps_js_1.path.join(dntShim.Deno.cwd(), source);
-                }
-                url = _0_deps_js_1.path.toFileUrl(path_).toString();
-                fileName = _0_deps_js_1.path.basename(path_);
-            }
-            else {
-                (0, _0_deps_js_1.unreachable)();
-            }
-        }
-        const res = await fetch(url);
-        if (fileName == "file") {
-            const contentType = res.headers.get("content-type");
-            if (contentType?.includes("image/png")) {
-                fileName += ".png";
-            }
-            else if (contentType?.includes("image/jpeg")) {
-                fileName += ".jpg";
-            }
-        }
-        contents = await res.arrayBuffer().then((v) => new Uint8Array(v));
-    }
-    return [contents, fileName];
-}
-exports.getFileContents = getFileContents;
 function isHttpUrl(string) {
     try {
         return new URL(string).protocol.startsWith("http");

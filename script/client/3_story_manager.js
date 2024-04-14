@@ -61,14 +61,12 @@ class StoryManager {
                 throw new _0_errors_js_1.InputError("URL not supported.");
             }
             else {
-                const [contents, fileName_] = await (0, _0_utilities_js_1.getFileContents)(source);
-                const fileName = params?.fileName ?? fileName_;
-                const mimeType = (0, _0_deps_js_1.contentType)(fileName.split(".").slice(-1)[0]) ?? "application/octet-stream";
-                const file = await __classPrivateFieldGet(this, _StoryManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: params?.chunkSize, signal: params?.signal });
+                const file = await __classPrivateFieldGet(this, _StoryManager_c, "f").fileManager.upload(source, params, null, "video" in content);
+                const mimeType = (0, _0_deps_js_1.contentType)(file.name.split(".").slice(-1)[0]) ?? "application/octet-stream";
                 if ("video" in content) {
                     media = new _2_tl_js_1.types.InputMediaUploadedDocument({
                         file,
-                        attributes: [new _2_tl_js_1.types.DocumentAttributeFilename({ file_name: fileName }), new _2_tl_js_1.types.DocumentAttributeVideo({ w: 720, h: 1280, duration: content.duration })],
+                        attributes: [new _2_tl_js_1.types.DocumentAttributeFilename({ file_name: file.name }), new _2_tl_js_1.types.DocumentAttributeVideo({ w: 720, h: 1280, duration: content.duration })],
                         mime_type: mimeType,
                     });
                 }

@@ -17,53 +17,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import * as dntShim from "../_dnt.shims.js";
-import { path, unreachable } from "../0_deps.js";
+import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { functions } from "../2_tl.js";
 export const resolve = () => Promise.resolve();
-export async function getFileContents(source, fileName = "") {
-    fileName = fileName.trim() || "file";
-    let contents;
-    if (source instanceof Uint8Array) {
-        contents = source;
-    }
-    else {
-        let url;
-        try {
-            url = new URL(source).toString();
-        }
-        catch {
-            if (typeof source === "string") {
-                let path_;
-                if (path.isAbsolute(source)) {
-                    path_ = source;
-                }
-                else {
-                    // @ts-ignore: lib
-                    path_ = path.join(dntShim.Deno.cwd(), source);
-                }
-                url = path.toFileUrl(path_).toString();
-                fileName = path.basename(path_);
-            }
-            else {
-                unreachable();
-            }
-        }
-        const res = await fetch(url);
-        if (fileName == "file") {
-            const contentType = res.headers.get("content-type");
-            if (contentType?.includes("image/png")) {
-                fileName += ".png";
-            }
-            else if (contentType?.includes("image/jpeg")) {
-                fileName += ".jpg";
-            }
-        }
-        contents = await res.arrayBuffer().then((v) => new Uint8Array(v));
-    }
-    return [contents, fileName];
-}
 export function isHttpUrl(string) {
     try {
         return new URL(string).protocol.startsWith("http");

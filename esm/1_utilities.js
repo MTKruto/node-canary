@@ -28,6 +28,7 @@ export * from "./utilities/0_mutex.js";
 export * from "./utilities/0_object.js";
 export * from "./utilities/0_rle.js";
 export * from "./utilities/0_types.js";
+export * from "./utilities/0_units.js";
 export * from "./utilities/1_auth.js";
 export * from "./utilities/1_base64.js";
 export * from "./utilities/1_math.js";

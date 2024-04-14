@@ -1,3 +1,15 @@
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _FileManager_instances, _a, _FileManager_c, _FileManager_Lupload, _FileManager_MAX_CHUNK_SIZE, _FileManager_BIG_FILE_THRESHOLD, _FileManager_getFileContents, _FileManager_downloadInner;
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
  * Copyright (C) 2023-2024 Roj <https://roj.im/>
@@ -17,21 +29,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
-    if (kind === "m") throw new TypeError("Private method is not writable");
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
-};
-var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
-};
-var _FileManager_instances, _FileManager_c, _FileManager_Lupload, _FileManager_downloadInner;
+import * as dntShim from "../_dnt.shims.js";
+import { extension, path } from "../0_deps.js";
 import { unreachable } from "../0_deps.js";
 import { ConnectionError, InputError } from "../0_errors.js";
-import { drop, getLogger, getRandomId, mod } from "../1_utilities.js";
+import { concat, drop, getLogger, getRandomId, kilobyte, megabyte, mod } from "../1_utilities.js";
 import { as, types } from "../2_tl.js";
 import { constructSticker, deserializeFileId, FileType, PhotoSourceType, serializeFileId, toUniqueFileId } from "../3_types.js";
 import { STICKER_SET_NAME_TTL } from "../4_constants.js";
@@ -45,33 +47,63 @@ export class FileManager {
         const L = getLogger("FileManager").client(c.id);
         __classPrivateFieldSet(this, _FileManager_Lupload, L.branch("upload"), "f");
     }
-    async upload(contents, params) {
-        const isBig = contents.length > 1048576; // 10 MB
-        const chunkSize = params?.chunkSize ?? 512 * 1024;
+    async upload(file, params, checkName, allowStream = true) {
+        let { size, name, contents } = await __classPrivateFieldGet(_a, _a, "m", _FileManager_getFileContents).call(_a, file, params, allowStream);
+        if (checkName) {
+            name = checkName(name);
+        }
+        if (size == 0 || size < -1) {
+            throw new InputError("Invalid file size.");
+        }
+        let isBig = size == -1 || size > __classPrivateFieldGet(_a, _a, "f", _FileManager_BIG_FILE_THRESHOLD);
+        const chunkSize = params?.chunkSize ?? __classPrivateFieldGet(_a, _a, "f", _FileManager_MAX_CHUNK_SIZE);
+        if (chunkSize > __classPrivateFieldGet(_a, _a, "f", _FileManager_MAX_CHUNK_SIZE)) {
+            throw new InputError("chunkSize is too big.");
+        }
         if (mod(chunkSize, 1024) != 0) {
             throw new InputError("chunkSize must be divisible by 1024.");
         }
         const signal = params?.signal;
-        __classPrivateFieldGet(this, _FileManager_Lupload, "f").debug("uploading " + (isBig ? "big " : "") + "file of size " + contents.length + " with chunk size of " + chunkSize);
+        __classPrivateFieldGet(this, _FileManager_Lupload, "f").debug("uploading " + (size == -1 ? "" : isBig ? "big " : "") + "file of size " + (size == -1 ? "unknown" : size) + " with chunk size of " + chunkSize);
         const fileId = getRandomId();
-        const name = params?.fileName ?? fileId.toString();
         const { api, disconnect, connect } = __classPrivateFieldGet(this, _FileManager_c, "f").apiFactory();
         signal?.addEventListener("abort", () => drop(disconnect()));
         await connect();
         let part = 0;
-        const partCount = Math.ceil(contents.length / chunkSize);
+        let totalParts = size == -1 ? -1 : Math.ceil(size / chunkSize);
+        let partCount = size == -1 ? 1 : totalParts;
+        const contentStream = contents instanceof Uint8Array ? contents : _a.iterateChunks(contents, chunkSize);
         try {
             main: for (; part < partCount; part++) {
                 chunk: while (true) {
                     try {
                         const start = part * chunkSize;
                         const end = start + chunkSize;
-                        const bytes = contents.subarray(start, end);
+                        let bytes;
+                        if (contentStream instanceof Uint8Array) {
+                            bytes = contentStream.subarray(start, end);
+                        }
+                        else {
+                            const result = await contentStream.next();
+                            if (result.value) {
+                                bytes = result.value.bytes;
+                                if (result.value.isSmall) {
+                                    isBig = false;
+                                }
+                                if (result.value.totalParts == -1) {
+                                    ++partCount;
+                                }
+                                totalParts = result.value.totalParts;
+                            }
+                            else {
+                                break main;
+                            }
+                        }
                         if (bytes.length == 0) {
                             continue main;
                         }
                         if (isBig) {
-                            await api.upload.saveBigFilePart({ file_id: fileId, file_part: part, bytes, file_total_parts: partCount });
+                            await api.upload.saveBigFilePart({ file_id: fileId, file_part: part, bytes, file_total_parts: totalParts });
                         }
                         else {
                             await api.upload.saveFilePart({ file_id: fileId, bytes, file_part: part });
@@ -112,10 +144,28 @@ export class FileManager {
         }
         __classPrivateFieldGet(this, _FileManager_Lupload, "f").debug("uploaded all " + partCount + " chunk(s)");
         if (isBig) {
-            return new types.InputFileBig({ id: fileId, parts: contents.length / chunkSize, name });
+            return new types.InputFileBig({ id: fileId, parts: partCount, name });
         }
         else {
             return new types.InputFile({ id: fileId, name, parts: part, md5_checksum: "" });
+        }
+    }
+    static async *iterateChunks(reader, chunkSize) {
+        let buffer = new Uint8Array();
+        let totalRead = 0;
+        while (true) {
+            const result = await reader.read();
+            if (result.value) {
+                buffer = concat(buffer, result.value);
+                totalRead += result.value.byteLength;
+            }
+            if (result.done || buffer.byteLength >= chunkSize) {
+                yield { isSmall: totalRead < chunkSize, totalParts: result.done ? Math.ceil(totalRead / chunkSize) : -1, bytes: buffer.slice(0, chunkSize) };
+                buffer = buffer.slice(chunkSize);
+            }
+            if (result.done) {
+                break;
+            }
         }
     }
     async *download(fileId, params) {
@@ -234,7 +284,90 @@ export class FileManager {
         return stickers;
     }
 }
-_FileManager_c = new WeakMap(), _FileManager_Lupload = new WeakMap(), _FileManager_instances = new WeakSet(), _FileManager_downloadInner = async function* _FileManager_downloadInner(location, dcId, params) {
+_a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new WeakMap(), _FileManager_instances = new WeakSet(), _FileManager_getFileContents = async function _FileManager_getFileContents(source, params, allowStream) {
+    let name = params?.fileName?.trim() || "file";
+    let contents;
+    let size = -1;
+    if (source instanceof Uint8Array) {
+        contents = source;
+        size = source.byteLength;
+    }
+    else if (source instanceof ReadableStream) {
+        if (!allowStream) {
+            throw new InputError("Streamed upload not allowed.");
+        }
+        contents = source.getReader();
+    }
+    else if (typeof source === "object" && source != null && (Symbol.iterator in source || Symbol.asyncIterator in source)) {
+        if (!allowStream) {
+            throw new InputError("Streamed upload not allowed.");
+        }
+        contents = new ReadableStream({
+            pull: Symbol.asyncIterator in source
+                ? async (controller) => {
+                    const { value, done } = await source.next();
+                    done ? controller.close() : controller.enqueue(value);
+                }
+                : (controller) => {
+                    const { value, done } = source.next();
+                    done ? controller.close() : controller.enqueue(value);
+                },
+        }).getReader();
+    }
+    else {
+        let url;
+        try {
+            url = new URL(source).toString();
+        }
+        catch {
+            let path_;
+            if (typeof source === "string") {
+                if (path.isAbsolute(source)) {
+                    path_ = source;
+                }
+                else {
+                    // @ts-ignore: lib
+                    path_ = path.join(dntShim.Deno.cwd(), source);
+                }
+                url = path.toFileUrl(path_).toString();
+                name = path.basename(path_);
+            }
+            else {
+                unreachable();
+            }
+        }
+        const response = await fetch(url);
+        if (response.body == null) {
+            throw new InputError("Invalid response");
+        }
+        if (name == "file") {
+            const contentType = response.headers.get("content-type")?.split(";")[0].trim();
+            if (contentType) {
+                name += extension(contentType);
+            }
+            else {
+                const maybeFileName = new URL(response.url).pathname.split("/")
+                    .filter((v) => v)
+                    .slice(-1)[0]
+                    .trim();
+                if (maybeFileName) {
+                    name += extension(path.extname(maybeFileName));
+                }
+            }
+        }
+        const contentLength = Number(response.headers.get("content-length"));
+        if (!isNaN(contentLength)) {
+            size = contentLength;
+        }
+        if (allowStream) {
+            contents = response.body.getReader();
+        }
+        else {
+            contents = new Uint8Array(await response.arrayBuffer());
+        }
+    }
+    return { size: params?.fileSize ? params.fileSize : size, name, contents };
+}, _FileManager_downloadInner = async function* _FileManager_downloadInner(location, dcId, params) {
     const id = "id" in location ? location.id : "photo_id" in location ? location.photo_id : null;
     if (id != null) {
         const file = await __classPrivateFieldGet(this, _FileManager_c, "f").storage.getFile(id);
@@ -283,3 +416,5 @@ _FileManager_c = new WeakMap(), _FileManager_Lupload = new WeakMap(), _FileManag
         drop(disconnect());
     }
 };
+_FileManager_MAX_CHUNK_SIZE = { value: 512 * kilobyte };
+_FileManager_BIG_FILE_THRESHOLD = { value: 10 * megabyte };

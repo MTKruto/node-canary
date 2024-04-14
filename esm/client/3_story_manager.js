@@ -34,7 +34,7 @@ import { InputError } from "../0_errors.js";
 import { getRandomId } from "../1_utilities.js";
 import { as, inputPeerToPeer, peerToChatId, types } from "../2_tl.js";
 import { constructStory, FileType, storyInteractiveAreaToTlObject, storyPrivacyToTlObject } from "../3_types.js";
-import { checkArray, checkStoryId, getFileContents, isHttpUrl } from "./0_utilities.js";
+import { checkArray, checkStoryId, isHttpUrl } from "./0_utilities.js";
 export class StoryManager {
     constructor(c) {
         _StoryManager_instances.add(this);
@@ -58,14 +58,12 @@ export class StoryManager {
                 throw new InputError("URL not supported.");
             }
             else {
-                const [contents, fileName_] = await getFileContents(source);
-                const fileName = params?.fileName ?? fileName_;
-                const mimeType = contentType(fileName.split(".").slice(-1)[0]) ?? "application/octet-stream";
-                const file = await __classPrivateFieldGet(this, _StoryManager_c, "f").fileManager.upload(contents, { fileName, chunkSize: params?.chunkSize, signal: params?.signal });
+                const file = await __classPrivateFieldGet(this, _StoryManager_c, "f").fileManager.upload(source, params, null, "video" in content);
+                const mimeType = contentType(file.name.split(".").slice(-1)[0]) ?? "application/octet-stream";
                 if ("video" in content) {
                     media = new types.InputMediaUploadedDocument({
                         file,
-                        attributes: [new types.DocumentAttributeFilename({ file_name: fileName }), new types.DocumentAttributeVideo({ w: 720, h: 1280, duration: content.duration })],
+                        attributes: [new types.DocumentAttributeFilename({ file_name: file.name }), new types.DocumentAttributeVideo({ w: 720, h: 1280, duration: content.duration })],
                         mime_type: mimeType,
                     });
                 }

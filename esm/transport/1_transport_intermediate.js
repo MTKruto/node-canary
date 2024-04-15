@@ -29,7 +29,8 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _TransportIntermediate_connection, _TransportIntermediate_initialized, _TransportIntermediate_obfuscated;
-import { bufferFromBigInt, concat } from "../1_utilities.js";
+import { concat } from "../0_deps.js";
+import { bufferFromBigInt } from "../1_utilities.js";
 import { getObfuscationParameters } from "./0_obfuscation.js";
 import { Transport } from "./0_transport.js";
 export class TransportIntermediate extends Transport {
@@ -74,7 +75,7 @@ export class TransportIntermediate extends Transport {
             throw new Error("Transport not initialized");
         }
         const length = bufferFromBigInt(buffer.length, 4);
-        const data = concat(length, buffer);
+        const data = concat([length, buffer]);
         this.encrypt(data);
         await __classPrivateFieldGet(this, _TransportIntermediate_connection, "f").write(data);
     }

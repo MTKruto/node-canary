@@ -20,6 +20,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TLRawWriter = void 0;
+const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 class TLRawWriter {
     constructor() {
@@ -34,7 +35,7 @@ class TLRawWriter {
         return this._buffer;
     }
     write(buffer) {
-        this._buffer = (0, _1_utilities_js_1.concat)(this._buffer, buffer);
+        this._buffer = (0, _0_deps_js_1.concat)([this._buffer, buffer]);
         return this;
     }
     writeInt24(int, signed = true) {

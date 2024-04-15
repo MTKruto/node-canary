@@ -17,8 +17,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { assertEquals, ige256Decrypt, ige256Encrypt } from "../0_deps.js";
-import { bufferFromBigInt, concat, mod, sha256, toUnixTimestamp } from "../1_utilities.js";
+import { assertEquals, concat, ige256Decrypt, ige256Encrypt } from "../0_deps.js";
+import { bufferFromBigInt, mod, sha256, toUnixTimestamp } from "../1_utilities.js";
 import { id, Message_, MessageContainer, RPCResult, serialize, TLReader, TLWriter } from "../2_tl.js";
 export function getMessageId(lastMsgId) {
     const now = toUnixTimestamp(new Date()) + 0;
@@ -54,11 +54,11 @@ export async function encryptMessage(message, authKey, authKeyId, salt, sessionI
     payloadWriter.write(message[serialize]());
     payloadWriter.write(new Uint8Array(mod(-(payloadWriter.buffer.length + 12), 16) + 12));
     const payload = payloadWriter.buffer;
-    const messageKey = (await sha256(concat(authKey.subarray(88, 120), payload))).subarray(8, 24);
-    const a = await sha256(concat(messageKey, authKey.subarray(0, 36)));
-    const b = await sha256(concat(authKey.subarray(40, 76), messageKey));
-    const aesKey = concat(a.subarray(0, 8), b.subarray(8, 24), a.subarray(24, 32));
-    const aesIV = concat(b.subarray(0, 8), a.subarray(8, 24), b.subarray(24, 32));
+    const messageKey = (await sha256(concat([authKey.subarray(88, 120), payload]))).subarray(8, 24);
+    const a = await sha256(concat([messageKey, authKey.subarray(0, 36)]));
+    const b = await sha256(concat([authKey.subarray(40, 76), messageKey]));
+    const aesKey = concat([a.subarray(0, 8), b.subarray(8, 24), a.subarray(24, 32)]);
+    const aesIV = concat([b.subarray(0, 8), a.subarray(8, 24), b.subarray(24, 32)]);
     const messageWriter = new TLWriter();
     messageWriter.writeInt64(authKeyId);
     messageWriter.write(messageKey);
@@ -70,10 +70,10 @@ export async function decryptMessage(buffer, authKey, authKeyId, _sessionId) {
     assertEquals(reader.readInt64(false), authKeyId);
     const messageKey_ = reader.readInt128();
     const messageKey = bufferFromBigInt(messageKey_, 16, true, true);
-    const a = await sha256(concat(messageKey, authKey.subarray(8, 44)));
-    const b = await sha256(concat(authKey.subarray(48, 84), messageKey));
-    const aesKey = concat(a.subarray(0, 8), b.subarray(8, 24), a.subarray(24, 32));
-    const aesIv = concat(b.subarray(0, 8), a.subarray(8, 24), b.subarray(24, 32));
+    const a = await sha256(concat([messageKey, authKey.subarray(8, 44)]));
+    const b = await sha256(concat([authKey.subarray(48, 84), messageKey]));
+    const aesKey = concat([a.subarray(0, 8), b.subarray(8, 24), a.subarray(24, 32)]);
+    const aesIv = concat([b.subarray(0, 8), a.subarray(8, 24), b.subarray(24, 32)]);
     const plaintext = ige256Decrypt(reader.buffer, aesKey, aesIv);
     assertEquals(plaintext.buffer.byteLength % 4, 0);
     let plainReader = new TLReader(plaintext);

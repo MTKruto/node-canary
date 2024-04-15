@@ -17,5 +17,4 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-export declare function concat(...buffers: [Uint8Array, Uint8Array, ...Uint8Array[]]): Uint8Array;
 export declare function bufferFromBigInt(int: bigint | number, byteCount: number, littleEndian?: boolean, signed?: boolean): Uint8Array;

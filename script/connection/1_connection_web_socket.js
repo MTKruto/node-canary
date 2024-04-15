@@ -163,7 +163,7 @@ _ConnectionWebSocket_webSocket = new WeakMap(), _ConnectionWebSocket_rMutex = ne
         }
         const unlock = await mutex.lock();
         const data = new Uint8Array(await new Blob([e.data].map((v) => v instanceof Blob || v instanceof Uint8Array ? v : v instanceof ArrayBuffer ? v : (0, _0_deps_js_1.unreachable)())).arrayBuffer());
-        __classPrivateFieldSet(this, _ConnectionWebSocket_buffer, (0, _1_utilities_js_1.concat)(__classPrivateFieldGet(this, _ConnectionWebSocket_buffer, "f"), data), "f");
+        __classPrivateFieldSet(this, _ConnectionWebSocket_buffer, (0, _0_deps_js_1.concat)([__classPrivateFieldGet(this, _ConnectionWebSocket_buffer, "f"), data]), "f");
         if (__classPrivateFieldGet(this, _ConnectionWebSocket_nextResolve, "f") != null && __classPrivateFieldGet(this, _ConnectionWebSocket_buffer, "f").length >= __classPrivateFieldGet(this, _ConnectionWebSocket_nextResolve, "f")[0]) {
             __classPrivateFieldGet(this, _ConnectionWebSocket_nextResolve, "f")[1].resolve();
             __classPrivateFieldSet(this, _ConnectionWebSocket_nextResolve, null, "f");

@@ -32,6 +32,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _TransportIntermediate_connection, _TransportIntermediate_initialized, _TransportIntermediate_obfuscated;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TransportIntermediate = void 0;
+const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _0_obfuscation_js_1 = require("./0_obfuscation.js");
 const _0_transport_js_1 = require("./0_transport.js");
@@ -77,7 +78,7 @@ class TransportIntermediate extends _0_transport_js_1.Transport {
             throw new Error("Transport not initialized");
         }
         const length = (0, _1_utilities_js_1.bufferFromBigInt)(buffer.length, 4);
-        const data = (0, _1_utilities_js_1.concat)(length, buffer);
+        const data = (0, _0_deps_js_1.concat)([length, buffer]);
         this.encrypt(data);
         await __classPrivateFieldGet(this, _TransportIntermediate_connection, "f").write(data);
     }

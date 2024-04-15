@@ -182,7 +182,7 @@ class FileManager {
         while (true) {
             const result = await reader.read();
             if (result.value) {
-                buffer = (0, _1_utilities_js_1.concat)(buffer, result.value);
+                buffer = (0, _0_deps_js_1.concat)([buffer, result.value]);
                 totalRead += result.value.byteLength;
             }
             if (result.done || buffer.byteLength >= chunkSize) {

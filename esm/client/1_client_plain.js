@@ -29,9 +29,9 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _ClientPlain_publicKeys, _ClientPlain_lastMsgId;
-import { assertEquals, assertInstanceOf, ige256Decrypt, ige256Encrypt, unreachable } from "../0_deps.js";
+import { assertEquals, assertInstanceOf, concat, ige256Decrypt, ige256Encrypt, unreachable } from "../0_deps.js";
 import { ConnectionError, TransportError } from "../0_errors.js";
-import { bigIntFromBuffer, bufferFromBigInt, concat, factorize, getLogger, getRandomBigInt, modExp, rsaPad, sha1 } from "../1_utilities.js";
+import { bigIntFromBuffer, bufferFromBigInt, factorize, getLogger, getRandomBigInt, modExp, rsaPad, sha1 } from "../1_utilities.js";
 import { functions, serialize, TLReader, types } from "../2_tl.js";
 import { PUBLIC_KEYS } from "../4_constants.js";
 import { ClientAbstract } from "./0_client_abstract.js";
@@ -134,8 +134,8 @@ export class ClientPlain extends ClientAbstract {
         LcreateAuthKey.debug("got server_DH_params_ok");
         const newNonce_ = bufferFromBigInt(newNonce, 32, true, true);
         const serverNonce_ = bufferFromBigInt(serverNonce, 16, true, true);
-        const tmpAesKey = concat(await sha1(concat(newNonce_, serverNonce_)), (await sha1(concat(serverNonce_, newNonce_))).subarray(0, 0 + 12));
-        const tmpAesIv = concat((await sha1(concat(serverNonce_, newNonce_))).subarray(12, 12 + 8), await sha1(concat(newNonce_, newNonce_)), newNonce_.subarray(0, 0 + 4));
+        const tmpAesKey = concat([await sha1(concat([newNonce_, serverNonce_])), (await sha1(concat([serverNonce_, newNonce_]))).subarray(0, 0 + 12)]);
+        const tmpAesIv = concat([(await sha1(concat([serverNonce_, newNonce_]))).subarray(12, 12 + 8), await sha1(concat([newNonce_, newNonce_])), newNonce_.subarray(0, 0 + 4)]);
         const answerWithHash = ige256Decrypt(dhParams.encrypted_answer, tmpAesKey, tmpAesIv);
         const dhInnerData = new TLReader(answerWithHash.slice(20)).readObject();
         assertInstanceOf(dhInnerData, types.Server_DH_inner_data);
@@ -150,9 +150,9 @@ export class ClientPlain extends ClientAbstract {
             retry_id: 0n,
             g_b: bufferFromBigInt(gB, 256, false, false),
         })[serialize]();
-        let dataWithHash = concat(await sha1(data), data);
+        let dataWithHash = concat([await sha1(data), data]);
         while (dataWithHash.length % 16 != 0) {
-            dataWithHash = concat(dataWithHash, new Uint8Array(1));
+            dataWithHash = concat([dataWithHash, new Uint8Array(1)]);
         }
         encryptedData = ige256Encrypt(dataWithHash, tmpAesKey, tmpAesIv);
         const dhGenOk = await this.invoke(new functions.set_client_DH_params({ nonce, server_nonce: serverNonce, encrypted_data: encryptedData }));

@@ -17,7 +17,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { bufferFromBigInt, concat } from "../1_utilities.js";
+import { concat } from "../0_deps.js";
+import { bufferFromBigInt } from "../1_utilities.js";
 export class TLRawWriter {
     constructor() {
         Object.defineProperty(this, "_buffer", {
@@ -31,7 +32,7 @@ export class TLRawWriter {
         return this._buffer;
     }
     write(buffer) {
-        this._buffer = concat(this._buffer, buffer);
+        this._buffer = concat([this._buffer, buffer]);
         return this;
     }
     writeInt24(int, signed = true) {

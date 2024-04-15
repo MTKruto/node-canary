@@ -137,8 +137,8 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
         LcreateAuthKey.debug("got server_DH_params_ok");
         const newNonce_ = (0, _1_utilities_js_1.bufferFromBigInt)(newNonce, 32, true, true);
         const serverNonce_ = (0, _1_utilities_js_1.bufferFromBigInt)(serverNonce, 16, true, true);
-        const tmpAesKey = (0, _1_utilities_js_1.concat)(await (0, _1_utilities_js_1.sha1)((0, _1_utilities_js_1.concat)(newNonce_, serverNonce_)), (await (0, _1_utilities_js_1.sha1)((0, _1_utilities_js_1.concat)(serverNonce_, newNonce_))).subarray(0, 0 + 12));
-        const tmpAesIv = (0, _1_utilities_js_1.concat)((await (0, _1_utilities_js_1.sha1)((0, _1_utilities_js_1.concat)(serverNonce_, newNonce_))).subarray(12, 12 + 8), await (0, _1_utilities_js_1.sha1)((0, _1_utilities_js_1.concat)(newNonce_, newNonce_)), newNonce_.subarray(0, 0 + 4));
+        const tmpAesKey = (0, _0_deps_js_1.concat)([await (0, _1_utilities_js_1.sha1)((0, _0_deps_js_1.concat)([newNonce_, serverNonce_])), (await (0, _1_utilities_js_1.sha1)((0, _0_deps_js_1.concat)([serverNonce_, newNonce_]))).subarray(0, 0 + 12)]);
+        const tmpAesIv = (0, _0_deps_js_1.concat)([(await (0, _1_utilities_js_1.sha1)((0, _0_deps_js_1.concat)([serverNonce_, newNonce_]))).subarray(12, 12 + 8), await (0, _1_utilities_js_1.sha1)((0, _0_deps_js_1.concat)([newNonce_, newNonce_])), newNonce_.subarray(0, 0 + 4)]);
         const answerWithHash = (0, _0_deps_js_1.ige256Decrypt)(dhParams.encrypted_answer, tmpAesKey, tmpAesIv);
         const dhInnerData = new _2_tl_js_1.TLReader(answerWithHash.slice(20)).readObject();
         (0, _0_deps_js_1.assertInstanceOf)(dhInnerData, _2_tl_js_1.types.Server_DH_inner_data);
@@ -153,9 +153,9 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
             retry_id: 0n,
             g_b: (0, _1_utilities_js_1.bufferFromBigInt)(gB, 256, false, false),
         })[_2_tl_js_1.serialize]();
-        let dataWithHash = (0, _1_utilities_js_1.concat)(await (0, _1_utilities_js_1.sha1)(data), data);
+        let dataWithHash = (0, _0_deps_js_1.concat)([await (0, _1_utilities_js_1.sha1)(data), data]);
         while (dataWithHash.length % 16 != 0) {
-            dataWithHash = (0, _1_utilities_js_1.concat)(dataWithHash, new Uint8Array(1));
+            dataWithHash = (0, _0_deps_js_1.concat)([dataWithHash, new Uint8Array(1)]);
         }
         encryptedData = (0, _0_deps_js_1.ige256Encrypt)(dataWithHash, tmpAesKey, tmpAesIv);
         const dhGenOk = await this.invoke(new _2_tl_js_1.functions.set_client_DH_params({ nonce, server_nonce: serverNonce, encrypted_data: encryptedData }));

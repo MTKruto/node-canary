@@ -56,14 +56,14 @@ async function rsaPad(data, [serverKey, exponent]) {
         if (++tries == 10) {
             throw new Error("Out of tries");
         }
-        const dataWithPadding = (0, _0_buffer_js_1.concat)(data, new Uint8Array(192 - data.length));
+        const dataWithPadding = (0, _0_deps_js_1.concat)([data, new Uint8Array(192 - data.length)]);
         const dataPadReversed = new Uint8Array(dataWithPadding).reverse();
         const tempKey = dntShim.crypto.getRandomValues(new Uint8Array(32));
-        const dataWithHash = (0, _0_buffer_js_1.concat)(dataPadReversed, await (0, _0_hash_js_1.sha256)((0, _0_buffer_js_1.concat)(tempKey, dataWithPadding)));
+        const dataWithHash = (0, _0_deps_js_1.concat)([dataPadReversed, await (0, _0_hash_js_1.sha256)((0, _0_deps_js_1.concat)([tempKey, dataWithPadding]))]);
         const aesEncrypted = (0, _0_deps_js_1.ige256Encrypt)(dataWithHash, tempKey, new Uint8Array(32));
         const aesEncryptedSha256 = await (0, _0_hash_js_1.sha256)(aesEncrypted);
         const tempKeyXor = tempKey.map((v, i) => v ^ aesEncryptedSha256[i]);
-        const keyAesEncrypted = (0, _0_buffer_js_1.concat)(tempKeyXor, aesEncrypted);
+        const keyAesEncrypted = (0, _0_deps_js_1.concat)([tempKeyXor, aesEncrypted]);
         (0, _0_deps_js_1.assertEquals)(keyAesEncrypted.length, 256);
         keyAesEncryptedInt = (0, _0_bigint_js_1.bigIntFromBuffer)(keyAesEncrypted, false, false);
     } while (keyAesEncryptedInt >= serverKey);

@@ -19,6 +19,7 @@
  */
 export * from "./deps/deno.land/std@0.222.1/assert/mod.js";
 export * as path from "./deps/deno.land/std@0.222.1/path/mod.js";
+export { concat } from "./deps/deno.land/std@0.222.1/bytes/concat.js";
 export { decodeBase64, encodeBase64 } from "./deps/deno.land/std@0.222.1/encoding/base64.js";
 import { contentType as contentType_ } from "./deps/deno.land/std@0.222.1/media_types/content_type.js";
 export declare const contentType: typeof contentType_;

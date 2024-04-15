@@ -62,6 +62,7 @@ __exportStar(require("./types/0_poll_option.js"), exports);
 __exportStar(require("./types/0_price_tag.js"), exports);
 __exportStar(require("./types/0_reaction.js"), exports);
 __exportStar(require("./types/0_restriction_reason.js"), exports);
+__exportStar(require("./types/0_self_destruct_option.js"), exports);
 __exportStar(require("./types/0_story_reference.js"), exports);
 __exportStar(require("./types/0_thumbnail.js"), exports);
 __exportStar(require("./types/0_voice.js"), exports);

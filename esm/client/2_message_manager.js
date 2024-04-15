@@ -33,7 +33,7 @@ import { contentType, unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { getLogger, getRandomId, toUnixTimestamp } from "../1_utilities.js";
 import { as, functions, getChannelChatId, peerToChatId, types } from "../2_tl.js";
-import { constructChatMemberUpdated, constructInviteLink, deserializeFileId } from "../3_types.js";
+import { constructChatMemberUpdated, constructInviteLink, deserializeFileId, selfDestructOptionToInt } from "../3_types.js";
 import { assertMessageType, chatMemberRightsToTlObject, constructChatMember, constructMessage as constructMessage_, deserializeInlineMessageId, FileType, messageEntityToTlObject, reactionEqual, reactionToTlObject, replyMarkupToTlObject } from "../3_types.js";
 import { messageSearchFilterToTlObject } from "../types/0_message_search_filter.js";
 import { parseHtml } from "./0_html.js";
@@ -438,22 +438,32 @@ export class MessageManager {
     async sendPhoto(chatId, photo, params) {
         let media = null;
         const spoiler = params?.hasSpoiler ? true : undefined;
+        const ttl_seconds = params && "selfDestruct" in params && params.selfDestruct !== undefined ? selfDestructOptionToInt(params.selfDestruct) : undefined;
         if (typeof photo === "string") {
             const fileId = this.resolveFileId(photo, [FileType.Photo, FileType.ProfilePhoto]);
             if (fileId != null) {
                 media = new types.InputMediaPhoto({
                     id: new types.InputPhoto(fileId),
                     spoiler,
+                    ttl_seconds,
                 });
             }
         }
         if (media == null) {
             if (typeof photo === "string" && isHttpUrl(photo)) {
-                media = new types.InputMediaPhotoExternal({ url: photo, spoiler });
+                media = new types.InputMediaPhotoExternal({
+                    url: photo,
+                    spoiler,
+                    ttl_seconds: (params && "selfDestruct" in params && params.selfDestruct !== undefined) ? selfDestructOptionToInt(params.selfDestruct) : undefined,
+                });
             }
             else {
                 const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(photo, params, null, false);
-                media = new types.InputMediaUploadedPhoto({ file, spoiler });
+                media = new types.InputMediaUploadedPhoto({
+                    file,
+                    spoiler,
+                    ttl_seconds: (params && "selfDestruct" in params && params.selfDestruct !== undefined) ? selfDestructOptionToInt(params.selfDestruct) : undefined,
+                });
             }
         }
         const message = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_sendMedia).call(this, chatId, media, params);
@@ -1188,6 +1198,7 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
 }, _MessageManager_sendDocumentInner = async function _MessageManager_sendDocumentInner(chatId, document, params, fileType, otherAttribs, urlSupported = false, expectedMimeTypes) {
     let media = null;
     const spoiler = params?.hasSpoiler ? true : undefined;
+    const ttl_seconds = params && "selfDestruct" in params && typeof params.selfDestruct !== undefined ? selfDestructOptionToInt(params.selfDestruct) : undefined;
     if (typeof document === "string") {
         const fileId = this.resolveFileId(document, fileType);
         if (fileId != null) {
@@ -1195,6 +1206,7 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
                 id: new types.InputDocument(fileId),
                 spoiler,
                 query: otherAttribs.find((v) => v instanceof types.DocumentAttributeSticker)?.alt || undefined,
+                ttl_seconds,
             });
         }
     }
@@ -1203,7 +1215,7 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
             if (!urlSupported) {
                 throw new InputError("URL not supported.");
             }
-            media = new types.InputMediaDocumentExternal({ url: document, spoiler });
+            media = new types.InputMediaDocumentExternal({ url: document, spoiler, ttl_seconds });
         }
         else {
             let mimeType;
@@ -1228,6 +1240,7 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
                 attributes: [new types.DocumentAttributeFilename({ file_name: file.name }), ...otherAttribs],
                 mime_type: mimeType,
                 force_file: fileType == FileType.Document ? true : undefined,
+                ttl_seconds,
             });
         }
     }
@@ -1325,12 +1338,14 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
     else if ("photo" in media) {
         let media_ = null;
         const spoiler = media.hasSpoiler ? true : undefined;
+        const ttl_seconds = "selfDestruct" in media && media.selfDestruct !== undefined ? selfDestructOptionToInt(media.selfDestruct) : undefined;
         if (typeof media.photo === "string") {
             const fileId = this.resolveFileId(media.photo, [FileType.Photo, FileType.ProfilePhoto]);
             if (fileId != null) {
                 media_ = new types.InputMediaPhoto({
                     id: new types.InputPhoto(fileId),
                     spoiler,
+                    ttl_seconds,
                 });
             }
         }
@@ -1340,13 +1355,14 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
             }
             else {
                 const file = await __classPrivateFieldGet(this, _MessageManager_c, "f").fileManager.upload(media.photo, media, null, false);
-                media_ = new types.InputMediaUploadedPhoto({ file, spoiler });
+                media_ = new types.InputMediaUploadedPhoto({ file, spoiler, ttl_seconds });
             }
         }
         return media_;
     }
     else if ("video" in media) {
-        return await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveInputMediaInner).call(this, media.video, media, FileType.Video, [
+        const ttl_seconds = "selfDestruct" in media && media.selfDestruct !== undefined ? selfDestructOptionToInt(media.selfDestruct) : undefined;
+        const media_ = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveInputMediaInner).call(this, media.video, media, FileType.Video, [
             new types.DocumentAttributeVideo({
                 supports_streaming: media?.supportsStreaming ? true : undefined,
                 w: media?.width ?? 0,
@@ -1354,6 +1370,8 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
                 duration: media?.duration ?? 0,
             }),
         ]);
+        media_.ttl_seconds = ttl_seconds;
+        return media_;
     }
     else {
         unreachable();

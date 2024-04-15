@@ -1,4 +1,3 @@
-"use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
  * Copyright (C) 2023-2024 Roj <https://roj.im/>
@@ -18,4 +17,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
+/** @unlisted */
+export type SelfDestructAfterOpen = "afterOpen";
+/** @unlisted */
+export type SelfDestructAfterSeconds = number;
+export type SelfDestructOption = SelfDestructAfterOpen | SelfDestructAfterSeconds;
+export declare function selfDestructOptionToInt(option: SelfDestructOption): number;

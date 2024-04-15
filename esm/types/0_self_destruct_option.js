@@ -1,4 +1,3 @@
-"use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
  * Copyright (C) 2023-2024 Roj <https://roj.im/>
@@ -18,4 +17,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
+import { InputError } from "../0_errors.js";
+export function selfDestructOptionToInt(option) {
+    if (option == "afterOpen") {
+        return 2147483647;
+    }
+    else if (typeof option === "number") {
+        if (option == 0) {
+            throw new InputError("Self destruct option cannot be zero.");
+        }
+        else if (option < 0) {
+            throw new InputError("Self destruct option cannot be negative.");
+        }
+        else {
+            return option;
+        }
+    }
+    else {
+        throw new InputError("Invalid self destruct option.");
+    }
+}

@@ -19,3 +19,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.selfDestructOptionToInt = void 0;
+const _0_errors_js_1 = require("../0_errors.js");
+function selfDestructOptionToInt(option) {
+    if (option == "afterOpen") {
+        return 2147483647;
+    }
+    else if (typeof option === "number") {
+        if (option == 0) {
+            throw new _0_errors_js_1.InputError("Self destruct option cannot be zero.");
+        }
+        else if (option < 0) {
+            throw new _0_errors_js_1.InputError("Self destruct option cannot be negative.");
+        }
+        else {
+            return option;
+        }
+    }
+    else {
+        throw new _0_errors_js_1.InputError("Invalid self destruct option.");
+    }
+}
+exports.selfDestructOptionToInt = selfDestructOptionToInt;

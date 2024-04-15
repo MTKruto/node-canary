@@ -46,6 +46,7 @@ export * from "./types/0_poll_option.js";
 export * from "./types/0_price_tag.js";
 export * from "./types/0_reaction.js";
 export * from "./types/0_restriction_reason.js";
+export * from "./types/0_self_destruct_option.js";
 export * from "./types/0_story_reference.js";
 export * from "./types/0_thumbnail.js";
 export * from "./types/0_voice.js";

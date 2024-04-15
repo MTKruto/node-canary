@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { MaybePromise } from "../1_utilities.js";
-import { BotCommandScope, Chat, ChatMemberRights, FileSource, ID, InlineQueryResultButton, LinkPreview, Message, MessageEntity, MessageSearchFilter, ParseMode, ReplyMarkup, ReplyQuote, StoryInteractiveArea, StoryPrivacy } from "../3_types.js";
+import { BotCommandScope, Chat, ChatMemberRights, FileSource, ID, InlineQueryResultButton, LinkPreview, Message, MessageEntity, MessageSearchFilter, ParseMode, ReplyMarkup, ReplyQuote, SelfDestructOption, StoryInteractiveArea, StoryPrivacy } from "../3_types.js";
 export interface AnswerCallbackQueryParams {
     /** A text to be shown to the user. */
     text?: string;
@@ -174,6 +174,7 @@ export interface _SpoilCommon {
     hasSpoiler?: boolean;
 }
 export interface SendPhotoParams extends _CaptionCommon, _SpoilCommon, _UploadCommon, _SendCommon {
+    selfDestruct?: SelfDestructOption;
 }
 export interface SetChatPhotoParams extends _UploadCommon {
 }
@@ -195,6 +196,7 @@ export interface SendVideoParams extends _CaptionCommon, _ThumbnailCommon, _Spoi
     height?: number;
     /** Whether the video is suitable for streaming. */
     supportsStreaming?: boolean;
+    selfDestruct?: SelfDestructOption;
 }
 export interface SendAnimationParams extends _CaptionCommon, _ThumbnailCommon, _SpoilCommon, _UploadCommon, _SendCommon {
     /** The duration of the animation in seconds. */

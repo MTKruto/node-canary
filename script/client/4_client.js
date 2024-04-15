@@ -579,7 +579,7 @@ class Client extends Composer {
         _Client_lastPropagatedAuthorizationState.set(this, null);
         _Client_pingLoopStarted.set(this, false);
         _Client_pingLoopAbortController.set(this, null);
-        _Client_pingInterval.set(this, 60 * 1000); // 60 seconds
+        _Client_pingInterval.set(this, 1 * _1_utilities_js_1.minute);
         _Client_lastUpdates.set(this, new Date());
         _Client_handleInvokeError.set(this, skipInvoke());
         /**
@@ -774,7 +774,7 @@ class Client extends Composer {
                             catch (err) {
                                 L.debug(`failed to reconnect, retrying in ${delay}:`, err);
                             }
-                            await new Promise((r) => setTimeout(r, delay * 1000));
+                            await new Promise((r) => setTimeout(r, delay * _1_utilities_js_1.second));
                             if (delay < 15) {
                                 delay += 5;
                             }
@@ -1146,8 +1146,8 @@ class Client extends Composer {
                     continue;
                 }
                 __classPrivateFieldGet(this, _Client_pingLoopAbortController, "f").signal.throwIfAborted();
-                await this.api.ping_delay_disconnect({ ping_id: (0, _1_utilities_js_1.getRandomId)(), disconnect_delay: __classPrivateFieldGet(this, _Client_pingInterval, "f") / 1000 + 15 });
-                if (Date.now() - __classPrivateFieldGet(this, _Client_lastUpdates, "f").getTime() >= 15 * 60 * 1000) {
+                await this.api.ping_delay_disconnect({ ping_id: (0, _1_utilities_js_1.getRandomId)(), disconnect_delay: __classPrivateFieldGet(this, _Client_pingInterval, "f") / _1_utilities_js_1.second + 15 });
+                if (Date.now() - __classPrivateFieldGet(this, _Client_lastUpdates, "f").getTime() >= 15 * _1_utilities_js_1.minute) {
                     (0, _1_utilities_js_1.drop)(__classPrivateFieldGet(this, _Client_updateManager, "f").recoverUpdateGap("lastUpdates"));
                 }
             }

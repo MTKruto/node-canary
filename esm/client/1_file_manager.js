@@ -9,7 +9,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _FileManager_instances, _a, _FileManager_c, _FileManager_Lupload, _FileManager_MAX_CHUNK_SIZE, _FileManager_BIG_FILE_THRESHOLD, _FileManager_getFileContents, _FileManager_downloadInner;
+var _FileManager_instances, _a, _FileManager_c, _FileManager_Lupload, _FileManager_MAX_CHUNK_SIZE, _FileManager_BIG_FILE_THRESHOLD, _FileManager_getFileContents, _FileManager_downloadInner, _FileManager_CUSTOM_EMOJI_TTL;
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
  * Copyright (C) 2023-2024 Roj <https://roj.im/>
@@ -33,7 +33,7 @@ import * as dntShim from "../_dnt.shims.js";
 import { extension, path } from "../0_deps.js";
 import { unreachable } from "../0_deps.js";
 import { ConnectionError, InputError } from "../0_errors.js";
-import { concat, drop, getLogger, getRandomId, kilobyte, megabyte, mod } from "../1_utilities.js";
+import { concat, drop, getLogger, getRandomId, kilobyte, megabyte, minute, mod } from "../1_utilities.js";
 import { as, types } from "../2_tl.js";
 import { constructSticker, deserializeFileId, FileType, PhotoSourceType, serializeFileId, toUniqueFileId } from "../3_types.js";
 import { STICKER_SET_NAME_TTL } from "../4_constants.js";
@@ -246,7 +246,7 @@ export class FileManager {
         let shouldFetch = false;
         for (const id_ of id) {
             const maybeDocument = await __classPrivateFieldGet(this, _FileManager_c, "f").messageStorage.getCustomEmojiDocument(BigInt(id_));
-            if (maybeDocument != null && Date.now() - maybeDocument[1].getTime() <= 30 * 60 * 1000) {
+            if (maybeDocument != null && Date.now() - maybeDocument[1].getTime() <= __classPrivateFieldGet(_a, _a, "f", _FileManager_CUSTOM_EMOJI_TTL)) {
                 const document_ = maybeDocument[0];
                 const fileId_ = {
                     type: FileType.Document,
@@ -418,3 +418,4 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
 };
 _FileManager_MAX_CHUNK_SIZE = { value: 512 * kilobyte };
 _FileManager_BIG_FILE_THRESHOLD = { value: 10 * megabyte };
+_FileManager_CUSTOM_EMOJI_TTL = { value: 30 * minute };

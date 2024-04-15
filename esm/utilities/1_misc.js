@@ -18,6 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
+import { second } from "./0_units.js";
 export function drop(promise) {
     promise.catch(() => { });
 }
@@ -48,8 +49,8 @@ export function mustPromptOneOf(message, choices) {
 export const ZERO_CHANNEL_ID = -1000000000000;
 export const VECTOR_CONSTRUCTOR = 0x1CB5C415;
 export function toUnixTimestamp(date) {
-    return Math.floor(date.getTime() / 1000);
+    return Math.floor(date.getTime() / second);
 }
 export function fromUnixTimestamp(date) {
-    return new Date(date * 1000);
+    return new Date(date * second);
 }

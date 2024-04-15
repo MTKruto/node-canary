@@ -21,6 +21,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fromUnixTimestamp = exports.toUnixTimestamp = exports.VECTOR_CONSTRUCTOR = exports.ZERO_CHANNEL_ID = exports.mustPromptOneOf = exports.mustPromptNumber = exports.mustPrompt = exports.drop = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
+const _0_units_js_1 = require("./0_units.js");
 function drop(promise) {
     promise.catch(() => { });
 }
@@ -55,10 +56,10 @@ exports.mustPromptOneOf = mustPromptOneOf;
 exports.ZERO_CHANNEL_ID = -1000000000000;
 exports.VECTOR_CONSTRUCTOR = 0x1CB5C415;
 function toUnixTimestamp(date) {
-    return Math.floor(date.getTime() / 1000);
+    return Math.floor(date.getTime() / _0_units_js_1.second);
 }
 exports.toUnixTimestamp = toUnixTimestamp;
 function fromUnixTimestamp(date) {
-    return new Date(date * 1000);
+    return new Date(date * _0_units_js_1.second);
 }
 exports.fromUnixTimestamp = fromUnixTimestamp;

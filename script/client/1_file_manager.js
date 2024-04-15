@@ -33,7 +33,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _FileManager_instances, _a, _FileManager_c, _FileManager_Lupload, _FileManager_MAX_CHUNK_SIZE, _FileManager_BIG_FILE_THRESHOLD, _FileManager_getFileContents, _FileManager_downloadInner;
+var _FileManager_instances, _a, _FileManager_c, _FileManager_Lupload, _FileManager_MAX_CHUNK_SIZE, _FileManager_BIG_FILE_THRESHOLD, _FileManager_getFileContents, _FileManager_downloadInner, _FileManager_CUSTOM_EMOJI_TTL;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FileManager = void 0;
 /**
@@ -272,7 +272,7 @@ class FileManager {
         let shouldFetch = false;
         for (const id_ of id) {
             const maybeDocument = await __classPrivateFieldGet(this, _FileManager_c, "f").messageStorage.getCustomEmojiDocument(BigInt(id_));
-            if (maybeDocument != null && Date.now() - maybeDocument[1].getTime() <= 30 * 60 * 1000) {
+            if (maybeDocument != null && Date.now() - maybeDocument[1].getTime() <= __classPrivateFieldGet(_a, _a, "f", _FileManager_CUSTOM_EMOJI_TTL)) {
                 const document_ = maybeDocument[0];
                 const fileId_ = {
                     type: _3_types_js_1.FileType.Document,
@@ -445,3 +445,4 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
 };
 _FileManager_MAX_CHUNK_SIZE = { value: 512 * _1_utilities_js_1.kilobyte };
 _FileManager_BIG_FILE_THRESHOLD = { value: 10 * _1_utilities_js_1.megabyte };
+_FileManager_CUSTOM_EMOJI_TTL = { value: 30 * _1_utilities_js_1.minute };

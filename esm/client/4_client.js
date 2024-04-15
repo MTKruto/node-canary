@@ -31,7 +31,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _Client_instances, _Client_client, _Client_guaranteeUpdateDelivery, _Client_updateManager, _Client_networkStatisticsManager, _Client_botInfoManager, _Client_fileManager, _Client_reactionManager, _Client_businessConnectionManager, _Client_messageManager, _Client_storyManager, _Client_callbackQueryManager, _Client_inlineQueryManager, _Client_chatListManager, _Client_accountManager, _Client_parseMode, _Client_publicKeys, _Client_ignoreOutgoing, _Client_storeMessages, _Client_Lauthorize, _Client_LpingLoop, _Client_LhandleMigrationError, _Client_L$initConncetion, _Client_namespaceProxies, _Client_getApiId, _Client_constructContext, _Client_propagateConnectionState, _Client_lastPropagatedConnectionState, _Client_stateChangeHandler, _Client_storageInited, _Client_initStorage, _Client_connectionInited, _Client_lastPropagatedAuthorizationState, _Client_propagateAuthorizationState, _Client_getSelfId, _Client_pingLoopStarted, _Client_pingLoopAbortController, _Client_pingInterval, _Client_lastUpdates, _Client_startPingLoop, _Client_pingLoop, _Client_invoke, _Client_handleInvokeError, _Client_getUserAccessHash, _Client_getChannelAccessHash, _Client_getInputPeerInner, _Client_handleCtxUpdate, _Client_queueHandleCtxUpdate, _Client_handleUpdate, _Client_lastGetMe, _Client_getMe;
 import { unreachable } from "../0_deps.js";
 import { AccessError, InputError } from "../0_errors.js";
-import { cleanObject, drop, getLogger, getRandomId, mustPrompt, mustPromptOneOf, ZERO_CHANNEL_ID } from "../1_utilities.js";
+import { cleanObject, drop, getLogger, getRandomId, minute, mustPrompt, mustPromptOneOf, second, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { as, chatIdToPeerId, functions, getChatIdPeerType, name, peerToChatId, types } from "../2_tl.js";
 import { StorageMemory } from "../3_storage.js";
 import { constructUser } from "../3_types.js";
@@ -575,7 +575,7 @@ export class Client extends Composer {
         _Client_lastPropagatedAuthorizationState.set(this, null);
         _Client_pingLoopStarted.set(this, false);
         _Client_pingLoopAbortController.set(this, null);
-        _Client_pingInterval.set(this, 60 * 1000); // 60 seconds
+        _Client_pingInterval.set(this, 1 * minute);
         _Client_lastUpdates.set(this, new Date());
         _Client_handleInvokeError.set(this, skipInvoke());
         /**
@@ -770,7 +770,7 @@ export class Client extends Composer {
                             catch (err) {
                                 L.debug(`failed to reconnect, retrying in ${delay}:`, err);
                             }
-                            await new Promise((r) => setTimeout(r, delay * 1000));
+                            await new Promise((r) => setTimeout(r, delay * second));
                             if (delay < 15) {
                                 delay += 5;
                             }
@@ -1142,8 +1142,8 @@ export class Client extends Composer {
                     continue;
                 }
                 __classPrivateFieldGet(this, _Client_pingLoopAbortController, "f").signal.throwIfAborted();
-                await this.api.ping_delay_disconnect({ ping_id: getRandomId(), disconnect_delay: __classPrivateFieldGet(this, _Client_pingInterval, "f") / 1000 + 15 });
-                if (Date.now() - __classPrivateFieldGet(this, _Client_lastUpdates, "f").getTime() >= 15 * 60 * 1000) {
+                await this.api.ping_delay_disconnect({ ping_id: getRandomId(), disconnect_delay: __classPrivateFieldGet(this, _Client_pingInterval, "f") / second + 15 });
+                if (Date.now() - __classPrivateFieldGet(this, _Client_lastUpdates, "f").getTime() >= 15 * minute) {
                     drop(__classPrivateFieldGet(this, _Client_updateManager, "f").recoverUpdateGap("lastUpdates"));
                 }
             }

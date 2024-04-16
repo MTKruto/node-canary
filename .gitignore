@@ -15,6 +15,10 @@ esm/client/0_utilities_test.js
 esm/client/0_utilities_test.d.ts
 script/client/0_utilities_test.js
 script/client/0_utilities_test.d.ts
+esm/client/1_file_manager_test.js
+esm/client/1_file_manager_test.d.ts
+script/client/1_file_manager_test.js
+script/client/1_file_manager_test.d.ts
 esm/client/2_message_manager_test.js
 esm/client/2_message_manager_test.d.ts
 script/client/2_message_manager_test.js
@@ -67,6 +71,10 @@ esm/utilities/0_cache_map_test.js
 esm/utilities/0_cache_map_test.d.ts
 script/utilities/0_cache_map_test.js
 script/utilities/0_cache_map_test.d.ts
+esm/utilities/0_part_stream_test.js
+esm/utilities/0_part_stream_test.d.ts
+script/utilities/0_part_stream_test.js
+script/utilities/0_part_stream_test.d.ts
 esm/utilities/0_rle_test.js
 esm/utilities/0_rle_test.d.ts
 script/utilities/0_rle_test.js

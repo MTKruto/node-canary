@@ -33,12 +33,22 @@ export type Api = {
         } ? Promisify<Functions[K][K_]["__F"]> : Functions[K][K_];
     };
 };
-interface ApiFactory {
-    (dcId?: number): {
-        api: Api;
-        connect: () => Promise<void>;
-        disconnect: () => Promise<void>;
-    };
+interface Connection {
+    api: Api;
+    connect: () => Promise<void>;
+    disconnect: () => Promise<void>;
+}
+export interface ConnectionPool extends Omit<Connection, "api"> {
+    size: number;
+    api: () => Api;
+    connect: () => Promise<void>;
+    disconnect: () => Promise<void>;
+}
+interface GetCdnConnection {
+    (dcId?: number): Connection;
+}
+interface GetCdnConnectionPool {
+    (size: number, dcId?: number): ConnectionPool;
 }
 export interface C {
     id: number;
@@ -55,7 +65,8 @@ export interface C {
     getEntity: EntityGetter;
     handleUpdate: (update: Update) => void;
     parseMode: ParseMode;
-    apiFactory: ApiFactory;
+    getCdnConnection: GetCdnConnection;
+    getCdnConnectionPool: GetCdnConnectionPool;
     ignoreOutgoing: boolean | null;
     cdn: boolean;
     dropPendingUpdates?: boolean;

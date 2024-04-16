@@ -17,21 +17,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-export * from "./utilities/0_bigint.js";
-export * from "./utilities/0_buffer.js";
-export * from "./utilities/0_cache_map.js";
-export * from "./utilities/0_color.js";
-export * from "./utilities/0_crypto.js";
-export * from "./utilities/0_hash.js";
-export * from "./utilities/0_logger.js";
-export * from "./utilities/0_mutex.js";
-export * from "./utilities/0_object.js";
-export * from "./utilities/0_part_stream.js";
-export * from "./utilities/0_rle.js";
-export * from "./utilities/0_types.js";
-export * from "./utilities/0_units.js";
-export * from "./utilities/1_auth.js";
-export * from "./utilities/1_base64.js";
-export * from "./utilities/1_math.js";
-export * from "./utilities/1_misc.js";
-export * from "./utilities/1_queue.js";
+export interface Part {
+    small: boolean;
+    part: number;
+    totalParts: number;
+    bytes: Uint8Array;
+}
+export declare class PartStream extends TransformStream<Uint8Array, Part> {
+    #private;
+    constructor(chunkSize: number);
+}

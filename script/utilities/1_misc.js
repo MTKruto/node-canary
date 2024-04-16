@@ -19,7 +19,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fromUnixTimestamp = exports.toUnixTimestamp = exports.VECTOR_CONSTRUCTOR = exports.ZERO_CHANNEL_ID = exports.mustPromptOneOf = exports.mustPromptNumber = exports.mustPrompt = exports.drop = void 0;
+exports.iterateReadableStream = exports.fromUnixTimestamp = exports.toUnixTimestamp = exports.VECTOR_CONSTRUCTOR = exports.ZERO_CHANNEL_ID = exports.mustPromptOneOf = exports.mustPromptNumber = exports.mustPrompt = exports.drop = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
 const _0_units_js_1 = require("./0_units.js");
 function drop(promise) {
@@ -63,3 +63,18 @@ function fromUnixTimestamp(date) {
     return new Date(date * _0_units_js_1.second);
 }
 exports.fromUnixTimestamp = fromUnixTimestamp;
+async function* iterateReadableStream(stream) {
+    const reader = stream.getReader();
+    try {
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done)
+                return;
+            yield value;
+        }
+    }
+    finally {
+        reader.releaseLock();
+    }
+}
+exports.iterateReadableStream = iterateReadableStream;

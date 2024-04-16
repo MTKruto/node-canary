@@ -25,3 +25,4 @@ export declare const ZERO_CHANNEL_ID = -1000000000000;
 export declare const VECTOR_CONSTRUCTOR = 481674261;
 export declare function toUnixTimestamp(date: Date): number;
 export declare function fromUnixTimestamp(date: number): Date;
+export declare function iterateReadableStream(stream: ReadableStream): AsyncGenerator<any, void, unknown>;

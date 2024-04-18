@@ -47,14 +47,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Parser = exports.gzip = exports.gunzip = exports.initTgCrypto = exports.ige256Encrypt = exports.ige256Decrypt = exports.destroyCtr256State = exports.ctr256 = exports.createCtr256State = exports.extension = exports.contentType = exports.encodeBase64 = exports.decodeBase64 = exports.concat = exports.path = void 0;
 // connection/1_connection_tcp.ts must be updated too when updating std.
-__exportStar(require("./deps/deno.land/std@0.222.1/assert/mod.js"), exports);
-exports.path = __importStar(require("./deps/deno.land/std@0.222.1/path/mod.js"));
-var concat_js_1 = require("./deps/deno.land/std@0.222.1/bytes/concat.js");
+__exportStar(require("./deps/deno.land/std@0.223.0/assert/mod.js"), exports);
+exports.path = __importStar(require("./deps/deno.land/std@0.223.0/path/mod.js"));
+var concat_js_1 = require("./deps/deno.land/std@0.223.0/bytes/concat.js");
 Object.defineProperty(exports, "concat", { enumerable: true, get: function () { return concat_js_1.concat; } });
-var base64_js_1 = require("./deps/deno.land/std@0.222.1/encoding/base64.js");
+var base64_js_1 = require("./deps/deno.land/std@0.223.0/encoding/base64.js");
 Object.defineProperty(exports, "decodeBase64", { enumerable: true, get: function () { return base64_js_1.decodeBase64; } });
 Object.defineProperty(exports, "encodeBase64", { enumerable: true, get: function () { return base64_js_1.encodeBase64; } });
-const content_type_js_1 = require("./deps/deno.land/std@0.222.1/media_types/content_type.js");
+const content_type_js_1 = require("./deps/deno.land/std@0.223.0/media_types/content_type.js");
 const contentType = (extentionOrType) => {
     if (extentionOrType == "tgs") {
         return "application/x-tgsticker";
@@ -64,7 +64,7 @@ const contentType = (extentionOrType) => {
     }
 };
 exports.contentType = contentType;
-const extension_js_1 = require("./deps/deno.land/std@0.222.1/media_types/extension.js");
+const extension_js_1 = require("./deps/deno.land/std@0.223.0/media_types/extension.js");
 function extension(mimeType) {
     if (mimeType == "application/x-tgsticker") {
         return "tgs";

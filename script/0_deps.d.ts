@@ -17,11 +17,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-export * from "./deps/deno.land/std@0.222.1/assert/mod.js";
-export * as path from "./deps/deno.land/std@0.222.1/path/mod.js";
-export { concat } from "./deps/deno.land/std@0.222.1/bytes/concat.js";
-export { decodeBase64, encodeBase64 } from "./deps/deno.land/std@0.222.1/encoding/base64.js";
-import { contentType as contentType_ } from "./deps/deno.land/std@0.222.1/media_types/content_type.js";
+export * from "./deps/deno.land/std@0.223.0/assert/mod.js";
+export * as path from "./deps/deno.land/std@0.223.0/path/mod.js";
+export { concat } from "./deps/deno.land/std@0.223.0/bytes/concat.js";
+export { decodeBase64, encodeBase64 } from "./deps/deno.land/std@0.223.0/encoding/base64.js";
+import { contentType as contentType_ } from "./deps/deno.land/std@0.223.0/media_types/content_type.js";
 export declare const contentType: typeof contentType_;
 export declare function extension(mimeType: string): string;
 export { createCtr256State, ctr256, type Ctr256State, destroyCtr256State, ige256Decrypt, ige256Encrypt, init as initTgCrypto } from "./deps/deno.land/x/tgcrypto@0.4.1/mod.js";

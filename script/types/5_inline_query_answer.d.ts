@@ -6,8 +6,6 @@ export interface InlineQueryAnswer {
     id: string;
     /** The inline query results. */
     results: InlineQueryResult[];
-    /** TTL of the caches of the results in seconds. */
-    cacheTime: number;
     /** A parameter that can be passed to next queries with the same text to yield more results. */
     nextOffset?: string;
 }

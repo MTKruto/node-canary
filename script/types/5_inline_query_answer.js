@@ -7,7 +7,6 @@ function constructInlineQueryAnswer(results) {
     return (0, _1_utilities_js_1.cleanObject)({
         id: results.query_id + "",
         results: results.results.map(_4_inline_query_result_js_1.constructInlineQueryResult),
-        cacheTime: results.cache_time,
         nextOffset: results.next_offset,
     });
 }

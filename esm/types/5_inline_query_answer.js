@@ -4,7 +4,6 @@ export function constructInlineQueryAnswer(results) {
     return cleanObject({
         id: results.query_id + "",
         results: results.results.map(constructInlineQueryResult),
-        cacheTime: results.cache_time,
         nextOffset: results.next_offset,
     });
 }

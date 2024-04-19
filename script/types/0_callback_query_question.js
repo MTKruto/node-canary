@@ -1,6 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateCallbackQueryQuestion = void 0;
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
  * Copyright (C) 2023-2024 Roj <https://roj.im/>
@@ -20,6 +18,8 @@ exports.validateCallbackQueryQuestion = void 0;
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.validateCallbackQueryQuestion = void 0;
 const _0_errors_js_1 = require("../0_errors.js");
 function validateCallbackQueryQuestion(q) {
     if (!["game", "password", "button"].includes(q.type)) {

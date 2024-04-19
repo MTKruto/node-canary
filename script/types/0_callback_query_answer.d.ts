@@ -18,9 +18,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { types } from "../2_tl.js";
+/** An answer to a callback query. */
 export interface CallbackQueryAnswer {
+    /** Whether the answer should be shown as an alert. */
     alert: boolean;
+    /** The text of the answer. */
     text: string;
+    /** A potential URL that is to be opened. */
     url: string;
 }
 export declare function constructCallbackQueryAnswer(answer: types.messages.BotCallbackAnswer): CallbackQueryAnswer;

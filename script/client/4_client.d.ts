@@ -184,7 +184,7 @@ export declare const restartAuth: unique symbol;
 export declare const handleMigrationError: unique symbol;
 declare const getEntity: unique symbol;
 export interface ClientParams extends ClientPlainParams {
-    /** A parse mode to use when the `parseMode` parameter is not specified when sending or editing messages. Defauls to `ParseMode.None`. */
+    /** A parse mode to use when the `parseMode` parameter is not specified when sending or editing messages. Defaults to `ParseMode.None`. */
     parseMode?: ParseMode;
     /** The app_version parameter to be passed to initConnection when calling `authorize`. It is recommended that this parameter is changed if users are authorized. Defaults to "MTKruto" followed by this version of MTKruto. */
     appVersion?: string;

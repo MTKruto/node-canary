@@ -76,8 +76,8 @@ exports.K = {
         customEmojiDocument: (id) => [...exports.K.cache.customEmojiDocuments(), id],
         businessConnections: () => [exports.K.cache.P("businessConnections")],
         businessConnection: (id) => [...exports.K.cache.businessConnections(), id],
-        allInlineQueryResults: () => [exports.K.cache.P("inlineQueryResults")],
-        inlineQueryResults: (userId, chatId, query, offset) => [...exports.K.cache.allInlineQueryResults(), userId, chatId, query, offset],
+        inlineQueryAnswers: () => [exports.K.cache.P("inlineQueryResults")],
+        inlineQueryAnswer: (userId, chatId, query, offset) => [...exports.K.cache.inlineQueryAnswers(), userId, chatId, query, offset],
     },
     messages: {
         P: (string) => `messages.${string}`,
@@ -406,11 +406,11 @@ class Storage {
             return null;
         }
     }
-    async setInlineQueryResults(userId, chatId, query, offset, results, date) {
-        await this.set(exports.K.cache.inlineQueryResults(userId, chatId, query, offset), [this.isMemoryStorage ? results : (0, _1_utilities_js_1.rleEncode)(results[_2_tl_js_1.serialize]()), date]);
+    async setInlineQueryAnswer(userId, chatId, query, offset, results, date) {
+        await this.set(exports.K.cache.inlineQueryAnswer(userId, chatId, query, offset), [this.isMemoryStorage ? results : (0, _1_utilities_js_1.rleEncode)(results[_2_tl_js_1.serialize]()), date]);
     }
-    async getInlineQueryResults(userId, chatId, query, offset) {
-        const peer_ = await this.get(exports.K.cache.inlineQueryResults(userId, chatId, query, offset));
+    async getInlineQueryAnswer(userId, chatId, query, offset) {
+        const peer_ = await this.get(exports.K.cache.inlineQueryAnswer(userId, chatId, query, offset));
         if (peer_ != null) {
             const [obj_, date] = peer_;
             return [await this.getTlObject(obj_), date];
@@ -466,8 +466,8 @@ class Storage {
             await this.set(key, null);
         }
     }
-    async deleteInlineQueryResults() {
-        for await (const [key] of await this.getMany({ prefix: exports.K.cache.allInlineQueryResults() })) {
+    async deleteInlineQueryAnswers() {
+        for await (const [key] of await this.getMany({ prefix: exports.K.cache.inlineQueryAnswers() })) {
             await this.set(key, null);
         }
     }
@@ -495,7 +495,7 @@ class Storage {
             this.deleteFiles(),
             this.deleteCustomEmojiDocuments(),
             this.deleteBusinessConnections(),
-            this.deleteInlineQueryResults(),
+            this.deleteInlineQueryAnswers(),
             this.deleteStickerSetNames(),
             this.deletePeers(),
             this.deleteUsernames(),

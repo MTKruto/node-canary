@@ -60,8 +60,8 @@ export declare const K: {
         customEmojiDocument: (id: bigint) => StorageKeyPart[];
         businessConnections: () => StorageKeyPart[];
         businessConnection: (id: string) => StorageKeyPart[];
-        allInlineQueryResults: () => StorageKeyPart[];
-        inlineQueryResults: (userId: number, chatId: number, query: string, offset: string) => StorageKeyPart[];
+        inlineQueryAnswers: () => StorageKeyPart[];
+        inlineQueryAnswer: (userId: number, chatId: number, query: string, offset: string) => StorageKeyPart[];
     };
     messages: {
         P: (string: string) => string;
@@ -151,8 +151,8 @@ export declare abstract class Storage {
     getCustomEmojiDocument(id: bigint): Promise<[types.Document, Date] | null>;
     setBusinessConnection(id: string, connection: types.BotBusinessConnection | null): Promise<void>;
     getBusinessConnection(id: string): Promise<types.BotBusinessConnection | null>;
-    setInlineQueryResults(userId: number, chatId: number, query: string, offset: string, results: types.messages.BotResults, date: Date): Promise<void>;
-    getInlineQueryResults(userId: number, chatId: number, query: string, offset: string): Promise<[types.messages.BotResults, Date] | null>;
+    setInlineQueryAnswer(userId: number, chatId: number, query: string, offset: string, results: types.messages.BotResults, date: Date): Promise<void>;
+    getInlineQueryAnswer(userId: number, chatId: number, query: string, offset: string): Promise<[types.messages.BotResults, Date] | null>;
     setUpdate(boxId: bigint, update: enums.Update): Promise<void>;
     deleteUpdates(): Promise<void>;
     getFirstUpdate(boxId: bigint): Promise<[readonly StorageKeyPart[], enums.Update] | null>;
@@ -161,7 +161,7 @@ export declare abstract class Storage {
     deleteFiles(): Promise<void>;
     deleteCustomEmojiDocuments(): Promise<void>;
     deleteBusinessConnections(): Promise<void>;
-    deleteInlineQueryResults(): Promise<void>;
+    deleteInlineQueryAnswers(): Promise<void>;
     deleteStickerSetNames(): Promise<void>;
     deletePeers(): Promise<void>;
     deleteUsernames(): Promise<void>;

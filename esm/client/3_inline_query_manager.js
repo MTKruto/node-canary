@@ -69,14 +69,14 @@ export class InlineQueryManager {
     async sendInlineQuery(userId, chatId, params) {
         const bot = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputUser(userId), peer = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputPeer(chatId), query = params?.query ?? "", offset = params?.offset ?? "";
         const botId = peerToChatId(bot), peerId = peerToChatId(peer);
-        const maybeResults = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageStorage.getInlineQueryResults(botId, peerId, query, offset);
+        const maybeResults = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageStorage.getInlineQueryAnswer(botId, peerId, query, offset);
         if (maybeResults != null && !__classPrivateFieldGet(_a, _a, "m", _InlineQueryManager_isExpired).call(_a, maybeResults[1], maybeResults[0].cache_time)) {
             return constructInlineQueryAnswer(maybeResults[0]);
         }
         const then = new Date();
         const results = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").api.messages.getInlineBotResults({ bot, peer, query, offset });
         if (results.cache_time > 0) {
-            await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageStorage.setInlineQueryResults(botId, peerId, query, offset, results, then);
+            await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageStorage.setInlineQueryAnswer(botId, peerId, query, offset, results, then);
         }
         return constructInlineQueryAnswer(results);
     }

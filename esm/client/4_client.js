@@ -2012,6 +2012,18 @@ export class Client extends Composer {
     // ========================= CALLBACK QUERIES ========================= //
     //
     /**
+     * Send a callback query. User-only.
+     *
+     * @method cq
+     * @param chatId The chat that includes the messsage.
+     * @param messageId The message that includes at a button responsible for the callback query question.
+     * @param question The callback query's question.
+     * @returns The bot's answer to the callback query.
+     */
+    async sendCallbackQuery(chatId, messageId, question) {
+        return await __classPrivateFieldGet(this, _Client_callbackQueryManager, "f").sendCallbackQuery(chatId, messageId, question);
+    }
+    /**
      * Answer a callback query. Bot-only.
      *
      * @method cq

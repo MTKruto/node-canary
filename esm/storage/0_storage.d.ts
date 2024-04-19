@@ -62,6 +62,8 @@ export declare const K: {
         businessConnection: (id: string) => StorageKeyPart[];
         inlineQueryAnswers: () => StorageKeyPart[];
         inlineQueryAnswer: (userId: number, chatId: number, query: string, offset: string) => StorageKeyPart[];
+        callbackQueryAnswers: () => StorageKeyPart[];
+        callbackQueryAnswer: (chatId: number, messageId: number, question: string) => StorageKeyPart[];
     };
     messages: {
         P: (string: string) => string;
@@ -153,6 +155,8 @@ export declare abstract class Storage {
     getBusinessConnection(id: string): Promise<types.BotBusinessConnection | null>;
     setInlineQueryAnswer(userId: number, chatId: number, query: string, offset: string, results: types.messages.BotResults, date: Date): Promise<void>;
     getInlineQueryAnswer(userId: number, chatId: number, query: string, offset: string): Promise<[types.messages.BotResults, Date] | null>;
+    setCallbackQueryAnswer(chatId: number, messageId: number, question: string, answer: types.messages.BotCallbackAnswer): Promise<void>;
+    getCallbackQueryAnswer(chatId: number, messageId: number, question: string): Promise<[types.messages.BotCallbackAnswer, Date] | null>;
     setUpdate(boxId: bigint, update: enums.Update): Promise<void>;
     deleteUpdates(): Promise<void>;
     getFirstUpdate(boxId: bigint): Promise<[readonly StorageKeyPart[], enums.Update] | null>;
@@ -162,6 +166,7 @@ export declare abstract class Storage {
     deleteCustomEmojiDocuments(): Promise<void>;
     deleteBusinessConnections(): Promise<void>;
     deleteInlineQueryAnswers(): Promise<void>;
+    deleteCallbackQueryAnswers(): Promise<void>;
     deleteStickerSetNames(): Promise<void>;
     deletePeers(): Promise<void>;
     deleteUsernames(): Promise<void>;

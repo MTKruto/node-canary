@@ -110,7 +110,7 @@ function getChatListId(chatList) {
 }
 exports.getChatListId = getChatListId;
 function checkMessageId(messageId) {
-    if (typeof messageId !== "number" || isNaN(messageId) || !messageId) {
+    if (typeof messageId !== "number" || isNaN(messageId) || messageId <= 0) {
         throw new _0_errors_js_1.InputError("Invalid message ID");
     }
     return messageId;

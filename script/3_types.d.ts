@@ -21,6 +21,8 @@ export * from "./types/_file_id.js";
 export * from "./types/_getters.js";
 export * from "./types/0_authorization_state.js";
 export * from "./types/0_bot_command.js";
+export * from "./types/0_callback_query_answer.js";
+export * from "./types/0_callback_query_question.js";
 export * from "./types/0_chat_action.js";
 export * from "./types/0_chat_administrator_rights.js";
 export * from "./types/0_chat_member_rights.js";

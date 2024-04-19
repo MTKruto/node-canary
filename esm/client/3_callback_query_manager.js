@@ -28,12 +28,14 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _CallbackQueryManager_c;
-import { types } from "../2_tl.js";
-import { constructCallbackQuery } from "../3_types.js";
-import { checkCallbackQueryId } from "./0_utilities.js";
+var _CallbackQueryManager_instances, _a, _CallbackQueryManager_c, _CallbackQueryManager_enc, _CallbackQueryManager_isExpired, _CallbackQueryManager_getPasswordCheck;
+import { peerToChatId, types } from "../2_tl.js";
+import { constructCallbackQuery, constructCallbackQueryAnswer, validateCallbackQueryQuestion } from "../3_types.js";
+import { checkCallbackQueryId, checkMessageId } from "./0_utilities.js";
+import { checkPassword } from "./0_password.js";
 export class CallbackQueryManager {
     constructor(c) {
+        _CallbackQueryManager_instances.add(this);
         _CallbackQueryManager_c.set(this, void 0);
         __classPrivateFieldSet(this, _CallbackQueryManager_c, c, "f");
     }
@@ -47,6 +49,26 @@ export class CallbackQueryManager {
             alert: params?.alert ? true : undefined,
         });
     }
+    async sendCallbackQuery(chatId, messageId, question) {
+        checkMessageId(messageId);
+        validateCallbackQueryQuestion(question);
+        const peer = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").getInputPeer(chatId), peerId = peerToChatId(peer), questionKey = JSON.stringify(question);
+        const maybeAnswer = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").messageStorage.getCallbackQueryAnswer(peerId, messageId, questionKey);
+        if (maybeAnswer != null && !__classPrivateFieldGet(_a, _a, "m", _CallbackQueryManager_isExpired).call(_a, maybeAnswer[1], maybeAnswer[0].cache_time)) {
+            return constructCallbackQueryAnswer(maybeAnswer[0]);
+        }
+        const answer = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").api.messages.getBotCallbackAnswer({
+            peer,
+            msg_id: messageId,
+            data: "data" in question ? __classPrivateFieldGet(_a, _a, "f", _CallbackQueryManager_enc).encode(question.data) : undefined,
+            game: question.type == "game" ? true : undefined,
+            password: question.type == "password" ? await __classPrivateFieldGet(this, _CallbackQueryManager_instances, "m", _CallbackQueryManager_getPasswordCheck).call(this, question.password) : undefined,
+        });
+        if (answer.cache_time >= 0) {
+            await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").messageStorage.setCallbackQueryAnswer(peerId, messageId, questionKey, answer);
+        }
+        return constructCallbackQueryAnswer(answer);
+    }
     static canHandleUpdate(update) {
         return update instanceof types.UpdateBotCallbackQuery || update instanceof types.UpdateInlineBotCallbackQuery;
     }
@@ -54,4 +76,10 @@ export class CallbackQueryManager {
         return { callbackQuery: await constructCallbackQuery(update, __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").getEntity, __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").messageManager.getMessageWithReply.bind(__classPrivateFieldGet(this, _CallbackQueryManager_c, "f").messageManager)) };
     }
 }
-_CallbackQueryManager_c = new WeakMap();
+_a = CallbackQueryManager, _CallbackQueryManager_c = new WeakMap(), _CallbackQueryManager_instances = new WeakSet(), _CallbackQueryManager_isExpired = function _CallbackQueryManager_isExpired(date, cacheTime) {
+    return (Date.now() - date.getTime()) / 1000 > cacheTime;
+}, _CallbackQueryManager_getPasswordCheck = async function _CallbackQueryManager_getPasswordCheck(password) {
+    const ap = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").api.account.getPassword();
+    return await checkPassword(password, ap);
+};
+_CallbackQueryManager_enc = { value: new TextEncoder() };

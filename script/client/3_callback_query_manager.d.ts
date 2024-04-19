@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { enums, types } from "../2_tl.js";
-import { Update } from "../3_types.js";
+import { CallbackQueryQuestion, ID, Update } from "../3_types.js";
 import { AnswerCallbackQueryParams } from "./0_params.js";
 import { C as C_ } from "./0_types.js";
 import { MessageManager } from "./2_message_manager.js";
@@ -30,6 +30,7 @@ export declare class CallbackQueryManager {
     #private;
     constructor(c: C);
     answerCallbackQuery(id: string, params?: AnswerCallbackQueryParams): Promise<void>;
+    sendCallbackQuery(chatId: ID, messageId: number, question: CallbackQueryQuestion): Promise<import("../3_types.js").CallbackQueryAnswer>;
     static canHandleUpdate(update: enums.Update): update is CallbackQueryManagerUpdate;
     handleUpdate(update: CallbackQueryManagerUpdate): Promise<Update>;
 }

@@ -103,7 +103,7 @@ export function getChatListId(chatList) {
     }
 }
 export function checkMessageId(messageId) {
-    if (typeof messageId !== "number" || isNaN(messageId) || !messageId) {
+    if (typeof messageId !== "number" || isNaN(messageId) || messageId <= 0) {
         throw new InputError("Invalid message ID");
     }
     return messageId;

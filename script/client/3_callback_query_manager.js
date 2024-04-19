@@ -29,14 +29,16 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _CallbackQueryManager_c;
+var _CallbackQueryManager_instances, _a, _CallbackQueryManager_c, _CallbackQueryManager_enc, _CallbackQueryManager_isExpired, _CallbackQueryManager_getPasswordCheck;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CallbackQueryManager = void 0;
 const _2_tl_js_1 = require("../2_tl.js");
 const _3_types_js_1 = require("../3_types.js");
 const _0_utilities_js_1 = require("./0_utilities.js");
+const _0_password_js_1 = require("./0_password.js");
 class CallbackQueryManager {
     constructor(c) {
+        _CallbackQueryManager_instances.add(this);
         _CallbackQueryManager_c.set(this, void 0);
         __classPrivateFieldSet(this, _CallbackQueryManager_c, c, "f");
     }
@@ -50,6 +52,26 @@ class CallbackQueryManager {
             alert: params?.alert ? true : undefined,
         });
     }
+    async sendCallbackQuery(chatId, messageId, question) {
+        (0, _0_utilities_js_1.checkMessageId)(messageId);
+        (0, _3_types_js_1.validateCallbackQueryQuestion)(question);
+        const peer = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").getInputPeer(chatId), peerId = (0, _2_tl_js_1.peerToChatId)(peer), questionKey = JSON.stringify(question);
+        const maybeAnswer = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").messageStorage.getCallbackQueryAnswer(peerId, messageId, questionKey);
+        if (maybeAnswer != null && !__classPrivateFieldGet(_a, _a, "m", _CallbackQueryManager_isExpired).call(_a, maybeAnswer[1], maybeAnswer[0].cache_time)) {
+            return (0, _3_types_js_1.constructCallbackQueryAnswer)(maybeAnswer[0]);
+        }
+        const answer = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").api.messages.getBotCallbackAnswer({
+            peer,
+            msg_id: messageId,
+            data: "data" in question ? __classPrivateFieldGet(_a, _a, "f", _CallbackQueryManager_enc).encode(question.data) : undefined,
+            game: question.type == "game" ? true : undefined,
+            password: question.type == "password" ? await __classPrivateFieldGet(this, _CallbackQueryManager_instances, "m", _CallbackQueryManager_getPasswordCheck).call(this, question.password) : undefined,
+        });
+        if (answer.cache_time >= 0) {
+            await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").messageStorage.setCallbackQueryAnswer(peerId, messageId, questionKey, answer);
+        }
+        return (0, _3_types_js_1.constructCallbackQueryAnswer)(answer);
+    }
     static canHandleUpdate(update) {
         return update instanceof _2_tl_js_1.types.UpdateBotCallbackQuery || update instanceof _2_tl_js_1.types.UpdateInlineBotCallbackQuery;
     }
@@ -58,4 +80,10 @@ class CallbackQueryManager {
     }
 }
 exports.CallbackQueryManager = CallbackQueryManager;
-_CallbackQueryManager_c = new WeakMap();
+_a = CallbackQueryManager, _CallbackQueryManager_c = new WeakMap(), _CallbackQueryManager_instances = new WeakSet(), _CallbackQueryManager_isExpired = function _CallbackQueryManager_isExpired(date, cacheTime) {
+    return (Date.now() - date.getTime()) / 1000 > cacheTime;
+}, _CallbackQueryManager_getPasswordCheck = async function _CallbackQueryManager_getPasswordCheck(password) {
+    const ap = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").api.account.getPassword();
+    return await (0, _0_password_js_1.checkPassword)(password, ap);
+};
+_CallbackQueryManager_enc = { value: new TextEncoder() };

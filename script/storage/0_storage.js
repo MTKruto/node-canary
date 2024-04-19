@@ -78,6 +78,8 @@ exports.K = {
         businessConnection: (id) => [...exports.K.cache.businessConnections(), id],
         inlineQueryAnswers: () => [exports.K.cache.P("inlineQueryResults")],
         inlineQueryAnswer: (userId, chatId, query, offset) => [...exports.K.cache.inlineQueryAnswers(), userId, chatId, query, offset],
+        callbackQueryAnswers: () => [exports.K.cache.P("callbackQueryAnswers")],
+        callbackQueryAnswer: (chatId, messageId, question) => [...exports.K.cache.callbackQueryAnswers(), chatId, messageId, question],
     },
     messages: {
         P: (string) => `messages.${string}`,
@@ -419,6 +421,19 @@ class Storage {
             return null;
         }
     }
+    async setCallbackQueryAnswer(chatId, messageId, question, answer) {
+        await this.set(exports.K.cache.callbackQueryAnswer(chatId, messageId, question), [this.isMemoryStorage ? answer : (0, _1_utilities_js_1.rleEncode)(answer[_2_tl_js_1.serialize]()), new Date()]);
+    }
+    async getCallbackQueryAnswer(chatId, messageId, question) {
+        const peer_ = await this.get(exports.K.cache.callbackQueryAnswer(chatId, messageId, question));
+        if (peer_ != null) {
+            const [obj_, date] = peer_;
+            return [await this.getTlObject(obj_), date];
+        }
+        else {
+            return null;
+        }
+    }
     async setUpdate(boxId, update) {
         await this.setTlObject(exports.K.updates.update(boxId, __classPrivateFieldGet(this, _Storage_instances, "m", _Storage_getUpdateId).call(this, update)), update);
     }
@@ -471,6 +486,11 @@ class Storage {
             await this.set(key, null);
         }
     }
+    async deleteCallbackQueryAnswers() {
+        for await (const [key] of await this.getMany({ prefix: exports.K.cache.callbackQueryAnswers() })) {
+            await this.set(key, null);
+        }
+    }
     async deleteStickerSetNames() {
         for await (const [key] of await this.getMany({ prefix: exports.K.cache.stickerSetNames() })) {
             await this.set(key, null);
@@ -496,6 +516,7 @@ class Storage {
             this.deleteCustomEmojiDocuments(),
             this.deleteBusinessConnections(),
             this.deleteInlineQueryAnswers(),
+            this.deleteCallbackQueryAnswers(),
             this.deleteStickerSetNames(),
             this.deletePeers(),
             this.deleteUsernames(),

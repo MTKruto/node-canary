@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.validateCallbackQueryQuestion = void 0;
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
  * Copyright (C) 2023-2024 Roj <https://roj.im/>
@@ -18,15 +20,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructInlineQueryAnswer = void 0;
-const _1_utilities_js_1 = require("../1_utilities.js");
-const _4_inline_query_result_js_1 = require("./4_inline_query_result.js");
-function constructInlineQueryAnswer(results) {
-    return (0, _1_utilities_js_1.cleanObject)({
-        id: results.query_id + "",
-        results: results.results.map(_4_inline_query_result_js_1.constructInlineQueryResult),
-        nextOffset: results.next_offset,
-    });
+const _0_errors_js_1 = require("../0_errors.js");
+function validateCallbackQueryQuestion(q) {
+    if (!["game", "password", "button"].includes(q.type)) {
+        throw new _0_errors_js_1.InputError("Got invalid callback query question type.");
+    }
+    if (q.type == "password" && (typeof q.password !== "string" || !q.password)) {
+        throw new _0_errors_js_1.InputError("Got empty password.");
+    }
+    if ((q.type == "button" || q.type == "password") && (typeof q.data !== "string" || !q.data)) {
+        throw new _0_errors_js_1.InputError("Got empty button data.");
+    }
 }
-exports.constructInlineQueryAnswer = constructInlineQueryAnswer;
+exports.validateCallbackQueryQuestion = validateCallbackQueryQuestion;

@@ -37,6 +37,8 @@ __exportStar(require("./types/_file_id.js"), exports);
 __exportStar(require("./types/_getters.js"), exports);
 __exportStar(require("./types/0_authorization_state.js"), exports);
 __exportStar(require("./types/0_bot_command.js"), exports);
+__exportStar(require("./types/0_callback_query_answer.js"), exports);
+__exportStar(require("./types/0_callback_query_question.js"), exports);
 __exportStar(require("./types/0_chat_action.js"), exports);
 __exportStar(require("./types/0_chat_administrator_rights.js"), exports);
 __exportStar(require("./types/0_chat_member_rights.js"), exports);

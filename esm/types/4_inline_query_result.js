@@ -18,9 +18,190 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { types } from "../2_tl.js";
-import { deserializeFileId } from "./_file_id.js";
-import { replyMarkupToTlObject } from "./3_reply_markup.js";
+import { as, types } from "../2_tl.js";
+import { cleanObject } from "../1_utilities.js";
+import { deserializeFileId, FileType, getPhotoFileId, serializeFileId } from "./_file_id.js";
+import { constructMessageEntity } from "./0_message_entity.js";
+import { getPhotoSizes } from "./1_photo.js";
+import { constructReplyMarkup, replyMarkupToTlObject } from "./3_reply_markup.js";
+import { constructThumbnail } from "./0_thumbnail.js";
+export function constructInlineQueryResult(result) {
+    const id = result.id, title = result.title ?? "", type = result.type, description = result.description;
+    if (result.send_message instanceof types.BotInlineMessageMediaGeo) {
+        const geoPoint = result.send_message.geo;
+        return cleanObject({
+            type: "location",
+            id,
+            title,
+            latitude: geoPoint.lat,
+            longitude: geoPoint.long,
+            horizontalAccuracy: geoPoint.accuracy_radius,
+            livePeriod: result.send_message.period,
+            heading: result.send_message.heading,
+            proximityAlertRadius: result.send_message.proximity_notification_radius,
+        });
+    }
+    else if (result.send_message instanceof types.BotInlineMessageMediaVenue) {
+        const geoPoint = result.send_message.geo;
+        return cleanObject({
+            type: "venue",
+            id,
+            title,
+            latitude: geoPoint.lat,
+            longitude: geoPoint.long,
+            address: result.send_message.address,
+            foursquareId: result.send_message.venue_id,
+            foursquareType: result.send_message.venue_type,
+        });
+    }
+    else if (result.send_message instanceof types.BotInlineMessageMediaWebPage || result.send_message instanceof types.BotInlineMessageText) {
+        return cleanObject({
+            type: "article",
+            id,
+            title,
+            description,
+            messageContent: cleanObject({
+                messageText: result.send_message.message,
+                entities: (result.send_message.entities ?? []).map(constructMessageEntity).filter((v) => v != null),
+                linkPreview: result.send_message instanceof types.InputBotInlineMessageMediaWebPage ? { url: result.send_message.url, smallMedia: result.send_message.force_small_media, largeMedia: result.send_message.force_large_media, aboveText: result.send_message.invert_media } : undefined,
+            }),
+            replyMarkup: result.send_message.reply_markup ? constructReplyMarkup(result.send_message.reply_markup) : undefined,
+        });
+    }
+    else if (result.send_message instanceof types.BotInlineMessageMediaAuto) {
+        let ref;
+        let attributes;
+        const thumbnailUrl = "thumb" in result ? result.thumb?.url : undefined;
+        let photoSizes;
+        let photo;
+        if (result instanceof types.BotInlineMediaResult) {
+            if (result.photo) {
+                photo = result.photo[as](types.Photo);
+                ref = { fileId: getPhotoFileId(photo).fileId };
+                const { largest } = photoSizes = getPhotoSizes(photo);
+                attributes = [new types.DocumentAttributeImageSize({ w: largest.w, h: largest.h })];
+            }
+            else if (result.document) {
+                const document = result.document[as](types.Document);
+                ref = {
+                    fileId: serializeFileId({
+                        type: FileType.Document,
+                        dcId: document.dc_id,
+                        fileReference: document.file_reference,
+                        location: { type: "common", id: document.id, accessHash: document.access_hash },
+                    }),
+                };
+                attributes = document.attributes;
+            }
+            else {
+                unreachable();
+            }
+        }
+        else if (result.content) {
+            ref = { url: result.content.url };
+            attributes = result.content.attributes;
+        }
+        else {
+            unreachable();
+        }
+        const messageContent = result.send_message.message
+            ? {
+                messageText: result.send_message.message,
+                entities: (result.send_message.entities ?? []).map(constructMessageEntity).filter((v) => v != null),
+            }
+            : undefined;
+        const replyMarkup = result.send_message.reply_markup ? constructReplyMarkup(result.send_message.reply_markup) : undefined;
+        switch (type) {
+            case "audio": {
+                const a = attributes?.find((v) => v instanceof types.DocumentAttributeAudio);
+                return cleanObject({
+                    id,
+                    type,
+                    title,
+                    ...ref,
+                    messageContent,
+                    replyMarkup,
+                    performer: a?.performer,
+                    audioDuration: a?.duration,
+                });
+            }
+            case "gif":
+            case "mpeg4Gif": {
+                const a = attributes.find((v) => v instanceof types.DocumentAttributeVideo);
+                return cleanObject({
+                    id,
+                    type,
+                    title,
+                    ...ref,
+                    messageContent,
+                    replyMarkup,
+                    thumbnailUrl,
+                    width: a?.w,
+                    height: a?.h,
+                    duration: a?.duration,
+                });
+            }
+            case "photo": {
+                const a = attributes.find((v) => v instanceof types.DocumentAttributeImageSize);
+                return cleanObject({
+                    id,
+                    type,
+                    title,
+                    description,
+                    ...ref,
+                    messageContent,
+                    replyMarkup,
+                    thumbnailUrl: thumbnailUrl,
+                    thumbnails: photo ? photoSizes?.sizes.slice(0, -1).map((v) => constructThumbnail(v, photo)) : undefined,
+                    width: a?.w,
+                    height: a?.h,
+                });
+            }
+            case "video": {
+                const a = attributes.find((v) => v instanceof types.DocumentAttributeVideo);
+                return cleanObject({
+                    id,
+                    type,
+                    title,
+                    description,
+                    ...ref,
+                    messageContent,
+                    replyMarkup,
+                    mimeType: "content" in result && result.content ? result.content.mime_type : "video/mp4",
+                    thumbnailUrl: thumbnailUrl,
+                    width: a?.w,
+                    height: a?.h,
+                    videoDuration: a?.duration,
+                });
+            }
+            case "voice": {
+                const a = attributes.find((v) => v instanceof types.DocumentAttributeAudio);
+                return cleanObject({
+                    id,
+                    type,
+                    title,
+                    ...ref,
+                    messageContent,
+                    replyMarkup,
+                    thumbnailUrl,
+                    voiceDuration: a?.duration,
+                });
+            }
+            case "document":
+            case "file": // Does it really return this?
+                return cleanObject({
+                    type: "document",
+                    id,
+                    title: result.title ?? "",
+                    ...ref,
+                    messageContent,
+                    replyMarkup,
+                    thumbnailUrl,
+                });
+        }
+    }
+    unreachable();
+}
 // deno-lint-ignore no-explicit-any
 export async function inlineQueryResultToTlObject(result_, parseText, usernameResolver) {
     let document = null;
@@ -28,9 +209,9 @@ export async function inlineQueryResultToTlObject(result_, parseText, usernameRe
     let fileId_ = null;
     switch (result_.type) {
         case "audio":
-            if ("audioUrl" in result_) {
+            if ("url" in result_) {
                 document = new types.InputWebDocument({
-                    url: result_.audioUrl,
+                    url: result_.url,
                     size: 0,
                     mime_type: "audio/mpeg",
                     attributes: [
@@ -43,101 +224,101 @@ export async function inlineQueryResultToTlObject(result_, parseText, usernameRe
                 });
             }
             else {
-                fileId_ = result_.audioFileId;
+                fileId_ = result_.fileId;
             }
             break;
         case "video":
-            if ("videoUrl" in result_) {
+            if ("url" in result_) {
                 document = new types.InputWebDocument({
-                    url: result_.videoUrl,
+                    url: result_.url,
                     size: 0,
                     mime_type: result_.mimeType ?? "video/mp4",
                     attributes: [
                         new types.DocumentAttributeVideo({
                             duration: result_.videoDuration ?? 0,
-                            h: result_.videoHeight ?? 0,
-                            w: result_.videoWidth ?? 0,
+                            h: result_.height ?? 0,
+                            w: result_.width ?? 0,
                         }),
                     ],
                 });
             }
             else {
-                fileId_ = result_.videoFileId;
+                fileId_ = result_.fileId;
             }
             break;
         case "document":
-            if ("documentUrl" in result_) {
+            if ("url" in result_) {
                 document = new types.InputWebDocument({
-                    url: result_.documentUrl,
+                    url: result_.url,
                     mime_type: "application/octet-stream",
                     attributes: [],
                     size: 0,
                 });
             }
             else {
-                fileId_ = result_.documentFileId;
+                fileId_ = result_.fileId;
             }
             break;
         case "gif":
-            if ("gifUrl" in result_) {
+            if ("url" in result_) {
                 document = new types.InputWebDocument({
-                    url: result_.gifUrl,
+                    url: result_.url,
                     size: 0,
                     mime_type: "image/gif",
                     attributes: [
                         new types.DocumentAttributeVideo({
-                            duration: result_.gifDuration ?? 0,
-                            h: result_.gifHeight ?? 0,
-                            w: result_.gifWidth ?? 0,
+                            duration: result_.duration ?? 0,
+                            w: result_.width ?? 0,
+                            h: result_.height ?? 0,
                         }),
                     ],
                 });
             }
             else {
-                fileId_ = result_.gifFileId;
+                fileId_ = result_.fileId;
             }
             break;
         case "mpeg4Gif":
-            if ("mpeg4Url" in result_) {
+            if ("url" in result_) {
                 document = new types.InputWebDocument({
-                    url: result_.mpeg4Url,
+                    url: result_.url,
                     size: 0,
                     mime_type: "video/mp4",
                     attributes: [
                         new types.DocumentAttributeVideo({
                             nosound: true,
-                            duration: result_.mpeg4Duration ?? 0,
-                            w: result_.mpeg4Width ?? 0,
-                            h: result_.mpeg4Height ?? 0,
+                            duration: result_.duration ?? 0,
+                            w: result_.width ?? 0,
+                            h: result_.height ?? 0,
                             supports_streaming: true,
                         }),
                     ],
                 });
             }
             else {
-                fileId_ = result_.mpeg4FileId;
+                fileId_ = result_.fileId;
             }
             break;
         case "photo":
-            if ("photoUrl" in result_) {
+            if ("url" in result_) {
                 document = new types.InputWebDocument({
-                    url: result_.photoUrl,
+                    url: result_.url,
                     size: 0,
                     mime_type: "image/jpeg",
-                    attributes: [new types.DocumentAttributeImageSize({ w: result_.photoWidth ?? 0, h: result_.photoHeight ?? 0 })],
+                    attributes: [new types.DocumentAttributeImageSize({ w: result_.width ?? 0, h: result_.height ?? 0 })],
                 });
             }
             else {
-                fileId_ = result_.photoFileId;
+                fileId_ = result_.fileId;
             }
             break;
         case "sticker":
-            fileId_ = result_.stickerFileId;
+            fileId_ = result_.fileId;
             break;
         case "voice":
-            if ("voiceUrl" in result_) {
+            if ("url" in result_) {
                 document = new types.InputWebDocument({
-                    url: result_.voiceUrl,
+                    url: result_.url,
                     size: 0,
                     mime_type: "audio/mpeg",
                     attributes: [
@@ -149,7 +330,7 @@ export async function inlineQueryResultToTlObject(result_, parseText, usernameRe
                 });
             }
             else {
-                fileId_ = result_.voiceFileId;
+                fileId_ = result_.fileId;
             }
             break;
     }
@@ -241,18 +422,18 @@ export async function inlineQueryResultToTlObject(result_, parseText, usernameRe
         });
     }
     else if (result_.type == "article") {
-        if (!("messageText" in result_.inputMessageContent)) {
+        if (!("messageText" in result_.messageContent)) {
             unreachable();
         }
-        const [message, entities] = await parseText(result_.inputMessageContent.messageText, { entities: result_.inputMessageContent.entities, parseMode: result_.inputMessageContent.parseMode });
-        const noWebpage = result_.inputMessageContent?.linkPreview?.disable ? true : undefined;
-        const invertMedia = result_.inputMessageContent?.linkPreview?.aboveText ? true : undefined;
+        const [message, entities] = await parseText(result_.messageContent.messageText, { entities: result_.messageContent.entities, parseMode: result_.messageContent.parseMode });
+        const noWebpage = result_.messageContent?.linkPreview?.disable ? true : undefined;
+        const invertMedia = result_.messageContent?.linkPreview?.aboveText ? true : undefined;
         let sendMessage;
-        if (result_.inputMessageContent.linkPreview?.url) {
+        if (result_.messageContent.linkPreview?.url) {
             sendMessage = new types.InputBotInlineMessageMediaWebPage({
-                url: result_.inputMessageContent.linkPreview.url,
-                force_large_media: result_.inputMessageContent.linkPreview.largeMedia ? true : undefined,
-                force_small_media: result_.inputMessageContent.linkPreview.smallMedia ? true : undefined,
+                url: result_.messageContent.linkPreview.url,
+                force_large_media: result_.messageContent.linkPreview.largeMedia ? true : undefined,
+                force_small_media: result_.messageContent.linkPreview.smallMedia ? true : undefined,
                 optional: message.length ? undefined : true,
                 message,
                 entities,
@@ -279,7 +460,7 @@ export async function inlineQueryResultToTlObject(result_, parseText, usernameRe
         });
     }
     else if (result_.type == "venue") {
-        if (!result_.fourSquareId || !result_.foursquareType) {
+        if (!result_.foursquareId || !result_.foursquareType) {
             unreachable();
         }
         return new types.InputBotInlineResult({
@@ -293,7 +474,7 @@ export async function inlineQueryResultToTlObject(result_, parseText, usernameRe
                 address: result_.address,
                 provider: "foursquare",
                 title: result_.title,
-                venue_id: result_.fourSquareId,
+                venue_id: result_.foursquareId,
                 venue_type: result_.foursquareType,
                 reply_markup: replyMarkup,
             }),

@@ -73,6 +73,8 @@ export const K = {
         customEmojiDocument: (id) => [...K.cache.customEmojiDocuments(), id],
         businessConnections: () => [K.cache.P("businessConnections")],
         businessConnection: (id) => [...K.cache.businessConnections(), id],
+        allInlineQueryResults: () => [K.cache.P("inlineQueryResults")],
+        inlineQueryResults: (userId, chatId, query, offset) => [...K.cache.allInlineQueryResults(), userId, chatId, query, offset],
     },
     messages: {
         P: (string) => `messages.${string}`,
@@ -401,6 +403,19 @@ export class Storage {
             return null;
         }
     }
+    async setInlineQueryResults(userId, chatId, query, offset, results, date) {
+        await this.set(K.cache.inlineQueryResults(userId, chatId, query, offset), [this.isMemoryStorage ? results : rleEncode(results[serialize]()), date]);
+    }
+    async getInlineQueryResults(userId, chatId, query, offset) {
+        const peer_ = await this.get(K.cache.inlineQueryResults(userId, chatId, query, offset));
+        if (peer_ != null) {
+            const [obj_, date] = peer_;
+            return [await this.getTlObject(obj_), date];
+        }
+        else {
+            return null;
+        }
+    }
     async setUpdate(boxId, update) {
         await this.setTlObject(K.updates.update(boxId, __classPrivateFieldGet(this, _Storage_instances, "m", _Storage_getUpdateId).call(this, update)), update);
     }
@@ -448,6 +463,11 @@ export class Storage {
             await this.set(key, null);
         }
     }
+    async deleteInlineQueryResults() {
+        for await (const [key] of await this.getMany({ prefix: K.cache.allInlineQueryResults() })) {
+            await this.set(key, null);
+        }
+    }
     async deleteStickerSetNames() {
         for await (const [key] of await this.getMany({ prefix: K.cache.stickerSetNames() })) {
             await this.set(key, null);
@@ -472,6 +492,7 @@ export class Storage {
             this.deleteFiles(),
             this.deleteCustomEmojiDocuments(),
             this.deleteBusinessConnections(),
+            this.deleteInlineQueryResults(),
             this.deleteStickerSetNames(),
             this.deletePeers(),
             this.deleteUsernames(),

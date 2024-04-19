@@ -17,12 +17,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { enums } from "../2_tl.js";
+import { enums, types } from "../2_tl.js";
 import { UsernameResolver } from "./_getters.js";
 import { MessageEntity } from "./0_message_entity.js";
 import { ParseMode } from "./0_parse_mode.js";
-import { InputMessageContent } from "./1_input_message_content.js";
+import { MessageContent } from "./1_message_content.js";
 import { ReplyMarkupInlineKeyboard } from "./3_reply_markup.js";
+import { Thumbnail } from "./0_thumbnail.js";
 /** @unlisted */
 type InlineQueryResultType = "article" | "audio" | "document" | "gif" | "mpeg4Gif" | "photo" | "sticker" | "video" | "voice" | "game" | "location" | "venue";
 /** @unlisted */
@@ -37,8 +38,8 @@ export interface _InlineQueryResultCaptionCommon {
     captionEntities?: MessageEntity[];
 }
 /** @unlisted */
-export interface _InlineQueryResultInputMessageContentReplyMarkupCommon {
-    inputMessageContent?: InputMessageContent;
+export interface _InlineQueryResultMessageContentReplyMarkupCommon {
+    messageContent?: MessageContent;
     replyMarkup?: ReplyMarkupInlineKeyboard;
 }
 /** @unlisted */
@@ -51,70 +52,71 @@ export interface _InlineQueryResultThumbnailCommon {
 export interface InlineQueryResultArticle extends _InlineQueryResultBase, _InlineQueryResultThumbnailCommon {
     type: "article";
     title: string;
-    inputMessageContent: InputMessageContent;
+    messageContent: MessageContent;
     description?: string;
     replyMarkup?: ReplyMarkupInlineKeyboard;
     url?: string;
     hideUrl?: boolean;
 }
 /** @unlisted */
-export interface InlineQueryResultAudio extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultInputMessageContentReplyMarkupCommon {
+export interface InlineQueryResultAudio extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultMessageContentReplyMarkupCommon {
     type: "audio";
     title: string;
-    audioUrl: string;
+    url: string;
     performer?: string;
     audioDuration?: number;
 }
 /** @unlisted */
-export interface InlineQueryResultCachedAudio extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultInputMessageContentReplyMarkupCommon {
+export interface InlineQueryResultCachedAudio extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultMessageContentReplyMarkupCommon {
     type: "audio";
-    audioFileId: string;
+    fileId: string;
 }
 /** @unlisted */
-export interface InlineQueryResultCachedDocument extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultInputMessageContentReplyMarkupCommon {
+export interface InlineQueryResultCachedDocument extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultMessageContentReplyMarkupCommon {
     type: "document";
-    documentFileId: string;
+    fileId: string;
     description?: string;
 }
 /** @unlisted */
-export interface InlineQueryResultCachedGif extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultInputMessageContentReplyMarkupCommon {
+export interface InlineQueryResultCachedGif extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultMessageContentReplyMarkupCommon {
     type: "gif";
-    gifFileId: string;
+    fileId: string;
     title?: string;
 }
 /** @unlisted */
-export interface InlineQueryResultCachedMpeg4Gif extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultInputMessageContentReplyMarkupCommon {
+export interface InlineQueryResultCachedMpeg4Gif extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultMessageContentReplyMarkupCommon {
     type: "mpeg4Gif";
-    mpeg4FileId: string;
+    fileId: string;
     title?: string;
 }
 /** @unlisted */
-export interface InlineQueryResultCachedPhoto extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultInputMessageContentReplyMarkupCommon {
+export interface InlineQueryResultCachedPhoto extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultMessageContentReplyMarkupCommon {
     type: "photo";
-    photoFileId: string;
+    fileId: string;
+    thumbnails?: Thumbnail[];
     title?: string;
     description?: string;
 }
 /** @unlisted */
-export interface InlineQueryResultCachedSticker extends _InlineQueryResultBase, _InlineQueryResultInputMessageContentReplyMarkupCommon {
+export interface InlineQueryResultCachedSticker extends _InlineQueryResultBase, _InlineQueryResultMessageContentReplyMarkupCommon {
     type: "sticker";
-    stickerFileId: string;
+    fileId: string;
 }
 /** @unlisted */
-export interface InlineQueryResultCachedVideo extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultInputMessageContentReplyMarkupCommon {
+export interface InlineQueryResultCachedVideo extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultMessageContentReplyMarkupCommon {
     type: "video";
     title: string;
-    videoFileId: string;
+    fileId: string;
     description?: string;
 }
 /** @unlisted */
-export interface InlineQueryResultCachedVoice extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultInputMessageContentReplyMarkupCommon {
+export interface InlineQueryResultCachedVoice extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultMessageContentReplyMarkupCommon {
     type: "voice";
     title: string;
-    voiceFileId: string;
+    fileId: string;
 }
 /** @unlisted */
-export interface InlineQueryResultContact extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultInputMessageContentReplyMarkupCommon, _InlineQueryResultThumbnailCommon {
+export interface InlineQueryResultContact extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultMessageContentReplyMarkupCommon, _InlineQueryResultThumbnailCommon {
     type: "game";
     phoneNumber: string;
     firstName: string;
@@ -122,10 +124,10 @@ export interface InlineQueryResultContact extends _InlineQueryResultBase, _Inlin
     vcard?: string;
 }
 /** @unlisted */
-export interface InlineQueryResultDocument extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultInputMessageContentReplyMarkupCommon, _InlineQueryResultThumbnailCommon {
+export interface InlineQueryResultDocument extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultMessageContentReplyMarkupCommon, _InlineQueryResultThumbnailCommon {
     type: "document";
     title: string;
-    documentUrl: string;
+    url: string;
 }
 /** @unlisted */
 export interface InlineQueryResultGame extends _InlineQueryResultBase {
@@ -134,18 +136,18 @@ export interface InlineQueryResultGame extends _InlineQueryResultBase {
     replyMarkup?: ReplyMarkupInlineKeyboard;
 }
 /** @unlisted */
-export interface InlineQueryResultGif extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultInputMessageContentReplyMarkupCommon {
+export interface InlineQueryResultGif extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultMessageContentReplyMarkupCommon {
     type: "gif";
     title?: string;
-    gifUrl: string;
-    gifWidth?: number;
-    gifHeight?: number;
-    gifDuration?: number;
+    url: string;
+    width?: number;
+    height?: number;
+    duration?: number;
     thumbnailUrl?: string;
     thumbnailMimeType?: string;
 }
 /** @unlisted */
-export interface InlineQueryResultLocation extends _InlineQueryResultBase, _InlineQueryResultInputMessageContentReplyMarkupCommon, _InlineQueryResultThumbnailCommon {
+export interface InlineQueryResultLocation extends _InlineQueryResultBase, _InlineQueryResultMessageContentReplyMarkupCommon, _InlineQueryResultThumbnailCommon {
     type: "location";
     title: string;
     latitude: number;
@@ -156,57 +158,58 @@ export interface InlineQueryResultLocation extends _InlineQueryResultBase, _Inli
     proximityAlertRadius?: number;
 }
 /** @unlisted */
-export interface InlineQueryResultMpeg4Gif extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultInputMessageContentReplyMarkupCommon {
+export interface InlineQueryResultMpeg4Gif extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultMessageContentReplyMarkupCommon {
     type: "mpeg4Gif";
-    mpeg4Url: string;
+    url: string;
     title?: string;
-    mpeg4Width?: number;
-    mpeg4Height?: number;
-    mpeg4Duration?: number;
+    width?: number;
+    height?: number;
+    duration?: number;
     thumbnailUrl?: string;
     thumbnailMimeType?: string;
 }
 /** @unlisted */
-export interface InlineQueryResultPhoto extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultInputMessageContentReplyMarkupCommon {
+export interface InlineQueryResultPhoto extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultMessageContentReplyMarkupCommon {
     type: "photo";
-    photoUrl: string;
+    url: string;
     thumbnailUrl: string;
     title?: string;
     description?: string;
-    photoWidth?: number;
-    photoHeight?: number;
+    width?: number;
+    height?: number;
 }
 /** @unlisted */
-export interface InlineQueryResultVenue extends _InlineQueryResultBase, _InlineQueryResultInputMessageContentReplyMarkupCommon, _InlineQueryResultThumbnailCommon {
+export interface InlineQueryResultVenue extends _InlineQueryResultBase, _InlineQueryResultMessageContentReplyMarkupCommon, _InlineQueryResultThumbnailCommon {
     type: "venue";
     title: string;
     latitude: number;
     longitude: number;
     address: string;
-    fourSquareId?: string;
+    foursquareId?: string;
     foursquareType?: string;
 }
 /** @unlisted */
-export interface InlineQueryResultVideo extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultInputMessageContentReplyMarkupCommon {
+export interface InlineQueryResultVideo extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultMessageContentReplyMarkupCommon {
     type: "video";
     title: string;
     description?: string;
-    videoUrl: string;
+    url: string;
     mimeType: string;
     thumbnailUrl: string;
-    videoWidth?: number;
-    videoHeight?: number;
+    width?: number;
+    height?: number;
     videoDuration?: number;
 }
 /** @unlisted */
-export interface InlineQueryResultVoice extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultInputMessageContentReplyMarkupCommon {
+export interface InlineQueryResultVoice extends _InlineQueryResultBase, _InlineQueryResultCaptionCommon, _InlineQueryResultMessageContentReplyMarkupCommon {
     type: "voice";
     title: string;
-    voiceUrl: string;
+    url: string;
     voiceDuration?: number;
 }
 /** A single inline query result. */
 export type InlineQueryResult = InlineQueryResultCachedAudio | InlineQueryResultCachedDocument | InlineQueryResultCachedGif | InlineQueryResultCachedMpeg4Gif | InlineQueryResultCachedPhoto | InlineQueryResultCachedSticker | InlineQueryResultCachedVideo | InlineQueryResultCachedVoice | InlineQueryResultArticle | InlineQueryResultAudio | InlineQueryResultContact | InlineQueryResultGame | InlineQueryResultDocument | InlineQueryResultGif | InlineQueryResultLocation | InlineQueryResultMpeg4Gif | InlineQueryResultPhoto | InlineQueryResultVenue | InlineQueryResultVideo | InlineQueryResultVoice;
+export declare function constructInlineQueryResult(result: types.BotInlineResult | types.BotInlineMediaResult): InlineQueryResult;
 export declare function inlineQueryResultToTlObject(result_: InlineQueryResult, parseText: (text: string, params?: {
     parseMode?: ParseMode;
     entities?: MessageEntity[];

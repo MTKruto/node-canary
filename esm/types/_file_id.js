@@ -20,7 +20,7 @@
 import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { base64DecodeUrlSafe, base64EncodeUrlSafe, rleDecode, rleEncode } from "../1_utilities.js";
-import { TLReader, TLWriter } from "../2_tl.js";
+import { TLReader, TLWriter, types } from "../2_tl.js";
 const NEXT_VERSION = 53;
 const PERSISTENT_ID_VERSION = 4;
 const WEB_LOCATION_FLAG = 1 << 24;
@@ -320,4 +320,35 @@ export function toUniqueFileId(fileId) {
         }
     }
     return base64EncodeUrlSafe(rleEncode(writer.buffer));
+}
+export function getPhotoFileId(photo) {
+    const sizes = photo.sizes
+        .map((v) => {
+        if (v instanceof types.PhotoSizeProgressive) {
+            return new types.PhotoSize({ type: v.type, w: v.w, h: v.h, size: Math.max(...v.sizes) });
+        }
+        else {
+            return v;
+        }
+    })
+        .filter((v) => v instanceof types.PhotoSize)
+        .sort((a, b) => a.size - b.size);
+    const largest = sizes.slice(-1)[0];
+    const { dc_id: dcId, id, access_hash: accessHash, file_reference: fileReference } = photo;
+    const fileId = {
+        type: FileType.Photo,
+        dcId,
+        fileReference,
+        location: {
+            type: "photo",
+            id,
+            accessHash,
+            source: {
+                type: PhotoSourceType.Thumbnail,
+                fileType: FileType.Photo,
+                thumbnailType: largest.type.charCodeAt(0),
+            },
+        },
+    };
+    return { fileId: serializeFileId(fileId), fileUniqueId: toUniqueFileId(fileId) };
 }

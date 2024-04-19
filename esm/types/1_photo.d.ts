@@ -34,3 +34,7 @@ export interface Photo {
     thumbnails: Thumbnail[];
 }
 export declare function constructPhoto(photo: types.Photo): Photo;
+export declare function getPhotoSizes(photo: types.Photo): {
+    sizes: types.PhotoSize[];
+    largest: types.PhotoSize;
+};

@@ -18,8 +18,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { enums, types } from "../2_tl.js";
-import { InlineQueryResult, Update } from "../3_types.js";
-import { AnswerInlineQueryParams } from "./0_params.js";
+import { ID, InlineQueryResult, Update } from "../3_types.js";
+import { AnswerInlineQueryParams, SendInlineQueryParams } from "./0_params.js";
 import { C as C_ } from "./0_types.js";
 import { MessageManager } from "./2_message_manager.js";
 type C = C_ & {
@@ -32,5 +32,6 @@ export declare class InlineQueryManager {
     answerInlineQuery(id: string, results: InlineQueryResult[], params?: AnswerInlineQueryParams): Promise<void>;
     static canHandleUpdate(update: enums.Update): update is InlineQueryManagerUpdate;
     handleUpdate(update: InlineQueryManagerUpdate): Promise<Update>;
+    sendInlineQuery(userId: ID, chatId: ID, params?: SendInlineQueryParams): Promise<import("../3_types.js").InlineQueryAnswer>;
 }
 export {};

@@ -19,7 +19,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.toUniqueFileId = exports.serializeFileId = exports.deserializeFileId = exports.PhotoSourceType = exports.FileType = void 0;
+exports.getPhotoFileId = exports.toUniqueFileId = exports.serializeFileId = exports.deserializeFileId = exports.PhotoSourceType = exports.FileType = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
 const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
@@ -327,3 +327,35 @@ function toUniqueFileId(fileId) {
     return (0, _1_utilities_js_1.base64EncodeUrlSafe)((0, _1_utilities_js_1.rleEncode)(writer.buffer));
 }
 exports.toUniqueFileId = toUniqueFileId;
+function getPhotoFileId(photo) {
+    const sizes = photo.sizes
+        .map((v) => {
+        if (v instanceof _2_tl_js_1.types.PhotoSizeProgressive) {
+            return new _2_tl_js_1.types.PhotoSize({ type: v.type, w: v.w, h: v.h, size: Math.max(...v.sizes) });
+        }
+        else {
+            return v;
+        }
+    })
+        .filter((v) => v instanceof _2_tl_js_1.types.PhotoSize)
+        .sort((a, b) => a.size - b.size);
+    const largest = sizes.slice(-1)[0];
+    const { dc_id: dcId, id, access_hash: accessHash, file_reference: fileReference } = photo;
+    const fileId = {
+        type: FileType.Photo,
+        dcId,
+        fileReference,
+        location: {
+            type: "photo",
+            id,
+            accessHash,
+            source: {
+                type: PhotoSourceType.Thumbnail,
+                fileType: FileType.Photo,
+                thumbnailType: largest.type.charCodeAt(0),
+            },
+        },
+    };
+    return { fileId: serializeFileId(fileId), fileUniqueId: toUniqueFileId(fileId) };
+}
+exports.getPhotoFileId = getPhotoFileId;

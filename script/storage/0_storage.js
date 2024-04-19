@@ -76,6 +76,8 @@ exports.K = {
         customEmojiDocument: (id) => [...exports.K.cache.customEmojiDocuments(), id],
         businessConnections: () => [exports.K.cache.P("businessConnections")],
         businessConnection: (id) => [...exports.K.cache.businessConnections(), id],
+        allInlineQueryResults: () => [exports.K.cache.P("inlineQueryResults")],
+        inlineQueryResults: (userId, chatId, query, offset) => [...exports.K.cache.allInlineQueryResults(), userId, chatId, query, offset],
     },
     messages: {
         P: (string) => `messages.${string}`,
@@ -404,6 +406,19 @@ class Storage {
             return null;
         }
     }
+    async setInlineQueryResults(userId, chatId, query, offset, results, date) {
+        await this.set(exports.K.cache.inlineQueryResults(userId, chatId, query, offset), [this.isMemoryStorage ? results : (0, _1_utilities_js_1.rleEncode)(results[_2_tl_js_1.serialize]()), date]);
+    }
+    async getInlineQueryResults(userId, chatId, query, offset) {
+        const peer_ = await this.get(exports.K.cache.inlineQueryResults(userId, chatId, query, offset));
+        if (peer_ != null) {
+            const [obj_, date] = peer_;
+            return [await this.getTlObject(obj_), date];
+        }
+        else {
+            return null;
+        }
+    }
     async setUpdate(boxId, update) {
         await this.setTlObject(exports.K.updates.update(boxId, __classPrivateFieldGet(this, _Storage_instances, "m", _Storage_getUpdateId).call(this, update)), update);
     }
@@ -451,6 +466,11 @@ class Storage {
             await this.set(key, null);
         }
     }
+    async deleteInlineQueryResults() {
+        for await (const [key] of await this.getMany({ prefix: exports.K.cache.allInlineQueryResults() })) {
+            await this.set(key, null);
+        }
+    }
     async deleteStickerSetNames() {
         for await (const [key] of await this.getMany({ prefix: exports.K.cache.stickerSetNames() })) {
             await this.set(key, null);
@@ -475,6 +495,7 @@ class Storage {
             this.deleteFiles(),
             this.deleteCustomEmojiDocuments(),
             this.deleteBusinessConnections(),
+            this.deleteInlineQueryResults(),
             this.deleteStickerSetNames(),
             this.deletePeers(),
             this.deleteUsernames(),

@@ -2028,6 +2028,17 @@ class Client extends Composer {
     // ========================= INLINE QUERIES ========================= //
     //
     /**
+     * Send an inline query. User-only.
+     *
+     * @method iq
+     * @param userId The ID of the bot to send the inline query to.
+     * @param chatId The ID of the chat from which the inline query is sent.
+     * @returns The bot's answer to the inline query.
+     */
+    async sendInlineQuery(userId, chatId, params) {
+        return await __classPrivateFieldGet(this, _Client_inlineQueryManager, "f").sendInlineQuery(userId, chatId, params);
+    }
+    /**
      * Answer an inline query. Bot-only.
      *
      * @method iq

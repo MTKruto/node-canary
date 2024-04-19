@@ -28,10 +28,10 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _InlineQueryManager_c;
+var _a, _InlineQueryManager_c, _InlineQueryManager_isExpired;
 import { unreachable } from "../0_deps.js";
-import { types } from "../2_tl.js";
-import { constructChosenInlineResult, constructInlineQuery, inlineQueryResultToTlObject } from "../3_types.js";
+import { peerToChatId, types } from "../2_tl.js";
+import { constructChosenInlineResult, constructInlineQuery, constructInlineQueryAnswer, inlineQueryResultToTlObject } from "../3_types.js";
 import { checkInlineQueryId } from "./0_utilities.js";
 export class InlineQueryManager {
     constructor(c) {
@@ -66,5 +66,21 @@ export class InlineQueryManager {
             unreachable();
         }
     }
+    async sendInlineQuery(userId, chatId, params) {
+        const bot = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputUser(userId), peer = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputPeer(chatId), query = params?.query ?? "", offset = params?.offset ?? "";
+        const botId = peerToChatId(bot), peerId = peerToChatId(peer);
+        const maybeResults = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageStorage.getInlineQueryResults(botId, peerId, query, offset);
+        if (maybeResults != null && !__classPrivateFieldGet(_a, _a, "m", _InlineQueryManager_isExpired).call(_a, maybeResults[1], maybeResults[0].cache_time)) {
+            return constructInlineQueryAnswer(maybeResults[0]);
+        }
+        const then = new Date();
+        const results = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").api.messages.getInlineBotResults({ bot, peer, query, offset });
+        if (results.cache_time > 0) {
+            await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageStorage.setInlineQueryResults(botId, peerId, query, offset, results, then);
+        }
+        return constructInlineQueryAnswer(results);
+    }
 }
-_InlineQueryManager_c = new WeakMap();
+_a = InlineQueryManager, _InlineQueryManager_c = new WeakMap(), _InlineQueryManager_isExpired = function _InlineQueryManager_isExpired(date, cacheTime) {
+    return (Date.now() - date.getTime()) / 1000 > cacheTime;
+};

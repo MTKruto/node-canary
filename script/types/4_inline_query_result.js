@@ -19,11 +19,193 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.inlineQueryResultToTlObject = void 0;
+exports.inlineQueryResultToTlObject = exports.constructInlineQueryResult = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
 const _2_tl_js_1 = require("../2_tl.js");
+const _1_utilities_js_1 = require("../1_utilities.js");
 const _file_id_js_1 = require("./_file_id.js");
+const _0_message_entity_js_1 = require("./0_message_entity.js");
+const _1_photo_js_1 = require("./1_photo.js");
 const _3_reply_markup_js_1 = require("./3_reply_markup.js");
+const _0_thumbnail_js_1 = require("./0_thumbnail.js");
+function constructInlineQueryResult(result) {
+    const id = result.id, title = result.title ?? "", type = result.type, description = result.description;
+    if (result.send_message instanceof _2_tl_js_1.types.BotInlineMessageMediaGeo) {
+        const geoPoint = result.send_message.geo;
+        return (0, _1_utilities_js_1.cleanObject)({
+            type: "location",
+            id,
+            title,
+            latitude: geoPoint.lat,
+            longitude: geoPoint.long,
+            horizontalAccuracy: geoPoint.accuracy_radius,
+            livePeriod: result.send_message.period,
+            heading: result.send_message.heading,
+            proximityAlertRadius: result.send_message.proximity_notification_radius,
+        });
+    }
+    else if (result.send_message instanceof _2_tl_js_1.types.BotInlineMessageMediaVenue) {
+        const geoPoint = result.send_message.geo;
+        return (0, _1_utilities_js_1.cleanObject)({
+            type: "venue",
+            id,
+            title,
+            latitude: geoPoint.lat,
+            longitude: geoPoint.long,
+            address: result.send_message.address,
+            foursquareId: result.send_message.venue_id,
+            foursquareType: result.send_message.venue_type,
+        });
+    }
+    else if (result.send_message instanceof _2_tl_js_1.types.BotInlineMessageMediaWebPage || result.send_message instanceof _2_tl_js_1.types.BotInlineMessageText) {
+        return (0, _1_utilities_js_1.cleanObject)({
+            type: "article",
+            id,
+            title,
+            description,
+            messageContent: (0, _1_utilities_js_1.cleanObject)({
+                messageText: result.send_message.message,
+                entities: (result.send_message.entities ?? []).map(_0_message_entity_js_1.constructMessageEntity).filter((v) => v != null),
+                linkPreview: result.send_message instanceof _2_tl_js_1.types.InputBotInlineMessageMediaWebPage ? { url: result.send_message.url, smallMedia: result.send_message.force_small_media, largeMedia: result.send_message.force_large_media, aboveText: result.send_message.invert_media } : undefined,
+            }),
+            replyMarkup: result.send_message.reply_markup ? (0, _3_reply_markup_js_1.constructReplyMarkup)(result.send_message.reply_markup) : undefined,
+        });
+    }
+    else if (result.send_message instanceof _2_tl_js_1.types.BotInlineMessageMediaAuto) {
+        let ref;
+        let attributes;
+        const thumbnailUrl = "thumb" in result ? result.thumb?.url : undefined;
+        let photoSizes;
+        let photo;
+        if (result instanceof _2_tl_js_1.types.BotInlineMediaResult) {
+            if (result.photo) {
+                photo = result.photo[_2_tl_js_1.as](_2_tl_js_1.types.Photo);
+                ref = { fileId: (0, _file_id_js_1.getPhotoFileId)(photo).fileId };
+                const { largest } = photoSizes = (0, _1_photo_js_1.getPhotoSizes)(photo);
+                attributes = [new _2_tl_js_1.types.DocumentAttributeImageSize({ w: largest.w, h: largest.h })];
+            }
+            else if (result.document) {
+                const document = result.document[_2_tl_js_1.as](_2_tl_js_1.types.Document);
+                ref = {
+                    fileId: (0, _file_id_js_1.serializeFileId)({
+                        type: _file_id_js_1.FileType.Document,
+                        dcId: document.dc_id,
+                        fileReference: document.file_reference,
+                        location: { type: "common", id: document.id, accessHash: document.access_hash },
+                    }),
+                };
+                attributes = document.attributes;
+            }
+            else {
+                (0, _0_deps_js_1.unreachable)();
+            }
+        }
+        else if (result.content) {
+            ref = { url: result.content.url };
+            attributes = result.content.attributes;
+        }
+        else {
+            (0, _0_deps_js_1.unreachable)();
+        }
+        const messageContent = result.send_message.message
+            ? {
+                messageText: result.send_message.message,
+                entities: (result.send_message.entities ?? []).map(_0_message_entity_js_1.constructMessageEntity).filter((v) => v != null),
+            }
+            : undefined;
+        const replyMarkup = result.send_message.reply_markup ? (0, _3_reply_markup_js_1.constructReplyMarkup)(result.send_message.reply_markup) : undefined;
+        switch (type) {
+            case "audio": {
+                const a = attributes?.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeAudio);
+                return (0, _1_utilities_js_1.cleanObject)({
+                    id,
+                    type,
+                    title,
+                    ...ref,
+                    messageContent,
+                    replyMarkup,
+                    performer: a?.performer,
+                    audioDuration: a?.duration,
+                });
+            }
+            case "gif":
+            case "mpeg4Gif": {
+                const a = attributes.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeVideo);
+                return (0, _1_utilities_js_1.cleanObject)({
+                    id,
+                    type,
+                    title,
+                    ...ref,
+                    messageContent,
+                    replyMarkup,
+                    thumbnailUrl,
+                    width: a?.w,
+                    height: a?.h,
+                    duration: a?.duration,
+                });
+            }
+            case "photo": {
+                const a = attributes.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeImageSize);
+                return (0, _1_utilities_js_1.cleanObject)({
+                    id,
+                    type,
+                    title,
+                    description,
+                    ...ref,
+                    messageContent,
+                    replyMarkup,
+                    thumbnailUrl: thumbnailUrl,
+                    thumbnails: photo ? photoSizes?.sizes.slice(0, -1).map((v) => (0, _0_thumbnail_js_1.constructThumbnail)(v, photo)) : undefined,
+                    width: a?.w,
+                    height: a?.h,
+                });
+            }
+            case "video": {
+                const a = attributes.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeVideo);
+                return (0, _1_utilities_js_1.cleanObject)({
+                    id,
+                    type,
+                    title,
+                    description,
+                    ...ref,
+                    messageContent,
+                    replyMarkup,
+                    mimeType: "content" in result && result.content ? result.content.mime_type : "video/mp4",
+                    thumbnailUrl: thumbnailUrl,
+                    width: a?.w,
+                    height: a?.h,
+                    videoDuration: a?.duration,
+                });
+            }
+            case "voice": {
+                const a = attributes.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeAudio);
+                return (0, _1_utilities_js_1.cleanObject)({
+                    id,
+                    type,
+                    title,
+                    ...ref,
+                    messageContent,
+                    replyMarkup,
+                    thumbnailUrl,
+                    voiceDuration: a?.duration,
+                });
+            }
+            case "document":
+            case "file": // Does it really return this?
+                return (0, _1_utilities_js_1.cleanObject)({
+                    type: "document",
+                    id,
+                    title: result.title ?? "",
+                    ...ref,
+                    messageContent,
+                    replyMarkup,
+                    thumbnailUrl,
+                });
+        }
+    }
+    (0, _0_deps_js_1.unreachable)();
+}
+exports.constructInlineQueryResult = constructInlineQueryResult;
 // deno-lint-ignore no-explicit-any
 async function inlineQueryResultToTlObject(result_, parseText, usernameResolver) {
     let document = null;
@@ -31,9 +213,9 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
     let fileId_ = null;
     switch (result_.type) {
         case "audio":
-            if ("audioUrl" in result_) {
+            if ("url" in result_) {
                 document = new _2_tl_js_1.types.InputWebDocument({
-                    url: result_.audioUrl,
+                    url: result_.url,
                     size: 0,
                     mime_type: "audio/mpeg",
                     attributes: [
@@ -46,101 +228,101 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
                 });
             }
             else {
-                fileId_ = result_.audioFileId;
+                fileId_ = result_.fileId;
             }
             break;
         case "video":
-            if ("videoUrl" in result_) {
+            if ("url" in result_) {
                 document = new _2_tl_js_1.types.InputWebDocument({
-                    url: result_.videoUrl,
+                    url: result_.url,
                     size: 0,
                     mime_type: result_.mimeType ?? "video/mp4",
                     attributes: [
                         new _2_tl_js_1.types.DocumentAttributeVideo({
                             duration: result_.videoDuration ?? 0,
-                            h: result_.videoHeight ?? 0,
-                            w: result_.videoWidth ?? 0,
+                            h: result_.height ?? 0,
+                            w: result_.width ?? 0,
                         }),
                     ],
                 });
             }
             else {
-                fileId_ = result_.videoFileId;
+                fileId_ = result_.fileId;
             }
             break;
         case "document":
-            if ("documentUrl" in result_) {
+            if ("url" in result_) {
                 document = new _2_tl_js_1.types.InputWebDocument({
-                    url: result_.documentUrl,
+                    url: result_.url,
                     mime_type: "application/octet-stream",
                     attributes: [],
                     size: 0,
                 });
             }
             else {
-                fileId_ = result_.documentFileId;
+                fileId_ = result_.fileId;
             }
             break;
         case "gif":
-            if ("gifUrl" in result_) {
+            if ("url" in result_) {
                 document = new _2_tl_js_1.types.InputWebDocument({
-                    url: result_.gifUrl,
+                    url: result_.url,
                     size: 0,
                     mime_type: "image/gif",
                     attributes: [
                         new _2_tl_js_1.types.DocumentAttributeVideo({
-                            duration: result_.gifDuration ?? 0,
-                            h: result_.gifHeight ?? 0,
-                            w: result_.gifWidth ?? 0,
+                            duration: result_.duration ?? 0,
+                            w: result_.width ?? 0,
+                            h: result_.height ?? 0,
                         }),
                     ],
                 });
             }
             else {
-                fileId_ = result_.gifFileId;
+                fileId_ = result_.fileId;
             }
             break;
         case "mpeg4Gif":
-            if ("mpeg4Url" in result_) {
+            if ("url" in result_) {
                 document = new _2_tl_js_1.types.InputWebDocument({
-                    url: result_.mpeg4Url,
+                    url: result_.url,
                     size: 0,
                     mime_type: "video/mp4",
                     attributes: [
                         new _2_tl_js_1.types.DocumentAttributeVideo({
                             nosound: true,
-                            duration: result_.mpeg4Duration ?? 0,
-                            w: result_.mpeg4Width ?? 0,
-                            h: result_.mpeg4Height ?? 0,
+                            duration: result_.duration ?? 0,
+                            w: result_.width ?? 0,
+                            h: result_.height ?? 0,
                             supports_streaming: true,
                         }),
                     ],
                 });
             }
             else {
-                fileId_ = result_.mpeg4FileId;
+                fileId_ = result_.fileId;
             }
             break;
         case "photo":
-            if ("photoUrl" in result_) {
+            if ("url" in result_) {
                 document = new _2_tl_js_1.types.InputWebDocument({
-                    url: result_.photoUrl,
+                    url: result_.url,
                     size: 0,
                     mime_type: "image/jpeg",
-                    attributes: [new _2_tl_js_1.types.DocumentAttributeImageSize({ w: result_.photoWidth ?? 0, h: result_.photoHeight ?? 0 })],
+                    attributes: [new _2_tl_js_1.types.DocumentAttributeImageSize({ w: result_.width ?? 0, h: result_.height ?? 0 })],
                 });
             }
             else {
-                fileId_ = result_.photoFileId;
+                fileId_ = result_.fileId;
             }
             break;
         case "sticker":
-            fileId_ = result_.stickerFileId;
+            fileId_ = result_.fileId;
             break;
         case "voice":
-            if ("voiceUrl" in result_) {
+            if ("url" in result_) {
                 document = new _2_tl_js_1.types.InputWebDocument({
-                    url: result_.voiceUrl,
+                    url: result_.url,
                     size: 0,
                     mime_type: "audio/mpeg",
                     attributes: [
@@ -152,7 +334,7 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
                 });
             }
             else {
-                fileId_ = result_.voiceFileId;
+                fileId_ = result_.fileId;
             }
             break;
     }
@@ -244,18 +426,18 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
         });
     }
     else if (result_.type == "article") {
-        if (!("messageText" in result_.inputMessageContent)) {
+        if (!("messageText" in result_.messageContent)) {
             (0, _0_deps_js_1.unreachable)();
         }
-        const [message, entities] = await parseText(result_.inputMessageContent.messageText, { entities: result_.inputMessageContent.entities, parseMode: result_.inputMessageContent.parseMode });
-        const noWebpage = result_.inputMessageContent?.linkPreview?.disable ? true : undefined;
-        const invertMedia = result_.inputMessageContent?.linkPreview?.aboveText ? true : undefined;
+        const [message, entities] = await parseText(result_.messageContent.messageText, { entities: result_.messageContent.entities, parseMode: result_.messageContent.parseMode });
+        const noWebpage = result_.messageContent?.linkPreview?.disable ? true : undefined;
+        const invertMedia = result_.messageContent?.linkPreview?.aboveText ? true : undefined;
         let sendMessage;
-        if (result_.inputMessageContent.linkPreview?.url) {
+        if (result_.messageContent.linkPreview?.url) {
             sendMessage = new _2_tl_js_1.types.InputBotInlineMessageMediaWebPage({
-                url: result_.inputMessageContent.linkPreview.url,
-                force_large_media: result_.inputMessageContent.linkPreview.largeMedia ? true : undefined,
-                force_small_media: result_.inputMessageContent.linkPreview.smallMedia ? true : undefined,
+                url: result_.messageContent.linkPreview.url,
+                force_large_media: result_.messageContent.linkPreview.largeMedia ? true : undefined,
+                force_small_media: result_.messageContent.linkPreview.smallMedia ? true : undefined,
                 optional: message.length ? undefined : true,
                 message,
                 entities,
@@ -282,7 +464,7 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
         });
     }
     else if (result_.type == "venue") {
-        if (!result_.fourSquareId || !result_.foursquareType) {
+        if (!result_.foursquareId || !result_.foursquareType) {
             (0, _0_deps_js_1.unreachable)();
         }
         return new _2_tl_js_1.types.InputBotInlineResult({
@@ -296,7 +478,7 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
                 address: result_.address,
                 provider: "foursquare",
                 title: result_.title,
-                venue_id: result_.fourSquareId,
+                venue_id: result_.foursquareId,
                 venue_type: result_.foursquareType,
                 reply_markup: replyMarkup,
             }),

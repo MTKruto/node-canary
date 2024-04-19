@@ -29,7 +29,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _InlineQueryManager_c;
+var _a, _InlineQueryManager_c, _InlineQueryManager_isExpired;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.InlineQueryManager = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
@@ -69,6 +69,22 @@ class InlineQueryManager {
             (0, _0_deps_js_1.unreachable)();
         }
     }
+    async sendInlineQuery(userId, chatId, params) {
+        const bot = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputUser(userId), peer = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputPeer(chatId), query = params?.query ?? "", offset = params?.offset ?? "";
+        const botId = (0, _2_tl_js_1.peerToChatId)(bot), peerId = (0, _2_tl_js_1.peerToChatId)(peer);
+        const maybeResults = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageStorage.getInlineQueryResults(botId, peerId, query, offset);
+        if (maybeResults != null && !__classPrivateFieldGet(_a, _a, "m", _InlineQueryManager_isExpired).call(_a, maybeResults[1], maybeResults[0].cache_time)) {
+            return (0, _3_types_js_1.constructInlineQueryAnswer)(maybeResults[0]);
+        }
+        const then = new Date();
+        const results = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").api.messages.getInlineBotResults({ bot, peer, query, offset });
+        if (results.cache_time > 0) {
+            await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageStorage.setInlineQueryResults(botId, peerId, query, offset, results, then);
+        }
+        return (0, _3_types_js_1.constructInlineQueryAnswer)(results);
+    }
 }
 exports.InlineQueryManager = InlineQueryManager;
-_InlineQueryManager_c = new WeakMap();
+_a = InlineQueryManager, _InlineQueryManager_c = new WeakMap(), _InlineQueryManager_isExpired = function _InlineQueryManager_isExpired(date, cacheTime) {
+    return (Date.now() - date.getTime()) / 1000 > cacheTime;
+};

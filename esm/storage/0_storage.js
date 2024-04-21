@@ -78,6 +78,8 @@ export const K = {
         inlineQueryAnswer: (userId, chatId, query, offset) => [...K.cache.inlineQueryAnswers(), userId, chatId, query, offset],
         callbackQueryAnswers: () => [K.cache.P("callbackQueryAnswers")],
         callbackQueryAnswer: (chatId, messageId, question) => [...K.cache.callbackQueryAnswers(), chatId, messageId, question],
+        fullChats: () => [K.cache.P("fullChats")],
+        fullChat: (chatId) => [...K.cache.fullChats(), chatId],
     },
     messages: {
         P: (string) => `messages.${string}`,
@@ -432,6 +434,12 @@ export class Storage {
             return null;
         }
     }
+    async setFullChat(chatId, fullChat) {
+        await this.setTlObject(K.cache.fullChat(chatId), fullChat);
+    }
+    async getFullChat(chatId) {
+        return await this.getTlObject(K.cache.fullChat(chatId));
+    }
     async setUpdate(boxId, update) {
         await this.setTlObject(K.updates.update(boxId, __classPrivateFieldGet(this, _Storage_instances, "m", _Storage_getUpdateId).call(this, update)), update);
     }
@@ -489,6 +497,11 @@ export class Storage {
             await this.set(key, null);
         }
     }
+    async deleteFullChats() {
+        for await (const [key] of await this.getMany({ prefix: K.cache.fullChats() })) {
+            await this.set(key, null);
+        }
+    }
     async deleteStickerSetNames() {
         for await (const [key] of await this.getMany({ prefix: K.cache.stickerSetNames() })) {
             await this.set(key, null);
@@ -515,6 +528,7 @@ export class Storage {
             this.deleteBusinessConnections(),
             this.deleteInlineQueryAnswers(),
             this.deleteCallbackQueryAnswers(),
+            this.deleteFullChats(),
             this.deleteStickerSetNames(),
             this.deletePeers(),
             this.deleteUsernames(),

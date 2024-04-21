@@ -64,6 +64,8 @@ export declare const K: {
         inlineQueryAnswer: (userId: number, chatId: number, query: string, offset: string) => StorageKeyPart[];
         callbackQueryAnswers: () => StorageKeyPart[];
         callbackQueryAnswer: (chatId: number, messageId: number, question: string) => StorageKeyPart[];
+        fullChats: () => StorageKeyPart[];
+        fullChat: (chatId: number) => StorageKeyPart[];
     };
     messages: {
         P: (string: string) => string;
@@ -157,6 +159,8 @@ export declare abstract class Storage {
     getInlineQueryAnswer(userId: number, chatId: number, query: string, offset: string): Promise<[types.messages.BotResults, Date] | null>;
     setCallbackQueryAnswer(chatId: number, messageId: number, question: string, answer: types.messages.BotCallbackAnswer): Promise<void>;
     getCallbackQueryAnswer(chatId: number, messageId: number, question: string): Promise<[types.messages.BotCallbackAnswer, Date] | null>;
+    setFullChat(chatId: number, fullChat: types.users.UserFull | types.ChannelFull | types.messages.ChatFull | null): Promise<void>;
+    getFullChat(chatId: number): Promise<types.users.UserFull | types.ChannelFull | types.messages.ChatFull | null>;
     setUpdate(boxId: bigint, update: enums.Update): Promise<void>;
     deleteUpdates(): Promise<void>;
     getFirstUpdate(boxId: bigint): Promise<[readonly StorageKeyPart[], enums.Update] | null>;
@@ -167,6 +171,7 @@ export declare abstract class Storage {
     deleteBusinessConnections(): Promise<void>;
     deleteInlineQueryAnswers(): Promise<void>;
     deleteCallbackQueryAnswers(): Promise<void>;
+    deleteFullChats(): Promise<void>;
     deleteStickerSetNames(): Promise<void>;
     deletePeers(): Promise<void>;
     deleteUsernames(): Promise<void>;

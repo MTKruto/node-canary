@@ -33,6 +33,7 @@ var _Storage_instances, _Storage_authKeyId, _Storage_resetAuthKeyId, _Storage_ac
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Storage = exports.K = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
+const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 // key parts
@@ -452,12 +453,12 @@ class Storage {
     }
     async assertUser(source) {
         if (await this.getAccountType() != "user") {
-            throw new Error(`${source}: not user a client`);
+            throw new _0_errors_js_1.InputError(`${source}: not user a client`);
         }
     }
     async assertBot(source) {
         if (await this.getAccountType() != "bot") {
-            throw new Error(`${source}: not a bot client`);
+            throw new _0_errors_js_1.InputError(`${source}: not a bot client`);
         }
     }
     async deleteFiles() {

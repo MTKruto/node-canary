@@ -67,6 +67,7 @@ export class InlineQueryManager {
         }
     }
     async sendInlineQuery(userId, chatId, params) {
+        await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").storage.assertUser("sendInlineQuery");
         const bot = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputUser(userId), peer = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputPeer(chatId), query = params?.query ?? "", offset = params?.offset ?? "";
         const botId = peerToChatId(bot), peerId = peerToChatId(peer);
         const maybeResults = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageStorage.getInlineQueryAnswer(botId, peerId, query, offset);

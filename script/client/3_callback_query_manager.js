@@ -53,6 +53,7 @@ class CallbackQueryManager {
         });
     }
     async sendCallbackQuery(chatId, messageId, question) {
+        await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").storage.assertUser("sendCallbackQuery");
         (0, _0_utilities_js_1.checkMessageId)(messageId);
         (0, _3_types_js_1.validateCallbackQueryQuestion)(question);
         const peer = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").getInputPeer(chatId), peerId = (0, _2_tl_js_1.peerToChatId)(peer), questionKey = JSON.stringify(question);

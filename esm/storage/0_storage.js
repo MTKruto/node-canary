@@ -30,6 +30,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _Storage_instances, _Storage_authKeyId, _Storage_resetAuthKeyId, _Storage_accountId, _Storage_accountType, _Storage_getUpdateId;
 import { AssertionError, unreachable } from "../0_deps.js";
+import { InputError } from "../0_errors.js";
 import { base64DecodeUrlSafe, base64EncodeUrlSafe, bigIntFromBuffer, rleDecode, rleEncode, sha1, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { peerToChatId, serialize, TLObject, TLReader, TLWriter, types } from "../2_tl.js";
 // key parts
@@ -449,12 +450,12 @@ export class Storage {
     }
     async assertUser(source) {
         if (await this.getAccountType() != "user") {
-            throw new Error(`${source}: not user a client`);
+            throw new InputError(`${source}: not user a client`);
         }
     }
     async assertBot(source) {
         if (await this.getAccountType() != "bot") {
-            throw new Error(`${source}: not a bot client`);
+            throw new InputError(`${source}: not a bot client`);
         }
     }
     async deleteFiles() {

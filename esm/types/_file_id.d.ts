@@ -110,6 +110,7 @@ type FileLocation = {
     id: bigint;
     accessHash: bigint;
 };
+/** @unlisted */
 export interface FileId {
     type: FileType;
     dcId: number;

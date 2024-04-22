@@ -1107,7 +1107,7 @@ class Client extends Composer {
             return new _2_tl_js_1.types.InputPeerSelf();
         }
         const inputPeer = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getInputPeerInner).call(this, id);
-        if ((inputPeer instanceof _2_tl_js_1.types.InputPeerUser || inputPeer instanceof _2_tl_js_1.types.InputPeerChannel && inputPeer.access_hash == 0n) && await this.storage.getAccountType() == "bot") {
+        if (((inputPeer instanceof _2_tl_js_1.types.InputPeerUser || inputPeer instanceof _2_tl_js_1.types.InputPeerChannel) && inputPeer.access_hash == 0n) && await this.storage.getAccountType() == "bot") {
             if ("channel_id" in inputPeer) {
                 inputPeer.access_hash = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getChannelAccessHash).call(this, inputPeer.channel_id);
             }

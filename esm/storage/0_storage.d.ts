@@ -159,8 +159,8 @@ export declare abstract class Storage {
     getInlineQueryAnswer(userId: number, chatId: number, query: string, offset: string): Promise<[types.messages.BotResults, Date] | null>;
     setCallbackQueryAnswer(chatId: number, messageId: number, question: string, answer: types.messages.BotCallbackAnswer): Promise<void>;
     getCallbackQueryAnswer(chatId: number, messageId: number, question: string): Promise<[types.messages.BotCallbackAnswer, Date] | null>;
-    setFullChat(chatId: number, fullChat: types.users.UserFull | types.ChannelFull | types.messages.ChatFull | null): Promise<void>;
-    getFullChat(chatId: number): Promise<types.users.UserFull | types.ChannelFull | types.messages.ChatFull | null>;
+    setFullChat(chatId: number, fullChat: types.UserFull | types.ChannelFull | types.ChatFull | null): Promise<void>;
+    getFullChat(chatId: number): Promise<types.UserFull | types.ChannelFull | types.ChatFull | null>;
     setUpdate(boxId: bigint, update: enums.Update): Promise<void>;
     deleteUpdates(): Promise<void>;
     getFirstUpdate(boxId: bigint): Promise<[readonly StorageKeyPart[], enums.Update] | null>;

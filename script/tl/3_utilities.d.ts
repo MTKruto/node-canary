@@ -20,7 +20,7 @@
 import { enums, types } from "./2_types.js";
 export declare function getChannelChatId(channelId: bigint): number;
 export type AnyEntity = types.User | types.Channel | types.ChannelForbidden | types.Chat | types.ChatForbidden;
-export declare function peerToChatId(peer: enums.Peer | enums.InputPeer | AnyEntity | {
+export declare function peerToChatId(peer: enums.Peer | enums.InputPeer | AnyEntity | types.ChannelFull | types.UserFull | types.ChatFull | {
     channel_id: bigint;
 } | {
     user_id: bigint;

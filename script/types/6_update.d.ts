@@ -31,7 +31,7 @@ import { ChatMemberUpdated } from "./3_chat_member_updated.js";
 import { Story } from "./3_story.js";
 import { Message } from "./4_message.js";
 import { CallbackQuery } from "./5_callback_query.js";
-import { Chat } from "./5_chat.js";
+import { ChatListItem } from "./5_chat_list_item.js";
 /**
  * A client's connection state was changed.
  *
@@ -165,14 +165,14 @@ export interface UpdateChosenInlineResult {
  */
 export interface UpdateNewChat {
     /** The newly added chat. */
-    newChat: Chat;
+    newChat: ChatListItem;
 }
 /**
  * A chat in the chat list was edited. User-only.
  * @unlisted
  */
 export interface UpdateEditedChat {
-    editedChat: Chat;
+    editedChat: ChatListItem;
 }
 /**
  * A chat was removed from the chat list. User-only.

@@ -28,13 +28,13 @@ function getChannelChatId(channelId) {
 }
 exports.getChannelChatId = getChannelChatId;
 function peerToChatId(peer) {
-    if (peer instanceof _2_types_js_1.types.PeerUser || peer instanceof _2_types_js_1.types.InputPeerUser || peer instanceof _2_types_js_1.types.User || "user_id" in peer) {
+    if (peer instanceof _2_types_js_1.types.PeerUser || peer instanceof _2_types_js_1.types.InputPeerUser || peer instanceof _2_types_js_1.types.User || peer instanceof _2_types_js_1.types.UserFull || "user_id" in peer) {
         return Number("id" in peer ? peer.id : peer.user_id);
     }
-    else if (peer instanceof _2_types_js_1.types.PeerChat || peer instanceof _2_types_js_1.types.InputPeerChat || peer instanceof _2_types_js_1.types.Chat || peer instanceof _2_types_js_1.types.ChatForbidden || "chat_id" in peer) {
+    else if (peer instanceof _2_types_js_1.types.PeerChat || peer instanceof _2_types_js_1.types.InputPeerChat || peer instanceof _2_types_js_1.types.Chat || peer instanceof _2_types_js_1.types.ChatForbidden || peer instanceof _2_types_js_1.types.ChatFull || "chat_id" in peer) {
         return -Number("id" in peer ? peer.id : peer.chat_id);
     }
-    else if (peer instanceof _2_types_js_1.types.PeerChannel || peer instanceof _2_types_js_1.types.InputPeerChannel || peer instanceof _2_types_js_1.types.Channel || peer instanceof _2_types_js_1.types.ChannelForbidden || "channel_id" in peer) {
+    else if (peer instanceof _2_types_js_1.types.PeerChannel || peer instanceof _2_types_js_1.types.InputPeerChannel || peer instanceof _2_types_js_1.types.Channel || peer instanceof _2_types_js_1.types.ChannelForbidden || peer instanceof _2_types_js_1.types.ChannelFull || "channel_id" in peer) {
         return getChannelChatId("id" in peer ? peer.id : peer.channel_id);
     }
     else {

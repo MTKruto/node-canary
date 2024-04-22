@@ -41,6 +41,8 @@ export interface ChatPPrivate extends _ChatPBase {
     lastName?: string;
     /** The user's main username. */
     username?: string;
+    /** The user's additional usernames. */
+    also?: string[];
     /** Whether the user has been identified as scam. */
     isScam: boolean;
     /** Whether the user has been identified as an impersonator. */
@@ -68,6 +70,8 @@ export interface ChatPChannelBase extends _ChatPBase {
     title: string;
     /** The main username of the chat or channel. */
     username?: string;
+    /** The chat or channel's additional usernames. */
+    also?: string[];
     /** Whether the chat or channel has been identified as scam. */
     isScam: boolean;
     /** Whether the chat or channel has been identified as an impersonator. */

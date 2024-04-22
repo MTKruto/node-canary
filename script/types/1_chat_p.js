@@ -99,6 +99,7 @@ function constructChatP(chat) {
             };
         }
         chat_.username = chat.username ?? chat.usernames?.[0].username;
+        chat_.also = chat.usernames?.map((v) => v.username).filter((v) => v != chat_.username);
         if (chat_.isRestricted) {
             chat_.restrictionReason = (chat.restriction_reason ?? []).map(_0_restriction_reason_js_1.constructRestrictionReason);
         }

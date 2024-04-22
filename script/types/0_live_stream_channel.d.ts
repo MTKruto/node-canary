@@ -18,9 +18,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { types } from "../2_tl.js";
+/** A live stream channel. */
 export interface LiveStreamChannel {
+    /** The live stream channel's unique identifier. */
     id: number;
+    /** The scale of the live stream channel's chunks. Duration of each chunk is equal to 1000 / 2 ^ scale. ` */
     scale: number;
+    /** The live stream channel's last timestamp. */
     timestamp: number;
 }
 export declare function constructLiveStreamChannel(channel: types.GroupCallStreamChannel): LiveStreamChannel;

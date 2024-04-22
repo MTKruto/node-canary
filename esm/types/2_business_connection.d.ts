@@ -20,11 +20,17 @@
 import { types } from "../2_tl.js";
 import { EntityGetter } from "./_getters.js";
 import { User } from "./1_user.js";
+/** A business connection. */
 export interface BusinessConnection {
+    /** The business connection's unique identifier. */
     id: string;
+    /** The business account that the connection is made with. */
     user: User;
+    /** The point in time of which the connection was recently updated. */
     date: Date;
+    /** Whether the bot can reply to older chats. */
     canReply: boolean;
+    /** Whether the connection is active. */
     isEnabled: boolean;
 }
 export declare function constructBusinessConnection(connection: types.BotBusinessConnection, getEntity: EntityGetter): Promise<BusinessConnection>;

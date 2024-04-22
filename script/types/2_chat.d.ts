@@ -24,19 +24,24 @@ import { ChatPChannel, ChatPGroup, ChatPPrivate, ChatPSupergroup } from "./1_cha
 import { Photo } from "./1_photo.js";
 import { Location } from "./0_location.js";
 import { Birthday } from "./0_birthday.js";
+/** @unlisted */
 export interface ChatBase {
+    /** The chat's photo. */
     photo?: Photo;
 }
 /** @unlisted */
 export interface ChatChannel extends ChatBase, ChatPChannel {
+    /** The channel's video chat ID. */
     videoChatId?: string;
 }
 /** @unlisted */
 export interface ChatSupergroup extends ChatBase, ChatPSupergroup {
+    /** The chat's video chat ID. */
     videoChatId?: string;
 }
 /** @unlisted */
 export interface ChatGroup extends ChatBase, ChatPGroup {
+    /** The chat's video chat ID. */
     videoChatId?: string;
 }
 /** @unlisted */

@@ -1100,7 +1100,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      *
      * @method vc
      * @param chatId The chat to schedule the video chat in.
-     * @param startAt The point of time in which the video chat should be started.
+     * @param startAt A point in time within the future in which the video chat will be started.
      * @returns The scheduled video chat.
      */
     scheduleVideoChat(chatId: ID, startAt: Date, params?: ScheduleVideoChatParams): Promise<VideoChatScheduled>;

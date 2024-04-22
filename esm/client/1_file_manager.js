@@ -9,7 +9,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _FileManager_instances, _a, _FileManager_c, _FileManager_Lupload, _FileManager_UPLOAD_MAX_CHUNK_SIZE, _FileManager_DOWNLOAD_MAX_CHUNK_SIZE, _FileManager_BIG_FILE_THRESHOLD, _FileManager_UPLOAD_REQUEST_PER_CONNECTION, _FileManager_uploadStream, _FileManager_uploadBuffer, _FileManager_handleUploadError, _FileManager_getFileContents, _FileManager_downloadInner, _FileManager_CUSTOM_EMOJI_TTL;
+var _FileManager_instances, _a, _FileManager_c, _FileManager_Lupload, _FileManager_UPLOAD_MAX_CHUNK_SIZE, _FileManager_DOWNLOAD_MAX_CHUNK_SIZE, _FileManager_BIG_FILE_THRESHOLD, _FileManager_UPLOAD_REQUEST_PER_CONNECTION, _FileManager_uploadStream, _FileManager_uploadBuffer, _FileManager_handleUploadError, _FileManager_getFileContents, _FileManager_CUSTOM_EMOJI_TTL;
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
  * Copyright (C) 2023-2024 Roj <https://roj.im/>
@@ -84,6 +84,51 @@ export class FileManager {
             return new types.InputFileBig({ id: fileId, parts: result.parts, name });
         }
     }
+    async *downloadInner(location, dcId, params) {
+        const id = "id" in location ? location.id : "photo_id" in location ? location.photo_id : null;
+        if (id != null && __classPrivateFieldGet(this, _FileManager_c, "f").storage.supportsFiles) {
+            const file = await __classPrivateFieldGet(this, _FileManager_c, "f").storage.getFile(id);
+            const partOffset = file == null ? 0 : params?.offset ? Math.ceil(10 / file[1]) - 1 : 0;
+            if (file != null && file[0] > 0) {
+                yield* __classPrivateFieldGet(this, _FileManager_c, "f").storage.iterFileParts(id, file[0], partOffset);
+                return;
+            }
+        }
+        const chunkSize = params?.chunkSize ?? __classPrivateFieldGet(_a, _a, "f", _FileManager_DOWNLOAD_MAX_CHUNK_SIZE);
+        _a.validateChunkSize(chunkSize, __classPrivateFieldGet(_a, _a, "f", _FileManager_DOWNLOAD_MAX_CHUNK_SIZE));
+        const connection = __classPrivateFieldGet(this, _FileManager_c, "f").getCdnConnection(dcId);
+        await connection.connect();
+        const limit = chunkSize;
+        let offset = params?.offset ? BigInt(params.offset) : 0n;
+        let part = 0;
+        try {
+            while (true) {
+                const file = await connection.api.upload.getFile({ location, offset, limit });
+                if (file instanceof types.upload.File) {
+                    yield file.bytes;
+                    if (id != null) {
+                        await __classPrivateFieldGet(this, _FileManager_c, "f").storage.saveFilePart(id, part, file.bytes);
+                    }
+                    ++part;
+                    if (file.bytes.length < limit) {
+                        if (id != null) {
+                            await __classPrivateFieldGet(this, _FileManager_c, "f").storage.setFilePartCount(id, part + 1, chunkSize);
+                        }
+                        break;
+                    }
+                    else {
+                        offset += BigInt(file.bytes.length);
+                    }
+                }
+                else {
+                    unreachable();
+                }
+            }
+        }
+        finally {
+            drop(connection.disconnect());
+        }
+    }
     static validateChunkSize(chunkSize, max) {
         if (chunkSize <= 0) {
             throw new InputError("chunkSize must be bigger than zero.");
@@ -109,7 +154,7 @@ export class FileManager {
                     const big = fileId_.location.source.type == PhotoSourceType.ChatPhotoBig;
                     const peer = await __classPrivateFieldGet(this, _FileManager_c, "f").getInputPeer(Number(fileId_.location.source.chatId)); // TODO: use access hash from source?
                     const location = new types.InputPeerPhotoFileLocation({ big: big ? true : undefined, peer, photo_id: fileId_.location.id });
-                    yield* __classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_downloadInner).call(this, location, fileId_.dcId, params);
+                    yield* this.downloadInner(location, fileId_.dcId, params);
                     break;
                 }
                 case FileType.Photo: {
@@ -119,7 +164,7 @@ export class FileManager {
                         file_reference: fileId_.fileReference ?? new Uint8Array(),
                         thumb_size: "thumbnailType" in fileId_.location.source ? String.fromCharCode(fileId_.location.source.thumbnailType) : "",
                     });
-                    yield* __classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_downloadInner).call(this, location, fileId_.dcId, params);
+                    yield* this.downloadInner(location, fileId_.dcId, params);
                     break;
                 }
                 case FileType.Thumbnail: {
@@ -129,7 +174,7 @@ export class FileManager {
                         file_reference: fileId_.fileReference ?? new Uint8Array(),
                         thumb_size: "thumbnailType" in fileId_.location.source ? String.fromCharCode(fileId_.location.source.thumbnailType) : unreachable(),
                     });
-                    yield* __classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_downloadInner).call(this, location, fileId_.dcId, params);
+                    yield* this.downloadInner(location, fileId_.dcId, params);
                     break;
                 }
             }
@@ -141,7 +186,7 @@ export class FileManager {
                 file_reference: fileId_.fileReference ?? new Uint8Array(),
                 thumb_size: "",
             });
-            yield* __classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_downloadInner).call(this, location, fileId_.dcId, params);
+            yield* this.downloadInner(location, fileId_.dcId, params);
         }
         else {
             unreachable();
@@ -373,50 +418,6 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
         }
     }
     return { size: params?.fileSize ? params.fileSize : size, name, contents };
-}, _FileManager_downloadInner = async function* _FileManager_downloadInner(location, dcId, params) {
-    const id = "id" in location ? location.id : "photo_id" in location ? location.photo_id : null;
-    if (id != null && __classPrivateFieldGet(this, _FileManager_c, "f").storage.supportsFiles) {
-        const file = await __classPrivateFieldGet(this, _FileManager_c, "f").storage.getFile(id);
-        const partOffset = file == null ? 0 : params?.offset ? Math.ceil(10 / file[1]) - 1 : 0;
-        if (file != null && file[0] > 0) {
-            yield* __classPrivateFieldGet(this, _FileManager_c, "f").storage.iterFileParts(id, file[0], partOffset);
-            return;
-        }
-    }
-    const chunkSize = params?.chunkSize ?? __classPrivateFieldGet(_a, _a, "f", _FileManager_DOWNLOAD_MAX_CHUNK_SIZE);
-    _a.validateChunkSize(chunkSize, __classPrivateFieldGet(_a, _a, "f", _FileManager_DOWNLOAD_MAX_CHUNK_SIZE));
-    const connection = __classPrivateFieldGet(this, _FileManager_c, "f").getCdnConnection(dcId);
-    await connection.connect();
-    const limit = chunkSize;
-    let offset = params?.offset ? BigInt(params.offset) : 0n;
-    let part = 0;
-    try {
-        while (true) {
-            const file = await connection.api.upload.getFile({ location, offset, limit });
-            if (file instanceof types.upload.File) {
-                yield file.bytes;
-                if (id != null) {
-                    await __classPrivateFieldGet(this, _FileManager_c, "f").storage.saveFilePart(id, part, file.bytes);
-                }
-                ++part;
-                if (file.bytes.length < limit) {
-                    if (id != null) {
-                        await __classPrivateFieldGet(this, _FileManager_c, "f").storage.setFilePartCount(id, part + 1, chunkSize);
-                    }
-                    break;
-                }
-                else {
-                    offset += BigInt(file.bytes.length);
-                }
-            }
-            else {
-                unreachable();
-            }
-        }
-    }
-    finally {
-        drop(connection.disconnect());
-    }
 };
 _FileManager_UPLOAD_MAX_CHUNK_SIZE = { value: 512 * kilobyte };
 _FileManager_DOWNLOAD_MAX_CHUNK_SIZE = { value: 1 * megabyte };

@@ -45,20 +45,22 @@ export async function constructChat(fullChat, getEntity) {
         if (chat == null)
             unreachable();
         const chatP = constructChatP(chat);
-        return {
+        return cleanObject({
             ...chatP,
             photo: fullChat.chat_photo && fullChat.chat_photo instanceof types.Photo ? constructPhoto(fullChat.chat_photo) : undefined,
-        };
+            videoChatId: fullChat.call ? String(fullChat.call.id) : undefined,
+        });
     }
     else if (fullChat instanceof types.ChannelFull) {
         const chat = await getEntity(new types.PeerChannel({ channel_id: fullChat.id }));
         if (chat == null)
             unreachable();
         const chatP = constructChatP(chat);
-        return {
+        return cleanObject({
             ...chatP,
             photo: fullChat.chat_photo && fullChat.chat_photo instanceof types.Photo ? constructPhoto(fullChat.chat_photo) : undefined,
-        };
+            videoChatId: fullChat.call ? String(fullChat.call.id) : undefined,
+        });
     }
     unreachable();
 }

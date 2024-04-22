@@ -48,20 +48,22 @@ async function constructChat(fullChat, getEntity) {
         if (chat == null)
             (0, _0_deps_js_1.unreachable)();
         const chatP = (0, _1_chat_p_js_1.constructChatP)(chat);
-        return {
+        return (0, _1_utilities_js_1.cleanObject)({
             ...chatP,
             photo: fullChat.chat_photo && fullChat.chat_photo instanceof _2_tl_js_1.types.Photo ? (0, _1_photo_js_1.constructPhoto)(fullChat.chat_photo) : undefined,
-        };
+            videoChatId: fullChat.call ? String(fullChat.call.id) : undefined,
+        });
     }
     else if (fullChat instanceof _2_tl_js_1.types.ChannelFull) {
         const chat = await getEntity(new _2_tl_js_1.types.PeerChannel({ channel_id: fullChat.id }));
         if (chat == null)
             (0, _0_deps_js_1.unreachable)();
         const chatP = (0, _1_chat_p_js_1.constructChatP)(chat);
-        return {
+        return (0, _1_utilities_js_1.cleanObject)({
             ...chatP,
             photo: fullChat.chat_photo && fullChat.chat_photo instanceof _2_tl_js_1.types.Photo ? (0, _1_photo_js_1.constructPhoto)(fullChat.chat_photo) : undefined,
-        };
+            videoChatId: fullChat.call ? String(fullChat.call.id) : undefined,
+        });
     }
     (0, _0_deps_js_1.unreachable)();
 }

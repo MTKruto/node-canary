@@ -80,6 +80,10 @@ export const K = {
         callbackQueryAnswer: (chatId, messageId, question) => [...K.cache.callbackQueryAnswers(), chatId, messageId, question],
         fullChats: () => [K.cache.P("fullChats")],
         fullChat: (chatId) => [...K.cache.fullChats(), chatId],
+        groupCalls: () => [K.cache.P("groupCalls")],
+        groupCall: (id) => [...K.cache.groupCalls(), id],
+        groupCallAccessHashes: () => [K.cache.P("groupCallAccessHashes")],
+        groupCallAccessHash: (id) => [...K.cache.groupCallAccessHashes(), id],
     },
     messages: {
         P: (string) => `messages.${string}`,
@@ -440,6 +444,18 @@ export class Storage {
     async getFullChat(chatId) {
         return await this.getTlObject(K.cache.fullChat(chatId));
     }
+    async setGroupCall(id, groupCall) {
+        await this.setTlObject(K.cache.groupCall(id), groupCall);
+    }
+    async getGroupCall(id) {
+        return await this.getTlObject(K.cache.groupCall(id));
+    }
+    async setGroupCallAccessHash(id, accessHash) {
+        await this.set(K.cache.groupCallAccessHash(id), accessHash);
+    }
+    async getGroupCallAccessHash(id) {
+        return await this.get(K.cache.groupCallAccessHash(id));
+    }
     async setUpdate(boxId, update) {
         await this.setTlObject(K.updates.update(boxId, __classPrivateFieldGet(this, _Storage_instances, "m", _Storage_getUpdateId).call(this, update)), update);
     }
@@ -502,6 +518,11 @@ export class Storage {
             await this.set(key, null);
         }
     }
+    async deleteGroupCalls() {
+        for await (const [key] of await this.getMany({ prefix: K.cache.groupCalls() })) {
+            await this.set(key, null);
+        }
+    }
     async deleteStickerSetNames() {
         for await (const [key] of await this.getMany({ prefix: K.cache.stickerSetNames() })) {
             await this.set(key, null);
@@ -529,6 +550,7 @@ export class Storage {
             this.deleteInlineQueryAnswers(),
             this.deleteCallbackQueryAnswers(),
             this.deleteFullChats(),
+            this.deleteGroupCalls(),
             this.deleteStickerSetNames(),
             this.deletePeers(),
             this.deleteUsernames(),

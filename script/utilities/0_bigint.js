@@ -86,9 +86,13 @@ function getRandomBigInt(byteLength, little, signed) {
     return bigIntFromBuffer(randomBytes, little, signed);
 }
 exports.getRandomBigInt = getRandomBigInt;
-/** Get a random ID. Useful when calling API functions directly. */
-function getRandomId() {
-    return getRandomBigInt(8, true, true);
+function getRandomId(number) {
+    if (number) {
+        return Number(getRandomBigInt(4, true, true));
+    }
+    else {
+        return getRandomBigInt(8, true, true);
+    }
 }
 exports.getRandomId = getRandomId;
 function gcd(a, b) {

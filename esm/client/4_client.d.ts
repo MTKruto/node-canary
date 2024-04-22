@@ -21,9 +21,9 @@ import { MaybePromise } from "../1_utilities.js";
 import { enums, functions, types } from "../2_tl.js";
 import { Storage } from "../3_storage.js";
 import { DC } from "../3_transport.js";
-import { BotCommand, BusinessConnection, CallbackQueryAnswer, CallbackQueryQuestion, Chat, ChatAction, ChatListItem, ChatMember, ChatP, FileSource, ID, InactiveChat, InlineQueryAnswer, InlineQueryResult, InputMedia, InputStoryContent, InviteLink, Message, MessageAnimation, MessageAudio, MessageContact, MessageDice, MessageDocument, MessageLocation, MessagePhoto, MessagePoll, MessageSticker, MessageText, MessageVenue, MessageVideo, MessageVideoNote, MessageVoice, NetworkStatistics, ParseMode, Poll, Reaction, Sticker, Story, Update, User } from "../3_types.js";
+import { BotCommand, BusinessConnection, CallbackQueryAnswer, CallbackQueryQuestion, Chat, ChatAction, ChatListItem, ChatMember, ChatP, FileSource, ID, InactiveChat, InlineQueryAnswer, InlineQueryResult, InputMedia, InputStoryContent, InviteLink, LiveStreamChannel, Message, MessageAnimation, MessageAudio, MessageContact, MessageDice, MessageDocument, MessageLocation, MessagePhoto, MessagePoll, MessageSticker, MessageText, MessageVenue, MessageVideo, MessageVideoNote, MessageVoice, NetworkStatistics, ParseMode, Poll, Reaction, Sticker, Story, Update, User, VideoChat, VideoChatActive, VideoChatScheduled } from "../3_types.js";
 import { Migrate } from "../4_errors.js";
-import { AddReactionParams, AnswerCallbackQueryParams, AnswerInlineQueryParams, AuthorizeUserParams, BanChatMemberParams, CreateInviteLinkParams, CreateStoryParams, DeleteMessageParams, DeleteMessagesParams, DownloadParams, EditMessageLiveLocationParams, EditMessageMediaParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetChatsParams, GetCreatedInviteLinksParams, GetHistoryParams, GetMyCommandsParams, PinMessageParams, ReplyParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendInlineQueryParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetMyCommandsParams, SetReactionsParams, StopPollParams } from "./0_params.js";
+import { AddReactionParams, AnswerCallbackQueryParams, AnswerInlineQueryParams, AuthorizeUserParams, BanChatMemberParams, CreateInviteLinkParams, CreateStoryParams, DeleteMessageParams, DeleteMessagesParams, DownloadLiveStreamChunkParams, DownloadParams, EditMessageLiveLocationParams, EditMessageMediaParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetChatsParams, GetCreatedInviteLinksParams, GetHistoryParams, GetMyCommandsParams, JoinVideoChatParams, PinMessageParams, ReplyParams, ScheduleVideoChatParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendInlineQueryParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetMyCommandsParams, SetReactionsParams, StartVideoChatParams, StopPollParams } from "./0_params.js";
 import { Api } from "./0_types.js";
 import { ClientPlainParams } from "./1_client_plain.js";
 import { Composer as Composer_, NextFunction } from "./1_composer.js";
@@ -1087,5 +1087,69 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param userId The identifier of the user to unblock.
      */
     unblockUser(userId: ID): Promise<void>;
+    /**
+     * Start a video chat. User-only.
+     *
+     * @method vc
+     * @param chatId The chat to start the video chat in.
+     * @returns The started video chat.
+     */
+    startVideoChat(chatId: ID, params?: StartVideoChatParams): Promise<VideoChatActive>;
+    /**
+     * Schedule a video chat. User-only.
+     *
+     * @method vc
+     * @param chatId The chat to schedule the video chat in.
+     * @param startAt The point of time in which the video chat should be started.
+     * @returns The scheduled video chat.
+     */
+    scheduleVideoChat(chatId: ID, startAt: Date, params?: ScheduleVideoChatParams): Promise<VideoChatScheduled>;
+    /**
+     * Join a video chat. User-only.
+     *
+     * @method vc
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param params_ WebRTC connection parameters.
+     * @returns Parameters to be passed to the used WebRTC library.
+     */
+    joinVideoChat(id: string, params_: string, params?: JoinVideoChatParams): Promise<string>;
+    /**
+     * Leave a video chat. User-only.
+     *
+     * @method vc
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     */
+    leaveVideoChat(id: string): Promise<void>;
+    /**
+     * Join a live stream. User-only.
+     *
+     * @method vc
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     */
+    joinLiveStream(id: string): Promise<void>;
+    /**
+     * Get a video chat. User-only.
+     *
+     * @method vc
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     */
+    getVideoChat(id: string): Promise<VideoChat>;
+    /**
+     * Get live stream channels. User-only.
+     *
+     * @method vc
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     */
+    getLiveStreamChannels(id: string): Promise<LiveStreamChannel[]>;
+    /**
+     * Download a live stream chunk. User-only.
+     *
+     * @method vc
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param channelId Stream channel ID.
+     * @param scale Stream channel scale.
+     * @param timestamp Millisecond timestamp of the chunk to download.
+     */
+    downloadLiveStreamChunk(id: string, channelId: number, scale: number, timestamp: number, params?: DownloadLiveStreamChunkParams): AsyncGenerator<Uint8Array, void, unknown>;
 }
 export {};

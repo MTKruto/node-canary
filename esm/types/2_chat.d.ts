@@ -30,13 +30,16 @@ export interface ChatBase {
 /** @unlisted */
 export interface ChatChannel extends ChatBase, ChatPChannel {
     also?: string[];
+    videoChatId?: string;
 }
 /** @unlisted */
 export interface ChatSupergroup extends ChatBase, ChatPSupergroup {
     also?: string[];
+    videoChatId?: string;
 }
 /** @unlisted */
 export interface ChatGroup extends ChatBase, ChatPGroup {
+    videoChatId?: string;
 }
 /** @unlisted */
 export interface ChatPrivate extends ChatBase, ChatPPrivate {

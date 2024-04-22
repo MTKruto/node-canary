@@ -83,6 +83,10 @@ exports.K = {
         callbackQueryAnswer: (chatId, messageId, question) => [...exports.K.cache.callbackQueryAnswers(), chatId, messageId, question],
         fullChats: () => [exports.K.cache.P("fullChats")],
         fullChat: (chatId) => [...exports.K.cache.fullChats(), chatId],
+        groupCalls: () => [exports.K.cache.P("groupCalls")],
+        groupCall: (id) => [...exports.K.cache.groupCalls(), id],
+        groupCallAccessHashes: () => [exports.K.cache.P("groupCallAccessHashes")],
+        groupCallAccessHash: (id) => [...exports.K.cache.groupCallAccessHashes(), id],
     },
     messages: {
         P: (string) => `messages.${string}`,
@@ -443,6 +447,18 @@ class Storage {
     async getFullChat(chatId) {
         return await this.getTlObject(exports.K.cache.fullChat(chatId));
     }
+    async setGroupCall(id, groupCall) {
+        await this.setTlObject(exports.K.cache.groupCall(id), groupCall);
+    }
+    async getGroupCall(id) {
+        return await this.getTlObject(exports.K.cache.groupCall(id));
+    }
+    async setGroupCallAccessHash(id, accessHash) {
+        await this.set(exports.K.cache.groupCallAccessHash(id), accessHash);
+    }
+    async getGroupCallAccessHash(id) {
+        return await this.get(exports.K.cache.groupCallAccessHash(id));
+    }
     async setUpdate(boxId, update) {
         await this.setTlObject(exports.K.updates.update(boxId, __classPrivateFieldGet(this, _Storage_instances, "m", _Storage_getUpdateId).call(this, update)), update);
     }
@@ -505,6 +521,11 @@ class Storage {
             await this.set(key, null);
         }
     }
+    async deleteGroupCalls() {
+        for await (const [key] of await this.getMany({ prefix: exports.K.cache.groupCalls() })) {
+            await this.set(key, null);
+        }
+    }
     async deleteStickerSetNames() {
         for await (const [key] of await this.getMany({ prefix: exports.K.cache.stickerSetNames() })) {
             await this.set(key, null);
@@ -532,6 +553,7 @@ class Storage {
             this.deleteInlineQueryAnswers(),
             this.deleteCallbackQueryAnswers(),
             this.deleteFullChats(),
+            this.deleteGroupCalls(),
             this.deleteStickerSetNames(),
             this.deletePeers(),
             this.deleteUsernames(),

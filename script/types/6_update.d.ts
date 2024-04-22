@@ -32,6 +32,7 @@ import { Story } from "./3_story.js";
 import { Message } from "./4_message.js";
 import { CallbackQuery } from "./5_callback_query.js";
 import { ChatListItem } from "./5_chat_list_item.js";
+import { VideoChat } from "./0_video_chat.js";
 /**
  * A client's connection state was changed.
  *
@@ -242,6 +243,13 @@ export interface UpdateNewStory {
 export interface UpdateBusinessConnection {
     businessConnection: BusinessConnection;
 }
+/**
+ * A video chat was started, scheduled, or ended.
+ * @unlisted
+ */
+export interface UpdateVideoChat {
+    videoChat: VideoChat;
+}
 /** @unlisted */
 export interface UpdateMap {
     message: UpdateNewMessage;
@@ -263,8 +271,9 @@ export interface UpdateMap {
     deletedStory: UpdateDeletedStory;
     story: UpdateNewStory;
     businessConnection: UpdateBusinessConnection;
+    videoChat: UpdateVideoChat;
 }
 /** @unlisted */
-export type UpdateIntersection<T> = T & Partial<UpdateConnectionState & UpdateAuthorizationState & UpdateNewMessage & UpdateEditedMessage & UpdateDeletedMessages & UpdateCallbackQuery & UpdateInlineQuery & UpdateChosenInlineResult & UpdateNewChat & UpdateEditedChat & UpdateDeletedChat & UpdateMessageInteractions & UpdateMessageReactionCount & UpdateMessageReactions & UpdateChatMember & UpdateMyChatMember & UpdateDeletedStory & UpdateNewStory & UpdateBusinessConnection>;
+export type UpdateIntersection<T> = T & Partial<UpdateConnectionState & UpdateAuthorizationState & UpdateNewMessage & UpdateEditedMessage & UpdateDeletedMessages & UpdateCallbackQuery & UpdateInlineQuery & UpdateChosenInlineResult & UpdateNewChat & UpdateEditedChat & UpdateDeletedChat & UpdateMessageInteractions & UpdateMessageReactionCount & UpdateMessageReactions & UpdateChatMember & UpdateMyChatMember & UpdateDeletedStory & UpdateNewStory & UpdateBusinessConnection & UpdateVideoChat>;
 /** An incoming update. */
-export type Update = UpdateConnectionState | UpdateAuthorizationState | UpdateNewMessage | UpdateEditedMessage | UpdateDeletedMessages | UpdateCallbackQuery | UpdateInlineQuery | UpdateChosenInlineResult | UpdateNewChat | UpdateEditedChat | UpdateDeletedChat | UpdateMessageInteractions | UpdateMessageReactionCount | UpdateMessageReactions | UpdateChatMember | UpdateMyChatMember | UpdateDeletedStory | UpdateNewStory | UpdateBusinessConnection;
+export type Update = UpdateConnectionState | UpdateAuthorizationState | UpdateNewMessage | UpdateEditedMessage | UpdateDeletedMessages | UpdateCallbackQuery | UpdateInlineQuery | UpdateChosenInlineResult | UpdateNewChat | UpdateEditedChat | UpdateDeletedChat | UpdateMessageInteractions | UpdateMessageReactionCount | UpdateMessageReactions | UpdateChatMember | UpdateMyChatMember | UpdateDeletedStory | UpdateNewStory | UpdateBusinessConnection | UpdateVideoChat;

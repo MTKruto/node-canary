@@ -56,9 +56,13 @@ export function getRandomBigInt(byteLength, little, signed) {
     dntShim.crypto.getRandomValues(randomBytes);
     return bigIntFromBuffer(randomBytes, little, signed);
 }
-/** Get a random ID. Useful when calling API functions directly. */
-export function getRandomId() {
-    return getRandomBigInt(8, true, true);
+export function getRandomId(number) {
+    if (number) {
+        return Number(getRandomBigInt(4, true, true));
+    }
+    else {
+        return getRandomBigInt(8, true, true);
+    }
 }
 export function gcd(a, b) {
     if (a == 0n) {

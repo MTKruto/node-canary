@@ -30,7 +30,7 @@ var _FileManager_instances, _a, _FileManager_c, _FileManager_Lupload, _FileManag
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import * as dntShim from "../_dnt.shims.js";
-import { assert, extension, path, unreachable } from "../0_deps.js";
+import { extension, path, unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { drop, getLogger, getRandomId, iterateReadableStream, kilobyte, megabyte, minute, mod, PartStream } from "../1_utilities.js";
 import { as, types } from "../2_tl.js";
@@ -291,14 +291,16 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
     const isBig = buffer.byteLength > __classPrivateFieldGet(_a, _a, "f", _FileManager_BIG_FILE_THRESHOLD);
     const partCount = Math.ceil(buffer.byteLength / chunkSize);
     let promises = new Array();
-    for (let part = 0; part < partCount;) {
+    main: for (let part = 0; part < partCount;) {
         for (let i = 0; i < pool.size; ++i) {
             const api = pool.api();
             for (let i = 0; i < __classPrivateFieldGet(_a, _a, "f", _FileManager_UPLOAD_REQUEST_PER_CONNECTION); ++i) {
                 const start = part * chunkSize;
                 const end = start + chunkSize;
                 const bytes = buffer.subarray(start, end);
-                assert(bytes.length != 0);
+                if (!bytes.length) {
+                    break main;
+                }
                 const thisPart = part++; // `thisPart` must be used instead of `part` in the promise body
                 promises.push(Promise.resolve().then(async () => {
                     while (true) {

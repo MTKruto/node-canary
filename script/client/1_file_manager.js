@@ -318,14 +318,16 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
     const isBig = buffer.byteLength > __classPrivateFieldGet(_a, _a, "f", _FileManager_BIG_FILE_THRESHOLD);
     const partCount = Math.ceil(buffer.byteLength / chunkSize);
     let promises = new Array();
-    for (let part = 0; part < partCount;) {
+    main: for (let part = 0; part < partCount;) {
         for (let i = 0; i < pool.size; ++i) {
             const api = pool.api();
             for (let i = 0; i < __classPrivateFieldGet(_a, _a, "f", _FileManager_UPLOAD_REQUEST_PER_CONNECTION); ++i) {
                 const start = part * chunkSize;
                 const end = start + chunkSize;
                 const bytes = buffer.subarray(start, end);
-                (0, _0_deps_js_1.assert)(bytes.length != 0);
+                if (!bytes.length) {
+                    break main;
+                }
                 const thisPart = part++; // `thisPart` must be used instead of `part` in the promise body
                 promises.push(Promise.resolve().then(async () => {
                     while (true) {

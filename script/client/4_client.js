@@ -264,7 +264,7 @@ class Client extends Composer {
                 }
                 (0, _0_deps_js_1.unreachable)();
             };
-            const chat_ = "messageReactions" in update ? update.messageReactions.chat : "messageReactionCount" in update ? update.messageReactionCount.chat : undefined;
+            const chat_ = "messageReactions" in update ? update.messageReactions.chat : "messageReactionCount" in update ? update.messageReactionCount.chat : "chatMember" in update ? update.chatMember.chat : undefined;
             const chat = chat_ ?? msg?.chat;
             const from = "callbackQuery" in update ? update.callbackQuery.from : "inlineQuery" in update ? update.inlineQuery.from : "message" in update ? update.message.from : "editedMessage" in update ? update.editedMessage?.from : undefined;
             const senderChat = msg?.senderChat;

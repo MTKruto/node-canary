@@ -266,7 +266,7 @@ class Client extends Composer {
             };
             const chat_ = "messageReactions" in update ? update.messageReactions.chat : "messageReactionCount" in update ? update.messageReactionCount.chat : "chatMember" in update ? update.chatMember.chat : undefined;
             const chat = chat_ ?? msg?.chat;
-            const from = "callbackQuery" in update ? update.callbackQuery.from : "inlineQuery" in update ? update.inlineQuery.from : "message" in update ? update.message.from : "editedMessage" in update ? update.editedMessage?.from : undefined;
+            const from = "callbackQuery" in update ? update.callbackQuery.from : "inlineQuery" in update ? update.inlineQuery.from : "message" in update ? update.message.from : "editedMessage" in update ? update.editedMessage?.from : "chatMember" in update ? update.chatMember.from : "messageReactions" in update ? update.messageReactions.user : undefined;
             const senderChat = msg?.senderChat;
             const getReplyToMessageId = (quote, chatId, messageId) => {
                 const isPrivate = chatId > 0;

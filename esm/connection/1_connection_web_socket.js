@@ -32,12 +32,10 @@ var _ConnectionWebSocket_instances, _ConnectionWebSocket_webSocket, _ConnectionW
 import * as dntShim from "../_dnt.shims.js";
 import { concat, unreachable } from "../0_deps.js";
 import { getLogger, Mutex } from "../1_utilities.js";
-import { ConnectionUnframed } from "./0_connection.js";
 const L = getLogger("ConnectionWebSocket");
 const errConnectionNotOpen = new Error("Connection not open");
-export class ConnectionWebSocket extends ConnectionUnframed {
+export class ConnectionWebSocket {
     constructor(url) {
-        super();
         _ConnectionWebSocket_instances.add(this);
         Object.defineProperty(this, "url", {
             enumerable: true,
@@ -50,6 +48,12 @@ export class ConnectionWebSocket extends ConnectionUnframed {
         _ConnectionWebSocket_wMutex.set(this, new Mutex());
         _ConnectionWebSocket_buffer.set(this, new Uint8Array());
         _ConnectionWebSocket_nextResolve.set(this, null);
+        Object.defineProperty(this, "stateChangeHandler", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         _ConnectionWebSocket_wasConnected.set(this, false);
         _ConnectionWebSocket_isConnecting.set(this, false);
         _ConnectionWebSocket_connectionError.set(this, null);

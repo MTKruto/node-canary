@@ -29,16 +29,11 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _StorageIndexedDB_instances, _StorageIndexedDB_name, _StorageIndexedDB_id, _StorageIndexedDB_supportsFiles, _StorageIndexedDB_fixKey;
-import { Storage } from "./0_storage.js";
 import { fixKey, getPrefixKeyRange, restoreKey } from "./1_utilities.js";
 const VERSION = 1;
 const KV_OBJECT_STORE = "kv";
-export class StorageIndexedDB extends Storage {
+export class StorageIndexedDB {
     constructor(name, params) {
-        if (typeof indexedDB == "undefined") {
-            throw new Error("Unavailable in current environment");
-        }
-        super();
         _StorageIndexedDB_instances.add(this);
         Object.defineProperty(this, "database", {
             enumerable: true,
@@ -49,14 +44,17 @@ export class StorageIndexedDB extends Storage {
         _StorageIndexedDB_name.set(this, void 0);
         _StorageIndexedDB_id.set(this, null);
         _StorageIndexedDB_supportsFiles.set(this, void 0);
+        if (typeof indexedDB == "undefined") {
+            throw new Error("Unavailable in current environment");
+        }
         __classPrivateFieldSet(this, _StorageIndexedDB_name, name, "f");
-        __classPrivateFieldSet(this, _StorageIndexedDB_supportsFiles, params?.fileStorage ?? true, "f");
+        __classPrivateFieldSet(this, _StorageIndexedDB_supportsFiles, params?.storeFiles ?? true, "f");
     }
     get name() {
         return __classPrivateFieldGet(this, _StorageIndexedDB_name, "f");
     }
     branch(id) {
-        const storage = new StorageIndexedDB(this.name);
+        const storage = new StorageIndexedDB(this.name, { storeFiles: __classPrivateFieldGet(this, _StorageIndexedDB_supportsFiles, "f") });
         __classPrivateFieldSet(storage, _StorageIndexedDB_id, id, "f");
         return storage;
     }
@@ -76,6 +74,9 @@ export class StorageIndexedDB extends Storage {
     }
     get supportsFiles() {
         return __classPrivateFieldGet(this, _StorageIndexedDB_supportsFiles, "f");
+    }
+    get mustSerialize() {
+        return true;
     }
     set(k, v, tx_) {
         k = __classPrivateFieldGet(this, _StorageIndexedDB_instances, "m", _StorageIndexedDB_fixKey).call(this, k);

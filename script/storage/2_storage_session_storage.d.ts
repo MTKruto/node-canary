@@ -19,9 +19,10 @@
  */
 import { MaybePromise } from "../1_utilities.js";
 import { GetManyFilter, Storage, StorageKeyPart } from "./0_storage.js";
-export declare class StorageSessionStorage extends Storage implements Storage {
+export declare class StorageSessionStorage implements Storage {
     #private;
     constructor(prefix: string);
+    get mustSerialize(): boolean;
     get prefix(): string;
     branch(id: string): StorageSessionStorage;
     initialize(): void;

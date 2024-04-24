@@ -29,19 +29,20 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _StorageSessionStorage_prefix;
-import { Storage } from "./0_storage.js";
 import { fromString, isInRange, toString } from "./1_utilities.js";
-export class StorageSessionStorage extends Storage {
+export class StorageSessionStorage {
     constructor(prefix) {
+        _StorageSessionStorage_prefix.set(this, void 0);
         if (typeof sessionStorage === "undefined") {
             throw new Error("Unavailable in current environment");
         }
         if (prefix.length <= 0) {
             throw new Error("Empty prefix");
         }
-        super();
-        _StorageSessionStorage_prefix.set(this, void 0);
         __classPrivateFieldSet(this, _StorageSessionStorage_prefix, prefix, "f");
+    }
+    get mustSerialize() {
+        return true;
     }
     get prefix() {
         return __classPrivateFieldGet(this, _StorageSessionStorage_prefix, "f");

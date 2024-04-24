@@ -19,12 +19,12 @@
  */
 import { MaybePromise } from "../1_utilities.js";
 import { GetManyFilter, Storage, StorageKeyPart } from "./0_storage.js";
-export declare class StorageMemory extends Storage implements Storage {
+export declare class StorageMemory implements Storage {
     #private;
     protected map: Map<string, unknown>;
-    constructor(authString?: string);
-    get isMemoryStorage(): boolean;
-    initialize(): Promise<void>;
+    constructor();
+    get mustSerialize(): boolean;
+    initialize(): void;
     branch(id: string): Storage;
     get supportsFiles(): boolean;
     get<T>(key: readonly StorageKeyPart[]): T | null;

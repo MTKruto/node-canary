@@ -32,19 +32,20 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _StorageSessionStorage_prefix;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StorageSessionStorage = void 0;
-const _0_storage_js_1 = require("./0_storage.js");
 const _1_utilities_js_1 = require("./1_utilities.js");
-class StorageSessionStorage extends _0_storage_js_1.Storage {
+class StorageSessionStorage {
     constructor(prefix) {
+        _StorageSessionStorage_prefix.set(this, void 0);
         if (typeof sessionStorage === "undefined") {
             throw new Error("Unavailable in current environment");
         }
         if (prefix.length <= 0) {
             throw new Error("Empty prefix");
         }
-        super();
-        _StorageSessionStorage_prefix.set(this, void 0);
         __classPrivateFieldSet(this, _StorageSessionStorage_prefix, prefix, "f");
+    }
+    get mustSerialize() {
+        return true;
     }
     get prefix() {
         return __classPrivateFieldGet(this, _StorageSessionStorage_prefix, "f");

@@ -1,7 +1,8 @@
-import { ConnectionUnframed } from "./0_connection.js";
-export declare class ConnectionWebSocket extends ConnectionUnframed implements ConnectionUnframed {
+import { Connection } from "./0_connection.js";
+export declare class ConnectionWebSocket implements Connection {
     #private;
     private readonly url;
+    stateChangeHandler?: Connection["stateChangeHandler"];
     constructor(url: string | URL);
     get connected(): boolean;
     open(): Promise<void>;

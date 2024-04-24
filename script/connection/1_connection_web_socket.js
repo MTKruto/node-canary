@@ -58,12 +58,10 @@ exports.ConnectionWebSocket = void 0;
 const dntShim = __importStar(require("../_dnt.shims.js"));
 const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
-const _0_connection_js_1 = require("./0_connection.js");
 const L = (0, _1_utilities_js_1.getLogger)("ConnectionWebSocket");
 const errConnectionNotOpen = new Error("Connection not open");
-class ConnectionWebSocket extends _0_connection_js_1.ConnectionUnframed {
+class ConnectionWebSocket {
     constructor(url) {
-        super();
         _ConnectionWebSocket_instances.add(this);
         Object.defineProperty(this, "url", {
             enumerable: true,
@@ -76,6 +74,12 @@ class ConnectionWebSocket extends _0_connection_js_1.ConnectionUnframed {
         _ConnectionWebSocket_wMutex.set(this, new _1_utilities_js_1.Mutex());
         _ConnectionWebSocket_buffer.set(this, new Uint8Array());
         _ConnectionWebSocket_nextResolve.set(this, null);
+        Object.defineProperty(this, "stateChangeHandler", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         _ConnectionWebSocket_wasConnected.set(this, false);
         _ConnectionWebSocket_isConnecting.set(this, false);
         _ConnectionWebSocket_connectionError.set(this, null);

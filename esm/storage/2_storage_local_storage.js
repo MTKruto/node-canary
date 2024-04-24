@@ -29,18 +29,16 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _StorageLocalStorage_prefix;
-import { Storage } from "./0_storage.js";
 import { fromString, isInRange, toString } from "./1_utilities.js";
-export class StorageLocalStorage extends Storage {
+export class StorageLocalStorage {
     constructor(prefix) {
+        _StorageLocalStorage_prefix.set(this, void 0);
         if (typeof localStorage === "undefined") {
             throw new Error("Unavailable in current environment");
         }
         if (prefix.length <= 0) {
             throw new Error("Empty prefix");
         }
-        super();
-        _StorageLocalStorage_prefix.set(this, void 0);
         __classPrivateFieldSet(this, _StorageLocalStorage_prefix, prefix, "f");
     }
     get prefix() {
@@ -53,6 +51,9 @@ export class StorageLocalStorage extends Storage {
     }
     get supportsFiles() {
         return false;
+    }
+    get mustSerialize() {
+        return true;
     }
     get(key_) {
         const key = this.prefix + toString(key_);

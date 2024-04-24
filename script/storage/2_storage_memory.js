@@ -18,25 +18,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
 var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
-};
-var _StorageMemory_instances, _StorageMemory_id, _StorageMemory_authString, _StorageMemory_fixKey, _StorageMemory_getEntries;
+var _StorageMemory_instances, _StorageMemory_id, _StorageMemory_fixKey, _StorageMemory_getEntries;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StorageMemory = void 0;
-const _0_storage_js_1 = require("./0_storage.js");
 const _1_utilities_js_1 = require("./1_utilities.js");
-class StorageMemory extends _0_storage_js_1.Storage {
-    constructor(authString) {
-        super();
+class StorageMemory {
+    constructor() {
         _StorageMemory_instances.add(this);
         Object.defineProperty(this, "map", {
             enumerable: true,
@@ -45,16 +43,11 @@ class StorageMemory extends _0_storage_js_1.Storage {
             value: new Map()
         });
         _StorageMemory_id.set(this, null);
-        _StorageMemory_authString.set(this, void 0);
-        __classPrivateFieldSet(this, _StorageMemory_authString, authString, "f");
     }
-    get isMemoryStorage() {
-        return true;
+    get mustSerialize() {
+        return false;
     }
-    async initialize() {
-        if (__classPrivateFieldGet(this, _StorageMemory_authString, "f")) {
-            await this.importAuthString(__classPrivateFieldGet(this, _StorageMemory_authString, "f"));
-        }
+    initialize() {
     }
     branch(id) {
         const storage = new StorageMemory();
@@ -110,7 +103,7 @@ class StorageMemory extends _0_storage_js_1.Storage {
     }
 }
 exports.StorageMemory = StorageMemory;
-_StorageMemory_id = new WeakMap(), _StorageMemory_authString = new WeakMap(), _StorageMemory_instances = new WeakSet(), _StorageMemory_fixKey = function _StorageMemory_fixKey(key) {
+_StorageMemory_id = new WeakMap(), _StorageMemory_instances = new WeakSet(), _StorageMemory_fixKey = function _StorageMemory_fixKey(key) {
     if (__classPrivateFieldGet(this, _StorageMemory_id, "f") !== null) {
         return ["__S" + __classPrivateFieldGet(this, _StorageMemory_id, "f"), ...key];
     }

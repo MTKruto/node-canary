@@ -20,9 +20,9 @@
 import { GetManyFilter, Storage, StorageKeyPart } from "./0_storage.js";
 export interface StorageIndexedDBParams {
     /** Whether to store files. Defaults to true. */
-    fileStorage?: boolean;
+    storeFiles?: boolean;
 }
-export declare class StorageIndexedDB extends Storage {
+export declare class StorageIndexedDB implements Storage {
     #private;
     database: IDBDatabase | null;
     constructor(name: string, params?: StorageIndexedDBParams);
@@ -30,6 +30,7 @@ export declare class StorageIndexedDB extends Storage {
     branch(id: string): StorageIndexedDB;
     initialize(): Promise<void>;
     get supportsFiles(): boolean;
+    get mustSerialize(): boolean;
     set(k: readonly StorageKeyPart[], v: unknown, tx_?: IDBTransaction): Promise<void>;
     get<T>(k: readonly StorageKeyPart[], tx_?: IDBTransaction | null, fix?: boolean): Promise<T | null>;
     getMany<T>(filter: GetManyFilter, params?: {

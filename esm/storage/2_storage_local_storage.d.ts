@@ -18,13 +18,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { GetManyFilter, Storage, StorageKeyPart } from "./0_storage.js";
-export declare class StorageLocalStorage extends Storage implements Storage {
+export declare class StorageLocalStorage implements Storage {
     #private;
     constructor(prefix: string);
     get prefix(): string;
-    branch(id: string): StorageLocalStorage;
+    branch(id: string): Storage;
     initialize(): void;
     get supportsFiles(): boolean;
+    get mustSerialize(): boolean;
     get<T>(key_: readonly StorageKeyPart[]): T | null;
     getMany<T>(filter: GetManyFilter, params?: {
         limit?: number;

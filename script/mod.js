@@ -56,7 +56,7 @@ Object.defineProperty(exports, "setLogVerbosity", { enumerable: true, get: funct
 var _0_password_js_1 = require("./client/0_password.js");
 Object.defineProperty(exports, "checkPassword", { enumerable: true, get: function () { return _0_password_js_1.checkPassword; } });
 __exportStar(require("./2_connection.js"), exports);
-__exportStar(require("./3_storage.js"), exports);
+__exportStar(require("./2_storage.js"), exports);
 __exportStar(require("./3_transport.js"), exports);
 __exportStar(require("./2_tl.js"), exports);
 __exportStar(require("./3_types.js"), exports);

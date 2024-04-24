@@ -32,18 +32,16 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _StorageLocalStorage_prefix;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StorageLocalStorage = void 0;
-const _0_storage_js_1 = require("./0_storage.js");
 const _1_utilities_js_1 = require("./1_utilities.js");
-class StorageLocalStorage extends _0_storage_js_1.Storage {
+class StorageLocalStorage {
     constructor(prefix) {
+        _StorageLocalStorage_prefix.set(this, void 0);
         if (typeof localStorage === "undefined") {
             throw new Error("Unavailable in current environment");
         }
         if (prefix.length <= 0) {
             throw new Error("Empty prefix");
         }
-        super();
-        _StorageLocalStorage_prefix.set(this, void 0);
         __classPrivateFieldSet(this, _StorageLocalStorage_prefix, prefix, "f");
     }
     get prefix() {
@@ -56,6 +54,9 @@ class StorageLocalStorage extends _0_storage_js_1.Storage {
     }
     get supportsFiles() {
         return false;
+    }
+    get mustSerialize() {
+        return true;
     }
     get(key_) {
         const key = this.prefix + (0, _1_utilities_js_1.toString)(key_);

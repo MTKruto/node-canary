@@ -185,6 +185,12 @@ export declare const restartAuth: unique symbol;
 export declare const handleMigrationError: unique symbol;
 declare const getEntity: unique symbol;
 export interface ClientParams extends ClientPlainParams {
+    /** The storage provider to use. Defaults to memory storage. Passing a string constructs a memory storage with the string being the auth string. */
+    storage?: Storage | null;
+    /** App's API ID from [my.telegram.org/apps](https://my.telegram.org/apps). Required if no account was previously authorized. */
+    apiId?: number;
+    /** App's API hash from [my.telegram.org/apps](https://my.telegram.org/apps). Required if no account was previously authorized. */
+    apiHash?: string;
     /** A parse mode to use when the `parseMode` parameter is not specified when sending or editing messages. Defaults to `ParseMode.None`. */
     parseMode?: ParseMode;
     /** The app_version parameter to be passed to initConnection when calling `authorize`. It is recommended that this parameter is changed if users are authorized. Defaults to _MTKruto_. */
@@ -209,16 +215,24 @@ export interface ClientParams extends ClientPlainParams {
     guaranteeUpdateDelivery?: boolean;
     /** Whether to not handle updates received when the client was not running. Defaults to `true` for bots, and `false` for users. */
     dropPendingUpdates?: boolean;
-    /** Whether to store messages. Defaults to `false`. */
-    storeMessages?: boolean;
+    /**
+     * Whether to persist cache to the provided storage, and not memory. Defaults to `false`.
+     *
+     * Explicitly setting this option to `true` is highly recommended if:
+     *
+     * - User accounts are authorized.
+     * - Less memory usage is demanded.
+     * - The client does not usually have a large uptime.
+     *
+     * When the provided storage takes advantage of memory, nothing changes, even if set to `true`.
+     */
+    persistCache?: boolean;
 }
 /**
  * An MTKruto client.
  */
 export declare class Client<C extends Context = Context> extends Composer<C> {
     #private;
-    readonly apiId: number | null;
-    readonly apiHash: string | null;
     readonly storage: StorageOperations;
     readonly messageStorage: StorageOperations;
     readonly appVersion: string;
@@ -234,7 +248,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param apiId App's API ID from [my.telegram.org](https://my.telegram.org/apps). Defaults to 0 (unset).
      * @param apiHash App's API hash from [my.telegram.org/apps](https://my.telegram.org/apps). Defaults to empty string (unset).
      */
-    constructor(storage?: Storage | null, apiId?: number | null, apiHash?: string | null, params?: ClientParams);
+    constructor(params?: ClientParams);
     get connected(): boolean;
     get disconnected(): boolean;
     api: Api;

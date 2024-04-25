@@ -28,7 +28,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Client_instances, _a, _Client_client, _Client_guaranteeUpdateDelivery, _Client_updateManager, _Client_networkStatisticsManager, _Client_botInfoManager, _Client_fileManager, _Client_reactionManager, _Client_videoChatManager, _Client_businessConnectionManager, _Client_messageManager, _Client_storyManager, _Client_callbackQueryManager, _Client_inlineQueryManager, _Client_chatListManager, _Client_accountManager, _Client_storage_, _Client_messageStorage_, _Client_parseMode, _Client_publicKeys, _Client_ignoreOutgoing, _Client_storeMessages, _Client_Lauthorize, _Client_LpingLoop, _Client_LhandleMigrationError, _Client_L$initConncetion, _Client_namespaceProxies, _Client_getApiId, _Client_getCdnConnectionPool, _Client_getCdnConnection, _Client_constructContext, _Client_propagateConnectionState, _Client_lastPropagatedConnectionState, _Client_stateChangeHandler, _Client_storageInited, _Client_initStorage, _Client_connectionInited, _Client_lastPropagatedAuthorizationState, _Client_propagateAuthorizationState, _Client_getSelfId, _Client_pingLoopStarted, _Client_pingLoopAbortController, _Client_pingInterval, _Client_lastUpdates, _Client_startPingLoop, _Client_pingLoop, _Client_invoke, _Client_handleInvokeError, _Client_getUserAccessHash, _Client_getChannelAccessHash, _Client_getInputPeerInner, _Client_handleCtxUpdate, _Client_queueHandleCtxUpdate, _Client_handleUpdate, _Client_lastGetMe, _Client_getMe;
+var _Client_instances, _a, _Client_client, _Client_guaranteeUpdateDelivery, _Client_updateManager, _Client_networkStatisticsManager, _Client_botInfoManager, _Client_fileManager, _Client_reactionManager, _Client_videoChatManager, _Client_businessConnectionManager, _Client_messageManager, _Client_storyManager, _Client_callbackQueryManager, _Client_inlineQueryManager, _Client_chatListManager, _Client_accountManager, _Client_storage_, _Client_messageStorage_, _Client_parseMode, _Client_apiId, _Client_apiHash, _Client_publicKeys, _Client_ignoreOutgoing, _Client_persistCache, _Client_Lauthorize, _Client_LpingLoop, _Client_LhandleMigrationError, _Client_L$initConncetion, _Client_namespaceProxies, _Client_getApiId, _Client_getCdnConnectionPool, _Client_getCdnConnection, _Client_constructContext, _Client_propagateConnectionState, _Client_lastPropagatedConnectionState, _Client_stateChangeHandler, _Client_storageInited, _Client_initStorage, _Client_connectionInited, _Client_lastPropagatedAuthorizationState, _Client_propagateAuthorizationState, _Client_getSelfId, _Client_pingLoopStarted, _Client_pingLoopAbortController, _Client_pingInterval, _Client_lastUpdates, _Client_startPingLoop, _Client_pingLoop, _Client_invoke, _Client_handleInvokeError, _Client_getUserAccessHash, _Client_getChannelAccessHash, _Client_getInputPeerInner, _Client_handleCtxUpdate, _Client_queueHandleCtxUpdate, _Client_handleUpdate, _Client_lastGetMe, _Client_getMe;
 import { unreachable } from "../0_deps.js";
 import { AccessError, InputError } from "../0_errors.js";
 import { cleanObject, drop, getLogger, getRandomId, minute, mustPrompt, mustPromptOneOf, second, ZERO_CHANNEL_ID } from "../1_utilities.js";
@@ -78,21 +78,9 @@ export class Client extends Composer {
      * @param apiId App's API ID from [my.telegram.org](https://my.telegram.org/apps). Defaults to 0 (unset).
      * @param apiHash App's API hash from [my.telegram.org/apps](https://my.telegram.org/apps). Defaults to empty string (unset).
      */
-    constructor(storage, apiId = 0, apiHash = "", params) {
+    constructor(params) {
         super();
         _Client_instances.add(this);
-        Object.defineProperty(this, "apiId", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: apiId
-        });
-        Object.defineProperty(this, "apiHash", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: apiHash
-        });
         _Client_client.set(this, void 0);
         _Client_guaranteeUpdateDelivery.set(this, void 0);
         _Client_updateManager.set(this, void 0);
@@ -123,6 +111,8 @@ export class Client extends Composer {
             value: void 0
         });
         _Client_parseMode.set(this, void 0);
+        _Client_apiId.set(this, void 0);
+        _Client_apiHash.set(this, void 0);
         Object.defineProperty(this, "appVersion", {
             enumerable: true,
             configurable: true,
@@ -161,7 +151,7 @@ export class Client extends Composer {
         });
         _Client_publicKeys.set(this, void 0);
         _Client_ignoreOutgoing.set(this, void 0);
-        _Client_storeMessages.set(this, void 0);
+        _Client_persistCache.set(this, void 0);
         _Client_Lauthorize.set(this, void 0);
         _Client_LpingLoop.set(this, void 0);
         _Client_LhandleMigrationError.set(this, void 0);
@@ -641,9 +631,11 @@ export class Client extends Composer {
                 }
             },
         };
-        __classPrivateFieldSet(this, _Client_storage_, storage || new StorageMemory(), "f");
-        __classPrivateFieldSet(this, _Client_storeMessages, params?.storeMessages ?? false, "f");
-        if (!__classPrivateFieldGet(this, _Client_storeMessages, "f")) {
+        __classPrivateFieldSet(this, _Client_apiId, params?.apiId ?? 0, "f");
+        __classPrivateFieldSet(this, _Client_apiHash, params?.apiHash ?? "", "f");
+        __classPrivateFieldSet(this, _Client_storage_, params?.storage || new StorageMemory(), "f");
+        __classPrivateFieldSet(this, _Client_persistCache, params?.persistCache ?? false, "f");
+        if (!__classPrivateFieldGet(this, _Client_persistCache, "f")) {
             __classPrivateFieldSet(this, _Client_messageStorage_, new StorageMemory(), "f");
         }
         else {
@@ -819,10 +811,10 @@ export class Client extends Composer {
         }
         await this.connect();
     }
-    async [(_Client_client = new WeakMap(), _Client_guaranteeUpdateDelivery = new WeakMap(), _Client_updateManager = new WeakMap(), _Client_networkStatisticsManager = new WeakMap(), _Client_botInfoManager = new WeakMap(), _Client_fileManager = new WeakMap(), _Client_reactionManager = new WeakMap(), _Client_videoChatManager = new WeakMap(), _Client_businessConnectionManager = new WeakMap(), _Client_messageManager = new WeakMap(), _Client_storyManager = new WeakMap(), _Client_callbackQueryManager = new WeakMap(), _Client_inlineQueryManager = new WeakMap(), _Client_chatListManager = new WeakMap(), _Client_accountManager = new WeakMap(), _Client_storage_ = new WeakMap(), _Client_messageStorage_ = new WeakMap(), _Client_parseMode = new WeakMap(), _Client_publicKeys = new WeakMap(), _Client_ignoreOutgoing = new WeakMap(), _Client_storeMessages = new WeakMap(), _Client_Lauthorize = new WeakMap(), _Client_LpingLoop = new WeakMap(), _Client_LhandleMigrationError = new WeakMap(), _Client_L$initConncetion = new WeakMap(), _Client_namespaceProxies = new WeakMap(), _Client_constructContext = new WeakMap(), _Client_lastPropagatedConnectionState = new WeakMap(), _Client_stateChangeHandler = new WeakMap(), _Client_storageInited = new WeakMap(), _Client_connectionInited = new WeakMap(), _Client_lastPropagatedAuthorizationState = new WeakMap(), _Client_pingLoopStarted = new WeakMap(), _Client_pingLoopAbortController = new WeakMap(), _Client_pingInterval = new WeakMap(), _Client_lastUpdates = new WeakMap(), _Client_handleInvokeError = new WeakMap(), _Client_lastGetMe = new WeakMap(), _Client_instances = new WeakSet(), _Client_getApiId = async function _Client_getApiId() {
-        const apiId = this.apiId || await this.storage.getApiId();
+    async [(_Client_client = new WeakMap(), _Client_guaranteeUpdateDelivery = new WeakMap(), _Client_updateManager = new WeakMap(), _Client_networkStatisticsManager = new WeakMap(), _Client_botInfoManager = new WeakMap(), _Client_fileManager = new WeakMap(), _Client_reactionManager = new WeakMap(), _Client_videoChatManager = new WeakMap(), _Client_businessConnectionManager = new WeakMap(), _Client_messageManager = new WeakMap(), _Client_storyManager = new WeakMap(), _Client_callbackQueryManager = new WeakMap(), _Client_inlineQueryManager = new WeakMap(), _Client_chatListManager = new WeakMap(), _Client_accountManager = new WeakMap(), _Client_storage_ = new WeakMap(), _Client_messageStorage_ = new WeakMap(), _Client_parseMode = new WeakMap(), _Client_apiId = new WeakMap(), _Client_apiHash = new WeakMap(), _Client_publicKeys = new WeakMap(), _Client_ignoreOutgoing = new WeakMap(), _Client_persistCache = new WeakMap(), _Client_Lauthorize = new WeakMap(), _Client_LpingLoop = new WeakMap(), _Client_LhandleMigrationError = new WeakMap(), _Client_L$initConncetion = new WeakMap(), _Client_namespaceProxies = new WeakMap(), _Client_constructContext = new WeakMap(), _Client_lastPropagatedConnectionState = new WeakMap(), _Client_stateChangeHandler = new WeakMap(), _Client_storageInited = new WeakMap(), _Client_connectionInited = new WeakMap(), _Client_lastPropagatedAuthorizationState = new WeakMap(), _Client_pingLoopStarted = new WeakMap(), _Client_pingLoopAbortController = new WeakMap(), _Client_pingInterval = new WeakMap(), _Client_lastUpdates = new WeakMap(), _Client_handleInvokeError = new WeakMap(), _Client_lastGetMe = new WeakMap(), _Client_instances = new WeakSet(), _Client_getApiId = async function _Client_getApiId() {
+        const apiId = __classPrivateFieldGet(this, _Client_apiId, "f") || await this.storage.getApiId();
         if (!apiId) {
-            throw new Error("apiId not set");
+            throw new InputError("apiId not set");
         }
         return apiId;
     }, _Client_getCdnConnectionPool = function _Client_getCdnConnectionPool(connectionCount, dcId) {
@@ -852,7 +844,10 @@ export class Client extends Composer {
         };
     }, _Client_getCdnConnection = function _Client_getCdnConnection(dcId) {
         const provider = this.storage.provider;
-        const client = new _a((!dcId || dcId == __classPrivateFieldGet(this, _Client_client, "f").dcId) ? provider : provider.branch(`download_client_${dcId}`), this.apiId, this.apiHash, {
+        const client = new _a({
+            storage: (!dcId || dcId == __classPrivateFieldGet(this, _Client_client, "f").dcId) ? provider : provider.branch(`download_client_${dcId}`),
+            apiId: __classPrivateFieldGet(this, _Client_apiId, "f"),
+            apiHash: __classPrivateFieldGet(this, _Client_apiHash, "f"),
             transportProvider: __classPrivateFieldGet(this, _Client_client, "f").transportProvider,
             appVersion: this.appVersion,
             deviceModel: this.deviceModel,
@@ -944,8 +939,8 @@ export class Client extends Composer {
             }
         }
         const apiId = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getApiId).call(this);
-        if (!this.apiHash) {
-            throw new Error("apiHash not set");
+        if (!__classPrivateFieldGet(this, _Client_apiHash, "f")) {
+            throw new InputError("apiHash not set");
         }
         if (typeof params === "undefined") {
             const loginType = mustPromptOneOf("Do you want to login as bot [b] or user [u]?", ["b", "u"]);
@@ -960,7 +955,7 @@ export class Client extends Composer {
         if (typeof params === "string") {
             while (true) {
                 try {
-                    const auth = await this.api.auth.importBotAuthorization({ api_id: apiId, api_hash: this.apiHash, bot_auth_token: params, flags: 0 });
+                    const auth = await this.api.auth.importBotAuthorization({ api_id: apiId, api_hash: __classPrivateFieldGet(this, _Client_apiHash, "f"), bot_auth_token: params, flags: 0 });
                     await this.storage.setAccountId(Number(auth[as](types.auth.Authorization).user.id));
                     await this.storage.setAccountType("bot");
                     break;
@@ -989,8 +984,8 @@ export class Client extends Composer {
                         phone = typeof params.phone === "string" ? params.phone : await params.phone();
                         const sendCode = () => this.api.auth.sendCode({
                             phone_number: phone,
-                            api_id: this.apiId,
-                            api_hash: this.apiHash,
+                            api_id: __classPrivateFieldGet(this, _Client_apiId, "f"),
+                            api_hash: __classPrivateFieldGet(this, _Client_apiHash, "f"),
                             settings: new types.CodeSettings(),
                         }).then((v) => v[as](types.auth.SentCode));
                         try {
@@ -1096,7 +1091,7 @@ export class Client extends Composer {
         return this.invoke(function_, true);
     }
     exportAuthString() {
-        return this.storage.exportAuthString(this.apiId);
+        return this.storage.exportAuthString(__classPrivateFieldGet(this, _Client_apiId, "f"));
     }
     async importAuthString(authString) {
         await __classPrivateFieldGet(this, _Client_instances, "m", _Client_initStorage).call(this);

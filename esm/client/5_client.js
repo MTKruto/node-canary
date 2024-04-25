@@ -1072,6 +1072,20 @@ export class Client extends Composer {
             }
         }
     }
+    async signOut() {
+        try {
+            await Promise.all([
+                this.storage.reset(),
+                this.api.auth.logOut().then(() => {
+                    __classPrivateFieldGet(this, _Client_instances, "m", _Client_propagateAuthorizationState).call(this, false);
+                }),
+            ]);
+        }
+        finally {
+            __classPrivateFieldSet(this, _Client_lastGetMe, null, "f");
+            await this.reconnect();
+        }
+    }
     /**
      * Same as calling `.connect()` followed by `.signIn(params)`.
      */

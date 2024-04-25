@@ -589,6 +589,11 @@ class StorageOperations {
     async getApiId() {
         return await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(exports.K.connection.apiId());
     }
+    async reset() {
+        for await (const [key] of await __classPrivateFieldGet(this, _StorageOperations_storage, "f").getMany({ prefix: [] })) {
+            await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(key, null);
+        }
+    }
 }
 exports.StorageOperations = StorageOperations;
 _StorageOperations_storage = new WeakMap(), _StorageOperations_supportsFiles = new WeakMap(), _StorageOperations_mustSerialize = new WeakMap(), _StorageOperations_authKeyId = new WeakMap(), _StorageOperations_accountId = new WeakMap(), _StorageOperations_accountType = new WeakMap(), _StorageOperations_instances = new WeakSet(), _StorageOperations_resetAuthKeyId = async function _StorageOperations_resetAuthKeyId(authKey) {

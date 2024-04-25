@@ -277,6 +277,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * 3. Reconnects the client to the appropriate DC in case of MIGRATE_X errors.
      */
     signIn(params?: SignInParams): Promise<void>;
+    signOut(): Promise<void>;
     /**
      * Same as calling `.connect()` followed by `.signIn(params)`.
      */

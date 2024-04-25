@@ -178,4 +178,5 @@ export declare class StorageOperations {
     clear(): Promise<void>;
     setApiId(apiId: number): Promise<void>;
     getApiId(): Promise<number | null>;
+    reset(): Promise<void>;
 }

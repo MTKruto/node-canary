@@ -23,7 +23,7 @@ import { Storage } from "../2_storage.js";
 import { DC } from "../3_transport.js";
 import { BotCommand, BusinessConnection, CallbackQueryAnswer, CallbackQueryQuestion, Chat, ChatAction, ChatListItem, ChatMember, ChatP, FileSource, ID, InactiveChat, InlineQueryAnswer, InlineQueryResult, InputMedia, InputStoryContent, InviteLink, LiveStreamChannel, Message, MessageAnimation, MessageAudio, MessageContact, MessageDice, MessageDocument, MessageLocation, MessagePhoto, MessagePoll, MessageSticker, MessageText, MessageVenue, MessageVideo, MessageVideoNote, MessageVoice, NetworkStatistics, ParseMode, Poll, Reaction, Sticker, Story, Update, User, VideoChat, VideoChatActive, VideoChatScheduled } from "../3_types.js";
 import { Migrate } from "../4_errors.js";
-import { AddReactionParams, AnswerCallbackQueryParams, AnswerInlineQueryParams, AuthorizeUserParams, BanChatMemberParams, CreateInviteLinkParams, CreateStoryParams, DeleteMessageParams, DeleteMessagesParams, DownloadLiveStreamChunkParams, DownloadParams, EditMessageLiveLocationParams, EditMessageMediaParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetChatsParams, GetCreatedInviteLinksParams, GetHistoryParams, GetMyCommandsParams, JoinVideoChatParams, PinMessageParams, ReplyParams, ScheduleVideoChatParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendInlineQueryParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetMyCommandsParams, SetReactionsParams, StartVideoChatParams, StopPollParams } from "./0_params.js";
+import { AddReactionParams, AnswerCallbackQueryParams, AnswerInlineQueryParams, BanChatMemberParams, CreateInviteLinkParams, CreateStoryParams, DeleteMessageParams, DeleteMessagesParams, DownloadLiveStreamChunkParams, DownloadParams, EditMessageLiveLocationParams, EditMessageMediaParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetChatsParams, GetCreatedInviteLinksParams, GetHistoryParams, GetMyCommandsParams, JoinVideoChatParams, PinMessageParams, ReplyParams, ScheduleVideoChatParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendInlineQueryParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetMyCommandsParams, SetReactionsParams, SignInParams, StartVideoChatParams, StopPollParams } from "./0_params.js";
 import { Api } from "./1_types.js";
 import { ClientPlainParams } from "./1_client_plain.js";
 import { Composer as Composer_, NextFunction } from "./1_composer.js";
@@ -31,7 +31,7 @@ import { StorageOperations } from "./0_storage_operations.js";
 export interface Context {
     /** The client that received the update. */
     client: Client;
-    /** The currently authorized user. */
+    /** The currently signed in user. */
     me?: User;
     /** Resolves to `message`, `editedMessage`, or the `message` field of `callbackQuery`. */
     msg?: Message;
@@ -193,17 +193,17 @@ export interface ClientParams extends ClientPlainParams {
     apiHash?: string;
     /** A parse mode to use when the `parseMode` parameter is not specified when sending or editing messages. Defaults to `ParseMode.None`. */
     parseMode?: ParseMode;
-    /** The app_version parameter to be passed to initConnection when calling `authorize`. It is recommended that this parameter is changed if users are authorized. Defaults to _MTKruto_. */
+    /** The app_version parameter to be passed to initConnection. It is recommended that this parameter is changed if users are authorized. Defaults to _MTKruto_. */
     appVersion?: string;
-    /** The device_version parameter to be passed to initConnection when calling `authorize`. The default varies by the current runtime. */
+    /** The device_version parameter to be passed to initConnection. The default varies by the current runtime. */
     deviceModel?: string;
-    /** The lang_code parameter to be passed to initConnection when calling `authorize`. Defaults to the runtime's language or `"en"`. */
+    /** The lang_code parameter to be passed to initConnection. Defaults to the runtime's language or `"en"`. */
     langCode?: string;
-    /** The lang_pack parameter to be passed to initConnection when calling `authorize`. Defaults to an empty string. */
+    /** The lang_pack parameter to be passed to initConnection. Defaults to an empty string. */
     langPack?: string;
-    /** The system_lang_cde parameter to be passed to initConnection when calling `authorize`. Defaults to the runtime's language or `"en"`. */
+    /** The system_lang_cde parameter to be passed to initConnection. Defaults to the runtime's language or `"en"`. */
     systemLangCode?: string;
-    /** The system_version parameter to be passed to initConnection when calling `authorize`. The default varies by the current runtime. */
+    /** The system_version parameter to be passed to initConnection. The default varies by the current runtime. */
     systemVersion?: string;
     /** Whether to use default handlers. Defaults to `true`. */
     defaultHandlers?: boolean;
@@ -269,24 +269,18 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
     [handleMigrationError](err: Migrate): Promise<void>;
     disconnect(): Promise<void>;
     /**
-     * Authorizes the client with one of the following:
-     *
-     * - Bot token (`string`)
-     * - User authorization handlers (`AuthorizeUserParams`)
-     *
-     * if the current auth key doesn't throw AUTH_KEY_UNREGISTERED when calling [updates.getState](1).
+     * Signs in using the provided parameters if not already signed in.
+     * If no parameters are provided, the credentials will be prompted in runtime.
      *
      * Notes:
      * 1. Requires the `apiId` and `apiHash` paramters to be passed when constructing the client.
-     * 2. Reconnects the client to the appropriate DC in case of MIGRATE_X errors.
-     *
-     * [1]: https://core.telegram.org/method/updates.getState
+     * 3. Reconnects the client to the appropriate DC in case of MIGRATE_X errors.
      */
-    authorize(params?: string | AuthorizeUserParams): Promise<void>;
+    signIn(params?: SignInParams): Promise<void>;
     /**
-     * Same as calling `.connect()` followed by `.authorize(params)`.
+     * Same as calling `.connect()` followed by `.signIn(params)`.
      */
-    start(params?: string | AuthorizeUserParams): Promise<void>;
+    start(params?: SignInParams): Promise<void>;
     /**
      * Invokes a function waiting and returning its reply if the second parameter is not `true`. Requires the client
      * to be connected.

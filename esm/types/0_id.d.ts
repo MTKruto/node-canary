@@ -18,6 +18,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 /**
- * The identifier of a channel, a group, or a user (as provided by MTKruto), a username, or a chat link (e.g., https://mtkruto.t.me, https://telegram.me/mtkruto). `"me"` resolves to the currently authorized account.
+ * The identifier of a channel, a group, or a user (as provided by MTKruto), a username, or a chat link (e.g., https://mtkruto.t.me, https://telegram.me/mtkruto). `"me"` resolves to current the account.
  */
 export type ID = number | string | "me";

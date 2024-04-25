@@ -96,10 +96,8 @@ function upgradeInstance(error, call) {
             return new v({ ...error, call });
         }
     }
-    for (const [k, v] of Object.entries(_3_errors_js_1.map)) {
-        if (error.error_message == k) {
-            return new v({ ...error, call });
-        }
+    if (error.error_message in _3_errors_js_1.map) {
+        return new _3_errors_js_1.map[error.error_message]({ ...error, call });
     }
     return error;
 }

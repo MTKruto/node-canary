@@ -73,10 +73,8 @@ export function upgradeInstance(error, call) {
             return new v({ ...error, call });
         }
     }
-    for (const [k, v] of Object.entries(map)) {
-        if (error.error_message == k) {
-            return new v({ ...error, call });
-        }
+    if (error.error_message in map) {
+        return new map[error.error_message]({ ...error, call });
     }
     return error;
 }

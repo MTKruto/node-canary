@@ -45,6 +45,6 @@ export declare class Composer<C extends {
         names: string | RegExp | (string | RegExp)[];
         prefixes: string | string[];
     }, ...middleware: Middleware<WithFilter<C, "message:text">>[]): Composer<WithFilter<C, "message:text">>;
-    callbackQuery(data: string | RegExp | (string | RegExp)[]): Composer<WithFilter<C, "callbackQuery:data">>;
-    inlineQuery(queries: string | RegExp | (string | RegExp)[]): Composer<WithFilter<C, "inlineQuery">>;
+    callbackQuery(data: string | RegExp | (string | RegExp)[], ...middleware: Middleware<WithFilter<C, "callbackQuery:data">>[]): Composer<WithFilter<C, "callbackQuery:data">>;
+    inlineQuery(queries: string | RegExp | (string | RegExp)[], ...middleware: Middleware<WithFilter<C, "inlineQuery">>[]): Composer<WithFilter<C, "inlineQuery">>;
 }

@@ -136,7 +136,7 @@ export class Composer {
             return false;
         }, ...middleware);
     }
-    callbackQuery(data) {
+    callbackQuery(data, ...middleware) {
         const data_ = Array.isArray(data) ? data : [data];
         return this.on("callbackQuery:data").filter((ctx) => {
             for (const data of data_) {
@@ -148,9 +148,9 @@ export class Composer {
                 }
             }
             return false;
-        });
+        }, ...middleware);
     }
-    inlineQuery(queries) {
+    inlineQuery(queries, ...middleware) {
         const queries_ = Array.isArray(queries) ? queries : [queries];
         return this.on("inlineQuery").filter((ctx) => {
             for (const query of queries_) {
@@ -162,7 +162,7 @@ export class Composer {
                 }
             }
             return false;
-        });
+        }, ...middleware);
     }
 }
 _Composer_handle = new WeakMap(), _Composer_prefixes = new WeakMap();

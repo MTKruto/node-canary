@@ -28,3 +28,4 @@ export interface Giveaway {
     monthCount: number;
 }
 export declare function constructGiveaway(g: types.MessageMediaGiveaway): Giveaway;
+//# sourceMappingURL=1_giveaway.d.ts.map

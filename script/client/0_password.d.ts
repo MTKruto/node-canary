@@ -9,3 +9,4 @@ export declare const ph2: (password: Uint8Array, salt1: Uint8Array, salt2: Uint8
 export declare function isGoodModExpFirst(modexp: bigint, prime: bigint): boolean;
 export declare function pad(bigint: number | bigint | Uint8Array): Uint8Array;
 export declare function checkPassword(password_: string, ap: enums.account.Password): Promise<types.InputCheckPasswordSRP>;
+//# sourceMappingURL=0_password.d.ts.map

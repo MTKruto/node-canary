@@ -29,3 +29,4 @@ export interface InlineQueryAnswer {
     nextOffset?: string;
 }
 export declare function constructInlineQueryAnswer(results: types.messages.BotResults): InlineQueryAnswer;
+//# sourceMappingURL=5_inline_query_answer.d.ts.map

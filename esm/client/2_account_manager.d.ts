@@ -28,3 +28,4 @@ export declare class AccountManager {
     hideUsernames(id: ID): Promise<boolean>;
     getInactiveChats(): Promise<import("../3_types.js").InactiveChat[]>;
 }
+//# sourceMappingURL=2_account_manager.d.ts.map

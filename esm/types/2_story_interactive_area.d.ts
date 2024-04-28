@@ -58,3 +58,4 @@ export interface StoryInteractiveAreaMessage extends _StoryInteractiveAreaPositi
 export type StoryInteractiveArea = StoryInteractiveAreaLocation | StoryInteractiveAreaVenue | StoryInteractiveAreaReaction | StoryInteractiveAreaMessage;
 export declare function constructStoryInteractiveArea(area: enums.MediaArea): StoryInteractiveArea;
 export declare function storyInteractiveAreaToTlObject(area: StoryInteractiveArea, getEntity: EntityGetter): Promise<enums.MediaArea>;
+//# sourceMappingURL=2_story_interactive_area.d.ts.map

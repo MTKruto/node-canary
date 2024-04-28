@@ -49,7 +49,7 @@ export function constructStoryInteractiveArea(area) {
         return {
             position,
             reaction,
-            count: 0,
+            count: 0, // TODO: count
             flipped: area.flipped ? true : false,
             dark: area.dark ? true : false,
         };
@@ -90,7 +90,7 @@ export async function storyInteractiveAreaToTlObject(area, getEntity) {
             address: area.venue.address,
             provider: "foursquare",
             title: area.venue.title,
-            venue_id: area.venue.foursquareId || "",
+            venue_id: area.venue.foursquareId || "", // TODO: require?
             venue_type: area.venue.foursquareType || "", // TODO: require?
         });
     }

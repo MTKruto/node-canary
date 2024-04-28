@@ -50,3 +50,4 @@ export interface Poll {
     closeDate?: Date;
 }
 export declare function constructPoll(media_: types.MessageMediaPoll): Poll;
+//# sourceMappingURL=1_poll.d.ts.map

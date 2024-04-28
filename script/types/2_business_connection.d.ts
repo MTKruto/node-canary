@@ -34,3 +34,4 @@ export interface BusinessConnection {
     isEnabled: boolean;
 }
 export declare function constructBusinessConnection(connection: types.BotBusinessConnection, getEntity: EntityGetter): Promise<BusinessConnection>;
+//# sourceMappingURL=2_business_connection.d.ts.map

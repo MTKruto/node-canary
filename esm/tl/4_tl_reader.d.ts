@@ -23,3 +23,4 @@ export type ReadObject = boolean | TLObject | Array<ReadObject | TLObject>;
 export declare class TLReader extends TLRawReader {
     readObject(id?: number): ReadObject;
 }
+//# sourceMappingURL=4_tl_reader.d.ts.map

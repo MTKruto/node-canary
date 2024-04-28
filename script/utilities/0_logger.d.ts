@@ -50,3 +50,4 @@ export declare function getLogger(scope: string): {
     log(verbosity_: number, ...args: any[]): void;
 };
 export type Logger = ReturnType<typeof getLogger>;
+//# sourceMappingURL=0_logger.d.ts.map

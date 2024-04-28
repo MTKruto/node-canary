@@ -973,15 +973,15 @@ class Config {
 let configuration_table;
 configuration_table = [
     /*      good lazy nice chain */
-    new Config(0, 0, 0, 0, deflate_stored),
-    new Config(4, 4, 8, 4, deflate_fast),
-    new Config(4, 5, 16, 8, deflate_fast),
-    new Config(4, 6, 32, 32, deflate_fast),
-    new Config(4, 4, 16, 16, deflate_slow),
-    new Config(8, 16, 32, 32, deflate_slow),
-    new Config(8, 16, 128, 128, deflate_slow),
-    new Config(8, 32, 128, 256, deflate_slow),
-    new Config(32, 128, 258, 1024, deflate_slow),
+    new Config(0, 0, 0, 0, deflate_stored), /* 0 store only */
+    new Config(4, 4, 8, 4, deflate_fast), /* 1 max speed, no lazy matches */
+    new Config(4, 5, 16, 8, deflate_fast), /* 2 */
+    new Config(4, 6, 32, 32, deflate_fast), /* 3 */
+    new Config(4, 4, 16, 16, deflate_slow), /* 4 lazy matches */
+    new Config(8, 16, 32, 32, deflate_slow), /* 5 */
+    new Config(8, 16, 128, 128, deflate_slow), /* 6 */
+    new Config(8, 32, 128, 256, deflate_slow), /* 7 */
+    new Config(32, 128, 258, 1024, deflate_slow), /* 8 */
     new Config(32, 258, 258, 4096, deflate_slow), /* 9 max compression */
 ];
 /* ===========================================================================

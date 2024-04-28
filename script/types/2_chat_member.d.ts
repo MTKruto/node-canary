@@ -64,3 +64,4 @@ export interface ChatMemberBanned extends ChatMemberBase {
 /** A chat member. */
 export type ChatMember = ChatMemberCreator | ChatMemberAdministrator | ChatMemberMember | ChatMemberRestricted | ChatMemberLeft | ChatMemberBanned;
 export declare function constructChatMember(participant: enums.ChannelParticipant | enums.ChatParticipant, getEntity: EntityGetter): Promise<ChatMember>;
+//# sourceMappingURL=2_chat_member.d.ts.map

@@ -25,3 +25,4 @@ export declare function diffstr(A: string, B: string): DiffResult<string>[];
 export declare function buildMessage(diffResult: ReadonlyArray<DiffResult<string>>, { stringDiff }?: {
     stringDiff?: boolean | undefined;
 }): string[];
+//# sourceMappingURL=_diff.d.ts.map

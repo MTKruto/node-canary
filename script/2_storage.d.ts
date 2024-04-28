@@ -23,3 +23,4 @@ export * from "./storage/2_storage_indexed_db.js";
 export * from "./storage/2_storage_local_storage.js";
 export * from "./storage/2_storage_memory.js";
 export * from "./storage/2_storage_session_storage.js";
+//# sourceMappingURL=2_storage.d.ts.map

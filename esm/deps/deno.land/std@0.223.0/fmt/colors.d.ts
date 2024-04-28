@@ -283,3 +283,4 @@ export declare function stripColor(string: string): string;
  * @param string to remove ANSI escape codes from
  */
 export declare function stripAnsiCode(string: string): string;
+//# sourceMappingURL=colors.d.ts.map

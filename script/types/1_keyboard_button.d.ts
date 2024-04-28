@@ -66,3 +66,4 @@ export interface KeyboardButtonMiniApp extends KeyboardButtonText {
 export type KeyboardButton = KeyboardButtonText | KeyboardButtonRequestUser | KeyboardButtonRequestChat | KeyboardButtonRequestContact | KeyboardButtonRequestLocation | KeyboardButtonRequestPoll | KeyboardButtonMiniApp;
 export declare function constructKeyboardButton(button_: enums.KeyboardButton): KeyboardButton;
 export declare function keyboardButtonToTlObject(button: KeyboardButton): enums.KeyboardButton;
+//# sourceMappingURL=1_keyboard_button.d.ts.map

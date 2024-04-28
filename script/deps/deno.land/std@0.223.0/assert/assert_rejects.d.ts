@@ -28,3 +28,4 @@ export declare function assertRejects(fn: () => PromiseLike<unknown>, msg?: stri
  * ```
  */
 export declare function assertRejects<E extends Error = Error>(fn: () => PromiseLike<unknown>, ErrorClass: new (...args: any[]) => E, msgIncludes?: string, msg?: string): Promise<E>;
+//# sourceMappingURL=assert_rejects.d.ts.map

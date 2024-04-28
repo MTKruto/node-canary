@@ -18,3 +18,4 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 export declare function bufferFromBigInt(int: bigint | number, byteCount: number, littleEndian?: boolean, signed?: boolean): Uint8Array;
+//# sourceMappingURL=0_buffer.d.ts.map

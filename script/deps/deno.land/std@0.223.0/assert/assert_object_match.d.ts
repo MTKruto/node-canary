@@ -11,3 +11,4 @@
  * ```
  */
 export declare function assertObjectMatch(actual: Record<PropertyKey, any>, expected: Record<PropertyKey, unknown>, msg?: string): void;
+//# sourceMappingURL=assert_object_match.d.ts.map

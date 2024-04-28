@@ -11,3 +11,4 @@
  * ```
  */
 export declare function assertExists<T>(actual: T, msg?: string): asserts actual is NonNullable<T>;
+//# sourceMappingURL=assert_exists.d.ts.map

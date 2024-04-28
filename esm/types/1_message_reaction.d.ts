@@ -31,3 +31,4 @@ export interface MessageReaction {
     chosen: boolean;
 }
 export declare function constructMessageReaction(reaction_: types.ReactionCount, recentReactions: types.MessagePeerReaction[]): MessageReaction;
+//# sourceMappingURL=1_message_reaction.d.ts.map

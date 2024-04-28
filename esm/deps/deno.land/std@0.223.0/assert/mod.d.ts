@@ -41,3 +41,4 @@ export * from "./equal.js";
 export * from "./fail.js";
 export * from "./unimplemented.js";
 export * from "./unreachable.js";
+//# sourceMappingURL=mod.d.ts.map

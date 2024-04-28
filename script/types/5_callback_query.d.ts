@@ -40,3 +40,4 @@ export interface CallbackQuery {
 }
 export declare function deserializeInlineMessageId(inlineMessageId: string): enums.InputBotInlineMessageID;
 export declare function constructCallbackQuery(callbackQuery: types.UpdateBotCallbackQuery | types.UpdateInlineBotCallbackQuery, getEntity: EntityGetter, getMessage: MessageGetter): Promise<CallbackQuery>;
+//# sourceMappingURL=5_callback_query.d.ts.map

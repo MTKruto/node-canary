@@ -27,3 +27,4 @@ export * from "./tl/5_tl_writer.js";
 export * from "./tl/6_rpc_result.js";
 export * from "./tl/7_message.js";
 export * from "./tl/8_message_container.js";
+//# sourceMappingURL=2_tl.d.ts.map

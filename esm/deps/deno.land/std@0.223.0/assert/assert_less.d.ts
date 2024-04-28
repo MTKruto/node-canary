@@ -11,3 +11,4 @@
  * ```
  */
 export declare function assertLess<T>(actual: T, expected: T, msg?: string): void;
+//# sourceMappingURL=assert_less.d.ts.map

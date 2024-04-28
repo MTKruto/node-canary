@@ -26,3 +26,4 @@ export interface MaskPosition {
     scale: number;
 }
 export declare function constructMaskPosition({ n, x, y, zoom }: enums.MaskCoords): MaskPosition;
+//# sourceMappingURL=0_mask_position.d.ts.map

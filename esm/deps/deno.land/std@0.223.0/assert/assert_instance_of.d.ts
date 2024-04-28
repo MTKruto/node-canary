@@ -15,3 +15,4 @@ export type GetConstructorType<T extends AnyConstructor> = T extends new (...arg
  * ```
  */
 export declare function assertInstanceOf<T extends AnyConstructor>(actual: unknown, expectedType: T, msg?: string): asserts actual is GetConstructorType<T>;
+//# sourceMappingURL=assert_instance_of.d.ts.map

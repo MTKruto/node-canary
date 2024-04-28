@@ -10,3 +10,4 @@ export default class GZheader {
     hcrc: number;
     done: boolean;
 }
+//# sourceMappingURL=gzheader.d.ts.map

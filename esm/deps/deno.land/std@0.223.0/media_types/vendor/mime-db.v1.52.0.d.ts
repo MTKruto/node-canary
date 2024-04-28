@@ -8516,3 +8516,4 @@ declare const _default: {
     };
 };
 export default _default;
+//# sourceMappingURL=mime-db.v1.52.0.d.ts.map

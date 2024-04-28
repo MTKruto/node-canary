@@ -35,3 +35,4 @@ export declare class CallbackQueryManager {
     handleUpdate(update: CallbackQueryManagerUpdate): Promise<Update>;
 }
 export {};
+//# sourceMappingURL=4_callback_query_manager.d.ts.map

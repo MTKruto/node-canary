@@ -26,3 +26,4 @@ export interface PollOption {
     voterCount: number;
 }
 export declare function constructPollOption(option: enums.PollAnswer, results: Array<enums.PollAnswerVoters>): PollOption;
+//# sourceMappingURL=0_poll_option.d.ts.map

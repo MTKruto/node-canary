@@ -10,3 +10,4 @@ export declare class ConnectionWebSocket implements Connection {
     write(p: Uint8Array): Promise<void>;
     close(): void;
 }
+//# sourceMappingURL=1_connection_web_socket.d.ts.map

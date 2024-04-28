@@ -29,3 +29,4 @@ export declare class TransportError extends MtkrutoError {
     readonly code: number;
     constructor(code: number);
 }
+//# sourceMappingURL=0_errors.d.ts.map

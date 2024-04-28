@@ -28,3 +28,4 @@ declare enum STATUS {
     Z_DEFLATED = 8
 }
 export default STATUS;
+//# sourceMappingURL=status.d.ts.map

@@ -27,3 +27,4 @@ export interface InactiveChat {
     chat: ChatP;
 }
 export declare function constructInactiveChat(chat_: enums.Chat, lastActivity: number): InactiveChat;
+//# sourceMappingURL=2_inactive_chat.d.ts.map

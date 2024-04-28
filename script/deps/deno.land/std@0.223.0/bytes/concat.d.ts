@@ -11,3 +11,4 @@
  * ```
  */
 export declare function concat(buf: Uint8Array[]): Uint8Array;
+//# sourceMappingURL=concat.d.ts.map

@@ -42,3 +42,4 @@ export declare class UpdateManager {
     setUpdateHandler(handler: UpdateHandler): void;
 }
 export {};
+//# sourceMappingURL=2_update_manager.d.ts.map

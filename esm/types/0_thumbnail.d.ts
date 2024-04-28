@@ -32,3 +32,4 @@ export interface Thumbnail {
     fileSize: number;
 }
 export declare function constructThumbnail(size: types.PhotoSize, file: types.Document | types.Photo): Thumbnail;
+//# sourceMappingURL=0_thumbnail.d.ts.map

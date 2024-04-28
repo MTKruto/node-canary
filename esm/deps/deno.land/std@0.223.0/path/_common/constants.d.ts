@@ -37,3 +37,4 @@ export declare const CHAR_AMPERSAND = 38;
 export declare const CHAR_EQUAL = 61;
 export declare const CHAR_0 = 48;
 export declare const CHAR_9 = 57;
+//# sourceMappingURL=constants.d.ts.map

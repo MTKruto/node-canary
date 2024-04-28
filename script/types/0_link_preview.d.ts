@@ -32,3 +32,4 @@ export interface LinkPreview {
     aboveText?: boolean;
 }
 export declare function constructLinkPreview(media: types.MessageMediaWebPage, invert?: boolean): LinkPreview;
+//# sourceMappingURL=0_link_preview.d.ts.map

@@ -35,3 +35,4 @@ export interface ChosenInlineResult {
     query: string;
 }
 export declare function constructChosenInlineResult(ubis: types.UpdateBotInlineSend, getEntity: EntityGetter): Promise<ChosenInlineResult>;
+//# sourceMappingURL=2_chosen_inline_result.d.ts.map

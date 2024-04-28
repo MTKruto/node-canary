@@ -22,3 +22,4 @@ export interface KeyboardButtonPollType {
     /** If a type is not specified, the user will be allowed to choose either type. */
     type?: "regular" | "quiz";
 }
+//# sourceMappingURL=0_keyboard_button_poll_type.d.ts.map

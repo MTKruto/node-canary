@@ -243,10 +243,6 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
     readonly systemVersion: string;
     /**
      * Constructs the client.
-     *
-     * @param storage The storage provider to use. Defaults to memory storage. Passing a string constructs a memory storage with the string being the auth string.
-     * @param apiId App's API ID from [my.telegram.org](https://my.telegram.org/apps). Defaults to 0 (unset).
-     * @param apiHash App's API hash from [my.telegram.org/apps](https://my.telegram.org/apps). Defaults to empty string (unset).
      */
     constructor(params?: ClientParams);
     get connected(): boolean;
@@ -1163,3 +1159,4 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
     downloadLiveStreamChunk(id: string, channelId: number, scale: number, timestamp: number, params?: DownloadLiveStreamChunkParams): AsyncGenerator<Uint8Array, void, unknown>;
 }
 export {};
+//# sourceMappingURL=5_client.d.ts.map

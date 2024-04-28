@@ -35,3 +35,4 @@ export interface Document {
     fileSize: number;
 }
 export declare function constructDocument(document: types.Document, fileNameAttribute: types.DocumentAttributeFilename, fileId: string, fileUniqueId: string): Document;
+//# sourceMappingURL=1_document.d.ts.map

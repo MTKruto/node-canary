@@ -37,3 +37,4 @@ export interface Game {
     animation?: Animation;
 }
 export declare function constructGame(media_: types.MessageMediaGame): Game;
+//# sourceMappingURL=2_game.d.ts.map

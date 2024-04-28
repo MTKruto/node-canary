@@ -16,3 +16,4 @@ export { extensions };
  * ```
  */
 export declare function extensionsByType(type: string): string[] | undefined;
+//# sourceMappingURL=extensions_by_type.d.ts.map

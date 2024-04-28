@@ -39,3 +39,4 @@ export declare class StorageIndexedDB implements Storage {
     }, tx_?: IDBTransaction): AsyncGenerator<[readonly StorageKeyPart[], T]>;
     incr(key: readonly StorageKeyPart[], by: number): Promise<void>;
 }
+//# sourceMappingURL=2_storage_indexed_db.d.ts.map

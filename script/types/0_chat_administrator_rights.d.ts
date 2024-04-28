@@ -47,3 +47,4 @@ export interface ChatAdministratorRights {
 }
 export declare function constructChatAdministratorRights(rights_: enums.ChatAdminRights): ChatAdministratorRights;
 export declare function chatAdministratorRightsToTlObject(rights: ChatAdministratorRights): types.ChatAdminRights;
+//# sourceMappingURL=0_chat_administrator_rights.d.ts.map

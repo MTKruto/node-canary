@@ -27,3 +27,4 @@ export declare class PartStream extends TransformStream<Uint8Array, Part> {
     #private;
     constructor(chunkSize: number);
 }
+//# sourceMappingURL=0_part_stream.d.ts.map

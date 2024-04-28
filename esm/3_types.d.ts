@@ -104,3 +104,4 @@ export * from "./types/5_chat_list_item.js";
 export * from "./types/2_chat.js";
 export * from "./types/5_inline_query_answer.js";
 export * from "./types/6_update.js";
+//# sourceMappingURL=3_types.d.ts.map

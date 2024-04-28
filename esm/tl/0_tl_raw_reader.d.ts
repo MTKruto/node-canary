@@ -33,3 +33,4 @@ export declare class TLRawReader {
     readBytes(): Uint8Array;
     readString(): string;
 }
+//# sourceMappingURL=0_tl_raw_reader.d.ts.map

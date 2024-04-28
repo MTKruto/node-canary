@@ -37,3 +37,4 @@ export interface InlineQuery {
     location?: Location;
 }
 export declare function constructInlineQuery(query_: types.UpdateBotInlineQuery, getEntity: EntityGetter): Promise<InlineQuery>;
+//# sourceMappingURL=2_inline_query.d.ts.map

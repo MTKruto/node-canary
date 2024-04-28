@@ -41,10 +41,10 @@ async function constructSticker(document, fileId, fileUniqueId, getStickerSetNam
         thumbnails: document.thumbs ? document.thumbs.map((v) => v instanceof _2_tl_js_1.types.PhotoSize ? (0, _0_thumbnail_js_1.constructThumbnail)(v, document) : null).filter((v) => v) : [],
         emoji: (customEmojiAttribute ? customEmojiAttribute.alt : stickerAttribute.alt) || undefined,
         setName,
-        premiumAnimation: undefined,
+        premiumAnimation: undefined, // TODO
         maskPosition: stickerAttribute.mask_coords ? (0, _0_mask_position_js_1.constructMaskPosition)(stickerAttribute.mask_coords) : undefined,
-        customEmojiId: customEmojiAttribute ? customEmojiId : undefined,
-        needsRepainting: customEmojiAttribute ? Boolean(customEmojiAttribute.text_color) : undefined,
+        customEmojiId: customEmojiAttribute ? customEmojiId : undefined, // TODO
+        needsRepainting: customEmojiAttribute ? Boolean(customEmojiAttribute.text_color) : undefined, // TODO
         fileSize: Number(document.size),
     });
 }

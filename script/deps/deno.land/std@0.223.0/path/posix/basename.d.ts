@@ -15,3 +15,4 @@
  * @param [suffix] - suffix to remove from extracted name.
  */
 export declare function basename(path: string, suffix?: string): string;
+//# sourceMappingURL=basename.d.ts.map

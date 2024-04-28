@@ -54,3 +54,4 @@ export * from "./glob_to_regexp.js";
 export * from "./is_glob.js";
 export * from "./join_globs.js";
 export * from "./normalize_glob.js";
+//# sourceMappingURL=mod.d.ts.map

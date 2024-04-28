@@ -32,3 +32,4 @@ export interface Contact {
     vcard?: string;
 }
 export declare function constructContact(contact: types.MessageMediaContact): Contact;
+//# sourceMappingURL=0_contact.d.ts.map

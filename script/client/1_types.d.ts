@@ -73,3 +73,4 @@ export interface C {
     invoke<T extends (functions.Function<unknown> | types.Type) = functions.Function<unknown>>(function_: T, businessConnectionId: string | undefined): Promise<T extends functions.Function<unknown> ? T["__R"] : void>;
 }
 export {};
+//# sourceMappingURL=1_types.d.ts.map

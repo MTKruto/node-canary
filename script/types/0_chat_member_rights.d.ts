@@ -57,3 +57,4 @@ export interface ChatMemberRights {
 }
 export declare function constructChatMemberRights(rights: types.ChatBannedRights): ChatMemberRights;
 export declare function chatMemberRightsToTlObject(rights?: ChatMemberRights, untilDate?: Date): types.ChatBannedRights;
+//# sourceMappingURL=0_chat_member_rights.d.ts.map

@@ -27,3 +27,4 @@ export interface ReactionCount {
     count: number;
 }
 export declare function constructReactionCount(reaction_: types.ReactionCount): ReactionCount;
+//# sourceMappingURL=1_reaction_count.d.ts.map

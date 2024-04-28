@@ -60,3 +60,4 @@ export interface ChatPrivate extends ChatBase, ChatPPrivate {
  */
 export type Chat = ChatChannel | ChatSupergroup | ChatGroup | ChatPrivate;
 export declare function constructChat(fullChat: types.UserFull | types.ChatFull | types.ChannelFull, getEntity: EntityGetter): Promise<Chat>;
+//# sourceMappingURL=2_chat.d.ts.map

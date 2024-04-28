@@ -9,3 +9,4 @@
  * ```
  */
 export declare function unimplemented(msg?: string): never;
+//# sourceMappingURL=unimplemented.d.ts.map

@@ -41,3 +41,4 @@ export declare class VideoChatManager {
     downloadLiveStreamChunk(id: string, channel: number, scale: number, timestamp: number, params?: DownloadLiveStreamChunkParams): AsyncGenerator<Uint8Array, void, unknown>;
 }
 export {};
+//# sourceMappingURL=3_video_chat_manager.d.ts.map

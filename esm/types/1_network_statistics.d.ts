@@ -23,3 +23,4 @@ export interface NetworkStatistics {
     messages: NetworkStatisticsEntry;
     cdn: NetworkStatisticsEntry;
 }
+//# sourceMappingURL=1_network_statistics.d.ts.map

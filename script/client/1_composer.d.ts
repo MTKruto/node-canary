@@ -48,3 +48,4 @@ export declare class Composer<C extends {
     callbackQuery(data: string | RegExp | (string | RegExp)[], ...middleware: Middleware<WithFilter<C, "callbackQuery:data">>[]): Composer<WithFilter<C, "callbackQuery:data">>;
     inlineQuery(queries: string | RegExp | (string | RegExp)[], ...middleware: Middleware<WithFilter<C, "inlineQuery">>[]): Composer<WithFilter<C, "inlineQuery">>;
 }
+//# sourceMappingURL=1_composer.d.ts.map

@@ -111,3 +111,4 @@ export interface MessageContentInvoice {
 }
 /** The content of a message to be returned as an inline query result. */
 export type MessageContent = MessageContentText | MessageContentLocation | MessageContentVenue | MessageContentContact | MessageContentInvoice;
+//# sourceMappingURL=1_message_content.d.ts.map

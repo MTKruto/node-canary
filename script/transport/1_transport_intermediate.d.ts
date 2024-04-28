@@ -28,3 +28,4 @@ export declare class TransportIntermediate extends Transport implements Transpor
     deinitialize(): void;
     get initialized(): boolean;
 }
+//# sourceMappingURL=1_transport_intermediate.d.ts.map

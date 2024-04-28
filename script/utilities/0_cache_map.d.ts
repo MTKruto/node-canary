@@ -23,3 +23,4 @@ export declare class CacheMap<K, V> extends Map<K, V> {
     constructor(limit: number);
     set(key: K, value: V): typeof this;
 }
+//# sourceMappingURL=0_cache_map.d.ts.map

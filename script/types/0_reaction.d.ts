@@ -33,3 +33,4 @@ export type Reaction = ReactionEmoji | ReactionCustomEmoji;
 export declare function constructReaction(reaction: enums.Reaction): Reaction;
 export declare function reactionToTlObject(reaction: Reaction): enums.Reaction;
 export declare function reactionEqual(left: Reaction, right: Reaction): boolean;
+//# sourceMappingURL=0_reaction.d.ts.map

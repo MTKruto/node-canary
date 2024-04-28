@@ -31,3 +31,4 @@ export declare function chatIdToPeer(chatId: number): enums.Peer;
 export declare function chatIdToPeerId(chatId: number): bigint;
 export declare function getChatIdPeerType(chatId: number): "user" | "chat" | "channel";
 export declare function inputPeerToPeer(inputPeer: enums.InputPeer): enums.Peer;
+//# sourceMappingURL=3_utilities.d.ts.map

@@ -8,3 +8,4 @@ export declare const dntGlobalThis: Omit<typeof globalThis, "WebSocket" | "crypt
     crypto: import("@deno/shim-crypto").Crypto;
     WebSocket: typeof WebSocket;
 };
+//# sourceMappingURL=_dnt.shims.d.ts.map

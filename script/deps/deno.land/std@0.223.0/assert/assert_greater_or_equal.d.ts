@@ -12,3 +12,4 @@
  * ```
  */
 export declare function assertGreaterOrEqual<T>(actual: T, expected: T, msg?: string): void;
+//# sourceMappingURL=assert_greater_or_equal.d.ts.map

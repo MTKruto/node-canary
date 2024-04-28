@@ -31,3 +31,4 @@ export declare abstract class Transport {
     abstract send(buffer: Uint8Array): MaybePromise<void>;
     deinitialize(): MaybePromise<void>;
 }
+//# sourceMappingURL=0_transport.d.ts.map

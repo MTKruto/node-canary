@@ -33,3 +33,4 @@ export declare function fixKey(key: readonly StorageKeyPart[]): IDBValidKey[];
 export declare function restoreKey(key: readonly StorageKeyPart[]): StorageKeyPart[];
 export declare function getPrefixKeyRange(prefix: any): IDBKeyRange;
 export declare function isInRange(key: StorageKeyPart[], start: readonly StorageKeyPart[], end: readonly StorageKeyPart[]): boolean;
+//# sourceMappingURL=1_utilities.d.ts.map

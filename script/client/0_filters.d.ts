@@ -77,3 +77,4 @@ export type FilterQuery = AnyLevelX;
 export type WithFilter<T, Q extends FilterQuery> = T & Filter<Q>;
 export declare function match<Q extends FilterQuery, T extends object>(filter: Q, value: T): boolean;
 export {};
+//# sourceMappingURL=0_filters.d.ts.map

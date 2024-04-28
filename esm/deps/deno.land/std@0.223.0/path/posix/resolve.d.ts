@@ -3,3 +3,4 @@
  * @param pathSegments to process to path
  */
 export declare function resolve(...pathSegments: string[]): string;
+//# sourceMappingURL=resolve.d.ts.map

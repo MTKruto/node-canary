@@ -61,3 +61,4 @@ export interface TLObjectConstructor<T = TLObject> {
 }
 export declare function isTLObjectConstructor(t: unknown): t is typeof TLObject;
 export {};
+//# sourceMappingURL=1_tl_object.d.ts.map

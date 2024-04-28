@@ -55,3 +55,4 @@ import { type GlobToRegExpOptions } from "../_common/glob_to_reg_exp.js";
  *   `!(foo|bar)` is treated like `!(@(foo|bar)*)`. This will work correctly if
  *   the group occurs not nested at the end of the segment. */
 export declare function globToRegExp(glob: string, options?: GlobToRegExpOptions): RegExp;
+//# sourceMappingURL=glob_to_regexp.d.ts.map

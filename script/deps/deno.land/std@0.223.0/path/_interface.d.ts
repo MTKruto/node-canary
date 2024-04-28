@@ -36,3 +36,4 @@ export interface ParsedPath {
     name: string;
 }
 export type FormatInputPathObject = Partial<ParsedPath>;
+//# sourceMappingURL=_interface.d.ts.map

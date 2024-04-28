@@ -125,3 +125,4 @@ export declare function getPhotoFileId(photo: types.Photo): {
     fileUniqueId: string;
 };
 export {};
+//# sourceMappingURL=_file_id.d.ts.map

@@ -26,3 +26,4 @@ export declare const VECTOR_CONSTRUCTOR = 481674261;
 export declare function toUnixTimestamp(date: Date): number;
 export declare function fromUnixTimestamp(date: number): Date;
 export declare function iterateReadableStream(stream: ReadableStream): AsyncGenerator<any, void, unknown>;
+//# sourceMappingURL=1_misc.d.ts.map

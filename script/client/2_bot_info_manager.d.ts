@@ -47,3 +47,4 @@ export declare class BotInfoManager {
     getMyCommands(params?: GetMyCommandsParams): Promise<BotCommand[]>;
     setMyCommands(commands: BotCommand[], params?: SetMyCommandsParams): Promise<void>;
 }
+//# sourceMappingURL=2_bot_info_manager.d.ts.map

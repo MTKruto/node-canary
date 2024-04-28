@@ -28,3 +28,4 @@ export interface CallbackQueryAnswer {
     url: string;
 }
 export declare function constructCallbackQueryAnswer(answer: types.messages.BotCallbackAnswer): CallbackQueryAnswer;
+//# sourceMappingURL=0_callback_query_answer.d.ts.map

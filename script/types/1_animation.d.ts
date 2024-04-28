@@ -41,3 +41,4 @@ export interface Animation {
     fileSize: number;
 }
 export declare function constructAnimation(document: types.Document, videoAttribute: types.DocumentAttributeVideo | undefined, fileAttribute: types.DocumentAttributeFilename | undefined, fileId: string, fileUniqueId: string): Animation;
+//# sourceMappingURL=1_animation.d.ts.map

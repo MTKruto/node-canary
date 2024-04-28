@@ -18,3 +18,4 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 export declare function factorize(pq: bigint): [bigint, bigint];
+//# sourceMappingURL=1_math.d.ts.map

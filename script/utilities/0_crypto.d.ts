@@ -24,3 +24,4 @@ export declare class CTR {
     call(data: Uint8Array): void;
     destroy(): void;
 }
+//# sourceMappingURL=0_crypto.d.ts.map

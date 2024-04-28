@@ -16,3 +16,4 @@
  * ```
  */
 export declare function assertStrictEquals<T>(actual: unknown, expected: T, msg?: string): asserts actual is T;
+//# sourceMappingURL=assert_strict_equals.d.ts.map

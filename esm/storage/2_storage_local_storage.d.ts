@@ -34,3 +34,4 @@ export declare class StorageLocalStorage implements Storage {
     set(key_: readonly StorageKeyPart[], value: unknown): void;
     incr(key: readonly StorageKeyPart[], by: number): void;
 }
+//# sourceMappingURL=2_storage_local_storage.d.ts.map

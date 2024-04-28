@@ -32,3 +32,4 @@ export interface InputStoryContentVideo {
 }
 /** A story content when provided as an input. */
 export type InputStoryContent = InputStoryContentPhoto | InputStoryContentVideo;
+//# sourceMappingURL=1_input_story_content.d.ts.map

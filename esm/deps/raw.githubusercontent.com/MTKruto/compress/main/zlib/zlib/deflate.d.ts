@@ -76,3 +76,4 @@ export declare function deflateInit2(strm: ZStream, level: number, method: numbe
 export declare function deflate(strm: ZStream, flush: number): CODE | -2 | STATUS.Z_NO_FLUSH | STATUS.Z_PARTIAL_FLUSH;
 export declare function deflateEnd(strm: ZStream): any;
 export declare function deflateSetDictionary(strm: ZStream, dictionary: Uint8Array): any;
+//# sourceMappingURL=deflate.d.ts.map

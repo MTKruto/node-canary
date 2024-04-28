@@ -34,3 +34,4 @@ export interface Location {
     proximityAlertRadius?: number;
 }
 export declare function constructLocation(geo_: types.MessageMediaGeo | types.MessageMediaGeoLive | types.GeoPoint): Location;
+//# sourceMappingURL=0_location.d.ts.map

@@ -29,3 +29,4 @@ export declare class MessageContainer {
     [serialize](): Uint8Array;
     static deserialize(buffer: Uint8Array): Message_[];
 }
+//# sourceMappingURL=8_message_container.d.ts.map

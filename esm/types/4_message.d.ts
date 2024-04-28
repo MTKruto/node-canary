@@ -491,3 +491,4 @@ export declare function constructMessage(message_: enums.Message, getEntity: Ent
     replyToMessage?: enums.Message;
 }): Promise<Message>;
 export {};
+//# sourceMappingURL=4_message.d.ts.map

@@ -106,3 +106,4 @@ export declare class MessageManager {
     editInlineMessageLiveLocation(inlineMessageId: string, latitude: number, longitude: number, params?: EditMessageLiveLocationParams): Promise<void>;
 }
 export {};
+//# sourceMappingURL=3_message_manager.d.ts.map

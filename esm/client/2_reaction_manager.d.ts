@@ -28,3 +28,4 @@ export declare class ReactionManager {
     handleUpdate(update: ReactionManagerUpdate): Promise<Update | null>;
 }
 export {};
+//# sourceMappingURL=2_reaction_manager.d.ts.map

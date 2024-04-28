@@ -41,3 +41,4 @@ export interface ChatMemberUpdated {
     viaSharedFolder?: boolean;
 }
 export declare function constructChatMemberUpdated(update: types.UpdateChannelParticipant | types.UpdateChatParticipant, getEntity: EntityGetter): Promise<ChatMemberUpdated>;
+//# sourceMappingURL=3_chat_member_updated.d.ts.map

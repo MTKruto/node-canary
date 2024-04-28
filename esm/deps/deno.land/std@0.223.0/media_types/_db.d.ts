@@ -5,3 +5,4 @@ export declare const types: Map<string, "application/1d-interleaved-parityfec" |
 /** A map of extensions for a given media type. */
 declare const extensions: Map<string, string[]>;
 export { db, extensions };
+//# sourceMappingURL=_db.d.ts.map

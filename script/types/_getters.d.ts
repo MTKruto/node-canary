@@ -35,3 +35,4 @@ export interface InputPeerGetter {
 export interface UsernameResolver {
     (username: string): MaybePromise<types.InputUser>;
 }
+//# sourceMappingURL=_getters.d.ts.map

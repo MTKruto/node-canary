@@ -12,3 +12,4 @@ export default class ZStream {
     data_type: number;
     adler: number;
 }
+//# sourceMappingURL=zstream.d.ts.map

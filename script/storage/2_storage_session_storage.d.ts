@@ -35,3 +35,4 @@ export declare class StorageSessionStorage implements Storage {
     set(key_: readonly StorageKeyPart[], value: unknown): MaybePromise<void>;
     incr(key: readonly StorageKeyPart[], by: number): void;
 }
+//# sourceMappingURL=2_storage_session_storage.d.ts.map

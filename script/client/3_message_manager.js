@@ -876,7 +876,7 @@ class MessageManager {
                 channel: new _2_tl_js_1.types.InputChannel(chat),
                 participant: member,
                 banned_rights: new _2_tl_js_1.types.ChatBannedRights({
-                    until_date: params?.untilDate ? (0, _1_utilities_js_1.toUnixTimestamp)(params.untilDate) : 0,
+                    until_date: params?.untilDate ? (0, _1_utilities_js_1.toUnixTimestamp)(params.untilDate) : 0, // todo
                     view_messages: true,
                     send_messages: true,
                     send_media: true,

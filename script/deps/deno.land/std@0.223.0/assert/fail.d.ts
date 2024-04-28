@@ -9,3 +9,4 @@
  * ```
  */
 export declare function fail(msg?: string): never;
+//# sourceMappingURL=fail.d.ts.map

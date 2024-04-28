@@ -12,3 +12,4 @@ export type Falsy = false | 0 | 0n | "" | null | undefined;
  * ```
  */
 export declare function assertFalse(expr: unknown, msg?: string): asserts expr is Falsy;
+//# sourceMappingURL=assert_false.d.ts.map

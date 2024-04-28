@@ -180,3 +180,4 @@ export declare class StorageOperations {
     getApiId(): Promise<number | null>;
     reset(): Promise<void>;
 }
+//# sourceMappingURL=0_storage_operations.d.ts.map

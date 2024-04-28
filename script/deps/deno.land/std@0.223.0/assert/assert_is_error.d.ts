@@ -16,3 +16,4 @@
  * ```
  */
 export declare function assertIsError<E extends Error = Error>(error: unknown, ErrorClass?: new (...args: any[]) => E, msgMatches?: string | RegExp, msg?: string): asserts error is E;
+//# sourceMappingURL=assert_is_error.d.ts.map

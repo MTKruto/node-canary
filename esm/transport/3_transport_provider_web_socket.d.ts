@@ -21,3 +21,4 @@ import { TransportProvider } from "./2_transport_provider.js";
 export declare const transportProviderWebSocket: (params?: {
     wss?: boolean;
 }) => TransportProvider;
+//# sourceMappingURL=3_transport_provider_web_socket.d.ts.map

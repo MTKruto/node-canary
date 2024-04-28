@@ -23,3 +23,4 @@ export interface MiniAppInfo {
     url: string;
 }
 export declare function constructMiniAppInfo(url: string): MiniAppInfo;
+//# sourceMappingURL=0_mini_app_info.d.ts.map

@@ -38,3 +38,4 @@ export declare const CODEPOINTS: {
     "|": number;
 };
 export declare function parseMarkdown(text_: string): [string, MessageEntity[]];
+//# sourceMappingURL=0_markdown.d.ts.map

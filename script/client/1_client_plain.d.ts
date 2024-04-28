@@ -35,3 +35,4 @@ export declare class ClientPlain extends ClientAbstract {
     invoke<T extends functions.Function<unknown>>(function_: T): Promise<T["__R"]>;
     createAuthKey(): Promise<[Uint8Array, bigint]>;
 }
+//# sourceMappingURL=1_client_plain.d.ts.map

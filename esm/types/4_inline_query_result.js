@@ -85,7 +85,7 @@ export function constructInlineQueryResult(result) {
                 const document = result.document[as](types.Document);
                 ref = {
                     fileId: serializeFileId({
-                        type: FileType.Document,
+                        type: FileType.Document, // Should this be changed? The type is already known.
                         dcId: document.dc_id,
                         fileReference: document.file_reference,
                         location: { type: "common", id: document.id, accessHash: document.access_hash },
@@ -167,7 +167,7 @@ export function constructInlineQueryResult(result) {
                     ...ref,
                     messageContent,
                     replyMarkup,
-                    mimeType: "content" in result && result.content ? result.content.mime_type : "video/mp4",
+                    mimeType: "content" in result && result.content ? result.content.mime_type : "video/mp4", // TODO
                     thumbnailUrl: thumbnailUrl,
                     width: a?.w,
                     height: a?.h,
@@ -382,7 +382,7 @@ export async function inlineQueryResultToTlObject(result_, parseText, usernameRe
             title,
             description,
             document: new types.InputDocument({
-                id: "id" in fileId.location ? fileId.location.id : unreachable(),
+                id: "id" in fileId.location ? fileId.location.id : unreachable(), // TODO: Remove UNREACHABLE()?
                 access_hash: fileId.location.accessHash,
                 file_reference: fileId.fileReference ?? new Uint8Array(),
             }),

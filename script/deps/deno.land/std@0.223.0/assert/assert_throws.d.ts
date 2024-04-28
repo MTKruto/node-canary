@@ -31,3 +31,4 @@ export declare function assertThrows(fn: () => unknown, msg?: string): unknown;
  * ```
  */
 export declare function assertThrows<E extends Error = Error>(fn: () => unknown, ErrorClass: new (...args: any[]) => E, msgIncludes?: string, msg?: string): E;
+//# sourceMappingURL=assert_throws.d.ts.map

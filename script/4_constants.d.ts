@@ -15,3 +15,4 @@ export declare const MAX_CHAT_ID = 999999999999;
 export declare const MAX_CHANNEL_ID = 997852516352;
 export declare const CHANNEL_DIFFERENCE_LIMIT_USER = 100;
 export declare const CHANNEL_DIFFERENCE_LIMIT_BOT = 100000;
+//# sourceMappingURL=4_constants.d.ts.map

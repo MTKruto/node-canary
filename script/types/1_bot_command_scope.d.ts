@@ -55,3 +55,4 @@ export interface BotCommandScopeChatMember {
 /** A type specifying where bot commads are available. */
 export type BotCommandScope = BotCommandScopeDefault | BotCommandScopeAllPrivateChats | BotCommandScopeAllGroupChats | BotCommandScopeAllChatAdministrators | BotCommandScopeChat | BotCommandScopeChatAdministrators | BotCommandScopeChatMember;
 export declare function botCommandScopeToTlObject(scope: BotCommandScope, getInputPeer: InputPeerGetter): Promise<enums.BotCommandScope>;
+//# sourceMappingURL=1_bot_command_scope.d.ts.map

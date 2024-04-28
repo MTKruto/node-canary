@@ -28057,3 +28057,4 @@ export declare namespace enums {
         type CollectibleInfo = types.fragment.CollectibleInfo;
     }
 }
+//# sourceMappingURL=2_types.d.ts.map

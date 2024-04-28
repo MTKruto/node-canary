@@ -101,3 +101,4 @@ export declare function constructChatP(chat: types.User): ChatPPrivate;
 export declare function constructChatP(chat: types.Chat | types.ChatForbidden): ChatPGroup;
 export declare function constructChatP(chat: types.Channel | types.ChannelForbidden): ChatPSupergroup | ChatPChannel;
 export declare function constructChatP(chat: types.User | types.Chat | types.ChatForbidden | types.Channel | types.ChannelForbidden): ChatP;
+//# sourceMappingURL=1_chat_p.d.ts.map

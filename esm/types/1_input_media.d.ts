@@ -106,3 +106,4 @@ export interface InputMediaVideo extends _InputMediaCommon {
     selfDestruct?: SelfDestructOption;
 }
 export type InputMedia = InputMediaAnimation | InputMediaAudio | InputMediaDocument | InputMediaPhoto | InputMediaVideo;
+//# sourceMappingURL=1_input_media.d.ts.map

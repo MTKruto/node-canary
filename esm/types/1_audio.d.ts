@@ -39,3 +39,4 @@ export interface Audio {
     thumbnails: Thumbnail[];
 }
 export declare function constructAudio(document: types.Document, audioAttribute: types.DocumentAttributeAudio | undefined, fileId: string, fileUniqueId: string): Audio;
+//# sourceMappingURL=1_audio.d.ts.map

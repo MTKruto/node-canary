@@ -10,3 +10,4 @@ export declare const message: {
     "-6": string;
 };
 export type CODE = 2 | 1 | 0 | "-1" | "-2" | "-3" | "-4" | "-5" | "-6";
+//# sourceMappingURL=messages.d.ts.map

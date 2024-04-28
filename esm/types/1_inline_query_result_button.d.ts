@@ -27,3 +27,4 @@ export interface InlineQueryResultButton {
     /** Deep linking parameter for the /start message. */
     startParameter?: string;
 }
+//# sourceMappingURL=1_inline_query_result_button.d.ts.map

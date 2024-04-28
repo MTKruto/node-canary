@@ -15,3 +15,4 @@ export declare class FileManager {
     getStickerSetName(inputStickerSet: types.InputStickerSetID, hash?: number): Promise<string>;
     getCustomEmojiStickers(id: string | string[]): Promise<Sticker[]>;
 }
+//# sourceMappingURL=2_file_manager.d.ts.map

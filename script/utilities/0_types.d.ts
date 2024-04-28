@@ -18,3 +18,4 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 export type MaybePromise<T> = T | Promise<T>;
+//# sourceMappingURL=0_types.d.ts.map

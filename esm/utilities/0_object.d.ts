@@ -18,3 +18,4 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 export declare function cleanObject<T extends Record<string, any>>(object: T): T;
+//# sourceMappingURL=0_object.d.ts.map

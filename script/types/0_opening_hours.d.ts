@@ -23,3 +23,4 @@ export interface OpeningHours {
     intervals: [number, number][];
 }
 export declare function constructOpeningHours(hours: types.BusinessWorkHours): OpeningHours;
+//# sourceMappingURL=0_opening_hours.d.ts.map

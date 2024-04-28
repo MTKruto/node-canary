@@ -5,3 +5,4 @@
  * @param to path in current working directory
  */
 export declare function relative(from: string, to: string): string;
+//# sourceMappingURL=relative.d.ts.map

@@ -24,3 +24,4 @@ export interface PriceTag {
     /** Price of the product in the smallest units of the currency (integer, not float/double). */
     amount: number;
 }
+//# sourceMappingURL=0_price_tag.d.ts.map

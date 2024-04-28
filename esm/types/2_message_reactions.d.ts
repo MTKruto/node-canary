@@ -40,3 +40,4 @@ export interface MessageReactions {
     newReactions: Reaction[];
 }
 export declare function constructMessageReactions(update: types.UpdateBotMessageReaction, getEntity: EntityGetter): Promise<MessageReactions | null>;
+//# sourceMappingURL=2_message_reactions.d.ts.map

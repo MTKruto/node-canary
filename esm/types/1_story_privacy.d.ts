@@ -39,3 +39,4 @@ export interface StoryPrivacyOnly {
 export type StoryPrivacy = StoryPrivacyEveryone | StoryPrivacyConctacts | StoryPrivacyCloseFriends | StoryPrivacyOnly;
 export declare function storyPrivacyToTlObject(privacy: StoryPrivacy, getEntity: EntityGetter): Promise<enums.InputPrivacyRule[]>;
 export declare function constructStoryPrivacy(privacy: enums.PrivacyRule[]): StoryPrivacy;
+//# sourceMappingURL=1_story_privacy.d.ts.map

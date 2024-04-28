@@ -45,3 +45,4 @@ export declare class StoryManager {
     handleUpdate(update: StoryManagerUpdate): Promise<Update | null>;
 }
 export {};
+//# sourceMappingURL=4_story_manager.d.ts.map

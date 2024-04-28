@@ -50,3 +50,4 @@ export declare abstract class ClientAbstract {
     disconnect(): Promise<void>;
     get disconnected(): boolean;
 }
+//# sourceMappingURL=0_client_abstract.d.ts.map

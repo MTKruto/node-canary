@@ -26,3 +26,4 @@ export interface GlobConstants {
     escapePrefix: string;
 }
 export declare function _globToRegExp(c: GlobConstants, glob: string, { extended, globstar: globstarOption, caseInsensitive, }?: GlobToRegExpOptions): RegExp;
+//# sourceMappingURL=glob_to_reg_exp.d.ts.map

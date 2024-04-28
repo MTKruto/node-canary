@@ -21,3 +21,4 @@ export declare class Inflate {
 declare function inflate(input: Uint8Array, options?: InflateOptions): Uint8Array;
 export declare const gunzip: typeof inflate;
 export {};
+//# sourceMappingURL=inflate.d.ts.map

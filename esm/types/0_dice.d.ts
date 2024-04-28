@@ -26,3 +26,4 @@ export interface Dice {
     value: number;
 }
 export declare function constructDice(dice_: types.MessageMediaDice): Dice;
+//# sourceMappingURL=0_dice.d.ts.map

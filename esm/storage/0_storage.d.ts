@@ -38,3 +38,4 @@ export interface Storage {
     supportsFiles: boolean;
     mustSerialize: boolean;
 }
+//# sourceMappingURL=0_storage.d.ts.map

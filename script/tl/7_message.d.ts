@@ -29,3 +29,4 @@ export declare class Message_ {
     [serialize](): Uint8Array;
     static deserialize(reader: TLReader): Message_;
 }
+//# sourceMappingURL=7_message.d.ts.map

@@ -61,3 +61,4 @@ export interface InlineKeyboardButtonPay extends _InlineKeyboardButtonBase {
 export type InlineKeyboardButton = InlineKeyboardButtonURL | InlineKeyboardButtonCallback | InlineKeyboardButtonMiniApp | InlineKeyboardButtonLogin | InlineKeyboardButtonSwitchInline | InlineKeyboardButtonSwitchInlineCurrent | InlineKeyboardButtonGame | InlineKeyboardButtonPay;
 export declare function constructInlineKeyboardButton(button_: enums.KeyboardButton): InlineKeyboardButton;
 export declare function inlineKeyboardButtonToTlObject(button: InlineKeyboardButton, usernameResolver: UsernameResolver): Promise<enums.KeyboardButton>;
+//# sourceMappingURL=2_inline_keyboard_button.d.ts.map

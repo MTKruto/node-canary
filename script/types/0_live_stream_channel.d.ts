@@ -28,3 +28,4 @@ export interface LiveStreamChannel {
     timestamp: number;
 }
 export declare function constructLiveStreamChannel(channel: types.GroupCallStreamChannel): LiveStreamChannel;
+//# sourceMappingURL=0_live_stream_channel.d.ts.map

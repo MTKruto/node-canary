@@ -385,3 +385,4 @@ export interface DownloadLiveStreamChunkParams {
     /** Video quality. */
     quality?: "low" | "medium" | "high";
 }
+//# sourceMappingURL=0_params.d.ts.map

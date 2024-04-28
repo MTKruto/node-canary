@@ -38,3 +38,4 @@ export type KnownExtensionOrType = keyof ContentTypeToExtension | ContentTypeToE
  * ```
  */
 export declare function contentType<T extends (string & {}) | KnownExtensionOrType>(extensionOrType: T): Lowercase<T> extends KnownExtensionOrType ? string : string | undefined;
+//# sourceMappingURL=content_type.d.ts.map

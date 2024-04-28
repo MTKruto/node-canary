@@ -215,3 +215,4 @@ export declare function inlineQueryResultToTlObject(result_: InlineQueryResult, 
     entities?: MessageEntity[];
 }) => Promise<readonly [string, any[] | undefined]>, usernameResolver: UsernameResolver): Promise<enums.InputBotInlineResult>;
 export {};
+//# sourceMappingURL=4_inline_query_result.d.ts.map

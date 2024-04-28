@@ -30,3 +30,4 @@ export interface Connection {
     };
     read(p: Uint8Array): MaybePromise<void>;
 }
+//# sourceMappingURL=0_connection.d.ts.map

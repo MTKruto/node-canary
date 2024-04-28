@@ -22,3 +22,4 @@ export interface AuthorizationState {
     /** Whether the client is authorized. */
     authorized: boolean;
 }
+//# sourceMappingURL=0_authorization_state.d.ts.map

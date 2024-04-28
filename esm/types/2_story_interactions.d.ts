@@ -27,3 +27,4 @@ export interface StoryInteractions {
     forwards: number;
 }
 export declare function constructStoryInteractions(views_: types.StoryViews): StoryInteractions;
+//# sourceMappingURL=2_story_interactions.d.ts.map

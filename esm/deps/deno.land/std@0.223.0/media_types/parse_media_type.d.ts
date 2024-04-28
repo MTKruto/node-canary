@@ -21,3 +21,4 @@
  * ```
  */
 export declare function parseMediaType(v: string): [mediaType: string, params: Record<string, string> | undefined];
+//# sourceMappingURL=parse_media_type.d.ts.map

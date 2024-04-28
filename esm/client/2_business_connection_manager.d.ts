@@ -28,3 +28,4 @@ export declare class BusinessConnectionManager {
     static canHandleUpdate(update: enums.Update): update is BusinessConnectionManagerUpdate;
     handleUpdate(update: BusinessConnectionManagerUpdate): Promise<Update>;
 }
+//# sourceMappingURL=2_business_connection_manager.d.ts.map

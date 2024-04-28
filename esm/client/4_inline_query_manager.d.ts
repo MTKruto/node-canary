@@ -35,3 +35,4 @@ export declare class InlineQueryManager {
     sendInlineQuery(userId: ID, chatId: ID, params?: SendInlineQueryParams): Promise<import("../3_types.js").InlineQueryAnswer>;
 }
 export {};
+//# sourceMappingURL=4_inline_query_manager.d.ts.map

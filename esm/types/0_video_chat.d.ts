@@ -58,3 +58,4 @@ export interface VideoChatEnded extends _VideoChatCommon {
 }
 export type VideoChat = VideoChatActive | VideoChatScheduled | VideoChatEnded;
 export declare function constructVideoChat(call: enums.GroupCall): VideoChat;
+//# sourceMappingURL=0_video_chat.d.ts.map

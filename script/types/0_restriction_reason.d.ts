@@ -25,3 +25,4 @@ export interface RestrictionReason {
     text: string;
 }
 export declare function constructRestrictionReason(rr: enums.RestrictionReason): RestrictionReason;
+//# sourceMappingURL=0_restriction_reason.d.ts.map

@@ -28,3 +28,4 @@ export declare class TransportAbridged extends Transport implements Transport {
     deinitialize(): void;
     get initialized(): boolean;
 }
+//# sourceMappingURL=1_transport_abridged.d.ts.map

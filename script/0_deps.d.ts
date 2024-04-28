@@ -27,3 +27,4 @@ export declare function extension(mimeType: string): string;
 export { createCtr256State, ctr256, type Ctr256State, destroyCtr256State, ige256Decrypt, ige256Encrypt, init as initTgCrypto } from "./deps/deno.land/x/tgcrypto@0.4.1/mod.js";
 export { gunzip, gzip } from "./deps/raw.githubusercontent.com/MTKruto/compress/main/mod.js";
 export { Parser } from "./deps/deno.land/x/html_parser@v0.1.3/src/mod.js";
+//# sourceMappingURL=0_deps.d.ts.map

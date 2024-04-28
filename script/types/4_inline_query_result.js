@@ -88,7 +88,7 @@ function constructInlineQueryResult(result) {
                 const document = result.document[_2_tl_js_1.as](_2_tl_js_1.types.Document);
                 ref = {
                     fileId: (0, _file_id_js_1.serializeFileId)({
-                        type: _file_id_js_1.FileType.Document,
+                        type: _file_id_js_1.FileType.Document, // Should this be changed? The type is already known.
                         dcId: document.dc_id,
                         fileReference: document.file_reference,
                         location: { type: "common", id: document.id, accessHash: document.access_hash },
@@ -170,7 +170,7 @@ function constructInlineQueryResult(result) {
                     ...ref,
                     messageContent,
                     replyMarkup,
-                    mimeType: "content" in result && result.content ? result.content.mime_type : "video/mp4",
+                    mimeType: "content" in result && result.content ? result.content.mime_type : "video/mp4", // TODO
                     thumbnailUrl: thumbnailUrl,
                     width: a?.w,
                     height: a?.h,
@@ -386,7 +386,7 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
             title,
             description,
             document: new _2_tl_js_1.types.InputDocument({
-                id: "id" in fileId.location ? fileId.location.id : (0, _0_deps_js_1.unreachable)(),
+                id: "id" in fileId.location ? fileId.location.id : (0, _0_deps_js_1.unreachable)(), // TODO: Remove UNREACHABLE()?
                 access_hash: fileId.location.accessHash,
                 file_reference: fileId.fileReference ?? new Uint8Array(),
             }),

@@ -33,3 +33,4 @@ export interface Venue {
     foursquareType?: string;
 }
 export declare function constructVenue(media_: types.MessageMediaVenue | types.MediaAreaVenue): Venue;
+//# sourceMappingURL=1_venue.d.ts.map

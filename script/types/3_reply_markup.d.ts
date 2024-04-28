@@ -60,3 +60,4 @@ export interface ReplyMarkupForceReply {
 export type ReplyMarkup = ReplyMarkupInlineKeyboard | ReplyMarkupKeyboard | ReplyMarkupRemoveKeyboard | ReplyMarkupForceReply;
 export declare function constructReplyMarkup(replyMarkup: enums.ReplyMarkup): ReplyMarkup;
 export declare function replyMarkupToTlObject(replyMarkup: ReplyMarkup, usernameResolver: UsernameResolver): Promise<enums.ReplyMarkup>;
+//# sourceMappingURL=3_reply_markup.d.ts.map

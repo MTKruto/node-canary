@@ -15,3 +15,4 @@
  * @param url of a file URL
  */
 export declare function fromFileUrl(url: string | URL): string;
+//# sourceMappingURL=from_file_url.d.ts.map

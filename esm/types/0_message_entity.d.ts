@@ -116,3 +116,4 @@ export type MessageEntity = MessageEntityMention | MessageEntityHashtag | Messag
 export declare function constructMessageEntity(obj: enums.MessageEntity): MessageEntity | null;
 export declare function messageEntityToTlObject(entity: MessageEntity, getEntity: EntityGetter): Promise<enums.MessageEntity>;
 export declare function sortMessageEntities(entities: MessageEntity[]): MessageEntity[];
+//# sourceMappingURL=0_message_entity.d.ts.map

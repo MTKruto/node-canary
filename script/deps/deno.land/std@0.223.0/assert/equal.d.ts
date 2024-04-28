@@ -12,3 +12,4 @@
  * ```
  */
 export declare function equal(c: unknown, d: unknown): boolean;
+//# sourceMappingURL=equal.d.ts.map

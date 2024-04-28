@@ -40,3 +40,4 @@ export interface InviteLink {
     pendingJoinRequestCount?: number;
 }
 export declare function constructInviteLink(inviteLink_: types.ChatInviteExported, getEntity: EntityGetter): Promise<InviteLink>;
+//# sourceMappingURL=2_invite_link.d.ts.map

@@ -25,3 +25,4 @@ export interface Birthday {
     year?: number;
 }
 export declare function constructBirthday(birthday: types.Birthday): Birthday;
+//# sourceMappingURL=0_birthday.d.ts.map

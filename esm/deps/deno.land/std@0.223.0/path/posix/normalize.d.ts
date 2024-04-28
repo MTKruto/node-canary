@@ -5,3 +5,4 @@
  * @param path to be normalized
  */
 export declare function normalize(path: string): string;
+//# sourceMappingURL=normalize.d.ts.map

@@ -873,7 +873,7 @@ export class MessageManager {
                 channel: new types.InputChannel(chat),
                 participant: member,
                 banned_rights: new types.ChatBannedRights({
-                    until_date: params?.untilDate ? toUnixTimestamp(params.untilDate) : 0,
+                    until_date: params?.untilDate ? toUnixTimestamp(params.untilDate) : 0, // todo
                     view_messages: true,
                     send_messages: true,
                     send_media: true,

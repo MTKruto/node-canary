@@ -31,3 +31,4 @@ export interface MessageInteractions {
     /** The number of times the message was forwarded. */
     forwards: number;
 }
+//# sourceMappingURL=2_message_interactions.d.ts.map

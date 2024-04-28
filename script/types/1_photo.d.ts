@@ -38,3 +38,4 @@ export declare function getPhotoSizes(photo: types.Photo): {
     sizes: types.PhotoSize[];
     largest: types.PhotoSize;
 };
+//# sourceMappingURL=1_photo.d.ts.map

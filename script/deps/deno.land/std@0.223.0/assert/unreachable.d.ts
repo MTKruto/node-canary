@@ -9,3 +9,4 @@
  * ```
  */
 export declare function unreachable(reason?: string): never;
+//# sourceMappingURL=unreachable.d.ts.map

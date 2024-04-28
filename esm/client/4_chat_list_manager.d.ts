@@ -37,3 +37,4 @@ export declare class ChatListManager {
     getChat(chatId: ID): Promise<import("../3_types.js").Chat>;
 }
 export {};
+//# sourceMappingURL=4_chat_list_manager.d.ts.map

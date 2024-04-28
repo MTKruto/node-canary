@@ -29,3 +29,4 @@ export interface ReplyQuote {
     entities: MessageEntity[];
 }
 export declare function constructReplyQuote(quoteText: string | undefined, quoteOffset: number | undefined, quoteEntities: enums.MessageEntity[] | undefined): ReplyQuote;
+//# sourceMappingURL=1_reply_quote.d.ts.map

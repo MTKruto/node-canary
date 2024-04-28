@@ -57,3 +57,4 @@ export interface Sticker {
 /** @unlisted */
 export type StickerSetNameGetter = (inputStickerSet: types.InputStickerSetID) => MaybePromise<string>;
 export declare function constructSticker(document: types.Document, fileId: string, fileUniqueId: string, getStickerSetName: StickerSetNameGetter, customEmojiId?: string): Promise<Sticker>;
+//# sourceMappingURL=1_sticker.d.ts.map

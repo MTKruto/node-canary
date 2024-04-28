@@ -32,3 +32,4 @@ export interface GiveawayParameters {
     countries: string[];
 }
 export declare function constructGiveawayParameters(g: types.MessageMediaGiveaway): GiveawayParameters;
+//# sourceMappingURL=0_giveaway_parameters.d.ts.map

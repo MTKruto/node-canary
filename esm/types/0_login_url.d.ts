@@ -28,3 +28,4 @@ export interface LoginUrl {
     /** Whether logging in will allow the bot to privately message the user. */
     requestWriteAccess?: boolean;
 }
+//# sourceMappingURL=0_login_url.d.ts.map

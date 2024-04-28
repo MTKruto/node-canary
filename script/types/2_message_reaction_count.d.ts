@@ -33,3 +33,4 @@ export interface MessageReactionCount {
     reactions: ReactionCount[];
 }
 export declare function constructMessageReactionCount(update: types.UpdateBotMessageReactions, getEntity: EntityGetter): Promise<MessageReactionCount | null>;
+//# sourceMappingURL=2_message_reaction_count.d.ts.map

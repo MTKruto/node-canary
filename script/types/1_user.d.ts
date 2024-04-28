@@ -53,3 +53,4 @@ export interface User {
     addedToAttachmentMenu: boolean;
 }
 export declare function constructUser(user_: types.User): User;
+//# sourceMappingURL=1_user.d.ts.map

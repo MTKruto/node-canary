@@ -31,3 +31,4 @@ export declare class TLRawWriter {
     writeBytes(bytes: Uint8Array): typeof this;
     writeString(string: string): typeof this;
 }
+//# sourceMappingURL=0_tl_raw_writer.d.ts.map

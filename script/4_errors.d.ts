@@ -37,3 +37,4 @@ export declare class FileMigrate extends Migrate {
 export declare class StatsMigrate extends Migrate {
 }
 export declare function upgradeInstance(error: types.Rpc_error, call: TLObject): types.Rpc_error;
+//# sourceMappingURL=4_errors.d.ts.map

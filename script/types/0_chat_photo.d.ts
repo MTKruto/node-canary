@@ -42,3 +42,4 @@ export type ChatPhotoChat = _ChatPhotoBase;
 export type ChatPhoto = ChatPhotoUser | ChatPhotoChat;
 export declare function constructChatPhoto(photo: types.ChatPhoto, chatId: number, chatAccessHash: bigint): ChatPhotoChat;
 export declare function constructChatPhoto(photo: types.UserProfilePhoto, chatId: number, chatAccessHash: bigint): ChatPhotoUser;
+//# sourceMappingURL=0_chat_photo.d.ts.map

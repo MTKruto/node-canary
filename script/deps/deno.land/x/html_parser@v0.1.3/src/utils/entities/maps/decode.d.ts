@@ -1,0 +1,32 @@
+declare const _default: {
+    '0': number;
+    '128': number;
+    '130': number;
+    '131': number;
+    '132': number;
+    '133': number;
+    '134': number;
+    '135': number;
+    '136': number;
+    '137': number;
+    '138': number;
+    '139': number;
+    '140': number;
+    '142': number;
+    '145': number;
+    '146': number;
+    '147': number;
+    '148': number;
+    '149': number;
+    '150': number;
+    '151': number;
+    '152': number;
+    '153': number;
+    '154': number;
+    '155': number;
+    '156': number;
+    '158': number;
+    '159': number;
+};
+export default _default;
+//# sourceMappingURL=decode.d.ts.map

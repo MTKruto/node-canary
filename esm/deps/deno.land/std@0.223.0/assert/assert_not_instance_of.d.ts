@@ -11,3 +11,4 @@
  * ```
  */
 export declare function assertNotInstanceOf<A, T>(actual: A, unexpectedType: new (...args: any[]) => T, msg?: string): asserts actual is Exclude<A, T>;
+//# sourceMappingURL=assert_not_instance_of.d.ts.map

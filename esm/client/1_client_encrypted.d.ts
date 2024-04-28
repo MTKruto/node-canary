@@ -51,3 +51,4 @@ export declare class ClientEncrypted extends ClientAbstract {
     invoke<T extends (functions.Function<unknown> | types.Type) = functions.Function<unknown>>(function_: T, noWait: true): Promise<void>;
     invoke<T extends (functions.Function<unknown> | types.Type) = functions.Function<unknown>>(function_: T, noWait?: boolean): Promise<T | void>;
 }
+//# sourceMappingURL=1_client_encrypted.d.ts.map

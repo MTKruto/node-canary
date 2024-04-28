@@ -24,3 +24,4 @@ export interface MessageReference {
     /** Unique identifier of the message. */
     messageId: number;
 }
+//# sourceMappingURL=0_message_reference.d.ts.map

@@ -15,3 +15,4 @@
  * ```
  */
 export declare function assertAlmostEquals(actual: number, expected: number, tolerance?: number, msg?: string): void;
+//# sourceMappingURL=assert_almost_equals.d.ts.map

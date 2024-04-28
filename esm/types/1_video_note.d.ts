@@ -37,3 +37,4 @@ export interface VideoNote {
     fileSize: number;
 }
 export declare function constructVideoNote(document: types.Document, videoAttribute: types.DocumentAttributeVideo, fileId: string, fileUniqueId: string): VideoNote;
+//# sourceMappingURL=1_video_note.d.ts.map

@@ -38,10 +38,10 @@ export async function constructSticker(document, fileId, fileUniqueId, getSticke
         thumbnails: document.thumbs ? document.thumbs.map((v) => v instanceof types.PhotoSize ? constructThumbnail(v, document) : null).filter((v) => v) : [],
         emoji: (customEmojiAttribute ? customEmojiAttribute.alt : stickerAttribute.alt) || undefined,
         setName,
-        premiumAnimation: undefined,
+        premiumAnimation: undefined, // TODO
         maskPosition: stickerAttribute.mask_coords ? constructMaskPosition(stickerAttribute.mask_coords) : undefined,
-        customEmojiId: customEmojiAttribute ? customEmojiId : undefined,
-        needsRepainting: customEmojiAttribute ? Boolean(customEmojiAttribute.text_color) : undefined,
+        customEmojiId: customEmojiAttribute ? customEmojiId : undefined, // TODO
+        needsRepainting: customEmojiAttribute ? Boolean(customEmojiAttribute.text_color) : undefined, // TODO
         fileSize: Number(document.size),
     });
 }

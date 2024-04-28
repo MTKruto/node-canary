@@ -32,3 +32,4 @@ export interface Voice {
     fileSize: number;
 }
 export declare function constructVoice(document: types.Document, audioAttributes: types.DocumentAttributeAudio, fileId: string, fileUniqueId: string): Voice;
+//# sourceMappingURL=0_voice.d.ts.map

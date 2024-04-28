@@ -41,3 +41,4 @@ export interface Video {
     fileSize: number;
 }
 export declare function constructVideo(document: types.Document, videoAttribute: types.DocumentAttributeVideo, fileName: string | undefined, fileId: string, fileUniqueId: string): Video;
+//# sourceMappingURL=1_video.d.ts.map

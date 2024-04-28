@@ -29,3 +29,4 @@ export interface StoryReaction {
     chosen: boolean;
 }
 export declare function constructStoryReaction(reaction_: types.ReactionCount): StoryReaction;
+//# sourceMappingURL=1_story_reaction.d.ts.map

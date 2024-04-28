@@ -45,3 +45,4 @@ export declare function inflate(strm: ZStream, flush: any): number;
 export declare function inflateEnd(strm: ZStream): 0 | -2;
 export declare function inflateGetHeader(strm: ZStream, head: any): 0 | -2;
 export declare function inflateSetDictionary(strm: ZStream, dictionary: any): 0 | -2 | -3 | -4;
+//# sourceMappingURL=inflate.d.ts.map

@@ -40,7 +40,7 @@ export function constructKeyboardButton(button_) {
                 text: button_.text,
                 requestChat: {
                     requestId: button_.button_id,
-                    chatIsChannel: false,
+                    chatIsChannel: false, // GUESS
                     chatIsForum: button_.peer_type.forum || false,
                     chatHasUsername: button_.peer_type.has_username || false,
                     chatIsCreated: button_.peer_type.creator || false,
@@ -60,7 +60,7 @@ export function constructKeyboardButton(button_) {
                 text: button_.text,
                 requestChat: {
                     requestId: button_.button_id,
-                    chatIsChannel: true,
+                    chatIsChannel: true, // GUESS
                     chatIsCreated: button_.peer_type.creator || false,
                     chatHasUsername: button_.peer_type.has_username || false,
                 },

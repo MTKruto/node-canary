@@ -25,3 +25,4 @@ export declare class Deflate {
     push(data: Uint8Array, mode: boolean | number): Uint8Array;
 }
 export declare function gzip(input: Uint8Array, options?: DeflateOptions): Uint8Array;
+//# sourceMappingURL=deflate.d.ts.map

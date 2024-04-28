@@ -30,3 +30,4 @@ export declare function encodeBase64(data: ArrayBuffer | Uint8Array | string): s
  * ```
  */
 export declare function decodeBase64(b64: string): Uint8Array;
+//# sourceMappingURL=base64.d.ts.map

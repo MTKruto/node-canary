@@ -7,3 +7,4 @@ export declare function getRandomBigInt(byteLength: number, little?: boolean, si
 export declare function getRandomId(number: true): number;
 export declare function getRandomId(): bigint;
 export declare function gcd(a: bigint, b: bigint): bigint;
+//# sourceMappingURL=0_bigint.d.ts.map

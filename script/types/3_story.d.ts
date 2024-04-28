@@ -41,3 +41,4 @@ export interface Story {
     captionEntities?: MessageEntity[];
 }
 export declare function constructStory(story: types.StoryItem, peer: types.PeerUser | types.PeerChat | types.PeerChannel, getEntity: EntityGetter): Promise<Story>;
+//# sourceMappingURL=3_story.d.ts.map

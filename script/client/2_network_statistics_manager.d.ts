@@ -36,3 +36,4 @@ export declare class NetworkStatisticsManager {
         write: (count: number) => Promise<void>;
     };
 }
+//# sourceMappingURL=2_network_statistics_manager.d.ts.map

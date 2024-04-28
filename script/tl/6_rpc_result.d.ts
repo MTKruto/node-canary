@@ -27,3 +27,4 @@ export declare class RPCResult {
     constructor(messageId: bigint, result: ReadObject);
     static deserialize(buffer: Uint8Array): RPCResult;
 }
+//# sourceMappingURL=6_rpc_result.d.ts.map

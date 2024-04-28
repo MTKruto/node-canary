@@ -18,3 +18,4 @@ export declare function isIterator<T>(obj: unknown): obj is Iterable<T>;
 export declare function isToken(s: string): boolean;
 export declare function isTSpecial(r: string): boolean;
 export declare function needsEncoding(s: string): boolean;
+//# sourceMappingURL=_util.d.ts.map

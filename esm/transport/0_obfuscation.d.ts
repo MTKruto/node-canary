@@ -4,3 +4,4 @@ export declare function getObfuscationParameters(protocol: number, connection: C
     encryptionCTR: CTR;
     decryptionCTR: CTR;
 }>;
+//# sourceMappingURL=0_obfuscation.d.ts.map

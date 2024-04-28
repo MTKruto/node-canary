@@ -47,3 +47,4 @@ export interface CallbackQueryQuestionButton {
 /** A reference to a button that is to be clicked by a user. */
 export type CallbackQueryQuestion = CallbackQueryQuestionGame | CallbackQueryQuestionPassword | CallbackQueryQuestionButton;
 export declare function validateCallbackQueryQuestion(q: CallbackQueryQuestion): void;
+//# sourceMappingURL=0_callback_query_question.d.ts.map

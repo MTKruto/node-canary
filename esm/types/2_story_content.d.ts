@@ -35,3 +35,4 @@ export interface StoryContentUnsupported {
 /** A story content. */
 export type StoryContent = StoryContentPhoto | StoryContentVideo | StoryContentUnsupported;
 export declare function constructStoryContent(media: enums.MessageMedia): StoryContent;
+//# sourceMappingURL=2_story_content.d.ts.map

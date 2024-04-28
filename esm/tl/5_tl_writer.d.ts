@@ -22,3 +22,4 @@ import { ReadObject } from "./4_tl_reader.js";
 export declare class TLWriter extends TLRawWriter {
     writeObject(object: ReadObject): typeof this;
 }
+//# sourceMappingURL=5_tl_writer.d.ts.map

@@ -14,6 +14,10 @@
     ".": {
       "import": "./esm/mod.js",
       "require": "./script/mod.js"
+    },
+    "./1_utilities": {
+      "import": "./esm/1_utilities.js",
+      "require": "./script/1_utilities.js"
     }
   },
   "scripts": {

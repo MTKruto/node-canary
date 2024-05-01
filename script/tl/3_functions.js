@@ -42,8 +42,8 @@ class Function_ extends _1_tl_object_js_1.TLObject {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: null
-        }); // virtual member
+            value: void 0
+        });
     }
 }
 exports.Function_ = Function_;
@@ -76,12 +76,6 @@ class req_pq_multi_ extends Function_ {
     }
 }
 exports.req_pq_multi_ = req_pq_multi_;
-Object.defineProperty(req_pq_multi_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class req_DH_params_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xD712E4BE;
@@ -156,12 +150,6 @@ class req_DH_params_ extends Function_ {
     }
 }
 exports.req_DH_params_ = req_DH_params_;
-Object.defineProperty(req_DH_params_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class set_client_DH_params_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xF5045F1F;
@@ -209,12 +197,6 @@ class set_client_DH_params_ extends Function_ {
     }
 }
 exports.set_client_DH_params_ = set_client_DH_params_;
-Object.defineProperty(set_client_DH_params_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class rpc_drop_answer_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x58E4A740;
@@ -244,12 +226,6 @@ class rpc_drop_answer_ extends Function_ {
     }
 }
 exports.rpc_drop_answer_ = rpc_drop_answer_;
-Object.defineProperty(rpc_drop_answer_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class get_future_salts_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xB921BD04;
@@ -279,12 +255,6 @@ class get_future_salts_ extends Function_ {
     }
 }
 exports.get_future_salts_ = get_future_salts_;
-Object.defineProperty(get_future_salts_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class ping_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x7ABE77EC;
@@ -314,12 +284,6 @@ class ping_ extends Function_ {
     }
 }
 exports.ping_ = ping_;
-Object.defineProperty(ping_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class ping_delay_disconnect_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xF3427B8C;
@@ -358,12 +322,6 @@ class ping_delay_disconnect_ extends Function_ {
     }
 }
 exports.ping_delay_disconnect_ = ping_delay_disconnect_;
-Object.defineProperty(ping_delay_disconnect_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class destroy_session_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xE7512126;
@@ -393,12 +351,6 @@ class destroy_session_ extends Function_ {
     }
 }
 exports.destroy_session_ = destroy_session_;
-Object.defineProperty(destroy_session_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class destroy_auth_key_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xD1435160;
@@ -417,12 +369,6 @@ class destroy_auth_key_ extends Function_ {
     }
 }
 exports.destroy_auth_key_ = destroy_auth_key_;
-Object.defineProperty(destroy_auth_key_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class invokeWithBusinessConnectionPrefix_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xDD289F8E;
@@ -452,12 +398,6 @@ class invokeWithBusinessConnectionPrefix_ extends Function_ {
     }
 }
 exports.invokeWithBusinessConnectionPrefix_ = invokeWithBusinessConnectionPrefix_;
-Object.defineProperty(invokeWithBusinessConnectionPrefix_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Invokes a query after successful completion of one of the previous queries. */
 class invokeAfterMsg_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -499,12 +439,6 @@ class invokeAfterMsg_ extends Function_ {
     }
 }
 exports.invokeAfterMsg_ = invokeAfterMsg_;
-Object.defineProperty(invokeAfterMsg_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Invokes a query after a successful completion of previous queries */
 class invokeAfterMsgs_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -546,12 +480,6 @@ class invokeAfterMsgs_ extends Function_ {
     }
 }
 exports.invokeAfterMsgs_ = invokeAfterMsgs_;
-Object.defineProperty(invokeAfterMsgs_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Initialize connection */
 class initConnection_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -676,12 +604,6 @@ class initConnection_ extends Function_ {
     }
 }
 exports.initConnection_ = initConnection_;
-Object.defineProperty(initConnection_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Invoke the specified query using the specified API [layer](https://core.telegram.org/api/invoking#layers) */
 class invokeWithLayer_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -723,12 +645,6 @@ class invokeWithLayer_ extends Function_ {
     }
 }
 exports.invokeWithLayer_ = invokeWithLayer_;
-Object.defineProperty(invokeWithLayer_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Invoke a request without subscribing the used connection for [updates](https://core.telegram.org/api/updates) (this is enabled by default for [file queries](https://core.telegram.org/api/files)). */
 class invokeWithoutUpdates_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -760,12 +676,6 @@ class invokeWithoutUpdates_ extends Function_ {
     }
 }
 exports.invokeWithoutUpdates_ = invokeWithoutUpdates_;
-Object.defineProperty(invokeWithoutUpdates_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Invoke with the given message range */
 class invokeWithMessagesRange_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -807,12 +717,6 @@ class invokeWithMessagesRange_ extends Function_ {
     }
 }
 exports.invokeWithMessagesRange_ = invokeWithMessagesRange_;
-Object.defineProperty(invokeWithMessagesRange_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Invoke a method within a [takeout session, see here » for more info](https://core.telegram.org/api/takeout). */
 class invokeWithTakeout_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -854,12 +758,6 @@ class invokeWithTakeout_ extends Function_ {
     }
 }
 exports.invokeWithTakeout_ = invokeWithTakeout_;
-Object.defineProperty(invokeWithTakeout_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class invokeWithBusinessConnection_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xDD289F8E;
@@ -898,12 +796,6 @@ class invokeWithBusinessConnection_ extends Function_ {
     }
 }
 exports.invokeWithBusinessConnection_ = invokeWithBusinessConnection_;
-Object.defineProperty(invokeWithBusinessConnection_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Send the verification code for login */
 class auth_sendCode_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -965,12 +857,6 @@ class auth_sendCode_ extends Function_ {
     }
 }
 exports.auth_sendCode_ = auth_sendCode_;
-Object.defineProperty(auth_sendCode_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Registers a validated phone number in the system. */
 class auth_signUp_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1043,12 +929,6 @@ class auth_signUp_ extends Function_ {
     }
 }
 exports.auth_signUp_ = auth_signUp_;
-Object.defineProperty(auth_signUp_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Signs in a user with a validated phone number. */
 class auth_signIn_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1112,12 +992,6 @@ class auth_signIn_ extends Function_ {
     }
 }
 exports.auth_signIn_ = auth_signIn_;
-Object.defineProperty(auth_signIn_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Logs out the user. */
 class auth_logOut_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1137,12 +1011,6 @@ class auth_logOut_ extends Function_ {
     }
 }
 exports.auth_logOut_ = auth_logOut_;
-Object.defineProperty(auth_logOut_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Terminates all user's authorized sessions except for the current one. */
 class auth_resetAuthorizations_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1162,12 +1030,6 @@ class auth_resetAuthorizations_ extends Function_ {
     }
 }
 exports.auth_resetAuthorizations_ = auth_resetAuthorizations_;
-Object.defineProperty(auth_resetAuthorizations_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns data for copying authorization to another data-center. */
 class auth_exportAuthorization_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1199,12 +1061,6 @@ class auth_exportAuthorization_ extends Function_ {
     }
 }
 exports.auth_exportAuthorization_ = auth_exportAuthorization_;
-Object.defineProperty(auth_exportAuthorization_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Logs in a user using a key transmitted from his native data-center. */
 class auth_importAuthorization_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1246,12 +1102,6 @@ class auth_importAuthorization_ extends Function_ {
     }
 }
 exports.auth_importAuthorization_ = auth_importAuthorization_;
-Object.defineProperty(auth_importAuthorization_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Binds a temporary authorization key `temp_auth_key_id` to the permanent authorization key `perm_auth_key_id`. Each permanent key may only be bound to one temporary key at a time, binding a new temporary key overwrites the previous one. */
 class auth_bindTempAuthKey_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1313,12 +1163,6 @@ class auth_bindTempAuthKey_ extends Function_ {
     }
 }
 exports.auth_bindTempAuthKey_ = auth_bindTempAuthKey_;
-Object.defineProperty(auth_bindTempAuthKey_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Login as a bot */
 class auth_importBotAuthorization_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1380,12 +1224,6 @@ class auth_importBotAuthorization_ extends Function_ {
     }
 }
 exports.auth_importBotAuthorization_ = auth_importBotAuthorization_;
-Object.defineProperty(auth_importBotAuthorization_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Try logging to an account protected by a [2FA password](https://core.telegram.org/api/srp). */
 class auth_checkPassword_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1417,12 +1255,6 @@ class auth_checkPassword_ extends Function_ {
     }
 }
 exports.auth_checkPassword_ = auth_checkPassword_;
-Object.defineProperty(auth_checkPassword_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Request recovery code of a [2FA password](https://core.telegram.org/api/srp), only for accounts with a [recovery email configured](https://core.telegram.org/api/srp#email-verification). */
 class auth_requestPasswordRecovery_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1442,12 +1274,6 @@ class auth_requestPasswordRecovery_ extends Function_ {
     }
 }
 exports.auth_requestPasswordRecovery_ = auth_requestPasswordRecovery_;
-Object.defineProperty(auth_requestPasswordRecovery_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Reset the [2FA password](https://core.telegram.org/api/srp) using the recovery code sent using [auth.requestPasswordRecovery](https://core.telegram.org/method/auth.requestPasswordRecovery). */
 class auth_recoverPassword_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1491,12 +1317,6 @@ class auth_recoverPassword_ extends Function_ {
     }
 }
 exports.auth_recoverPassword_ = auth_recoverPassword_;
-Object.defineProperty(auth_recoverPassword_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Resend the login code via another medium, the phone code type is determined by the return value of the previous auth.sendCode/auth.resendCode: see [login](https://core.telegram.org/api/auth) for more info. */
 class auth_resendCode_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1538,12 +1358,6 @@ class auth_resendCode_ extends Function_ {
     }
 }
 exports.auth_resendCode_ = auth_resendCode_;
-Object.defineProperty(auth_resendCode_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Cancel the login verification code */
 class auth_cancelCode_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1585,12 +1399,6 @@ class auth_cancelCode_ extends Function_ {
     }
 }
 exports.auth_cancelCode_ = auth_cancelCode_;
-Object.defineProperty(auth_cancelCode_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Delete all temporary authorization keys **except for** the ones specified */
 class auth_dropTempAuthKeys_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1622,12 +1430,6 @@ class auth_dropTempAuthKeys_ extends Function_ {
     }
 }
 exports.auth_dropTempAuthKeys_ = auth_dropTempAuthKeys_;
-Object.defineProperty(auth_dropTempAuthKeys_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Generate a login token, for [login via QR code](https://core.telegram.org/api/qr-login).
 The generated login token should be encoded using base64url, then shown as a `tg://login?token=base64encodedtoken` [deep link »](https://core.telegram.org/api/links#qr-code-login-links) in the QR code. */
 class auth_exportLoginToken_ extends Function_ {
@@ -1680,12 +1482,6 @@ class auth_exportLoginToken_ extends Function_ {
     }
 }
 exports.auth_exportLoginToken_ = auth_exportLoginToken_;
-Object.defineProperty(auth_exportLoginToken_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Login using a redirected login token, generated in case of DC mismatch during [QR code login](https://core.telegram.org/api/qr-login). */
 class auth_importLoginToken_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1717,12 +1513,6 @@ class auth_importLoginToken_ extends Function_ {
     }
 }
 exports.auth_importLoginToken_ = auth_importLoginToken_;
-Object.defineProperty(auth_importLoginToken_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Accept QR code login token, logging in the app that generated it. */
 class auth_acceptLoginToken_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1754,12 +1544,6 @@ class auth_acceptLoginToken_ extends Function_ {
     }
 }
 exports.auth_acceptLoginToken_ = auth_acceptLoginToken_;
-Object.defineProperty(auth_acceptLoginToken_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Check if the [2FA recovery code](https://core.telegram.org/api/srp) sent using [auth.requestPasswordRecovery](https://core.telegram.org/method/auth.requestPasswordRecovery) is valid, before passing it to [auth.recoverPassword](https://core.telegram.org/method/auth.recoverPassword). */
 class auth_checkRecoveryPassword_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1791,12 +1575,6 @@ class auth_checkRecoveryPassword_ extends Function_ {
     }
 }
 exports.auth_checkRecoveryPassword_ = auth_checkRecoveryPassword_;
-Object.defineProperty(auth_checkRecoveryPassword_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Login by importing an authorization token */
 class auth_importWebTokenAuthorization_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1848,12 +1626,6 @@ class auth_importWebTokenAuthorization_ extends Function_ {
     }
 }
 exports.auth_importWebTokenAuthorization_ = auth_importWebTokenAuthorization_;
-Object.defineProperty(auth_importWebTokenAuthorization_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Request an SMS code via Firebase. */
 class auth_requestFirebaseSms_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1917,12 +1689,6 @@ class auth_requestFirebaseSms_ extends Function_ {
     }
 }
 exports.auth_requestFirebaseSms_ = auth_requestFirebaseSms_;
-Object.defineProperty(auth_requestFirebaseSms_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Reset the [login email »](https://core.telegram.org/api/auth#email-verification). */
 class auth_resetLoginEmail_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -1964,12 +1730,6 @@ class auth_resetLoginEmail_ extends Function_ {
     }
 }
 exports.auth_resetLoginEmail_ = auth_resetLoginEmail_;
-Object.defineProperty(auth_resetLoginEmail_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Register device to receive [PUSH notifications](https://core.telegram.org/api/push-updates) */
 class account_registerDevice_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2053,12 +1813,6 @@ class account_registerDevice_ extends Function_ {
     }
 }
 exports.account_registerDevice_ = account_registerDevice_;
-Object.defineProperty(account_registerDevice_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Deletes a device by its token, stops sending PUSH-notifications to it. */
 class account_unregisterDevice_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2110,12 +1864,6 @@ class account_unregisterDevice_ extends Function_ {
     }
 }
 exports.account_unregisterDevice_ = account_unregisterDevice_;
-Object.defineProperty(account_unregisterDevice_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Edits notification settings from a given user/group, from all users/all groups. */
 class account_updateNotifySettings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2157,12 +1905,6 @@ class account_updateNotifySettings_ extends Function_ {
     }
 }
 exports.account_updateNotifySettings_ = account_updateNotifySettings_;
-Object.defineProperty(account_updateNotifySettings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Gets current notification settings for a given user/group, from all users/all groups. */
 class account_getNotifySettings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2194,12 +1936,6 @@ class account_getNotifySettings_ extends Function_ {
     }
 }
 exports.account_getNotifySettings_ = account_getNotifySettings_;
-Object.defineProperty(account_getNotifySettings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Resets all notification settings from users and groups. */
 class account_resetNotifySettings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2219,12 +1955,6 @@ class account_resetNotifySettings_ extends Function_ {
     }
 }
 exports.account_resetNotifySettings_ = account_resetNotifySettings_;
-Object.defineProperty(account_resetNotifySettings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Updates user profile. */
 class account_updateProfile_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2278,12 +2008,6 @@ class account_updateProfile_ extends Function_ {
     }
 }
 exports.account_updateProfile_ = account_updateProfile_;
-Object.defineProperty(account_updateProfile_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Updates online user status. */
 class account_updateStatus_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2315,12 +2039,6 @@ class account_updateStatus_ extends Function_ {
     }
 }
 exports.account_updateStatus_ = account_updateStatus_;
-Object.defineProperty(account_updateStatus_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns a list of available [wallpapers](https://core.telegram.org/api/wallpapers). */
 class account_getWallPapers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2352,12 +2070,6 @@ class account_getWallPapers_ extends Function_ {
     }
 }
 exports.account_getWallPapers_ = account_getWallPapers_;
-Object.defineProperty(account_getWallPapers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Report a peer for violation of telegram's Terms of Service */
 class account_reportPeer_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2409,12 +2121,6 @@ class account_reportPeer_ extends Function_ {
     }
 }
 exports.account_reportPeer_ = account_reportPeer_;
-Object.defineProperty(account_reportPeer_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Validates a username and checks availability. */
 class account_checkUsername_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2448,12 +2154,6 @@ class account_checkUsername_ extends Function_ {
     }
 }
 exports.account_checkUsername_ = account_checkUsername_;
-Object.defineProperty(account_checkUsername_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Changes username for the current user. */
 class account_updateUsername_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2487,12 +2187,6 @@ class account_updateUsername_ extends Function_ {
     }
 }
 exports.account_updateUsername_ = account_updateUsername_;
-Object.defineProperty(account_updateUsername_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get privacy settings of current account */
 class account_getPrivacy_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2524,12 +2218,6 @@ class account_getPrivacy_ extends Function_ {
     }
 }
 exports.account_getPrivacy_ = account_getPrivacy_;
-Object.defineProperty(account_getPrivacy_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Change privacy settings of current account */
 class account_setPrivacy_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2571,12 +2259,6 @@ class account_setPrivacy_ extends Function_ {
     }
 }
 exports.account_setPrivacy_ = account_setPrivacy_;
-Object.defineProperty(account_setPrivacy_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Delete the user's account from the telegram servers. */
 class account_deleteAccount_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2620,12 +2302,6 @@ class account_deleteAccount_ extends Function_ {
     }
 }
 exports.account_deleteAccount_ = account_deleteAccount_;
-Object.defineProperty(account_deleteAccount_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get days to live of account */
 class account_getAccountTTL_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2645,12 +2321,6 @@ class account_getAccountTTL_ extends Function_ {
     }
 }
 exports.account_getAccountTTL_ = account_getAccountTTL_;
-Object.defineProperty(account_getAccountTTL_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set account self-destruction period */
 class account_setAccountTTL_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2682,12 +2352,6 @@ class account_setAccountTTL_ extends Function_ {
     }
 }
 exports.account_setAccountTTL_ = account_setAccountTTL_;
-Object.defineProperty(account_setAccountTTL_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Verify a new phone number to associate to the current account */
 class account_sendChangePhoneCode_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2729,12 +2393,6 @@ class account_sendChangePhoneCode_ extends Function_ {
     }
 }
 exports.account_sendChangePhoneCode_ = account_sendChangePhoneCode_;
-Object.defineProperty(account_sendChangePhoneCode_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Change the phone number of the current account */
 class account_changePhone_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2786,12 +2444,6 @@ class account_changePhone_ extends Function_ {
     }
 }
 exports.account_changePhone_ = account_changePhone_;
-Object.defineProperty(account_changePhone_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** When client-side passcode lock feature is enabled, will not show message texts in incoming [PUSH notifications](https://core.telegram.org/api/push-updates). */
 class account_updateDeviceLocked_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2823,12 +2475,6 @@ class account_updateDeviceLocked_ extends Function_ {
     }
 }
 exports.account_updateDeviceLocked_ = account_updateDeviceLocked_;
-Object.defineProperty(account_updateDeviceLocked_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get logged-in sessions */
 class account_getAuthorizations_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2848,12 +2494,6 @@ class account_getAuthorizations_ extends Function_ {
     }
 }
 exports.account_getAuthorizations_ = account_getAuthorizations_;
-Object.defineProperty(account_getAuthorizations_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Log out an active [authorized session](https://core.telegram.org/api/auth) by its hash */
 class account_resetAuthorization_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2885,12 +2525,6 @@ class account_resetAuthorization_ extends Function_ {
     }
 }
 exports.account_resetAuthorization_ = account_resetAuthorization_;
-Object.defineProperty(account_resetAuthorization_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain configuration for two-factor authorization with password */
 class account_getPassword_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2910,12 +2544,6 @@ class account_getPassword_ extends Function_ {
     }
 }
 exports.account_getPassword_ = account_getPassword_;
-Object.defineProperty(account_getPassword_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get private info associated to the password info (recovery email, telegram [passport](https://core.telegram.org/passport) info & so on) */
 class account_getPasswordSettings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2947,12 +2575,6 @@ class account_getPasswordSettings_ extends Function_ {
     }
 }
 exports.account_getPasswordSettings_ = account_getPasswordSettings_;
-Object.defineProperty(account_getPasswordSettings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set a new 2FA password */
 class account_updatePasswordSettings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -2994,12 +2616,6 @@ class account_updatePasswordSettings_ extends Function_ {
     }
 }
 exports.account_updatePasswordSettings_ = account_updatePasswordSettings_;
-Object.defineProperty(account_updatePasswordSettings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Send confirmation code to cancel account deletion, for more info [click here »](https://core.telegram.org/api/account-deletion) */
 class account_sendConfirmPhoneCode_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3041,12 +2657,6 @@ class account_sendConfirmPhoneCode_ extends Function_ {
     }
 }
 exports.account_sendConfirmPhoneCode_ = account_sendConfirmPhoneCode_;
-Object.defineProperty(account_sendConfirmPhoneCode_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Confirm a phone number to cancel account deletion, for more info [click here »](https://core.telegram.org/api/account-deletion) */
 class account_confirmPhone_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3088,12 +2698,6 @@ class account_confirmPhone_ extends Function_ {
     }
 }
 exports.account_confirmPhone_ = account_confirmPhone_;
-Object.defineProperty(account_confirmPhone_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get temporary payment password */
 class account_getTmpPassword_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3135,12 +2739,6 @@ class account_getTmpPassword_ extends Function_ {
     }
 }
 exports.account_getTmpPassword_ = account_getTmpPassword_;
-Object.defineProperty(account_getTmpPassword_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get web [login widget](https://core.telegram.org/widgets/login) authorizations */
 class account_getWebAuthorizations_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3160,12 +2758,6 @@ class account_getWebAuthorizations_ extends Function_ {
     }
 }
 exports.account_getWebAuthorizations_ = account_getWebAuthorizations_;
-Object.defineProperty(account_getWebAuthorizations_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Log out an active web [telegram login](https://core.telegram.org/widgets/login) session */
 class account_resetWebAuthorization_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3197,12 +2789,6 @@ class account_resetWebAuthorization_ extends Function_ {
     }
 }
 exports.account_resetWebAuthorization_ = account_resetWebAuthorization_;
-Object.defineProperty(account_resetWebAuthorization_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Reset all active web [telegram login](https://core.telegram.org/widgets/login) sessions */
 class account_resetWebAuthorizations_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3222,12 +2808,6 @@ class account_resetWebAuthorizations_ extends Function_ {
     }
 }
 exports.account_resetWebAuthorizations_ = account_resetWebAuthorizations_;
-Object.defineProperty(account_resetWebAuthorizations_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get all saved [Telegram Passport](https://core.telegram.org/passport) documents, [for more info see the passport docs »](https://core.telegram.org/passport/encryption#encryption) */
 class account_getAllSecureValues_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3247,12 +2827,6 @@ class account_getAllSecureValues_ extends Function_ {
     }
 }
 exports.account_getAllSecureValues_ = account_getAllSecureValues_;
-Object.defineProperty(account_getAllSecureValues_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get saved [Telegram Passport](https://core.telegram.org/passport) document, [for more info see the passport docs »](https://core.telegram.org/passport/encryption#encryption) */
 class account_getSecureValue_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3284,12 +2858,6 @@ class account_getSecureValue_ extends Function_ {
     }
 }
 exports.account_getSecureValue_ = account_getSecureValue_;
-Object.defineProperty(account_getSecureValue_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Securely save [Telegram Passport](https://core.telegram.org/passport) document, [for more info see the passport docs »](https://core.telegram.org/passport/encryption#encryption) */
 class account_saveSecureValue_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3331,12 +2899,6 @@ class account_saveSecureValue_ extends Function_ {
     }
 }
 exports.account_saveSecureValue_ = account_saveSecureValue_;
-Object.defineProperty(account_saveSecureValue_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Delete stored [Telegram Passport](https://core.telegram.org/passport) documents, [for more info see the passport docs »](https://core.telegram.org/passport/encryption#encryption) */
 class account_deleteSecureValue_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3368,12 +2930,6 @@ class account_deleteSecureValue_ extends Function_ {
     }
 }
 exports.account_deleteSecureValue_ = account_deleteSecureValue_;
-Object.defineProperty(account_deleteSecureValue_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns a Telegram Passport authorization form for sharing data with a service */
 class account_getAuthorizationForm_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3425,12 +2981,6 @@ class account_getAuthorizationForm_ extends Function_ {
     }
 }
 exports.account_getAuthorizationForm_ = account_getAuthorizationForm_;
-Object.defineProperty(account_getAuthorizationForm_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Sends a Telegram Passport authorization form, effectively sharing data with the service */
 class account_acceptAuthorization_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3502,12 +3052,6 @@ class account_acceptAuthorization_ extends Function_ {
     }
 }
 exports.account_acceptAuthorization_ = account_acceptAuthorization_;
-Object.defineProperty(account_acceptAuthorization_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Send the verification phone code for telegram [passport](https://core.telegram.org/passport). */
 class account_sendVerifyPhoneCode_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3549,12 +3093,6 @@ class account_sendVerifyPhoneCode_ extends Function_ {
     }
 }
 exports.account_sendVerifyPhoneCode_ = account_sendVerifyPhoneCode_;
-Object.defineProperty(account_sendVerifyPhoneCode_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Verify a phone number for telegram [passport](https://core.telegram.org/passport). */
 class account_verifyPhone_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3606,12 +3144,6 @@ class account_verifyPhone_ extends Function_ {
     }
 }
 exports.account_verifyPhone_ = account_verifyPhone_;
-Object.defineProperty(account_verifyPhone_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Send an email verification code. */
 class account_sendVerifyEmailCode_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3653,12 +3185,6 @@ class account_sendVerifyEmailCode_ extends Function_ {
     }
 }
 exports.account_sendVerifyEmailCode_ = account_sendVerifyEmailCode_;
-Object.defineProperty(account_sendVerifyEmailCode_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Verify an email address. */
 class account_verifyEmail_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3700,12 +3226,6 @@ class account_verifyEmail_ extends Function_ {
     }
 }
 exports.account_verifyEmail_ = account_verifyEmail_;
-Object.defineProperty(account_verifyEmail_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Initialize a [takeout session, see here » for more info](https://core.telegram.org/api/takeout). */
 class account_initTakeoutSession_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3799,12 +3319,6 @@ class account_initTakeoutSession_ extends Function_ {
     }
 }
 exports.account_initTakeoutSession_ = account_initTakeoutSession_;
-Object.defineProperty(account_initTakeoutSession_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Terminate a [takeout session, see here » for more info](https://core.telegram.org/api/takeout). */
 class account_finishTakeoutSession_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3838,12 +3352,6 @@ class account_finishTakeoutSession_ extends Function_ {
     }
 }
 exports.account_finishTakeoutSession_ = account_finishTakeoutSession_;
-Object.defineProperty(account_finishTakeoutSession_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Verify an email to use as [2FA recovery method](https://core.telegram.org/api/srp). */
 class account_confirmPasswordEmail_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3875,12 +3383,6 @@ class account_confirmPasswordEmail_ extends Function_ {
     }
 }
 exports.account_confirmPasswordEmail_ = account_confirmPasswordEmail_;
-Object.defineProperty(account_confirmPasswordEmail_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Resend the code to verify an email to use as [2FA recovery method](https://core.telegram.org/api/srp). */
 class account_resendPasswordEmail_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3900,12 +3402,6 @@ class account_resendPasswordEmail_ extends Function_ {
     }
 }
 exports.account_resendPasswordEmail_ = account_resendPasswordEmail_;
-Object.defineProperty(account_resendPasswordEmail_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Cancel the code that was sent to verify an email to use as [2FA recovery method](https://core.telegram.org/api/srp). */
 class account_cancelPasswordEmail_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3925,12 +3421,6 @@ class account_cancelPasswordEmail_ extends Function_ {
     }
 }
 exports.account_cancelPasswordEmail_ = account_cancelPasswordEmail_;
-Object.defineProperty(account_cancelPasswordEmail_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Whether the user will receive notifications when contacts sign up */
 class account_getContactSignUpNotification_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3950,12 +3440,6 @@ class account_getContactSignUpNotification_ extends Function_ {
     }
 }
 exports.account_getContactSignUpNotification_ = account_getContactSignUpNotification_;
-Object.defineProperty(account_getContactSignUpNotification_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Toggle contact sign up notifications */
 class account_setContactSignUpNotification_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -3987,12 +3471,6 @@ class account_setContactSignUpNotification_ extends Function_ {
     }
 }
 exports.account_setContactSignUpNotification_ = account_setContactSignUpNotification_;
-Object.defineProperty(account_setContactSignUpNotification_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns list of chats with non-default notification settings */
 class account_getNotifyExceptions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4046,12 +3524,6 @@ class account_getNotifyExceptions_ extends Function_ {
     }
 }
 exports.account_getNotifyExceptions_ = account_getNotifyExceptions_;
-Object.defineProperty(account_getNotifyExceptions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get info about a certain [wallpaper](https://core.telegram.org/api/wallpapers) */
 class account_getWallPaper_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4083,12 +3555,6 @@ class account_getWallPaper_ extends Function_ {
     }
 }
 exports.account_getWallPaper_ = account_getWallPaper_;
-Object.defineProperty(account_getWallPaper_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Create and upload a new [wallpaper](https://core.telegram.org/api/wallpapers) */
 class account_uploadWallPaper_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4152,12 +3618,6 @@ class account_uploadWallPaper_ extends Function_ {
     }
 }
 exports.account_uploadWallPaper_ = account_uploadWallPaper_;
-Object.defineProperty(account_uploadWallPaper_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Install/uninstall [wallpaper](https://core.telegram.org/api/wallpapers) */
 class account_saveWallPaper_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4209,12 +3669,6 @@ class account_saveWallPaper_ extends Function_ {
     }
 }
 exports.account_saveWallPaper_ = account_saveWallPaper_;
-Object.defineProperty(account_saveWallPaper_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Install [wallpaper](https://core.telegram.org/api/wallpapers) */
 class account_installWallPaper_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4256,12 +3710,6 @@ class account_installWallPaper_ extends Function_ {
     }
 }
 exports.account_installWallPaper_ = account_installWallPaper_;
-Object.defineProperty(account_installWallPaper_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Delete all installed [wallpapers](https://core.telegram.org/api/wallpapers), reverting to the default wallpaper set. */
 class account_resetWallPapers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4281,12 +3729,6 @@ class account_resetWallPapers_ extends Function_ {
     }
 }
 exports.account_resetWallPapers_ = account_resetWallPapers_;
-Object.defineProperty(account_resetWallPapers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get media autodownload settings */
 class account_getAutoDownloadSettings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4306,12 +3748,6 @@ class account_getAutoDownloadSettings_ extends Function_ {
     }
 }
 exports.account_getAutoDownloadSettings_ = account_getAutoDownloadSettings_;
-Object.defineProperty(account_getAutoDownloadSettings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Change media autodownload settings */
 class account_saveAutoDownloadSettings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4365,12 +3801,6 @@ class account_saveAutoDownloadSettings_ extends Function_ {
     }
 }
 exports.account_saveAutoDownloadSettings_ = account_saveAutoDownloadSettings_;
-Object.defineProperty(account_saveAutoDownloadSettings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Upload theme */
 class account_uploadTheme_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4434,12 +3864,6 @@ class account_uploadTheme_ extends Function_ {
     }
 }
 exports.account_uploadTheme_ = account_uploadTheme_;
-Object.defineProperty(account_uploadTheme_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Create a theme */
 class account_createTheme_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4503,12 +3927,6 @@ class account_createTheme_ extends Function_ {
     }
 }
 exports.account_createTheme_ = account_createTheme_;
-Object.defineProperty(account_createTheme_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Update theme */
 class account_updateTheme_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4592,12 +4010,6 @@ class account_updateTheme_ extends Function_ {
     }
 }
 exports.account_updateTheme_ = account_updateTheme_;
-Object.defineProperty(account_updateTheme_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Save a theme */
 class account_saveTheme_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4639,12 +4051,6 @@ class account_saveTheme_ extends Function_ {
     }
 }
 exports.account_saveTheme_ = account_saveTheme_;
-Object.defineProperty(account_saveTheme_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Install a theme */
 class account_installTheme_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4708,12 +4114,6 @@ class account_installTheme_ extends Function_ {
     }
 }
 exports.account_installTheme_ = account_installTheme_;
-Object.defineProperty(account_installTheme_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get theme information */
 class account_getTheme_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4755,12 +4155,6 @@ class account_getTheme_ extends Function_ {
     }
 }
 exports.account_getTheme_ = account_getTheme_;
-Object.defineProperty(account_getTheme_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get installed themes */
 class account_getThemes_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4802,12 +4196,6 @@ class account_getThemes_ extends Function_ {
     }
 }
 exports.account_getThemes_ = account_getThemes_;
-Object.defineProperty(account_getThemes_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set sensitive content settings (for viewing or hiding NSFW content) */
 class account_setContentSettings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4841,12 +4229,6 @@ class account_setContentSettings_ extends Function_ {
     }
 }
 exports.account_setContentSettings_ = account_setContentSettings_;
-Object.defineProperty(account_setContentSettings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get sensitive content settings */
 class account_getContentSettings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4866,12 +4248,6 @@ class account_getContentSettings_ extends Function_ {
     }
 }
 exports.account_getContentSettings_ = account_getContentSettings_;
-Object.defineProperty(account_getContentSettings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get info about multiple [wallpapers](https://core.telegram.org/api/wallpapers) */
 class account_getMultiWallPapers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4903,12 +4279,6 @@ class account_getMultiWallPapers_ extends Function_ {
     }
 }
 exports.account_getMultiWallPapers_ = account_getMultiWallPapers_;
-Object.defineProperty(account_getMultiWallPapers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get global privacy settings */
 class account_getGlobalPrivacySettings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4928,12 +4298,6 @@ class account_getGlobalPrivacySettings_ extends Function_ {
     }
 }
 exports.account_getGlobalPrivacySettings_ = account_getGlobalPrivacySettings_;
-Object.defineProperty(account_getGlobalPrivacySettings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set global privacy settings */
 class account_setGlobalPrivacySettings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -4965,12 +4329,6 @@ class account_setGlobalPrivacySettings_ extends Function_ {
     }
 }
 exports.account_setGlobalPrivacySettings_ = account_setGlobalPrivacySettings_;
-Object.defineProperty(account_setGlobalPrivacySettings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Report a profile photo of a dialog */
 class account_reportProfilePhoto_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5032,12 +4390,6 @@ class account_reportProfilePhoto_ extends Function_ {
     }
 }
 exports.account_reportProfilePhoto_ = account_reportProfilePhoto_;
-Object.defineProperty(account_reportProfilePhoto_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Initiate a 2FA password reset: can only be used if the user is already logged-in, [see here for more info »](https://core.telegram.org/api/srp#password-reset) */
 class account_resetPassword_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5057,12 +4409,6 @@ class account_resetPassword_ extends Function_ {
     }
 }
 exports.account_resetPassword_ = account_resetPassword_;
-Object.defineProperty(account_resetPassword_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Abort a pending 2FA password reset, [see here for more info »](https://core.telegram.org/api/srp#password-reset) */
 class account_declinePasswordReset_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5082,12 +4428,6 @@ class account_declinePasswordReset_ extends Function_ {
     }
 }
 exports.account_declinePasswordReset_ = account_declinePasswordReset_;
-Object.defineProperty(account_declinePasswordReset_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get all available chat [themes »](https://core.telegram.org/api/themes). */
 class account_getChatThemes_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5119,12 +4459,6 @@ class account_getChatThemes_ extends Function_ {
     }
 }
 exports.account_getChatThemes_ = account_getChatThemes_;
-Object.defineProperty(account_getChatThemes_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set time-to-live of current session */
 class account_setAuthorizationTTL_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5156,12 +4490,6 @@ class account_setAuthorizationTTL_ extends Function_ {
     }
 }
 exports.account_setAuthorizationTTL_ = account_setAuthorizationTTL_;
-Object.defineProperty(account_setAuthorizationTTL_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Change settings related to a session. */
 class account_changeAuthorizationSettings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5225,12 +4553,6 @@ class account_changeAuthorizationSettings_ extends Function_ {
     }
 }
 exports.account_changeAuthorizationSettings_ = account_changeAuthorizationSettings_;
-Object.defineProperty(account_changeAuthorizationSettings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Fetch saved notification sounds */
 class account_getSavedRingtones_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5262,12 +4584,6 @@ class account_getSavedRingtones_ extends Function_ {
     }
 }
 exports.account_getSavedRingtones_ = account_getSavedRingtones_;
-Object.defineProperty(account_getSavedRingtones_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Save or remove saved notification sound. */
 class account_saveRingtone_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5309,12 +4625,6 @@ class account_saveRingtone_ extends Function_ {
     }
 }
 exports.account_saveRingtone_ = account_saveRingtone_;
-Object.defineProperty(account_saveRingtone_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Upload notification sound, use [account.saveRingtone](https://core.telegram.org/method/account.saveRingtone) to convert it and add it to the list of saved notification sounds. */
 class account_uploadRingtone_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5366,12 +4676,6 @@ class account_uploadRingtone_ extends Function_ {
     }
 }
 exports.account_uploadRingtone_ = account_uploadRingtone_;
-Object.defineProperty(account_uploadRingtone_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set an [emoji status](https://core.telegram.org/api/emoji-status) */
 class account_updateEmojiStatus_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5403,12 +4707,6 @@ class account_updateEmojiStatus_ extends Function_ {
     }
 }
 exports.account_updateEmojiStatus_ = account_updateEmojiStatus_;
-Object.defineProperty(account_updateEmojiStatus_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get a list of default suggested [emoji statuses](https://core.telegram.org/api/emoji-status) */
 class account_getDefaultEmojiStatuses_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5440,12 +4738,6 @@ class account_getDefaultEmojiStatuses_ extends Function_ {
     }
 }
 exports.account_getDefaultEmojiStatuses_ = account_getDefaultEmojiStatuses_;
-Object.defineProperty(account_getDefaultEmojiStatuses_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get recently used [emoji statuses](https://core.telegram.org/api/emoji-status) */
 class account_getRecentEmojiStatuses_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5477,12 +4769,6 @@ class account_getRecentEmojiStatuses_ extends Function_ {
     }
 }
 exports.account_getRecentEmojiStatuses_ = account_getRecentEmojiStatuses_;
-Object.defineProperty(account_getRecentEmojiStatuses_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Clears list of recently used [emoji statuses](https://core.telegram.org/api/emoji-status) */
 class account_clearRecentEmojiStatuses_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5502,12 +4788,6 @@ class account_clearRecentEmojiStatuses_ extends Function_ {
     }
 }
 exports.account_clearRecentEmojiStatuses_ = account_clearRecentEmojiStatuses_;
-Object.defineProperty(account_clearRecentEmojiStatuses_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Reorder usernames associated with the currently logged-in user. */
 class account_reorderUsernames_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5539,12 +4819,6 @@ class account_reorderUsernames_ extends Function_ {
     }
 }
 exports.account_reorderUsernames_ = account_reorderUsernames_;
-Object.defineProperty(account_reorderUsernames_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Activate or deactivate a purchased [fragment.com](https://fragment.com) username associated to the currently logged-in user. */
 class account_toggleUsername_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5586,12 +4860,6 @@ class account_toggleUsername_ extends Function_ {
     }
 }
 exports.account_toggleUsername_ = account_toggleUsername_;
-Object.defineProperty(account_toggleUsername_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get a set of suggested [custom emoji stickers](https://core.telegram.org/api/custom-emoji) that can be [used as profile picture](https://core.telegram.org/api/files#sticker-profile-pictures) */
 class account_getDefaultProfilePhotoEmojis_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5623,12 +4891,6 @@ class account_getDefaultProfilePhotoEmojis_ extends Function_ {
     }
 }
 exports.account_getDefaultProfilePhotoEmojis_ = account_getDefaultProfilePhotoEmojis_;
-Object.defineProperty(account_getDefaultProfilePhotoEmojis_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get a set of suggested [custom emoji stickers](https://core.telegram.org/api/custom-emoji) that can be [used as group picture](https://core.telegram.org/api/files#sticker-profile-pictures) */
 class account_getDefaultGroupPhotoEmojis_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5660,12 +4922,6 @@ class account_getDefaultGroupPhotoEmojis_ extends Function_ {
     }
 }
 exports.account_getDefaultGroupPhotoEmojis_ = account_getDefaultGroupPhotoEmojis_;
-Object.defineProperty(account_getDefaultGroupPhotoEmojis_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get autosave settings */
 class account_getAutoSaveSettings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5685,12 +4941,6 @@ class account_getAutoSaveSettings_ extends Function_ {
     }
 }
 exports.account_getAutoSaveSettings_ = account_getAutoSaveSettings_;
-Object.defineProperty(account_getAutoSaveSettings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Modify autosave settings */
 class account_saveAutoSaveSettings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5764,12 +5014,6 @@ class account_saveAutoSaveSettings_ extends Function_ {
     }
 }
 exports.account_saveAutoSaveSettings_ = account_saveAutoSaveSettings_;
-Object.defineProperty(account_saveAutoSaveSettings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Clear all peer-specific autosave settings. */
 class account_deleteAutoSaveExceptions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5789,12 +5033,6 @@ class account_deleteAutoSaveExceptions_ extends Function_ {
     }
 }
 exports.account_deleteAutoSaveExceptions_ = account_deleteAutoSaveExceptions_;
-Object.defineProperty(account_deleteAutoSaveExceptions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Invalidate the specified login codes, see [here »](https://core.telegram.org/api/auth#invalidating-login-codes) for more info. */
 class account_invalidateSignInCodes_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5826,12 +5064,6 @@ class account_invalidateSignInCodes_ extends Function_ {
     }
 }
 exports.account_invalidateSignInCodes_ = account_invalidateSignInCodes_;
-Object.defineProperty(account_invalidateSignInCodes_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Update the [accent color and background custom emoji »](https://core.telegram.org/api/colors) of the current account. */
 class account_updateColor_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5885,12 +5117,6 @@ class account_updateColor_ extends Function_ {
     }
 }
 exports.account_updateColor_ = account_updateColor_;
-Object.defineProperty(account_updateColor_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get a set of suggested [custom emoji stickers](https://core.telegram.org/api/custom-emoji) that can be used in an [accent color pattern](https://core.telegram.org/api/colors). */
 class account_getDefaultBackgroundEmojis_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5922,12 +5148,6 @@ class account_getDefaultBackgroundEmojis_ extends Function_ {
     }
 }
 exports.account_getDefaultBackgroundEmojis_ = account_getDefaultBackgroundEmojis_;
-Object.defineProperty(account_getDefaultBackgroundEmojis_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get a list of default suggested [channel emoji statuses](https://core.telegram.org/api/emoji-status). */
 class account_getChannelDefaultEmojiStatuses_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5959,12 +5179,6 @@ class account_getChannelDefaultEmojiStatuses_ extends Function_ {
     }
 }
 exports.account_getChannelDefaultEmojiStatuses_ = account_getChannelDefaultEmojiStatuses_;
-Object.defineProperty(account_getChannelDefaultEmojiStatuses_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns fetch the full list of [custom emoji IDs »](https://core.telegram.org/api/custom-emoji) that cannot be used in [channel emoji statuses »](https://core.telegram.org/api/emoji-status). */
 class account_getChannelRestrictedStatusEmojis_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -5996,12 +5210,6 @@ class account_getChannelRestrictedStatusEmojis_ extends Function_ {
     }
 }
 exports.account_getChannelRestrictedStatusEmojis_ = account_getChannelRestrictedStatusEmojis_;
-Object.defineProperty(account_getChannelRestrictedStatusEmojis_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class account_updateBusinessWorkHours_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x4B00E066;
@@ -6033,12 +5241,6 @@ class account_updateBusinessWorkHours_ extends Function_ {
     }
 }
 exports.account_updateBusinessWorkHours_ = account_updateBusinessWorkHours_;
-Object.defineProperty(account_updateBusinessWorkHours_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class account_updateBusinessLocation_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x9E6B131A;
@@ -6079,12 +5281,6 @@ class account_updateBusinessLocation_ extends Function_ {
     }
 }
 exports.account_updateBusinessLocation_ = account_updateBusinessLocation_;
-Object.defineProperty(account_updateBusinessLocation_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class account_updateBusinessGreetingMessage_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x66CDAFC4;
@@ -6116,12 +5312,6 @@ class account_updateBusinessGreetingMessage_ extends Function_ {
     }
 }
 exports.account_updateBusinessGreetingMessage_ = account_updateBusinessGreetingMessage_;
-Object.defineProperty(account_updateBusinessGreetingMessage_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class account_updateBusinessAwayMessage_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xA26A7FA5;
@@ -6153,12 +5343,6 @@ class account_updateBusinessAwayMessage_ extends Function_ {
     }
 }
 exports.account_updateBusinessAwayMessage_ = account_updateBusinessAwayMessage_;
-Object.defineProperty(account_updateBusinessAwayMessage_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class account_updateConnectedBot_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x43D8521D;
@@ -6217,12 +5401,6 @@ class account_updateConnectedBot_ extends Function_ {
     }
 }
 exports.account_updateConnectedBot_ = account_updateConnectedBot_;
-Object.defineProperty(account_updateConnectedBot_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class account_getConnectedBots_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x4EA4C80F;
@@ -6241,12 +5419,6 @@ class account_getConnectedBots_ extends Function_ {
     }
 }
 exports.account_getConnectedBots_ = account_getConnectedBots_;
-Object.defineProperty(account_getConnectedBots_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class account_getBotBusinessConnection_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x76A86270;
@@ -6276,12 +5448,6 @@ class account_getBotBusinessConnection_ extends Function_ {
     }
 }
 exports.account_getBotBusinessConnection_ = account_getBotBusinessConnection_;
-Object.defineProperty(account_getBotBusinessConnection_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class account_updateBusinessIntro_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xA614D034;
@@ -6313,12 +5479,6 @@ class account_updateBusinessIntro_ extends Function_ {
     }
 }
 exports.account_updateBusinessIntro_ = account_updateBusinessIntro_;
-Object.defineProperty(account_updateBusinessIntro_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class account_toggleConnectedBotPaused_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x646E1097;
@@ -6357,12 +5517,6 @@ class account_toggleConnectedBotPaused_ extends Function_ {
     }
 }
 exports.account_toggleConnectedBotPaused_ = account_toggleConnectedBotPaused_;
-Object.defineProperty(account_toggleConnectedBotPaused_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class account_disablePeerConnectedBot_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x5E437ED9;
@@ -6392,12 +5546,6 @@ class account_disablePeerConnectedBot_ extends Function_ {
     }
 }
 exports.account_disablePeerConnectedBot_ = account_disablePeerConnectedBot_;
-Object.defineProperty(account_disablePeerConnectedBot_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class account_updateBirthday_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xCC6E0C11;
@@ -6429,12 +5577,6 @@ class account_updateBirthday_ extends Function_ {
     }
 }
 exports.account_updateBirthday_ = account_updateBirthday_;
-Object.defineProperty(account_updateBirthday_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class account_createBusinessChatLink_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x8851E68E;
@@ -6464,12 +5606,6 @@ class account_createBusinessChatLink_ extends Function_ {
     }
 }
 exports.account_createBusinessChatLink_ = account_createBusinessChatLink_;
-Object.defineProperty(account_createBusinessChatLink_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class account_editBusinessChatLink_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x8C3410AF;
@@ -6508,12 +5644,6 @@ class account_editBusinessChatLink_ extends Function_ {
     }
 }
 exports.account_editBusinessChatLink_ = account_editBusinessChatLink_;
-Object.defineProperty(account_editBusinessChatLink_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class account_deleteBusinessChatLink_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x60073674;
@@ -6543,12 +5673,6 @@ class account_deleteBusinessChatLink_ extends Function_ {
     }
 }
 exports.account_deleteBusinessChatLink_ = account_deleteBusinessChatLink_;
-Object.defineProperty(account_deleteBusinessChatLink_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class account_getBusinessChatLinks_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x6F70DDE1;
@@ -6567,12 +5691,6 @@ class account_getBusinessChatLinks_ extends Function_ {
     }
 }
 exports.account_getBusinessChatLinks_ = account_getBusinessChatLinks_;
-Object.defineProperty(account_getBusinessChatLinks_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class account_resolveBusinessChatLink_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x5492E5EE;
@@ -6602,12 +5720,6 @@ class account_resolveBusinessChatLink_ extends Function_ {
     }
 }
 exports.account_resolveBusinessChatLink_ = account_resolveBusinessChatLink_;
-Object.defineProperty(account_resolveBusinessChatLink_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class account_updatePersonalChannel_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xD94305E0;
@@ -6637,12 +5749,6 @@ class account_updatePersonalChannel_ extends Function_ {
     }
 }
 exports.account_updatePersonalChannel_ = account_updatePersonalChannel_;
-Object.defineProperty(account_updatePersonalChannel_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns basic user info according to their identifiers. */
 class users_getUsers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -6674,12 +5780,6 @@ class users_getUsers_ extends Function_ {
     }
 }
 exports.users_getUsers_ = users_getUsers_;
-Object.defineProperty(users_getUsers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns extended user info by ID. */
 class users_getFullUser_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -6711,12 +5811,6 @@ class users_getFullUser_ extends Function_ {
     }
 }
 exports.users_getFullUser_ = users_getFullUser_;
-Object.defineProperty(users_getFullUser_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Notify the user that the sent [passport](https://core.telegram.org/passport) data contains some errors The user will not be able to re-submit their Passport data to you until the errors are fixed (the contents of the field for which you returned the error must change). */
 class users_setSecureValueErrors_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -6758,12 +5852,6 @@ class users_setSecureValueErrors_ extends Function_ {
     }
 }
 exports.users_setSecureValueErrors_ = users_setSecureValueErrors_;
-Object.defineProperty(users_setSecureValueErrors_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class users_getIsPremiumRequiredToContact_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xA622AA10;
@@ -6793,12 +5881,6 @@ class users_getIsPremiumRequiredToContact_ extends Function_ {
     }
 }
 exports.users_getIsPremiumRequiredToContact_ = users_getIsPremiumRequiredToContact_;
-Object.defineProperty(users_getIsPremiumRequiredToContact_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get the telegram IDs of all contacts.
 Returns an array of Telegram user IDs for all contacts (0 if a contact does not have an associated Telegram account or have hidden their account using privacy settings). */
 class contacts_getContactIDs_ extends Function_ {
@@ -6831,12 +5913,6 @@ class contacts_getContactIDs_ extends Function_ {
     }
 }
 exports.contacts_getContactIDs_ = contacts_getContactIDs_;
-Object.defineProperty(contacts_getContactIDs_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Use this method to obtain the online statuses of all contacts with an accessible Telegram account. */
 class contacts_getStatuses_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -6856,12 +5932,6 @@ class contacts_getStatuses_ extends Function_ {
     }
 }
 exports.contacts_getStatuses_ = contacts_getStatuses_;
-Object.defineProperty(contacts_getStatuses_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns the current user's contact list. */
 class contacts_getContacts_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -6893,12 +5963,6 @@ class contacts_getContacts_ extends Function_ {
     }
 }
 exports.contacts_getContacts_ = contacts_getContacts_;
-Object.defineProperty(contacts_getContacts_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Imports contacts: saves a full list on the server, adds already registered contacts to the contact list, returns added contacts and their info. */
 class contacts_importContacts_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -6930,12 +5994,6 @@ class contacts_importContacts_ extends Function_ {
     }
 }
 exports.contacts_importContacts_ = contacts_importContacts_;
-Object.defineProperty(contacts_importContacts_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Deletes several contacts from the list. */
 class contacts_deleteContacts_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -6967,12 +6025,6 @@ class contacts_deleteContacts_ extends Function_ {
     }
 }
 exports.contacts_deleteContacts_ = contacts_deleteContacts_;
-Object.defineProperty(contacts_deleteContacts_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Delete contacts by phone number */
 class contacts_deleteByPhones_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7004,12 +6056,6 @@ class contacts_deleteByPhones_ extends Function_ {
     }
 }
 exports.contacts_deleteByPhones_ = contacts_deleteByPhones_;
-Object.defineProperty(contacts_deleteByPhones_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Adds a peer to a blocklist, see [here »](https://core.telegram.org/api/block) for more info. */
 class contacts_block_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7053,12 +6099,6 @@ class contacts_block_ extends Function_ {
     }
 }
 exports.contacts_block_ = contacts_block_;
-Object.defineProperty(contacts_block_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Deletes a peer from a blocklist, see [here »](https://core.telegram.org/api/block) for more info. */
 class contacts_unblock_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7102,12 +6142,6 @@ class contacts_unblock_ extends Function_ {
     }
 }
 exports.contacts_unblock_ = contacts_unblock_;
-Object.defineProperty(contacts_unblock_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns the list of blocked users. */
 class contacts_getBlocked_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7161,12 +6195,6 @@ class contacts_getBlocked_ extends Function_ {
     }
 }
 exports.contacts_getBlocked_ = contacts_getBlocked_;
-Object.defineProperty(contacts_getBlocked_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns users found by username substring. */
 class contacts_search_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7208,12 +6236,6 @@ class contacts_search_ extends Function_ {
     }
 }
 exports.contacts_search_ = contacts_search_;
-Object.defineProperty(contacts_search_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Resolve a @username to get peer info */
 class contacts_resolveUsername_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7245,12 +6267,6 @@ class contacts_resolveUsername_ extends Function_ {
     }
 }
 exports.contacts_resolveUsername_ = contacts_resolveUsername_;
-Object.defineProperty(contacts_resolveUsername_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get most used peers */
 class contacts_getTopPeers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7384,12 +6400,6 @@ class contacts_getTopPeers_ extends Function_ {
     }
 }
 exports.contacts_getTopPeers_ = contacts_getTopPeers_;
-Object.defineProperty(contacts_getTopPeers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Reset [rating](https://core.telegram.org/api/top-rating) of top peer */
 class contacts_resetTopPeerRating_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7431,12 +6441,6 @@ class contacts_resetTopPeerRating_ extends Function_ {
     }
 }
 exports.contacts_resetTopPeerRating_ = contacts_resetTopPeerRating_;
-Object.defineProperty(contacts_resetTopPeerRating_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Removes all contacts without an associated Telegram account. */
 class contacts_resetSaved_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7456,12 +6460,6 @@ class contacts_resetSaved_ extends Function_ {
     }
 }
 exports.contacts_resetSaved_ = contacts_resetSaved_;
-Object.defineProperty(contacts_resetSaved_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get all contacts, requires a [takeout session, see here » for more info](https://core.telegram.org/api/takeout). */
 class contacts_getSaved_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7481,12 +6479,6 @@ class contacts_getSaved_ extends Function_ {
     }
 }
 exports.contacts_getSaved_ = contacts_getSaved_;
-Object.defineProperty(contacts_getSaved_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Enable/disable [top peers](https://core.telegram.org/api/top-rating) */
 class contacts_toggleTopPeers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7518,12 +6510,6 @@ class contacts_toggleTopPeers_ extends Function_ {
     }
 }
 exports.contacts_toggleTopPeers_ = contacts_toggleTopPeers_;
-Object.defineProperty(contacts_toggleTopPeers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Add an existing telegram user as contact. */
 class contacts_addContact_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7597,12 +6583,6 @@ class contacts_addContact_ extends Function_ {
     }
 }
 exports.contacts_addContact_ = contacts_addContact_;
-Object.defineProperty(contacts_addContact_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** If the [add contact action bar is active](https://core.telegram.org/api/action-bar#add-contact), add that user as contact */
 class contacts_acceptContact_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7634,12 +6614,6 @@ class contacts_acceptContact_ extends Function_ {
     }
 }
 exports.contacts_acceptContact_ = contacts_acceptContact_;
-Object.defineProperty(contacts_acceptContact_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get users and geochats near you, see [here »](https://core.telegram.org/api/nearby) for more info. */
 class contacts_getLocated_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7694,12 +6668,6 @@ class contacts_getLocated_ extends Function_ {
     }
 }
 exports.contacts_getLocated_ = contacts_getLocated_;
-Object.defineProperty(contacts_getLocated_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Stop getting notifications about [discussion replies](https://core.telegram.org/api/discussion) of a certain user in `@replies` */
 class contacts_blockFromReplies_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7763,12 +6731,6 @@ class contacts_blockFromReplies_ extends Function_ {
     }
 }
 exports.contacts_blockFromReplies_ = contacts_blockFromReplies_;
-Object.defineProperty(contacts_blockFromReplies_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Resolve a phone number to get user info, if their privacy settings allow it. */
 class contacts_resolvePhone_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7800,12 +6762,6 @@ class contacts_resolvePhone_ extends Function_ {
     }
 }
 exports.contacts_resolvePhone_ = contacts_resolvePhone_;
-Object.defineProperty(contacts_resolvePhone_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Generates a [temporary profile link](https://core.telegram.org/api/links#temporary-profile-links) for the currently logged-in user. */
 class contacts_exportContactToken_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7825,12 +6781,6 @@ class contacts_exportContactToken_ extends Function_ {
     }
 }
 exports.contacts_exportContactToken_ = contacts_exportContactToken_;
-Object.defineProperty(contacts_exportContactToken_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain user info from a [temporary profile link](https://core.telegram.org/api/links#temporary-profile-links). */
 class contacts_importContactToken_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7862,12 +6812,6 @@ class contacts_importContactToken_ extends Function_ {
     }
 }
 exports.contacts_importContactToken_ = contacts_importContactToken_;
-Object.defineProperty(contacts_importContactToken_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Edit the [close friends list, see here »](https://core.telegram.org/api/privacy) for more info. */
 class contacts_editCloseFriends_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7899,12 +6843,6 @@ class contacts_editCloseFriends_ extends Function_ {
     }
 }
 exports.contacts_editCloseFriends_ = contacts_editCloseFriends_;
-Object.defineProperty(contacts_editCloseFriends_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Replace the contents of an entire [blocklist, see here for more info »](https://core.telegram.org/api/block). */
 class contacts_setBlocked_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -7958,12 +6896,6 @@ class contacts_setBlocked_ extends Function_ {
     }
 }
 exports.contacts_setBlocked_ = contacts_setBlocked_;
-Object.defineProperty(contacts_setBlocked_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class contacts_getBirthdays_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xDAEDA864;
@@ -7982,12 +6914,6 @@ class contacts_getBirthdays_ extends Function_ {
     }
 }
 exports.contacts_getBirthdays_ = contacts_getBirthdays_;
-Object.defineProperty(contacts_getBirthdays_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns the list of messages by their IDs. */
 class messages_getMessages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -8019,12 +6945,6 @@ class messages_getMessages_ extends Function_ {
     }
 }
 exports.messages_getMessages_ = messages_getMessages_;
-Object.defineProperty(messages_getMessages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns the current user dialog list. */
 class messages_getDialogs_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -8118,12 +7038,6 @@ class messages_getDialogs_ extends Function_ {
     }
 }
 exports.messages_getDialogs_ = messages_getDialogs_;
-Object.defineProperty(messages_getDialogs_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns the conversation history with one interlocutor / within a chat */
 class messages_getHistory_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -8225,12 +7139,6 @@ class messages_getHistory_ extends Function_ {
     }
 }
 exports.messages_getHistory_ = messages_getHistory_;
-Object.defineProperty(messages_getHistory_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Search for messages. */
 class messages_search_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -8403,12 +7311,6 @@ class messages_search_ extends Function_ {
     }
 }
 exports.messages_search_ = messages_search_;
-Object.defineProperty(messages_search_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Marks message history as read. */
 class messages_readHistory_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -8450,12 +7352,6 @@ class messages_readHistory_ extends Function_ {
     }
 }
 exports.messages_readHistory_ = messages_readHistory_;
-Object.defineProperty(messages_readHistory_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Deletes communication history. */
 class messages_deleteHistory_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -8539,12 +7435,6 @@ class messages_deleteHistory_ extends Function_ {
     }
 }
 exports.messages_deleteHistory_ = messages_deleteHistory_;
-Object.defineProperty(messages_deleteHistory_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Deletes messages by their identifiers. */
 class messages_deleteMessages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -8588,12 +7478,6 @@ class messages_deleteMessages_ extends Function_ {
     }
 }
 exports.messages_deleteMessages_ = messages_deleteMessages_;
-Object.defineProperty(messages_deleteMessages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Confirms receipt of messages by a client, cancels PUSH-notification sending. */
 class messages_receivedMessages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -8625,12 +7509,6 @@ class messages_receivedMessages_ extends Function_ {
     }
 }
 exports.messages_receivedMessages_ = messages_receivedMessages_;
-Object.defineProperty(messages_receivedMessages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Sends a current user typing event (see [SendMessageAction](https://core.telegram.org/type/SendMessageAction) for all event types) to a conversation partner or group. */
 class messages_setTyping_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -8684,12 +7562,6 @@ class messages_setTyping_ extends Function_ {
     }
 }
 exports.messages_setTyping_ = messages_setTyping_;
-Object.defineProperty(messages_setTyping_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Sends a message to a chat */
 class messages_sendMessage_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -8872,12 +7744,6 @@ class messages_sendMessage_ extends Function_ {
     }
 }
 exports.messages_sendMessage_ = messages_sendMessage_;
-Object.defineProperty(messages_sendMessage_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Send a media */
 class messages_sendMedia_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -9060,12 +7926,6 @@ class messages_sendMedia_ extends Function_ {
     }
 }
 exports.messages_sendMedia_ = messages_sendMedia_;
-Object.defineProperty(messages_sendMedia_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Forwards messages by their IDs. */
 class messages_forwardMessages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -9228,12 +8088,6 @@ class messages_forwardMessages_ extends Function_ {
     }
 }
 exports.messages_forwardMessages_ = messages_forwardMessages_;
-Object.defineProperty(messages_forwardMessages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Report a new incoming chat for spam, if the [peer settings](https://core.telegram.org/constructor/peerSettings) of the chat allow us to do that */
 class messages_reportSpam_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -9265,12 +8119,6 @@ class messages_reportSpam_ extends Function_ {
     }
 }
 exports.messages_reportSpam_ = messages_reportSpam_;
-Object.defineProperty(messages_reportSpam_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get peer settings */
 class messages_getPeerSettings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -9302,12 +8150,6 @@ class messages_getPeerSettings_ extends Function_ {
     }
 }
 exports.messages_getPeerSettings_ = messages_getPeerSettings_;
-Object.defineProperty(messages_getPeerSettings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Report a message in a chat for violation of telegram's Terms of Service */
 class messages_report_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -9369,12 +8211,6 @@ class messages_report_ extends Function_ {
     }
 }
 exports.messages_report_ = messages_report_;
-Object.defineProperty(messages_report_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns chat basic info on their IDs. */
 class messages_getChats_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -9406,12 +8242,6 @@ class messages_getChats_ extends Function_ {
     }
 }
 exports.messages_getChats_ = messages_getChats_;
-Object.defineProperty(messages_getChats_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get full info about a [basic group](https://core.telegram.org/api/channel#basic-groups). */
 class messages_getFullChat_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -9443,12 +8273,6 @@ class messages_getFullChat_ extends Function_ {
     }
 }
 exports.messages_getFullChat_ = messages_getFullChat_;
-Object.defineProperty(messages_getFullChat_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Changes chat name and sends a service message on it. */
 class messages_editChatTitle_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -9490,12 +8314,6 @@ class messages_editChatTitle_ extends Function_ {
     }
 }
 exports.messages_editChatTitle_ = messages_editChatTitle_;
-Object.defineProperty(messages_editChatTitle_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Changes chat photo and sends a service message on it */
 class messages_editChatPhoto_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -9537,12 +8355,6 @@ class messages_editChatPhoto_ extends Function_ {
     }
 }
 exports.messages_editChatPhoto_ = messages_editChatPhoto_;
-Object.defineProperty(messages_editChatPhoto_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Adds a user to a chat and sends a service message on it. */
 class messages_addChatUser_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -9594,12 +8406,6 @@ class messages_addChatUser_ extends Function_ {
     }
 }
 exports.messages_addChatUser_ = messages_addChatUser_;
-Object.defineProperty(messages_addChatUser_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Deletes a user from a chat and sends a service message on it. */
 class messages_deleteChatUser_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -9653,12 +8459,6 @@ class messages_deleteChatUser_ extends Function_ {
     }
 }
 exports.messages_deleteChatUser_ = messages_deleteChatUser_;
-Object.defineProperty(messages_deleteChatUser_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Creates a new chat. */
 class messages_createChat_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -9712,12 +8512,6 @@ class messages_createChat_ extends Function_ {
     }
 }
 exports.messages_createChat_ = messages_createChat_;
-Object.defineProperty(messages_createChat_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns configuration parameters for Diffie-Hellman key generation. Can also return a random sequence of bytes of required length. */
 class messages_getDhConfig_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -9759,12 +8553,6 @@ class messages_getDhConfig_ extends Function_ {
     }
 }
 exports.messages_getDhConfig_ = messages_getDhConfig_;
-Object.defineProperty(messages_getDhConfig_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Sends a request to start a secret chat to the user. */
 class messages_requestEncryption_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -9816,12 +8604,6 @@ class messages_requestEncryption_ extends Function_ {
     }
 }
 exports.messages_requestEncryption_ = messages_requestEncryption_;
-Object.defineProperty(messages_requestEncryption_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Confirms creation of a secret chat */
 class messages_acceptEncryption_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -9873,12 +8655,6 @@ class messages_acceptEncryption_ extends Function_ {
     }
 }
 exports.messages_acceptEncryption_ = messages_acceptEncryption_;
-Object.defineProperty(messages_acceptEncryption_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Cancels a request for creation and/or delete info on secret chat. */
 class messages_discardEncryption_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -9922,12 +8698,6 @@ class messages_discardEncryption_ extends Function_ {
     }
 }
 exports.messages_discardEncryption_ = messages_discardEncryption_;
-Object.defineProperty(messages_discardEncryption_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Send typing event by the current user to a secret chat. */
 class messages_setEncryptedTyping_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -9972,12 +8742,6 @@ class messages_setEncryptedTyping_ extends Function_ {
     }
 }
 exports.messages_setEncryptedTyping_ = messages_setEncryptedTyping_;
-Object.defineProperty(messages_setEncryptedTyping_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Marks message history within a secret chat as read. */
 class messages_readEncryptedHistory_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10019,12 +8783,6 @@ class messages_readEncryptedHistory_ extends Function_ {
     }
 }
 exports.messages_readEncryptedHistory_ = messages_readEncryptedHistory_;
-Object.defineProperty(messages_readEncryptedHistory_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Sends a text message to a secret chat. */
 class messages_sendEncrypted_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10088,12 +8846,6 @@ class messages_sendEncrypted_ extends Function_ {
     }
 }
 exports.messages_sendEncrypted_ = messages_sendEncrypted_;
-Object.defineProperty(messages_sendEncrypted_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Sends a message with a file attachment to a secret chat */
 class messages_sendEncryptedFile_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10167,12 +8919,6 @@ class messages_sendEncryptedFile_ extends Function_ {
     }
 }
 exports.messages_sendEncryptedFile_ = messages_sendEncryptedFile_;
-Object.defineProperty(messages_sendEncryptedFile_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Sends a service message to a secret chat. */
 class messages_sendEncryptedService_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10224,12 +8970,6 @@ class messages_sendEncryptedService_ extends Function_ {
     }
 }
 exports.messages_sendEncryptedService_ = messages_sendEncryptedService_;
-Object.defineProperty(messages_sendEncryptedService_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Confirms receipt of messages in a secret chat by client, cancels push notifications.
 The method returns a list of **random\_id**s of messages for which push notifications were cancelled. */
 class messages_receivedQueue_ extends Function_ {
@@ -10262,12 +9002,6 @@ class messages_receivedQueue_ extends Function_ {
     }
 }
 exports.messages_receivedQueue_ = messages_receivedQueue_;
-Object.defineProperty(messages_receivedQueue_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Report a secret chat for spam */
 class messages_reportEncryptedSpam_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10299,12 +9033,6 @@ class messages_reportEncryptedSpam_ extends Function_ {
     }
 }
 exports.messages_reportEncryptedSpam_ = messages_reportEncryptedSpam_;
-Object.defineProperty(messages_reportEncryptedSpam_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Notifies the sender about the recipient having listened a voice message or watched a video. */
 class messages_readMessageContents_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10336,12 +9064,6 @@ class messages_readMessageContents_ extends Function_ {
     }
 }
 exports.messages_readMessageContents_ = messages_readMessageContents_;
-Object.defineProperty(messages_readMessageContents_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get stickers by emoji */
 class messages_getStickers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10383,12 +9105,6 @@ class messages_getStickers_ extends Function_ {
     }
 }
 exports.messages_getStickers_ = messages_getStickers_;
-Object.defineProperty(messages_getStickers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get all installed stickers */
 class messages_getAllStickers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10420,12 +9136,6 @@ class messages_getAllStickers_ extends Function_ {
     }
 }
 exports.messages_getAllStickers_ = messages_getAllStickers_;
-Object.defineProperty(messages_getAllStickers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get preview of webpage */
 class messages_getWebPagePreview_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10469,12 +9179,6 @@ class messages_getWebPagePreview_ extends Function_ {
     }
 }
 exports.messages_getWebPagePreview_ = messages_getWebPagePreview_;
-Object.defineProperty(messages_getWebPagePreview_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Export an invite link for a chat */
 class messages_exportChatInvite_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10558,12 +9262,6 @@ class messages_exportChatInvite_ extends Function_ {
     }
 }
 exports.messages_exportChatInvite_ = messages_exportChatInvite_;
-Object.defineProperty(messages_exportChatInvite_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Check the validity of a chat invite link and get basic info about it */
 class messages_checkChatInvite_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10595,12 +9293,6 @@ class messages_checkChatInvite_ extends Function_ {
     }
 }
 exports.messages_checkChatInvite_ = messages_checkChatInvite_;
-Object.defineProperty(messages_checkChatInvite_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Import a chat invite and join a private chat/supergroup/channel */
 class messages_importChatInvite_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10632,12 +9324,6 @@ class messages_importChatInvite_ extends Function_ {
     }
 }
 exports.messages_importChatInvite_ = messages_importChatInvite_;
-Object.defineProperty(messages_importChatInvite_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get info about a stickerset */
 class messages_getStickerSet_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10679,12 +9365,6 @@ class messages_getStickerSet_ extends Function_ {
     }
 }
 exports.messages_getStickerSet_ = messages_getStickerSet_;
-Object.defineProperty(messages_getStickerSet_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Install a stickerset */
 class messages_installStickerSet_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10726,12 +9406,6 @@ class messages_installStickerSet_ extends Function_ {
     }
 }
 exports.messages_installStickerSet_ = messages_installStickerSet_;
-Object.defineProperty(messages_installStickerSet_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Uninstall a stickerset */
 class messages_uninstallStickerSet_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10763,12 +9437,6 @@ class messages_uninstallStickerSet_ extends Function_ {
     }
 }
 exports.messages_uninstallStickerSet_ = messages_uninstallStickerSet_;
-Object.defineProperty(messages_uninstallStickerSet_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Start a conversation with a bot using a [deep linking parameter](https://core.telegram.org/api/links#bot-links) */
 class messages_startBot_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10830,12 +9498,6 @@ class messages_startBot_ extends Function_ {
     }
 }
 exports.messages_startBot_ = messages_startBot_;
-Object.defineProperty(messages_startBot_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get and increase the view counter of a message sent or forwarded from a [channel](https://core.telegram.org/api/channel) */
 class messages_getMessagesViews_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10887,12 +9549,6 @@ class messages_getMessagesViews_ extends Function_ {
     }
 }
 exports.messages_getMessagesViews_ = messages_getMessagesViews_;
-Object.defineProperty(messages_getMessagesViews_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Make a user admin in a [basic group](https://core.telegram.org/api/channel#basic-groups). */
 class messages_editChatAdmin_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10944,12 +9600,6 @@ class messages_editChatAdmin_ extends Function_ {
     }
 }
 exports.messages_editChatAdmin_ = messages_editChatAdmin_;
-Object.defineProperty(messages_editChatAdmin_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Turn a [basic group into a supergroup](https://core.telegram.org/api/channel#migration) */
 class messages_migrateChat_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -10981,12 +9631,6 @@ class messages_migrateChat_ extends Function_ {
     }
 }
 exports.messages_migrateChat_ = messages_migrateChat_;
-Object.defineProperty(messages_migrateChat_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Search for messages and peers globally */
 class messages_searchGlobal_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -11100,12 +9744,6 @@ class messages_searchGlobal_ extends Function_ {
     }
 }
 exports.messages_searchGlobal_ = messages_searchGlobal_;
-Object.defineProperty(messages_searchGlobal_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Reorder installed stickersets */
 class messages_reorderStickerSets_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -11159,12 +9797,6 @@ class messages_reorderStickerSets_ extends Function_ {
     }
 }
 exports.messages_reorderStickerSets_ = messages_reorderStickerSets_;
-Object.defineProperty(messages_reorderStickerSets_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get a document by its SHA256 hash, mainly used for gifs */
 class messages_getDocumentByHash_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -11216,12 +9848,6 @@ class messages_getDocumentByHash_ extends Function_ {
     }
 }
 exports.messages_getDocumentByHash_ = messages_getDocumentByHash_;
-Object.defineProperty(messages_getDocumentByHash_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get saved GIFs */
 class messages_getSavedGifs_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -11253,12 +9879,6 @@ class messages_getSavedGifs_ extends Function_ {
     }
 }
 exports.messages_getSavedGifs_ = messages_getSavedGifs_;
-Object.defineProperty(messages_getSavedGifs_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Add GIF to saved gifs list */
 class messages_saveGif_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -11300,12 +9920,6 @@ class messages_saveGif_ extends Function_ {
     }
 }
 exports.messages_saveGif_ = messages_saveGif_;
-Object.defineProperty(messages_saveGif_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Query an inline bot */
 class messages_getInlineBotResults_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -11379,12 +9993,6 @@ class messages_getInlineBotResults_ extends Function_ {
     }
 }
 exports.messages_getInlineBotResults_ = messages_getInlineBotResults_;
-Object.defineProperty(messages_getInlineBotResults_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Answer an inline query, for bots only */
 class messages_setInlineBotResults_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -11488,12 +10096,6 @@ class messages_setInlineBotResults_ extends Function_ {
     }
 }
 exports.messages_setInlineBotResults_ = messages_setInlineBotResults_;
-Object.defineProperty(messages_setInlineBotResults_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Send a result obtained using [messages.getInlineBotResults](https://core.telegram.org/method/messages.getInlineBotResults). */
 class messages_sendInlineBotResult_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -11636,12 +10238,6 @@ class messages_sendInlineBotResult_ extends Function_ {
     }
 }
 exports.messages_sendInlineBotResult_ = messages_sendInlineBotResult_;
-Object.defineProperty(messages_sendInlineBotResult_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Find out if a media message's caption can be edited */
 class messages_getMessageEditData_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -11683,12 +10279,6 @@ class messages_getMessageEditData_ extends Function_ {
     }
 }
 exports.messages_getMessageEditData_ = messages_getMessageEditData_;
-Object.defineProperty(messages_getMessageEditData_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Edit message */
 class messages_editMessage_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -11811,12 +10401,6 @@ class messages_editMessage_ extends Function_ {
     }
 }
 exports.messages_editMessage_ = messages_editMessage_;
-Object.defineProperty(messages_editMessage_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Edit an inline bot message */
 class messages_editInlineBotMessage_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -11910,12 +10494,6 @@ class messages_editInlineBotMessage_ extends Function_ {
     }
 }
 exports.messages_editInlineBotMessage_ = messages_editInlineBotMessage_;
-Object.defineProperty(messages_editInlineBotMessage_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Press an inline callback button and get a callback answer from the bot */
 class messages_getBotCallbackAnswer_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -11989,12 +10567,6 @@ class messages_getBotCallbackAnswer_ extends Function_ {
     }
 }
 exports.messages_getBotCallbackAnswer_ = messages_getBotCallbackAnswer_;
-Object.defineProperty(messages_getBotCallbackAnswer_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set the callback answer to a user button press (bots only) */
 class messages_setBotCallbackAnswer_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -12068,12 +10640,6 @@ class messages_setBotCallbackAnswer_ extends Function_ {
     }
 }
 exports.messages_setBotCallbackAnswer_ = messages_setBotCallbackAnswer_;
-Object.defineProperty(messages_setBotCallbackAnswer_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get dialog info of specified peers */
 class messages_getPeerDialogs_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -12105,12 +10671,6 @@ class messages_getPeerDialogs_ extends Function_ {
     }
 }
 exports.messages_getPeerDialogs_ = messages_getPeerDialogs_;
-Object.defineProperty(messages_getPeerDialogs_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Save a message [draft](https://core.telegram.org/api/drafts) associated to a chat. */
 class messages_saveDraft_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -12204,12 +10764,6 @@ class messages_saveDraft_ extends Function_ {
     }
 }
 exports.messages_saveDraft_ = messages_saveDraft_;
-Object.defineProperty(messages_saveDraft_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Return all message [drafts](https://core.telegram.org/api/drafts).
 Returns all the latest [updateDraftMessage](https://core.telegram.org/constructor/updateDraftMessage) updates related to all chats with drafts. */
 class messages_getAllDrafts_ extends Function_ {
@@ -12230,12 +10784,6 @@ class messages_getAllDrafts_ extends Function_ {
     }
 }
 exports.messages_getAllDrafts_ = messages_getAllDrafts_;
-Object.defineProperty(messages_getAllDrafts_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get featured stickers */
 class messages_getFeaturedStickers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -12267,12 +10815,6 @@ class messages_getFeaturedStickers_ extends Function_ {
     }
 }
 exports.messages_getFeaturedStickers_ = messages_getFeaturedStickers_;
-Object.defineProperty(messages_getFeaturedStickers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Mark new featured stickers as read */
 class messages_readFeaturedStickers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -12304,12 +10846,6 @@ class messages_readFeaturedStickers_ extends Function_ {
     }
 }
 exports.messages_readFeaturedStickers_ = messages_readFeaturedStickers_;
-Object.defineProperty(messages_readFeaturedStickers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get recent stickers */
 class messages_getRecentStickers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -12353,12 +10889,6 @@ class messages_getRecentStickers_ extends Function_ {
     }
 }
 exports.messages_getRecentStickers_ = messages_getRecentStickers_;
-Object.defineProperty(messages_getRecentStickers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Add/remove sticker from recent stickers list */
 class messages_saveRecentSticker_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -12412,12 +10942,6 @@ class messages_saveRecentSticker_ extends Function_ {
     }
 }
 exports.messages_saveRecentSticker_ = messages_saveRecentSticker_;
-Object.defineProperty(messages_saveRecentSticker_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Clear recent stickers */
 class messages_clearRecentStickers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -12451,12 +10975,6 @@ class messages_clearRecentStickers_ extends Function_ {
     }
 }
 exports.messages_clearRecentStickers_ = messages_clearRecentStickers_;
-Object.defineProperty(messages_clearRecentStickers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get all archived stickers */
 class messages_getArchivedStickers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -12520,12 +11038,6 @@ class messages_getArchivedStickers_ extends Function_ {
     }
 }
 exports.messages_getArchivedStickers_ = messages_getArchivedStickers_;
-Object.defineProperty(messages_getArchivedStickers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get installed mask stickers */
 class messages_getMaskStickers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -12557,12 +11069,6 @@ class messages_getMaskStickers_ extends Function_ {
     }
 }
 exports.messages_getMaskStickers_ = messages_getMaskStickers_;
-Object.defineProperty(messages_getMaskStickers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get stickers attached to a photo or video */
 class messages_getAttachedStickers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -12594,12 +11100,6 @@ class messages_getAttachedStickers_ extends Function_ {
     }
 }
 exports.messages_getAttachedStickers_ = messages_getAttachedStickers_;
-Object.defineProperty(messages_getAttachedStickers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Use this method to set the score of the specified user in a game sent as a normal message (bots only). */
 class messages_setGameScore_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -12683,12 +11183,6 @@ class messages_setGameScore_ extends Function_ {
     }
 }
 exports.messages_setGameScore_ = messages_setGameScore_;
-Object.defineProperty(messages_setGameScore_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Use this method to set the score of the specified user in a game sent as an inline message (bots only). */
 class messages_setInlineGameScore_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -12762,12 +11256,6 @@ class messages_setInlineGameScore_ extends Function_ {
     }
 }
 exports.messages_setInlineGameScore_ = messages_setInlineGameScore_;
-Object.defineProperty(messages_setInlineGameScore_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get highscores of a game */
 class messages_getGameHighScores_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -12819,12 +11307,6 @@ class messages_getGameHighScores_ extends Function_ {
     }
 }
 exports.messages_getGameHighScores_ = messages_getGameHighScores_;
-Object.defineProperty(messages_getGameHighScores_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get highscores of a game sent using an inline bot */
 class messages_getInlineGameHighScores_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -12866,12 +11348,6 @@ class messages_getInlineGameHighScores_ extends Function_ {
     }
 }
 exports.messages_getInlineGameHighScores_ = messages_getInlineGameHighScores_;
-Object.defineProperty(messages_getInlineGameHighScores_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get chats in common with a user */
 class messages_getCommonChats_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -12923,12 +11399,6 @@ class messages_getCommonChats_ extends Function_ {
     }
 }
 exports.messages_getCommonChats_ = messages_getCommonChats_;
-Object.defineProperty(messages_getCommonChats_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get [instant view](https://instantview.telegram.org) page */
 class messages_getWebPage_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -12970,12 +11440,6 @@ class messages_getWebPage_ extends Function_ {
     }
 }
 exports.messages_getWebPage_ = messages_getWebPage_;
-Object.defineProperty(messages_getWebPage_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Pin/unpin a dialog */
 class messages_toggleDialogPin_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -13019,12 +11483,6 @@ class messages_toggleDialogPin_ extends Function_ {
     }
 }
 exports.messages_toggleDialogPin_ = messages_toggleDialogPin_;
-Object.defineProperty(messages_toggleDialogPin_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Reorder pinned dialogs */
 class messages_reorderPinnedDialogs_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -13078,12 +11536,6 @@ class messages_reorderPinnedDialogs_ extends Function_ {
     }
 }
 exports.messages_reorderPinnedDialogs_ = messages_reorderPinnedDialogs_;
-Object.defineProperty(messages_reorderPinnedDialogs_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get pinned dialogs */
 class messages_getPinnedDialogs_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -13115,12 +11567,6 @@ class messages_getPinnedDialogs_ extends Function_ {
     }
 }
 exports.messages_getPinnedDialogs_ = messages_getPinnedDialogs_;
-Object.defineProperty(messages_getPinnedDialogs_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** If you sent an invoice requesting a shipping address and the parameter is\_flexible was specified, the bot will receive an [updateBotShippingQuery](https://core.telegram.org/constructor/updateBotShippingQuery) update. Use this method to reply to shipping queries. */
 class messages_setBotShippingResults_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -13174,12 +11620,6 @@ class messages_setBotShippingResults_ extends Function_ {
     }
 }
 exports.messages_setBotShippingResults_ = messages_setBotShippingResults_;
-Object.defineProperty(messages_setBotShippingResults_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Once the user has confirmed their payment and shipping details, the bot receives an [updateBotPrecheckoutQuery](https://core.telegram.org/constructor/updateBotPrecheckoutQuery) update.
 Use this method to respond to such pre-checkout queries.
 **Note**: Telegram must receive an answer within 10 seconds after the pre-checkout query was sent. */
@@ -13235,12 +11675,6 @@ class messages_setBotPrecheckoutResults_ extends Function_ {
     }
 }
 exports.messages_setBotPrecheckoutResults_ = messages_setBotPrecheckoutResults_;
-Object.defineProperty(messages_setBotPrecheckoutResults_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Upload a file and associate it to a chat (without actually sending it to the chat) */
 class messages_uploadMedia_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -13293,12 +11727,6 @@ class messages_uploadMedia_ extends Function_ {
     }
 }
 exports.messages_uploadMedia_ = messages_uploadMedia_;
-Object.defineProperty(messages_uploadMedia_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Notify the other user in a private chat that a screenshot of the chat was taken */
 class messages_sendScreenshotNotification_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -13350,12 +11778,6 @@ class messages_sendScreenshotNotification_ extends Function_ {
     }
 }
 exports.messages_sendScreenshotNotification_ = messages_sendScreenshotNotification_;
-Object.defineProperty(messages_sendScreenshotNotification_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get faved stickers */
 class messages_getFavedStickers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -13387,12 +11809,6 @@ class messages_getFavedStickers_ extends Function_ {
     }
 }
 exports.messages_getFavedStickers_ = messages_getFavedStickers_;
-Object.defineProperty(messages_getFavedStickers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Mark or unmark a sticker as favorite */
 class messages_faveSticker_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -13434,12 +11850,6 @@ class messages_faveSticker_ extends Function_ {
     }
 }
 exports.messages_faveSticker_ = messages_faveSticker_;
-Object.defineProperty(messages_faveSticker_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get unread messages where we were mentioned */
 class messages_getUnreadMentions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -13533,12 +11943,6 @@ class messages_getUnreadMentions_ extends Function_ {
     }
 }
 exports.messages_getUnreadMentions_ = messages_getUnreadMentions_;
-Object.defineProperty(messages_getUnreadMentions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Mark mentions as read */
 class messages_readMentions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -13582,12 +11986,6 @@ class messages_readMentions_ extends Function_ {
     }
 }
 exports.messages_readMentions_ = messages_readMentions_;
-Object.defineProperty(messages_readMentions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get live location history of a certain user */
 class messages_getRecentLocations_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -13639,12 +12037,6 @@ class messages_getRecentLocations_ extends Function_ {
     }
 }
 exports.messages_getRecentLocations_ = messages_getRecentLocations_;
-Object.defineProperty(messages_getRecentLocations_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Send an [album or grouped media](https://core.telegram.org/api/files#albums-grouped-media) */
 class messages_sendMultiMedia_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -13787,12 +12179,6 @@ class messages_sendMultiMedia_ extends Function_ {
     }
 }
 exports.messages_sendMultiMedia_ = messages_sendMultiMedia_;
-Object.defineProperty(messages_sendMultiMedia_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Upload encrypted file and associate it to a secret chat */
 class messages_uploadEncryptedFile_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -13834,12 +12220,6 @@ class messages_uploadEncryptedFile_ extends Function_ {
     }
 }
 exports.messages_uploadEncryptedFile_ = messages_uploadEncryptedFile_;
-Object.defineProperty(messages_uploadEncryptedFile_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Search for stickersets */
 class messages_searchStickerSets_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -13893,12 +12273,6 @@ class messages_searchStickerSets_ extends Function_ {
     }
 }
 exports.messages_searchStickerSets_ = messages_searchStickerSets_;
-Object.defineProperty(messages_searchStickerSets_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get message ranges for saving the user's chat history */
 class messages_getSplitRanges_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -13918,12 +12292,6 @@ class messages_getSplitRanges_ extends Function_ {
     }
 }
 exports.messages_getSplitRanges_ = messages_getSplitRanges_;
-Object.defineProperty(messages_getSplitRanges_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Manually mark dialog as unread */
 class messages_markDialogUnread_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -13967,12 +12335,6 @@ class messages_markDialogUnread_ extends Function_ {
     }
 }
 exports.messages_markDialogUnread_ = messages_markDialogUnread_;
-Object.defineProperty(messages_markDialogUnread_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get dialogs manually marked as unread */
 class messages_getDialogUnreadMarks_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -13992,12 +12354,6 @@ class messages_getDialogUnreadMarks_ extends Function_ {
     }
 }
 exports.messages_getDialogUnreadMarks_ = messages_getDialogUnreadMarks_;
-Object.defineProperty(messages_getDialogUnreadMarks_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Clear all [drafts](https://core.telegram.org/api/drafts). */
 class messages_clearAllDrafts_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14017,12 +12373,6 @@ class messages_clearAllDrafts_ extends Function_ {
     }
 }
 exports.messages_clearAllDrafts_ = messages_clearAllDrafts_;
-Object.defineProperty(messages_clearAllDrafts_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Pin a message */
 class messages_updatePinnedMessage_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14096,12 +12446,6 @@ class messages_updatePinnedMessage_ extends Function_ {
     }
 }
 exports.messages_updatePinnedMessage_ = messages_updatePinnedMessage_;
-Object.defineProperty(messages_updatePinnedMessage_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Vote in a [poll](https://core.telegram.org/constructor/poll) */
 class messages_sendVote_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14153,12 +12497,6 @@ class messages_sendVote_ extends Function_ {
     }
 }
 exports.messages_sendVote_ = messages_sendVote_;
-Object.defineProperty(messages_sendVote_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get poll results */
 class messages_getPollResults_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14200,12 +12538,6 @@ class messages_getPollResults_ extends Function_ {
     }
 }
 exports.messages_getPollResults_ = messages_getPollResults_;
-Object.defineProperty(messages_getPollResults_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get count of online users in a chat */
 class messages_getOnlines_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14237,12 +12569,6 @@ class messages_getOnlines_ extends Function_ {
     }
 }
 exports.messages_getOnlines_ = messages_getOnlines_;
-Object.defineProperty(messages_getOnlines_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Edit the description of a [group/supergroup/channel](https://core.telegram.org/api/channel). */
 class messages_editChatAbout_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14284,12 +12610,6 @@ class messages_editChatAbout_ extends Function_ {
     }
 }
 exports.messages_editChatAbout_ = messages_editChatAbout_;
-Object.defineProperty(messages_editChatAbout_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Edit the default banned rights of a [channel/supergroup/group](https://core.telegram.org/api/channel). */
 class messages_editChatDefaultBannedRights_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14331,12 +12651,6 @@ class messages_editChatDefaultBannedRights_ extends Function_ {
     }
 }
 exports.messages_editChatDefaultBannedRights_ = messages_editChatDefaultBannedRights_;
-Object.defineProperty(messages_editChatDefaultBannedRights_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get localized [emoji keywords »](https://core.telegram.org/api/custom-emoji#emoji-keywords). */
 class messages_getEmojiKeywords_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14368,12 +12682,6 @@ class messages_getEmojiKeywords_ extends Function_ {
     }
 }
 exports.messages_getEmojiKeywords_ = messages_getEmojiKeywords_;
-Object.defineProperty(messages_getEmojiKeywords_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get changed [emoji keywords »](https://core.telegram.org/api/custom-emoji#emoji-keywords). */
 class messages_getEmojiKeywordsDifference_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14415,12 +12723,6 @@ class messages_getEmojiKeywordsDifference_ extends Function_ {
     }
 }
 exports.messages_getEmojiKeywordsDifference_ = messages_getEmojiKeywordsDifference_;
-Object.defineProperty(messages_getEmojiKeywordsDifference_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain a list of related languages that must be used when fetching [emoji keyword lists »](https://core.telegram.org/api/custom-emoji#emoji-keywords). */
 class messages_getEmojiKeywordsLanguages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14452,12 +12754,6 @@ class messages_getEmojiKeywordsLanguages_ extends Function_ {
     }
 }
 exports.messages_getEmojiKeywordsLanguages_ = messages_getEmojiKeywordsLanguages_;
-Object.defineProperty(messages_getEmojiKeywordsLanguages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns an HTTP URL which can be used to automatically log in into translation platform and suggest new [emoji keywords »](https://core.telegram.org/api/custom-emoji#emoji-keywords). The URL will be valid for 30 seconds after generation. */
 class messages_getEmojiURL_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14489,12 +12785,6 @@ class messages_getEmojiURL_ extends Function_ {
     }
 }
 exports.messages_getEmojiURL_ = messages_getEmojiURL_;
-Object.defineProperty(messages_getEmojiURL_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get the number of results that would be found by a [messages.search](https://core.telegram.org/method/messages.search) call with the same parameters */
 class messages_getSearchCounters_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14558,12 +12848,6 @@ class messages_getSearchCounters_ extends Function_ {
     }
 }
 exports.messages_getSearchCounters_ = messages_getSearchCounters_;
-Object.defineProperty(messages_getSearchCounters_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get more info about a Seamless Telegram Login authorization request, for more info [click here »](https://core.telegram.org/api/url-authorization) */
 class messages_requestUrlAuth_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14627,12 +12911,6 @@ class messages_requestUrlAuth_ extends Function_ {
     }
 }
 exports.messages_requestUrlAuth_ = messages_requestUrlAuth_;
-Object.defineProperty(messages_requestUrlAuth_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Use this to accept a Seamless Telegram Login authorization request, for more info [click here »](https://core.telegram.org/api/url-authorization) */
 class messages_acceptUrlAuth_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14706,12 +12984,6 @@ class messages_acceptUrlAuth_ extends Function_ {
     }
 }
 exports.messages_acceptUrlAuth_ = messages_acceptUrlAuth_;
-Object.defineProperty(messages_acceptUrlAuth_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Should be called after the user hides the [report spam/add as contact bar](https://core.telegram.org/api/action-bar) of a new chat, effectively prevents the user from executing the actions specified in the [action bar »](https://core.telegram.org/api/action-bar). */
 class messages_hidePeerSettingsBar_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14743,12 +13015,6 @@ class messages_hidePeerSettingsBar_ extends Function_ {
     }
 }
 exports.messages_hidePeerSettingsBar_ = messages_hidePeerSettingsBar_;
-Object.defineProperty(messages_hidePeerSettingsBar_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get scheduled messages */
 class messages_getScheduledHistory_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14790,12 +13056,6 @@ class messages_getScheduledHistory_ extends Function_ {
     }
 }
 exports.messages_getScheduledHistory_ = messages_getScheduledHistory_;
-Object.defineProperty(messages_getScheduledHistory_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get scheduled messages */
 class messages_getScheduledMessages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14837,12 +13097,6 @@ class messages_getScheduledMessages_ extends Function_ {
     }
 }
 exports.messages_getScheduledMessages_ = messages_getScheduledMessages_;
-Object.defineProperty(messages_getScheduledMessages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Send scheduled messages right away */
 class messages_sendScheduledMessages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14884,12 +13138,6 @@ class messages_sendScheduledMessages_ extends Function_ {
     }
 }
 exports.messages_sendScheduledMessages_ = messages_sendScheduledMessages_;
-Object.defineProperty(messages_sendScheduledMessages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Delete scheduled messages */
 class messages_deleteScheduledMessages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -14931,12 +13179,6 @@ class messages_deleteScheduledMessages_ extends Function_ {
     }
 }
 exports.messages_deleteScheduledMessages_ = messages_deleteScheduledMessages_;
-Object.defineProperty(messages_deleteScheduledMessages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get poll results for non-anonymous polls */
 class messages_getPollVotes_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15011,12 +13253,6 @@ class messages_getPollVotes_ extends Function_ {
     }
 }
 exports.messages_getPollVotes_ = messages_getPollVotes_;
-Object.defineProperty(messages_getPollVotes_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Apply changes to multiple stickersets */
 class messages_toggleStickerSets_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15080,12 +13316,6 @@ class messages_toggleStickerSets_ extends Function_ {
     }
 }
 exports.messages_toggleStickerSets_ = messages_toggleStickerSets_;
-Object.defineProperty(messages_toggleStickerSets_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get [folders](https://core.telegram.org/api/folders) */
 class messages_getDialogFilters_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15105,12 +13335,6 @@ class messages_getDialogFilters_ extends Function_ {
     }
 }
 exports.messages_getDialogFilters_ = messages_getDialogFilters_;
-Object.defineProperty(messages_getDialogFilters_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get [suggested folders](https://core.telegram.org/api/folders) */
 class messages_getSuggestedDialogFilters_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15130,12 +13354,6 @@ class messages_getSuggestedDialogFilters_ extends Function_ {
     }
 }
 exports.messages_getSuggestedDialogFilters_ = messages_getSuggestedDialogFilters_;
-Object.defineProperty(messages_getSuggestedDialogFilters_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Update [folder](https://core.telegram.org/api/folders) */
 class messages_updateDialogFilter_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15179,12 +13397,6 @@ class messages_updateDialogFilter_ extends Function_ {
     }
 }
 exports.messages_updateDialogFilter_ = messages_updateDialogFilter_;
-Object.defineProperty(messages_updateDialogFilter_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Reorder [folders](https://core.telegram.org/api/folders) */
 class messages_updateDialogFiltersOrder_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15216,12 +13428,6 @@ class messages_updateDialogFiltersOrder_ extends Function_ {
     }
 }
 exports.messages_updateDialogFiltersOrder_ = messages_updateDialogFiltersOrder_;
-Object.defineProperty(messages_updateDialogFiltersOrder_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Method for fetching previously featured stickers */
 class messages_getOldFeaturedStickers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15273,12 +13479,6 @@ class messages_getOldFeaturedStickers_ extends Function_ {
     }
 }
 exports.messages_getOldFeaturedStickers_ = messages_getOldFeaturedStickers_;
-Object.defineProperty(messages_getOldFeaturedStickers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get messages in a reply thread */
 class messages_getReplies_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15390,12 +13590,6 @@ class messages_getReplies_ extends Function_ {
     }
 }
 exports.messages_getReplies_ = messages_getReplies_;
-Object.defineProperty(messages_getReplies_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get [discussion message](https://core.telegram.org/api/threads) from the [associated discussion group](https://core.telegram.org/api/discussion) of a channel to show it on top of the comment section, without actually joining the group */
 class messages_getDiscussionMessage_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15437,12 +13631,6 @@ class messages_getDiscussionMessage_ extends Function_ {
     }
 }
 exports.messages_getDiscussionMessage_ = messages_getDiscussionMessage_;
-Object.defineProperty(messages_getDiscussionMessage_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Mark a [thread](https://core.telegram.org/api/threads) as read */
 class messages_readDiscussion_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15494,12 +13682,6 @@ class messages_readDiscussion_ extends Function_ {
     }
 }
 exports.messages_readDiscussion_ = messages_readDiscussion_;
-Object.defineProperty(messages_readDiscussion_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** [Unpin](https://core.telegram.org/api/pin) all pinned messages */
 class messages_unpinAllMessages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15543,12 +13725,6 @@ class messages_unpinAllMessages_ extends Function_ {
     }
 }
 exports.messages_unpinAllMessages_ = messages_unpinAllMessages_;
-Object.defineProperty(messages_unpinAllMessages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Delete a [chat](https://core.telegram.org/api/channel) */
 class messages_deleteChat_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15580,12 +13756,6 @@ class messages_deleteChat_ extends Function_ {
     }
 }
 exports.messages_deleteChat_ = messages_deleteChat_;
-Object.defineProperty(messages_deleteChat_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Delete the entire phone call history. */
 class messages_deletePhoneCallHistory_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15619,12 +13789,6 @@ class messages_deletePhoneCallHistory_ extends Function_ {
     }
 }
 exports.messages_deletePhoneCallHistory_ = messages_deletePhoneCallHistory_;
-Object.defineProperty(messages_deletePhoneCallHistory_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtains information about a chat export file, generated by a foreign chat app, [click here for more info about imported chats »](https://core.telegram.org/api/import). */
 class messages_checkHistoryImport_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15656,12 +13820,6 @@ class messages_checkHistoryImport_ extends Function_ {
     }
 }
 exports.messages_checkHistoryImport_ = messages_checkHistoryImport_;
-Object.defineProperty(messages_checkHistoryImport_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Import chat history from a foreign chat app into a specific Telegram chat, [click here for more info about imported chats »](https://core.telegram.org/api/import). */
 class messages_initHistoryImport_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15713,12 +13871,6 @@ class messages_initHistoryImport_ extends Function_ {
     }
 }
 exports.messages_initHistoryImport_ = messages_initHistoryImport_;
-Object.defineProperty(messages_initHistoryImport_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Upload a media file associated with an [imported chat, click here for more info »](https://core.telegram.org/api/import). */
 class messages_uploadImportedMedia_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15780,12 +13932,6 @@ class messages_uploadImportedMedia_ extends Function_ {
     }
 }
 exports.messages_uploadImportedMedia_ = messages_uploadImportedMedia_;
-Object.defineProperty(messages_uploadImportedMedia_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Complete the [history import process](https://core.telegram.org/api/import), importing all messages into the chat.
 To be called only after initializing the import with [messages.initHistoryImport](https://core.telegram.org/method/messages.initHistoryImport) and uploading all files using [messages.uploadImportedMedia](https://core.telegram.org/method/messages.uploadImportedMedia). */
 class messages_startHistoryImport_ extends Function_ {
@@ -15828,12 +13974,6 @@ class messages_startHistoryImport_ extends Function_ {
     }
 }
 exports.messages_startHistoryImport_ = messages_startHistoryImport_;
-Object.defineProperty(messages_startHistoryImport_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get info about the chat invites of a specific chat */
 class messages_getExportedChatInvites_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15917,12 +14057,6 @@ class messages_getExportedChatInvites_ extends Function_ {
     }
 }
 exports.messages_getExportedChatInvites_ = messages_getExportedChatInvites_;
-Object.defineProperty(messages_getExportedChatInvites_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get info about a chat invite */
 class messages_getExportedChatInvite_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -15964,12 +14098,6 @@ class messages_getExportedChatInvite_ extends Function_ {
     }
 }
 exports.messages_getExportedChatInvite_ = messages_getExportedChatInvite_;
-Object.defineProperty(messages_getExportedChatInvite_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Edit an exported chat invite */
 class messages_editExportedChatInvite_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -16063,12 +14191,6 @@ class messages_editExportedChatInvite_ extends Function_ {
     }
 }
 exports.messages_editExportedChatInvite_ = messages_editExportedChatInvite_;
-Object.defineProperty(messages_editExportedChatInvite_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Delete all revoked chat invites */
 class messages_deleteRevokedExportedChatInvites_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -16110,12 +14232,6 @@ class messages_deleteRevokedExportedChatInvites_ extends Function_ {
     }
 }
 exports.messages_deleteRevokedExportedChatInvites_ = messages_deleteRevokedExportedChatInvites_;
-Object.defineProperty(messages_deleteRevokedExportedChatInvites_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Delete a chat invite */
 class messages_deleteExportedChatInvite_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -16157,12 +14273,6 @@ class messages_deleteExportedChatInvite_ extends Function_ {
     }
 }
 exports.messages_deleteExportedChatInvite_ = messages_deleteExportedChatInvite_;
-Object.defineProperty(messages_deleteExportedChatInvite_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get info about chat invites generated by admins. */
 class messages_getAdminsWithInvites_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -16194,12 +14304,6 @@ class messages_getAdminsWithInvites_ extends Function_ {
     }
 }
 exports.messages_getAdminsWithInvites_ = messages_getAdminsWithInvites_;
-Object.defineProperty(messages_getAdminsWithInvites_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get info about the users that joined the chat using a specific chat invite */
 class messages_getChatInviteImporters_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -16293,12 +14397,6 @@ class messages_getChatInviteImporters_ extends Function_ {
     }
 }
 exports.messages_getChatInviteImporters_ = messages_getChatInviteImporters_;
-Object.defineProperty(messages_getChatInviteImporters_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set maximum Time-To-Live of all messages in the specified chat */
 class messages_setHistoryTTL_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -16340,12 +14438,6 @@ class messages_setHistoryTTL_ extends Function_ {
     }
 }
 exports.messages_setHistoryTTL_ = messages_setHistoryTTL_;
-Object.defineProperty(messages_setHistoryTTL_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Check whether chat history exported from another chat app can be [imported into a specific Telegram chat, click here for more info »](https://core.telegram.org/api/import). */
 class messages_checkHistoryImportPeer_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -16377,12 +14469,6 @@ class messages_checkHistoryImportPeer_ extends Function_ {
     }
 }
 exports.messages_checkHistoryImportPeer_ = messages_checkHistoryImportPeer_;
-Object.defineProperty(messages_checkHistoryImportPeer_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Change the chat theme of a certain chat */
 class messages_setChatTheme_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -16424,12 +14510,6 @@ class messages_setChatTheme_ extends Function_ {
     }
 }
 exports.messages_setChatTheme_ = messages_setChatTheme_;
-Object.defineProperty(messages_setChatTheme_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get which users read a specific message: only available for groups and supergroups with less than [`chat_read_mark_size_threshold` members](https://core.telegram.org/api/config#chat-read-mark-size-threshold), read receipts will be stored for [`chat_read_mark_expire_period` seconds after the message was sent](https://core.telegram.org/api/config#chat-read-mark-expire-period), see [client configuration for more info »](https://core.telegram.org/api/config#client-configuration). */
 class messages_getMessageReadParticipants_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -16471,12 +14551,6 @@ class messages_getMessageReadParticipants_ extends Function_ {
     }
 }
 exports.messages_getMessageReadParticipants_ = messages_getMessageReadParticipants_;
-Object.defineProperty(messages_getMessageReadParticipants_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns information about the next messages of the specified type in the chat split by days. */
 class messages_getSearchResultsCalendar_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -16550,12 +14624,6 @@ class messages_getSearchResultsCalendar_ extends Function_ {
     }
 }
 exports.messages_getSearchResultsCalendar_ = messages_getSearchResultsCalendar_;
-Object.defineProperty(messages_getSearchResultsCalendar_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns sparse positions of messages of the specified type in the chat to be used for shared media scroll implementation. */
 class messages_getSearchResultsPositions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -16629,12 +14697,6 @@ class messages_getSearchResultsPositions_ extends Function_ {
     }
 }
 exports.messages_getSearchResultsPositions_ = messages_getSearchResultsPositions_;
-Object.defineProperty(messages_getSearchResultsPositions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Dismiss or approve a chat [join request](https://core.telegram.org/api/invites#join-requests) related to a specific chat or channel. */
 class messages_hideChatJoinRequest_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -16688,12 +14750,6 @@ class messages_hideChatJoinRequest_ extends Function_ {
     }
 }
 exports.messages_hideChatJoinRequest_ = messages_hideChatJoinRequest_;
-Object.defineProperty(messages_hideChatJoinRequest_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Dismiss or approve all [join requests](https://core.telegram.org/api/invites#join-requests) related to a specific chat or channel. */
 class messages_hideAllChatJoinRequests_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -16747,12 +14803,6 @@ class messages_hideAllChatJoinRequests_ extends Function_ {
     }
 }
 exports.messages_hideAllChatJoinRequests_ = messages_hideAllChatJoinRequests_;
-Object.defineProperty(messages_hideAllChatJoinRequests_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Enable or disable [content protection](https://telegram.org/blog/protected-content-delete-by-date-and-more) on a channel or chat */
 class messages_toggleNoForwards_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -16794,12 +14844,6 @@ class messages_toggleNoForwards_ extends Function_ {
     }
 }
 exports.messages_toggleNoForwards_ = messages_toggleNoForwards_;
-Object.defineProperty(messages_toggleNoForwards_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Change the default peer that should be used when sending messages, reactions, poll votes to a specific group */
 class messages_saveDefaultSendAs_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -16841,12 +14885,6 @@ class messages_saveDefaultSendAs_ extends Function_ {
     }
 }
 exports.messages_saveDefaultSendAs_ = messages_saveDefaultSendAs_;
-Object.defineProperty(messages_saveDefaultSendAs_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** React to message. */
 class messages_sendReaction_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -16920,12 +14958,6 @@ class messages_sendReaction_ extends Function_ {
     }
 }
 exports.messages_sendReaction_ = messages_sendReaction_;
-Object.defineProperty(messages_sendReaction_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get [message reactions »](https://core.telegram.org/api/reactions) */
 class messages_getMessagesReactions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -16967,12 +14999,6 @@ class messages_getMessagesReactions_ extends Function_ {
     }
 }
 exports.messages_getMessagesReactions_ = messages_getMessagesReactions_;
-Object.defineProperty(messages_getMessagesReactions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get [message reaction](https://core.telegram.org/api/reactions) list, along with the sender of each reaction. */
 class messages_getMessageReactionsList_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -17046,12 +15072,6 @@ class messages_getMessageReactionsList_ extends Function_ {
     }
 }
 exports.messages_getMessageReactionsList_ = messages_getMessageReactionsList_;
-Object.defineProperty(messages_getMessageReactionsList_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Change the set of [message reactions »](https://core.telegram.org/api/reactions) that can be used in a certain group, supergroup or channel */
 class messages_setChatAvailableReactions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -17093,12 +15113,6 @@ class messages_setChatAvailableReactions_ extends Function_ {
     }
 }
 exports.messages_setChatAvailableReactions_ = messages_setChatAvailableReactions_;
-Object.defineProperty(messages_setChatAvailableReactions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain available [message reactions »](https://core.telegram.org/api/reactions) */
 class messages_getAvailableReactions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -17130,12 +15144,6 @@ class messages_getAvailableReactions_ extends Function_ {
     }
 }
 exports.messages_getAvailableReactions_ = messages_getAvailableReactions_;
-Object.defineProperty(messages_getAvailableReactions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Change default emoji reaction to use in the quick reaction menu: the value is synced across devices and can be fetched using [help.getConfig, `reactions_default` field](https://core.telegram.org/method/help.getConfig). */
 class messages_setDefaultReaction_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -17167,12 +15175,6 @@ class messages_setDefaultReaction_ extends Function_ {
     }
 }
 exports.messages_setDefaultReaction_ = messages_setDefaultReaction_;
-Object.defineProperty(messages_setDefaultReaction_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Translate a given text. */
 class messages_translateText_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -17236,12 +15238,6 @@ class messages_translateText_ extends Function_ {
     }
 }
 exports.messages_translateText_ = messages_translateText_;
-Object.defineProperty(messages_translateText_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get unread reactions to messages you sent */
 class messages_getUnreadReactions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -17335,12 +15331,6 @@ class messages_getUnreadReactions_ extends Function_ {
     }
 }
 exports.messages_getUnreadReactions_ = messages_getUnreadReactions_;
-Object.defineProperty(messages_getUnreadReactions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Mark [message reactions »](https://core.telegram.org/api/reactions) as read */
 class messages_readReactions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -17384,12 +15374,6 @@ class messages_readReactions_ extends Function_ {
     }
 }
 exports.messages_readReactions_ = messages_readReactions_;
-Object.defineProperty(messages_readReactions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** View and search recently sent media.
 This method does not support pagination. */
 class messages_searchSentMedia_ extends Function_ {
@@ -17442,12 +15426,6 @@ class messages_searchSentMedia_ extends Function_ {
     }
 }
 exports.messages_searchSentMedia_ = messages_searchSentMedia_;
-Object.defineProperty(messages_searchSentMedia_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns installed attachment menu [bot mini apps »](https://core.telegram.org/api/bots/attach) */
 class messages_getAttachMenuBots_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -17479,12 +15457,6 @@ class messages_getAttachMenuBots_ extends Function_ {
     }
 }
 exports.messages_getAttachMenuBots_ = messages_getAttachMenuBots_;
-Object.defineProperty(messages_getAttachMenuBots_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns attachment menu entry for a [bot mini app that can be launched from the attachment menu »](https://core.telegram.org/api/bots/attach) */
 class messages_getAttachMenuBot_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -17516,12 +15488,6 @@ class messages_getAttachMenuBot_ extends Function_ {
     }
 }
 exports.messages_getAttachMenuBot_ = messages_getAttachMenuBot_;
-Object.defineProperty(messages_getAttachMenuBot_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Enable or disable [web bot attachment menu »](https://core.telegram.org/api/bots/attach) */
 class messages_toggleBotInAttachMenu_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -17575,12 +15541,6 @@ class messages_toggleBotInAttachMenu_ extends Function_ {
     }
 }
 exports.messages_toggleBotInAttachMenu_ = messages_toggleBotInAttachMenu_;
-Object.defineProperty(messages_toggleBotInAttachMenu_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Open a [bot mini app](https://core.telegram.org/bots/webapps), sending over user information after user confirmation. */
 class messages_requestWebView_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -17704,12 +15664,6 @@ class messages_requestWebView_ extends Function_ {
     }
 }
 exports.messages_requestWebView_ = messages_requestWebView_;
-Object.defineProperty(messages_requestWebView_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Indicate to the server (from the user side) that the user is still using a web app. */
 class messages_prolongWebView_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -17793,12 +15747,6 @@ class messages_prolongWebView_ extends Function_ {
     }
 }
 exports.messages_prolongWebView_ = messages_prolongWebView_;
-Object.defineProperty(messages_prolongWebView_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Open a [bot mini app](https://core.telegram.org/api/bots/webapps). */
 class messages_requestSimpleWebView_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -17892,12 +15840,6 @@ class messages_requestSimpleWebView_ extends Function_ {
     }
 }
 exports.messages_requestSimpleWebView_ = messages_requestSimpleWebView_;
-Object.defineProperty(messages_requestSimpleWebView_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Terminate webview interaction started with [messages.requestWebView](https://core.telegram.org/method/messages.requestWebView), sending the specified message to the chat on behalf of the user. */
 class messages_sendWebViewResultMessage_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -17939,12 +15881,6 @@ class messages_sendWebViewResultMessage_ extends Function_ {
     }
 }
 exports.messages_sendWebViewResultMessage_ = messages_sendWebViewResultMessage_;
-Object.defineProperty(messages_sendWebViewResultMessage_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Used by the user to relay data from an opened [reply keyboard bot mini app](https://core.telegram.org/api/bots/webapps) to the bot that owns it. */
 class messages_sendWebViewData_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18006,12 +15942,6 @@ class messages_sendWebViewData_ extends Function_ {
     }
 }
 exports.messages_sendWebViewData_ = messages_sendWebViewData_;
-Object.defineProperty(messages_sendWebViewData_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** [Transcribe voice message](https://core.telegram.org/api/transcribe) */
 class messages_transcribeAudio_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18053,12 +15983,6 @@ class messages_transcribeAudio_ extends Function_ {
     }
 }
 exports.messages_transcribeAudio_ = messages_transcribeAudio_;
-Object.defineProperty(messages_transcribeAudio_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Rate [transcribed voice message](https://core.telegram.org/api/transcribe) */
 class messages_rateTranscribedAudio_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18120,12 +16044,6 @@ class messages_rateTranscribedAudio_ extends Function_ {
     }
 }
 exports.messages_rateTranscribedAudio_ = messages_rateTranscribedAudio_;
-Object.defineProperty(messages_rateTranscribedAudio_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Fetch [custom emoji stickers »](https://core.telegram.org/api/custom-emoji). */
 class messages_getCustomEmojiDocuments_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18157,12 +16075,6 @@ class messages_getCustomEmojiDocuments_ extends Function_ {
     }
 }
 exports.messages_getCustomEmojiDocuments_ = messages_getCustomEmojiDocuments_;
-Object.defineProperty(messages_getCustomEmojiDocuments_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Gets the list of currently installed [custom emoji stickersets](https://core.telegram.org/api/custom-emoji). */
 class messages_getEmojiStickers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18194,12 +16106,6 @@ class messages_getEmojiStickers_ extends Function_ {
     }
 }
 exports.messages_getEmojiStickers_ = messages_getEmojiStickers_;
-Object.defineProperty(messages_getEmojiStickers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Gets featured custom emoji stickersets. */
 class messages_getFeaturedEmojiStickers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18231,12 +16137,6 @@ class messages_getFeaturedEmojiStickers_ extends Function_ {
     }
 }
 exports.messages_getFeaturedEmojiStickers_ = messages_getFeaturedEmojiStickers_;
-Object.defineProperty(messages_getFeaturedEmojiStickers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Report a [message reaction](https://core.telegram.org/api/reactions) */
 class messages_reportReaction_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18288,12 +16188,6 @@ class messages_reportReaction_ extends Function_ {
     }
 }
 exports.messages_reportReaction_ = messages_reportReaction_;
-Object.defineProperty(messages_reportReaction_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Got popular [message reactions](https://core.telegram.org/api/reactions) */
 class messages_getTopReactions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18335,12 +16229,6 @@ class messages_getTopReactions_ extends Function_ {
     }
 }
 exports.messages_getTopReactions_ = messages_getTopReactions_;
-Object.defineProperty(messages_getTopReactions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get recently used [message reactions](https://core.telegram.org/api/reactions) */
 class messages_getRecentReactions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18382,12 +16270,6 @@ class messages_getRecentReactions_ extends Function_ {
     }
 }
 exports.messages_getRecentReactions_ = messages_getRecentReactions_;
-Object.defineProperty(messages_getRecentReactions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Clear recently used [message reactions](https://core.telegram.org/api/reactions) */
 class messages_clearRecentReactions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18407,12 +16289,6 @@ class messages_clearRecentReactions_ extends Function_ {
     }
 }
 exports.messages_clearRecentReactions_ = messages_clearRecentReactions_;
-Object.defineProperty(messages_clearRecentReactions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get information about extended media */
 class messages_getExtendedMedia_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18454,12 +16330,6 @@ class messages_getExtendedMedia_ extends Function_ {
     }
 }
 exports.messages_getExtendedMedia_ = messages_getExtendedMedia_;
-Object.defineProperty(messages_getExtendedMedia_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Changes the default value of the Time-To-Live setting, applied to all new chats. */
 class messages_setDefaultHistoryTTL_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18491,12 +16361,6 @@ class messages_setDefaultHistoryTTL_ extends Function_ {
     }
 }
 exports.messages_setDefaultHistoryTTL_ = messages_setDefaultHistoryTTL_;
-Object.defineProperty(messages_setDefaultHistoryTTL_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Gets the default value of the Time-To-Live setting, applied to all new chats. */
 class messages_getDefaultHistoryTTL_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18516,12 +16380,6 @@ class messages_getDefaultHistoryTTL_ extends Function_ {
     }
 }
 exports.messages_getDefaultHistoryTTL_ = messages_getDefaultHistoryTTL_;
-Object.defineProperty(messages_getDefaultHistoryTTL_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Send one or more chosen peers, as requested by a [keyboardButtonRequestPeer](https://core.telegram.org/constructor/keyboardButtonRequestPeer) button. */
 class messages_sendBotRequestedPeer_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18583,12 +16441,6 @@ class messages_sendBotRequestedPeer_ extends Function_ {
     }
 }
 exports.messages_sendBotRequestedPeer_ = messages_sendBotRequestedPeer_;
-Object.defineProperty(messages_sendBotRequestedPeer_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Represents a list of [emoji categories](https://core.telegram.org/api/custom-emoji#emoji-categories), to be used when selecting [custom emojis](https://core.telegram.org/api/custom-emoji). */
 class messages_getEmojiGroups_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18620,12 +16472,6 @@ class messages_getEmojiGroups_ extends Function_ {
     }
 }
 exports.messages_getEmojiGroups_ = messages_getEmojiGroups_;
-Object.defineProperty(messages_getEmojiGroups_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Represents a list of [emoji categories](https://core.telegram.org/api/custom-emoji#emoji-categories), to be used when selecting custom emojis to set as [custom emoji status](https://core.telegram.org/api). */
 class messages_getEmojiStatusGroups_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18657,12 +16503,6 @@ class messages_getEmojiStatusGroups_ extends Function_ {
     }
 }
 exports.messages_getEmojiStatusGroups_ = messages_getEmojiStatusGroups_;
-Object.defineProperty(messages_getEmojiStatusGroups_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Represents a list of [emoji categories](https://core.telegram.org/api/custom-emoji#emoji-categories), to be used when selecting custom emojis to set as [profile picture](https://core.telegram.org/api/files#sticker-profile-pictures). */
 class messages_getEmojiProfilePhotoGroups_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18694,12 +16534,6 @@ class messages_getEmojiProfilePhotoGroups_ extends Function_ {
     }
 }
 exports.messages_getEmojiProfilePhotoGroups_ = messages_getEmojiProfilePhotoGroups_;
-Object.defineProperty(messages_getEmojiProfilePhotoGroups_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Look for [custom emojis](https://core.telegram.org/api/custom-emoji) associated to a UTF8 emoji */
 class messages_searchCustomEmoji_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18741,12 +16575,6 @@ class messages_searchCustomEmoji_ extends Function_ {
     }
 }
 exports.messages_searchCustomEmoji_ = messages_searchCustomEmoji_;
-Object.defineProperty(messages_searchCustomEmoji_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Show or hide the [real-time chat translation popup](https://core.telegram.org/api/translation) for a certain chat */
 class messages_togglePeerTranslations_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18790,12 +16618,6 @@ class messages_togglePeerTranslations_ extends Function_ {
     }
 }
 exports.messages_togglePeerTranslations_ = messages_togglePeerTranslations_;
-Object.defineProperty(messages_togglePeerTranslations_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain information about a [direct link Mini App](https://core.telegram.org/api/bots/webapps#direct-link-mini-apps) */
 class messages_getBotApp_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18837,12 +16659,6 @@ class messages_getBotApp_ extends Function_ {
     }
 }
 exports.messages_getBotApp_ = messages_getBotApp_;
-Object.defineProperty(messages_getBotApp_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Open a [bot mini app](https://core.telegram.org/bots/webapps) from a [direct Mini App deep link](https://core.telegram.org/api/links#direct-mini-app-links), sending over user information after user confirmation. */
 class messages_requestAppWebView_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -18926,12 +16742,6 @@ class messages_requestAppWebView_ extends Function_ {
     }
 }
 exports.messages_requestAppWebView_ = messages_requestAppWebView_;
-Object.defineProperty(messages_requestAppWebView_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set a custom [wallpaper »](https://core.telegram.org/api/wallpapers) in a specific private chat with another user. */
 class messages_setChatWallPaper_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -19015,12 +16825,6 @@ class messages_setChatWallPaper_ extends Function_ {
     }
 }
 exports.messages_setChatWallPaper_ = messages_setChatWallPaper_;
-Object.defineProperty(messages_setChatWallPaper_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Search for [custom emoji stickersets »](https://core.telegram.org/api/custom-emoji) */
 class messages_searchEmojiStickerSets_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -19074,12 +16878,6 @@ class messages_searchEmojiStickerSets_ extends Function_ {
     }
 }
 exports.messages_searchEmojiStickerSets_ = messages_searchEmojiStickerSets_;
-Object.defineProperty(messages_searchEmojiStickerSets_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns the current saved dialog list, see [here »](https://core.telegram.org/api/saved-messages) for more info. */
 class messages_getSavedDialogs_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -19163,12 +16961,6 @@ class messages_getSavedDialogs_ extends Function_ {
     }
 }
 exports.messages_getSavedDialogs_ = messages_getSavedDialogs_;
-Object.defineProperty(messages_getSavedDialogs_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns [saved messages »](https://core.telegram.org/api/saved-messages) forwarded from a specific peer */
 class messages_getSavedHistory_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -19270,12 +17062,6 @@ class messages_getSavedHistory_ extends Function_ {
     }
 }
 exports.messages_getSavedHistory_ = messages_getSavedHistory_;
-Object.defineProperty(messages_getSavedHistory_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Deletes messages forwarded from a specific peer to [saved messages »](https://core.telegram.org/api/saved-messages). */
 class messages_deleteSavedHistory_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -19339,12 +17125,6 @@ class messages_deleteSavedHistory_ extends Function_ {
     }
 }
 exports.messages_deleteSavedHistory_ = messages_deleteSavedHistory_;
-Object.defineProperty(messages_deleteSavedHistory_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get pinned [saved dialogs, see here »](https://core.telegram.org/api/saved-messages) for more info. */
 class messages_getPinnedSavedDialogs_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -19364,12 +17144,6 @@ class messages_getPinnedSavedDialogs_ extends Function_ {
     }
 }
 exports.messages_getPinnedSavedDialogs_ = messages_getPinnedSavedDialogs_;
-Object.defineProperty(messages_getPinnedSavedDialogs_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Pin or unpin a [saved message dialog »](https://core.telegram.org/api/saved-messages). */
 class messages_toggleSavedDialogPin_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -19413,12 +17187,6 @@ class messages_toggleSavedDialogPin_ extends Function_ {
     }
 }
 exports.messages_toggleSavedDialogPin_ = messages_toggleSavedDialogPin_;
-Object.defineProperty(messages_toggleSavedDialogPin_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Reorder pinned [saved message dialogs »](https://core.telegram.org/api/saved-messages). */
 class messages_reorderPinnedSavedDialogs_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -19462,12 +17230,6 @@ class messages_reorderPinnedSavedDialogs_ extends Function_ {
     }
 }
 exports.messages_reorderPinnedSavedDialogs_ = messages_reorderPinnedSavedDialogs_;
-Object.defineProperty(messages_reorderPinnedSavedDialogs_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class messages_getSavedReactionTags_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x3637E05B;
@@ -19508,12 +17270,6 @@ class messages_getSavedReactionTags_ extends Function_ {
     }
 }
 exports.messages_getSavedReactionTags_ = messages_getSavedReactionTags_;
-Object.defineProperty(messages_getSavedReactionTags_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class messages_updateSavedReactionTag_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x60297DEC;
@@ -19554,12 +17310,6 @@ class messages_updateSavedReactionTag_ extends Function_ {
     }
 }
 exports.messages_updateSavedReactionTag_ = messages_updateSavedReactionTag_;
-Object.defineProperty(messages_updateSavedReactionTag_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class messages_getDefaultTagReactions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xBDF93428;
@@ -19589,12 +17339,6 @@ class messages_getDefaultTagReactions_ extends Function_ {
     }
 }
 exports.messages_getDefaultTagReactions_ = messages_getDefaultTagReactions_;
-Object.defineProperty(messages_getDefaultTagReactions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class messages_getOutboxReadDate_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x8C4BFE5D;
@@ -19633,12 +17377,6 @@ class messages_getOutboxReadDate_ extends Function_ {
     }
 }
 exports.messages_getOutboxReadDate_ = messages_getOutboxReadDate_;
-Object.defineProperty(messages_getOutboxReadDate_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class messages_getQuickReplies_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xD483F2A8;
@@ -19668,12 +17406,6 @@ class messages_getQuickReplies_ extends Function_ {
     }
 }
 exports.messages_getQuickReplies_ = messages_getQuickReplies_;
-Object.defineProperty(messages_getQuickReplies_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class messages_reorderQuickReplies_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x60331907;
@@ -19703,12 +17435,6 @@ class messages_reorderQuickReplies_ extends Function_ {
     }
 }
 exports.messages_reorderQuickReplies_ = messages_reorderQuickReplies_;
-Object.defineProperty(messages_reorderQuickReplies_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class messages_checkQuickReplyShortcut_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xF1D0FBD3;
@@ -19738,12 +17464,6 @@ class messages_checkQuickReplyShortcut_ extends Function_ {
     }
 }
 exports.messages_checkQuickReplyShortcut_ = messages_checkQuickReplyShortcut_;
-Object.defineProperty(messages_checkQuickReplyShortcut_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class messages_editQuickReplyShortcut_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x5C003CEF;
@@ -19782,12 +17502,6 @@ class messages_editQuickReplyShortcut_ extends Function_ {
     }
 }
 exports.messages_editQuickReplyShortcut_ = messages_editQuickReplyShortcut_;
-Object.defineProperty(messages_editQuickReplyShortcut_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class messages_deleteQuickReplyShortcut_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x3CC04740;
@@ -19817,12 +17531,6 @@ class messages_deleteQuickReplyShortcut_ extends Function_ {
     }
 }
 exports.messages_deleteQuickReplyShortcut_ = messages_deleteQuickReplyShortcut_;
-Object.defineProperty(messages_deleteQuickReplyShortcut_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class messages_getQuickReplyMessages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x94A495C3;
@@ -19872,12 +17580,6 @@ class messages_getQuickReplyMessages_ extends Function_ {
     }
 }
 exports.messages_getQuickReplyMessages_ = messages_getQuickReplyMessages_;
-Object.defineProperty(messages_getQuickReplyMessages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class messages_sendQuickReplyMessages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x6C750DE1;
@@ -19934,12 +17636,6 @@ class messages_sendQuickReplyMessages_ extends Function_ {
     }
 }
 exports.messages_sendQuickReplyMessages_ = messages_sendQuickReplyMessages_;
-Object.defineProperty(messages_sendQuickReplyMessages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class messages_deleteQuickReplyMessages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xE105E910;
@@ -19978,12 +17674,6 @@ class messages_deleteQuickReplyMessages_ extends Function_ {
     }
 }
 exports.messages_deleteQuickReplyMessages_ = messages_deleteQuickReplyMessages_;
-Object.defineProperty(messages_deleteQuickReplyMessages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class messages_toggleDialogFilterTags_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xFD2DDA49;
@@ -20013,12 +17703,6 @@ class messages_toggleDialogFilterTags_ extends Function_ {
     }
 }
 exports.messages_toggleDialogFilterTags_ = messages_toggleDialogFilterTags_;
-Object.defineProperty(messages_toggleDialogFilterTags_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class messages_getMyStickers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xD0B5E1FC;
@@ -20057,12 +17741,6 @@ class messages_getMyStickers_ extends Function_ {
     }
 }
 exports.messages_getMyStickers_ = messages_getMyStickers_;
-Object.defineProperty(messages_getMyStickers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns a current state of updates. */
 class updates_getState_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -20082,12 +17760,6 @@ class updates_getState_ extends Function_ {
     }
 }
 exports.updates_getState_ = updates_getState_;
-Object.defineProperty(updates_getState_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get new [updates](https://core.telegram.org/api/updates). */
 class updates_getDifference_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -20173,12 +17845,6 @@ class updates_getDifference_ extends Function_ {
     }
 }
 exports.updates_getDifference_ = updates_getDifference_;
-Object.defineProperty(updates_getDifference_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns the difference between the current state of updates of a certain channel and transmitted. */
 class updates_getChannelDifference_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -20253,12 +17919,6 @@ class updates_getChannelDifference_ extends Function_ {
     }
 }
 exports.updates_getChannelDifference_ = updates_getChannelDifference_;
-Object.defineProperty(updates_getChannelDifference_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Installs a previously uploaded photo as a profile photo. */
 class photos_updateProfilePhoto_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -20312,12 +17972,6 @@ class photos_updateProfilePhoto_ extends Function_ {
     }
 }
 exports.photos_updateProfilePhoto_ = photos_updateProfilePhoto_;
-Object.defineProperty(photos_updateProfilePhoto_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Updates current user profile photo. */
 class photos_uploadProfilePhoto_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -20401,12 +18055,6 @@ class photos_uploadProfilePhoto_ extends Function_ {
     }
 }
 exports.photos_uploadProfilePhoto_ = photos_uploadProfilePhoto_;
-Object.defineProperty(photos_uploadProfilePhoto_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Deletes profile photos. The method returns a list of successfully deleted photo IDs. */
 class photos_deletePhotos_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -20438,12 +18086,6 @@ class photos_deletePhotos_ extends Function_ {
     }
 }
 exports.photos_deletePhotos_ = photos_deletePhotos_;
-Object.defineProperty(photos_deletePhotos_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns the list of user photos. */
 class photos_getUserPhotos_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -20505,12 +18147,6 @@ class photos_getUserPhotos_ extends Function_ {
     }
 }
 exports.photos_getUserPhotos_ = photos_getUserPhotos_;
-Object.defineProperty(photos_getUserPhotos_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Upload a custom profile picture for a contact, or suggest a new profile picture to a contact. */
 class photos_uploadContactProfilePhoto_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -20604,12 +18240,6 @@ class photos_uploadContactProfilePhoto_ extends Function_ {
     }
 }
 exports.photos_uploadContactProfilePhoto_ = photos_uploadContactProfilePhoto_;
-Object.defineProperty(photos_uploadContactProfilePhoto_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Saves a part of file for further sending to one of the methods. */
 class upload_saveFilePart_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -20661,12 +18291,6 @@ class upload_saveFilePart_ extends Function_ {
     }
 }
 exports.upload_saveFilePart_ = upload_saveFilePart_;
-Object.defineProperty(upload_saveFilePart_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns content of a whole file or its part. */
 class upload_getFile_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -20740,12 +18364,6 @@ class upload_getFile_ extends Function_ {
     }
 }
 exports.upload_getFile_ = upload_getFile_;
-Object.defineProperty(upload_getFile_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Saves a part of a large file (over 10 MB in size) to be later passed to one of the methods. */
 class upload_saveBigFilePart_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -20807,12 +18425,6 @@ class upload_saveBigFilePart_ extends Function_ {
     }
 }
 exports.upload_saveBigFilePart_ = upload_saveBigFilePart_;
-Object.defineProperty(upload_saveBigFilePart_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns content of a web file, by proxying the request through telegram, see the [webfile docs for more info](https://core.telegram.org/api/files#downloading-webfiles). */
 class upload_getWebFile_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -20864,12 +18476,6 @@ class upload_getWebFile_ extends Function_ {
     }
 }
 exports.upload_getWebFile_ = upload_getWebFile_;
-Object.defineProperty(upload_getWebFile_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Download a [CDN](https://core.telegram.org/cdn) file. */
 class upload_getCdnFile_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -20921,12 +18527,6 @@ class upload_getCdnFile_ extends Function_ {
     }
 }
 exports.upload_getCdnFile_ = upload_getCdnFile_;
-Object.defineProperty(upload_getCdnFile_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Request a reupload of a certain file to a [CDN DC](https://core.telegram.org/cdn). */
 class upload_reuploadCdnFile_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -20968,12 +18568,6 @@ class upload_reuploadCdnFile_ extends Function_ {
     }
 }
 exports.upload_reuploadCdnFile_ = upload_reuploadCdnFile_;
-Object.defineProperty(upload_reuploadCdnFile_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get SHA256 hashes for verifying downloaded [CDN](https://core.telegram.org/cdn) files */
 class upload_getCdnFileHashes_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21015,12 +18609,6 @@ class upload_getCdnFileHashes_ extends Function_ {
     }
 }
 exports.upload_getCdnFileHashes_ = upload_getCdnFileHashes_;
-Object.defineProperty(upload_getCdnFileHashes_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get SHA256 hashes for verifying downloaded files */
 class upload_getFileHashes_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21062,12 +18650,6 @@ class upload_getFileHashes_ extends Function_ {
     }
 }
 exports.upload_getFileHashes_ = upload_getFileHashes_;
-Object.defineProperty(upload_getFileHashes_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns current configuration, including data center configuration. */
 class help_getConfig_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21087,12 +18669,6 @@ class help_getConfig_ extends Function_ {
     }
 }
 exports.help_getConfig_ = help_getConfig_;
-Object.defineProperty(help_getConfig_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns info on data center nearest to the user. */
 class help_getNearestDc_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21112,12 +18688,6 @@ class help_getNearestDc_ extends Function_ {
     }
 }
 exports.help_getNearestDc_ = help_getNearestDc_;
-Object.defineProperty(help_getNearestDc_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns information on update availability for the current application. */
 class help_getAppUpdate_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21149,12 +18719,6 @@ class help_getAppUpdate_ extends Function_ {
     }
 }
 exports.help_getAppUpdate_ = help_getAppUpdate_;
-Object.defineProperty(help_getAppUpdate_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns localized text of a text message with an invitation. */
 class help_getInviteText_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21174,12 +18738,6 @@ class help_getInviteText_ extends Function_ {
     }
 }
 exports.help_getInviteText_ = help_getInviteText_;
-Object.defineProperty(help_getInviteText_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns the support user for the "ask a question" feature. */
 class help_getSupport_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21199,12 +18757,6 @@ class help_getSupport_ extends Function_ {
     }
 }
 exports.help_getSupport_ = help_getSupport_;
-Object.defineProperty(help_getSupport_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Informs the server about the number of pending bot updates if they haven't been processed for a long time; for bots only */
 class help_setBotUpdatesStatus_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21246,12 +18798,6 @@ class help_setBotUpdatesStatus_ extends Function_ {
     }
 }
 exports.help_setBotUpdatesStatus_ = help_setBotUpdatesStatus_;
-Object.defineProperty(help_setBotUpdatesStatus_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get configuration for [CDN](https://core.telegram.org/cdn) file downloads. */
 class help_getCdnConfig_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21271,12 +18817,6 @@ class help_getCdnConfig_ extends Function_ {
     }
 }
 exports.help_getCdnConfig_ = help_getCdnConfig_;
-Object.defineProperty(help_getCdnConfig_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get recently used `t.me` links. */
 class help_getRecentMeUrls_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21308,12 +18848,6 @@ class help_getRecentMeUrls_ extends Function_ {
     }
 }
 exports.help_getRecentMeUrls_ = help_getRecentMeUrls_;
-Object.defineProperty(help_getRecentMeUrls_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Look for updates of telegram's terms of service */
 class help_getTermsOfServiceUpdate_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21333,12 +18867,6 @@ class help_getTermsOfServiceUpdate_ extends Function_ {
     }
 }
 exports.help_getTermsOfServiceUpdate_ = help_getTermsOfServiceUpdate_;
-Object.defineProperty(help_getTermsOfServiceUpdate_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Accept the new terms of service */
 class help_acceptTermsOfService_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21370,12 +18898,6 @@ class help_acceptTermsOfService_ extends Function_ {
     }
 }
 exports.help_acceptTermsOfService_ = help_acceptTermsOfService_;
-Object.defineProperty(help_acceptTermsOfService_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get info about an unsupported deep link, see [here for more info »](https://core.telegram.org/api/links#unsupported-links). */
 class help_getDeepLinkInfo_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21407,12 +18929,6 @@ class help_getDeepLinkInfo_ extends Function_ {
     }
 }
 exports.help_getDeepLinkInfo_ = help_getDeepLinkInfo_;
-Object.defineProperty(help_getDeepLinkInfo_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get app-specific configuration, see [client configuration](https://core.telegram.org/api/config#client-configuration) for more info on the result. */
 class help_getAppConfig_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21444,12 +18960,6 @@ class help_getAppConfig_ extends Function_ {
     }
 }
 exports.help_getAppConfig_ = help_getAppConfig_;
-Object.defineProperty(help_getAppConfig_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Saves logs of application on the server. */
 class help_saveAppLog_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21481,12 +18991,6 @@ class help_saveAppLog_ extends Function_ {
     }
 }
 exports.help_saveAppLog_ = help_saveAppLog_;
-Object.defineProperty(help_saveAppLog_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get [passport](https://core.telegram.org/passport) configuration */
 class help_getPassportConfig_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21518,12 +19022,6 @@ class help_getPassportConfig_ extends Function_ {
     }
 }
 exports.help_getPassportConfig_ = help_getPassportConfig_;
-Object.defineProperty(help_getPassportConfig_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get localized name of the telegram support user */
 class help_getSupportName_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21543,12 +19041,6 @@ class help_getSupportName_ extends Function_ {
     }
 }
 exports.help_getSupportName_ = help_getSupportName_;
-Object.defineProperty(help_getSupportName_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Can only be used by TSF members to obtain internal information. */
 class help_getUserInfo_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21580,12 +19072,6 @@ class help_getUserInfo_ extends Function_ {
     }
 }
 exports.help_getUserInfo_ = help_getUserInfo_;
-Object.defineProperty(help_getUserInfo_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Internal use */
 class help_editUserInfo_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21637,12 +19123,6 @@ class help_editUserInfo_ extends Function_ {
     }
 }
 exports.help_editUserInfo_ = help_editUserInfo_;
-Object.defineProperty(help_editUserInfo_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get MTProxy/Public Service Announcement information */
 class help_getPromoData_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21662,12 +19142,6 @@ class help_getPromoData_ extends Function_ {
     }
 }
 exports.help_getPromoData_ = help_getPromoData_;
-Object.defineProperty(help_getPromoData_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Hide MTProxy/Public Service Announcement information */
 class help_hidePromoData_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21699,12 +19173,6 @@ class help_hidePromoData_ extends Function_ {
     }
 }
 exports.help_hidePromoData_ = help_hidePromoData_;
-Object.defineProperty(help_hidePromoData_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Dismiss a [suggestion, see here for more info »](https://core.telegram.org/api/config#suggestions). */
 class help_dismissSuggestion_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21746,12 +19214,6 @@ class help_dismissSuggestion_ extends Function_ {
     }
 }
 exports.help_dismissSuggestion_ = help_dismissSuggestion_;
-Object.defineProperty(help_dismissSuggestion_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get name, ISO code, localized name and phone codes/patterns of all available countries */
 class help_getCountriesList_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21793,12 +19255,6 @@ class help_getCountriesList_ extends Function_ {
     }
 }
 exports.help_getCountriesList_ = help_getCountriesList_;
-Object.defineProperty(help_getCountriesList_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get Telegram Premium promotion information */
 class help_getPremiumPromo_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21818,12 +19274,6 @@ class help_getPremiumPromo_ extends Function_ {
     }
 }
 exports.help_getPremiumPromo_ = help_getPremiumPromo_;
-Object.defineProperty(help_getPremiumPromo_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get the set of [accent color palettes »](https://core.telegram.org/api/colors) that can be used for message accents. */
 class help_getPeerColors_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21855,12 +19305,6 @@ class help_getPeerColors_ extends Function_ {
     }
 }
 exports.help_getPeerColors_ = help_getPeerColors_;
-Object.defineProperty(help_getPeerColors_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get the set of [accent color palettes »](https://core.telegram.org/api/colors) that can be used in profile page backgrounds. */
 class help_getPeerProfileColors_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21892,12 +19336,6 @@ class help_getPeerProfileColors_ extends Function_ {
     }
 }
 exports.help_getPeerProfileColors_ = help_getPeerProfileColors_;
-Object.defineProperty(help_getPeerProfileColors_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class help_getTimezonesList_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x49B30240;
@@ -21927,12 +19365,6 @@ class help_getTimezonesList_ extends Function_ {
     }
 }
 exports.help_getTimezonesList_ = help_getTimezonesList_;
-Object.defineProperty(help_getTimezonesList_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Mark [channel/supergroup](https://core.telegram.org/api/channel) history as read */
 class channels_readHistory_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -21974,12 +19406,6 @@ class channels_readHistory_ extends Function_ {
     }
 }
 exports.channels_readHistory_ = channels_readHistory_;
-Object.defineProperty(channels_readHistory_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Delete messages in a [channel/supergroup](https://core.telegram.org/api/channel) */
 class channels_deleteMessages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22021,12 +19447,6 @@ class channels_deleteMessages_ extends Function_ {
     }
 }
 exports.channels_deleteMessages_ = channels_deleteMessages_;
-Object.defineProperty(channels_deleteMessages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Reports some messages from a user in a supergroup as spam; requires administrator rights in the supergroup */
 class channels_reportSpam_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22078,12 +19498,6 @@ class channels_reportSpam_ extends Function_ {
     }
 }
 exports.channels_reportSpam_ = channels_reportSpam_;
-Object.defineProperty(channels_reportSpam_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get [channel/supergroup](https://core.telegram.org/api/channel) messages */
 class channels_getMessages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22125,12 +19539,6 @@ class channels_getMessages_ extends Function_ {
     }
 }
 exports.channels_getMessages_ = channels_getMessages_;
-Object.defineProperty(channels_getMessages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get the participants of a [supergroup/channel](https://core.telegram.org/api/channel) */
 class channels_getParticipants_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22202,12 +19610,6 @@ class channels_getParticipants_ extends Function_ {
     }
 }
 exports.channels_getParticipants_ = channels_getParticipants_;
-Object.defineProperty(channels_getParticipants_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get info about a [channel/supergroup](https://core.telegram.org/api/channel) participant */
 class channels_getParticipant_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22249,12 +19651,6 @@ class channels_getParticipant_ extends Function_ {
     }
 }
 exports.channels_getParticipant_ = channels_getParticipant_;
-Object.defineProperty(channels_getParticipant_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get info about [channels/supergroups](https://core.telegram.org/api/channel) */
 class channels_getChannels_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22286,12 +19682,6 @@ class channels_getChannels_ extends Function_ {
     }
 }
 exports.channels_getChannels_ = channels_getChannels_;
-Object.defineProperty(channels_getChannels_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get full info about a [supergroup](https://core.telegram.org/api/channel#supergroups), [gigagroup](https://core.telegram.org/api/channel#gigagroups) or [channel](https://core.telegram.org/api/channel#channels) */
 class channels_getFullChannel_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22323,12 +19713,6 @@ class channels_getFullChannel_ extends Function_ {
     }
 }
 exports.channels_getFullChannel_ = channels_getFullChannel_;
-Object.defineProperty(channels_getFullChannel_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Create a [supergroup/channel](https://core.telegram.org/api/channel). */
 class channels_createChannel_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22442,12 +19826,6 @@ class channels_createChannel_ extends Function_ {
     }
 }
 exports.channels_createChannel_ = channels_createChannel_;
-Object.defineProperty(channels_createChannel_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Modify the admin rights of a user in a [supergroup/channel](https://core.telegram.org/api/channel). */
 class channels_editAdmin_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22509,12 +19887,6 @@ class channels_editAdmin_ extends Function_ {
     }
 }
 exports.channels_editAdmin_ = channels_editAdmin_;
-Object.defineProperty(channels_editAdmin_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Edit the name of a [channel/supergroup](https://core.telegram.org/api/channel) */
 class channels_editTitle_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22556,12 +19928,6 @@ class channels_editTitle_ extends Function_ {
     }
 }
 exports.channels_editTitle_ = channels_editTitle_;
-Object.defineProperty(channels_editTitle_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Change the photo of a [channel/supergroup](https://core.telegram.org/api/channel) */
 class channels_editPhoto_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22603,12 +19969,6 @@ class channels_editPhoto_ extends Function_ {
     }
 }
 exports.channels_editPhoto_ = channels_editPhoto_;
-Object.defineProperty(channels_editPhoto_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Check if a username is free and can be assigned to a channel/supergroup */
 class channels_checkUsername_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22650,12 +20010,6 @@ class channels_checkUsername_ extends Function_ {
     }
 }
 exports.channels_checkUsername_ = channels_checkUsername_;
-Object.defineProperty(channels_checkUsername_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Change or remove the username of a supergroup/channel */
 class channels_updateUsername_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22697,12 +20051,6 @@ class channels_updateUsername_ extends Function_ {
     }
 }
 exports.channels_updateUsername_ = channels_updateUsername_;
-Object.defineProperty(channels_updateUsername_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Join a channel/supergroup */
 class channels_joinChannel_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22734,12 +20082,6 @@ class channels_joinChannel_ extends Function_ {
     }
 }
 exports.channels_joinChannel_ = channels_joinChannel_;
-Object.defineProperty(channels_joinChannel_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Leave a [channel/supergroup](https://core.telegram.org/api/channel) */
 class channels_leaveChannel_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22771,12 +20113,6 @@ class channels_leaveChannel_ extends Function_ {
     }
 }
 exports.channels_leaveChannel_ = channels_leaveChannel_;
-Object.defineProperty(channels_leaveChannel_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Invite users to a channel/supergroup */
 class channels_inviteToChannel_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22818,12 +20154,6 @@ class channels_inviteToChannel_ extends Function_ {
     }
 }
 exports.channels_inviteToChannel_ = channels_inviteToChannel_;
-Object.defineProperty(channels_inviteToChannel_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Delete a [channel/supergroup](https://core.telegram.org/api/channel) */
 class channels_deleteChannel_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22855,12 +20185,6 @@ class channels_deleteChannel_ extends Function_ {
     }
 }
 exports.channels_deleteChannel_ = channels_deleteChannel_;
-Object.defineProperty(channels_deleteChannel_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get link and embed info of a message in a [channel/supergroup](https://core.telegram.org/api/channel) */
 class channels_exportMessageLink_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22924,12 +20248,6 @@ class channels_exportMessageLink_ extends Function_ {
     }
 }
 exports.channels_exportMessageLink_ = channels_exportMessageLink_;
-Object.defineProperty(channels_exportMessageLink_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Enable/disable message signatures in channels */
 class channels_toggleSignatures_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -22971,12 +20289,6 @@ class channels_toggleSignatures_ extends Function_ {
     }
 }
 exports.channels_toggleSignatures_ = channels_toggleSignatures_;
-Object.defineProperty(channels_toggleSignatures_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get [channels/supergroups/geogroups](https://core.telegram.org/api/channel) we're admin in. Usually called when the user exceeds the [limit](https://core.telegram.org/constructor/config) for owned public [channels/supergroups/geogroups](https://core.telegram.org/api/channel), and the user is given the choice to remove one of his channels/supergroups/geogroups. */
 class channels_getAdminedPublicChannels_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23030,12 +20342,6 @@ class channels_getAdminedPublicChannels_ extends Function_ {
     }
 }
 exports.channels_getAdminedPublicChannels_ = channels_getAdminedPublicChannels_;
-Object.defineProperty(channels_getAdminedPublicChannels_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Ban/unban/kick a user in a [supergroup/channel](https://core.telegram.org/api/channel). */
 class channels_editBanned_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23087,12 +20393,6 @@ class channels_editBanned_ extends Function_ {
     }
 }
 exports.channels_editBanned_ = channels_editBanned_;
-Object.defineProperty(channels_editBanned_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get the admin log of a [channel/supergroup](https://core.telegram.org/api/channel) */
 class channels_getAdminLog_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23186,12 +20486,6 @@ class channels_getAdminLog_ extends Function_ {
     }
 }
 exports.channels_getAdminLog_ = channels_getAdminLog_;
-Object.defineProperty(channels_getAdminLog_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Associate a stickerset to the supergroup */
 class channels_setStickers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23233,12 +20527,6 @@ class channels_setStickers_ extends Function_ {
     }
 }
 exports.channels_setStickers_ = channels_setStickers_;
-Object.defineProperty(channels_setStickers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Mark [channel/supergroup](https://core.telegram.org/api/channel) message contents as read */
 class channels_readMessageContents_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23280,12 +20568,6 @@ class channels_readMessageContents_ extends Function_ {
     }
 }
 exports.channels_readMessageContents_ = channels_readMessageContents_;
-Object.defineProperty(channels_readMessageContents_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Delete the history of a [supergroup](https://core.telegram.org/api/channel) */
 class channels_deleteHistory_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23339,12 +20621,6 @@ class channels_deleteHistory_ extends Function_ {
     }
 }
 exports.channels_deleteHistory_ = channels_deleteHistory_;
-Object.defineProperty(channels_deleteHistory_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Hide/unhide message history for new channel/supergroup users */
 class channels_togglePreHistoryHidden_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23386,12 +20662,6 @@ class channels_togglePreHistoryHidden_ extends Function_ {
     }
 }
 exports.channels_togglePreHistoryHidden_ = channels_togglePreHistoryHidden_;
-Object.defineProperty(channels_togglePreHistoryHidden_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get a list of [channels/supergroups](https://core.telegram.org/api/channel) we left, requires a [takeout session, see here » for more info](https://core.telegram.org/api/takeout). */
 class channels_getLeftChannels_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23423,12 +20693,6 @@ class channels_getLeftChannels_ extends Function_ {
     }
 }
 exports.channels_getLeftChannels_ = channels_getLeftChannels_;
-Object.defineProperty(channels_getLeftChannels_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get all groups that can be used as [discussion groups](https://core.telegram.org/api/discussion). */
 class channels_getGroupsForDiscussion_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23448,12 +20712,6 @@ class channels_getGroupsForDiscussion_ extends Function_ {
     }
 }
 exports.channels_getGroupsForDiscussion_ = channels_getGroupsForDiscussion_;
-Object.defineProperty(channels_getGroupsForDiscussion_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Associate a group to a channel as [discussion group](https://core.telegram.org/api/discussion) for that channel */
 class channels_setDiscussionGroup_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23495,12 +20753,6 @@ class channels_setDiscussionGroup_ extends Function_ {
     }
 }
 exports.channels_setDiscussionGroup_ = channels_setDiscussionGroup_;
-Object.defineProperty(channels_setDiscussionGroup_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Transfer channel ownership */
 class channels_editCreator_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23552,12 +20804,6 @@ class channels_editCreator_ extends Function_ {
     }
 }
 exports.channels_editCreator_ = channels_editCreator_;
-Object.defineProperty(channels_editCreator_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Edit location of geogroup, see [here »](https://core.telegram.org/api/nearby) for more info on geogroups. */
 class channels_editLocation_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23609,12 +20855,6 @@ class channels_editLocation_ extends Function_ {
     }
 }
 exports.channels_editLocation_ = channels_editLocation_;
-Object.defineProperty(channels_editLocation_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Toggle supergroup slow mode: if enabled, users will only be able to send one message every `seconds` seconds */
 class channels_toggleSlowMode_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23656,12 +20896,6 @@ class channels_toggleSlowMode_ extends Function_ {
     }
 }
 exports.channels_toggleSlowMode_ = channels_toggleSlowMode_;
-Object.defineProperty(channels_toggleSlowMode_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get inactive channels and supergroups */
 class channels_getInactiveChannels_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23681,12 +20915,6 @@ class channels_getInactiveChannels_ extends Function_ {
     }
 }
 exports.channels_getInactiveChannels_ = channels_getInactiveChannels_;
-Object.defineProperty(channels_getInactiveChannels_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Convert a [supergroup](https://core.telegram.org/api/channel) to a [gigagroup](https://core.telegram.org/api/channel), when requested by [channel suggestions](https://core.telegram.org/api/config#channel-suggestions). */
 class channels_convertToGigagroup_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23718,12 +20946,6 @@ class channels_convertToGigagroup_ extends Function_ {
     }
 }
 exports.channels_convertToGigagroup_ = channels_convertToGigagroup_;
-Object.defineProperty(channels_convertToGigagroup_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Mark a specific sponsored message as read */
 class channels_viewSponsoredMessage_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23765,12 +20987,6 @@ class channels_viewSponsoredMessage_ extends Function_ {
     }
 }
 exports.channels_viewSponsoredMessage_ = channels_viewSponsoredMessage_;
-Object.defineProperty(channels_viewSponsoredMessage_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get a list of sponsored messages */
 class channels_getSponsoredMessages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23802,12 +21018,6 @@ class channels_getSponsoredMessages_ extends Function_ {
     }
 }
 exports.channels_getSponsoredMessages_ = channels_getSponsoredMessages_;
-Object.defineProperty(channels_getSponsoredMessages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtains a list of peers that can be used to send messages in a specific group */
 class channels_getSendAs_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23839,12 +21049,6 @@ class channels_getSendAs_ extends Function_ {
     }
 }
 exports.channels_getSendAs_ = channels_getSendAs_;
-Object.defineProperty(channels_getSendAs_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Delete all messages sent by a specific participant of a given supergroup */
 class channels_deleteParticipantHistory_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23886,12 +21090,6 @@ class channels_deleteParticipantHistory_ extends Function_ {
     }
 }
 exports.channels_deleteParticipantHistory_ = channels_deleteParticipantHistory_;
-Object.defineProperty(channels_deleteParticipantHistory_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set whether all users [should join a discussion group in order to comment on a post »](https://core.telegram.org/api/discussion#requiring-users-to-join-the-group) */
 class channels_toggleJoinToSend_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23933,12 +21131,6 @@ class channels_toggleJoinToSend_ extends Function_ {
     }
 }
 exports.channels_toggleJoinToSend_ = channels_toggleJoinToSend_;
-Object.defineProperty(channels_toggleJoinToSend_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set whether all users should [request admin approval to join the group »](https://core.telegram.org/api/invites#join-requests). */
 class channels_toggleJoinRequest_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -23980,12 +21172,6 @@ class channels_toggleJoinRequest_ extends Function_ {
     }
 }
 exports.channels_toggleJoinRequest_ = channels_toggleJoinRequest_;
-Object.defineProperty(channels_toggleJoinRequest_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Reorder active usernames */
 class channels_reorderUsernames_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24027,12 +21213,6 @@ class channels_reorderUsernames_ extends Function_ {
     }
 }
 exports.channels_reorderUsernames_ = channels_reorderUsernames_;
-Object.defineProperty(channels_reorderUsernames_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Activate or deactivate a purchased [fragment.com](https://fragment.com) username associated to a [supergroup or channel](https://core.telegram.org/api/channel) we own. */
 class channels_toggleUsername_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24084,12 +21264,6 @@ class channels_toggleUsername_ extends Function_ {
     }
 }
 exports.channels_toggleUsername_ = channels_toggleUsername_;
-Object.defineProperty(channels_toggleUsername_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Disable all purchased usernames of a supergroup or channel */
 class channels_deactivateAllUsernames_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24121,12 +21295,6 @@ class channels_deactivateAllUsernames_ extends Function_ {
     }
 }
 exports.channels_deactivateAllUsernames_ = channels_deactivateAllUsernames_;
-Object.defineProperty(channels_deactivateAllUsernames_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Enable or disable [forum functionality](https://core.telegram.org/api/forum) in a supergroup. */
 class channels_toggleForum_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24168,12 +21336,6 @@ class channels_toggleForum_ extends Function_ {
     }
 }
 exports.channels_toggleForum_ = channels_toggleForum_;
-Object.defineProperty(channels_toggleForum_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Create a [forum topic](https://core.telegram.org/api/forum); requires [`manage_topics` rights](https://core.telegram.org/api/rights). */
 class channels_createForumTopic_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24257,12 +21419,6 @@ class channels_createForumTopic_ extends Function_ {
     }
 }
 exports.channels_createForumTopic_ = channels_createForumTopic_;
-Object.defineProperty(channels_createForumTopic_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get [topics of a forum](https://core.telegram.org/api/forum) */
 class channels_getForumTopics_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24346,12 +21502,6 @@ class channels_getForumTopics_ extends Function_ {
     }
 }
 exports.channels_getForumTopics_ = channels_getForumTopics_;
-Object.defineProperty(channels_getForumTopics_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get forum topics by their ID */
 class channels_getForumTopicsByID_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24393,12 +21543,6 @@ class channels_getForumTopicsByID_ extends Function_ {
     }
 }
 exports.channels_getForumTopicsByID_ = channels_getForumTopicsByID_;
-Object.defineProperty(channels_getForumTopicsByID_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Edit [forum topic](https://core.telegram.org/api/forum); requires [`manage_topics` rights](https://core.telegram.org/api/rights). */
 class channels_editForumTopic_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24482,12 +21626,6 @@ class channels_editForumTopic_ extends Function_ {
     }
 }
 exports.channels_editForumTopic_ = channels_editForumTopic_;
-Object.defineProperty(channels_editForumTopic_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Pin or unpin [forum topics](https://core.telegram.org/api/forum) */
 class channels_updatePinnedForumTopic_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24539,12 +21677,6 @@ class channels_updatePinnedForumTopic_ extends Function_ {
     }
 }
 exports.channels_updatePinnedForumTopic_ = channels_updatePinnedForumTopic_;
-Object.defineProperty(channels_updatePinnedForumTopic_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Delete message history of a [forum topic](https://core.telegram.org/api/forum) */
 class channels_deleteTopicHistory_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24586,12 +21718,6 @@ class channels_deleteTopicHistory_ extends Function_ {
     }
 }
 exports.channels_deleteTopicHistory_ = channels_deleteTopicHistory_;
-Object.defineProperty(channels_deleteTopicHistory_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Reorder pinned forum topics */
 class channels_reorderPinnedForumTopics_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24646,12 +21772,6 @@ class channels_reorderPinnedForumTopics_ extends Function_ {
     }
 }
 exports.channels_reorderPinnedForumTopics_ = channels_reorderPinnedForumTopics_;
-Object.defineProperty(channels_reorderPinnedForumTopics_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Enable or disable the [native antispam system](https://core.telegram.org/api/antispam). */
 class channels_toggleAntiSpam_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24693,12 +21813,6 @@ class channels_toggleAntiSpam_ extends Function_ {
     }
 }
 exports.channels_toggleAntiSpam_ = channels_toggleAntiSpam_;
-Object.defineProperty(channels_toggleAntiSpam_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Report a [native antispam](https://core.telegram.org/api/antispam) false positive */
 class channels_reportAntiSpamFalsePositive_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24740,12 +21854,6 @@ class channels_reportAntiSpamFalsePositive_ extends Function_ {
     }
 }
 exports.channels_reportAntiSpamFalsePositive_ = channels_reportAntiSpamFalsePositive_;
-Object.defineProperty(channels_reportAntiSpamFalsePositive_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Hide or display the participants list in a [supergroup](https://core.telegram.org/api/channel). */
 class channels_toggleParticipantsHidden_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24787,12 +21895,6 @@ class channels_toggleParticipantsHidden_ extends Function_ {
     }
 }
 exports.channels_toggleParticipantsHidden_ = channels_toggleParticipantsHidden_;
-Object.defineProperty(channels_toggleParticipantsHidden_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Informs the server that the user has either: */
 class channels_clickSponsoredMessage_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24834,12 +21936,6 @@ class channels_clickSponsoredMessage_ extends Function_ {
     }
 }
 exports.channels_clickSponsoredMessage_ = channels_clickSponsoredMessage_;
-Object.defineProperty(channels_clickSponsoredMessage_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Update the [accent color and background custom emoji »](https://core.telegram.org/api/colors) of a channel. */
 class channels_updateColor_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24903,12 +21999,6 @@ class channels_updateColor_ extends Function_ {
     }
 }
 exports.channels_updateColor_ = channels_updateColor_;
-Object.defineProperty(channels_updateColor_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Users may also choose to display messages from all topics of a [forum](https://core.telegram.org/api/forum) as if they were sent to a normal group, using a "View as messages" setting in the local client: this setting only affects the current account, and is synced to other logged in sessions using this method. */
 class channels_toggleViewForumAsMessages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24950,12 +22040,6 @@ class channels_toggleViewForumAsMessages_ extends Function_ {
     }
 }
 exports.channels_toggleViewForumAsMessages_ = channels_toggleViewForumAsMessages_;
-Object.defineProperty(channels_toggleViewForumAsMessages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain a list of similarly themed public channels, selected based on similarities in their **subscriber bases**. */
 class channels_getChannelRecommendations_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -24987,12 +22071,6 @@ class channels_getChannelRecommendations_ extends Function_ {
     }
 }
 exports.channels_getChannelRecommendations_ = channels_getChannelRecommendations_;
-Object.defineProperty(channels_getChannelRecommendations_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set an [emoji status](https://core.telegram.org/api/emoji-status) for a channel. */
 class channels_updateEmojiStatus_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -25034,12 +22112,6 @@ class channels_updateEmojiStatus_ extends Function_ {
     }
 }
 exports.channels_updateEmojiStatus_ = channels_updateEmojiStatus_;
-Object.defineProperty(channels_updateEmojiStatus_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class channels_setBoostsToUnblockRestrictions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xAD399CEE;
@@ -25078,12 +22150,6 @@ class channels_setBoostsToUnblockRestrictions_ extends Function_ {
     }
 }
 exports.channels_setBoostsToUnblockRestrictions_ = channels_setBoostsToUnblockRestrictions_;
-Object.defineProperty(channels_setBoostsToUnblockRestrictions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class channels_setEmojiStickers_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x3CD930B7;
@@ -25122,12 +22188,6 @@ class channels_setEmojiStickers_ extends Function_ {
     }
 }
 exports.channels_setEmojiStickers_ = channels_setEmojiStickers_;
-Object.defineProperty(channels_setEmojiStickers_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class channels_reportSponsoredMessage_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xAF8FF6B9;
@@ -25175,12 +22235,6 @@ class channels_reportSponsoredMessage_ extends Function_ {
     }
 }
 exports.channels_reportSponsoredMessage_ = channels_reportSponsoredMessage_;
-Object.defineProperty(channels_reportSponsoredMessage_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class channels_restrictSponsoredMessages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x9AE91519;
@@ -25219,12 +22273,6 @@ class channels_restrictSponsoredMessages_ extends Function_ {
     }
 }
 exports.channels_restrictSponsoredMessages_ = channels_restrictSponsoredMessages_;
-Object.defineProperty(channels_restrictSponsoredMessages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Sends a custom request; for bots only */
 class bots_sendCustomRequest_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -25266,12 +22314,6 @@ class bots_sendCustomRequest_ extends Function_ {
     }
 }
 exports.bots_sendCustomRequest_ = bots_sendCustomRequest_;
-Object.defineProperty(bots_sendCustomRequest_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Answers a custom query; for bots only */
 class bots_answerWebhookJSONQuery_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -25313,12 +22355,6 @@ class bots_answerWebhookJSONQuery_ extends Function_ {
     }
 }
 exports.bots_answerWebhookJSONQuery_ = bots_answerWebhookJSONQuery_;
-Object.defineProperty(bots_answerWebhookJSONQuery_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set bot command list */
 class bots_setBotCommands_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -25370,12 +22406,6 @@ class bots_setBotCommands_ extends Function_ {
     }
 }
 exports.bots_setBotCommands_ = bots_setBotCommands_;
-Object.defineProperty(bots_setBotCommands_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Clear bot commands for the specified bot scope and language code */
 class bots_resetBotCommands_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -25417,12 +22447,6 @@ class bots_resetBotCommands_ extends Function_ {
     }
 }
 exports.bots_resetBotCommands_ = bots_resetBotCommands_;
-Object.defineProperty(bots_resetBotCommands_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain a list of bot commands for the specified bot scope and language code */
 class bots_getBotCommands_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -25464,12 +22488,6 @@ class bots_getBotCommands_ extends Function_ {
     }
 }
 exports.bots_getBotCommands_ = bots_getBotCommands_;
-Object.defineProperty(bots_getBotCommands_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Sets the [menu button action »](https://core.telegram.org/api/bots/menu) for a given user or for all users */
 class bots_setBotMenuButton_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -25511,12 +22529,6 @@ class bots_setBotMenuButton_ extends Function_ {
     }
 }
 exports.bots_setBotMenuButton_ = bots_setBotMenuButton_;
-Object.defineProperty(bots_setBotMenuButton_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Gets the menu button action for a given user or for all users, previously set using [bots.setBotMenuButton](https://core.telegram.org/method/bots.setBotMenuButton); users can see this information in the [botInfo](https://core.telegram.org/constructor/botInfo) constructor. */
 class bots_getBotMenuButton_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -25548,12 +22560,6 @@ class bots_getBotMenuButton_ extends Function_ {
     }
 }
 exports.bots_getBotMenuButton_ = bots_getBotMenuButton_;
-Object.defineProperty(bots_getBotMenuButton_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set the default [suggested admin rights](https://core.telegram.org/api/rights#suggested-bot-rights) for bots being added as admins to channels, see [here for more info on how to handle them »](https://core.telegram.org/api/rights#suggested-bot-rights). */
 class bots_setBotBroadcastDefaultAdminRights_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -25585,12 +22591,6 @@ class bots_setBotBroadcastDefaultAdminRights_ extends Function_ {
     }
 }
 exports.bots_setBotBroadcastDefaultAdminRights_ = bots_setBotBroadcastDefaultAdminRights_;
-Object.defineProperty(bots_setBotBroadcastDefaultAdminRights_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set the default [suggested admin rights](https://core.telegram.org/api/rights#suggested-bot-rights) for bots being added as admins to groups, see [here for more info on how to handle them »](https://core.telegram.org/api/rights#suggested-bot-rights). */
 class bots_setBotGroupDefaultAdminRights_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -25622,12 +22622,6 @@ class bots_setBotGroupDefaultAdminRights_ extends Function_ {
     }
 }
 exports.bots_setBotGroupDefaultAdminRights_ = bots_setBotGroupDefaultAdminRights_;
-Object.defineProperty(bots_setBotGroupDefaultAdminRights_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set localized name, about text and description of a bot (or of the current account, if called by a bot). */
 class bots_setBotInfo_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -25701,12 +22695,6 @@ class bots_setBotInfo_ extends Function_ {
     }
 }
 exports.bots_setBotInfo_ = bots_setBotInfo_;
-Object.defineProperty(bots_setBotInfo_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get localized name, about text and description of a bot (or of the current account, if called by a bot). */
 class bots_getBotInfo_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -25750,12 +22738,6 @@ class bots_getBotInfo_ extends Function_ {
     }
 }
 exports.bots_getBotInfo_ = bots_getBotInfo_;
-Object.defineProperty(bots_getBotInfo_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Reorder usernames associated to a bot we own. */
 class bots_reorderUsernames_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -25797,12 +22779,6 @@ class bots_reorderUsernames_ extends Function_ {
     }
 }
 exports.bots_reorderUsernames_ = bots_reorderUsernames_;
-Object.defineProperty(bots_reorderUsernames_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Activate or deactivate a purchased [fragment.com](https://fragment.com) username associated to a bot we own. */
 class bots_toggleUsername_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -25854,12 +22830,6 @@ class bots_toggleUsername_ extends Function_ {
     }
 }
 exports.bots_toggleUsername_ = bots_toggleUsername_;
-Object.defineProperty(bots_toggleUsername_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Check whether the specified bot can send us messages */
 class bots_canSendMessage_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -25891,12 +22861,6 @@ class bots_canSendMessage_ extends Function_ {
     }
 }
 exports.bots_canSendMessage_ = bots_canSendMessage_;
-Object.defineProperty(bots_canSendMessage_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Allow the specified bot to send us messages */
 class bots_allowSendMessage_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -25928,12 +22892,6 @@ class bots_allowSendMessage_ extends Function_ {
     }
 }
 exports.bots_allowSendMessage_ = bots_allowSendMessage_;
-Object.defineProperty(bots_allowSendMessage_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Send a custom request from a [mini bot app](https://core.telegram.org/api/bots/webapps), triggered by a [web\_app\_invoke\_custom\_method event »](https://core.telegram.org/api/web-events#web-app-invoke-custom-method). */
 class bots_invokeWebViewCustomMethod_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -25985,12 +22943,6 @@ class bots_invokeWebViewCustomMethod_ extends Function_ {
     }
 }
 exports.bots_invokeWebViewCustomMethod_ = bots_invokeWebViewCustomMethod_;
-Object.defineProperty(bots_invokeWebViewCustomMethod_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get a payment form */
 class payments_getPaymentForm_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26040,12 +22992,6 @@ class payments_getPaymentForm_ extends Function_ {
     }
 }
 exports.payments_getPaymentForm_ = payments_getPaymentForm_;
-Object.defineProperty(payments_getPaymentForm_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get payment receipt */
 class payments_getPaymentReceipt_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26087,12 +23033,6 @@ class payments_getPaymentReceipt_ extends Function_ {
     }
 }
 exports.payments_getPaymentReceipt_ = payments_getPaymentReceipt_;
-Object.defineProperty(payments_getPaymentReceipt_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Submit requested order information for validation */
 class payments_validateRequestedInfo_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26146,12 +23086,6 @@ class payments_validateRequestedInfo_ extends Function_ {
     }
 }
 exports.payments_validateRequestedInfo_ = payments_validateRequestedInfo_;
-Object.defineProperty(payments_validateRequestedInfo_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Send compiled payment form */
 class payments_sendPaymentForm_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26235,12 +23169,6 @@ class payments_sendPaymentForm_ extends Function_ {
     }
 }
 exports.payments_sendPaymentForm_ = payments_sendPaymentForm_;
-Object.defineProperty(payments_sendPaymentForm_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get saved payment information */
 class payments_getSavedInfo_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26260,12 +23188,6 @@ class payments_getSavedInfo_ extends Function_ {
     }
 }
 exports.payments_getSavedInfo_ = payments_getSavedInfo_;
-Object.defineProperty(payments_getSavedInfo_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Clear saved payment information */
 class payments_clearSavedInfo_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26309,12 +23231,6 @@ class payments_clearSavedInfo_ extends Function_ {
     }
 }
 exports.payments_clearSavedInfo_ = payments_clearSavedInfo_;
-Object.defineProperty(payments_clearSavedInfo_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get info about a credit card */
 class payments_getBankCardData_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26346,12 +23262,6 @@ class payments_getBankCardData_ extends Function_ {
     }
 }
 exports.payments_getBankCardData_ = payments_getBankCardData_;
-Object.defineProperty(payments_getBankCardData_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Generate an [invoice deep link](https://core.telegram.org/api/links#invoice-links) */
 class payments_exportInvoice_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26383,12 +23293,6 @@ class payments_exportInvoice_ extends Function_ {
     }
 }
 exports.payments_exportInvoice_ = payments_exportInvoice_;
-Object.defineProperty(payments_exportInvoice_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Informs server about a purchase made through the App Store: for official applications only. */
 class payments_assignAppStoreTransaction_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26430,12 +23334,6 @@ class payments_assignAppStoreTransaction_ extends Function_ {
     }
 }
 exports.payments_assignAppStoreTransaction_ = payments_assignAppStoreTransaction_;
-Object.defineProperty(payments_assignAppStoreTransaction_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Informs server about a purchase made through the Play Store: for official applications only. */
 class payments_assignPlayMarketTransaction_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26477,12 +23375,6 @@ class payments_assignPlayMarketTransaction_ extends Function_ {
     }
 }
 exports.payments_assignPlayMarketTransaction_ = payments_assignPlayMarketTransaction_;
-Object.defineProperty(payments_assignPlayMarketTransaction_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Checks whether Telegram Premium purchase is possible. Must be called before in-store Premium purchase, official apps only. */
 class payments_canPurchasePremium_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26514,12 +23406,6 @@ class payments_canPurchasePremium_ extends Function_ {
     }
 }
 exports.payments_canPurchasePremium_ = payments_canPurchasePremium_;
-Object.defineProperty(payments_canPurchasePremium_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain a list of Telegram Premium [giveaway/gift code »](https://core.telegram.org/api/giveaways) options. */
 class payments_getPremiumGiftCodeOptions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26553,12 +23439,6 @@ class payments_getPremiumGiftCodeOptions_ extends Function_ {
     }
 }
 exports.payments_getPremiumGiftCodeOptions_ = payments_getPremiumGiftCodeOptions_;
-Object.defineProperty(payments_getPremiumGiftCodeOptions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain information about a [Telegram Premium giftcode »](https://core.telegram.org/api/giveaways) */
 class payments_checkGiftCode_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26590,12 +23470,6 @@ class payments_checkGiftCode_ extends Function_ {
     }
 }
 exports.payments_checkGiftCode_ = payments_checkGiftCode_;
-Object.defineProperty(payments_checkGiftCode_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Apply a [Telegram Premium giftcode »](https://core.telegram.org/api/giveaways) */
 class payments_applyGiftCode_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26627,12 +23501,6 @@ class payments_applyGiftCode_ extends Function_ {
     }
 }
 exports.payments_applyGiftCode_ = payments_applyGiftCode_;
-Object.defineProperty(payments_applyGiftCode_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain information about a [Telegram Premium giveaway »](https://core.telegram.org/api/giveaways). */
 class payments_getGiveawayInfo_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26674,12 +23542,6 @@ class payments_getGiveawayInfo_ extends Function_ {
     }
 }
 exports.payments_getGiveawayInfo_ = payments_getGiveawayInfo_;
-Object.defineProperty(payments_getGiveawayInfo_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Launch a [prepaid giveaway »](https://core.telegram.org/api/giveaways). */
 class payments_launchPrepaidGiveaway_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26731,12 +23593,6 @@ class payments_launchPrepaidGiveaway_ extends Function_ {
     }
 }
 exports.payments_launchPrepaidGiveaway_ = payments_launchPrepaidGiveaway_;
-Object.defineProperty(payments_launchPrepaidGiveaway_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Create a stickerset, bots only. */
 class stickers_createStickerSet_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26850,12 +23706,6 @@ class stickers_createStickerSet_ extends Function_ {
     }
 }
 exports.stickers_createStickerSet_ = stickers_createStickerSet_;
-Object.defineProperty(stickers_createStickerSet_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Remove a sticker from the set where it belongs, bots only. The sticker set must have been created by the bot. */
 class stickers_removeStickerFromSet_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26887,12 +23737,6 @@ class stickers_removeStickerFromSet_ extends Function_ {
     }
 }
 exports.stickers_removeStickerFromSet_ = stickers_removeStickerFromSet_;
-Object.defineProperty(stickers_removeStickerFromSet_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Changes the absolute position of a sticker in the set to which it belongs; for bots only. The sticker set must have been created by the bot */
 class stickers_changeStickerPosition_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26934,12 +23778,6 @@ class stickers_changeStickerPosition_ extends Function_ {
     }
 }
 exports.stickers_changeStickerPosition_ = stickers_changeStickerPosition_;
-Object.defineProperty(stickers_changeStickerPosition_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Add a sticker to a stickerset, bots only. The sticker set must have been created by the bot. */
 class stickers_addStickerToSet_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -26981,12 +23819,6 @@ class stickers_addStickerToSet_ extends Function_ {
     }
 }
 exports.stickers_addStickerToSet_ = stickers_addStickerToSet_;
-Object.defineProperty(stickers_addStickerToSet_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set stickerset thumbnail */
 class stickers_setStickerSetThumb_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -27040,12 +23872,6 @@ class stickers_setStickerSetThumb_ extends Function_ {
     }
 }
 exports.stickers_setStickerSetThumb_ = stickers_setStickerSetThumb_;
-Object.defineProperty(stickers_setStickerSetThumb_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Check whether the given short name is available */
 class stickers_checkShortName_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -27077,12 +23903,6 @@ class stickers_checkShortName_ extends Function_ {
     }
 }
 exports.stickers_checkShortName_ = stickers_checkShortName_;
-Object.defineProperty(stickers_checkShortName_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Suggests a short name for a given stickerpack name */
 class stickers_suggestShortName_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -27114,12 +23934,6 @@ class stickers_suggestShortName_ extends Function_ {
     }
 }
 exports.stickers_suggestShortName_ = stickers_suggestShortName_;
-Object.defineProperty(stickers_suggestShortName_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Update the keywords, emojis or [mask coordinates](https://core.telegram.org/api/stickers#mask-stickers) of a sticker, bots only. */
 class stickers_changeSticker_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -27183,12 +23997,6 @@ class stickers_changeSticker_ extends Function_ {
     }
 }
 exports.stickers_changeSticker_ = stickers_changeSticker_;
-Object.defineProperty(stickers_changeSticker_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Renames a stickerset, bots only. */
 class stickers_renameStickerSet_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -27230,12 +24038,6 @@ class stickers_renameStickerSet_ extends Function_ {
     }
 }
 exports.stickers_renameStickerSet_ = stickers_renameStickerSet_;
-Object.defineProperty(stickers_renameStickerSet_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Deletes a stickerset we created, bots only. */
 class stickers_deleteStickerSet_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -27267,12 +24069,6 @@ class stickers_deleteStickerSet_ extends Function_ {
     }
 }
 exports.stickers_deleteStickerSet_ = stickers_deleteStickerSet_;
-Object.defineProperty(stickers_deleteStickerSet_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class stickers_replaceSticker_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x4696459A;
@@ -27311,12 +24107,6 @@ class stickers_replaceSticker_ extends Function_ {
     }
 }
 exports.stickers_replaceSticker_ = stickers_replaceSticker_;
-Object.defineProperty(stickers_replaceSticker_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get phone call configuration to be passed to libtgvoip's shared config */
 class phone_getCallConfig_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -27336,12 +24126,6 @@ class phone_getCallConfig_ extends Function_ {
     }
 }
 exports.phone_getCallConfig_ = phone_getCallConfig_;
-Object.defineProperty(phone_getCallConfig_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Start a telegram phone call */
 class phone_requestCall_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -27415,12 +24199,6 @@ class phone_requestCall_ extends Function_ {
     }
 }
 exports.phone_requestCall_ = phone_requestCall_;
-Object.defineProperty(phone_requestCall_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Accept incoming call */
 class phone_acceptCall_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -27472,12 +24250,6 @@ class phone_acceptCall_ extends Function_ {
     }
 }
 exports.phone_acceptCall_ = phone_acceptCall_;
-Object.defineProperty(phone_acceptCall_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** [Complete phone call E2E encryption key exchange »](https://core.telegram.org/api/end-to-end/voice-calls) */
 class phone_confirmCall_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -27539,12 +24311,6 @@ class phone_confirmCall_ extends Function_ {
     }
 }
 exports.phone_confirmCall_ = phone_confirmCall_;
-Object.defineProperty(phone_confirmCall_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Optional: notify the server that the user is currently busy in a call: this will automatically refuse all incoming phone calls until the current phone call is ended. */
 class phone_receivedCall_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -27576,12 +24342,6 @@ class phone_receivedCall_ extends Function_ {
     }
 }
 exports.phone_receivedCall_ = phone_receivedCall_;
-Object.defineProperty(phone_receivedCall_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Refuse or end running call */
 class phone_discardCall_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -27655,12 +24415,6 @@ class phone_discardCall_ extends Function_ {
     }
 }
 exports.phone_discardCall_ = phone_discardCall_;
-Object.defineProperty(phone_discardCall_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Rate a call, returns info about the rating message sent to the official VoIP bot. */
 class phone_setCallRating_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -27724,12 +24478,6 @@ class phone_setCallRating_ extends Function_ {
     }
 }
 exports.phone_setCallRating_ = phone_setCallRating_;
-Object.defineProperty(phone_setCallRating_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Send phone call debug data to server */
 class phone_saveCallDebug_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -27771,12 +24519,6 @@ class phone_saveCallDebug_ extends Function_ {
     }
 }
 exports.phone_saveCallDebug_ = phone_saveCallDebug_;
-Object.defineProperty(phone_saveCallDebug_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Send VoIP signaling data */
 class phone_sendSignalingData_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -27818,12 +24560,6 @@ class phone_sendSignalingData_ extends Function_ {
     }
 }
 exports.phone_sendSignalingData_ = phone_sendSignalingData_;
-Object.defineProperty(phone_sendSignalingData_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Create a group call or livestream */
 class phone_createGroupCall_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -27897,12 +24633,6 @@ class phone_createGroupCall_ extends Function_ {
     }
 }
 exports.phone_createGroupCall_ = phone_createGroupCall_;
-Object.defineProperty(phone_createGroupCall_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Join a group call */
 class phone_joinGroupCall_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -27986,12 +24716,6 @@ class phone_joinGroupCall_ extends Function_ {
     }
 }
 exports.phone_joinGroupCall_ = phone_joinGroupCall_;
-Object.defineProperty(phone_joinGroupCall_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Leave a group call */
 class phone_leaveGroupCall_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -28033,12 +24757,6 @@ class phone_leaveGroupCall_ extends Function_ {
     }
 }
 exports.phone_leaveGroupCall_ = phone_leaveGroupCall_;
-Object.defineProperty(phone_leaveGroupCall_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Invite a set of users to a group call. */
 class phone_inviteToGroupCall_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -28080,12 +24798,6 @@ class phone_inviteToGroupCall_ extends Function_ {
     }
 }
 exports.phone_inviteToGroupCall_ = phone_inviteToGroupCall_;
-Object.defineProperty(phone_inviteToGroupCall_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Terminate a group call */
 class phone_discardGroupCall_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -28117,12 +24829,6 @@ class phone_discardGroupCall_ extends Function_ {
     }
 }
 exports.phone_discardGroupCall_ = phone_discardGroupCall_;
-Object.defineProperty(phone_discardGroupCall_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Change group call settings */
 class phone_toggleGroupCallSettings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -28176,12 +24882,6 @@ class phone_toggleGroupCallSettings_ extends Function_ {
     }
 }
 exports.phone_toggleGroupCallSettings_ = phone_toggleGroupCallSettings_;
-Object.defineProperty(phone_toggleGroupCallSettings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get info about a group call */
 class phone_getGroupCall_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -28223,12 +24923,6 @@ class phone_getGroupCall_ extends Function_ {
     }
 }
 exports.phone_getGroupCall_ = phone_getGroupCall_;
-Object.defineProperty(phone_getGroupCall_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get group call participants */
 class phone_getGroupParticipants_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -28301,12 +24995,6 @@ class phone_getGroupParticipants_ extends Function_ {
     }
 }
 exports.phone_getGroupParticipants_ = phone_getGroupParticipants_;
-Object.defineProperty(phone_getGroupParticipants_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Check whether the group call Server Forwarding Unit is currently receiving the streams with the specified WebRTC source IDs.
 Returns an intersection of the source IDs specified in `sources`, and the source IDs currently being forwarded by the SFU. */
 class phone_checkGroupCall_ extends Function_ {
@@ -28349,12 +25037,6 @@ class phone_checkGroupCall_ extends Function_ {
     }
 }
 exports.phone_checkGroupCall_ = phone_checkGroupCall_;
-Object.defineProperty(phone_checkGroupCall_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Start or stop recording a group call: the recorded audio and video streams will be automatically sent to `Saved messages` (the chat with ourselves). */
 class phone_toggleGroupCallRecord_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -28428,12 +25110,6 @@ class phone_toggleGroupCallRecord_ extends Function_ {
     }
 }
 exports.phone_toggleGroupCallRecord_ = phone_toggleGroupCallRecord_;
-Object.defineProperty(phone_toggleGroupCallRecord_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Edit information about a given group call participant */
 class phone_editGroupCallParticipant_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -28537,12 +25213,6 @@ class phone_editGroupCallParticipant_ extends Function_ {
     }
 }
 exports.phone_editGroupCallParticipant_ = phone_editGroupCallParticipant_;
-Object.defineProperty(phone_editGroupCallParticipant_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Edit the title of a group call or livestream */
 class phone_editGroupCallTitle_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -28584,12 +25254,6 @@ class phone_editGroupCallTitle_ extends Function_ {
     }
 }
 exports.phone_editGroupCallTitle_ = phone_editGroupCallTitle_;
-Object.defineProperty(phone_editGroupCallTitle_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get a list of peers that can be used to join a group call, presenting yourself as a specific user/channel. */
 class phone_getGroupCallJoinAs_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -28621,12 +25285,6 @@ class phone_getGroupCallJoinAs_ extends Function_ {
     }
 }
 exports.phone_getGroupCallJoinAs_ = phone_getGroupCallJoinAs_;
-Object.defineProperty(phone_getGroupCallJoinAs_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get an [invite link](https://core.telegram.org/api/links#video-chat-livestream-links) for a group call or livestream */
 class phone_exportGroupCallInvite_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -28670,12 +25328,6 @@ class phone_exportGroupCallInvite_ extends Function_ {
     }
 }
 exports.phone_exportGroupCallInvite_ = phone_exportGroupCallInvite_;
-Object.defineProperty(phone_exportGroupCallInvite_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Subscribe or unsubscribe to a scheduled group call */
 class phone_toggleGroupCallStartSubscription_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -28717,12 +25369,6 @@ class phone_toggleGroupCallStartSubscription_ extends Function_ {
     }
 }
 exports.phone_toggleGroupCallStartSubscription_ = phone_toggleGroupCallStartSubscription_;
-Object.defineProperty(phone_toggleGroupCallStartSubscription_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Start a scheduled group call. */
 class phone_startScheduledGroupCall_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -28754,12 +25400,6 @@ class phone_startScheduledGroupCall_ extends Function_ {
     }
 }
 exports.phone_startScheduledGroupCall_ = phone_startScheduledGroupCall_;
-Object.defineProperty(phone_startScheduledGroupCall_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Set the default peer that will be used to join a group call in a specific dialog. */
 class phone_saveDefaultGroupCallJoinAs_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -28801,12 +25441,6 @@ class phone_saveDefaultGroupCallJoinAs_ extends Function_ {
     }
 }
 exports.phone_saveDefaultGroupCallJoinAs_ = phone_saveDefaultGroupCallJoinAs_;
-Object.defineProperty(phone_saveDefaultGroupCallJoinAs_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Start screen sharing in a call */
 class phone_joinGroupCallPresentation_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -28848,12 +25482,6 @@ class phone_joinGroupCallPresentation_ extends Function_ {
     }
 }
 exports.phone_joinGroupCallPresentation_ = phone_joinGroupCallPresentation_;
-Object.defineProperty(phone_joinGroupCallPresentation_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Stop screen sharing in a group call */
 class phone_leaveGroupCallPresentation_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -28885,12 +25513,6 @@ class phone_leaveGroupCallPresentation_ extends Function_ {
     }
 }
 exports.phone_leaveGroupCallPresentation_ = phone_leaveGroupCallPresentation_;
-Object.defineProperty(phone_leaveGroupCallPresentation_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get info about RTMP streams in a group call or livestream.
 This method should be invoked to the same group/channel-related DC used for [downloading livestream chunks](https://core.telegram.org/api/files#downloading-files).
 As usual, the media DC is preferred, if available. */
@@ -28924,12 +25546,6 @@ class phone_getGroupCallStreamChannels_ extends Function_ {
     }
 }
 exports.phone_getGroupCallStreamChannels_ = phone_getGroupCallStreamChannels_;
-Object.defineProperty(phone_getGroupCallStreamChannels_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get RTMP URL and stream key for RTMP livestreams. Can be used even before creating the actual RTMP livestream with [phone.createGroupCall](https://core.telegram.org/method/phone.createGroupCall) (the `rtmp_stream` flag must be set). */
 class phone_getGroupCallStreamRtmpUrl_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -28971,12 +25587,6 @@ class phone_getGroupCallStreamRtmpUrl_ extends Function_ {
     }
 }
 exports.phone_getGroupCallStreamRtmpUrl_ = phone_getGroupCallStreamRtmpUrl_;
-Object.defineProperty(phone_getGroupCallStreamRtmpUrl_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Save phone call debug information */
 class phone_saveCallLog_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -29018,12 +25628,6 @@ class phone_saveCallLog_ extends Function_ {
     }
 }
 exports.phone_saveCallLog_ = phone_saveCallLog_;
-Object.defineProperty(phone_saveCallLog_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get localization pack strings */
 class langpack_getLangPack_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -29065,12 +25669,6 @@ class langpack_getLangPack_ extends Function_ {
     }
 }
 exports.langpack_getLangPack_ = langpack_getLangPack_;
-Object.defineProperty(langpack_getLangPack_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get strings from a language pack */
 class langpack_getStrings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -29122,12 +25720,6 @@ class langpack_getStrings_ extends Function_ {
     }
 }
 exports.langpack_getStrings_ = langpack_getStrings_;
-Object.defineProperty(langpack_getStrings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get new strings in language pack */
 class langpack_getDifference_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -29179,12 +25771,6 @@ class langpack_getDifference_ extends Function_ {
     }
 }
 exports.langpack_getDifference_ = langpack_getDifference_;
-Object.defineProperty(langpack_getDifference_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get information about all languages in a localization pack */
 class langpack_getLanguages_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -29216,12 +25802,6 @@ class langpack_getLanguages_ extends Function_ {
     }
 }
 exports.langpack_getLanguages_ = langpack_getLanguages_;
-Object.defineProperty(langpack_getLanguages_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get information about a language in a localization pack */
 class langpack_getLanguage_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -29263,12 +25843,6 @@ class langpack_getLanguage_ extends Function_ {
     }
 }
 exports.langpack_getLanguage_ = langpack_getLanguage_;
-Object.defineProperty(langpack_getLanguage_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Edit peers in [peer folder](https://core.telegram.org/api/folders#peer-folders) */
 class folders_editPeerFolders_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -29300,12 +25874,6 @@ class folders_editPeerFolders_ extends Function_ {
     }
 }
 exports.folders_editPeerFolders_ = folders_editPeerFolders_;
-Object.defineProperty(folders_editPeerFolders_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get [channel statistics](https://core.telegram.org/api/stats) */
 class stats_getBroadcastStats_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -29349,12 +25917,6 @@ class stats_getBroadcastStats_ extends Function_ {
     }
 }
 exports.stats_getBroadcastStats_ = stats_getBroadcastStats_;
-Object.defineProperty(stats_getBroadcastStats_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Load [channel statistics graph](https://core.telegram.org/api/stats) asynchronously */
 class stats_loadAsyncGraph_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -29398,12 +25960,6 @@ class stats_loadAsyncGraph_ extends Function_ {
     }
 }
 exports.stats_loadAsyncGraph_ = stats_loadAsyncGraph_;
-Object.defineProperty(stats_loadAsyncGraph_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get [supergroup statistics](https://core.telegram.org/api/stats) */
 class stats_getMegagroupStats_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -29447,12 +26003,6 @@ class stats_getMegagroupStats_ extends Function_ {
     }
 }
 exports.stats_getMegagroupStats_ = stats_getMegagroupStats_;
-Object.defineProperty(stats_getMegagroupStats_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtains a list of messages, indicating to which other public channels was a channel message forwarded.
 Will return a list of [messages](https://core.telegram.org/constructor/message) with `peer_id` equal to the public channel to which this message was forwarded. */
 class stats_getMessagePublicForwards_ extends Function_ {
@@ -29515,12 +26065,6 @@ class stats_getMessagePublicForwards_ extends Function_ {
     }
 }
 exports.stats_getMessagePublicForwards_ = stats_getMessagePublicForwards_;
-Object.defineProperty(stats_getMessagePublicForwards_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get [message statistics](https://core.telegram.org/api/stats) */
 class stats_getMessageStats_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -29574,12 +26118,6 @@ class stats_getMessageStats_ extends Function_ {
     }
 }
 exports.stats_getMessageStats_ = stats_getMessageStats_;
-Object.defineProperty(stats_getMessageStats_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get [statistics](https://core.telegram.org/api/stats) for a certain [story](https://core.telegram.org/api/stories). */
 class stats_getStoryStats_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -29633,12 +26171,6 @@ class stats_getStoryStats_ extends Function_ {
     }
 }
 exports.stats_getStoryStats_ = stats_getStoryStats_;
-Object.defineProperty(stats_getStoryStats_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain forwards of a [story](https://core.telegram.org/api/stories) as a message to public chats and reposts by public channels. */
 class stats_getStoryPublicForwards_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -29700,12 +26232,6 @@ class stats_getStoryPublicForwards_ extends Function_ {
     }
 }
 exports.stats_getStoryPublicForwards_ = stats_getStoryPublicForwards_;
-Object.defineProperty(stats_getStoryPublicForwards_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class stats_getBroadcastRevenueStats_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x75DFB671;
@@ -29746,12 +26272,6 @@ class stats_getBroadcastRevenueStats_ extends Function_ {
     }
 }
 exports.stats_getBroadcastRevenueStats_ = stats_getBroadcastRevenueStats_;
-Object.defineProperty(stats_getBroadcastRevenueStats_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class stats_getBroadcastRevenueWithdrawalUrl_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x2A65EF73;
@@ -29790,12 +26310,6 @@ class stats_getBroadcastRevenueWithdrawalUrl_ extends Function_ {
     }
 }
 exports.stats_getBroadcastRevenueWithdrawalUrl_ = stats_getBroadcastRevenueWithdrawalUrl_;
-Object.defineProperty(stats_getBroadcastRevenueWithdrawalUrl_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class stats_getBroadcastRevenueTransactions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x0069280F;
@@ -29843,12 +26357,6 @@ class stats_getBroadcastRevenueTransactions_ extends Function_ {
     }
 }
 exports.stats_getBroadcastRevenueTransactions_ = stats_getBroadcastRevenueTransactions_;
-Object.defineProperty(stats_getBroadcastRevenueTransactions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Export a [folder »](https://core.telegram.org/api/folders), creating a [chat folder deep link »](https://core.telegram.org/api/links#chat-folder-links). */
 class chatlists_exportChatlistInvite_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -29900,12 +26408,6 @@ class chatlists_exportChatlistInvite_ extends Function_ {
     }
 }
 exports.chatlists_exportChatlistInvite_ = chatlists_exportChatlistInvite_;
-Object.defineProperty(chatlists_exportChatlistInvite_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Delete a previously created [chat folder deep link »](https://core.telegram.org/api/links#chat-folder-links). */
 class chatlists_deleteExportedInvite_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -29947,12 +26449,6 @@ class chatlists_deleteExportedInvite_ extends Function_ {
     }
 }
 exports.chatlists_deleteExportedInvite_ = chatlists_deleteExportedInvite_;
-Object.defineProperty(chatlists_deleteExportedInvite_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Edit a [chat folder deep link »](https://core.telegram.org/api/links#chat-folder-links). */
 class chatlists_editExportedInvite_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30016,12 +26512,6 @@ class chatlists_editExportedInvite_ extends Function_ {
     }
 }
 exports.chatlists_editExportedInvite_ = chatlists_editExportedInvite_;
-Object.defineProperty(chatlists_editExportedInvite_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** List all [chat folder deep links »](https://core.telegram.org/api/links#chat-folder-links) associated to a folder */
 class chatlists_getExportedInvites_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30053,12 +26543,6 @@ class chatlists_getExportedInvites_ extends Function_ {
     }
 }
 exports.chatlists_getExportedInvites_ = chatlists_getExportedInvites_;
-Object.defineProperty(chatlists_getExportedInvites_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain information about a [chat folder deep link »](https://core.telegram.org/api/links#chat-folder-links). */
 class chatlists_checkChatlistInvite_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30090,12 +26574,6 @@ class chatlists_checkChatlistInvite_ extends Function_ {
     }
 }
 exports.chatlists_checkChatlistInvite_ = chatlists_checkChatlistInvite_;
-Object.defineProperty(chatlists_checkChatlistInvite_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Import a [chat folder deep link »](https://core.telegram.org/api/links#chat-folder-links), joining some or all the chats in the folder. */
 class chatlists_joinChatlistInvite_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30137,12 +26615,6 @@ class chatlists_joinChatlistInvite_ extends Function_ {
     }
 }
 exports.chatlists_joinChatlistInvite_ = chatlists_joinChatlistInvite_;
-Object.defineProperty(chatlists_joinChatlistInvite_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Fetch new chats associated with an imported [chat folder deep link »](https://core.telegram.org/api/links#chat-folder-links). Must be invoked at most every `chatlist_update_period` seconds (as per the related [client configuration parameter »](https://core.telegram.org/api/config#chatlist-update-period)). */
 class chatlists_getChatlistUpdates_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30174,12 +26646,6 @@ class chatlists_getChatlistUpdates_ extends Function_ {
     }
 }
 exports.chatlists_getChatlistUpdates_ = chatlists_getChatlistUpdates_;
-Object.defineProperty(chatlists_getChatlistUpdates_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Join channels and supergroups recently added to a [chat folder deep link »](https://core.telegram.org/api/links#chat-folder-links). */
 class chatlists_joinChatlistUpdates_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30221,12 +26687,6 @@ class chatlists_joinChatlistUpdates_ extends Function_ {
     }
 }
 exports.chatlists_joinChatlistUpdates_ = chatlists_joinChatlistUpdates_;
-Object.defineProperty(chatlists_joinChatlistUpdates_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Dismiss new pending peers recently added to a [chat folder deep link »](https://core.telegram.org/api/links#chat-folder-links). */
 class chatlists_hideChatlistUpdates_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30258,12 +26718,6 @@ class chatlists_hideChatlistUpdates_ extends Function_ {
     }
 }
 exports.chatlists_hideChatlistUpdates_ = chatlists_hideChatlistUpdates_;
-Object.defineProperty(chatlists_hideChatlistUpdates_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns identifiers of pinned or always included chats from a chat folder imported using a [chat folder deep link »](https://core.telegram.org/api/links#chat-folder-links), which are suggested to be left when the chat folder is deleted. */
 class chatlists_getLeaveChatlistSuggestions_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30295,12 +26749,6 @@ class chatlists_getLeaveChatlistSuggestions_ extends Function_ {
     }
 }
 exports.chatlists_getLeaveChatlistSuggestions_ = chatlists_getLeaveChatlistSuggestions_;
-Object.defineProperty(chatlists_getLeaveChatlistSuggestions_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Delete a folder imported using a [chat folder deep link »](https://core.telegram.org/api/links#chat-folder-links) */
 class chatlists_leaveChatlist_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30342,12 +26790,6 @@ class chatlists_leaveChatlist_ extends Function_ {
     }
 }
 exports.chatlists_leaveChatlist_ = chatlists_leaveChatlist_;
-Object.defineProperty(chatlists_leaveChatlist_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Check whether we can post stories as the specified peer. */
 class stories_canSendStory_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30379,12 +26821,6 @@ class stories_canSendStory_ extends Function_ {
     }
 }
 exports.stories_canSendStory_ = stories_canSendStory_;
-Object.defineProperty(stories_canSendStory_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Uploads a [Telegram Story](https://core.telegram.org/api/stories). */
 class stories_sendStory_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30538,12 +26974,6 @@ class stories_sendStory_ extends Function_ {
     }
 }
 exports.stories_sendStory_ = stories_sendStory_;
-Object.defineProperty(stories_sendStory_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Edit an uploaded [story](https://core.telegram.org/api/stories) */
 class stories_editStory_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30637,12 +27067,6 @@ class stories_editStory_ extends Function_ {
     }
 }
 exports.stories_editStory_ = stories_editStory_;
-Object.defineProperty(stories_editStory_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Deletes some posted [stories](https://core.telegram.org/api/stories). */
 class stories_deleteStories_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30684,12 +27108,6 @@ class stories_deleteStories_ extends Function_ {
     }
 }
 exports.stories_deleteStories_ = stories_deleteStories_;
-Object.defineProperty(stories_deleteStories_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Pin or unpin one or more stories */
 class stories_togglePinned_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30741,12 +27159,6 @@ class stories_togglePinned_ extends Function_ {
     }
 }
 exports.stories_togglePinned_ = stories_togglePinned_;
-Object.defineProperty(stories_togglePinned_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Fetch the List of active (or active and hidden) stories, see [here »](https://core.telegram.org/api/stories#watching-stories) for more info on watching stories. */
 class stories_getAllStories_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30800,12 +27212,6 @@ class stories_getAllStories_ extends Function_ {
     }
 }
 exports.stories_getAllStories_ = stories_getAllStories_;
-Object.defineProperty(stories_getAllStories_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Fetch the [stories](https://core.telegram.org/api/stories#pinned-or-archived-stories) pinned on a peer's profile. */
 class stories_getPinnedStories_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30857,12 +27263,6 @@ class stories_getPinnedStories_ extends Function_ {
     }
 }
 exports.stories_getPinnedStories_ = stories_getPinnedStories_;
-Object.defineProperty(stories_getPinnedStories_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Fetch the [story archive »](https://core.telegram.org/api/stories#pinned-or-archived-stories) of a peer we control. */
 class stories_getStoriesArchive_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30914,12 +27314,6 @@ class stories_getStoriesArchive_ extends Function_ {
     }
 }
 exports.stories_getStoriesArchive_ = stories_getStoriesArchive_;
-Object.defineProperty(stories_getStoriesArchive_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain full info about a set of [stories](https://core.telegram.org/api/stories) by their IDs. */
 class stories_getStoriesByID_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30961,12 +27355,6 @@ class stories_getStoriesByID_ extends Function_ {
     }
 }
 exports.stories_getStoriesByID_ = stories_getStoriesByID_;
-Object.defineProperty(stories_getStoriesByID_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Hide the active stories of a specific peer, preventing them from being displayed on the action bar on the homescreen. */
 class stories_toggleAllStoriesHidden_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -30998,12 +27386,6 @@ class stories_toggleAllStoriesHidden_ extends Function_ {
     }
 }
 exports.stories_toggleAllStoriesHidden_ = stories_toggleAllStoriesHidden_;
-Object.defineProperty(stories_toggleAllStoriesHidden_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Mark all stories up to a certain ID as read, for a given peer; will emit an [updateReadStories](https://core.telegram.org/constructor/updateReadStories) update to all logged-in sessions. */
 class stories_readStories_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31045,12 +27427,6 @@ class stories_readStories_ extends Function_ {
     }
 }
 exports.stories_readStories_ = stories_readStories_;
-Object.defineProperty(stories_readStories_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Increment the view counter of one or more stories. */
 class stories_incrementStoryViews_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31092,12 +27468,6 @@ class stories_incrementStoryViews_ extends Function_ {
     }
 }
 exports.stories_incrementStoryViews_ = stories_incrementStoryViews_;
-Object.defineProperty(stories_incrementStoryViews_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain the list of users that have viewed a specific [story we posted](https://core.telegram.org/api/stories) */
 class stories_getStoryViewsList_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31201,12 +27571,6 @@ class stories_getStoryViewsList_ extends Function_ {
     }
 }
 exports.stories_getStoryViewsList_ = stories_getStoryViewsList_;
-Object.defineProperty(stories_getStoryViewsList_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain info about the view count, forward count, reactions and recent viewers of one or more [stories](https://core.telegram.org/api/stories). */
 class stories_getStoriesViews_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31248,12 +27612,6 @@ class stories_getStoriesViews_ extends Function_ {
     }
 }
 exports.stories_getStoriesViews_ = stories_getStoriesViews_;
-Object.defineProperty(stories_getStoriesViews_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Generate a [story deep link](https://core.telegram.org/api/links#story-links) for a specific story */
 class stories_exportStoryLink_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31295,12 +27653,6 @@ class stories_exportStoryLink_ extends Function_ {
     }
 }
 exports.stories_exportStoryLink_ = stories_exportStoryLink_;
-Object.defineProperty(stories_exportStoryLink_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Report a story. */
 class stories_report_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31362,12 +27714,6 @@ class stories_report_ extends Function_ {
     }
 }
 exports.stories_report_ = stories_report_;
-Object.defineProperty(stories_report_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Activates [stories stealth mode](https://core.telegram.org/api/stories#stealth-mode), see [here »](https://core.telegram.org/api/stories#stealth-mode) for more info. */
 class stories_activateStealthMode_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31411,12 +27757,6 @@ class stories_activateStealthMode_ extends Function_ {
     }
 }
 exports.stories_activateStealthMode_ = stories_activateStealthMode_;
-Object.defineProperty(stories_activateStealthMode_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** React to a story. */
 class stories_sendReaction_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31480,12 +27820,6 @@ class stories_sendReaction_ extends Function_ {
     }
 }
 exports.stories_sendReaction_ = stories_sendReaction_;
-Object.defineProperty(stories_sendReaction_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Fetch the full active [story list](https://core.telegram.org/api/stories#watching-stories) of a specific peer. */
 class stories_getPeerStories_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31517,12 +27851,6 @@ class stories_getPeerStories_ extends Function_ {
     }
 }
 exports.stories_getPeerStories_ = stories_getPeerStories_;
-Object.defineProperty(stories_getPeerStories_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain the latest read story ID for all peers when first logging in, returned as a list of [updateReadStories](https://core.telegram.org/constructor/updateReadStories) updates, see [here »](https://core.telegram.org/api/stories#watching-stories) for more info. */
 class stories_getAllReadPeerStories_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31542,12 +27870,6 @@ class stories_getAllReadPeerStories_ extends Function_ {
     }
 }
 exports.stories_getAllReadPeerStories_ = stories_getAllReadPeerStories_;
-Object.defineProperty(stories_getAllReadPeerStories_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get the IDs of the maximum read stories for a set of peers. */
 class stories_getPeerMaxIDs_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31579,12 +27901,6 @@ class stories_getPeerMaxIDs_ extends Function_ {
     }
 }
 exports.stories_getPeerMaxIDs_ = stories_getPeerMaxIDs_;
-Object.defineProperty(stories_getPeerMaxIDs_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain a list of channels where the user can post [stories](https://core.telegram.org/api/stories) */
 class stories_getChatsToSend_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31604,12 +27920,6 @@ class stories_getChatsToSend_ extends Function_ {
     }
 }
 exports.stories_getChatsToSend_ = stories_getChatsToSend_;
-Object.defineProperty(stories_getChatsToSend_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Hide the active stories of a user, preventing them from being displayed on the action bar on the homescreen, see [here »](https://core.telegram.org/api/stories#hiding-stories-of-other-users) for more info. */
 class stories_togglePeerStoriesHidden_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31651,12 +27961,6 @@ class stories_togglePeerStoriesHidden_ extends Function_ {
     }
 }
 exports.stories_togglePeerStoriesHidden_ = stories_togglePeerStoriesHidden_;
-Object.defineProperty(stories_togglePeerStoriesHidden_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Get the [reaction](https://core.telegram.org/api/reactions) and interaction list of a [story](https://core.telegram.org/api/stories) posted to a channel, along with the sender of each reaction. */
 class stories_getStoryReactionsList_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31740,12 +28044,6 @@ class stories_getStoryReactionsList_ extends Function_ {
     }
 }
 exports.stories_getStoryReactionsList_ = stories_getStoryReactionsList_;
-Object.defineProperty(stories_getStoryReactionsList_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtains info about the boosts that were applied to a certain channel (admins only) */
 class premium_getBoostsList_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31809,12 +28107,6 @@ class premium_getBoostsList_ extends Function_ {
     }
 }
 exports.premium_getBoostsList_ = premium_getBoostsList_;
-Object.defineProperty(premium_getBoostsList_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Obtain which peers are we currently [boosting](https://core.telegram.org/api/boost), and how many [boost slots](https://core.telegram.org/api/boost) we have left. */
 class premium_getMyBoosts_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31834,12 +28126,6 @@ class premium_getMyBoosts_ extends Function_ {
     }
 }
 exports.premium_getMyBoosts_ = premium_getMyBoosts_;
-Object.defineProperty(premium_getMyBoosts_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Apply one or more [boosts »](https://core.telegram.org/api/boost) to a peer. */
 class premium_applyBoost_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31883,12 +28169,6 @@ class premium_applyBoost_ extends Function_ {
     }
 }
 exports.premium_applyBoost_ = premium_applyBoost_;
-Object.defineProperty(premium_applyBoost_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Gets the current [number of boosts](https://core.telegram.org/api/boost) of a channel. */
 class premium_getBoostsStatus_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31920,12 +28200,6 @@ class premium_getBoostsStatus_ extends Function_ {
     }
 }
 exports.premium_getBoostsStatus_ = premium_getBoostsStatus_;
-Object.defineProperty(premium_getBoostsStatus_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 /** Returns the lists of boost that were applied to a channel by a specific user (admins only) */
 class premium_getUserBoosts_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
@@ -31967,12 +28241,6 @@ class premium_getUserBoosts_ extends Function_ {
     }
 }
 exports.premium_getUserBoosts_ = premium_getUserBoosts_;
-Object.defineProperty(premium_getUserBoosts_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class smsjobs_isEligibleToJoin_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x0EDC39D0;
@@ -31991,12 +28259,6 @@ class smsjobs_isEligibleToJoin_ extends Function_ {
     }
 }
 exports.smsjobs_isEligibleToJoin_ = smsjobs_isEligibleToJoin_;
-Object.defineProperty(smsjobs_isEligibleToJoin_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class smsjobs_join_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xA74ECE2D;
@@ -32015,12 +28277,6 @@ class smsjobs_join_ extends Function_ {
     }
 }
 exports.smsjobs_join_ = smsjobs_join_;
-Object.defineProperty(smsjobs_join_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class smsjobs_leave_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x9898AD73;
@@ -32039,12 +28295,6 @@ class smsjobs_leave_ extends Function_ {
     }
 }
 exports.smsjobs_leave_ = smsjobs_leave_;
-Object.defineProperty(smsjobs_leave_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class smsjobs_updateSettings_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x093FA0BF;
@@ -32076,12 +28326,6 @@ class smsjobs_updateSettings_ extends Function_ {
     }
 }
 exports.smsjobs_updateSettings_ = smsjobs_updateSettings_;
-Object.defineProperty(smsjobs_updateSettings_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class smsjobs_getStatus_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x10A698E8;
@@ -32100,12 +28344,6 @@ class smsjobs_getStatus_ extends Function_ {
     }
 }
 exports.smsjobs_getStatus_ = smsjobs_getStatus_;
-Object.defineProperty(smsjobs_getStatus_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class smsjobs_getSmsJob_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x778D902F;
@@ -32135,12 +28373,6 @@ class smsjobs_getSmsJob_ extends Function_ {
     }
 }
 exports.smsjobs_getSmsJob_ = smsjobs_getSmsJob_;
-Object.defineProperty(smsjobs_getSmsJob_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class smsjobs_finishJob_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0x4F1EBF24;
@@ -32181,12 +28413,6 @@ class smsjobs_finishJob_ extends Function_ {
     }
 }
 exports.smsjobs_finishJob_ = smsjobs_finishJob_;
-Object.defineProperty(smsjobs_finishJob_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 class fragment_getCollectibleInfo_ extends Function_ {
     get [_1_tl_object_js_1.id]() {
         return 0xBE1E85BA;
@@ -32216,12 +28442,6 @@ class fragment_getCollectibleInfo_ extends Function_ {
     }
 }
 exports.fragment_getCollectibleInfo_ = fragment_getCollectibleInfo_;
-Object.defineProperty(fragment_getCollectibleInfo_, "__F", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: null
-});
 exports.functions = {
     Function: Function_,
     req_pq_multi: req_pq_multi_,

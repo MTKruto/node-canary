@@ -29,26 +29,26 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _StorageLocalStorage_prefix;
+var _StorageLocalStorage_prefix, _StorageLocalStorage_path, _StorageLocalStorage_storage;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StorageLocalStorage = void 0;
+const node_localstorage_1 = require("node-localstorage");
 const _1_utilities_js_1 = require("./1_utilities.js");
 class StorageLocalStorage {
-    constructor(prefix) {
+    constructor(path) {
         _StorageLocalStorage_prefix.set(this, void 0);
-        if (typeof localStorage === "undefined") {
-            throw new Error("Unavailable in current environment");
-        }
-        if (prefix.length <= 0) {
-            throw new Error("Empty prefix");
-        }
-        __classPrivateFieldSet(this, _StorageLocalStorage_prefix, prefix, "f");
+        _StorageLocalStorage_path.set(this, void 0);
+        _StorageLocalStorage_storage.set(this, void 0);
+        __classPrivateFieldSet(this, _StorageLocalStorage_prefix, "main", "f");
+        __classPrivateFieldSet(this, _StorageLocalStorage_storage, new node_localstorage_1.LocalStorage(__classPrivateFieldSet(this, _StorageLocalStorage_path, path, "f")), "f");
     }
     get prefix() {
         return __classPrivateFieldGet(this, _StorageLocalStorage_prefix, "f");
     }
     branch(id) {
-        return new StorageLocalStorage(this.prefix + "S__" + id);
+        const storage = new StorageLocalStorage(__classPrivateFieldGet(this, _StorageLocalStorage_path, "f"));
+        __classPrivateFieldSet(storage, _StorageLocalStorage_prefix, this.prefix + "S__" + id, "f");
+        return storage;
     }
     initialize() {
     }
@@ -60,7 +60,7 @@ class StorageLocalStorage {
     }
     get(key_) {
         const key = this.prefix + (0, _1_utilities_js_1.toString)(key_);
-        const value = localStorage.getItem(key);
+        const value = __classPrivateFieldGet(this, _StorageLocalStorage_storage, "f").getItem(key);
         if (value != null) {
             return (0, _1_utilities_js_1.fromString)(value);
         }
@@ -69,7 +69,7 @@ class StorageLocalStorage {
         }
     }
     *getMany(filter, params) {
-        let entries = Object.entries(localStorage).sort(([a], [b]) => a.localeCompare(b));
+        let entries = Object.entries(__classPrivateFieldGet(this, _StorageLocalStorage_storage, "f")).sort(([a], [b]) => a.localeCompare(b));
         if (params?.reverse) {
             entries.reverse();
         }
@@ -101,10 +101,10 @@ class StorageLocalStorage {
     set(key_, value) {
         const key = this.prefix + (0, _1_utilities_js_1.toString)(key_);
         if (value != null) {
-            localStorage.setItem(key, (0, _1_utilities_js_1.toString)(value));
+            __classPrivateFieldGet(this, _StorageLocalStorage_storage, "f").setItem(key, (0, _1_utilities_js_1.toString)(value));
         }
         else {
-            localStorage.removeItem(key);
+            __classPrivateFieldGet(this, _StorageLocalStorage_storage, "f").removeItem(key);
         }
     }
     incr(key, by) {
@@ -112,4 +112,4 @@ class StorageLocalStorage {
     }
 }
 exports.StorageLocalStorage = StorageLocalStorage;
-_StorageLocalStorage_prefix = new WeakMap();
+_StorageLocalStorage_prefix = new WeakMap(), _StorageLocalStorage_path = new WeakMap(), _StorageLocalStorage_storage = new WeakMap();

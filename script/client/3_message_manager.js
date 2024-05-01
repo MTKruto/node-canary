@@ -1199,7 +1199,7 @@ _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(
     const topMsgId = params?.messageThreadId;
     const replyToMsgId = params?.replyToMessageId;
     return replyToMsgId !== undefined ? new _2_tl_js_1.types.InputReplyToMessage({ reply_to_msg_id: replyToMsgId, top_msg_id: topMsgId, quote_text: params?.replyQuote?.text, quote_entities: await Promise.all(params?.replyQuote?.entities.map((v) => (0, _3_types_js_2.messageEntityToTlObject)(v, __classPrivateFieldGet(this, _MessageManager_c, "f").getEntity)) ?? []), quote_offset: params?.replyQuote?.offset }) : undefined;
-}, _MessageManager_sendDocumentInner = async function _MessageManager_sendDocumentInner(chatId, document, params, fileType, otherAttribs, urlSupported = false, expectedMimeTypes) {
+}, _MessageManager_sendDocumentInner = async function _MessageManager_sendDocumentInner(chatId, document, params, fileType, otherAttribs, urlSupported = true, expectedMimeTypes) {
     let media = null;
     const spoiler = params?.hasSpoiler ? true : undefined;
     const ttl_seconds = params && "selfDestruct" in params && typeof params.selfDestruct !== undefined ? (0, _3_types_js_1.selfDestructOptionToInt)(params.selfDestruct) : undefined;

@@ -25,7 +25,7 @@ import { MessageContent } from "./1_message_content.js";
 import { ReplyMarkupInlineKeyboard } from "./3_reply_markup.js";
 import { Thumbnail } from "./0_thumbnail.js";
 /** @unlisted */
-type InlineQueryResultType = "article" | "audio" | "document" | "gif" | "mpeg4Gif" | "photo" | "sticker" | "video" | "voice" | "game" | "location" | "venue";
+export type InlineQueryResultType = "article" | "audio" | "document" | "gif" | "mpeg4Gif" | "photo" | "sticker" | "video" | "voice" | "game" | "location" | "venue";
 /** @unlisted */
 export interface _InlineQueryResultBase {
     type: InlineQueryResultType;
@@ -214,5 +214,4 @@ export declare function inlineQueryResultToTlObject(result_: InlineQueryResult, 
     parseMode?: ParseMode;
     entities?: MessageEntity[];
 }) => Promise<readonly [string, any[] | undefined]>, usernameResolver: UsernameResolver): Promise<enums.InputBotInlineResult>;
-export {};
 //# sourceMappingURL=4_inline_query_result.d.ts.map

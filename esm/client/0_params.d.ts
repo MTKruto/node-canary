@@ -227,8 +227,6 @@ export interface SendVideoNoteParams extends _CaptionCommon, _ThumbnailCommon, _
     duration?: number;
     /** The video's width and height (diameter). */
     length?: number;
-    /** A thumbnail of the file to attach. Can't be larger than 200kB or have a height exceeding 320 pixels. Can't reuse an existing file for it and can only be uploaded directly. */
-    thumbnail?: FileSource;
 }
 export interface SendLocationParams extends _SendCommon {
     /** The accuracy radius of the location in meters. Must be in the range of 0-1500. */

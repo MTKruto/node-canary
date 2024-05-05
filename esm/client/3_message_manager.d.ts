@@ -76,9 +76,9 @@ export declare class MessageManager {
     unpinMessage(chatId: ID, messageId: number): Promise<void>;
     unpinMessages(chatId: ID): Promise<void>;
     setAvailableReactions(chatId: ID, availableReactions: "none" | "all" | Reaction[]): Promise<void>;
-    setReactions(chatId: number, messageId: number, reactions: Reaction[], params?: SetReactionsParams): Promise<void>;
-    addReaction(chatId: number, messageId: number, reaction: Reaction, params?: AddReactionParams): Promise<void>;
-    removeReaction(chatId: number, messageId: number, reaction: Reaction): Promise<void>;
+    setReactions(chatId: ID, messageId: number, reactions: Reaction[], params?: SetReactionsParams): Promise<void>;
+    addReaction(chatId: ID, messageId: number, reaction: Reaction, params?: AddReactionParams): Promise<void>;
+    removeReaction(chatId: ID, messageId: number, reaction: Reaction): Promise<void>;
     static canHandleUpdate(update: enums.Update): update is MessageManagerUpdate;
     handleUpdate(update: MessageManagerUpdate): Promise<Update | null>;
     sendChatAction(chatId: ID, action: ChatAction, params?: SendChatActionParams): Promise<void>;

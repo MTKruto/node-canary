@@ -132,7 +132,7 @@ async function getReply(message_, chat, getMessage) {
             L.warning("couldn't get replied message");
         }
     }
-    return { replyToMessage: undefined, threadId: undefined, isTopicMessage: undefined };
+    return { replyToMessage: undefined, threadId: undefined, isTopicMessage: false };
 }
 async function constructServiceMessage(message_, chat, getEntity, getMessage) {
     const message = {
@@ -321,7 +321,7 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
         date: (0, _1_utilities_js_1.fromUnixTimestamp)(message_.date),
         views: message_.views,
         forwards: message_.forwards,
-        isTopicMessage: false,
+        isTopicMessage: message_.reply_to && message_.reply_to instanceof _2_tl_js_1.types.MessageReplyHeader && message_.reply_to.reply_to_top_id ? true : false,
         hasProtectedContent: message_.noforwards || false,
         senderBoostCount: message_.from_boosts_applied,
     };

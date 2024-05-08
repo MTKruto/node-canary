@@ -26,6 +26,7 @@ function constructVideoChat(call) {
     const id = String(call.id);
     if (call instanceof _2_tl_js_1.types.GroupCallDiscarded) {
         return {
+            type: "ended",
             id,
             duration: call.duration,
         };
@@ -36,6 +37,7 @@ function constructVideoChat(call) {
         const participantCount = call.participants_count;
         if (call.schedule_date) {
             return {
+                type: "scheduled",
                 id,
                 title,
                 scheduledFor: (0, _1_utilities_js_1.fromUnixTimestamp)(call.schedule_date),
@@ -45,6 +47,7 @@ function constructVideoChat(call) {
         }
         else {
             return {
+                type: "active",
                 id,
                 title,
                 liveStream,

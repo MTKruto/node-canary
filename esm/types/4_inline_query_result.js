@@ -61,7 +61,8 @@ export function constructInlineQueryResult(result) {
             title,
             description,
             messageContent: cleanObject({
-                messageText: result.send_message.message,
+                type: "text",
+                text: result.send_message.message,
                 entities: (result.send_message.entities ?? []).map(constructMessageEntity).filter((v) => v != null),
                 linkPreview: result.send_message instanceof types.InputBotInlineMessageMediaWebPage ? { url: result.send_message.url, smallMedia: result.send_message.force_small_media, largeMedia: result.send_message.force_large_media, aboveText: result.send_message.invert_media } : undefined,
             }),
@@ -106,7 +107,8 @@ export function constructInlineQueryResult(result) {
         }
         const messageContent = result.send_message.message
             ? {
-                messageText: result.send_message.message,
+                type: "text",
+                text: result.send_message.message,
                 entities: (result.send_message.entities ?? []).map(constructMessageEntity).filter((v) => v != null),
             }
             : undefined;
@@ -422,10 +424,10 @@ export async function inlineQueryResultToTlObject(result_, parseText, usernameRe
         });
     }
     else if (result_.type == "article") {
-        if (!("messageText" in result_.messageContent)) {
+        if (!("text" in result_.messageContent)) {
             unreachable();
         }
-        const [message, entities] = await parseText(result_.messageContent.messageText, { entities: result_.messageContent.entities, parseMode: result_.messageContent.parseMode });
+        const [message, entities] = await parseText(result_.messageContent.text, { entities: result_.messageContent.entities, parseMode: result_.messageContent.parseMode });
         const noWebpage = result_.messageContent?.linkPreview?.disable ? true : undefined;
         const invertMedia = result_.messageContent?.linkPreview?.aboveText ? true : undefined;
         let sendMessage;

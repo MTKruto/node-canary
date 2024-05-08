@@ -23,10 +23,12 @@ import { KeyboardButton } from "./1_keyboard_button.js";
 import { InlineKeyboardButton } from "./2_inline_keyboard_button.js";
 /** @unlisted */
 export interface ReplyMarkupInlineKeyboard {
+    /** @discriminator */
     inlineKeyboard: InlineKeyboardButton[][];
 }
 /** @unlisted */
 export interface ReplyMarkupKeyboard {
+    /** @discriminator */
     keyboard: KeyboardButton[][];
     isPersistent?: boolean;
     resizeKeyboard?: boolean;
@@ -39,7 +41,7 @@ export interface ReplyMarkupKeyboard {
  * @unlisted
  */
 export interface ReplyMarkupRemoveKeyboard {
-    /** Differentiate from other reply markup types. */
+    /** Differentiate from other reply markup types. @discriminator */
     removeKeyboard: true;
     /** Whether to only affect specific users. If true, only users that were mentioned will be affected along with the author of the replied message if any. */
     selective?: boolean;
@@ -49,7 +51,7 @@ export interface ReplyMarkupRemoveKeyboard {
  * @unlisted
  */
 export interface ReplyMarkupForceReply {
-    /** Differentiate from other reply markup types. */
+    /** Differentiate from other reply markup types. @discriminator */
     forceReply: true;
     /** A placeholder to be shown in the client's message box. */
     inputFieldPlaceholder?: string;

@@ -42,16 +42,17 @@ export function constructChatPhoto(photo, chatId, chatAccessHash) {
             bigFileId,
             bigFileUniqueId,
             hasVideo: photo.has_video || false,
+            personal: false,
         });
     }
     else {
         return cleanObject({
-            personal: photo.personal ? true : undefined,
             smallFileId,
             smallFileUniqueId,
             bigFileId,
             bigFileUniqueId,
             hasVideo: photo.has_video || false,
+            personal: photo.personal ? true : false,
         });
     }
 }

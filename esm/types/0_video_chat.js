@@ -23,6 +23,7 @@ export function constructVideoChat(call) {
     const id = String(call.id);
     if (call instanceof types.GroupCallDiscarded) {
         return {
+            type: "ended",
             id,
             duration: call.duration,
         };
@@ -33,6 +34,7 @@ export function constructVideoChat(call) {
         const participantCount = call.participants_count;
         if (call.schedule_date) {
             return {
+                type: "scheduled",
                 id,
                 title,
                 scheduledFor: fromUnixTimestamp(call.schedule_date),
@@ -42,6 +44,7 @@ export function constructVideoChat(call) {
         }
         else {
             return {
+                type: "active",
                 id,
                 title,
                 liveStream,

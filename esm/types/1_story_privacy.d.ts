@@ -21,18 +21,22 @@ import { enums } from "../2_tl.js";
 import { EntityGetter } from "./_getters.js";
 /** @unlisted */
 export interface StoryPrivacyEveryone {
+    /** @discriminator */
     everyoneExcept: number[];
 }
 /** @unlisted */
 export interface StoryPrivacyConctacts {
+    /** @discriminator */
     contactsExcept: number[];
 }
 /** @unlisted */
 export interface StoryPrivacyCloseFriends {
+    /** @discriminator */
     closeFriends: true;
 }
 /** @unlisted */
 export interface StoryPrivacyOnly {
+    /** @discriminator */
     only: number[];
 }
 /** A story's privacy choice. */

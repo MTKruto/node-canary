@@ -44,7 +44,7 @@ import { VideoChat } from "./0_video_chat.js";
  * @unlisted
  */
 export interface UpdateConnectionState {
-    /** The client's new connection state. */
+    /** The client's new connection state. @discriminator */
     connectionState: ConnectionState;
 }
 /**
@@ -63,7 +63,7 @@ export interface UpdateConnectionState {
  * @unlisted
  */
 export interface UpdateAuthorizationState {
-    /** The client's new authorization state. */
+    /** The client's new authorization state. @discriminator */
     authorizationState: AuthorizationState;
 }
 /**
@@ -88,7 +88,7 @@ export interface UpdateAuthorizationState {
  * @unlisted
  */
 export interface UpdateNewMessage {
-    /** The sent or received message. */
+    /** The sent or received message. @discriminator */
     message: Message;
 }
 /**
@@ -103,7 +103,7 @@ export interface UpdateNewMessage {
  * @unlisted
  */
 export interface UpdateEditedMessage {
-    /** The edited message. */
+    /** The edited message. @discriminator */
     editedMessage: Message;
 }
 /**
@@ -119,7 +119,7 @@ export interface UpdateEditedMessage {
  * @unlisted
  */
 export interface UpdateDeletedMessages {
-    /** The deleted messages. */
+    /** The deleted messages. @discriminator */
     deletedMessages: MessageReference[];
     businessConnectionId?: string;
 }
@@ -134,7 +134,7 @@ export interface UpdateDeletedMessages {
  * @unlisted
  */
 export interface UpdateCallbackQuery {
-    /** The received callback query. */
+    /** The received callback query. @discriminator */
     callbackQuery: CallbackQuery;
 }
 /**
@@ -149,7 +149,7 @@ export interface UpdateCallbackQuery {
  * @unlisted
  */
 export interface UpdateInlineQuery {
-    /** The received inline query. */
+    /** The received inline query. @discriminator */
     inlineQuery: InlineQuery;
 }
 /**
@@ -157,7 +157,7 @@ export interface UpdateInlineQuery {
  * @unlisted
  */
 export interface UpdateChosenInlineResult {
-    /** The chosen inline query result. */
+    /** The chosen inline query result. @discriminator */
     chosenInlineResult: ChosenInlineResult;
 }
 /**
@@ -165,7 +165,7 @@ export interface UpdateChosenInlineResult {
  * @unlisted
  */
 export interface UpdateNewChat {
-    /** The newly added chat. */
+    /** The newly added chat. @discriminator */
     newChat: ChatListItem;
 }
 /**
@@ -173,6 +173,7 @@ export interface UpdateNewChat {
  * @unlisted
  */
 export interface UpdateEditedChat {
+    /** @discriminator */
     editedChat: ChatListItem;
 }
 /**
@@ -180,7 +181,7 @@ export interface UpdateEditedChat {
  * @unlisted
  */
 export interface UpdateDeletedChat {
-    /** The chat that was deleted. */
+    /** The chat that was deleted. @discriminator */
     deletedChat: {
         chatId: number;
     };
@@ -190,7 +191,7 @@ export interface UpdateDeletedChat {
  * @unlisted
  */
 export interface UpdateMessageInteractions {
-    /** The new message interactions. */
+    /** The new message interactions. @discriminator */
     messageInteractions: MessageInteractions;
 }
 /**
@@ -198,7 +199,7 @@ export interface UpdateMessageInteractions {
  * @unlisted
  */
 export interface UpdateMessageReactionCount {
-    /** The new message reactions. */
+    /** The new message reactions. @discriminator */
     messageReactionCount: MessageReactionCount;
 }
 /**
@@ -206,6 +207,7 @@ export interface UpdateMessageReactionCount {
  * @unlisted
  */
 export interface UpdateMessageReactions {
+    /** @discriminator */
     messageReactions: MessageReactions;
 }
 /**
@@ -213,6 +215,7 @@ export interface UpdateMessageReactions {
  * @unlisted
  */
 export interface UpdateChatMember {
+    /** @discriminator */
     chatMember: ChatMemberUpdated;
 }
 /**
@@ -220,6 +223,7 @@ export interface UpdateChatMember {
  * @unlisted
  */
 export interface UpdateMyChatMember {
+    /** @discriminator */
     myChatMember: ChatMemberUpdated;
 }
 /**
@@ -227,6 +231,7 @@ export interface UpdateMyChatMember {
  * @unlisted
  */
 export interface UpdateDeletedStory {
+    /** @discriminator */
     deletedStory: StoryReference;
 }
 /**
@@ -234,6 +239,7 @@ export interface UpdateDeletedStory {
  * @unlisted
  */
 export interface UpdateNewStory {
+    /** @discriminator */
     story: Story;
 }
 /**
@@ -241,6 +247,7 @@ export interface UpdateNewStory {
  * @unlisted
  */
 export interface UpdateBusinessConnection {
+    /** @discriminator */
     businessConnection: BusinessConnection;
 }
 /**
@@ -248,6 +255,7 @@ export interface UpdateBusinessConnection {
  * @unlisted
  */
 export interface UpdateVideoChat {
+    /** @discriminator */
     videoChat: VideoChat;
 }
 /** @unlisted */

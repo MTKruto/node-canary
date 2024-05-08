@@ -22,6 +22,7 @@
  * @unlisted
  */
 export interface CallbackQueryQuestionGame {
+    /** @discriminator */
     type: "game";
 }
 /**
@@ -29,6 +30,7 @@ export interface CallbackQueryQuestionGame {
  * @unlisted
  */
 export interface CallbackQueryQuestionPassword {
+    /** @discriminator */
     type: "password";
     /** The target button's callback data. */
     data: string;
@@ -40,6 +42,7 @@ export interface CallbackQueryQuestionPassword {
  * @unlisted
  */
 export interface CallbackQueryQuestionButton {
+    /** @discriminator */
     type: "button";
     /** The target button's callback data. */
     data: string;

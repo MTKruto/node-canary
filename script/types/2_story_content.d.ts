@@ -22,14 +22,17 @@ import { Photo } from "./1_photo.js";
 import { Video } from "./1_video.js";
 /** @unlisted */
 export interface StoryContentPhoto {
+    /** @discriminator */
     photo: Photo;
 }
 /** @unlisted */
 export interface StoryContentVideo {
+    /** @discriminator */
     video: Video;
 }
 /** @unlisted */
 export interface StoryContentUnsupported {
+    /** @discriminator */
     unsupported: true;
 }
 /** A story content. */

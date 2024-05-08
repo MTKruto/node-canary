@@ -64,7 +64,8 @@ function constructInlineQueryResult(result) {
             title,
             description,
             messageContent: (0, _1_utilities_js_1.cleanObject)({
-                messageText: result.send_message.message,
+                type: "text",
+                text: result.send_message.message,
                 entities: (result.send_message.entities ?? []).map(_0_message_entity_js_1.constructMessageEntity).filter((v) => v != null),
                 linkPreview: result.send_message instanceof _2_tl_js_1.types.InputBotInlineMessageMediaWebPage ? { url: result.send_message.url, smallMedia: result.send_message.force_small_media, largeMedia: result.send_message.force_large_media, aboveText: result.send_message.invert_media } : undefined,
             }),
@@ -109,7 +110,8 @@ function constructInlineQueryResult(result) {
         }
         const messageContent = result.send_message.message
             ? {
-                messageText: result.send_message.message,
+                type: "text",
+                text: result.send_message.message,
                 entities: (result.send_message.entities ?? []).map(_0_message_entity_js_1.constructMessageEntity).filter((v) => v != null),
             }
             : undefined;
@@ -426,10 +428,10 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
         });
     }
     else if (result_.type == "article") {
-        if (!("messageText" in result_.messageContent)) {
+        if (!("text" in result_.messageContent)) {
             (0, _0_deps_js_1.unreachable)();
         }
-        const [message, entities] = await parseText(result_.messageContent.messageText, { entities: result_.messageContent.entities, parseMode: result_.messageContent.parseMode });
+        const [message, entities] = await parseText(result_.messageContent.text, { entities: result_.messageContent.entities, parseMode: result_.messageContent.parseMode });
         const noWebpage = result_.messageContent?.linkPreview?.disable ? true : undefined;
         const invertMedia = result_.messageContent?.linkPreview?.aboveText ? true : undefined;
         let sendMessage;

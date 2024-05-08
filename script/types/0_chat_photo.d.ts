@@ -18,8 +18,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { types } from "../2_tl.js";
-/** @unlisted */
-export interface _ChatPhotoBase {
+/** A chat photo. */
+export interface ChatPhoto {
     /** A file identifier that can be used to download or reuse the small version of the chat photo (160x160). */
     smallFileId: string;
     /** A file identifier that can be used to identify the small version of the chat photo (160x160). */
@@ -30,16 +30,8 @@ export interface _ChatPhotoBase {
     bigFileUniqueId: string;
     /** Whether the chat photo is animated. */
     hasVideo: boolean;
-}
-/** @unlisted */
-export interface ChatPhotoUser extends _ChatPhotoBase {
     /** Differentiates between user profile photos. */
-    personal: true;
+    personal: boolean;
 }
-/** @unlisted */
-export type ChatPhotoChat = _ChatPhotoBase;
-/** A chat photo. */
-export type ChatPhoto = ChatPhotoUser | ChatPhotoChat;
-export declare function constructChatPhoto(photo: types.ChatPhoto, chatId: number, chatAccessHash: bigint): ChatPhotoChat;
-export declare function constructChatPhoto(photo: types.UserProfilePhoto, chatId: number, chatAccessHash: bigint): ChatPhotoUser;
+export declare function constructChatPhoto(photo: types.UserProfilePhoto | types.ChatPhoto, chatId: number, chatAccessHash: bigint): ChatPhoto;
 //# sourceMappingURL=0_chat_photo.d.ts.map

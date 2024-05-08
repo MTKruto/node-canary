@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { types } from "../2_tl.js";
-import { ChatPhotoUser } from "./0_chat_photo.js";
+import { ChatPhoto } from "./0_chat_photo.js";
 /** A user. */
 export interface User {
     /** Unique identifier for this user or bot */
@@ -36,7 +36,7 @@ export interface User {
     /** The user's additional usernames. */
     also?: string[];
     /** The user's profile photo. */
-    photo?: ChatPhotoUser;
+    photo?: ChatPhoto;
     /** The user's [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag). */
     languageCode?: string;
     /** Whether the user has been identified as scam. */

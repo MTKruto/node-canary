@@ -45,16 +45,17 @@ function constructChatPhoto(photo, chatId, chatAccessHash) {
             bigFileId,
             bigFileUniqueId,
             hasVideo: photo.has_video || false,
+            personal: false,
         });
     }
     else {
         return (0, _1_utilities_js_1.cleanObject)({
-            personal: photo.personal ? true : undefined,
             smallFileId,
             smallFileUniqueId,
             bigFileId,
             bigFileUniqueId,
             hasVideo: photo.has_video || false,
+            personal: photo.personal ? true : false,
         });
     }
 }

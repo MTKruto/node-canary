@@ -121,9 +121,15 @@ export interface _MessageMediaBase extends _MessageBase {
  * @unlisted
  */
 export interface MessageText extends _MessageBase {
-    /** The text included in the message. @discriminator */
+    /**
+     * The text included in the message
+     * @discriminator
+     */
     text: string;
-    /** Entities of the text. @discriminator */
+    /**
+     * Entities of the text
+     * @discriminator
+     */
     entities: MessageEntity[];
     /** The message's link preview. */
     linkPreview?: LinkPreview;
@@ -140,7 +146,9 @@ export interface MessageLink extends _MessageBase {
 }
 /** @unlisted */
 export interface MessagePhoto extends _MessageMediaBase {
-    /** The photo included in the message. @discriminator */
+    /** The photo included in the message
+     * @discriminator
+     */
     photo: Photo;
 }
 /**
@@ -148,7 +156,10 @@ export interface MessagePhoto extends _MessageMediaBase {
  * @unlisted
  */
 export interface MessageDocument extends _MessageMediaBase {
-    /** The document included in the message. @discriminator */
+    /**
+     * The document included in the message
+     * @discriminator
+     */
     document: Document;
 }
 /**
@@ -156,7 +167,10 @@ export interface MessageDocument extends _MessageMediaBase {
  * @unlisted
  */
 export interface MessageVideo extends _MessageMediaBase {
-    /** The video included in the message. @discriminator */
+    /**
+     * The video included in the message
+     * @discriminator
+     */
     video: Video;
 }
 /**
@@ -164,7 +178,10 @@ export interface MessageVideo extends _MessageMediaBase {
  * @unlisted
  */
 export interface MessageSticker extends _MessageBase {
-    /** The sticker included in the message. @discriminator */
+    /**
+     * The sticker included in the message
+     * @discriminator
+     */
     sticker: Sticker;
 }
 /**
@@ -172,7 +189,10 @@ export interface MessageSticker extends _MessageBase {
  * @unlisted
  */
 export interface MessageAnimation extends _MessageMediaBase {
-    /** The animation included in the message. @discriminator */
+    /**
+     * The animation included in the message
+     * @discriminator
+     */
     animation: Animation;
 }
 /**
@@ -180,7 +200,10 @@ export interface MessageAnimation extends _MessageMediaBase {
  * @unlisted
  */
 export interface MessageVoice extends _MessageMediaBase {
-    /** The voice included in the message. @discriminator */
+    /**
+     * The voice included in the message
+     * @discriminator
+     */
     voice: Voice;
 }
 /**
@@ -188,7 +211,10 @@ export interface MessageVoice extends _MessageMediaBase {
  * @unlisted
  */
 export interface MessageAudio extends _MessageMediaBase {
-    /** The audio included in the message. @discriminator */
+    /**
+     * The audio included in the message
+     * @discriminator
+     */
     audio: Audio;
 }
 /**
@@ -196,7 +222,10 @@ export interface MessageAudio extends _MessageMediaBase {
  * @unlisted
  */
 export interface MessageDice extends _MessageBase {
-    /** The dice included in the message. @discriminator */
+    /**
+     * The dice included in the message
+     * @discriminator
+     */
     dice: Dice;
 }
 /**
@@ -204,7 +233,10 @@ export interface MessageDice extends _MessageBase {
  * @unlisted
  */
 export interface MessageVideoNote extends _MessageBase {
-    /** The video note included in the message. @discriminator */
+    /**
+     * The video note included in the message
+     * @discriminator
+     */
     videoNote: VideoNote;
 }
 /**
@@ -212,7 +244,10 @@ export interface MessageVideoNote extends _MessageBase {
  * @unlisted
  */
 export interface MessageContact extends _MessageBase {
-    /** The contact included in the message. @discriminator */
+    /**
+     * The contact included in the message
+     * @discriminator
+     */
     contact: Contact;
 }
 /**
@@ -220,7 +255,10 @@ export interface MessageContact extends _MessageBase {
  * @unlisted
  */
 export interface MessageGame extends _MessageBase {
-    /** The game included in the message. @discriminator */
+    /**
+     * The game included in the message
+     * @discriminator
+     */
     game: Game;
 }
 /**
@@ -228,7 +266,10 @@ export interface MessageGame extends _MessageBase {
  * @unlisted
  */
 export interface MessagePoll extends _MessageBase {
-    /** The poll included in the message. @discriminator */
+    /**
+     * The poll included in the message
+     * @discriminator
+     */
     poll: Poll;
 }
 /**
@@ -236,7 +277,10 @@ export interface MessagePoll extends _MessageBase {
  * @unlisted
  */
 export interface MessageVenue extends _MessageBase {
-    /** The venue included in the message. @discriminator */
+    /**
+     * The venue included in the message
+     * @discriminator
+     */
     venue: Venue;
 }
 /**
@@ -244,7 +288,10 @@ export interface MessageVenue extends _MessageBase {
  * @unlisted
  */
 export interface MessageLocation extends _MessageBase {
-    /** The location included in the message. @discriminator */
+    /**
+     * The location included in the message
+     * @discriminator
+     */
     location: Location;
 }
 /**
@@ -252,7 +299,10 @@ export interface MessageLocation extends _MessageBase {
  * @unlisted
  */
 export interface MessageNewChatMembers extends _MessageBase {
-    /** The new members of the chat. @discriminator */
+    /**
+     * The new members of the chat
+     * @discriminator
+     */
     newChatMembers: User[];
 }
 /**
@@ -260,7 +310,10 @@ export interface MessageNewChatMembers extends _MessageBase {
  * @unlisted
  */
 export interface MessageLeftChatMember extends _MessageBase {
-    /** The member who left the chat. @discriminator */
+    /**
+     * The member who left the chat
+     * @discriminator
+     */
     leftChatMember: User;
 }
 /**
@@ -268,7 +321,10 @@ export interface MessageLeftChatMember extends _MessageBase {
  * @unlisted
  */
 export interface MessageNewChatTitle extends _MessageBase {
-    /** The new title of the chat. @discriminator */
+    /**
+     * The new title of the chat
+     * @discriminator
+     */
     newChatTitle: string;
 }
 /**
@@ -276,7 +332,10 @@ export interface MessageNewChatTitle extends _MessageBase {
  * @unlisted
  */
 export interface MessageNewChatPhoto extends _MessageBase {
-    /** The new photo of the chat. @discriminator */
+    /**
+     * The new photo of the chat
+     * @discriminator
+     */
     newChatPhoto: Photo;
 }
 /**
@@ -295,7 +354,10 @@ export interface MessageDeletedChatPhoto extends _MessageBase {
 export interface MessageGroupCreated extends _MessageBase {
     /** @discriminator */
     groupCreated: true;
-    /** The initial members of the group. @discriminator */
+    /**
+     * The initial members of the group.
+     * @discriminator
+     */
     newChatMembers: User[];
 }
 /**
@@ -321,7 +383,10 @@ export interface MessageChannelCreated extends _MessageBase {
  * @unlisted
  */
 export interface MessageAutoDeleteTimerChanged extends _MessageBase {
-    /** The new auto-delete time in seconds. @discriminator */
+    /**
+     * The new auto-delete time in seconds
+     * @discriminator
+     */
     newAutoDeleteTime: number;
 }
 /**
@@ -329,7 +394,10 @@ export interface MessageAutoDeleteTimerChanged extends _MessageBase {
  * @unlisted
  */
 export interface MessageChatMigratedTo extends _MessageBase {
-    /** The supergroup's ID. @discriminator */
+    /**
+     * The supergroup's ID
+     * @discriminator
+     */
     chatMigratedTo: number;
 }
 /**
@@ -337,7 +405,10 @@ export interface MessageChatMigratedTo extends _MessageBase {
  * @unlisted
  */
 export interface MessageChatMigratedFrom extends _MessageBase {
-    /** The group's ID. @discriminator */
+    /**
+     * The group's ID
+     * @discriminator
+     */
     chatMigratedFrom: number;
 }
 /**
@@ -345,7 +416,10 @@ export interface MessageChatMigratedFrom extends _MessageBase {
  * @unlisted
  */
 export interface MessagePinnedMessage extends _MessageBase {
-    /** The message that was pinned. @discriminator */
+    /**
+     * The message that was pinned
+     * @discriminator
+     */
     pinnedMessage: Message;
 }
 /**

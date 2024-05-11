@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-export declare function drop<T>(promise: Promise<T>): void;
+export declare function drop(maybePromise: unknown): void;
 export declare function mustPrompt(message: string): string;
 export declare function mustPromptNumber(message: string): number;
 export declare function mustPromptOneOf<T extends readonly string[]>(message: string, choices: T): T[number];

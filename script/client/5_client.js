@@ -729,12 +729,12 @@ class Client extends Composer {
                                 break;
                             }
                             catch (err) {
+                                if (delay < 15) {
+                                    delay += 5;
+                                }
                                 L.debug(`failed to reconnect, retrying in ${delay}:`, err);
                             }
                             await new Promise((r) => setTimeout(r, delay * _1_utilities_js_1.second));
-                            if (delay < 15) {
-                                delay += 5;
-                            }
                         }
                     }
                 })());

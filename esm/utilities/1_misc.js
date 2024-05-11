@@ -19,8 +19,10 @@
  */
 import { unreachable } from "../0_deps.js";
 import { second } from "./0_units.js";
-export function drop(promise) {
-    promise.catch(() => { });
+export function drop(maybePromise) {
+    if (maybePromise !== undefined && maybePromise != null && typeof maybePromise === "object" && maybePromise instanceof Promise) {
+        maybePromise.catch(() => { });
+    }
 }
 export function mustPrompt(message) {
     const result = prompt(message);

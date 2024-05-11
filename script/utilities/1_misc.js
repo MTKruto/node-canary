@@ -22,8 +22,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.iterateReadableStream = exports.fromUnixTimestamp = exports.toUnixTimestamp = exports.VECTOR_CONSTRUCTOR = exports.ZERO_CHANNEL_ID = exports.mustPromptOneOf = exports.mustPromptNumber = exports.mustPrompt = exports.drop = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
 const _0_units_js_1 = require("./0_units.js");
-function drop(promise) {
-    promise.catch(() => { });
+function drop(maybePromise) {
+    if (maybePromise !== undefined && maybePromise != null && typeof maybePromise === "object" && maybePromise instanceof Promise) {
+        maybePromise.catch(() => { });
+    }
 }
 exports.drop = drop;
 function mustPrompt(message) {

@@ -150,7 +150,7 @@ _ClientEncrypted_authKey = new WeakMap(), _ClientEncrypted_authKeyId = new WeakM
             }
             catch (err) {
                 __classPrivateFieldGet(this, _ClientEncrypted_LreceiveLoop, "f").error("failed to decrypt message:", err);
-                this.handlers.error?.(err, "decryption");
+                drop(this.handlers.error?.(err, "decryption"));
                 continue;
             }
             const messages = decrypted instanceof MessageContainer ? decrypted.messages : [decrypted];
@@ -161,11 +161,11 @@ _ClientEncrypted_authKey = new WeakMap(), _ClientEncrypted_authKeyId = new WeakM
                 }
                 __classPrivateFieldGet(this, _ClientEncrypted_LreceiveLoop, "f").debug("received", (typeof body === "object" && name in body) ? body[name] : body.constructor.name);
                 if (body instanceof types._Updates || body instanceof types._Update) {
-                    this.handlers.updates?.(body, null);
+                    drop(this.handlers.updates?.(body, null));
                 }
                 else if (body instanceof types.New_session_created) {
                     this.serverSalt = body.server_salt;
-                    this.handlers.serverSaltReassigned?.(this.serverSalt);
+                    drop(this.handlers.serverSaltReassigned?.(this.serverSalt));
                 }
                 else if (message.body instanceof RPCResult) {
                     let result = message.body.result;
@@ -192,10 +192,10 @@ _ClientEncrypted_authKey = new WeakMap(), _ClientEncrypted_authKeyId = new WeakM
                         }
                     };
                     if (result instanceof types._Updates || result instanceof types._Update) {
-                        this.handlers.updates?.(result, promise?.call ?? null, resolvePromise);
+                        drop(this.handlers.updates?.(result, promise?.call ?? null, resolvePromise));
                     }
                     else {
-                        this.handlers.result?.(result, resolvePromise);
+                        drop(this.handlers.result?.(result, resolvePromise));
                     }
                 }
                 else if (message.body instanceof types.Pong) {
@@ -208,7 +208,7 @@ _ClientEncrypted_authKey = new WeakMap(), _ClientEncrypted_authKeyId = new WeakM
                 else if (message.body instanceof types.Bad_server_salt) {
                     __classPrivateFieldGet(this, _ClientEncrypted_LreceiveLoop, "f").debug("server salt reassigned");
                     this.serverSalt = message.body.new_server_salt;
-                    this.handlers.serverSaltReassigned?.(this.serverSalt);
+                    drop(this.handlers.serverSaltReassigned?.(this.serverSalt));
                     const promise = __classPrivateFieldGet(this, _ClientEncrypted_promises, "f").get(message.body.bad_msg_id);
                     const ack = __classPrivateFieldGet(this, _ClientEncrypted_recentAcks, "f").get(message.body.bad_msg_id);
                     if (promise) {
@@ -239,7 +239,7 @@ _ClientEncrypted_authKey = new WeakMap(), _ClientEncrypted_authKeyId = new WeakM
             }
             else if (err instanceof TLError) {
                 __classPrivateFieldGet(this, _ClientEncrypted_LreceiveLoop, "f").error("failed to deserialize:", err);
-                this.handlers.error?.(err, "deserialization");
+                drop(this.handlers.error?.(err, "deserialization"));
             }
             else {
                 __classPrivateFieldGet(this, _ClientEncrypted_LreceiveLoop, "f").error("unexpected error:", err);

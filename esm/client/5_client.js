@@ -708,6 +708,7 @@ export class Client extends Composer {
             return transport;
         };
         if (params?.defaultHandlers ?? true) {
+            let lastReconnection = null;
             this.on("connectionState", ({ connectionState }, next) => {
                 drop((async () => {
                     if (connectionState == "notConnected") {
@@ -716,10 +717,14 @@ export class Client extends Composer {
                             return;
                         }
                         let delay = 5;
+                        if (lastReconnection != null && Date.now() - lastReconnection.getTime() <= 10 * second) {
+                            await new Promise((r) => setTimeout(r, delay * second));
+                        }
                         while (!this.connected) {
                             L.debug("reconnecting");
                             try {
                                 await this.connect();
+                                lastReconnection = new Date();
                                 L.debug("reconnected");
                                 drop(__classPrivateFieldGet(this, _Client_updateManager, "f").recoverUpdateGap("reconnect"));
                                 break;

@@ -96,6 +96,9 @@ export class FileManager {
         }
         const chunkSize = params?.chunkSize ?? __classPrivateFieldGet(_a, _a, "f", _FileManager_DOWNLOAD_MAX_CHUNK_SIZE);
         _a.validateChunkSize(chunkSize, __classPrivateFieldGet(_a, _a, "f", _FileManager_DOWNLOAD_MAX_CHUNK_SIZE));
+        if (params?.offset !== undefined) {
+            _a.validateOffset(params.offset);
+        }
         const connection = __classPrivateFieldGet(this, _FileManager_c, "f").getCdnConnection(dcId);
         await connection.connect();
         const limit = chunkSize;
@@ -141,6 +144,17 @@ export class FileManager {
         }
         if (mod(chunkSize, 1024) != 0) {
             throw new InputError("chunkSize must be divisible by 1024.");
+        }
+    }
+    static validateOffset(offset) {
+        if (offset < 0) {
+            throw new InputError("offset must not be smaller than zero.");
+        }
+        if (offset % 1 != 0) {
+            throw new InputError("offset must be a whole number.");
+        }
+        if (mod(offset, 1024) != 0) {
+            throw new InputError("offset must be divisible by 1024.");
         }
     }
     async *download(fileId, params) {

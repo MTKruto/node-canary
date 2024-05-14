@@ -113,6 +113,15 @@ async function getSender(message_, getEntity) {
             unreachable();
         }
     }
+    else if (message_.peer_id instanceof types.PeerUser) {
+        const entity = await getEntity(message_.peer_id);
+        if (entity) {
+            return { from: constructUser(entity) };
+        }
+        else {
+            unreachable();
+        }
+    }
 }
 async function getReply(message_, chat, getMessage) {
     if (getMessage && message_.reply_to instanceof types.MessageReplyHeader && message_.reply_to.reply_to_msg_id) {

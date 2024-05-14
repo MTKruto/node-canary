@@ -117,6 +117,15 @@ async function getSender(message_, getEntity) {
             (0, _0_deps_js_1.unreachable)();
         }
     }
+    else if (message_.peer_id instanceof _2_tl_js_1.types.PeerUser) {
+        const entity = await getEntity(message_.peer_id);
+        if (entity) {
+            return { from: (0, _1_user_js_1.constructUser)(entity) };
+        }
+        else {
+            (0, _0_deps_js_1.unreachable)();
+        }
+    }
 }
 async function getReply(message_, chat, getMessage) {
     if (getMessage && message_.reply_to instanceof _2_tl_js_1.types.MessageReplyHeader && message_.reply_to.reply_to_msg_id) {

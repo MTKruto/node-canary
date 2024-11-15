@@ -36,7 +36,7 @@ jobs:
             pwd && \
             ls && \
             cd MTKruto/ && \
-            deno run -A https://raw.githubusercontent.com/MTKruto/npm/main/transform_node.ts 0.0.0 ./mod.ts && \
+            deno run -A https://raw.githubusercontent.com/MTKruto/npm/main/transform.ts 0.0.0 ./mod.ts && \
             rm -rf ../main/* && \
             ls -R dist && \
             mv dist/* ../main/ && \

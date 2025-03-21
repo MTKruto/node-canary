@@ -32,15 +32,14 @@ var _ClientEncrypted_instances, _ClientEncrypted_authKey, _ClientEncrypted_authK
 import { SECOND, unreachable } from "../0_deps.js";
 import { ConnectionError } from "../0_errors.js";
 import { bigIntFromBuffer, CacheMap, drop, getLogger, getRandomBigInt, getRandomId, gunzip, gzip, sha1, toUnixTimestamp } from "../1_utilities.js";
-import { Api, GZIP_PACKED, is, isGenericFunction, isOfEnum, isOneOf, mustGetReturnType, repr, RPC_RESULT, TLError, TLReader, X } from "../2_tl.js";
+import { Api, deserializeTelegramType, GZIP_PACKED, is, isGenericFunction, isOfEnum, isOneOf, mustGetReturnType, repr, RPC_RESULT, serializeTelegramObject, TLError, TLReader, TLWriter, X } from "../2_tl.js";
 import { constructTelegramError } from "../4_errors.js";
-import { TLWriter } from "../tl/2_tl_writer.js";
 import { ClientAbstract } from "./0_client_abstract.js";
 import { decryptMessage, encryptMessage, getMessageId } from "./0_message.js";
 const COMPRESSION_THRESHOLD = 1024;
 // global ClientEncrypted ID counter for logs
 let id = 0;
-const RPC_ERROR = Api.schema["rpc_error"][0];
+const RPC_ERROR = Api.schema.definitions["rpc_error"][0];
 /**
  * An MTProto client for making encrypted connections. Most users won't need to interact with this. Used internally by `Client`.
  *
@@ -125,7 +124,7 @@ export class ClientEncrypted extends ClientAbstract {
     }
     async invoke(function_, noWait) {
         const messageId = __classPrivateFieldGet(this, _ClientEncrypted_instances, "m", _ClientEncrypted_nextMessageId).call(this);
-        let body = new TLWriter().serialize(function_).buffer;
+        let body = serializeTelegramObject(function_);
         if (body.length > COMPRESSION_THRESHOLD) {
             body = new TLWriter()
                 .writeInt32(GZIP_PACKED, false)
@@ -145,7 +144,7 @@ export class ClientEncrypted extends ClientAbstract {
                 _: "message",
                 msg_id: __classPrivateFieldGet(this, _ClientEncrypted_instances, "m", _ClientEncrypted_nextMessageId).call(this),
                 seqno: __classPrivateFieldGet(this, _ClientEncrypted_instances, "m", _ClientEncrypted_nextSeqNo).call(this, false),
-                body: new TLWriter().serialize({ _: "msgs_ack", msg_ids: __classPrivateFieldGet(this, _ClientEncrypted_toAcknowledge, "f").splice(0, 8192) }).buffer,
+                body: serializeTelegramObject({ _: "msgs_ack", msg_ids: __classPrivateFieldGet(this, _ClientEncrypted_toAcknowledge, "f").splice(0, 8192) }),
             };
             __classPrivateFieldGet(this, _ClientEncrypted_recentAcks, "f").set(ack.msg_id, { container, message: ack });
             message_ = {
@@ -325,11 +324,11 @@ async function _ClientEncrypted_receiveLoop() {
     // deno-lint-ignore no-explicit-any
     let result;
     if (id == RPC_ERROR) {
-        result = await reader.deserialize("rpc_error");
+        result = await deserializeTelegramType("rpc_error", reader);
         __classPrivateFieldGet(this, _ClientEncrypted_LreceiveLoop, "f").debug("RPCResult:", result.error_code, result.error_message);
     }
     else {
-        result = await reader.deserialize(mustGetReturnType(call._));
+        result = await deserializeTelegramType(mustGetReturnType(call._), reader);
         __classPrivateFieldGet(this, _ClientEncrypted_LreceiveLoop, "f").debug("RPCResult:", Array.isArray(result) ? "Array" : typeof result === "object" ? result._ : result);
     }
     const resolvePromise = () => {
@@ -348,7 +347,7 @@ async function _ClientEncrypted_receiveLoop() {
         drop(this.handlers.result?.(result, resolvePromise));
     }
 }, _ClientEncrypted_handleType = async function _ClientEncrypted_handleType(message, reader) {
-    const body = await reader.deserialize(X);
+    const body = await deserializeTelegramType(X, reader);
     __classPrivateFieldGet(this, _ClientEncrypted_LreceiveLoop, "f").debug("received", repr(body));
     let sendAck = true;
     if (isOfEnum("Updates", body) || isOfEnum("Update", body)) {

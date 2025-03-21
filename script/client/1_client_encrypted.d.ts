@@ -17,14 +17,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { Api, ReadObject } from "../2_tl.js";
+import { Api, DeserializedType } from "../2_tl.js";
 import { ClientAbstract } from "./0_client_abstract.js";
 import { ClientAbstractParams } from "./0_client_abstract.js";
 export type ErrorSource = "deserialization" | "decryption" | "unknown";
 export interface Handlers {
     serverSaltReassigned?: (newServerSalt: bigint) => void;
     updates?: (updates: Api.Updates | Api.Update, call: Api.AnyType | null, callback?: () => void) => void;
-    result?: (result: ReadObject, callback: () => void) => void;
+    result?: (result: DeserializedType, callback: () => void) => void;
     error?: (err: unknown, source: ErrorSource) => void;
 }
 /**

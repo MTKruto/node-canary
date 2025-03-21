@@ -34,7 +34,7 @@ async function constructChosenInlineResult(ubis, getEntity) {
         resultId: ubis.id,
         from: (0, _1_user_js_1.constructUser)(entity),
         location: (0, _2_tl_js_1.is)("geoPoint", ubis.geo) ? (0, _0_location_js_1.constructLocation)(ubis.geo) : undefined,
-        inlineMessageId: ubis.msg_id === undefined ? undefined : (0, _1_utilities_js_1.base64EncodeUrlSafe)(new _2_tl_js_1.TLWriter().serialize(ubis.msg_id).buffer),
+        inlineMessageId: ubis.msg_id === undefined ? undefined : (0, _1_utilities_js_1.base64EncodeUrlSafe)((0, _2_tl_js_1.serializeTelegramObject)(ubis.msg_id)),
         query: ubis.query,
     });
 }

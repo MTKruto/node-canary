@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { TLRawReader } from "./0_tl_raw_reader.js";
+import { TLReader } from "./1_tl_reader.js";
 export interface message {
     _: "message";
     msg_id: bigint;
@@ -25,7 +25,7 @@ export interface message {
     body: Uint8Array | msg_container;
 }
 export declare function serializeMessage(message: message): Promise<Uint8Array>;
-export declare function deserializeMessage(reader: TLRawReader): Promise<message>;
+export declare function deserializeMessage(reader: TLReader): Promise<message>;
 export interface msg_container {
     _: "msg_container";
     messages: message[];

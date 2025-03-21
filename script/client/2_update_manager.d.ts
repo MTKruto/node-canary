@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { Queue } from "../1_utilities.js";
-import { Api, ReadObject } from "../2_tl.js";
+import { Api, DeserializedType } from "../2_tl.js";
 import { ID } from "../3_types.js";
 import { C } from "./1_types.js";
 type UpdateHandler = (update: Api.Update) => Promise<(() => Promise<unknown>)>;
@@ -34,9 +34,9 @@ export declare class UpdateManager {
     static isQtsUpdate(v: Api.Update): v is QtsUpdate;
     static isChannelPtsUpdate(v: Api.Update | Api.Updates): v is ChannelPtsUpdate;
     fetchState(source: string): Promise<void>;
-    processChats(chats: Api.Chat[], context: ReadObject): Promise<void>;
-    processResult(result: ReadObject): Promise<void>;
-    processUsers(users: Api.User[], context: ReadObject): Promise<void>;
+    processChats(chats: Api.Chat[], context: DeserializedType): Promise<void>;
+    processResult(result: DeserializedType): Promise<void>;
+    processUsers(users: Api.User[], context: DeserializedType): Promise<void>;
     getHandleUpdateQueue(boxId: bigint): Queue;
     processUpdates(updates: Api.Update | Api.Updates, checkGap: boolean, call?: Api.AnyObject | null, callback?: () => void): void;
     recoverUpdateGap(source: string): Promise<void>;

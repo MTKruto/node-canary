@@ -17,8 +17,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { TLRawReader } from "./0_tl_raw_reader.js";
-import { TLRawWriter } from "./0_tl_raw_writer.js";
+import { TLReader } from "./1_tl_reader.js";
+import { TLWriter } from "./1_tl_writer.js";
 export async function serializeMessage(message) {
     let body;
     if (message.body instanceof Uint8Array) {
@@ -27,7 +27,7 @@ export async function serializeMessage(message) {
     else {
         body = await serializeMsgContainer(message.body);
     }
-    const writer = new TLRawWriter()
+    const writer = new TLWriter()
         .writeInt64(message.msg_id)
         .writeInt32(message.seqno)
         .writeInt32(body.length)
@@ -38,8 +38,8 @@ export async function deserializeMessage(reader) {
     const id_ = reader.readInt64();
     const seqno = reader.readInt32();
     const length = reader.readInt32();
-    reader = new TLRawReader(reader.read(length));
-    const reader2 = new TLRawReader(reader.buffer);
+    reader = new TLReader(reader.read(length));
+    const reader2 = new TLReader(reader.buffer);
     const id = reader2.readInt32(false);
     let body;
     {
@@ -54,7 +54,7 @@ export async function deserializeMessage(reader) {
 }
 export const MSG_CONTAINER_CONSTRUCTOR = 0x73F1F8DC;
 export async function serializeMsgContainer(msgContainer) {
-    const writer = new TLRawWriter();
+    const writer = new TLWriter();
     writer.writeInt32(MSG_CONTAINER_CONSTRUCTOR, false);
     writer.writeInt32(msgContainer.messages.length);
     for (const message of msgContainer.messages) {
@@ -63,7 +63,7 @@ export async function serializeMsgContainer(msgContainer) {
     return writer.buffer;
 }
 export async function deserializeMsgContainer(buffer) {
-    const reader = new TLRawReader(buffer);
+    const reader = new TLReader(buffer);
     const length = reader.readInt32();
     const messages = new Array();
     for (let i = 0; i < length; i++) {

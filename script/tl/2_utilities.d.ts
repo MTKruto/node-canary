@@ -17,7 +17,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import * as Api from "./0_api.js";
+import { Schema } from "./0_types.js";
+import * as Api from "./1_api.js";
+import { AnyType, Enums, Functions, Types } from "./1_api.js";
+export declare function isValidType(object: any, schema?: Schema): object is AnyType;
+export declare function assertIsValidType(object: any, schema?: Schema): void;
+export declare function is<S extends keyof (Types & Functions)>(typeName: S, value: unknown): value is S extends keyof Types ? Types[S] : S extends keyof Functions ? Functions[S] : never;
+export declare function isOneOf<S extends keyof (Types & Functions)>(typeNames: S[] | readonly S[], value: unknown): value is S extends keyof Types ? Types[S] : S extends keyof Functions ? Functions[S] : never;
+export declare function isOfEnum<S extends keyof Enums>(enumName: S, value: unknown): value is Enums[S];
+export declare function as<S extends keyof Types>(typeName: S, value: unknown): Types[S];
+export declare function isGenericFunction(value: unknown): boolean;
+export declare function mustGetReturnType(name: string): string;
 export declare function getChannelChatId(channelId: bigint): number;
 export type AnyEntity = Api.user | Api.channel | Api.channelForbidden | Api.chat | Api.chatForbidden;
 export type InputPeerWithIdentifier = Api.inputPeerChat | Api.inputPeerUser | Api.inputPeerChannel | Api.inputPeerUserFromMessage | Api.inputPeerChannelFromMessage;

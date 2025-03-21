@@ -32,7 +32,7 @@ var _ClientPlain_publicKeys, _ClientPlain_lastMessageId;
 import { assert, assertEquals, concat, ige256Decrypt, ige256Encrypt, unreachable } from "../0_deps.js";
 import { ConnectionError, TransportError } from "../0_errors.js";
 import { bigIntFromBuffer, bufferFromBigInt, factorize, getLogger, getRandomBigInt, modExp, rsaPad, sha1 } from "../1_utilities.js";
-import { is, mustGetReturnType, TLReader, TLWriter } from "../2_tl.js";
+import { deserializeTelegramType, is, mustGetReturnType, serializeTelegramObject } from "../2_tl.js";
 import { PUBLIC_KEYS } from "../4_constants.js";
 import { ClientAbstract } from "./0_client_abstract.js";
 import { getMessageId, packUnencryptedMessage, unpackUnencryptedMessage } from "./0_message.js";
@@ -53,7 +53,7 @@ export class ClientPlain extends ClientAbstract {
             throw new ConnectionError("Not connected.");
         }
         const messageId = __classPrivateFieldSet(this, _ClientPlain_lastMessageId, getMessageId(__classPrivateFieldGet(this, _ClientPlain_lastMessageId, "f"), 0), "f");
-        const payload = packUnencryptedMessage(new TLWriter().serialize(function_).buffer, messageId);
+        const payload = packUnencryptedMessage(serializeTelegramObject(function_), messageId);
         await this.transport.transport.send(payload);
         L.out(function_);
         L.outBin(payload);
@@ -64,8 +64,7 @@ export class ClientPlain extends ClientAbstract {
             throw new TransportError(Number(int));
         }
         const { message } = unpackUnencryptedMessage(buffer);
-        const reader = new TLReader(message);
-        const result = await reader.deserialize(mustGetReturnType(function_._));
+        const result = await deserializeTelegramType(mustGetReturnType(function_._), message);
         L.in(result);
         return result;
     }
@@ -113,8 +112,7 @@ export class ClientPlain extends ClientAbstract {
         const pq = resPq.pq;
         const serverNonce = resPq.server_nonce;
         const newNonce = getRandomBigInt(32, false, true);
-        let encryptedData = await rsaPad(new TLWriter()
-            .serialize({
+        let encryptedData = await rsaPad(serializeTelegramObject({
             _: "p_q_inner_data_dc",
             pq,
             p,
@@ -123,8 +121,7 @@ export class ClientPlain extends ClientAbstract {
             new_nonce: newNonce,
             nonce,
             server_nonce: serverNonce,
-        })
-            .buffer, publicKey);
+        }), publicKey);
         const dhParams = await this.invoke({
             _: "req_DH_params",
             nonce,
@@ -141,22 +138,20 @@ export class ClientPlain extends ClientAbstract {
         const tmpAesKey = concat([await sha1(concat([newNonce_, serverNonce_])), (await sha1(concat([serverNonce_, newNonce_]))).subarray(0, 0 + 12)]);
         const tmpAesIv = concat([(await sha1(concat([serverNonce_, newNonce_]))).subarray(12, 12 + 8), await sha1(concat([newNonce_, newNonce_])), newNonce_.subarray(0, 0 + 4)]);
         const answerWithHash = ige256Decrypt(dhParams.encrypted_answer, tmpAesKey, tmpAesIv);
-        const dhInnerData = await new TLReader(answerWithHash.slice(20)).deserialize("server_DH_inner_data");
+        const dhInnerData = await deserializeTelegramType("server_DH_inner_data", answerWithHash.slice(20));
         assert(is("server_DH_inner_data", dhInnerData));
         const { g, g_a: gA_, dh_prime: dhPrime_ } = dhInnerData;
         const gA = bigIntFromBuffer(gA_, false, false);
         const dhPrime = bigIntFromBuffer(dhPrime_, false, false);
         const b = getRandomBigInt(256, false, false);
         const gB = modExp(BigInt(g), b, dhPrime);
-        const data = new TLWriter()
-            .serialize({
+        const data = serializeTelegramObject({
             _: "client_DH_inner_data",
             nonce,
             server_nonce: serverNonce,
             retry_id: 0n,
             g_b: bufferFromBigInt(gB, 256, false, false),
-        })
-            .buffer;
+        });
         let dataWithHash = concat([await sha1(data), data]);
         while (dataWithHash.length % 16 != 0) {
             dataWithHash = concat([dataWithHash, new Uint8Array(1)]);

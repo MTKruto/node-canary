@@ -34,6 +34,9 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -41,16 +44,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Api = exports.TLError = void 0;
-var _0_tl_raw_reader_js_1 = require("./tl/0_tl_raw_reader.js");
-Object.defineProperty(exports, "TLError", { enumerable: true, get: function () { return _0_tl_raw_reader_js_1.TLError; } });
-exports.Api = __importStar(require("./tl/0_api.js"));
-__exportStar(require("./tl/1_utilities.js"), exports);
-__exportStar(require("./tl/2_utilities.js"), exports);
+var _0_tl_error_js_1 = require("./tl/0_tl_error.js");
+Object.defineProperty(exports, "TLError", { enumerable: true, get: function () { return _0_tl_error_js_1.TLError; } });
+__exportStar(require("./tl/0_utilities.js"), exports);
+exports.Api = __importStar(require("./tl/1_api.js"));
+__exportStar(require("./tl/1_tl_reader.js"), exports);
+__exportStar(require("./tl/1_tl_writer.js"), exports);
 __exportStar(require("./tl/2_message.js"), exports);
-__exportStar(require("./tl/2_tl_reader.js"), exports);
-__exportStar(require("./tl/2_tl_writer.js"), exports);
+__exportStar(require("./tl/2_telegram.js"), exports);
+__exportStar(require("./tl/2_utilities.js"), exports);

@@ -246,7 +246,7 @@ class StorageOperations {
             await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(key, null);
         }
         else {
-            await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(key, __classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? [value._, (0, _1_utilities_js_1.rleEncode)(new _2_tl_js_1.TLWriter().serialize(value).buffer)] : value);
+            await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(key, __classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? [value._, (0, _1_utilities_js_1.rleEncode)((0, _2_tl_js_1.serializeTelegramObject)(value))] : value);
         }
     }
     async getTlObject(keyOrBuffer) {
@@ -254,7 +254,7 @@ class StorageOperations {
         const buffer = (keyOrBuffer instanceof Uint8Array || (0, _2_tl_js_1.isValidType)(keyOrBuffer)) ? keyOrBuffer : await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(keyOrBuffer);
         if (buffer != null) {
             if (Array.isArray(buffer)) {
-                return await new _2_tl_js_1.TLReader((0, _1_utilities_js_1.rleDecode)(buffer[1])).deserialize(buffer[0]);
+                return await (0, _2_tl_js_1.deserializeTelegramType)(buffer[0], (0, _1_utilities_js_1.rleDecode)(buffer[1]));
             }
             else {
                 return buffer;
@@ -302,7 +302,7 @@ class StorageOperations {
         return __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(exports.K.updates.channelPts(channelId));
     }
     async setEntity(entity) {
-        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.peer((0, _2_tl_js_1.peerToChatId)(entity)), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)(new _2_tl_js_1.TLWriter().serialize(entity).buffer) : entity, new Date()]);
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.peer((0, _2_tl_js_1.peerToChatId)(entity)), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)((0, _2_tl_js_1.serializeTelegramObject)(entity)) : entity, new Date()]);
     }
     async getEntity(key) {
         const peer_ = await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(exports.K.cache.peer(key));
@@ -435,7 +435,7 @@ class StorageOperations {
         await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.file(id), [partCount, chunkSize]);
     }
     async setCustomEmojiDocument(id, document) {
-        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.customEmojiDocument(id), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)(new _2_tl_js_1.TLWriter().serialize(document).buffer) : document, new Date()]);
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.customEmojiDocument(id), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)((0, _2_tl_js_1.serializeTelegramObject)(document)) : document, new Date()]);
     }
     async getCustomEmojiDocument(id) {
         const v = await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(exports.K.cache.customEmojiDocument(id));
@@ -447,7 +447,7 @@ class StorageOperations {
         }
     }
     async setBusinessConnection(id, connection) {
-        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.businessConnection(id), connection == null ? null : __classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)(new _2_tl_js_1.TLWriter().serialize(connection).buffer) : connection);
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.businessConnection(id), connection == null ? null : __classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)((0, _2_tl_js_1.serializeTelegramObject)(connection)) : connection);
     }
     async getBusinessConnection(id) {
         const v = await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(exports.K.cache.businessConnection(id));
@@ -459,7 +459,7 @@ class StorageOperations {
         }
     }
     async setInlineQueryAnswer(userId, chatId, query, offset, results, date) {
-        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.inlineQueryAnswer(userId, chatId, query, offset), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)(new _2_tl_js_1.TLWriter().serialize(results).buffer) : results, date]);
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.inlineQueryAnswer(userId, chatId, query, offset), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)((0, _2_tl_js_1.serializeTelegramObject)(results)) : results, date]);
     }
     async getInlineQueryAnswer(userId, chatId, query, offset) {
         const peer_ = await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(exports.K.cache.inlineQueryAnswer(userId, chatId, query, offset));
@@ -472,7 +472,7 @@ class StorageOperations {
         }
     }
     async setCallbackQueryAnswer(chatId, messageId, question, answer) {
-        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.callbackQueryAnswer(chatId, messageId, question), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)(new _2_tl_js_1.TLWriter().serialize(answer).buffer) : answer, new Date()]);
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.callbackQueryAnswer(chatId, messageId, question), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)((0, _2_tl_js_1.serializeTelegramObject)(answer)) : answer, new Date()]);
     }
     async getCallbackQueryAnswer(chatId, messageId, question) {
         const peer_ = await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(exports.K.cache.callbackQueryAnswer(chatId, messageId, question));

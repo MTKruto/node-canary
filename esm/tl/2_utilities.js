@@ -17,9 +17,59 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+// deno-lint-ignore-file no-explicit-any
 import { unreachable } from "../0_deps.js";
 import { ZERO_CHANNEL_ID } from "../1_utilities.js";
-import { isOneOf } from "./1_utilities.js";
+import { schema as schema_ } from "./1_api.js";
+export function isValidType(object, schema = schema_) {
+    return object != null && typeof object === "object" && typeof object._ === "string" && schema.definitions[object._] !== undefined;
+}
+export function assertIsValidType(object, schema = schema_) {
+    if (!isValidType(object, schema)) {
+        throw new Error("Invalid object");
+    }
+}
+export function is(typeName, value) {
+    if (!isValidType(value)) {
+        return false;
+    }
+    else {
+        return value._ === typeName;
+    }
+}
+export function isOneOf(typeNames, value) {
+    return typeNames.some((v) => is(v, value));
+}
+export function isOfEnum(enumName, value) {
+    return !isValidType(value) || schema_.definitions[value._][2] != enumName;
+}
+export function as(typeName, value) {
+    if (is(typeName, value)) {
+        return value;
+    }
+    else {
+        unreachable();
+    }
+}
+const GENERIC_FUNCTIONS = [
+    "invokeAfterMsg",
+    "invokeAfterMsgs",
+    "initConnection",
+    "invokeWithLayer",
+    "invokeWithoutUpdates",
+    "invokeWithMessagesRange",
+    "invokeWithTakeout",
+];
+export function isGenericFunction(value) {
+    return isOneOf(GENERIC_FUNCTIONS, value);
+}
+export function mustGetReturnType(name) {
+    const type = schema_.definitions[name];
+    if (!type || !type[2]) {
+        unreachable();
+    }
+    return type[2];
+}
 export function getChannelChatId(channelId) {
     return ZERO_CHANNEL_ID + -Number(channelId);
 }

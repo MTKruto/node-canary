@@ -30,8 +30,7 @@ const ERR_INVALID_INLINE_MESSAGE_ID = new _0_errors_js_1.InputError("Invalid inl
 async function deserializeInlineMessageId(inlineMessageId) {
     try {
         const buffer = (0, _1_utilities_js_1.base64DecodeUrlSafe)(inlineMessageId);
-        const reader = new _2_tl_js_1.TLReader(buffer);
-        const object = await reader.deserialize("InputBotInlineMessageID");
+        const object = await (0, _2_tl_js_1.deserializeTelegramType)("InputBotInlineMessageID", buffer);
         if ((0, _2_tl_js_1.is)("inputBotInlineMessageID64", object) || (0, _2_tl_js_1.is)("inputBotInlineMessageID", object)) {
             return object;
         }
@@ -59,6 +58,6 @@ async function constructCallbackQuery(callbackQuery, getEntity, getMessage) {
         return (0, _1_utilities_js_1.cleanObject)({ id, from: user, message, chatInstance, data, gameShortName });
     }
     else {
-        return (0, _1_utilities_js_1.cleanObject)({ id, from: user, inlineMessageId: (0, _1_utilities_js_1.base64EncodeUrlSafe)(new _2_tl_js_1.TLWriter().serialize(callbackQuery.msg_id).buffer), chatInstance, data, gameShortName });
+        return (0, _1_utilities_js_1.cleanObject)({ id, from: user, inlineMessageId: (0, _1_utilities_js_1.base64EncodeUrlSafe)((0, _2_tl_js_1.serializeTelegramObject)(callbackQuery.msg_id)), chatInstance, data, gameShortName });
     }
 }

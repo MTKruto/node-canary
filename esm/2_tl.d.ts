@@ -17,11 +17,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-export { TLError } from "./tl/0_tl_raw_reader.js";
-export * as Api from "./tl/0_api.js";
-export * from "./tl/1_utilities.js";
-export * from "./tl/2_utilities.js";
+export { TLError } from "./tl/0_tl_error.js";
+export * from "./tl/0_utilities.js";
+export * as Api from "./tl/1_api.js";
+export * from "./tl/1_tl_reader.js";
+export * from "./tl/1_tl_writer.js";
 export * from "./tl/2_message.js";
-export * from "./tl/2_tl_reader.js";
-export * from "./tl/2_tl_writer.js";
+export * from "./tl/2_telegram.js";
+export * from "./tl/2_utilities.js";
 //# sourceMappingURL=2_tl.d.ts.map

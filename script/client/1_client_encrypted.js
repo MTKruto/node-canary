@@ -37,13 +37,12 @@ const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _4_errors_js_1 = require("../4_errors.js");
-const _2_tl_writer_js_1 = require("../tl/2_tl_writer.js");
 const _0_client_abstract_js_1 = require("./0_client_abstract.js");
 const _0_message_js_1 = require("./0_message.js");
 const COMPRESSION_THRESHOLD = 1024;
 // global ClientEncrypted ID counter for logs
 let id = 0;
-const RPC_ERROR = _2_tl_js_1.Api.schema["rpc_error"][0];
+const RPC_ERROR = _2_tl_js_1.Api.schema.definitions["rpc_error"][0];
 /**
  * An MTProto client for making encrypted connections. Most users won't need to interact with this. Used internally by `Client`.
  *
@@ -128,9 +127,9 @@ class ClientEncrypted extends _0_client_abstract_js_1.ClientAbstract {
     }
     async invoke(function_, noWait) {
         const messageId = __classPrivateFieldGet(this, _ClientEncrypted_instances, "m", _ClientEncrypted_nextMessageId).call(this);
-        let body = new _2_tl_writer_js_1.TLWriter().serialize(function_).buffer;
+        let body = (0, _2_tl_js_1.serializeTelegramObject)(function_);
         if (body.length > COMPRESSION_THRESHOLD) {
-            body = new _2_tl_writer_js_1.TLWriter()
+            body = new _2_tl_js_1.TLWriter()
                 .writeInt32(_2_tl_js_1.GZIP_PACKED, false)
                 .writeBytes(await (0, _1_utilities_js_1.gzip)(body))
                 .buffer;
@@ -148,7 +147,7 @@ class ClientEncrypted extends _0_client_abstract_js_1.ClientAbstract {
                 _: "message",
                 msg_id: __classPrivateFieldGet(this, _ClientEncrypted_instances, "m", _ClientEncrypted_nextMessageId).call(this),
                 seqno: __classPrivateFieldGet(this, _ClientEncrypted_instances, "m", _ClientEncrypted_nextSeqNo).call(this, false),
-                body: new _2_tl_writer_js_1.TLWriter().serialize({ _: "msgs_ack", msg_ids: __classPrivateFieldGet(this, _ClientEncrypted_toAcknowledge, "f").splice(0, 8192) }).buffer,
+                body: (0, _2_tl_js_1.serializeTelegramObject)({ _: "msgs_ack", msg_ids: __classPrivateFieldGet(this, _ClientEncrypted_toAcknowledge, "f").splice(0, 8192) }),
             };
             __classPrivateFieldGet(this, _ClientEncrypted_recentAcks, "f").set(ack.msg_id, { container, message: ack });
             message_ = {
@@ -329,11 +328,11 @@ async function _ClientEncrypted_receiveLoop() {
     // deno-lint-ignore no-explicit-any
     let result;
     if (id == RPC_ERROR) {
-        result = await reader.deserialize("rpc_error");
+        result = await (0, _2_tl_js_1.deserializeTelegramType)("rpc_error", reader);
         __classPrivateFieldGet(this, _ClientEncrypted_LreceiveLoop, "f").debug("RPCResult:", result.error_code, result.error_message);
     }
     else {
-        result = await reader.deserialize((0, _2_tl_js_1.mustGetReturnType)(call._));
+        result = await (0, _2_tl_js_1.deserializeTelegramType)((0, _2_tl_js_1.mustGetReturnType)(call._), reader);
         __classPrivateFieldGet(this, _ClientEncrypted_LreceiveLoop, "f").debug("RPCResult:", Array.isArray(result) ? "Array" : typeof result === "object" ? result._ : result);
     }
     const resolvePromise = () => {
@@ -352,7 +351,7 @@ async function _ClientEncrypted_receiveLoop() {
         (0, _1_utilities_js_1.drop)(this.handlers.result?.(result, resolvePromise));
     }
 }, _ClientEncrypted_handleType = async function _ClientEncrypted_handleType(message, reader) {
-    const body = await reader.deserialize(_2_tl_js_1.X);
+    const body = await (0, _2_tl_js_1.deserializeTelegramType)(_2_tl_js_1.X, reader);
     __classPrivateFieldGet(this, _ClientEncrypted_LreceiveLoop, "f").debug("received", (0, _2_tl_js_1.repr)(body));
     let sendAck = true;
     if ((0, _2_tl_js_1.isOfEnum)("Updates", body) || (0, _2_tl_js_1.isOfEnum)("Update", body)) {

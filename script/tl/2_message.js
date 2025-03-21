@@ -24,8 +24,8 @@ exports.serializeMessage = serializeMessage;
 exports.deserializeMessage = deserializeMessage;
 exports.serializeMsgContainer = serializeMsgContainer;
 exports.deserializeMsgContainer = deserializeMsgContainer;
-const _0_tl_raw_reader_js_1 = require("./0_tl_raw_reader.js");
-const _0_tl_raw_writer_js_1 = require("./0_tl_raw_writer.js");
+const _1_tl_reader_js_1 = require("./1_tl_reader.js");
+const _1_tl_writer_js_1 = require("./1_tl_writer.js");
 async function serializeMessage(message) {
     let body;
     if (message.body instanceof Uint8Array) {
@@ -34,7 +34,7 @@ async function serializeMessage(message) {
     else {
         body = await serializeMsgContainer(message.body);
     }
-    const writer = new _0_tl_raw_writer_js_1.TLRawWriter()
+    const writer = new _1_tl_writer_js_1.TLWriter()
         .writeInt64(message.msg_id)
         .writeInt32(message.seqno)
         .writeInt32(body.length)
@@ -45,8 +45,8 @@ async function deserializeMessage(reader) {
     const id_ = reader.readInt64();
     const seqno = reader.readInt32();
     const length = reader.readInt32();
-    reader = new _0_tl_raw_reader_js_1.TLRawReader(reader.read(length));
-    const reader2 = new _0_tl_raw_reader_js_1.TLRawReader(reader.buffer);
+    reader = new _1_tl_reader_js_1.TLReader(reader.read(length));
+    const reader2 = new _1_tl_reader_js_1.TLReader(reader.buffer);
     const id = reader2.readInt32(false);
     let body;
     {
@@ -61,7 +61,7 @@ async function deserializeMessage(reader) {
 }
 exports.MSG_CONTAINER_CONSTRUCTOR = 0x73F1F8DC;
 async function serializeMsgContainer(msgContainer) {
-    const writer = new _0_tl_raw_writer_js_1.TLRawWriter();
+    const writer = new _1_tl_writer_js_1.TLWriter();
     writer.writeInt32(exports.MSG_CONTAINER_CONSTRUCTOR, false);
     writer.writeInt32(msgContainer.messages.length);
     for (const message of msgContainer.messages) {
@@ -70,7 +70,7 @@ async function serializeMsgContainer(msgContainer) {
     return writer.buffer;
 }
 async function deserializeMsgContainer(buffer) {
-    const reader = new _0_tl_raw_reader_js_1.TLRawReader(buffer);
+    const reader = new _1_tl_reader_js_1.TLReader(buffer);
     const length = reader.readInt32();
     const messages = new Array();
     for (let i = 0; i < length; i++) {

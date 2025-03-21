@@ -19,7 +19,7 @@
  */
 import { MaybePromise } from "../1_utilities.js";
 import { Storage, StorageKeyPart } from "../2_storage.js";
-import { AnyEntity, Api, ReadObject } from "../2_tl.js";
+import { AnyEntity, Api, DeserializedType } from "../2_tl.js";
 import { DC } from "../3_transport.js";
 import { Translation, VoiceTranscription } from "../3_types.js";
 export declare const K: {
@@ -124,7 +124,7 @@ export declare class StorageOperations {
     updateUsernames(id: number, usernames: string[]): Promise<void>;
     getUsername(username: string): Promise<[number, Date] | null>;
     setTlObject(key: readonly StorageKeyPart[], value: Api.AnyType | null): Promise<void>;
-    getTlObject(keyOrBuffer: Api.AnyType | Uint8Array | readonly StorageKeyPart[]): Promise<ReadObject | null>;
+    getTlObject(keyOrBuffer: Api.AnyType | Uint8Array | readonly StorageKeyPart[]): Promise<DeserializedType | null>;
     setState(state: Api.updates_State): Promise<void>;
     getState(): Promise<Api.updates_State | null>;
     setMessage(chatId: number, messageId: number, message: Api.Message | null): Promise<void>;
@@ -135,7 +135,7 @@ export declare class StorageOperations {
     setChannelPts(channelId: bigint, pts: number): Promise<void>;
     getChannelPts(channelId: bigint): MaybePromise<number | null>;
     setEntity(entity: AnyEntity): Promise<void>;
-    getEntity(key: number): Promise<ReadObject | null>;
+    getEntity(key: number): Promise<DeserializedType | null>;
     setAccountId(accountId: number): Promise<void>;
     getAccountId(): Promise<number | null>;
     setAccountType(type: "user" | "bot"): Promise<void>;

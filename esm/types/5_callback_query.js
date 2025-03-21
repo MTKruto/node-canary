@@ -20,14 +20,13 @@
 import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { base64DecodeUrlSafe, base64EncodeUrlSafe, cleanObject } from "../1_utilities.js";
-import { is, peerToChatId, TLReader, TLWriter } from "../2_tl.js";
+import { deserializeTelegramType, is, peerToChatId, serializeTelegramObject } from "../2_tl.js";
 import { constructUser } from "./1_user.js";
 const ERR_INVALID_INLINE_MESSAGE_ID = new InputError("Invalid inline message ID");
 export async function deserializeInlineMessageId(inlineMessageId) {
     try {
         const buffer = base64DecodeUrlSafe(inlineMessageId);
-        const reader = new TLReader(buffer);
-        const object = await reader.deserialize("InputBotInlineMessageID");
+        const object = await deserializeTelegramType("InputBotInlineMessageID", buffer);
         if (is("inputBotInlineMessageID64", object) || is("inputBotInlineMessageID", object)) {
             return object;
         }
@@ -55,6 +54,6 @@ export async function constructCallbackQuery(callbackQuery, getEntity, getMessag
         return cleanObject({ id, from: user, message, chatInstance, data, gameShortName });
     }
     else {
-        return cleanObject({ id, from: user, inlineMessageId: base64EncodeUrlSafe(new TLWriter().serialize(callbackQuery.msg_id).buffer), chatInstance, data, gameShortName });
+        return cleanObject({ id, from: user, inlineMessageId: base64EncodeUrlSafe(serializeTelegramObject(callbackQuery.msg_id)), chatInstance, data, gameShortName });
     }
 }

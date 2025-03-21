@@ -56,7 +56,7 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
             throw new _0_errors_js_1.ConnectionError("Not connected.");
         }
         const messageId = __classPrivateFieldSet(this, _ClientPlain_lastMessageId, (0, _0_message_js_1.getMessageId)(__classPrivateFieldGet(this, _ClientPlain_lastMessageId, "f"), 0), "f");
-        const payload = (0, _0_message_js_1.packUnencryptedMessage)(new _2_tl_js_1.TLWriter().serialize(function_).buffer, messageId);
+        const payload = (0, _0_message_js_1.packUnencryptedMessage)((0, _2_tl_js_1.serializeTelegramObject)(function_), messageId);
         await this.transport.transport.send(payload);
         L.out(function_);
         L.outBin(payload);
@@ -67,8 +67,7 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
             throw new _0_errors_js_1.TransportError(Number(int));
         }
         const { message } = (0, _0_message_js_1.unpackUnencryptedMessage)(buffer);
-        const reader = new _2_tl_js_1.TLReader(message);
-        const result = await reader.deserialize((0, _2_tl_js_1.mustGetReturnType)(function_._));
+        const result = await (0, _2_tl_js_1.deserializeTelegramType)((0, _2_tl_js_1.mustGetReturnType)(function_._), message);
         L.in(result);
         return result;
     }
@@ -116,8 +115,7 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
         const pq = resPq.pq;
         const serverNonce = resPq.server_nonce;
         const newNonce = (0, _1_utilities_js_1.getRandomBigInt)(32, false, true);
-        let encryptedData = await (0, _1_utilities_js_1.rsaPad)(new _2_tl_js_1.TLWriter()
-            .serialize({
+        let encryptedData = await (0, _1_utilities_js_1.rsaPad)((0, _2_tl_js_1.serializeTelegramObject)({
             _: "p_q_inner_data_dc",
             pq,
             p,
@@ -126,8 +124,7 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
             new_nonce: newNonce,
             nonce,
             server_nonce: serverNonce,
-        })
-            .buffer, publicKey);
+        }), publicKey);
         const dhParams = await this.invoke({
             _: "req_DH_params",
             nonce,
@@ -144,22 +141,20 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
         const tmpAesKey = (0, _0_deps_js_1.concat)([await (0, _1_utilities_js_1.sha1)((0, _0_deps_js_1.concat)([newNonce_, serverNonce_])), (await (0, _1_utilities_js_1.sha1)((0, _0_deps_js_1.concat)([serverNonce_, newNonce_]))).subarray(0, 0 + 12)]);
         const tmpAesIv = (0, _0_deps_js_1.concat)([(await (0, _1_utilities_js_1.sha1)((0, _0_deps_js_1.concat)([serverNonce_, newNonce_]))).subarray(12, 12 + 8), await (0, _1_utilities_js_1.sha1)((0, _0_deps_js_1.concat)([newNonce_, newNonce_])), newNonce_.subarray(0, 0 + 4)]);
         const answerWithHash = (0, _0_deps_js_1.ige256Decrypt)(dhParams.encrypted_answer, tmpAesKey, tmpAesIv);
-        const dhInnerData = await new _2_tl_js_1.TLReader(answerWithHash.slice(20)).deserialize("server_DH_inner_data");
+        const dhInnerData = await (0, _2_tl_js_1.deserializeTelegramType)("server_DH_inner_data", answerWithHash.slice(20));
         (0, _0_deps_js_1.assert)((0, _2_tl_js_1.is)("server_DH_inner_data", dhInnerData));
         const { g, g_a: gA_, dh_prime: dhPrime_ } = dhInnerData;
         const gA = (0, _1_utilities_js_1.bigIntFromBuffer)(gA_, false, false);
         const dhPrime = (0, _1_utilities_js_1.bigIntFromBuffer)(dhPrime_, false, false);
         const b = (0, _1_utilities_js_1.getRandomBigInt)(256, false, false);
         const gB = (0, _1_utilities_js_1.modExp)(BigInt(g), b, dhPrime);
-        const data = new _2_tl_js_1.TLWriter()
-            .serialize({
+        const data = (0, _2_tl_js_1.serializeTelegramObject)({
             _: "client_DH_inner_data",
             nonce,
             server_nonce: serverNonce,
             retry_id: 0n,
             g_b: (0, _1_utilities_js_1.bufferFromBigInt)(gB, 256, false, false),
-        })
-            .buffer;
+        });
         let dataWithHash = (0, _0_deps_js_1.concat)([await (0, _1_utilities_js_1.sha1)(data), data]);
         while (dataWithHash.length % 16 != 0) {
             dataWithHash = (0, _0_deps_js_1.concat)([dataWithHash, new Uint8Array(1)]);

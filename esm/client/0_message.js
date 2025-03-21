@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,9 +19,9 @@
  */
 import { assertEquals, concat, ige256Decrypt, ige256Encrypt } from "../0_deps.js";
 import { bufferFromBigInt, mod, sha256, toUnixTimestamp } from "../1_utilities.js";
-import { id, Message_, MessageContainer, RPCResult, serialize, TLReader, TLWriter } from "../2_tl.js";
-export function getMessageId(lastMsgId) {
-    const now = toUnixTimestamp(new Date()) + 0;
+import { deserializeMessage, serializeMessage, TLReader, TLWriter } from "../2_tl.js";
+export function getMessageId(lastMsgId, difference) {
+    const now = toUnixTimestamp(new Date()) + difference;
     const nanoseconds = Math.floor((now - Math.floor(now)) * 1e9);
     let newMsgId = (BigInt(Math.floor(now)) <<
         32n) ||
@@ -51,7 +51,7 @@ export async function encryptMessage(message, authKey, authKeyId, salt, sessionI
     const payloadWriter = new TLWriter();
     payloadWriter.writeInt64(salt);
     payloadWriter.writeInt64(sessionId);
-    payloadWriter.write(message[serialize]());
+    payloadWriter.write(await serializeMessage(message));
     payloadWriter.write(new Uint8Array(mod(-(payloadWriter.buffer.length + 12), 16) + 12));
     const payload = payloadWriter.buffer;
     const messageKey = (await sha256(concat([authKey.subarray(88, 120), payload]))).subarray(8, 24);
@@ -76,24 +76,8 @@ export async function decryptMessage(buffer, authKey, authKeyId, _sessionId) {
     const aesIv = concat([b.subarray(0, 8), a.subarray(8, 24), b.subarray(24, 32)]);
     const plaintext = ige256Decrypt(reader.buffer, aesKey, aesIv);
     assertEquals(plaintext.buffer.byteLength % 4, 0);
-    let plainReader = new TLReader(plaintext);
+    const plainReader = new TLReader(plaintext);
     const _salt = plainReader.readInt64();
     const _sessionId_ = plainReader.readInt64(false);
-    const mid = plainReader.readInt64();
-    const seqno = plainReader.readInt32();
-    const length = plainReader.readInt32();
-    plainReader = new TLReader(plainReader.read(length));
-    const cid = plainReader.readInt32(false);
-    if (cid == MessageContainer[id]) {
-        const messages = MessageContainer.deserialize(plainReader.buffer);
-        return new MessageContainer(mid, seqno, messages);
-    }
-    else if (cid == RPCResult[id]) {
-        const body = RPCResult.deserialize(plainReader.buffer);
-        return new Message_(mid, seqno, body);
-    }
-    else {
-        const body = plainReader.readObject(cid);
-        return new Message_(mid, seqno, body);
-    }
+    return deserializeMessage(plainReader);
 }

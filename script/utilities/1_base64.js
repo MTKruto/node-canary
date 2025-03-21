@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,13 +19,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.base64DecodeUrlSafe = exports.base64EncodeUrlSafe = void 0;
+exports.base64EncodeUrlSafe = base64EncodeUrlSafe;
+exports.base64DecodeUrlSafe = base64DecodeUrlSafe;
 const _0_deps_js_1 = require("../0_deps.js");
 const _0_bigint_js_1 = require("./0_bigint.js");
 function base64EncodeUrlSafe(data) {
     return (0, _0_deps_js_1.encodeBase64)(data).replace(/=*$/, "").replaceAll("+", "-").replaceAll("/", "_");
 }
-exports.base64EncodeUrlSafe = base64EncodeUrlSafe;
 function base64DecodeUrlSafe(data) {
     data = data.replaceAll("_", "/").replaceAll("-", "+");
     if (data.length != 4) {
@@ -33,4 +33,3 @@ function base64DecodeUrlSafe(data) {
     }
     return (0, _0_deps_js_1.decodeBase64)(data);
 }
-exports.base64DecodeUrlSafe = base64DecodeUrlSafe;

@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,8 +17,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { enums, types } from "../2_tl.js";
-import { ChatListItem, ID } from "../3_types.js";
+import { Api } from "../2_tl.js";
+import { ChatListItem, ChatMember, ChatP, type ChatPChannel, type ChatPSupergroup, ID } from "../3_types.js";
+import { type CreateChannelParams, type CreateGroupParams, type CreateSupergroupParams, GetChatMembersParams, GetCommonChatsParams } from "./0_params.js";
+import { UpdateProcessor } from "./0_update_processor.js";
 import { C as C_ } from "./1_types.js";
 import { FileManager } from "./2_file_manager.js";
 import { MessageManager } from "./3_message_manager.js";
@@ -26,15 +28,31 @@ type C = C_ & {
     fileManager: FileManager;
     messageManager: MessageManager;
 };
-type ChatListManagerUpdate = types.UpdateNewMessage | types.UpdateNewChannelMessage | types.UpdatePinnedDialogs | types.UpdateFolderPeers | types.UpdateChannel | types.UpdateChat | types.UpdateUser | types.UpdateUserName;
-export declare class ChatListManager {
+declare const chatListManagerUpdates: readonly ["updateNewMessage", "updateNewChannelMessage", "updatePinnedDialogs", "updateFolderPeers", "updateChannel", "updateChat", "updateUser", "updateUserName"];
+type ChatListManagerUpdate = Api.Types[(typeof chatListManagerUpdates)[number]];
+export declare class ChatListManager implements UpdateProcessor<ChatListManagerUpdate> {
     #private;
     constructor(c: C);
-    reassignChatLastMessage(chatId: number, add?: boolean, sendUpdate?: boolean): Promise<() => Promise<void>>;
+    reassignChatLastMessage(chatId: number, add?: boolean, sendUpdate?: boolean): Promise<() => void>;
     getChats(from?: "archived" | "main", after?: ChatListItem, limit?: number): Promise<ChatListItem[]>;
-    static canHandleUpdate(update: enums.Update): update is ChatListManagerUpdate;
-    handleUpdate(update: ChatListManagerUpdate): Promise<void>;
+    canHandleUpdate(update: Api.Update): update is ChatListManagerUpdate;
+    handleUpdate(update: ChatListManagerUpdate): Promise<null>;
     getChat(chatId: ID): Promise<import("../3_types.js").Chat>;
+    getChatAdministrators(chatId: ID): Promise<ChatMember[]>;
+    getChatMember(chatId: ID, userId: ID): Promise<ChatMember>;
+    getChatMembers(chatId: ID, params?: GetChatMembersParams): Promise<ChatMember[]>;
+    createGroup(title: string, params?: CreateGroupParams): Promise<import("../3_types.js").ChatPGroup>;
+    createSupergroup(title: string, params?: CreateSupergroupParams): Promise<ChatPSupergroup>;
+    createChannel(title: string, params?: CreateChannelParams): Promise<ChatPChannel>;
+    setMessageTtl(chatId: ID, messageTtl: number): Promise<void>;
+    archiveChats(chatIds: ID[]): Promise<void>;
+    archiveChat(chatId: ID): Promise<void>;
+    unarchiveChats(chatIds: ID[]): Promise<void>;
+    unarchiveChat(chatId: ID): Promise<void>;
+    getCommonChats(userId: ID, params?: GetCommonChatsParams): Promise<ChatP[]>;
+    getChatSettings(chatId: ID): Promise<import("../3_types.js").ChatSettings>;
+    disableBusinessBots(chatId: ID): Promise<void>;
+    enableBusinessBots(chatId: ID): Promise<void>;
 }
 export {};
 //# sourceMappingURL=4_chat_list_manager.d.ts.map

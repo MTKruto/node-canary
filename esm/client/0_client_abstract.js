@@ -1,6 +1,18 @@
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var _ClientAbstract_dc, _ClientAbstract_disconnected;
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,22 +29,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
-};
-var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
-    if (kind === "m") throw new TypeError("Private method is not writable");
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
-};
-var _ClientAbstract_dc;
+import * as dntShim from "../_dnt.shims.js";
 import { initTgCrypto } from "../0_deps.js";
 import { ConnectionError } from "../0_errors.js";
-import { transportProviderWebSocket } from "../3_transport.js";
+import { transportProviderTcp, transportProviderWebSocket } from "../3_transport.js";
 import { INITIAL_DC } from "../4_constants.js";
+// @ts-ignore: lib
+const defaultTransportProvider = typeof dntShim.Deno === "undefined" ? transportProviderWebSocket : transportProviderTcp;
 export class ClientAbstract {
     constructor(params) {
         Object.defineProperty(this, "initialDc", {
@@ -66,8 +69,9 @@ export class ClientAbstract {
             writable: true,
             value: void 0
         });
+        _ClientAbstract_disconnected.set(this, false);
         this.initialDc = params?.initialDc ?? INITIAL_DC;
-        this.transportProvider = params?.transportProvider ?? transportProviderWebSocket();
+        this.transportProvider = params?.transportProvider ?? defaultTransportProvider();
         this.cdn = params?.cdn ?? false;
     }
     get dc() {
@@ -79,7 +83,6 @@ export class ClientAbstract {
         }
         return this.transport.dcId;
     }
-    // MaybePromise since `Client` has to deal with `Storage.set()`
     setDc(dc) {
         __classPrivateFieldSet(this, _ClientAbstract_dc, dc, "f");
     }
@@ -92,11 +95,13 @@ export class ClientAbstract {
         await initTgCrypto();
         await this.transport.connection.open();
         await this.transport.transport.initialize();
+        __classPrivateFieldSet(this, _ClientAbstract_disconnected, false, "f");
     }
     async reconnect(dc) {
-        await this.disconnect();
+        await this.transport?.transport.deinitialize();
+        await this.transport?.connection.close();
         if (dc) {
-            await this.setDc(dc);
+            this.setDc(dc);
         }
         await this.connect();
     }
@@ -106,9 +111,10 @@ export class ClientAbstract {
         }
         await this.transport.transport.deinitialize();
         await this.transport.connection.close();
+        __classPrivateFieldSet(this, _ClientAbstract_disconnected, true, "f");
     }
     get disconnected() {
-        return !this.transport?.transport.initialized;
+        return __classPrivateFieldGet(this, _ClientAbstract_disconnected, "f");
     }
 }
-_ClientAbstract_dc = new WeakMap();
+_ClientAbstract_dc = new WeakMap(), _ClientAbstract_disconnected = new WeakMap();

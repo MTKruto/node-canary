@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,7 +18,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { MaybePromise } from "../1_utilities.js";
-import { BotCommandScope, ChatListItem, ChatMemberRights, FileSource, ID, InlineQueryResultButton, LinkPreview, Message, MessageEntity, MessageSearchFilter, ParseMode, ReplyMarkup, ReplyQuote, SelfDestructOption, StoryInteractiveArea, StoryPrivacy } from "../3_types.js";
+import { Birthday, BotCommandScope, ChatListItem, ChatMemberRights, FileSource, ID, InlineQueryResultButton, LinkPreview, MessageEntity, MessageSearchFilter, ParseMode, ReplyMarkup, SelfDestructOption, StoryInteractiveArea, StoryPrivacy } from "../3_types.js";
+import { ReplyTo } from "../types/2_reply_to.js";
 export interface AnswerCallbackQueryParams {
     /** A text to be shown to the user. */
     text?: string;
@@ -30,35 +31,47 @@ export interface AnswerCallbackQueryParams {
     cacheTime?: number;
 }
 export interface SignInParamsUser<S = string> {
+    /** A user phone number or a function that returns it. */
     phone: S | (() => MaybePromise<S>);
+    /** A verification code or a function that returns it. */
     code: S | (() => MaybePromise<S>);
+    /** An account password or a function that returns it. */
     password: S | ((hint: string | null) => MaybePromise<S>);
 }
 export interface SignInParamsBot {
+    /** A bot token. */
     botToken: string;
 }
 export type SignInParams = SignInParamsUser | SignInParamsBot;
 export interface _BusinessConnectionIdCommon {
+    /** The identifier of a business connection ID to perform the action on. Bot-only. */
     businessConnectionId?: string;
 }
-export interface _SendCommon extends _BusinessConnectionIdCommon {
+export interface _ReplyMarkupCommon {
+    /** The reply markup of the message. Bot-only. */
+    replyMarkup?: ReplyMarkup;
+}
+export interface _PaidBroadcastCommon {
+    paidBroadcast?: boolean;
+}
+export interface _SendCommon extends _BusinessConnectionIdCommon, _PaidBroadcastCommon {
     /** Whether to send the message in a silent way without making a sound on the recipients' clients. */
     disableNotification?: boolean;
     /** Whether to protect the contents of the message from copying and forwarding. */
     protectContent?: boolean;
-    /** The identifier of a message to reply to. */
-    replyToMessageId?: number;
-    /** A specific part of the replying message's text to quote. */
-    replyQuote?: ReplyQuote;
+    /** Information on what the message is replying to. */
+    replyTo?: ReplyTo;
     /** The identifier of a thread to send the message to. */
     messageThreadId?: number;
     /** The identifier of a chat to send the message on behalf of. User-only. */
     sendAs?: ID;
-    /** The reply markup of the message. Bot-only. */
-    replyMarkup?: ReplyMarkup;
+    /** The identifier of a message effect to be attached to the message. */
+    effectId?: number;
+    /** If specified, the message will be scheduled to be sent at that date. User-only. */
+    sendAt?: Date;
 }
-export interface SendMessageParams extends _SendCommon {
-    /** The parse mode to use. If not provided, the default parse mode will be used. */
+export interface SendMessageParams extends _SendCommon, _ReplyMarkupCommon {
+    /** The parse mode to use. if omitted, the default parse mode will be used. */
     parseMode?: ParseMode;
     /** The message's entities. */
     entities?: MessageEntity[];
@@ -68,23 +81,35 @@ export interface SendMessageParams extends _SendCommon {
 export interface SendChatActionParams extends _BusinessConnectionIdCommon {
     messageThreadId?: number;
 }
-export interface EditMessageParams {
-    /** The parse mode to use. If not provided, the default parse mode will be used. */
+export interface _EditMessageTextCommon extends _ReplyMarkupCommon {
+    /** The parse mode to use. if omitted, the default parse mode will be used. */
     parseMode?: ParseMode;
     /** The message's entities. */
     entities?: MessageEntity[];
     /** The message's link preview. */
     linkPreview?: LinkPreview;
-    /** The reply markup of the message. Bot-only. */
-    replyMarkup?: ReplyMarkup;
 }
-export interface EditMessageReplyMarkupParams {
-    /** The reply markup of the message. Bot-only. */
-    replyMarkup?: ReplyMarkup;
+export interface EditMessageTextParams extends _BusinessConnectionIdCommon, _EditMessageTextCommon {
 }
-export interface EditMessageMediaParams {
-    /** The reply markup of the message. Bot-only. */
-    replyMarkup?: ReplyMarkup;
+export interface EditInlineMessageTextParams extends _EditMessageTextCommon {
+}
+export interface _EditMessageCaptionCommon extends _ReplyMarkupCommon {
+    /** The message's new caption. If omitted, the caption will be removed.  */
+    caption?: string;
+    /** The parse mode to use. If omitted, the default parse mode will be used. */
+    parseMode?: ParseMode;
+    /** The caption's entities. */
+    entities?: MessageEntity[];
+}
+export interface EditMessageCaptionParams extends _BusinessConnectionIdCommon, _EditMessageCaptionCommon {
+}
+export interface EditInlineMessageCaptionParams extends _EditMessageCaptionCommon {
+}
+export interface EditMessageReplyMarkupParams extends _BusinessConnectionIdCommon, _ReplyMarkupCommon {
+}
+export interface EditMessageMediaParams extends _BusinessConnectionIdCommon, _ReplyMarkupCommon {
+}
+export interface EditInlineMessageMediaParams extends _ReplyMarkupCommon {
 }
 export interface ForwardMessagesParams extends Omit<_SendCommon, "replyToMessageId" | "replyMarkup"> {
     /** Whether to not include the original sender of the message that is going to be forwarded. */
@@ -92,7 +117,13 @@ export interface ForwardMessagesParams extends Omit<_SendCommon, "replyToMessage
     /** Whether to not include the original caption of the message that is going to be forwarded. */
     dropCaption?: boolean;
 }
-export interface SendPollParams extends _SendCommon {
+export interface SendPollParams extends _SendCommon, _ReplyMarkupCommon {
+    /** The entities of the poll's question. */
+    questionEntities?: MessageEntity[];
+    /** The parse mode to use for the poll's question. if omitted, the default parse mode will be used. */
+    questionParseMode?: ParseMode;
+    /** The parse mode to use for the poll's options. if omitted, the default parse mode will be used. */
+    optionParseMode?: ParseMode;
     /** Whether the poll should be anonymous. */
     isAnonymous?: boolean;
     /** The type of the poll. */
@@ -103,7 +134,7 @@ export interface SendPollParams extends _SendCommon {
     correctOptionIndex?: number;
     /** A text that will be shown to the user when the poll is answered. Only valid for quiz polls. */
     explanation?: string;
-    /** The parse mode to use for the explanation. If not provided, the default parse mode will be used. */
+    /** The parse mode to use for the explanation. if omitted, the default parse mode will be used. */
     explanationParseMode?: ParseMode;
     /** The explanation's entities. */
     explanationEntities?: MessageEntity[];
@@ -114,30 +145,43 @@ export interface SendPollParams extends _SendCommon {
     /** Whether the poll should be closed as soon as it is sent, allowing no answers. */
     isClosed?: boolean;
 }
+export interface SendInvoiceParams extends _SendCommon, _ReplyMarkupCommon {
+    providerToken?: string;
+    maxTipAmount?: number;
+    suggestedTipAmounts?: number[];
+    startParameter?: string;
+    providerData?: string;
+    photoUrl?: string;
+    photoSize?: number;
+    photoWidth?: number;
+    photoHeight?: number;
+    needName?: boolean;
+    needPhoneNumber?: boolean;
+    needEmail?: boolean;
+    needShippingAddress?: boolean;
+    sendPhoneNumberToProvider?: boolean;
+    sendEmailToProvider?: boolean;
+    flexible?: boolean;
+}
 export interface DownloadParams {
     /** Size of each download chunk in bytes. */
     chunkSize?: number;
     /** Download offset in bytes. */
     offset?: number;
+    /** Download abort signal. */
+    signal?: AbortSignal;
 }
 export interface _UploadCommon {
     /** The file name to assign if applicable. */
     fileName?: string;
+    /** The file's size. */
+    fileSize?: number;
     /** The mime type to assign if applicable. */
     mimeType?: string;
     /** Size of each upload chunk in bytes. */
     chunkSize?: number;
     /** Upload abort signal. */
-    signal?: AbortSignal | null;
-}
-export interface UploadParams {
-    /** The file name to assign. */
-    fileName?: string;
-    fileSize?: number;
-    /** Size of each upload chunk in bytes. */
-    chunkSize?: number;
-    /** Upload abort signal. */
-    signal?: AbortSignal | null;
+    signal?: AbortSignal;
 }
 export interface AnswerInlineQueryParams {
     /** TTL of the caches of the results in seconds. Defaults to 300. */
@@ -151,7 +195,7 @@ export interface AnswerInlineQueryParams {
     button?: InlineQueryResultButton;
 }
 export interface SetMyCommandsParams {
-    /** A two-letter ISO 639-1 language code. If not set, the command details will be updated for users having an unsupported language. */
+    /** A two-letter ISO 639-1 language code. If omitted, the command details will be updated for users having an unsupported language. */
     languageCode?: string;
     /** The scope in which the commands are available. */
     scope?: BotCommandScope;
@@ -170,14 +214,19 @@ export interface _CaptionCommon {
     caption?: string;
     /** The caption's entities. */
     captionEntities?: MessageEntity[];
-    /** The parse mode to use for the caption. If not provided, the default parse mode will be used. */
+    /** The parse mode to use for the caption. if omitted, the default parse mode will be used. */
     parseMode?: ParseMode;
 }
 export interface _SpoilCommon {
     /** Whether to mark the media as a spoiler. */
     hasSpoiler?: boolean;
 }
-export interface SendPhotoParams extends _CaptionCommon, _SpoilCommon, _UploadCommon, _SendCommon {
+export interface _StarCount {
+    /** The amount of stars that will be required to unlock the media. */
+    starCount?: number;
+}
+export interface SendPhotoParams extends _CaptionCommon, _SpoilCommon, _UploadCommon, _SendCommon, _ReplyMarkupCommon, _StarCount {
+    /** The photo's self-destruct preference. */
     selfDestruct?: SelfDestructOption;
 }
 export interface SetChatPhotoParams extends _UploadCommon {
@@ -189,9 +238,10 @@ export interface _ThumbnailCommon {
 export interface SendDocumentParams extends _CaptionCommon, _ThumbnailCommon, _UploadCommon, _SendCommon {
 }
 export interface SendStickerParams extends _UploadCommon, _SendCommon {
+    /** Emoji to bind to the sticker. */
     emoji?: string;
 }
-export interface SendVideoParams extends _CaptionCommon, _ThumbnailCommon, _SpoilCommon, _UploadCommon, _SendCommon {
+export interface SendVideoParams extends _CaptionCommon, _ThumbnailCommon, _SpoilCommon, _UploadCommon, _SendCommon, _StarCount {
     /** The duration of the video in seconds. */
     duration?: number;
     /** The width of the photo in pixels. */
@@ -200,6 +250,7 @@ export interface SendVideoParams extends _CaptionCommon, _ThumbnailCommon, _Spoi
     height?: number;
     /** Whether the video is suitable for streaming. */
     supportsStreaming?: boolean;
+    /** The video's self-destruct preference. */
     selfDestruct?: SelfDestructOption;
 }
 export interface SendAnimationParams extends _CaptionCommon, _ThumbnailCommon, _SpoilCommon, _UploadCommon, _SendCommon {
@@ -228,7 +279,9 @@ export interface SendVideoNoteParams extends _CaptionCommon, _ThumbnailCommon, _
     /** The video's width and height (diameter). */
     length?: number;
 }
-export interface SendLocationParams extends _SendCommon {
+export interface SendMediaGroupParams extends _SendCommon {
+}
+export interface SendLocationParams extends _SendCommon, _ReplyMarkupCommon {
     /** The accuracy radius of the location in meters. Must be in the range of 0-1500. */
     horizontalAccuracy?: number;
     /** The duration in which the location can be updated in seconds. Must be in the range of 80-864,000. */
@@ -238,19 +291,19 @@ export interface SendLocationParams extends _SendCommon {
     /** The maximum distance for proximity alerts on approaching another chat member in meters. Must be in the range 1-100,000. */
     proximityAlertRadius?: number;
 }
-export interface SendVenueParams extends _SendCommon {
+export interface SendVenueParams extends _SendCommon, _ReplyMarkupCommon {
     /** Foursquare identifier of the venue. */
     foursquareId?: string;
     /** Foursquare type of the venue, if known. For example, "arts_entertainment/default", "arts_entertainment/aquarium" or "food/icecream". */
     foursquareType?: string;
 }
-export interface SendContactParams extends _SendCommon {
+export interface SendContactParams extends _SendCommon, _ReplyMarkupCommon {
     /** The contact's last name. */
     lastName?: string;
     /** Additional information in the vCard format. */
     vcard?: string;
 }
-export interface SendDiceParams extends _SendCommon {
+export interface SendDiceParams extends _SendCommon, _ReplyMarkupCommon {
     /** The type of the dice. Can be 🎲, 🎯, 🏀, ⚽, 🎳, 🎰. Defaults to 🎲. */
     emoji?: "🎲" | "🎯" | "🏀" | "⚽" | "🎳" | "🎰";
 }
@@ -259,8 +312,8 @@ export interface ReplyParams {
     quote?: boolean;
 }
 export interface GetHistoryParams {
-    /** The oldest message to get messages after. */
-    after?: Message;
+    /** The identifier of a message. If specified, the chat history will be fetched from that message. */
+    fromMessageId?: number;
     /** The maximum number of results to return. Must be in the range of 1-100. Defaults to 100. */
     limit?: number;
 }
@@ -282,11 +335,13 @@ export interface GetChatsParams {
     /** The maximum number of results to return. Must be in the range of 1-100. Defaults to 100. */
     limit?: number;
 }
-export interface PinMessageParams {
+export interface PinMessageParams extends _BusinessConnectionIdCommon {
     /** Whether to pin the message for both sides. For private chats only. */
     bothSides?: boolean;
     /** Whether to silently pin the message. */
     disableNotification?: boolean;
+}
+export interface UnpinMessageParams extends _BusinessConnectionIdCommon {
 }
 export interface BanChatMemberParams {
     /** A point in time within the future in which the ban will be reverted. */
@@ -320,7 +375,7 @@ export interface SearchMessagesParams {
     /** A message identifier to start searching after. */
     after?: number;
     /** The identifier of a message thread to search in. */
-    messageThreadId?: number;
+    threadId?: number;
     /** The maximum number of results to return. Must be in the range of 1-100. Defaults to 100. */
     limit?: number;
 }
@@ -341,24 +396,25 @@ export interface GetCreatedInviteLinksParams {
     limit?: number;
     /** Whether only revoked invite links must be returned. */
     revoked?: boolean;
+    /** Only get the invite links created after a specific date. */
     afterDate?: Date;
+    /** Only get the invite links created after a specific invite link. */
     afterInviteLink?: string;
 }
-export interface StopPollParams {
-    replyMarkup?: ReplyMarkup;
+export interface StopPollParams extends _BusinessConnectionIdCommon, _ReplyMarkupCommon {
 }
-export interface EditMessageLiveLocationParams {
+export interface EditMessageLiveLocationParams extends _BusinessConnectionIdCommon, _ReplyMarkupCommon {
     /** The accuracy radius of the location in meters. Must be in the range of 0-1500. */
     horizontalAccuracy?: number;
     /** The direction which the user is moving towards. Must be in the range of 1-350. */
     heading?: number;
     /** The maximum distance for proximity alerts on approaching another chat member in meters. Must be in the range 1-100,000. */
     proximityAlertRadius?: number;
-    /** The reply markup of the message. Bot-only. */
-    replyMarkup?: ReplyMarkup;
 }
 export interface SendInlineQueryParams {
+    /** The inline query's text. Defaults to empty string. */
     query?: string;
+    /** Bot-provided pagination offset. */
     offset?: string;
 }
 export interface StartVideoChatParams {
@@ -382,5 +438,144 @@ export interface JoinVideoChatParams {
 export interface DownloadLiveStreamChunkParams {
     /** Video quality. */
     quality?: "low" | "medium" | "high";
+    /** Download abort signal. */
+    signal?: AbortSignal;
+}
+export interface AnswerPreCheckoutQueryParams {
+    error?: string;
+}
+export interface ApproveJoinRequestsParams {
+    /** If specified, only join requests initiated from this invite link will be approved. */
+    inviteLink?: string;
+}
+export interface DeclineJoinRequestsParams {
+    /** If specified, only join requests initiated from this invite link will be declined. */
+    inviteLink?: string;
+}
+export interface AddChatMemberParams {
+    /** The number of current messages to make visible to the user that is about to be added. */
+    historyLimit?: number;
+}
+export interface GetChatMembersParams {
+    /** The number of results to skip. */
+    offset?: number;
+    /** The maximum number of results to return. */
+    limit?: number;
+}
+export interface CreateGroupParams {
+    /** Users to invite after creating the group. */
+    users?: ID[];
+    /** Time to live of the messages of the group that is to be created in seconds. */
+    messageTtl?: number;
+}
+export interface CreateSupergroupParams {
+    /** The description of the supergroup that is to be created. */
+    description?: string;
+    /** Whether a forum should be created. */
+    forum?: boolean;
+    /** Time to live of the messages of the supergroup that is to be created in seconds. */
+    messageTtl?: number;
+}
+export interface CreateChannelParams {
+    /** The description of the channel that is to be created. */
+    description?: string;
+    /** Time to live of the messages of the channel that is to be created in seconds. */
+    messageTtl?: number;
+}
+export interface StartBotParams {
+    /** A deeplink to follow. */
+    deeplink?: string;
+    /** If specified, the bot will be started in that chat instead of its own private chat. */
+    chatId?: ID;
+}
+export interface SetEmojiStatusParams {
+    /** If specified, the emoji status will be unset in that date. */
+    until?: Date;
+}
+export interface AddContactParams {
+    /** A custom ame for the contact. */
+    firstName?: string;
+    /** A custom last name for the contact. */
+    lastName?: string;
+    /** Whether the phone number of the current user should be shared with the contact. */
+    sharePhoneNumber?: boolean;
+}
+export interface UpdateProfileParams {
+    /** New account first name. */
+    firstName?: string;
+    /** New account last name. */
+    lastName?: string;
+    /** New account bio. */
+    bio?: string;
+}
+export interface GetTranslationsParams {
+    /** The platform to get translations for. Defaults to the client's platform. */
+    platform?: string;
+    /** The language to get translations for. Defaults to the client's language. */
+    language?: string;
+}
+export interface GetCommonChatsParams {
+    /** The identifier of a chat. If specified, the list of common chats will be fetched from that chat. */
+    fromChatId?: ID;
+    /** The maximum number of results to return. Must be in the range of 1-100. Defaults to 100. */
+    limit?: number;
+}
+export interface GetClaimedGiftsParams {
+    /** An offset key returned by a previous result. */
+    offset?: string;
+    /** The maximum number of results to return. */
+    limit?: number;
+}
+export interface SendGiftParams {
+    /** A message to send along with the gift. */
+    message?: string;
+    /** The parse mode to use for the message. */
+    parseMode?: ParseMode;
+    /** The entities of the message. */
+    entities?: MessageEntity[];
+    /** If true, only the receiver of the gift will know the name of the sender. */
+    private?: boolean;
+    /** Whether the gift should be upgraded before sending it. */
+    upgrade?: boolean;
+}
+export interface SetSignaturesEnabledParams {
+    /** Whether author profiles should be shown in posts. */
+    showAuthorProfile?: boolean;
+}
+export interface SetBirthdayParams {
+    /** New birthday. If not set, birthday will be removed. */
+    birthday?: Birthday;
+}
+export interface SetPersonalChannelParams {
+    /** New personal channel. If not set, personal channel will be removed. */
+    chatId?: ID;
+}
+export interface SetNameColorParams {
+    /** Identifier of a custom emoji to display in message reply headers. */
+    customEmojiId?: string;
+}
+export interface SetProfileColorParams {
+    /** Identifier of a custom emoji to display in the profile. */
+    customEmojiId?: string;
+}
+export interface SetLocationParams {
+    /** Written address of the business. If not set, address will be removed. */
+    address?: string;
+    /** Latitude of the business. */
+    latitude?: number;
+    /** Longitude of the business. */
+    longitude?: number;
+}
+export interface CreateTopicParams {
+    /** The color to use for the default topic icon. */
+    color?: number;
+    /** Identifier of a custom emoji to display as the icon of the topic. */
+    customEmojiId?: string;
+    /** The identifier of a chat to create the topic on behalf of. User-only. */
+    sendAs?: ID;
+}
+export interface EditTopicParams {
+    /** Identifier of a custom emoji to display as the icon of the topic. */
+    customEmojiId?: string;
 }
 //# sourceMappingURL=0_params.d.ts.map

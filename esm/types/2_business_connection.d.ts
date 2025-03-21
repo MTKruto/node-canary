@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { EntityGetter } from "./_getters.js";
 import { User } from "./1_user.js";
 /** A business connection. */
@@ -33,5 +33,5 @@ export interface BusinessConnection {
     /** Whether the connection is active. */
     isEnabled: boolean;
 }
-export declare function constructBusinessConnection(connection: types.BotBusinessConnection, getEntity: EntityGetter): Promise<BusinessConnection>;
+export declare function constructBusinessConnection(connection: Api.botBusinessConnection, getEntity: EntityGetter): Promise<BusinessConnection>;
 //# sourceMappingURL=2_business_connection.d.ts.map

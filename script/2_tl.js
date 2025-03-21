@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -29,21 +29,28 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
 }));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.functions = exports.types = exports.TLError = void 0;
+exports.Api = exports.TLError = void 0;
 var _0_tl_raw_reader_js_1 = require("./tl/0_tl_raw_reader.js");
 Object.defineProperty(exports, "TLError", { enumerable: true, get: function () { return _0_tl_raw_reader_js_1.TLError; } });
-__exportStar(require("./tl/1_tl_object.js"), exports);
-var _2_types_js_1 = require("./tl/2_types.js");
-Object.defineProperty(exports, "types", { enumerable: true, get: function () { return _2_types_js_1.types; } });
-__exportStar(require("./tl/3_utilities.js"), exports);
-var _3_functions_js_1 = require("./tl/3_functions.js");
-Object.defineProperty(exports, "functions", { enumerable: true, get: function () { return _3_functions_js_1.functions; } });
-__exportStar(require("./tl/4_tl_reader.js"), exports);
-__exportStar(require("./tl/5_tl_writer.js"), exports);
-__exportStar(require("./tl/6_rpc_result.js"), exports);
-__exportStar(require("./tl/7_message.js"), exports);
-__exportStar(require("./tl/8_message_container.js"), exports);
+exports.Api = __importStar(require("./tl/0_api.js"));
+__exportStar(require("./tl/1_utilities.js"), exports);
+__exportStar(require("./tl/2_utilities.js"), exports);
+__exportStar(require("./tl/2_message.js"), exports);
+__exportStar(require("./tl/2_tl_reader.js"), exports);
+__exportStar(require("./tl/2_tl_writer.js"), exports);

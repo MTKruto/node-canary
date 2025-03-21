@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -29,10 +29,14 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _CallbackQueryManager_instances, _a, _CallbackQueryManager_c, _CallbackQueryManager_enc, _CallbackQueryManager_isExpired, _CallbackQueryManager_getPasswordCheck;
-import { peerToChatId, types } from "../2_tl.js";
+import { isOneOf } from "../2_tl.js";
 import { constructCallbackQuery, constructCallbackQueryAnswer, validateCallbackQueryQuestion } from "../3_types.js";
-import { checkCallbackQueryId, checkMessageId } from "./0_utilities.js";
 import { checkPassword } from "./0_password.js";
+import { checkCallbackQueryId, checkMessageId } from "./0_utilities.js";
+const callbackQueryManagerUpdates = [
+    "updateBotCallbackQuery",
+    "updateInlineBotCallbackQuery",
+];
 export class CallbackQueryManager {
     constructor(c) {
         _CallbackQueryManager_instances.add(this);
@@ -40,38 +44,27 @@ export class CallbackQueryManager {
         __classPrivateFieldSet(this, _CallbackQueryManager_c, c, "f");
     }
     async answerCallbackQuery(id, params) {
-        await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").storage.assertBot("answerCallbackQuery");
+        __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").storage.assertBot("answerCallbackQuery");
         checkCallbackQueryId(id);
-        await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").api.messages.setBotCallbackAnswer({
-            query_id: BigInt(id),
-            cache_time: params?.cacheTime ?? 0,
-            message: params?.text,
-            alert: params?.alert ? true : undefined,
-        });
+        await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").invoke({ _: "messages.setBotCallbackAnswer", query_id: BigInt(id), cache_time: params?.cacheTime ?? 0, message: params?.text, alert: params?.alert ? true : undefined });
     }
     async sendCallbackQuery(chatId, messageId, question) {
-        await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").storage.assertUser("sendCallbackQuery");
+        __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").storage.assertUser("sendCallbackQuery");
         checkMessageId(messageId);
         validateCallbackQueryQuestion(question);
-        const peer = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").getInputPeer(chatId), peerId = peerToChatId(peer), questionKey = JSON.stringify(question);
+        const peer = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").getInputPeer(chatId), peerId = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").getInputPeerChatId(peer), questionKey = JSON.stringify(question);
         const maybeAnswer = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").messageStorage.getCallbackQueryAnswer(peerId, messageId, questionKey);
         if (maybeAnswer != null && !__classPrivateFieldGet(_a, _a, "m", _CallbackQueryManager_isExpired).call(_a, maybeAnswer[1], maybeAnswer[0].cache_time)) {
             return constructCallbackQueryAnswer(maybeAnswer[0]);
         }
-        const answer = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").api.messages.getBotCallbackAnswer({
-            peer,
-            msg_id: messageId,
-            data: "data" in question ? __classPrivateFieldGet(_a, _a, "f", _CallbackQueryManager_enc).encode(question.data) : undefined,
-            game: question.type == "game" ? true : undefined,
-            password: question.type == "password" ? await __classPrivateFieldGet(this, _CallbackQueryManager_instances, "m", _CallbackQueryManager_getPasswordCheck).call(this, question.password) : undefined,
-        });
+        const answer = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").invoke({ _: "messages.getBotCallbackAnswer", peer, msg_id: messageId, data: "data" in question ? __classPrivateFieldGet(_a, _a, "f", _CallbackQueryManager_enc).encode(question.data) : undefined, game: question.type == "game" ? true : undefined, password: question.type == "password" ? await __classPrivateFieldGet(this, _CallbackQueryManager_instances, "m", _CallbackQueryManager_getPasswordCheck).call(this, question.password) : undefined });
         if (answer.cache_time >= 0) {
             await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").messageStorage.setCallbackQueryAnswer(peerId, messageId, questionKey, answer);
         }
         return constructCallbackQueryAnswer(answer);
     }
-    static canHandleUpdate(update) {
-        return update instanceof types.UpdateBotCallbackQuery || update instanceof types.UpdateInlineBotCallbackQuery;
+    canHandleUpdate(update) {
+        return isOneOf(callbackQueryManagerUpdates, update);
     }
     async handleUpdate(update) {
         return { callbackQuery: await constructCallbackQuery(update, __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").getEntity, __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").messageManager.getMessageWithReply.bind(__classPrivateFieldGet(this, _CallbackQueryManager_c, "f").messageManager)) };
@@ -80,7 +73,7 @@ export class CallbackQueryManager {
 _a = CallbackQueryManager, _CallbackQueryManager_c = new WeakMap(), _CallbackQueryManager_instances = new WeakSet(), _CallbackQueryManager_isExpired = function _CallbackQueryManager_isExpired(date, cacheTime) {
     return (Date.now() - date.getTime()) / 1000 > cacheTime;
 }, _CallbackQueryManager_getPasswordCheck = async function _CallbackQueryManager_getPasswordCheck(password) {
-    const ap = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").api.account.getPassword();
+    const ap = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").invoke({ _: "account.getPassword" });
     return await checkPassword(password, ap);
 };
 _CallbackQueryManager_enc = { value: new TextEncoder() };

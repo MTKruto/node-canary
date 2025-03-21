@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,24 +18,24 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { as, types } from "../2_tl.js";
+import { as, is } from "../2_tl.js";
 import { FileType, serializeFileId, toUniqueFileId } from "./_file_id.js";
 import { constructPhoto } from "./1_photo.js";
 import { constructVideo } from "./1_video.js";
 export function constructStoryContent(media) {
-    if (media instanceof types.MessageMediaPhoto) {
+    if (is("messageMediaPhoto", media)) {
         if (!media.photo) {
             unreachable();
         }
-        const photo = constructPhoto(media.photo[as](types.Photo));
+        const photo = constructPhoto(as("photo", media.photo));
         return { photo };
     }
-    else if (media instanceof types.MessageMediaDocument) {
+    else if (is("messageMediaDocument", media)) {
         const document = media.document;
-        if (!(document instanceof types.Document)) {
+        if (!(is("document", document))) {
             unreachable();
         }
-        const video = document.attributes.find((v) => v instanceof types.DocumentAttributeVideo);
+        const video = document.attributes.find((v) => is("documentAttributeVideo", v));
         if (!video) {
             unreachable();
         }

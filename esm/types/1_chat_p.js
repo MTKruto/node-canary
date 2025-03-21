@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,10 +19,10 @@
  */
 import { unreachable } from "../0_deps.js";
 import { cleanObject, getColorFromPeerId, ZERO_CHANNEL_ID } from "../1_utilities.js";
-import { types } from "../2_tl.js";
+import { is } from "../2_tl.js";
 import { constructRestrictionReason } from "./0_restriction_reason.js";
 export function constructChatP(chat) {
-    if (chat instanceof types.User) {
+    if (is("user", chat)) {
         const id = Number(chat.id);
         const chat_ = {
             id,
@@ -42,7 +42,7 @@ export function constructChatP(chat) {
         }
         return cleanObject(chat_);
     }
-    else if (chat instanceof types.Chat || chat instanceof types.ChatForbidden) {
+    else if (is("chat", chat) || is("chatForbidden", chat)) {
         const id = Number(-chat.id);
         const chat_ = {
             id,
@@ -51,15 +51,15 @@ export function constructChatP(chat) {
             title: chat.title,
             isCreator: false,
         };
-        if (chat instanceof types.Chat) {
+        if (is("chat", chat)) {
             chat_.isCreator = chat.creator || false;
         }
         return cleanObject(chat_);
     }
-    else if (chat instanceof types.Channel || chat instanceof types.ChannelForbidden) {
+    else if (is("channel", chat) || is("channelForbidden", chat)) {
         let chat_;
         const id = ZERO_CHANNEL_ID + -Number(chat.id);
-        if (chat instanceof types.ChannelForbidden) {
+        if (is("channelForbidden", chat)) {
             const { title } = chat;
             if (chat.megagroup) {
                 return { id, color: getColorFromPeerId(id), title, type: "supergroup", isScam: false, isFake: false, isVerified: false, isRestricted: false, isForum: false };

@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -20,7 +20,7 @@
 import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { base64DecodeUrlSafe, base64EncodeUrlSafe, rleDecode, rleEncode } from "../1_utilities.js";
-import { TLReader, TLWriter, types } from "../2_tl.js";
+import { is, TLReader, TLWriter } from "../2_tl.js";
 const NEXT_VERSION = 53;
 const PERSISTENT_ID_VERSION = 4;
 const WEB_LOCATION_FLAG = 1 << 24;
@@ -324,14 +324,14 @@ export function toUniqueFileId(fileId) {
 export function getPhotoFileId(photo) {
     const sizes = photo.sizes
         .map((v) => {
-        if (v instanceof types.PhotoSizeProgressive) {
-            return new types.PhotoSize({ type: v.type, w: v.w, h: v.h, size: Math.max(...v.sizes) });
+        if (is("photoSizeProgressive", v)) {
+            return { _: "photoSize", type: v.type, w: v.w, h: v.h, size: Math.max(...v.sizes) };
         }
         else {
             return v;
         }
     })
-        .filter((v) => v instanceof types.PhotoSize)
+        .filter((v) => is("photoSize", v))
         .sort((a, b) => a.size - b.size);
     const largest = sizes.slice(-1)[0];
     const { dc_id: dcId, id, access_hash: accessHash, file_reference: fileReference } = photo;

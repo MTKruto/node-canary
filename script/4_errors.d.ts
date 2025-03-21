@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,16 +17,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { ErrorWithCall, ErrorWithCallParams } from "./3_errors.js";
-import { TLObject, types } from "./2_tl.js";
+import { TelegramError, TelegramErrorParams } from "./3_errors.js";
+import { Api } from "./2_tl.js";
 export * from "./3_errors.js";
-export declare class FloodWait extends ErrorWithCall {
+export declare class FloodWait extends TelegramError {
     seconds: number;
-    constructor(params: ErrorWithCallParams);
+    constructor(params: TelegramErrorParams);
 }
-export declare class Migrate extends ErrorWithCall {
+export declare class Migrate extends TelegramError {
     dc: number;
-    constructor(params: ErrorWithCallParams);
+    constructor(params: TelegramErrorParams);
 }
 export declare class UserMigrate extends Migrate {
 }
@@ -36,5 +36,5 @@ export declare class FileMigrate extends Migrate {
 }
 export declare class StatsMigrate extends Migrate {
 }
-export declare function upgradeInstance(error: types.Rpc_error, call: TLObject): types.Rpc_error;
+export declare function constructTelegramError(error: Api.rpc_error, call: Api.AnyObject): TelegramError;
 //# sourceMappingURL=4_errors.d.ts.map

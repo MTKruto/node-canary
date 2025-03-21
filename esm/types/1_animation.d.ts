@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { Thumbnail } from "./0_thumbnail.js";
 /** An animation file (GIF or H.264/MPEG-4 AVC video without sound). */
 export interface Animation {
@@ -40,5 +40,5 @@ export interface Animation {
     /** Size of the file in bytes. */
     fileSize: number;
 }
-export declare function constructAnimation(document: types.Document, videoAttribute: types.DocumentAttributeVideo | undefined, fileAttribute: types.DocumentAttributeFilename | undefined, fileId: string, fileUniqueId: string): Animation;
+export declare function constructAnimation(document: Api.document, videoAttribute: Api.documentAttributeVideo | undefined, fileAttribute: Api.documentAttributeFilename | undefined, fileId: string, fileUniqueId: string): Animation;
 //# sourceMappingURL=1_animation.d.ts.map

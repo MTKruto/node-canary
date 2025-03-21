@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,21 +18,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { MaybePromise } from "../1_utilities.js";
-import { enums, types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { ID } from "./0_id.js";
 /** @unlisted */
 export interface EntityGetter {
-    (peer: types.PeerUser): MaybePromise<types.User | null>;
-    (peer: types.PeerChat): MaybePromise<types.Chat | types.ChatForbidden | null>;
-    (peer: types.PeerChannel): MaybePromise<types.Channel | types.ChannelForbidden | null>;
-    (peer: types.PeerUser | types.PeerChat | types.PeerChannel): MaybePromise<types.User | types.Chat | types.ChatForbidden | types.Channel | types.ChannelForbidden | null>;
+    (peer: Api.peerUser): MaybePromise<Api.user | null>;
+    (peer: Api.peerChat): MaybePromise<Api.chat | Api.chatForbidden | null>;
+    (peer: Api.peerChannel): MaybePromise<Api.channel | Api.channelForbidden | null>;
+    (peer: Api.peerUser | Api.peerChat | Api.peerChannel): MaybePromise<Api.user | Api.chat | Api.chatForbidden | Api.channel | Api.channelForbidden | null>;
 }
 /** @unlisted */
 export interface InputPeerGetter {
-    (id: ID): Promise<enums.InputPeer>;
+    (id: ID): Promise<Api.InputPeer>;
 }
 /** @unlisted */
 export interface UsernameResolver {
-    (username: string): MaybePromise<types.InputUser>;
+    (username: string): MaybePromise<Api.inputUser>;
 }
 //# sourceMappingURL=_getters.d.ts.map

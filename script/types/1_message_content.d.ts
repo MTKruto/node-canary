@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -83,7 +83,7 @@ export interface MessageContentText {
     type: "text";
     /** The message's text. */
     text: string;
-    /** The parse mode to use. If not provided, the default parse mode will be used. */
+    /** The parse mode to use. if omitted, the default parse mode will be used. */
     parseMode?: ParseMode;
     /** The message's entities. */
     entities?: MessageEntity[];

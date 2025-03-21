@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,8 +18,22 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BroadcastRequired = exports.BroadcastPublicVotersForbidden = exports.BroadcastIdInvalid = exports.BroadcastForbidden = exports.BroadcastCallsDisabled = exports.BotScoreNotModified = exports.BotResponseTimeout = exports.BotPollsDisabled = exports.BotPaymentsDisabled = exports.BotOnesideNotAvail = exports.BotMissing = exports.BotMethodInvalid = exports.BotInvalid = exports.BotInlineDisabled = exports.BotGroupsBlocked = exports.BotGamesDisabled = exports.BotDomainInvalid = exports.BotCommandInvalid = exports.BotCommandDescriptionInvalid = exports.BotChannelsNa = exports.BotsTooMuch = exports.BasePortLocInvalid = exports.BannedRightsInvalid = exports.BankCardNumberInvalid = exports.AutoarchiveNotAvailable = exports.AuthTokenInvalid = exports.AuthTokenExpired = exports.AuthTokenException = exports.AuthTokenAlreadyAccepted = exports.AuthRestart = exports.AuthKeyUnregistered = exports.AuthKeyPermEmpty = exports.AuthKeyInvalid = exports.AuthKeyDuplicated = exports.AuthBytesInvalid = exports.AudioTitleEmpty = exports.AudioContentUrlEmpty = exports.ArticleTitleEmpty = exports.ApiIdPublishedFlood = exports.ApiIdInvalid = exports.AlbumPhotosTooMany = exports.AdminRankInvalid = exports.AdminRankEmojiNotAllowed = exports.AdminIdInvalid = exports.AdminsTooMuch = exports.ActiveUserRequired = exports.AccessTokenInvalid = exports.AccessTokenExpired = exports.AboutTooLong = exports.ErrorWithCall = void 0;
+exports.BroadcastRequired = exports.BroadcastPublicVotersForbidden = exports.BroadcastIdInvalid = exports.BroadcastForbidden = exports.BroadcastCallsDisabled = exports.BotScoreNotModified = exports.BotResponseTimeout = exports.BotPollsDisabled = exports.BotPaymentsDisabled = exports.BotOnesideNotAvail = exports.BotMissing = exports.BotMethodInvalid = exports.BotInvalid = exports.BotInlineDisabled = exports.BotGroupsBlocked = exports.BotGamesDisabled = exports.BotDomainInvalid = exports.BotCommandInvalid = exports.BotCommandDescriptionInvalid = exports.BotChannelsNa = exports.BotsTooMuch = exports.BasePortLocInvalid = exports.BannedRightsInvalid = exports.BankCardNumberInvalid = exports.AutoarchiveNotAvailable = exports.AuthTokenInvalid = exports.AuthTokenExpired = exports.AuthTokenException = exports.AuthTokenAlreadyAccepted = exports.AuthRestart = exports.AuthKeyUnregistered = exports.AuthKeyPermEmpty = exports.AuthKeyInvalid = exports.AuthKeyDuplicated = exports.AuthBytesInvalid = exports.AudioTitleEmpty = exports.AudioContentUrlEmpty = exports.ArticleTitleEmpty = exports.ApiIdPublishedFlood = exports.ApiIdInvalid = exports.AlbumPhotosTooMany = exports.AdminRankInvalid = exports.AdminRankEmojiNotAllowed = exports.AdminIdInvalid = exports.AdminsTooMuch = exports.ActiveUserRequired = exports.AccessTokenInvalid = exports.AccessTokenExpired = exports.AboutTooLong = exports.TelegramError = void 0;
 exports.ChatTooBig = exports.ChatTitleEmpty = exports.ChatSendStickersForbidden = exports.ChatSendPollForbidden = exports.ChatSendMediaForbidden = exports.ChatSendInlineForbidden = exports.ChatSendGifsForbidden = exports.ChatSendGameForbidden = exports.ChatRevokeDateUnsupported = exports.ChatRestricted = exports.ChatNotModified = exports.ChatLinkExists = exports.ChatInvitePermanent = exports.ChatInvalid = exports.ChatIdInvalid = exports.ChatIdGenerateFailed = exports.ChatIdEmpty = exports.ChatGuestSendForbidden = exports.ChatGetFailed = exports.ChatForwardsRestricted = exports.ChatForbidden = exports.ChatDiscussionUnallowed = exports.ChatAdminRequired = exports.ChatAdminInviteRequired = exports.ChatAboutTooLong = exports.ChatAboutNotModified = exports.ChannelTooLarge = exports.ChannelTooBig = exports.ChannelPublicGroupNa = exports.ChannelPrivate = exports.ChannelParicipantMissing = exports.ChannelInvalid = exports.ChannelIdInvalid = exports.ChannelForumMissing = exports.ChannelBanned = exports.ChannelsTooMuch = exports.ChannelsAdminPublicTooMuch = exports.ChannelsAdminLocatedTooMuch = exports.CdnUploadTimeout = exports.CdnMethodInvalid = exports.CallProtocolFlagsInvalid = exports.CallPeerInvalid = exports.CallOccupyFailed = exports.CallAlreadyDeclined = exports.CallAlreadyAccepted = exports.ButtonUserPrivacyRestricted = exports.ButtonUrlInvalid = exports.ButtonTypeInvalid = exports.ButtonTextInvalid = exports.ButtonDataInvalid = void 0;
 exports.ExternalUrlInvalid = exports.ExportCardInvalid = exports.ExpireForbidden = exports.ExpireDateInvalid = exports.ErrorTextEmpty = exports.EntityMentionUserInvalid = exports.EntityBoundsInvalid = exports.EntitiesTooLong = exports.EncryptionOccupyFailed = exports.EncryptionIdInvalid = exports.EncryptionDeclined = exports.EncryptionAlreadyDeclined = exports.EncryptionAlreadyAccepted = exports.EncryptedMessageInvalid = exports.EmoticonStickerpackMissing = exports.EmoticonInvalid = exports.EmoticonEmpty = exports.EmojiNotModified = exports.EmojiInvalid = exports.EmailVerifyExpired = exports.EmailUnconfirmed = exports.EmailInvalid = exports.EmailHashExpired = exports.EditBotInviteForbidden = exports.DocumentInvalid = exports.DhGAInvalid = exports.DcIdInvalid = exports.DateEmpty = exports.DataTooLong = exports.DataJsonInvalid = exports.DataInvalid = exports.CurrencyTotalAmountInvalid = exports.CreateCallFailed = exports.ContactReqMissing = exports.ContactNameEmpty = exports.ContactIdInvalid = exports.ContactAddMissing = exports.ConnectionSystemLangCodeEmpty = exports.ConnectionSystemEmpty = exports.ConnectionNotInited = exports.ConnectionLayerInvalid = exports.ConnectionLangPackInvalid = exports.ConnectionDeviceModelEmpty = exports.ConnectionAppVersionEmpty = exports.ConnectionApiIdInvalid = exports.CodeInvalid = exports.CodeHashInvalid = exports.CodeEmpty = exports.ChpCallFail = exports.ChatWriteForbidden = void 0;
 exports.HideRequesterMissing = exports.HashInvalid = exports.GroupCallInvalid = exports.GroupedMediaInvalid = exports.GroupcallSsrcDuplicateMuch = exports.GroupcallNotModified = exports.GroupcallJoinMissing = exports.GroupcallInvalid = exports.GroupcallForbidden = exports.GroupcallAlreadyStarted = exports.GroupcallAlreadyDiscarded = exports.GroupcallAddParticipantsFailed = exports.GraphOutdatedReload = exports.GraphInvalidReload = exports.GraphExpiredReload = exports.GifIdInvalid = exports.GifContentTypeInvalid = exports.GeoPointInvalid = exports.GameBotInvalid = exports.FromPeerInvalid = exports.FromMessageBotDisabled = exports.FreshResetAuthorisationForbidden = exports.FreshChangePhoneForbidden = exports.FreshChangeAdminsForbidden = exports.FolderIdInvalid = exports.FolderIdEmpty = exports.FirstnameInvalid = exports.FilterTitleEmpty = exports.FilterNotSupported = exports.FilterIncludeEmpty = exports.FilterIdInvalid = exports.FileTitleEmpty = exports.FileReferenceInvalid = exports.FileReferenceExpired = exports.FileReferenceEmpty = exports.FilePartXMissing = exports.FilePartTooBig = exports.FilePartSizeInvalid = exports.FilePartSizeChanged = exports.FilePartLengthInvalid = exports.FilePartInvalid = exports.FilePartEmpty = exports.FilePart_0Missing = exports.FilePartsInvalid = exports.FileIdInvalid = exports.FileEmtpy = exports.FileContentTypeInvalid = exports.FilerefUpgradeNeeded = exports.FieldNameInvalid = exports.FieldNameEmpty = void 0;
@@ -30,1545 +44,1555 @@ exports.SignInFailed = exports.ShortNameOccupied = exports.ShortNameInvalid = ex
 exports.TtlPeriodInvalid = exports.TtlMediaInvalid = exports.TtlDaysInvalid = exports.ToLangInvalid = exports.TopicDeleted = exports.TokenInvalid = exports.TmpPasswordInvalid = exports.TmpPasswordDisabled = exports.TitleInvalid = exports.Timeout = exports.ThemeTitleInvalid = exports.ThemeMimeInvalid = exports.ThemeInvalid = exports.ThemeFormatInvalid = exports.ThemeFileInvalid = exports.TempAuthKeyEmpty = exports.TempAuthKeyAlreadyBound = exports.TakeoutRequired = exports.TakeoutInvalid = exports.SwitchPmTextEmpty = exports.StoreInvalidScalarType = exports.StorageCheckFailed = exports.StickerVideoNowebm = exports.StickerVideoNodoc = exports.StickerVideoBig = exports.StickerThumbTgsNotgs = exports.StickerThumbPngNopng = exports.StickerTgsNotgs = exports.StickerTgsNodoc = exports.StickerPngNopng = exports.StickerPngDimensions = exports.StickerMimeInvalid = exports.StickerInvalid = exports.StickerIdInvalid = exports.StickerGifDimensions = exports.StickerFileInvalid = exports.StickerEmojiInvalid = exports.StickerDocumentInvalid = exports.StickersTooMuch = exports.StickersEmpty = exports.StickersetOwnerAnonymous = exports.StickersetInvalid = exports.StickerpackStickersTooMuch = exports.StartParamTooLong = exports.StartParamInvalid = exports.StartParamEmpty = exports.SrpPasswordChanged = exports.SrpIdInvalid = exports.SmsCodeCreateFailed = exports.SlowmodeMultiMsgsDisabled = void 0;
 exports.WebdocumentInvalid = exports.WcConvertUrlInvalid = exports.WallpaperMimeInvalid = exports.WallpaperInvalid = exports.WallpaperFileInvalid = exports.VoiceMessagesForbidden = exports.VideoTitleEmpty = exports.VideoFileInvalid = exports.VideoContentTypeInvalid = exports.UserVolumeInvalid = exports.UserRestricted = exports.UserPrivacyRestricted = exports.UserNotParticipant = exports.UserNotMutualContact = exports.UserKicked = exports.UserIsBot = exports.UserIsBlocked = exports.UserInvalid = exports.UserIdInvalid = exports.UserDeleted = exports.UserDeactivatedBan = exports.UserDeactivated = exports.UserCreator = exports.UserChannelsTooMuch = exports.UserBotRequired = exports.UserBotInvalid = exports.UserBot = exports.UserBlocked = exports.UserBannedInChannel = exports.UserAlreadyParticipant = exports.UserAlreadyInvited = exports.UserAdminInvalid = exports.UsersTooMuch = exports.UsersTooFew = exports.UserpicUploadRequired = exports.UserpicPrivacyRequired = exports.UsernamePurchaseAvailable = exports.UsernameOccupied = exports.UsernameNotOccupied = exports.UsernameNotModified = exports.UsernameInvalid = exports.UsageLimitInvalid = exports.UrlInvalid = exports.UpdateAppToLogin = exports.UntilDateInvalid = exports.UnknownMethod = exports.UnknownError = exports.Timedout = exports.TypeConstructorInvalid = exports.TypesEmpty = void 0;
 exports.map = exports.YouBlockedUser = exports.WorkerBusyTooLongRetry = exports.WebpushTokenInvalid = exports.WebpushKeyInvalid = exports.WebpushAuthInvalid = exports.WebpageMediaEmpty = exports.WebpageCurlFailed = exports.WebdocumentUrlInvalid = exports.WebdocumentSizeTooBig = exports.WebdocumentMimeInvalid = void 0;
-const _2_tl_js_1 = require("./2_tl.js");
-class ErrorWithCall extends _2_tl_js_1.types.Rpc_error {
+const _0_errors_js_1 = require("./0_errors.js");
+__exportStar(require("./0_errors.js"), exports);
+class TelegramError extends _0_errors_js_1.MtkrutoError {
     constructor(params) {
-        super(params);
-        Object.defineProperty(this, "call", {
+        super(`${params.error_code}: ${params.error_message} (${params.call._})`);
+        Object.defineProperty(this, "errorCode", {
             enumerable: true,
             configurable: true,
             writable: true,
             value: void 0
         });
-        this.call = params.call;
+        Object.defineProperty(this, "errorMessage", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.name = "TelegramError";
+        this.errorCode = params.error_code;
+        this.errorMessage = params.error_message;
+        this.cause = params.call;
     }
 }
-exports.ErrorWithCall = ErrorWithCall;
-class AboutTooLong extends ErrorWithCall {
+exports.TelegramError = TelegramError;
+class AboutTooLong extends TelegramError {
 }
 exports.AboutTooLong = AboutTooLong;
-class AccessTokenExpired extends ErrorWithCall {
+class AccessTokenExpired extends TelegramError {
 }
 exports.AccessTokenExpired = AccessTokenExpired;
-class AccessTokenInvalid extends ErrorWithCall {
+class AccessTokenInvalid extends TelegramError {
 }
 exports.AccessTokenInvalid = AccessTokenInvalid;
-class ActiveUserRequired extends ErrorWithCall {
+class ActiveUserRequired extends TelegramError {
 }
 exports.ActiveUserRequired = ActiveUserRequired;
-class AdminsTooMuch extends ErrorWithCall {
+class AdminsTooMuch extends TelegramError {
 }
 exports.AdminsTooMuch = AdminsTooMuch;
-class AdminIdInvalid extends ErrorWithCall {
+class AdminIdInvalid extends TelegramError {
 }
 exports.AdminIdInvalid = AdminIdInvalid;
-class AdminRankEmojiNotAllowed extends ErrorWithCall {
+class AdminRankEmojiNotAllowed extends TelegramError {
 }
 exports.AdminRankEmojiNotAllowed = AdminRankEmojiNotAllowed;
-class AdminRankInvalid extends ErrorWithCall {
+class AdminRankInvalid extends TelegramError {
 }
 exports.AdminRankInvalid = AdminRankInvalid;
-class AlbumPhotosTooMany extends ErrorWithCall {
+class AlbumPhotosTooMany extends TelegramError {
 }
 exports.AlbumPhotosTooMany = AlbumPhotosTooMany;
-class ApiIdInvalid extends ErrorWithCall {
+class ApiIdInvalid extends TelegramError {
 }
 exports.ApiIdInvalid = ApiIdInvalid;
-class ApiIdPublishedFlood extends ErrorWithCall {
+class ApiIdPublishedFlood extends TelegramError {
 }
 exports.ApiIdPublishedFlood = ApiIdPublishedFlood;
-class ArticleTitleEmpty extends ErrorWithCall {
+class ArticleTitleEmpty extends TelegramError {
 }
 exports.ArticleTitleEmpty = ArticleTitleEmpty;
-class AudioContentUrlEmpty extends ErrorWithCall {
+class AudioContentUrlEmpty extends TelegramError {
 }
 exports.AudioContentUrlEmpty = AudioContentUrlEmpty;
-class AudioTitleEmpty extends ErrorWithCall {
+class AudioTitleEmpty extends TelegramError {
 }
 exports.AudioTitleEmpty = AudioTitleEmpty;
-class AuthBytesInvalid extends ErrorWithCall {
+class AuthBytesInvalid extends TelegramError {
 }
 exports.AuthBytesInvalid = AuthBytesInvalid;
-class AuthKeyDuplicated extends ErrorWithCall {
+class AuthKeyDuplicated extends TelegramError {
 }
 exports.AuthKeyDuplicated = AuthKeyDuplicated;
-class AuthKeyInvalid extends ErrorWithCall {
+class AuthKeyInvalid extends TelegramError {
 }
 exports.AuthKeyInvalid = AuthKeyInvalid;
-class AuthKeyPermEmpty extends ErrorWithCall {
+class AuthKeyPermEmpty extends TelegramError {
 }
 exports.AuthKeyPermEmpty = AuthKeyPermEmpty;
-class AuthKeyUnregistered extends ErrorWithCall {
+class AuthKeyUnregistered extends TelegramError {
 }
 exports.AuthKeyUnregistered = AuthKeyUnregistered;
-class AuthRestart extends ErrorWithCall {
+class AuthRestart extends TelegramError {
 }
 exports.AuthRestart = AuthRestart;
-class AuthTokenAlreadyAccepted extends ErrorWithCall {
+class AuthTokenAlreadyAccepted extends TelegramError {
 }
 exports.AuthTokenAlreadyAccepted = AuthTokenAlreadyAccepted;
-class AuthTokenException extends ErrorWithCall {
+class AuthTokenException extends TelegramError {
 }
 exports.AuthTokenException = AuthTokenException;
-class AuthTokenExpired extends ErrorWithCall {
+class AuthTokenExpired extends TelegramError {
 }
 exports.AuthTokenExpired = AuthTokenExpired;
-class AuthTokenInvalid extends ErrorWithCall {
+class AuthTokenInvalid extends TelegramError {
 }
 exports.AuthTokenInvalid = AuthTokenInvalid;
-class AutoarchiveNotAvailable extends ErrorWithCall {
+class AutoarchiveNotAvailable extends TelegramError {
 }
 exports.AutoarchiveNotAvailable = AutoarchiveNotAvailable;
-class BankCardNumberInvalid extends ErrorWithCall {
+class BankCardNumberInvalid extends TelegramError {
 }
 exports.BankCardNumberInvalid = BankCardNumberInvalid;
-class BannedRightsInvalid extends ErrorWithCall {
+class BannedRightsInvalid extends TelegramError {
 }
 exports.BannedRightsInvalid = BannedRightsInvalid;
-class BasePortLocInvalid extends ErrorWithCall {
+class BasePortLocInvalid extends TelegramError {
 }
 exports.BasePortLocInvalid = BasePortLocInvalid;
-class BotsTooMuch extends ErrorWithCall {
+class BotsTooMuch extends TelegramError {
 }
 exports.BotsTooMuch = BotsTooMuch;
-class BotChannelsNa extends ErrorWithCall {
+class BotChannelsNa extends TelegramError {
 }
 exports.BotChannelsNa = BotChannelsNa;
-class BotCommandDescriptionInvalid extends ErrorWithCall {
+class BotCommandDescriptionInvalid extends TelegramError {
 }
 exports.BotCommandDescriptionInvalid = BotCommandDescriptionInvalid;
-class BotCommandInvalid extends ErrorWithCall {
+class BotCommandInvalid extends TelegramError {
 }
 exports.BotCommandInvalid = BotCommandInvalid;
-class BotDomainInvalid extends ErrorWithCall {
+class BotDomainInvalid extends TelegramError {
 }
 exports.BotDomainInvalid = BotDomainInvalid;
-class BotGamesDisabled extends ErrorWithCall {
+class BotGamesDisabled extends TelegramError {
 }
 exports.BotGamesDisabled = BotGamesDisabled;
-class BotGroupsBlocked extends ErrorWithCall {
+class BotGroupsBlocked extends TelegramError {
 }
 exports.BotGroupsBlocked = BotGroupsBlocked;
-class BotInlineDisabled extends ErrorWithCall {
+class BotInlineDisabled extends TelegramError {
 }
 exports.BotInlineDisabled = BotInlineDisabled;
-class BotInvalid extends ErrorWithCall {
+class BotInvalid extends TelegramError {
 }
 exports.BotInvalid = BotInvalid;
-class BotMethodInvalid extends ErrorWithCall {
+class BotMethodInvalid extends TelegramError {
 }
 exports.BotMethodInvalid = BotMethodInvalid;
-class BotMissing extends ErrorWithCall {
+class BotMissing extends TelegramError {
 }
 exports.BotMissing = BotMissing;
-class BotOnesideNotAvail extends ErrorWithCall {
+class BotOnesideNotAvail extends TelegramError {
 }
 exports.BotOnesideNotAvail = BotOnesideNotAvail;
-class BotPaymentsDisabled extends ErrorWithCall {
+class BotPaymentsDisabled extends TelegramError {
 }
 exports.BotPaymentsDisabled = BotPaymentsDisabled;
-class BotPollsDisabled extends ErrorWithCall {
+class BotPollsDisabled extends TelegramError {
 }
 exports.BotPollsDisabled = BotPollsDisabled;
-class BotResponseTimeout extends ErrorWithCall {
+class BotResponseTimeout extends TelegramError {
 }
 exports.BotResponseTimeout = BotResponseTimeout;
-class BotScoreNotModified extends ErrorWithCall {
+class BotScoreNotModified extends TelegramError {
 }
 exports.BotScoreNotModified = BotScoreNotModified;
-class BroadcastCallsDisabled extends ErrorWithCall {
+class BroadcastCallsDisabled extends TelegramError {
 }
 exports.BroadcastCallsDisabled = BroadcastCallsDisabled;
-class BroadcastForbidden extends ErrorWithCall {
+class BroadcastForbidden extends TelegramError {
 }
 exports.BroadcastForbidden = BroadcastForbidden;
-class BroadcastIdInvalid extends ErrorWithCall {
+class BroadcastIdInvalid extends TelegramError {
 }
 exports.BroadcastIdInvalid = BroadcastIdInvalid;
-class BroadcastPublicVotersForbidden extends ErrorWithCall {
+class BroadcastPublicVotersForbidden extends TelegramError {
 }
 exports.BroadcastPublicVotersForbidden = BroadcastPublicVotersForbidden;
-class BroadcastRequired extends ErrorWithCall {
+class BroadcastRequired extends TelegramError {
 }
 exports.BroadcastRequired = BroadcastRequired;
-class ButtonDataInvalid extends ErrorWithCall {
+class ButtonDataInvalid extends TelegramError {
 }
 exports.ButtonDataInvalid = ButtonDataInvalid;
-class ButtonTextInvalid extends ErrorWithCall {
+class ButtonTextInvalid extends TelegramError {
 }
 exports.ButtonTextInvalid = ButtonTextInvalid;
-class ButtonTypeInvalid extends ErrorWithCall {
+class ButtonTypeInvalid extends TelegramError {
 }
 exports.ButtonTypeInvalid = ButtonTypeInvalid;
-class ButtonUrlInvalid extends ErrorWithCall {
+class ButtonUrlInvalid extends TelegramError {
 }
 exports.ButtonUrlInvalid = ButtonUrlInvalid;
-class ButtonUserPrivacyRestricted extends ErrorWithCall {
+class ButtonUserPrivacyRestricted extends TelegramError {
 }
 exports.ButtonUserPrivacyRestricted = ButtonUserPrivacyRestricted;
-class CallAlreadyAccepted extends ErrorWithCall {
+class CallAlreadyAccepted extends TelegramError {
 }
 exports.CallAlreadyAccepted = CallAlreadyAccepted;
-class CallAlreadyDeclined extends ErrorWithCall {
+class CallAlreadyDeclined extends TelegramError {
 }
 exports.CallAlreadyDeclined = CallAlreadyDeclined;
-class CallOccupyFailed extends ErrorWithCall {
+class CallOccupyFailed extends TelegramError {
 }
 exports.CallOccupyFailed = CallOccupyFailed;
-class CallPeerInvalid extends ErrorWithCall {
+class CallPeerInvalid extends TelegramError {
 }
 exports.CallPeerInvalid = CallPeerInvalid;
-class CallProtocolFlagsInvalid extends ErrorWithCall {
+class CallProtocolFlagsInvalid extends TelegramError {
 }
 exports.CallProtocolFlagsInvalid = CallProtocolFlagsInvalid;
-class CdnMethodInvalid extends ErrorWithCall {
+class CdnMethodInvalid extends TelegramError {
 }
 exports.CdnMethodInvalid = CdnMethodInvalid;
-class CdnUploadTimeout extends ErrorWithCall {
+class CdnUploadTimeout extends TelegramError {
 }
 exports.CdnUploadTimeout = CdnUploadTimeout;
-class ChannelsAdminLocatedTooMuch extends ErrorWithCall {
+class ChannelsAdminLocatedTooMuch extends TelegramError {
 }
 exports.ChannelsAdminLocatedTooMuch = ChannelsAdminLocatedTooMuch;
-class ChannelsAdminPublicTooMuch extends ErrorWithCall {
+class ChannelsAdminPublicTooMuch extends TelegramError {
 }
 exports.ChannelsAdminPublicTooMuch = ChannelsAdminPublicTooMuch;
-class ChannelsTooMuch extends ErrorWithCall {
+class ChannelsTooMuch extends TelegramError {
 }
 exports.ChannelsTooMuch = ChannelsTooMuch;
-class ChannelBanned extends ErrorWithCall {
+class ChannelBanned extends TelegramError {
 }
 exports.ChannelBanned = ChannelBanned;
-class ChannelForumMissing extends ErrorWithCall {
+class ChannelForumMissing extends TelegramError {
 }
 exports.ChannelForumMissing = ChannelForumMissing;
-class ChannelIdInvalid extends ErrorWithCall {
+class ChannelIdInvalid extends TelegramError {
 }
 exports.ChannelIdInvalid = ChannelIdInvalid;
-class ChannelInvalid extends ErrorWithCall {
+class ChannelInvalid extends TelegramError {
 }
 exports.ChannelInvalid = ChannelInvalid;
-class ChannelParicipantMissing extends ErrorWithCall {
+class ChannelParicipantMissing extends TelegramError {
 }
 exports.ChannelParicipantMissing = ChannelParicipantMissing;
-class ChannelPrivate extends ErrorWithCall {
+class ChannelPrivate extends TelegramError {
 }
 exports.ChannelPrivate = ChannelPrivate;
-class ChannelPublicGroupNa extends ErrorWithCall {
+class ChannelPublicGroupNa extends TelegramError {
 }
 exports.ChannelPublicGroupNa = ChannelPublicGroupNa;
-class ChannelTooBig extends ErrorWithCall {
+class ChannelTooBig extends TelegramError {
 }
 exports.ChannelTooBig = ChannelTooBig;
-class ChannelTooLarge extends ErrorWithCall {
+class ChannelTooLarge extends TelegramError {
 }
 exports.ChannelTooLarge = ChannelTooLarge;
-class ChatAboutNotModified extends ErrorWithCall {
+class ChatAboutNotModified extends TelegramError {
 }
 exports.ChatAboutNotModified = ChatAboutNotModified;
-class ChatAboutTooLong extends ErrorWithCall {
+class ChatAboutTooLong extends TelegramError {
 }
 exports.ChatAboutTooLong = ChatAboutTooLong;
-class ChatAdminInviteRequired extends ErrorWithCall {
+class ChatAdminInviteRequired extends TelegramError {
 }
 exports.ChatAdminInviteRequired = ChatAdminInviteRequired;
-class ChatAdminRequired extends ErrorWithCall {
+class ChatAdminRequired extends TelegramError {
 }
 exports.ChatAdminRequired = ChatAdminRequired;
-class ChatDiscussionUnallowed extends ErrorWithCall {
+class ChatDiscussionUnallowed extends TelegramError {
 }
 exports.ChatDiscussionUnallowed = ChatDiscussionUnallowed;
-class ChatForbidden extends ErrorWithCall {
+class ChatForbidden extends TelegramError {
 }
 exports.ChatForbidden = ChatForbidden;
-class ChatForwardsRestricted extends ErrorWithCall {
+class ChatForwardsRestricted extends TelegramError {
 }
 exports.ChatForwardsRestricted = ChatForwardsRestricted;
-class ChatGetFailed extends ErrorWithCall {
+class ChatGetFailed extends TelegramError {
 }
 exports.ChatGetFailed = ChatGetFailed;
-class ChatGuestSendForbidden extends ErrorWithCall {
+class ChatGuestSendForbidden extends TelegramError {
 }
 exports.ChatGuestSendForbidden = ChatGuestSendForbidden;
-class ChatIdEmpty extends ErrorWithCall {
+class ChatIdEmpty extends TelegramError {
 }
 exports.ChatIdEmpty = ChatIdEmpty;
-class ChatIdGenerateFailed extends ErrorWithCall {
+class ChatIdGenerateFailed extends TelegramError {
 }
 exports.ChatIdGenerateFailed = ChatIdGenerateFailed;
-class ChatIdInvalid extends ErrorWithCall {
+class ChatIdInvalid extends TelegramError {
 }
 exports.ChatIdInvalid = ChatIdInvalid;
-class ChatInvalid extends ErrorWithCall {
+class ChatInvalid extends TelegramError {
 }
 exports.ChatInvalid = ChatInvalid;
-class ChatInvitePermanent extends ErrorWithCall {
+class ChatInvitePermanent extends TelegramError {
 }
 exports.ChatInvitePermanent = ChatInvitePermanent;
-class ChatLinkExists extends ErrorWithCall {
+class ChatLinkExists extends TelegramError {
 }
 exports.ChatLinkExists = ChatLinkExists;
-class ChatNotModified extends ErrorWithCall {
+class ChatNotModified extends TelegramError {
 }
 exports.ChatNotModified = ChatNotModified;
-class ChatRestricted extends ErrorWithCall {
+class ChatRestricted extends TelegramError {
 }
 exports.ChatRestricted = ChatRestricted;
-class ChatRevokeDateUnsupported extends ErrorWithCall {
+class ChatRevokeDateUnsupported extends TelegramError {
 }
 exports.ChatRevokeDateUnsupported = ChatRevokeDateUnsupported;
-class ChatSendGameForbidden extends ErrorWithCall {
+class ChatSendGameForbidden extends TelegramError {
 }
 exports.ChatSendGameForbidden = ChatSendGameForbidden;
-class ChatSendGifsForbidden extends ErrorWithCall {
+class ChatSendGifsForbidden extends TelegramError {
 }
 exports.ChatSendGifsForbidden = ChatSendGifsForbidden;
-class ChatSendInlineForbidden extends ErrorWithCall {
+class ChatSendInlineForbidden extends TelegramError {
 }
 exports.ChatSendInlineForbidden = ChatSendInlineForbidden;
-class ChatSendMediaForbidden extends ErrorWithCall {
+class ChatSendMediaForbidden extends TelegramError {
 }
 exports.ChatSendMediaForbidden = ChatSendMediaForbidden;
-class ChatSendPollForbidden extends ErrorWithCall {
+class ChatSendPollForbidden extends TelegramError {
 }
 exports.ChatSendPollForbidden = ChatSendPollForbidden;
-class ChatSendStickersForbidden extends ErrorWithCall {
+class ChatSendStickersForbidden extends TelegramError {
 }
 exports.ChatSendStickersForbidden = ChatSendStickersForbidden;
-class ChatTitleEmpty extends ErrorWithCall {
+class ChatTitleEmpty extends TelegramError {
 }
 exports.ChatTitleEmpty = ChatTitleEmpty;
-class ChatTooBig extends ErrorWithCall {
+class ChatTooBig extends TelegramError {
 }
 exports.ChatTooBig = ChatTooBig;
-class ChatWriteForbidden extends ErrorWithCall {
+class ChatWriteForbidden extends TelegramError {
 }
 exports.ChatWriteForbidden = ChatWriteForbidden;
-class ChpCallFail extends ErrorWithCall {
+class ChpCallFail extends TelegramError {
 }
 exports.ChpCallFail = ChpCallFail;
-class CodeEmpty extends ErrorWithCall {
+class CodeEmpty extends TelegramError {
 }
 exports.CodeEmpty = CodeEmpty;
-class CodeHashInvalid extends ErrorWithCall {
+class CodeHashInvalid extends TelegramError {
 }
 exports.CodeHashInvalid = CodeHashInvalid;
-class CodeInvalid extends ErrorWithCall {
+class CodeInvalid extends TelegramError {
 }
 exports.CodeInvalid = CodeInvalid;
-class ConnectionApiIdInvalid extends ErrorWithCall {
+class ConnectionApiIdInvalid extends TelegramError {
 }
 exports.ConnectionApiIdInvalid = ConnectionApiIdInvalid;
-class ConnectionAppVersionEmpty extends ErrorWithCall {
+class ConnectionAppVersionEmpty extends TelegramError {
 }
 exports.ConnectionAppVersionEmpty = ConnectionAppVersionEmpty;
-class ConnectionDeviceModelEmpty extends ErrorWithCall {
+class ConnectionDeviceModelEmpty extends TelegramError {
 }
 exports.ConnectionDeviceModelEmpty = ConnectionDeviceModelEmpty;
-class ConnectionLangPackInvalid extends ErrorWithCall {
+class ConnectionLangPackInvalid extends TelegramError {
 }
 exports.ConnectionLangPackInvalid = ConnectionLangPackInvalid;
-class ConnectionLayerInvalid extends ErrorWithCall {
+class ConnectionLayerInvalid extends TelegramError {
 }
 exports.ConnectionLayerInvalid = ConnectionLayerInvalid;
-class ConnectionNotInited extends ErrorWithCall {
+class ConnectionNotInited extends TelegramError {
 }
 exports.ConnectionNotInited = ConnectionNotInited;
-class ConnectionSystemEmpty extends ErrorWithCall {
+class ConnectionSystemEmpty extends TelegramError {
 }
 exports.ConnectionSystemEmpty = ConnectionSystemEmpty;
-class ConnectionSystemLangCodeEmpty extends ErrorWithCall {
+class ConnectionSystemLangCodeEmpty extends TelegramError {
 }
 exports.ConnectionSystemLangCodeEmpty = ConnectionSystemLangCodeEmpty;
-class ContactAddMissing extends ErrorWithCall {
+class ContactAddMissing extends TelegramError {
 }
 exports.ContactAddMissing = ContactAddMissing;
-class ContactIdInvalid extends ErrorWithCall {
+class ContactIdInvalid extends TelegramError {
 }
 exports.ContactIdInvalid = ContactIdInvalid;
-class ContactNameEmpty extends ErrorWithCall {
+class ContactNameEmpty extends TelegramError {
 }
 exports.ContactNameEmpty = ContactNameEmpty;
-class ContactReqMissing extends ErrorWithCall {
+class ContactReqMissing extends TelegramError {
 }
 exports.ContactReqMissing = ContactReqMissing;
-class CreateCallFailed extends ErrorWithCall {
+class CreateCallFailed extends TelegramError {
 }
 exports.CreateCallFailed = CreateCallFailed;
-class CurrencyTotalAmountInvalid extends ErrorWithCall {
+class CurrencyTotalAmountInvalid extends TelegramError {
 }
 exports.CurrencyTotalAmountInvalid = CurrencyTotalAmountInvalid;
-class DataInvalid extends ErrorWithCall {
+class DataInvalid extends TelegramError {
 }
 exports.DataInvalid = DataInvalid;
-class DataJsonInvalid extends ErrorWithCall {
+class DataJsonInvalid extends TelegramError {
 }
 exports.DataJsonInvalid = DataJsonInvalid;
-class DataTooLong extends ErrorWithCall {
+class DataTooLong extends TelegramError {
 }
 exports.DataTooLong = DataTooLong;
-class DateEmpty extends ErrorWithCall {
+class DateEmpty extends TelegramError {
 }
 exports.DateEmpty = DateEmpty;
-class DcIdInvalid extends ErrorWithCall {
+class DcIdInvalid extends TelegramError {
 }
 exports.DcIdInvalid = DcIdInvalid;
-class DhGAInvalid extends ErrorWithCall {
+class DhGAInvalid extends TelegramError {
 }
 exports.DhGAInvalid = DhGAInvalid;
-class DocumentInvalid extends ErrorWithCall {
+class DocumentInvalid extends TelegramError {
 }
 exports.DocumentInvalid = DocumentInvalid;
-class EditBotInviteForbidden extends ErrorWithCall {
+class EditBotInviteForbidden extends TelegramError {
 }
 exports.EditBotInviteForbidden = EditBotInviteForbidden;
-class EmailHashExpired extends ErrorWithCall {
+class EmailHashExpired extends TelegramError {
 }
 exports.EmailHashExpired = EmailHashExpired;
-class EmailInvalid extends ErrorWithCall {
+class EmailInvalid extends TelegramError {
 }
 exports.EmailInvalid = EmailInvalid;
-class EmailUnconfirmed extends ErrorWithCall {
+class EmailUnconfirmed extends TelegramError {
 }
 exports.EmailUnconfirmed = EmailUnconfirmed;
-class EmailVerifyExpired extends ErrorWithCall {
+class EmailVerifyExpired extends TelegramError {
 }
 exports.EmailVerifyExpired = EmailVerifyExpired;
-class EmojiInvalid extends ErrorWithCall {
+class EmojiInvalid extends TelegramError {
 }
 exports.EmojiInvalid = EmojiInvalid;
-class EmojiNotModified extends ErrorWithCall {
+class EmojiNotModified extends TelegramError {
 }
 exports.EmojiNotModified = EmojiNotModified;
-class EmoticonEmpty extends ErrorWithCall {
+class EmoticonEmpty extends TelegramError {
 }
 exports.EmoticonEmpty = EmoticonEmpty;
-class EmoticonInvalid extends ErrorWithCall {
+class EmoticonInvalid extends TelegramError {
 }
 exports.EmoticonInvalid = EmoticonInvalid;
-class EmoticonStickerpackMissing extends ErrorWithCall {
+class EmoticonStickerpackMissing extends TelegramError {
 }
 exports.EmoticonStickerpackMissing = EmoticonStickerpackMissing;
-class EncryptedMessageInvalid extends ErrorWithCall {
+class EncryptedMessageInvalid extends TelegramError {
 }
 exports.EncryptedMessageInvalid = EncryptedMessageInvalid;
-class EncryptionAlreadyAccepted extends ErrorWithCall {
+class EncryptionAlreadyAccepted extends TelegramError {
 }
 exports.EncryptionAlreadyAccepted = EncryptionAlreadyAccepted;
-class EncryptionAlreadyDeclined extends ErrorWithCall {
+class EncryptionAlreadyDeclined extends TelegramError {
 }
 exports.EncryptionAlreadyDeclined = EncryptionAlreadyDeclined;
-class EncryptionDeclined extends ErrorWithCall {
+class EncryptionDeclined extends TelegramError {
 }
 exports.EncryptionDeclined = EncryptionDeclined;
-class EncryptionIdInvalid extends ErrorWithCall {
+class EncryptionIdInvalid extends TelegramError {
 }
 exports.EncryptionIdInvalid = EncryptionIdInvalid;
-class EncryptionOccupyFailed extends ErrorWithCall {
+class EncryptionOccupyFailed extends TelegramError {
 }
 exports.EncryptionOccupyFailed = EncryptionOccupyFailed;
-class EntitiesTooLong extends ErrorWithCall {
+class EntitiesTooLong extends TelegramError {
 }
 exports.EntitiesTooLong = EntitiesTooLong;
-class EntityBoundsInvalid extends ErrorWithCall {
+class EntityBoundsInvalid extends TelegramError {
 }
 exports.EntityBoundsInvalid = EntityBoundsInvalid;
-class EntityMentionUserInvalid extends ErrorWithCall {
+class EntityMentionUserInvalid extends TelegramError {
 }
 exports.EntityMentionUserInvalid = EntityMentionUserInvalid;
-class ErrorTextEmpty extends ErrorWithCall {
+class ErrorTextEmpty extends TelegramError {
 }
 exports.ErrorTextEmpty = ErrorTextEmpty;
-class ExpireDateInvalid extends ErrorWithCall {
+class ExpireDateInvalid extends TelegramError {
 }
 exports.ExpireDateInvalid = ExpireDateInvalid;
-class ExpireForbidden extends ErrorWithCall {
+class ExpireForbidden extends TelegramError {
 }
 exports.ExpireForbidden = ExpireForbidden;
-class ExportCardInvalid extends ErrorWithCall {
+class ExportCardInvalid extends TelegramError {
 }
 exports.ExportCardInvalid = ExportCardInvalid;
-class ExternalUrlInvalid extends ErrorWithCall {
+class ExternalUrlInvalid extends TelegramError {
 }
 exports.ExternalUrlInvalid = ExternalUrlInvalid;
-class FieldNameEmpty extends ErrorWithCall {
+class FieldNameEmpty extends TelegramError {
 }
 exports.FieldNameEmpty = FieldNameEmpty;
-class FieldNameInvalid extends ErrorWithCall {
+class FieldNameInvalid extends TelegramError {
 }
 exports.FieldNameInvalid = FieldNameInvalid;
-class FilerefUpgradeNeeded extends ErrorWithCall {
+class FilerefUpgradeNeeded extends TelegramError {
 }
 exports.FilerefUpgradeNeeded = FilerefUpgradeNeeded;
-class FileContentTypeInvalid extends ErrorWithCall {
+class FileContentTypeInvalid extends TelegramError {
 }
 exports.FileContentTypeInvalid = FileContentTypeInvalid;
-class FileEmtpy extends ErrorWithCall {
+class FileEmtpy extends TelegramError {
 }
 exports.FileEmtpy = FileEmtpy;
-class FileIdInvalid extends ErrorWithCall {
+class FileIdInvalid extends TelegramError {
 }
 exports.FileIdInvalid = FileIdInvalid;
-class FilePartsInvalid extends ErrorWithCall {
+class FilePartsInvalid extends TelegramError {
 }
 exports.FilePartsInvalid = FilePartsInvalid;
-class FilePart_0Missing extends ErrorWithCall {
+class FilePart_0Missing extends TelegramError {
 }
 exports.FilePart_0Missing = FilePart_0Missing;
-class FilePartEmpty extends ErrorWithCall {
+class FilePartEmpty extends TelegramError {
 }
 exports.FilePartEmpty = FilePartEmpty;
-class FilePartInvalid extends ErrorWithCall {
+class FilePartInvalid extends TelegramError {
 }
 exports.FilePartInvalid = FilePartInvalid;
-class FilePartLengthInvalid extends ErrorWithCall {
+class FilePartLengthInvalid extends TelegramError {
 }
 exports.FilePartLengthInvalid = FilePartLengthInvalid;
-class FilePartSizeChanged extends ErrorWithCall {
+class FilePartSizeChanged extends TelegramError {
 }
 exports.FilePartSizeChanged = FilePartSizeChanged;
-class FilePartSizeInvalid extends ErrorWithCall {
+class FilePartSizeInvalid extends TelegramError {
 }
 exports.FilePartSizeInvalid = FilePartSizeInvalid;
-class FilePartTooBig extends ErrorWithCall {
+class FilePartTooBig extends TelegramError {
 }
 exports.FilePartTooBig = FilePartTooBig;
-class FilePartXMissing extends ErrorWithCall {
+class FilePartXMissing extends TelegramError {
 }
 exports.FilePartXMissing = FilePartXMissing;
-class FileReferenceEmpty extends ErrorWithCall {
+class FileReferenceEmpty extends TelegramError {
 }
 exports.FileReferenceEmpty = FileReferenceEmpty;
-class FileReferenceExpired extends ErrorWithCall {
+class FileReferenceExpired extends TelegramError {
 }
 exports.FileReferenceExpired = FileReferenceExpired;
-class FileReferenceInvalid extends ErrorWithCall {
+class FileReferenceInvalid extends TelegramError {
 }
 exports.FileReferenceInvalid = FileReferenceInvalid;
-class FileTitleEmpty extends ErrorWithCall {
+class FileTitleEmpty extends TelegramError {
 }
 exports.FileTitleEmpty = FileTitleEmpty;
-class FilterIdInvalid extends ErrorWithCall {
+class FilterIdInvalid extends TelegramError {
 }
 exports.FilterIdInvalid = FilterIdInvalid;
-class FilterIncludeEmpty extends ErrorWithCall {
+class FilterIncludeEmpty extends TelegramError {
 }
 exports.FilterIncludeEmpty = FilterIncludeEmpty;
-class FilterNotSupported extends ErrorWithCall {
+class FilterNotSupported extends TelegramError {
 }
 exports.FilterNotSupported = FilterNotSupported;
-class FilterTitleEmpty extends ErrorWithCall {
+class FilterTitleEmpty extends TelegramError {
 }
 exports.FilterTitleEmpty = FilterTitleEmpty;
-class FirstnameInvalid extends ErrorWithCall {
+class FirstnameInvalid extends TelegramError {
 }
 exports.FirstnameInvalid = FirstnameInvalid;
-class FolderIdEmpty extends ErrorWithCall {
+class FolderIdEmpty extends TelegramError {
 }
 exports.FolderIdEmpty = FolderIdEmpty;
-class FolderIdInvalid extends ErrorWithCall {
+class FolderIdInvalid extends TelegramError {
 }
 exports.FolderIdInvalid = FolderIdInvalid;
-class FreshChangeAdminsForbidden extends ErrorWithCall {
+class FreshChangeAdminsForbidden extends TelegramError {
 }
 exports.FreshChangeAdminsForbidden = FreshChangeAdminsForbidden;
-class FreshChangePhoneForbidden extends ErrorWithCall {
+class FreshChangePhoneForbidden extends TelegramError {
 }
 exports.FreshChangePhoneForbidden = FreshChangePhoneForbidden;
-class FreshResetAuthorisationForbidden extends ErrorWithCall {
+class FreshResetAuthorisationForbidden extends TelegramError {
 }
 exports.FreshResetAuthorisationForbidden = FreshResetAuthorisationForbidden;
-class FromMessageBotDisabled extends ErrorWithCall {
+class FromMessageBotDisabled extends TelegramError {
 }
 exports.FromMessageBotDisabled = FromMessageBotDisabled;
-class FromPeerInvalid extends ErrorWithCall {
+class FromPeerInvalid extends TelegramError {
 }
 exports.FromPeerInvalid = FromPeerInvalid;
-class GameBotInvalid extends ErrorWithCall {
+class GameBotInvalid extends TelegramError {
 }
 exports.GameBotInvalid = GameBotInvalid;
-class GeoPointInvalid extends ErrorWithCall {
+class GeoPointInvalid extends TelegramError {
 }
 exports.GeoPointInvalid = GeoPointInvalid;
-class GifContentTypeInvalid extends ErrorWithCall {
+class GifContentTypeInvalid extends TelegramError {
 }
 exports.GifContentTypeInvalid = GifContentTypeInvalid;
-class GifIdInvalid extends ErrorWithCall {
+class GifIdInvalid extends TelegramError {
 }
 exports.GifIdInvalid = GifIdInvalid;
-class GraphExpiredReload extends ErrorWithCall {
+class GraphExpiredReload extends TelegramError {
 }
 exports.GraphExpiredReload = GraphExpiredReload;
-class GraphInvalidReload extends ErrorWithCall {
+class GraphInvalidReload extends TelegramError {
 }
 exports.GraphInvalidReload = GraphInvalidReload;
-class GraphOutdatedReload extends ErrorWithCall {
+class GraphOutdatedReload extends TelegramError {
 }
 exports.GraphOutdatedReload = GraphOutdatedReload;
-class GroupcallAddParticipantsFailed extends ErrorWithCall {
+class GroupcallAddParticipantsFailed extends TelegramError {
 }
 exports.GroupcallAddParticipantsFailed = GroupcallAddParticipantsFailed;
-class GroupcallAlreadyDiscarded extends ErrorWithCall {
+class GroupcallAlreadyDiscarded extends TelegramError {
 }
 exports.GroupcallAlreadyDiscarded = GroupcallAlreadyDiscarded;
-class GroupcallAlreadyStarted extends ErrorWithCall {
+class GroupcallAlreadyStarted extends TelegramError {
 }
 exports.GroupcallAlreadyStarted = GroupcallAlreadyStarted;
-class GroupcallForbidden extends ErrorWithCall {
+class GroupcallForbidden extends TelegramError {
 }
 exports.GroupcallForbidden = GroupcallForbidden;
-class GroupcallInvalid extends ErrorWithCall {
+class GroupcallInvalid extends TelegramError {
 }
 exports.GroupcallInvalid = GroupcallInvalid;
-class GroupcallJoinMissing extends ErrorWithCall {
+class GroupcallJoinMissing extends TelegramError {
 }
 exports.GroupcallJoinMissing = GroupcallJoinMissing;
-class GroupcallNotModified extends ErrorWithCall {
+class GroupcallNotModified extends TelegramError {
 }
 exports.GroupcallNotModified = GroupcallNotModified;
-class GroupcallSsrcDuplicateMuch extends ErrorWithCall {
+class GroupcallSsrcDuplicateMuch extends TelegramError {
 }
 exports.GroupcallSsrcDuplicateMuch = GroupcallSsrcDuplicateMuch;
-class GroupedMediaInvalid extends ErrorWithCall {
+class GroupedMediaInvalid extends TelegramError {
 }
 exports.GroupedMediaInvalid = GroupedMediaInvalid;
-class GroupCallInvalid extends ErrorWithCall {
+class GroupCallInvalid extends TelegramError {
 }
 exports.GroupCallInvalid = GroupCallInvalid;
-class HashInvalid extends ErrorWithCall {
+class HashInvalid extends TelegramError {
 }
 exports.HashInvalid = HashInvalid;
-class HideRequesterMissing extends ErrorWithCall {
+class HideRequesterMissing extends TelegramError {
 }
 exports.HideRequesterMissing = HideRequesterMissing;
-class HistoryGetFailed extends ErrorWithCall {
+class HistoryGetFailed extends TelegramError {
 }
 exports.HistoryGetFailed = HistoryGetFailed;
-class ImageProcessFailed extends ErrorWithCall {
+class ImageProcessFailed extends TelegramError {
 }
 exports.ImageProcessFailed = ImageProcessFailed;
-class ImportFileInvalid extends ErrorWithCall {
+class ImportFileInvalid extends TelegramError {
 }
 exports.ImportFileInvalid = ImportFileInvalid;
-class ImportFormatUnrecognized extends ErrorWithCall {
+class ImportFormatUnrecognized extends TelegramError {
 }
 exports.ImportFormatUnrecognized = ImportFormatUnrecognized;
-class ImportIdInvalid extends ErrorWithCall {
+class ImportIdInvalid extends TelegramError {
 }
 exports.ImportIdInvalid = ImportIdInvalid;
-class InlineBotRequired extends ErrorWithCall {
+class InlineBotRequired extends TelegramError {
 }
 exports.InlineBotRequired = InlineBotRequired;
-class InlineResultExpired extends ErrorWithCall {
+class InlineResultExpired extends TelegramError {
 }
 exports.InlineResultExpired = InlineResultExpired;
-class InputConstructorInvalid extends ErrorWithCall {
+class InputConstructorInvalid extends TelegramError {
 }
 exports.InputConstructorInvalid = InputConstructorInvalid;
-class InputFetchError extends ErrorWithCall {
+class InputFetchError extends TelegramError {
 }
 exports.InputFetchError = InputFetchError;
-class InputFetchFail extends ErrorWithCall {
+class InputFetchFail extends TelegramError {
 }
 exports.InputFetchFail = InputFetchFail;
-class InputFilterInvalid extends ErrorWithCall {
+class InputFilterInvalid extends TelegramError {
 }
 exports.InputFilterInvalid = InputFilterInvalid;
-class InputLayerInvalid extends ErrorWithCall {
+class InputLayerInvalid extends TelegramError {
 }
 exports.InputLayerInvalid = InputLayerInvalid;
-class InputMethodInvalid extends ErrorWithCall {
+class InputMethodInvalid extends TelegramError {
 }
 exports.InputMethodInvalid = InputMethodInvalid;
-class InputRequestTooLong extends ErrorWithCall {
+class InputRequestTooLong extends TelegramError {
 }
 exports.InputRequestTooLong = InputRequestTooLong;
-class InputTextEmpty extends ErrorWithCall {
+class InputTextEmpty extends TelegramError {
 }
 exports.InputTextEmpty = InputTextEmpty;
-class InputUserDeactivated extends ErrorWithCall {
+class InputUserDeactivated extends TelegramError {
 }
 exports.InputUserDeactivated = InputUserDeactivated;
-class InterdcXCallError extends ErrorWithCall {
+class InterdcXCallError extends TelegramError {
 }
 exports.InterdcXCallError = InterdcXCallError;
-class InterdcXCallRichError extends ErrorWithCall {
+class InterdcXCallRichError extends TelegramError {
 }
 exports.InterdcXCallRichError = InterdcXCallRichError;
-class InviteForbiddenWithJoinas extends ErrorWithCall {
+class InviteForbiddenWithJoinas extends TelegramError {
 }
 exports.InviteForbiddenWithJoinas = InviteForbiddenWithJoinas;
-class InviteHashEmpty extends ErrorWithCall {
+class InviteHashEmpty extends TelegramError {
 }
 exports.InviteHashEmpty = InviteHashEmpty;
-class InviteHashExpired extends ErrorWithCall {
+class InviteHashExpired extends TelegramError {
 }
 exports.InviteHashExpired = InviteHashExpired;
-class InviteHashInvalid extends ErrorWithCall {
+class InviteHashInvalid extends TelegramError {
 }
 exports.InviteHashInvalid = InviteHashInvalid;
-class InviteRequestSent extends ErrorWithCall {
+class InviteRequestSent extends TelegramError {
 }
 exports.InviteRequestSent = InviteRequestSent;
-class InviteRevokedMissing extends ErrorWithCall {
+class InviteRevokedMissing extends TelegramError {
 }
 exports.InviteRevokedMissing = InviteRevokedMissing;
-class InvoicePayloadInvalid extends ErrorWithCall {
+class InvoicePayloadInvalid extends TelegramError {
 }
 exports.InvoicePayloadInvalid = InvoicePayloadInvalid;
-class JoinAsPeerInvalid extends ErrorWithCall {
+class JoinAsPeerInvalid extends TelegramError {
 }
 exports.JoinAsPeerInvalid = JoinAsPeerInvalid;
-class LangCodeInvalid extends ErrorWithCall {
+class LangCodeInvalid extends TelegramError {
 }
 exports.LangCodeInvalid = LangCodeInvalid;
-class LangCodeNotSupported extends ErrorWithCall {
+class LangCodeNotSupported extends TelegramError {
 }
 exports.LangCodeNotSupported = LangCodeNotSupported;
-class LangPackInvalid extends ErrorWithCall {
+class LangPackInvalid extends TelegramError {
 }
 exports.LangPackInvalid = LangPackInvalid;
-class LastnameInvalid extends ErrorWithCall {
+class LastnameInvalid extends TelegramError {
 }
 exports.LastnameInvalid = LastnameInvalid;
-class LimitInvalid extends ErrorWithCall {
+class LimitInvalid extends TelegramError {
 }
 exports.LimitInvalid = LimitInvalid;
-class LinkNotModified extends ErrorWithCall {
+class LinkNotModified extends TelegramError {
 }
 exports.LinkNotModified = LinkNotModified;
-class LocationInvalid extends ErrorWithCall {
+class LocationInvalid extends TelegramError {
 }
 exports.LocationInvalid = LocationInvalid;
-class MaxDateInvalid extends ErrorWithCall {
+class MaxDateInvalid extends TelegramError {
 }
 exports.MaxDateInvalid = MaxDateInvalid;
-class MaxIdInvalid extends ErrorWithCall {
+class MaxIdInvalid extends TelegramError {
 }
 exports.MaxIdInvalid = MaxIdInvalid;
-class MaxQtsInvalid extends ErrorWithCall {
+class MaxQtsInvalid extends TelegramError {
 }
 exports.MaxQtsInvalid = MaxQtsInvalid;
-class Md5ChecksumInvalid extends ErrorWithCall {
+class Md5ChecksumInvalid extends TelegramError {
 }
 exports.Md5ChecksumInvalid = Md5ChecksumInvalid;
-class MediaCaptionTooLong extends ErrorWithCall {
+class MediaCaptionTooLong extends TelegramError {
 }
 exports.MediaCaptionTooLong = MediaCaptionTooLong;
-class MediaEmpty extends ErrorWithCall {
+class MediaEmpty extends TelegramError {
 }
 exports.MediaEmpty = MediaEmpty;
-class MediaGroupedInvalid extends ErrorWithCall {
+class MediaGroupedInvalid extends TelegramError {
 }
 exports.MediaGroupedInvalid = MediaGroupedInvalid;
-class MediaInvalid extends ErrorWithCall {
+class MediaInvalid extends TelegramError {
 }
 exports.MediaInvalid = MediaInvalid;
-class MediaNewInvalid extends ErrorWithCall {
+class MediaNewInvalid extends TelegramError {
 }
 exports.MediaNewInvalid = MediaNewInvalid;
-class MediaPrevInvalid extends ErrorWithCall {
+class MediaPrevInvalid extends TelegramError {
 }
 exports.MediaPrevInvalid = MediaPrevInvalid;
-class MediaTtlInvalid extends ErrorWithCall {
+class MediaTtlInvalid extends TelegramError {
 }
 exports.MediaTtlInvalid = MediaTtlInvalid;
-class MegagroupIdInvalid extends ErrorWithCall {
+class MegagroupIdInvalid extends TelegramError {
 }
 exports.MegagroupIdInvalid = MegagroupIdInvalid;
-class MegagroupPrehistoryHidden extends ErrorWithCall {
+class MegagroupPrehistoryHidden extends TelegramError {
 }
 exports.MegagroupPrehistoryHidden = MegagroupPrehistoryHidden;
-class MegagroupRequired extends ErrorWithCall {
+class MegagroupRequired extends TelegramError {
 }
 exports.MegagroupRequired = MegagroupRequired;
-class MemberNoLocation extends ErrorWithCall {
+class MemberNoLocation extends TelegramError {
 }
 exports.MemberNoLocation = MemberNoLocation;
-class MemberOccupyPrimaryLocFailed extends ErrorWithCall {
+class MemberOccupyPrimaryLocFailed extends TelegramError {
 }
 exports.MemberOccupyPrimaryLocFailed = MemberOccupyPrimaryLocFailed;
-class MessageAuthorRequired extends ErrorWithCall {
+class MessageAuthorRequired extends TelegramError {
 }
 exports.MessageAuthorRequired = MessageAuthorRequired;
-class MessageDeleteForbidden extends ErrorWithCall {
+class MessageDeleteForbidden extends TelegramError {
 }
 exports.MessageDeleteForbidden = MessageDeleteForbidden;
-class MessageEditTimeExpired extends ErrorWithCall {
+class MessageEditTimeExpired extends TelegramError {
 }
 exports.MessageEditTimeExpired = MessageEditTimeExpired;
-class MessageEmpty extends ErrorWithCall {
+class MessageEmpty extends TelegramError {
 }
 exports.MessageEmpty = MessageEmpty;
-class MessageIdsEmpty extends ErrorWithCall {
+class MessageIdsEmpty extends TelegramError {
 }
 exports.MessageIdsEmpty = MessageIdsEmpty;
-class MessageIdInvalid extends ErrorWithCall {
+class MessageIdInvalid extends TelegramError {
 }
 exports.MessageIdInvalid = MessageIdInvalid;
-class MessageNotModified extends ErrorWithCall {
+class MessageNotModified extends TelegramError {
 }
 exports.MessageNotModified = MessageNotModified;
-class MessagePollClosed extends ErrorWithCall {
+class MessagePollClosed extends TelegramError {
 }
 exports.MessagePollClosed = MessagePollClosed;
-class MessageTooLong extends ErrorWithCall {
+class MessageTooLong extends TelegramError {
 }
 exports.MessageTooLong = MessageTooLong;
-class MethodInvalid extends ErrorWithCall {
+class MethodInvalid extends TelegramError {
 }
 exports.MethodInvalid = MethodInvalid;
-class MinDateInvalid extends ErrorWithCall {
+class MinDateInvalid extends TelegramError {
 }
 exports.MinDateInvalid = MinDateInvalid;
-class MsgidDecreaseRetry extends ErrorWithCall {
+class MsgidDecreaseRetry extends TelegramError {
 }
 exports.MsgidDecreaseRetry = MsgidDecreaseRetry;
-class MsgIdInvalid extends ErrorWithCall {
+class MsgIdInvalid extends TelegramError {
 }
 exports.MsgIdInvalid = MsgIdInvalid;
-class MsgTooOld extends ErrorWithCall {
+class MsgTooOld extends TelegramError {
 }
 exports.MsgTooOld = MsgTooOld;
-class MsgWaitFailed extends ErrorWithCall {
+class MsgWaitFailed extends TelegramError {
 }
 exports.MsgWaitFailed = MsgWaitFailed;
-class MtSendQueueTooLong extends ErrorWithCall {
+class MtSendQueueTooLong extends TelegramError {
 }
 exports.MtSendQueueTooLong = MtSendQueueTooLong;
-class MultiMediaTooLong extends ErrorWithCall {
+class MultiMediaTooLong extends TelegramError {
 }
 exports.MultiMediaTooLong = MultiMediaTooLong;
-class NeedChatInvalid extends ErrorWithCall {
+class NeedChatInvalid extends TelegramError {
 }
 exports.NeedChatInvalid = NeedChatInvalid;
-class NeedMemberInvalid extends ErrorWithCall {
+class NeedMemberInvalid extends TelegramError {
 }
 exports.NeedMemberInvalid = NeedMemberInvalid;
-class NewSaltInvalid extends ErrorWithCall {
+class NewSaltInvalid extends TelegramError {
 }
 exports.NewSaltInvalid = NewSaltInvalid;
-class NewSettingsEmpty extends ErrorWithCall {
+class NewSettingsEmpty extends TelegramError {
 }
 exports.NewSettingsEmpty = NewSettingsEmpty;
-class NewSettingsInvalid extends ErrorWithCall {
+class NewSettingsInvalid extends TelegramError {
 }
 exports.NewSettingsInvalid = NewSettingsInvalid;
-class NextOffsetInvalid extends ErrorWithCall {
+class NextOffsetInvalid extends TelegramError {
 }
 exports.NextOffsetInvalid = NextOffsetInvalid;
-class NotAllowed extends ErrorWithCall {
+class NotAllowed extends TelegramError {
 }
 exports.NotAllowed = NotAllowed;
-class OffsetInvalid extends ErrorWithCall {
+class OffsetInvalid extends TelegramError {
 }
 exports.OffsetInvalid = OffsetInvalid;
-class OffsetPeerIdInvalid extends ErrorWithCall {
+class OffsetPeerIdInvalid extends TelegramError {
 }
 exports.OffsetPeerIdInvalid = OffsetPeerIdInvalid;
-class OptionsTooMuch extends ErrorWithCall {
+class OptionsTooMuch extends TelegramError {
 }
 exports.OptionsTooMuch = OptionsTooMuch;
-class OptionInvalid extends ErrorWithCall {
+class OptionInvalid extends TelegramError {
 }
 exports.OptionInvalid = OptionInvalid;
-class PackShortNameInvalid extends ErrorWithCall {
+class PackShortNameInvalid extends TelegramError {
 }
 exports.PackShortNameInvalid = PackShortNameInvalid;
-class PackShortNameOccupied extends ErrorWithCall {
+class PackShortNameOccupied extends TelegramError {
 }
 exports.PackShortNameOccupied = PackShortNameOccupied;
-class PackTitleInvalid extends ErrorWithCall {
+class PackTitleInvalid extends TelegramError {
 }
 exports.PackTitleInvalid = PackTitleInvalid;
-class ParticipantsTooFew extends ErrorWithCall {
+class ParticipantsTooFew extends TelegramError {
 }
 exports.ParticipantsTooFew = ParticipantsTooFew;
-class ParticipantCallFailed extends ErrorWithCall {
+class ParticipantCallFailed extends TelegramError {
 }
 exports.ParticipantCallFailed = ParticipantCallFailed;
-class ParticipantIdInvalid extends ErrorWithCall {
+class ParticipantIdInvalid extends TelegramError {
 }
 exports.ParticipantIdInvalid = ParticipantIdInvalid;
-class ParticipantJoinMissing extends ErrorWithCall {
+class ParticipantJoinMissing extends TelegramError {
 }
 exports.ParticipantJoinMissing = ParticipantJoinMissing;
-class ParticipantVersionOutdated extends ErrorWithCall {
+class ParticipantVersionOutdated extends TelegramError {
 }
 exports.ParticipantVersionOutdated = ParticipantVersionOutdated;
-class PasswordEmpty extends ErrorWithCall {
+class PasswordEmpty extends TelegramError {
 }
 exports.PasswordEmpty = PasswordEmpty;
-class PasswordHashInvalid extends ErrorWithCall {
+class PasswordHashInvalid extends TelegramError {
 }
 exports.PasswordHashInvalid = PasswordHashInvalid;
-class PasswordMissing extends ErrorWithCall {
+class PasswordMissing extends TelegramError {
 }
 exports.PasswordMissing = PasswordMissing;
-class PasswordRecoveryExpired extends ErrorWithCall {
+class PasswordRecoveryExpired extends TelegramError {
 }
 exports.PasswordRecoveryExpired = PasswordRecoveryExpired;
-class PasswordRecoveryNa extends ErrorWithCall {
+class PasswordRecoveryNa extends TelegramError {
 }
 exports.PasswordRecoveryNa = PasswordRecoveryNa;
-class PasswordRequired extends ErrorWithCall {
+class PasswordRequired extends TelegramError {
 }
 exports.PasswordRequired = PasswordRequired;
-class PaymentProviderInvalid extends ErrorWithCall {
+class PaymentProviderInvalid extends TelegramError {
 }
 exports.PaymentProviderInvalid = PaymentProviderInvalid;
-class PeerFlood extends ErrorWithCall {
+class PeerFlood extends TelegramError {
 }
 exports.PeerFlood = PeerFlood;
-class PeerHistoryEmpty extends ErrorWithCall {
+class PeerHistoryEmpty extends TelegramError {
 }
 exports.PeerHistoryEmpty = PeerHistoryEmpty;
-class PeerIdInvalid extends ErrorWithCall {
+class PeerIdInvalid extends TelegramError {
 }
 exports.PeerIdInvalid = PeerIdInvalid;
-class PeerIdNotSupported extends ErrorWithCall {
+class PeerIdNotSupported extends TelegramError {
 }
 exports.PeerIdNotSupported = PeerIdNotSupported;
-class PersistentTimestampEmpty extends ErrorWithCall {
+class PersistentTimestampEmpty extends TelegramError {
 }
 exports.PersistentTimestampEmpty = PersistentTimestampEmpty;
-class PersistentTimestampInvalid extends ErrorWithCall {
+class PersistentTimestampInvalid extends TelegramError {
 }
 exports.PersistentTimestampInvalid = PersistentTimestampInvalid;
-class PersistentTimestampOutdated extends ErrorWithCall {
+class PersistentTimestampOutdated extends TelegramError {
 }
 exports.PersistentTimestampOutdated = PersistentTimestampOutdated;
-class PhoneCodeEmpty extends ErrorWithCall {
+class PhoneCodeEmpty extends TelegramError {
 }
 exports.PhoneCodeEmpty = PhoneCodeEmpty;
-class PhoneCodeExpired extends ErrorWithCall {
+class PhoneCodeExpired extends TelegramError {
 }
 exports.PhoneCodeExpired = PhoneCodeExpired;
-class PhoneCodeHashEmpty extends ErrorWithCall {
+class PhoneCodeHashEmpty extends TelegramError {
 }
 exports.PhoneCodeHashEmpty = PhoneCodeHashEmpty;
-class PhoneCodeInvalid extends ErrorWithCall {
+class PhoneCodeInvalid extends TelegramError {
 }
 exports.PhoneCodeInvalid = PhoneCodeInvalid;
-class PhoneHashExpired extends ErrorWithCall {
+class PhoneHashExpired extends TelegramError {
 }
 exports.PhoneHashExpired = PhoneHashExpired;
-class PhoneNotOccupied extends ErrorWithCall {
+class PhoneNotOccupied extends TelegramError {
 }
 exports.PhoneNotOccupied = PhoneNotOccupied;
-class PhoneNumberAppSignupForbidden extends ErrorWithCall {
+class PhoneNumberAppSignupForbidden extends TelegramError {
 }
 exports.PhoneNumberAppSignupForbidden = PhoneNumberAppSignupForbidden;
-class PhoneNumberBanned extends ErrorWithCall {
+class PhoneNumberBanned extends TelegramError {
 }
 exports.PhoneNumberBanned = PhoneNumberBanned;
-class PhoneNumberFlood extends ErrorWithCall {
+class PhoneNumberFlood extends TelegramError {
 }
 exports.PhoneNumberFlood = PhoneNumberFlood;
-class PhoneNumberInvalid extends ErrorWithCall {
+class PhoneNumberInvalid extends TelegramError {
 }
 exports.PhoneNumberInvalid = PhoneNumberInvalid;
-class PhoneNumberOccupied extends ErrorWithCall {
+class PhoneNumberOccupied extends TelegramError {
 }
 exports.PhoneNumberOccupied = PhoneNumberOccupied;
-class PhoneNumberUnoccupied extends ErrorWithCall {
+class PhoneNumberUnoccupied extends TelegramError {
 }
 exports.PhoneNumberUnoccupied = PhoneNumberUnoccupied;
-class PhonePasswordFlood extends ErrorWithCall {
+class PhonePasswordFlood extends TelegramError {
 }
 exports.PhonePasswordFlood = PhonePasswordFlood;
-class PhonePasswordProtected extends ErrorWithCall {
+class PhonePasswordProtected extends TelegramError {
 }
 exports.PhonePasswordProtected = PhonePasswordProtected;
-class PhotoContentTypeInvalid extends ErrorWithCall {
+class PhotoContentTypeInvalid extends TelegramError {
 }
 exports.PhotoContentTypeInvalid = PhotoContentTypeInvalid;
-class PhotoContentUrlEmpty extends ErrorWithCall {
+class PhotoContentUrlEmpty extends TelegramError {
 }
 exports.PhotoContentUrlEmpty = PhotoContentUrlEmpty;
-class PhotoCropFileMissing extends ErrorWithCall {
+class PhotoCropFileMissing extends TelegramError {
 }
 exports.PhotoCropFileMissing = PhotoCropFileMissing;
-class PhotoCropSizeSmall extends ErrorWithCall {
+class PhotoCropSizeSmall extends TelegramError {
 }
 exports.PhotoCropSizeSmall = PhotoCropSizeSmall;
-class PhotoExtInvalid extends ErrorWithCall {
+class PhotoExtInvalid extends TelegramError {
 }
 exports.PhotoExtInvalid = PhotoExtInvalid;
-class PhotoFileMissing extends ErrorWithCall {
+class PhotoFileMissing extends TelegramError {
 }
 exports.PhotoFileMissing = PhotoFileMissing;
-class PhotoIdInvalid extends ErrorWithCall {
+class PhotoIdInvalid extends TelegramError {
 }
 exports.PhotoIdInvalid = PhotoIdInvalid;
-class PhotoInvalid extends ErrorWithCall {
+class PhotoInvalid extends TelegramError {
 }
 exports.PhotoInvalid = PhotoInvalid;
-class PhotoInvalidDimensions extends ErrorWithCall {
+class PhotoInvalidDimensions extends TelegramError {
 }
 exports.PhotoInvalidDimensions = PhotoInvalidDimensions;
-class PhotoSaveFileInvalid extends ErrorWithCall {
+class PhotoSaveFileInvalid extends TelegramError {
 }
 exports.PhotoSaveFileInvalid = PhotoSaveFileInvalid;
-class PhotoThumbUrlEmpty extends ErrorWithCall {
+class PhotoThumbUrlEmpty extends TelegramError {
 }
 exports.PhotoThumbUrlEmpty = PhotoThumbUrlEmpty;
-class PinnedDialogsTooMuch extends ErrorWithCall {
+class PinnedDialogsTooMuch extends TelegramError {
 }
 exports.PinnedDialogsTooMuch = PinnedDialogsTooMuch;
-class PinRestricted extends ErrorWithCall {
+class PinRestricted extends TelegramError {
 }
 exports.PinRestricted = PinRestricted;
-class PollAnswersInvalid extends ErrorWithCall {
+class PollAnswersInvalid extends TelegramError {
 }
 exports.PollAnswersInvalid = PollAnswersInvalid;
-class PollAnswerInvalid extends ErrorWithCall {
+class PollAnswerInvalid extends TelegramError {
 }
 exports.PollAnswerInvalid = PollAnswerInvalid;
-class PollOptionDuplicate extends ErrorWithCall {
+class PollOptionDuplicate extends TelegramError {
 }
 exports.PollOptionDuplicate = PollOptionDuplicate;
-class PollOptionInvalid extends ErrorWithCall {
+class PollOptionInvalid extends TelegramError {
 }
 exports.PollOptionInvalid = PollOptionInvalid;
-class PollQuestionInvalid extends ErrorWithCall {
+class PollQuestionInvalid extends TelegramError {
 }
 exports.PollQuestionInvalid = PollQuestionInvalid;
-class PollUnsupported extends ErrorWithCall {
+class PollUnsupported extends TelegramError {
 }
 exports.PollUnsupported = PollUnsupported;
-class PollVoteRequired extends ErrorWithCall {
+class PollVoteRequired extends TelegramError {
 }
 exports.PollVoteRequired = PollVoteRequired;
-class PostponedTimeout extends ErrorWithCall {
+class PostponedTimeout extends TelegramError {
 }
 exports.PostponedTimeout = PostponedTimeout;
-class PremiumAccountRequired extends ErrorWithCall {
+class PremiumAccountRequired extends TelegramError {
 }
 exports.PremiumAccountRequired = PremiumAccountRequired;
-class PremiumCurrentlyUnavailable extends ErrorWithCall {
+class PremiumCurrentlyUnavailable extends TelegramError {
 }
 exports.PremiumCurrentlyUnavailable = PremiumCurrentlyUnavailable;
-class PreviousChatImportActiveWaitXmin extends ErrorWithCall {
+class PreviousChatImportActiveWaitXmin extends TelegramError {
 }
 exports.PreviousChatImportActiveWaitXmin = PreviousChatImportActiveWaitXmin;
-class PrivacyKeyInvalid extends ErrorWithCall {
+class PrivacyKeyInvalid extends TelegramError {
 }
 exports.PrivacyKeyInvalid = PrivacyKeyInvalid;
-class PrivacyTooLong extends ErrorWithCall {
+class PrivacyTooLong extends TelegramError {
 }
 exports.PrivacyTooLong = PrivacyTooLong;
-class PrivacyValueInvalid extends ErrorWithCall {
+class PrivacyValueInvalid extends TelegramError {
 }
 exports.PrivacyValueInvalid = PrivacyValueInvalid;
-class PtsChangeEmpty extends ErrorWithCall {
+class PtsChangeEmpty extends TelegramError {
 }
 exports.PtsChangeEmpty = PtsChangeEmpty;
-class PublicChannelMissing extends ErrorWithCall {
+class PublicChannelMissing extends TelegramError {
 }
 exports.PublicChannelMissing = PublicChannelMissing;
-class PublicKeyRequired extends ErrorWithCall {
+class PublicKeyRequired extends TelegramError {
 }
 exports.PublicKeyRequired = PublicKeyRequired;
-class QueryIdEmpty extends ErrorWithCall {
+class QueryIdEmpty extends TelegramError {
 }
 exports.QueryIdEmpty = QueryIdEmpty;
-class QueryIdInvalid extends ErrorWithCall {
+class QueryIdInvalid extends TelegramError {
 }
 exports.QueryIdInvalid = QueryIdInvalid;
-class QueryTooShort extends ErrorWithCall {
+class QueryTooShort extends TelegramError {
 }
 exports.QueryTooShort = QueryTooShort;
-class QuizAnswerMissing extends ErrorWithCall {
+class QuizAnswerMissing extends TelegramError {
 }
 exports.QuizAnswerMissing = QuizAnswerMissing;
-class QuizCorrectAnswersEmpty extends ErrorWithCall {
+class QuizCorrectAnswersEmpty extends TelegramError {
 }
 exports.QuizCorrectAnswersEmpty = QuizCorrectAnswersEmpty;
-class QuizCorrectAnswersTooMuch extends ErrorWithCall {
+class QuizCorrectAnswersTooMuch extends TelegramError {
 }
 exports.QuizCorrectAnswersTooMuch = QuizCorrectAnswersTooMuch;
-class QuizCorrectAnswerInvalid extends ErrorWithCall {
+class QuizCorrectAnswerInvalid extends TelegramError {
 }
 exports.QuizCorrectAnswerInvalid = QuizCorrectAnswerInvalid;
-class QuizMultipleInvalid extends ErrorWithCall {
+class QuizMultipleInvalid extends TelegramError {
 }
 exports.QuizMultipleInvalid = QuizMultipleInvalid;
-class RandomIdDuplicate extends ErrorWithCall {
+class RandomIdDuplicate extends TelegramError {
 }
 exports.RandomIdDuplicate = RandomIdDuplicate;
-class RandomIdEmpty extends ErrorWithCall {
+class RandomIdEmpty extends TelegramError {
 }
 exports.RandomIdEmpty = RandomIdEmpty;
-class RandomIdInvalid extends ErrorWithCall {
+class RandomIdInvalid extends TelegramError {
 }
 exports.RandomIdInvalid = RandomIdInvalid;
-class RandomLengthInvalid extends ErrorWithCall {
+class RandomLengthInvalid extends TelegramError {
 }
 exports.RandomLengthInvalid = RandomLengthInvalid;
-class RangesInvalid extends ErrorWithCall {
+class RangesInvalid extends TelegramError {
 }
 exports.RangesInvalid = RangesInvalid;
-class ReactionsTooMany extends ErrorWithCall {
+class ReactionsTooMany extends TelegramError {
 }
 exports.ReactionsTooMany = ReactionsTooMany;
-class ReactionEmpty extends ErrorWithCall {
+class ReactionEmpty extends TelegramError {
 }
 exports.ReactionEmpty = ReactionEmpty;
-class ReactionInvalid extends ErrorWithCall {
+class ReactionInvalid extends TelegramError {
 }
 exports.ReactionInvalid = ReactionInvalid;
-class ReflectorNotAvailable extends ErrorWithCall {
+class ReflectorNotAvailable extends TelegramError {
 }
 exports.ReflectorNotAvailable = ReflectorNotAvailable;
-class RegIdGenerateFailed extends ErrorWithCall {
+class RegIdGenerateFailed extends TelegramError {
 }
 exports.RegIdGenerateFailed = RegIdGenerateFailed;
-class ReplyMarkupBuyEmpty extends ErrorWithCall {
+class ReplyMarkupBuyEmpty extends TelegramError {
 }
 exports.ReplyMarkupBuyEmpty = ReplyMarkupBuyEmpty;
-class ReplyMarkupGameEmpty extends ErrorWithCall {
+class ReplyMarkupGameEmpty extends TelegramError {
 }
 exports.ReplyMarkupGameEmpty = ReplyMarkupGameEmpty;
-class ReplyMarkupInvalid extends ErrorWithCall {
+class ReplyMarkupInvalid extends TelegramError {
 }
 exports.ReplyMarkupInvalid = ReplyMarkupInvalid;
-class ReplyMarkupTooLong extends ErrorWithCall {
+class ReplyMarkupTooLong extends TelegramError {
 }
 exports.ReplyMarkupTooLong = ReplyMarkupTooLong;
-class ResetRequestMissing extends ErrorWithCall {
+class ResetRequestMissing extends TelegramError {
 }
 exports.ResetRequestMissing = ResetRequestMissing;
-class ResultsTooMuch extends ErrorWithCall {
+class ResultsTooMuch extends TelegramError {
 }
 exports.ResultsTooMuch = ResultsTooMuch;
-class ResultIdDuplicate extends ErrorWithCall {
+class ResultIdDuplicate extends TelegramError {
 }
 exports.ResultIdDuplicate = ResultIdDuplicate;
-class ResultIdEmpty extends ErrorWithCall {
+class ResultIdEmpty extends TelegramError {
 }
 exports.ResultIdEmpty = ResultIdEmpty;
-class ResultIdInvalid extends ErrorWithCall {
+class ResultIdInvalid extends TelegramError {
 }
 exports.ResultIdInvalid = ResultIdInvalid;
-class ResultTypeInvalid extends ErrorWithCall {
+class ResultTypeInvalid extends TelegramError {
 }
 exports.ResultTypeInvalid = ResultTypeInvalid;
-class RevoteNotAllowed extends ErrorWithCall {
+class RevoteNotAllowed extends TelegramError {
 }
 exports.RevoteNotAllowed = RevoteNotAllowed;
-class RightsNotModified extends ErrorWithCall {
+class RightsNotModified extends TelegramError {
 }
 exports.RightsNotModified = RightsNotModified;
-class RightForbidden extends ErrorWithCall {
+class RightForbidden extends TelegramError {
 }
 exports.RightForbidden = RightForbidden;
-class RpcCallFail extends ErrorWithCall {
+class RpcCallFail extends TelegramError {
 }
 exports.RpcCallFail = RpcCallFail;
-class RpcMcgetFail extends ErrorWithCall {
+class RpcMcgetFail extends TelegramError {
 }
 exports.RpcMcgetFail = RpcMcgetFail;
-class RsaDecryptFailed extends ErrorWithCall {
+class RsaDecryptFailed extends TelegramError {
 }
 exports.RsaDecryptFailed = RsaDecryptFailed;
-class ScheduleBotNotAllowed extends ErrorWithCall {
+class ScheduleBotNotAllowed extends TelegramError {
 }
 exports.ScheduleBotNotAllowed = ScheduleBotNotAllowed;
-class ScheduleDateInvalid extends ErrorWithCall {
+class ScheduleDateInvalid extends TelegramError {
 }
 exports.ScheduleDateInvalid = ScheduleDateInvalid;
-class ScheduleDateTooLate extends ErrorWithCall {
+class ScheduleDateTooLate extends TelegramError {
 }
 exports.ScheduleDateTooLate = ScheduleDateTooLate;
-class ScheduleStatusPrivate extends ErrorWithCall {
+class ScheduleStatusPrivate extends TelegramError {
 }
 exports.ScheduleStatusPrivate = ScheduleStatusPrivate;
-class ScheduleTooMuch extends ErrorWithCall {
+class ScheduleTooMuch extends TelegramError {
 }
 exports.ScheduleTooMuch = ScheduleTooMuch;
-class ScoreInvalid extends ErrorWithCall {
+class ScoreInvalid extends TelegramError {
 }
 exports.ScoreInvalid = ScoreInvalid;
-class SearchQueryEmpty extends ErrorWithCall {
+class SearchQueryEmpty extends TelegramError {
 }
 exports.SearchQueryEmpty = SearchQueryEmpty;
-class SearchWithLinkNotSupported extends ErrorWithCall {
+class SearchWithLinkNotSupported extends TelegramError {
 }
 exports.SearchWithLinkNotSupported = SearchWithLinkNotSupported;
-class SecondsInvalid extends ErrorWithCall {
+class SecondsInvalid extends TelegramError {
 }
 exports.SecondsInvalid = SecondsInvalid;
-class SendAsPeerInvalid extends ErrorWithCall {
+class SendAsPeerInvalid extends TelegramError {
 }
 exports.SendAsPeerInvalid = SendAsPeerInvalid;
-class SendCodeUnavailable extends ErrorWithCall {
+class SendCodeUnavailable extends TelegramError {
 }
 exports.SendCodeUnavailable = SendCodeUnavailable;
-class SendMessageMediaInvalid extends ErrorWithCall {
+class SendMessageMediaInvalid extends TelegramError {
 }
 exports.SendMessageMediaInvalid = SendMessageMediaInvalid;
-class SendMessageTypeInvalid extends ErrorWithCall {
+class SendMessageTypeInvalid extends TelegramError {
 }
 exports.SendMessageTypeInvalid = SendMessageTypeInvalid;
-class SensitiveChangeForbidden extends ErrorWithCall {
+class SensitiveChangeForbidden extends TelegramError {
 }
 exports.SensitiveChangeForbidden = SensitiveChangeForbidden;
-class SessionExpired extends ErrorWithCall {
+class SessionExpired extends TelegramError {
 }
 exports.SessionExpired = SessionExpired;
-class SessionPasswordNeeded extends ErrorWithCall {
+class SessionPasswordNeeded extends TelegramError {
 }
 exports.SessionPasswordNeeded = SessionPasswordNeeded;
-class SessionRevoked extends ErrorWithCall {
+class SessionRevoked extends TelegramError {
 }
 exports.SessionRevoked = SessionRevoked;
-class SettingsInvalid extends ErrorWithCall {
+class SettingsInvalid extends TelegramError {
 }
 exports.SettingsInvalid = SettingsInvalid;
-class Sha256HashInvalid extends ErrorWithCall {
+class Sha256HashInvalid extends TelegramError {
 }
 exports.Sha256HashInvalid = Sha256HashInvalid;
-class ShortnameOccupyFailed extends ErrorWithCall {
+class ShortnameOccupyFailed extends TelegramError {
 }
 exports.ShortnameOccupyFailed = ShortnameOccupyFailed;
-class ShortNameInvalid extends ErrorWithCall {
+class ShortNameInvalid extends TelegramError {
 }
 exports.ShortNameInvalid = ShortNameInvalid;
-class ShortNameOccupied extends ErrorWithCall {
+class ShortNameOccupied extends TelegramError {
 }
 exports.ShortNameOccupied = ShortNameOccupied;
-class SignInFailed extends ErrorWithCall {
+class SignInFailed extends TelegramError {
 }
 exports.SignInFailed = SignInFailed;
-class SlowmodeMultiMsgsDisabled extends ErrorWithCall {
+class SlowmodeMultiMsgsDisabled extends TelegramError {
 }
 exports.SlowmodeMultiMsgsDisabled = SlowmodeMultiMsgsDisabled;
-class SmsCodeCreateFailed extends ErrorWithCall {
+class SmsCodeCreateFailed extends TelegramError {
 }
 exports.SmsCodeCreateFailed = SmsCodeCreateFailed;
-class SrpIdInvalid extends ErrorWithCall {
+class SrpIdInvalid extends TelegramError {
 }
 exports.SrpIdInvalid = SrpIdInvalid;
-class SrpPasswordChanged extends ErrorWithCall {
+class SrpPasswordChanged extends TelegramError {
 }
 exports.SrpPasswordChanged = SrpPasswordChanged;
-class StartParamEmpty extends ErrorWithCall {
+class StartParamEmpty extends TelegramError {
 }
 exports.StartParamEmpty = StartParamEmpty;
-class StartParamInvalid extends ErrorWithCall {
+class StartParamInvalid extends TelegramError {
 }
 exports.StartParamInvalid = StartParamInvalid;
-class StartParamTooLong extends ErrorWithCall {
+class StartParamTooLong extends TelegramError {
 }
 exports.StartParamTooLong = StartParamTooLong;
-class StickerpackStickersTooMuch extends ErrorWithCall {
+class StickerpackStickersTooMuch extends TelegramError {
 }
 exports.StickerpackStickersTooMuch = StickerpackStickersTooMuch;
-class StickersetInvalid extends ErrorWithCall {
+class StickersetInvalid extends TelegramError {
 }
 exports.StickersetInvalid = StickersetInvalid;
-class StickersetOwnerAnonymous extends ErrorWithCall {
+class StickersetOwnerAnonymous extends TelegramError {
 }
 exports.StickersetOwnerAnonymous = StickersetOwnerAnonymous;
-class StickersEmpty extends ErrorWithCall {
+class StickersEmpty extends TelegramError {
 }
 exports.StickersEmpty = StickersEmpty;
-class StickersTooMuch extends ErrorWithCall {
+class StickersTooMuch extends TelegramError {
 }
 exports.StickersTooMuch = StickersTooMuch;
-class StickerDocumentInvalid extends ErrorWithCall {
+class StickerDocumentInvalid extends TelegramError {
 }
 exports.StickerDocumentInvalid = StickerDocumentInvalid;
-class StickerEmojiInvalid extends ErrorWithCall {
+class StickerEmojiInvalid extends TelegramError {
 }
 exports.StickerEmojiInvalid = StickerEmojiInvalid;
-class StickerFileInvalid extends ErrorWithCall {
+class StickerFileInvalid extends TelegramError {
 }
 exports.StickerFileInvalid = StickerFileInvalid;
-class StickerGifDimensions extends ErrorWithCall {
+class StickerGifDimensions extends TelegramError {
 }
 exports.StickerGifDimensions = StickerGifDimensions;
-class StickerIdInvalid extends ErrorWithCall {
+class StickerIdInvalid extends TelegramError {
 }
 exports.StickerIdInvalid = StickerIdInvalid;
-class StickerInvalid extends ErrorWithCall {
+class StickerInvalid extends TelegramError {
 }
 exports.StickerInvalid = StickerInvalid;
-class StickerMimeInvalid extends ErrorWithCall {
+class StickerMimeInvalid extends TelegramError {
 }
 exports.StickerMimeInvalid = StickerMimeInvalid;
-class StickerPngDimensions extends ErrorWithCall {
+class StickerPngDimensions extends TelegramError {
 }
 exports.StickerPngDimensions = StickerPngDimensions;
-class StickerPngNopng extends ErrorWithCall {
+class StickerPngNopng extends TelegramError {
 }
 exports.StickerPngNopng = StickerPngNopng;
-class StickerTgsNodoc extends ErrorWithCall {
+class StickerTgsNodoc extends TelegramError {
 }
 exports.StickerTgsNodoc = StickerTgsNodoc;
-class StickerTgsNotgs extends ErrorWithCall {
+class StickerTgsNotgs extends TelegramError {
 }
 exports.StickerTgsNotgs = StickerTgsNotgs;
-class StickerThumbPngNopng extends ErrorWithCall {
+class StickerThumbPngNopng extends TelegramError {
 }
 exports.StickerThumbPngNopng = StickerThumbPngNopng;
-class StickerThumbTgsNotgs extends ErrorWithCall {
+class StickerThumbTgsNotgs extends TelegramError {
 }
 exports.StickerThumbTgsNotgs = StickerThumbTgsNotgs;
-class StickerVideoBig extends ErrorWithCall {
+class StickerVideoBig extends TelegramError {
 }
 exports.StickerVideoBig = StickerVideoBig;
-class StickerVideoNodoc extends ErrorWithCall {
+class StickerVideoNodoc extends TelegramError {
 }
 exports.StickerVideoNodoc = StickerVideoNodoc;
-class StickerVideoNowebm extends ErrorWithCall {
+class StickerVideoNowebm extends TelegramError {
 }
 exports.StickerVideoNowebm = StickerVideoNowebm;
-class StorageCheckFailed extends ErrorWithCall {
+class StorageCheckFailed extends TelegramError {
 }
 exports.StorageCheckFailed = StorageCheckFailed;
-class StoreInvalidScalarType extends ErrorWithCall {
+class StoreInvalidScalarType extends TelegramError {
 }
 exports.StoreInvalidScalarType = StoreInvalidScalarType;
-class SwitchPmTextEmpty extends ErrorWithCall {
+class SwitchPmTextEmpty extends TelegramError {
 }
 exports.SwitchPmTextEmpty = SwitchPmTextEmpty;
-class TakeoutInvalid extends ErrorWithCall {
+class TakeoutInvalid extends TelegramError {
 }
 exports.TakeoutInvalid = TakeoutInvalid;
-class TakeoutRequired extends ErrorWithCall {
+class TakeoutRequired extends TelegramError {
 }
 exports.TakeoutRequired = TakeoutRequired;
-class TempAuthKeyAlreadyBound extends ErrorWithCall {
+class TempAuthKeyAlreadyBound extends TelegramError {
 }
 exports.TempAuthKeyAlreadyBound = TempAuthKeyAlreadyBound;
-class TempAuthKeyEmpty extends ErrorWithCall {
+class TempAuthKeyEmpty extends TelegramError {
 }
 exports.TempAuthKeyEmpty = TempAuthKeyEmpty;
-class ThemeFileInvalid extends ErrorWithCall {
+class ThemeFileInvalid extends TelegramError {
 }
 exports.ThemeFileInvalid = ThemeFileInvalid;
-class ThemeFormatInvalid extends ErrorWithCall {
+class ThemeFormatInvalid extends TelegramError {
 }
 exports.ThemeFormatInvalid = ThemeFormatInvalid;
-class ThemeInvalid extends ErrorWithCall {
+class ThemeInvalid extends TelegramError {
 }
 exports.ThemeInvalid = ThemeInvalid;
-class ThemeMimeInvalid extends ErrorWithCall {
+class ThemeMimeInvalid extends TelegramError {
 }
 exports.ThemeMimeInvalid = ThemeMimeInvalid;
-class ThemeTitleInvalid extends ErrorWithCall {
+class ThemeTitleInvalid extends TelegramError {
 }
 exports.ThemeTitleInvalid = ThemeTitleInvalid;
-class Timeout extends ErrorWithCall {
+class Timeout extends TelegramError {
 }
 exports.Timeout = Timeout;
-class TitleInvalid extends ErrorWithCall {
+class TitleInvalid extends TelegramError {
 }
 exports.TitleInvalid = TitleInvalid;
-class TmpPasswordDisabled extends ErrorWithCall {
+class TmpPasswordDisabled extends TelegramError {
 }
 exports.TmpPasswordDisabled = TmpPasswordDisabled;
-class TmpPasswordInvalid extends ErrorWithCall {
+class TmpPasswordInvalid extends TelegramError {
 }
 exports.TmpPasswordInvalid = TmpPasswordInvalid;
-class TokenInvalid extends ErrorWithCall {
+class TokenInvalid extends TelegramError {
 }
 exports.TokenInvalid = TokenInvalid;
-class TopicDeleted extends ErrorWithCall {
+class TopicDeleted extends TelegramError {
 }
 exports.TopicDeleted = TopicDeleted;
-class ToLangInvalid extends ErrorWithCall {
+class ToLangInvalid extends TelegramError {
 }
 exports.ToLangInvalid = ToLangInvalid;
-class TtlDaysInvalid extends ErrorWithCall {
+class TtlDaysInvalid extends TelegramError {
 }
 exports.TtlDaysInvalid = TtlDaysInvalid;
-class TtlMediaInvalid extends ErrorWithCall {
+class TtlMediaInvalid extends TelegramError {
 }
 exports.TtlMediaInvalid = TtlMediaInvalid;
-class TtlPeriodInvalid extends ErrorWithCall {
+class TtlPeriodInvalid extends TelegramError {
 }
 exports.TtlPeriodInvalid = TtlPeriodInvalid;
-class TypesEmpty extends ErrorWithCall {
+class TypesEmpty extends TelegramError {
 }
 exports.TypesEmpty = TypesEmpty;
-class TypeConstructorInvalid extends ErrorWithCall {
+class TypeConstructorInvalid extends TelegramError {
 }
 exports.TypeConstructorInvalid = TypeConstructorInvalid;
-class Timedout extends ErrorWithCall {
+class Timedout extends TelegramError {
 }
 exports.Timedout = Timedout;
-class UnknownError extends ErrorWithCall {
+class UnknownError extends TelegramError {
 }
 exports.UnknownError = UnknownError;
-class UnknownMethod extends ErrorWithCall {
+class UnknownMethod extends TelegramError {
 }
 exports.UnknownMethod = UnknownMethod;
-class UntilDateInvalid extends ErrorWithCall {
+class UntilDateInvalid extends TelegramError {
 }
 exports.UntilDateInvalid = UntilDateInvalid;
-class UpdateAppToLogin extends ErrorWithCall {
+class UpdateAppToLogin extends TelegramError {
 }
 exports.UpdateAppToLogin = UpdateAppToLogin;
-class UrlInvalid extends ErrorWithCall {
+class UrlInvalid extends TelegramError {
 }
 exports.UrlInvalid = UrlInvalid;
-class UsageLimitInvalid extends ErrorWithCall {
+class UsageLimitInvalid extends TelegramError {
 }
 exports.UsageLimitInvalid = UsageLimitInvalid;
-class UsernameInvalid extends ErrorWithCall {
+class UsernameInvalid extends TelegramError {
 }
 exports.UsernameInvalid = UsernameInvalid;
-class UsernameNotModified extends ErrorWithCall {
+class UsernameNotModified extends TelegramError {
 }
 exports.UsernameNotModified = UsernameNotModified;
-class UsernameNotOccupied extends ErrorWithCall {
+class UsernameNotOccupied extends TelegramError {
 }
 exports.UsernameNotOccupied = UsernameNotOccupied;
-class UsernameOccupied extends ErrorWithCall {
+class UsernameOccupied extends TelegramError {
 }
 exports.UsernameOccupied = UsernameOccupied;
-class UsernamePurchaseAvailable extends ErrorWithCall {
+class UsernamePurchaseAvailable extends TelegramError {
 }
 exports.UsernamePurchaseAvailable = UsernamePurchaseAvailable;
-class UserpicPrivacyRequired extends ErrorWithCall {
+class UserpicPrivacyRequired extends TelegramError {
 }
 exports.UserpicPrivacyRequired = UserpicPrivacyRequired;
-class UserpicUploadRequired extends ErrorWithCall {
+class UserpicUploadRequired extends TelegramError {
 }
 exports.UserpicUploadRequired = UserpicUploadRequired;
-class UsersTooFew extends ErrorWithCall {
+class UsersTooFew extends TelegramError {
 }
 exports.UsersTooFew = UsersTooFew;
-class UsersTooMuch extends ErrorWithCall {
+class UsersTooMuch extends TelegramError {
 }
 exports.UsersTooMuch = UsersTooMuch;
-class UserAdminInvalid extends ErrorWithCall {
+class UserAdminInvalid extends TelegramError {
 }
 exports.UserAdminInvalid = UserAdminInvalid;
-class UserAlreadyInvited extends ErrorWithCall {
+class UserAlreadyInvited extends TelegramError {
 }
 exports.UserAlreadyInvited = UserAlreadyInvited;
-class UserAlreadyParticipant extends ErrorWithCall {
+class UserAlreadyParticipant extends TelegramError {
 }
 exports.UserAlreadyParticipant = UserAlreadyParticipant;
-class UserBannedInChannel extends ErrorWithCall {
+class UserBannedInChannel extends TelegramError {
 }
 exports.UserBannedInChannel = UserBannedInChannel;
-class UserBlocked extends ErrorWithCall {
+class UserBlocked extends TelegramError {
 }
 exports.UserBlocked = UserBlocked;
-class UserBot extends ErrorWithCall {
+class UserBot extends TelegramError {
 }
 exports.UserBot = UserBot;
-class UserBotInvalid extends ErrorWithCall {
+class UserBotInvalid extends TelegramError {
 }
 exports.UserBotInvalid = UserBotInvalid;
-class UserBotRequired extends ErrorWithCall {
+class UserBotRequired extends TelegramError {
 }
 exports.UserBotRequired = UserBotRequired;
-class UserChannelsTooMuch extends ErrorWithCall {
+class UserChannelsTooMuch extends TelegramError {
 }
 exports.UserChannelsTooMuch = UserChannelsTooMuch;
-class UserCreator extends ErrorWithCall {
+class UserCreator extends TelegramError {
 }
 exports.UserCreator = UserCreator;
-class UserDeactivated extends ErrorWithCall {
+class UserDeactivated extends TelegramError {
 }
 exports.UserDeactivated = UserDeactivated;
-class UserDeactivatedBan extends ErrorWithCall {
+class UserDeactivatedBan extends TelegramError {
 }
 exports.UserDeactivatedBan = UserDeactivatedBan;
-class UserDeleted extends ErrorWithCall {
+class UserDeleted extends TelegramError {
 }
 exports.UserDeleted = UserDeleted;
-class UserIdInvalid extends ErrorWithCall {
+class UserIdInvalid extends TelegramError {
 }
 exports.UserIdInvalid = UserIdInvalid;
-class UserInvalid extends ErrorWithCall {
+class UserInvalid extends TelegramError {
 }
 exports.UserInvalid = UserInvalid;
-class UserIsBlocked extends ErrorWithCall {
+class UserIsBlocked extends TelegramError {
 }
 exports.UserIsBlocked = UserIsBlocked;
-class UserIsBot extends ErrorWithCall {
+class UserIsBot extends TelegramError {
 }
 exports.UserIsBot = UserIsBot;
-class UserKicked extends ErrorWithCall {
+class UserKicked extends TelegramError {
 }
 exports.UserKicked = UserKicked;
-class UserNotMutualContact extends ErrorWithCall {
+class UserNotMutualContact extends TelegramError {
 }
 exports.UserNotMutualContact = UserNotMutualContact;
-class UserNotParticipant extends ErrorWithCall {
+class UserNotParticipant extends TelegramError {
 }
 exports.UserNotParticipant = UserNotParticipant;
-class UserPrivacyRestricted extends ErrorWithCall {
+class UserPrivacyRestricted extends TelegramError {
 }
 exports.UserPrivacyRestricted = UserPrivacyRestricted;
-class UserRestricted extends ErrorWithCall {
+class UserRestricted extends TelegramError {
 }
 exports.UserRestricted = UserRestricted;
-class UserVolumeInvalid extends ErrorWithCall {
+class UserVolumeInvalid extends TelegramError {
 }
 exports.UserVolumeInvalid = UserVolumeInvalid;
-class VideoContentTypeInvalid extends ErrorWithCall {
+class VideoContentTypeInvalid extends TelegramError {
 }
 exports.VideoContentTypeInvalid = VideoContentTypeInvalid;
-class VideoFileInvalid extends ErrorWithCall {
+class VideoFileInvalid extends TelegramError {
 }
 exports.VideoFileInvalid = VideoFileInvalid;
-class VideoTitleEmpty extends ErrorWithCall {
+class VideoTitleEmpty extends TelegramError {
 }
 exports.VideoTitleEmpty = VideoTitleEmpty;
-class VoiceMessagesForbidden extends ErrorWithCall {
+class VoiceMessagesForbidden extends TelegramError {
 }
 exports.VoiceMessagesForbidden = VoiceMessagesForbidden;
-class WallpaperFileInvalid extends ErrorWithCall {
+class WallpaperFileInvalid extends TelegramError {
 }
 exports.WallpaperFileInvalid = WallpaperFileInvalid;
-class WallpaperInvalid extends ErrorWithCall {
+class WallpaperInvalid extends TelegramError {
 }
 exports.WallpaperInvalid = WallpaperInvalid;
-class WallpaperMimeInvalid extends ErrorWithCall {
+class WallpaperMimeInvalid extends TelegramError {
 }
 exports.WallpaperMimeInvalid = WallpaperMimeInvalid;
-class WcConvertUrlInvalid extends ErrorWithCall {
+class WcConvertUrlInvalid extends TelegramError {
 }
 exports.WcConvertUrlInvalid = WcConvertUrlInvalid;
-class WebdocumentInvalid extends ErrorWithCall {
+class WebdocumentInvalid extends TelegramError {
 }
 exports.WebdocumentInvalid = WebdocumentInvalid;
-class WebdocumentMimeInvalid extends ErrorWithCall {
+class WebdocumentMimeInvalid extends TelegramError {
 }
 exports.WebdocumentMimeInvalid = WebdocumentMimeInvalid;
-class WebdocumentSizeTooBig extends ErrorWithCall {
+class WebdocumentSizeTooBig extends TelegramError {
 }
 exports.WebdocumentSizeTooBig = WebdocumentSizeTooBig;
-class WebdocumentUrlInvalid extends ErrorWithCall {
+class WebdocumentUrlInvalid extends TelegramError {
 }
 exports.WebdocumentUrlInvalid = WebdocumentUrlInvalid;
-class WebpageCurlFailed extends ErrorWithCall {
+class WebpageCurlFailed extends TelegramError {
 }
 exports.WebpageCurlFailed = WebpageCurlFailed;
-class WebpageMediaEmpty extends ErrorWithCall {
+class WebpageMediaEmpty extends TelegramError {
 }
 exports.WebpageMediaEmpty = WebpageMediaEmpty;
-class WebpushAuthInvalid extends ErrorWithCall {
+class WebpushAuthInvalid extends TelegramError {
 }
 exports.WebpushAuthInvalid = WebpushAuthInvalid;
-class WebpushKeyInvalid extends ErrorWithCall {
+class WebpushKeyInvalid extends TelegramError {
 }
 exports.WebpushKeyInvalid = WebpushKeyInvalid;
-class WebpushTokenInvalid extends ErrorWithCall {
+class WebpushTokenInvalid extends TelegramError {
 }
 exports.WebpushTokenInvalid = WebpushTokenInvalid;
-class WorkerBusyTooLongRetry extends ErrorWithCall {
+class WorkerBusyTooLongRetry extends TelegramError {
 }
 exports.WorkerBusyTooLongRetry = WorkerBusyTooLongRetry;
-class YouBlockedUser extends ErrorWithCall {
+class YouBlockedUser extends TelegramError {
 }
 exports.YouBlockedUser = YouBlockedUser;
 exports.map = {

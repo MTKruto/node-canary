@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -29,7 +29,6 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _BotInfoManager_instances, _BotInfoManager_c, _BotInfoManager_setMyInfo, _BotInfoManager_getMyInfo;
-import { types } from "../2_tl.js";
 import { botCommandScopeToTlObject } from "../3_types.js";
 export class BotInfoManager {
     constructor(c) {
@@ -38,48 +37,50 @@ export class BotInfoManager {
         __classPrivateFieldSet(this, _BotInfoManager_c, c, "f");
     }
     async setMyDescription(params) {
-        await __classPrivateFieldGet(this, _BotInfoManager_c, "f").storage.assertBot("setMyDescription");
+        __classPrivateFieldGet(this, _BotInfoManager_c, "f").storage.assertBot("setMyDescription");
         await __classPrivateFieldGet(this, _BotInfoManager_instances, "m", _BotInfoManager_setMyInfo).call(this, { description: params?.description, lang_code: params?.languageCode ?? "" });
     }
     async setMyName(params) {
-        await __classPrivateFieldGet(this, _BotInfoManager_c, "f").storage.assertBot("setMyName");
+        __classPrivateFieldGet(this, _BotInfoManager_c, "f").storage.assertBot("setMyName");
         await __classPrivateFieldGet(this, _BotInfoManager_instances, "m", _BotInfoManager_setMyInfo).call(this, { name: params?.name, lang_code: params?.languageCode ?? "" });
     }
     async setMyShortDescription(params) {
-        await __classPrivateFieldGet(this, _BotInfoManager_c, "f").storage.assertBot("setMyShortDescription");
+        __classPrivateFieldGet(this, _BotInfoManager_c, "f").storage.assertBot("setMyShortDescription");
         await __classPrivateFieldGet(this, _BotInfoManager_instances, "m", _BotInfoManager_setMyInfo).call(this, { about: params?.shortDescription, lang_code: params?.languageCode ?? "" });
     }
     async getMyDescription(params) {
-        await __classPrivateFieldGet(this, _BotInfoManager_c, "f").storage.assertBot("getMyDescription");
-        return await __classPrivateFieldGet(this, _BotInfoManager_instances, "m", _BotInfoManager_getMyInfo).call(this, params?.languageCode).then((v) => v.description);
+        __classPrivateFieldGet(this, _BotInfoManager_c, "f").storage.assertBot("getMyDescription");
+        return (await __classPrivateFieldGet(this, _BotInfoManager_instances, "m", _BotInfoManager_getMyInfo).call(this, params?.languageCode)).description;
     }
     async getMyName(params) {
-        await __classPrivateFieldGet(this, _BotInfoManager_c, "f").storage.assertBot("getMyName");
-        return await __classPrivateFieldGet(this, _BotInfoManager_instances, "m", _BotInfoManager_getMyInfo).call(this, params?.languageCode).then((v) => v.description);
+        __classPrivateFieldGet(this, _BotInfoManager_c, "f").storage.assertBot("getMyName");
+        return (await __classPrivateFieldGet(this, _BotInfoManager_instances, "m", _BotInfoManager_getMyInfo).call(this, params?.languageCode)).description;
     }
     async getMyShortDescription(params) {
-        await __classPrivateFieldGet(this, _BotInfoManager_c, "f").storage.assertBot("getMyShortDescription");
-        return await __classPrivateFieldGet(this, _BotInfoManager_instances, "m", _BotInfoManager_getMyInfo).call(this, params?.languageCode).then((v) => v.about);
+        __classPrivateFieldGet(this, _BotInfoManager_c, "f").storage.assertBot("getMyShortDescription");
+        return (await __classPrivateFieldGet(this, _BotInfoManager_instances, "m", _BotInfoManager_getMyInfo).call(this, params?.languageCode)).about;
     }
     async getMyCommands(params) {
-        await __classPrivateFieldGet(this, _BotInfoManager_c, "f").storage.assertBot("getMyCommands");
-        const commands_ = await __classPrivateFieldGet(this, _BotInfoManager_c, "f").api.bots.getBotCommands({
+        __classPrivateFieldGet(this, _BotInfoManager_c, "f").storage.assertBot("getMyCommands");
+        const commands_ = await __classPrivateFieldGet(this, _BotInfoManager_c, "f").invoke({
+            _: "bots.getBotCommands",
             lang_code: params?.languageCode ?? "",
             scope: await botCommandScopeToTlObject(params?.scope ?? { type: "default" }, __classPrivateFieldGet(this, _BotInfoManager_c, "f").getInputPeer),
         });
         return commands_.map((v) => ({ command: v.command, description: v.description }));
     }
     async setMyCommands(commands, params) {
-        await __classPrivateFieldGet(this, _BotInfoManager_c, "f").storage.assertBot("setMyCommands");
-        await __classPrivateFieldGet(this, _BotInfoManager_c, "f").api.bots.setBotCommands({
-            commands: commands.map((v) => new types.BotCommand(v)),
+        __classPrivateFieldGet(this, _BotInfoManager_c, "f").storage.assertBot("setMyCommands");
+        await __classPrivateFieldGet(this, _BotInfoManager_c, "f").invoke({
+            _: "bots.setBotCommands",
+            commands: commands.map((v) => ({ ...v, _: "botCommand" })),
             lang_code: params?.languageCode ?? "",
             scope: await botCommandScopeToTlObject(params?.scope ?? { type: "default" }, __classPrivateFieldGet(this, _BotInfoManager_c, "f").getInputPeer),
         });
     }
 }
 _BotInfoManager_c = new WeakMap(), _BotInfoManager_instances = new WeakSet(), _BotInfoManager_setMyInfo = async function _BotInfoManager_setMyInfo(info) {
-    await __classPrivateFieldGet(this, _BotInfoManager_c, "f").api.bots.setBotInfo({ bot: new types.InputUserSelf(), ...info });
+    await __classPrivateFieldGet(this, _BotInfoManager_c, "f").invoke({ _: "bots.setBotInfo", ...info });
 }, _BotInfoManager_getMyInfo = function _BotInfoManager_getMyInfo(languageCode) {
-    return __classPrivateFieldGet(this, _BotInfoManager_c, "f").api.bots.getBotInfo({ bot: new types.InputUserSelf(), lang_code: languageCode ?? "" });
+    return __classPrivateFieldGet(this, _BotInfoManager_c, "f").invoke({ _: "bots.getBotInfo", lang_code: languageCode ?? "" });
 };

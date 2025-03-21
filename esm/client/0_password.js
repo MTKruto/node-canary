@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -20,7 +20,7 @@
 import * as dntShim from "../_dnt.shims.js";
 import { concat } from "../0_deps.js";
 import { bigIntFromBuffer, bufferFromBigInt, getRandomBigInt, mod, modExp, sha256 } from "../1_utilities.js";
-import { types } from "../2_tl.js";
+import { is } from "../2_tl.js";
 export function isSafePrime(primeBytes, g) {
     // deno-fmt-ignore
     const goodPrime = new Uint8Array([
@@ -61,12 +61,12 @@ export const sh = (data, salt) => h(concat([salt, data, salt]));
 // PH1(password, salt1, salt2) := SH(SH(password, salt1), salt2)
 export const ph1 = async (password, salt1, salt2) => await sh(await sh(password, salt1), salt2);
 export async function pbkdf2(password, salt, iterations) {
-    const key = await dntShim.dntGlobalThis.crypto.subtle.importKey("raw", password, "PBKDF2", false, ["deriveBits"]);
-    const buffer = await dntShim.dntGlobalThis.crypto.subtle.deriveBits({ name: "PBKDF2", salt, iterations, hash: "SHA-512" }, key, 512);
+    const key = await dntShim.crypto.subtle.importKey("raw", password, "PBKDF2", false, ["deriveBits"]);
+    const buffer = await dntShim.crypto.subtle.deriveBits({ name: "PBKDF2", salt, iterations, hash: "SHA-512" }, key, 512);
     return new Uint8Array(buffer);
 }
 // PH2(password, salt1, salt2) := SH(pbkdf2(sha512, PH1(password, salt1, salt2), salt1, 100000), salt2)
-export const ph2 = async (password, salt1, salt2) => await sh(await pbkdf2(await ph1(password, salt1, salt2), salt1, 100000), salt2);
+export const ph2 = async (password, salt1, salt2) => await sh(await pbkdf2(await ph1(password, salt1, salt2), salt1, 100_000), salt2);
 export function isGoodModExpFirst(modexp, prime) {
     const diff = prime - modexp;
     const minDiffBitsCount = 2048 - 64;
@@ -90,8 +90,7 @@ export function pad(bigint) {
 export async function checkPassword(password_, ap) {
     const password = new TextEncoder().encode(password_);
     const algo = ap.current_algo;
-    if (!(algo instanceof
-        types.PasswordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow)) {
+    if (!(is("passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow", algo))) {
         throw new Error("Unexpected algorithm");
     }
     // g := algo.g
@@ -122,7 +121,7 @@ export async function checkPassword(password_, ap) {
     let u = 0n;
     let a = 0n;
     let gA = 0n;
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 1_000; i++) {
         a = getRandomBigInt(256, false);
         // g_a := pow(g, a) mod p
         gA = modExp(BigInt(g), a, p);
@@ -158,9 +157,5 @@ export async function checkPassword(password_, ap) {
         pad(gB),
         kA,
     ]));
-    return new types.InputCheckPasswordSRP({
-        srp_id: srpId,
-        A: pad(gA),
-        M1: m1,
-    });
+    return { _: "inputCheckPasswordSRP", srp_id: srpId, A: pad(gA), M1: m1 };
 }

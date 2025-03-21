@@ -23,10 +23,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkPassword = exports.pad = exports.isGoodModExpFirst = exports.ph2 = exports.pbkdf2 = exports.ph1 = exports.sh = exports.h = exports.isSafePrime = void 0;
+exports.ph2 = exports.ph1 = exports.sh = exports.h = void 0;
+exports.isSafePrime = isSafePrime;
+exports.pbkdf2 = pbkdf2;
+exports.isGoodModExpFirst = isGoodModExpFirst;
+exports.pad = pad;
+exports.checkPassword = checkPassword;
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -80,7 +85,6 @@ function isSafePrime(primeBytes, g) {
     }
     return false;
 }
-exports.isSafePrime = isSafePrime;
 // H(data) := sha256(data)
 exports.h = _1_utilities_js_1.sha256;
 // SH(data, salt) := H(salt | data | salt)
@@ -90,13 +94,12 @@ exports.sh = sh;
 const ph1 = async (password, salt1, salt2) => await (0, exports.sh)(await (0, exports.sh)(password, salt1), salt2);
 exports.ph1 = ph1;
 async function pbkdf2(password, salt, iterations) {
-    const key = await dntShim.dntGlobalThis.crypto.subtle.importKey("raw", password, "PBKDF2", false, ["deriveBits"]);
-    const buffer = await dntShim.dntGlobalThis.crypto.subtle.deriveBits({ name: "PBKDF2", salt, iterations, hash: "SHA-512" }, key, 512);
+    const key = await dntShim.crypto.subtle.importKey("raw", password, "PBKDF2", false, ["deriveBits"]);
+    const buffer = await dntShim.crypto.subtle.deriveBits({ name: "PBKDF2", salt, iterations, hash: "SHA-512" }, key, 512);
     return new Uint8Array(buffer);
 }
-exports.pbkdf2 = pbkdf2;
 // PH2(password, salt1, salt2) := SH(pbkdf2(sha512, PH1(password, salt1, salt2), salt1, 100000), salt2)
-const ph2 = async (password, salt1, salt2) => await (0, exports.sh)(await pbkdf2(await (0, exports.ph1)(password, salt1, salt2), salt1, 100000), salt2);
+const ph2 = async (password, salt1, salt2) => await (0, exports.sh)(await pbkdf2(await (0, exports.ph1)(password, salt1, salt2), salt1, 100_000), salt2);
 exports.ph2 = ph2;
 function isGoodModExpFirst(modexp, prime) {
     const diff = prime - modexp;
@@ -107,7 +110,6 @@ function isGoodModExpFirst(modexp, prime) {
         modexp.toString(2).length < minDiffBitsCount ||
         Math.floor((modexp.toString(2).length + 7) / 8) > maxModExpSize);
 }
-exports.isGoodModExpFirst = isGoodModExpFirst;
 function pad(bigint) {
     if (typeof bigint === "number") {
         bigint = BigInt(bigint);
@@ -119,12 +121,10 @@ function pad(bigint) {
         return (0, _0_deps_js_1.concat)([new Uint8Array(256 - bigint.length), bigint]);
     }
 }
-exports.pad = pad;
 async function checkPassword(password_, ap) {
     const password = new TextEncoder().encode(password_);
     const algo = ap.current_algo;
-    if (!(algo instanceof
-        _2_tl_js_1.types.PasswordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow)) {
+    if (!((0, _2_tl_js_1.is)("passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow", algo))) {
         throw new Error("Unexpected algorithm");
     }
     // g := algo.g
@@ -155,7 +155,7 @@ async function checkPassword(password_, ap) {
     let u = 0n;
     let a = 0n;
     let gA = 0n;
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 1_000; i++) {
         a = (0, _1_utilities_js_1.getRandomBigInt)(256, false);
         // g_a := pow(g, a) mod p
         gA = (0, _1_utilities_js_1.modExp)(BigInt(g), a, p);
@@ -191,10 +191,5 @@ async function checkPassword(password_, ap) {
         pad(gB),
         kA,
     ]));
-    return new _2_tl_js_1.types.InputCheckPasswordSRP({
-        srp_id: srpId,
-        A: pad(gA),
-        M1: m1,
-    });
+    return { _: "inputCheckPasswordSRP", srp_id: srpId, A: pad(gA), M1: m1 };
 }
-exports.checkPassword = checkPassword;

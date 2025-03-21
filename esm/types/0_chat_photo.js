@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { cleanObject } from "../1_utilities.js";
-import { types } from "../2_tl.js";
+import { is } from "../2_tl.js";
 import { FileType, PhotoSourceType, serializeFileId, toUniqueFileId } from "./_file_id.js";
 export function constructChatPhoto(photo, chatId, chatAccessHash) {
     const smallFileId_ = {
@@ -35,7 +35,7 @@ export function constructChatPhoto(photo, chatId, chatAccessHash) {
     };
     const bigFileId = serializeFileId(bigFileId_);
     const bigFileUniqueId = toUniqueFileId(bigFileId_);
-    if (photo instanceof types.ChatPhoto) {
+    if (is("chatPhoto", photo)) {
         return cleanObject({
             smallFileId,
             smallFileUniqueId,

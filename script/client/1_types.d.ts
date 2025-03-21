@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,30 +17,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { enums, functions, types } from "../2_tl.js";
-import { StorageOperations } from "./0_storage_operations.js";
+import { Api } from "../2_tl.js";
 import { ConnectionState, EntityGetter, ID, ParseMode, Update } from "../3_types.js";
-type Functions = typeof functions;
-type Keys = keyof Functions;
-type AnyFunc = (...args: any) => any;
-type Promisify<T extends AnyFunc> = (...args: Parameters<T>) => Promise<ReturnType<T>>;
-export type Api = {
-    [K in Keys]: Functions[K] extends {
-        __F: AnyFunc;
-    } ? Promisify<Functions[K]["__F"]> : {
-        [K_ in keyof Functions[K]]: Functions[K][K_] extends {
-            __F: AnyFunc;
-        } ? Promisify<Functions[K][K_]["__F"]> : Functions[K][K_];
-    };
-};
+import { StorageOperations } from "./0_storage_operations.js";
+export type Invoke = <T extends Api.AnyFunction<P>, P extends Api.Function, R extends unknown = Api.ReturnType<Api.Functions[T["_"]]>>(function_: T, businessConnectionId?: string) => Promise<R>;
 interface Connection {
-    api: Api;
+    invoke: Invoke;
     connect: () => Promise<void>;
     disconnect: () => Promise<void>;
 }
-export interface ConnectionPool extends Omit<Connection, "api"> {
+export interface ConnectionPool extends Omit<Connection, "invoke"> {
     size: number;
-    api: () => Api;
+    invoke: () => Invoke;
     connect: () => Promise<void>;
     disconnect: () => Promise<void>;
 }
@@ -52,25 +40,28 @@ interface GetCdnConnectionPool {
 }
 export interface C {
     id: number;
-    api: Api;
     storage: StorageOperations;
     messageStorage: StorageOperations;
     guaranteeUpdateDelivery: boolean;
     setConnectionState: (connectionState: ConnectionState) => void;
     resetConnectionState: () => void;
     getSelfId: () => Promise<number>;
-    getInputPeer: (id: ID) => Promise<enums.InputPeer>;
-    getInputChannel: (id: ID) => Promise<types.InputChannel>;
-    getInputUser: (id: ID) => Promise<types.InputUser>;
+    getInputPeer: (id: ID) => Promise<Api.InputPeer>;
+    getInputChannel: (id: ID) => Promise<Api.inputChannel | Api.inputChannelFromMessage>;
+    getInputUser: (id: ID) => Promise<Api.inputUserSelf | Api.inputUser | Api.inputUserFromMessage>;
+    getInputPeerChatId: (inputPeer: Api.InputPeer | Api.InputUser | Api.InputChannel) => Promise<number>;
     getEntity: EntityGetter;
     handleUpdate: (update: Update) => void;
     parseMode: ParseMode;
     getCdnConnection: GetCdnConnection;
     getCdnConnectionPool: GetCdnConnectionPool;
-    ignoreOutgoing: boolean | null;
+    outgoingMessages: "none" | "business" | "all" | null;
     cdn: boolean;
     dropPendingUpdates?: boolean;
-    invoke<T extends (functions.Function<unknown> | types.Type) = functions.Function<unknown>>(function_: T, businessConnectionId: string | undefined): Promise<T extends functions.Function<unknown> ? T["__R"] : void>;
+    invoke: Invoke;
+    disconnected: () => boolean;
+    langPack?: string;
+    langCode?: string;
 }
 export {};
 //# sourceMappingURL=1_types.d.ts.map

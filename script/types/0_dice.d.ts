@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 /** A rolled dice. */
 export interface Dice {
     /** The emoji on which the dice is based on. */
@@ -25,5 +25,5 @@ export interface Dice {
     /** The result of the roll, which is in the range of 1-6 for the emojis "🎲", "🎯" and "🎳",  1-5 for the emojis "🏀" and "⚽", and 1-64 for emoji "🎰". */
     value: number;
 }
-export declare function constructDice(dice_: types.MessageMediaDice): Dice;
+export declare function constructDice(dice_: Api.messageMediaDice): Dice;
 //# sourceMappingURL=0_dice.d.ts.map

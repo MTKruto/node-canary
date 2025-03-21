@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -33,6 +33,7 @@ var _TransportAbridged_initialized, _TransportAbridged_connection, _TransportAbr
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TransportAbridged = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
+const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _0_obfuscation_js_1 = require("./0_obfuscation.js");
 const _0_transport_js_1 = require("./0_transport.js");
@@ -55,43 +56,37 @@ class TransportAbridged extends _0_transport_js_1.Transport {
             }
             __classPrivateFieldSet(this, _TransportAbridged_initialized, true, "f");
         }
-        else {
-            throw new Error("Transport already initialized");
-        }
     }
     async receive() {
         let length;
         {
-            const buffer = new Uint8Array(1);
+            let buffer = new Uint8Array(1);
             await __classPrivateFieldGet(this, _TransportAbridged_connection, "f").read(buffer);
-            this.decrypt(buffer);
+            buffer = await this.decrypt(buffer);
             if (buffer[0] < 0x7F) {
                 length = buffer[0];
             }
             else {
-                const buffer = new Uint8Array(3);
+                let buffer = new Uint8Array(3);
                 await __classPrivateFieldGet(this, _TransportAbridged_connection, "f").read(buffer);
-                this.decrypt(buffer);
-                const dataView = new DataView(buffer.buffer, buffer.byteOffset, buffer.byteLength);
-                length = dataView.getUint16(0, true);
+                buffer = await this.decrypt(buffer);
+                length = Number((0, _1_utilities_js_1.bigIntFromBuffer)(buffer, true, true));
             }
         }
         length *= 4;
         const buffer = new Uint8Array(length);
         await __classPrivateFieldGet(this, _TransportAbridged_connection, "f").read(buffer);
-        this.decrypt(buffer);
-        return buffer;
+        return await this.decrypt(buffer);
     }
     async send(buffer) {
         if (!this.initialized) {
-            throw new Error("Transport not initialized");
+            throw new _0_errors_js_1.ConnectionError("Transport not initialized");
         }
         const bufferLength = buffer.length / 4;
         const header = new Uint8Array([bufferLength >= 0x7F ? 0x7F : bufferLength]);
         const length = bufferLength >= 0x7F ? (0, _1_utilities_js_1.bufferFromBigInt)(bufferLength, 3) : new Uint8Array();
         const data = (0, _0_deps_js_1.concat)([header, length, buffer]);
-        this.encrypt(data);
-        await __classPrivateFieldGet(this, _TransportAbridged_connection, "f").write(data);
+        await __classPrivateFieldGet(this, _TransportAbridged_connection, "f").write(await this.encrypt(data));
     }
     deinitialize() {
         super.deinitialize();

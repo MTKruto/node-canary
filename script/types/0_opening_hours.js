@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,11 +19,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructOpeningHours = void 0;
+exports.constructOpeningHours = constructOpeningHours;
 function constructOpeningHours(hours) {
     return {
         timezone: hours.timezone_id,
         intervals: hours.weekly_open.map((v) => [v.start_minute, v.end_minute]),
     };
 }
-exports.constructOpeningHours = constructOpeningHours;

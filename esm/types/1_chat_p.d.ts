@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { RestrictionReason } from "./0_restriction_reason.js";
 /** @unlisted */
 export type ChatType = "private" | "group" | "supergroup" | "channel";
@@ -101,8 +101,8 @@ export interface ChatPSupergroup extends ChatPChannelBase {
  * A chat with lesser fields.
  */
 export type ChatP = ChatPPrivate | ChatPGroup | ChatPSupergroup | ChatPChannel;
-export declare function constructChatP(chat: types.User): ChatPPrivate;
-export declare function constructChatP(chat: types.Chat | types.ChatForbidden): ChatPGroup;
-export declare function constructChatP(chat: types.Channel | types.ChannelForbidden): ChatPSupergroup | ChatPChannel;
-export declare function constructChatP(chat: types.User | types.Chat | types.ChatForbidden | types.Channel | types.ChannelForbidden): ChatP;
+export declare function constructChatP(chat: Api.user): ChatPPrivate;
+export declare function constructChatP(chat: Api.chat | Api.chatForbidden): ChatPGroup;
+export declare function constructChatP(chat: Api.channel | Api.channelForbidden): ChatPSupergroup | ChatPChannel;
+export declare function constructChatP(chat: Api.user | Api.chat | Api.chatForbidden | Api.channel | Api.channelForbidden): ChatP;
 //# sourceMappingURL=1_chat_p.d.ts.map

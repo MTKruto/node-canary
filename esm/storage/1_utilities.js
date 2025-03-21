@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -28,6 +28,7 @@ export var ValueType;
     ValueType[ValueType["Date"] = 4] = "Date";
     ValueType[ValueType["Uint8Array"] = 5] = "Uint8Array";
     ValueType[ValueType["Array"] = 6] = "Array";
+    ValueType[ValueType["Map"] = 7] = "Map";
 })(ValueType || (ValueType = {}));
 export function toString(value) {
     if (typeof value === "boolean") {
@@ -59,6 +60,9 @@ export function toString(value) {
             }
         });
         return `${ValueType.Array}${items.join("\n")}`;
+    }
+    else if (typeof value === "object" && value != null && Object.getPrototypeOf(value) == Object.prototype) {
+        return `${ValueType.Map}${toString(Object.entries(value)).slice(1)}`;
     }
     else {
         unreachable();
@@ -104,6 +108,9 @@ export function fromString(string) {
             }
             return arr;
         }
+        case ValueType.Map:
+            //deno-lint-ignore no-explicit-any
+            return Object.fromEntries(fromString(`${ValueType.Array}${value}`));
     }
 }
 export function fixKey(key) {
@@ -195,6 +202,9 @@ export function isInRange(key, start, end) {
     for (const [i, part] of key.entries()) {
         const left = start[i];
         const right = end[i];
+        if (!left || !right) {
+            continue;
+        }
         if (left === undefined || right === undefined) {
             return false;
         }

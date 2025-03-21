@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -40,13 +40,14 @@ export async function getObfuscationParameters(protocol, connection) {
     }
     const encryptKey = init.slice(8, 8 + 32);
     const encryptIv = init.slice(40, 40 + 16);
-    const encryptionCTR = new CTR(encryptKey, encryptIv);
-    const encryptedInit = new Uint8Array(init);
-    encryptionCTR.call(encryptedInit);
+    const importedEncryptedKey = await CTR.importKey(encryptKey);
+    const encryptionCTR = new CTR(importedEncryptedKey, encryptIv);
+    const encryptedInit = await encryptionCTR.call(init);
     const initRev = new Uint8Array(init).reverse();
     const decryptKey = initRev.slice(8, 8 + 32);
     const decryptIv = initRev.slice(40, 40 + 16);
-    const decryptionCTR = new CTR(decryptKey, decryptIv);
+    const importedDecryptKey = await CTR.importKey(decryptKey);
+    const decryptionCTR = new CTR(importedDecryptKey, decryptIv);
     await connection.write(concat([init.subarray(0, 56), encryptedInit.subarray(56, 56 + 8)]));
     return { encryptionCTR, decryptionCTR };
 }

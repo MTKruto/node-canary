@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
 export function constructChatAdministratorRights(rights_) {
     const rights = {
         isAnonymous: rights_.anonymous || false,
@@ -44,14 +43,5 @@ export function constructChatAdministratorRights(rights_) {
     return rights;
 }
 export function chatAdministratorRightsToTlObject(rights) {
-    return new types.ChatAdminRights({
-        anonymous: rights.isAnonymous || undefined,
-        other: rights.canManageChat || undefined,
-        delete_messages: rights.canDeleteMessages || undefined,
-        manage_call: rights.canManageChat || undefined,
-        ban_users: rights.canRestrictMembers || undefined,
-        add_admins: rights.canPromoteMembers || undefined,
-        change_info: rights.canChangeInfo || undefined,
-        invite_users: rights.canInviteUsers || undefined,
-    });
+    return { _: "chatAdminRights", anonymous: rights.isAnonymous || undefined, other: rights.canManageChat || undefined, delete_messages: rights.canDeleteMessages || undefined, manage_call: rights.canManageChat || undefined, ban_users: rights.canRestrictMembers || undefined, add_admins: rights.canPromoteMembers || undefined, change_info: rights.canChangeInfo || undefined, invite_users: rights.canInviteUsers || undefined };
 }

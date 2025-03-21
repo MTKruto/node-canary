@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,7 +19,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cleanObject = void 0;
+exports.cleanObject = cleanObject;
 // deno-lint-ignore no-explicit-any
 function cleanObject(object) {
     for (const [k, v] of Object.entries(object)) {
@@ -31,4 +31,3 @@ function cleanObject(object) {
     }
     return object;
 }
-exports.cleanObject = cleanObject;

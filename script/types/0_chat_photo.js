@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,7 +19,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructChatPhoto = void 0;
+exports.constructChatPhoto = constructChatPhoto;
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _file_id_js_1 = require("./_file_id.js");
@@ -38,7 +38,7 @@ function constructChatPhoto(photo, chatId, chatAccessHash) {
     };
     const bigFileId = (0, _file_id_js_1.serializeFileId)(bigFileId_);
     const bigFileUniqueId = (0, _file_id_js_1.toUniqueFileId)(bigFileId_);
-    if (photo instanceof _2_tl_js_1.types.ChatPhoto) {
+    if ((0, _2_tl_js_1.is)("chatPhoto", photo)) {
         return (0, _1_utilities_js_1.cleanObject)({
             smallFileId,
             smallFileUniqueId,
@@ -59,4 +59,3 @@ function constructChatPhoto(photo, chatId, chatAccessHash) {
         });
     }
 }
-exports.constructChatPhoto = constructChatPhoto;

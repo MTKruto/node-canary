@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,12 +18,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { fromUnixTimestamp } from "../1_utilities.js";
-import { types } from "../2_tl.js";
 import { constructUser } from "./1_user.js";
 export async function constructBusinessConnection(connection, getEntity) {
     return {
         id: connection.connection_id,
-        user: constructUser((await getEntity(new types.PeerUser(connection)))),
+        user: constructUser((await getEntity({ ...connection, _: "peerUser" }))),
         date: fromUnixTimestamp(connection.date),
         canReply: !!connection.can_reply,
         isEnabled: !connection.disabled,

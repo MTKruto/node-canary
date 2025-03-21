@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { EntityGetter } from "./_getters.js";
 import { Location } from "./0_location.js";
 import { User } from "./1_user.js";
@@ -36,5 +36,5 @@ export interface InlineQuery {
     /** The location of the user who made the inline query. */
     location?: Location;
 }
-export declare function constructInlineQuery(query_: types.UpdateBotInlineQuery, getEntity: EntityGetter): Promise<InlineQuery>;
+export declare function constructInlineQuery(query_: Api.updateBotInlineQuery, getEntity: EntityGetter): Promise<InlineQuery>;
 //# sourceMappingURL=2_inline_query.d.ts.map

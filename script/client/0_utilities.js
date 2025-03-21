@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,7 +19,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isMtprotoFunction = exports.checkInlineQueryId = exports.checkCallbackQueryId = exports.checkArray = exports.checkPollOption = exports.checkStoryId = exports.checkMessageId = exports.getChatListId = exports.getUsername = exports.isHttpUrl = exports.resolve = void 0;
+exports.resolve = void 0;
+exports.isHttpUrl = isHttpUrl;
+exports.getUsername = getUsername;
+exports.getChatListId = getChatListId;
+exports.checkMessageId = checkMessageId;
+exports.checkStoryId = checkStoryId;
+exports.checkPollOption = checkPollOption;
+exports.checkArray = checkArray;
+exports.checkCallbackQueryId = checkCallbackQueryId;
+exports.checkInlineQueryId = checkInlineQueryId;
+exports.isMtprotoFunction = isMtprotoFunction;
+exports.isCdnFunction = isCdnFunction;
+exports.canBeInputUser = canBeInputUser;
+exports.toInputUser = toInputUser;
+exports.canBeInputChannel = canBeInputChannel;
+exports.toInputChannel = toInputChannel;
 const _0_deps_js_1 = require("../0_deps.js");
 const _0_errors_js_1 = require("../0_errors.js");
 const _2_tl_js_1 = require("../2_tl.js");
@@ -33,7 +48,6 @@ function isHttpUrl(string) {
         return false;
     }
 }
-exports.isHttpUrl = isHttpUrl;
 function isAlpha(string) {
     const c = string.charCodeAt(0) | 0x20;
     return "a".charCodeAt(0) <= c && c <= "z".charCodeAt(0);
@@ -97,7 +111,6 @@ function getUsername(string) {
     }
     return validateUsername(parts[0]);
 }
-exports.getUsername = getUsername;
 function getChatListId(chatList) {
     switch (chatList) {
         case "main":
@@ -108,54 +121,97 @@ function getChatListId(chatList) {
             (0, _0_deps_js_1.unreachable)();
     }
 }
-exports.getChatListId = getChatListId;
 function checkMessageId(messageId) {
     if (typeof messageId !== "number" || isNaN(messageId) || messageId <= 0) {
         throw new _0_errors_js_1.InputError("Invalid message ID");
     }
     return messageId;
 }
-exports.checkMessageId = checkMessageId;
 function checkStoryId(storyId) {
     if (typeof storyId !== "number" || isNaN(storyId) || !storyId) {
         throw new _0_errors_js_1.InputError("Invalid story ID");
     }
     return storyId;
 }
-exports.checkStoryId = checkStoryId;
 function checkPollOption(option) {
     if (!option.trim()) {
         throw new _0_errors_js_1.InputError("Poll option must not be empty.");
     }
 }
-exports.checkPollOption = checkPollOption;
 function checkArray(array, check) {
     for (const item of array) {
         check(item);
     }
 }
-exports.checkArray = checkArray;
 function checkCallbackQueryId(id) {
     if (typeof id !== "string" || !id.trim()) {
         throw new _0_errors_js_1.InputError("Invalid callback query ID.");
     }
 }
-exports.checkCallbackQueryId = checkCallbackQueryId;
 function checkInlineQueryId(id) {
     if (typeof id !== "string" || !id.trim()) {
         throw new _0_errors_js_1.InputError("Invalid inline query ID.");
     }
 }
-exports.checkInlineQueryId = checkInlineQueryId;
+const MTPROTO_FUNCTIONS = [
+    "ping",
+    "ping_delay_disconnect",
+    "req_pq_multi",
+    "rpc_drop_answer",
+    "get_future_salts",
+    "destroy_session",
+    "destroy_auth_key",
+    "req_DH_params",
+    "set_client_DH_params",
+];
 function isMtprotoFunction(value) {
-    return value instanceof _2_tl_js_1.functions.ping ||
-        value instanceof _2_tl_js_1.functions.ping_delay_disconnect ||
-        value instanceof _2_tl_js_1.functions.req_pq_multi ||
-        value instanceof _2_tl_js_1.functions.rpc_drop_answer ||
-        value instanceof _2_tl_js_1.functions.get_future_salts ||
-        value instanceof _2_tl_js_1.functions.destroy_session ||
-        value instanceof _2_tl_js_1.functions.destroy_auth_key ||
-        value instanceof _2_tl_js_1.functions.req_DH_params ||
-        value instanceof _2_tl_js_1.functions.set_client_DH_params;
+    return (0, _2_tl_js_1.isOneOf)(MTPROTO_FUNCTIONS, value);
 }
-exports.isMtprotoFunction = isMtprotoFunction;
+const CDN_FUNCTIONS = [
+    "upload.saveFilePart",
+    "upload.getFile",
+    "upload.saveBigFilePart",
+    "upload.getWebFile",
+    "upload.getCdnFile",
+    "upload.reuploadCdnFile",
+    "upload.getCdnFileHashes",
+    "upload.getFileHashes",
+];
+function isCdnFunction(value) {
+    return (0, _2_tl_js_1.isOneOf)(CDN_FUNCTIONS, value);
+}
+function canBeInputUser(inputPeer) {
+    return (0, _2_tl_js_1.isOneOf)(["inputPeerSelf", "inputPeerUser", "inputPeerUserFromMessage"], inputPeer);
+}
+function toInputUser(inputPeer) {
+    let id;
+    if ((0, _2_tl_js_1.is)("inputPeerUser", inputPeer)) {
+        id = { ...inputPeer, _: "inputUser" };
+    }
+    else if ((0, _2_tl_js_1.is)("inputPeerUserFromMessage", inputPeer)) {
+        id = { ...inputPeer, _: "inputUserFromMessage" };
+    }
+    else if ((0, _2_tl_js_1.is)("inputPeerSelf", inputPeer)) {
+        id = { _: "inputUserSelf" };
+    }
+    else {
+        (0, _0_deps_js_1.unreachable)();
+    }
+    return id;
+}
+function canBeInputChannel(inputPeer) {
+    return (0, _2_tl_js_1.isOneOf)(["inputPeerChannel", "inputPeerChannelFromMessage"], inputPeer);
+}
+function toInputChannel(inputPeer) {
+    let id;
+    if ((0, _2_tl_js_1.is)("inputPeerChannel", inputPeer)) {
+        id = { ...inputPeer, _: "inputChannel" };
+    }
+    else if ((0, _2_tl_js_1.is)("inputPeerChannelFromMessage", inputPeer)) {
+        id = { ...inputPeer, _: "inputChannelFromMessage" };
+    }
+    else {
+        (0, _0_deps_js_1.unreachable)();
+    }
+    return id;
+}

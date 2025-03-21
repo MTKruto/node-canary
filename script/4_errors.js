@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -33,11 +33,12 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.upgradeInstance = exports.StatsMigrate = exports.FileMigrate = exports.PhoneMigrate = exports.UserMigrate = exports.Migrate = exports.FloodWait = void 0;
+exports.StatsMigrate = exports.FileMigrate = exports.PhoneMigrate = exports.UserMigrate = exports.Migrate = exports.FloodWait = void 0;
+exports.constructTelegramError = constructTelegramError;
 const _0_deps_js_1 = require("./0_deps.js");
 const _3_errors_js_1 = require("./3_errors.js");
 __exportStar(require("./3_errors.js"), exports);
-class FloodWait extends _3_errors_js_1.ErrorWithCall {
+class FloodWait extends _3_errors_js_1.TelegramError {
     constructor(params) {
         super(params);
         Object.defineProperty(this, "seconds", {
@@ -54,7 +55,7 @@ class FloodWait extends _3_errors_js_1.ErrorWithCall {
     }
 }
 exports.FloodWait = FloodWait;
-class Migrate extends _3_errors_js_1.ErrorWithCall {
+class Migrate extends _3_errors_js_1.TelegramError {
     constructor(params) {
         super(params);
         Object.defineProperty(this, "dc", {
@@ -90,7 +91,7 @@ const prefixMap = {
     "STATS_MIGRATE_": StatsMigrate,
     "FLOOD_WAIT_": FloodWait,
 };
-function upgradeInstance(error, call) {
+function constructTelegramError(error, call) {
     for (const [k, v] of Object.entries(prefixMap)) {
         if (error.error_message.startsWith(k)) {
             return new v({ ...error, call });
@@ -99,6 +100,5 @@ function upgradeInstance(error, call) {
     if (error.error_message in _3_errors_js_1.map) {
         return new _3_errors_js_1.map[error.error_message]({ ...error, call });
     }
-    return error;
+    return new _3_errors_js_1.TelegramError({ ...error, call });
 }
-exports.upgradeInstance = upgradeInstance;

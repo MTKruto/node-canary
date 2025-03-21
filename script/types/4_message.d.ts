@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,13 +18,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { MaybePromise } from "../1_utilities.js";
-import { enums } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { EntityGetter } from "./_getters.js";
 import { Contact } from "./0_contact.js";
 import { Dice } from "./0_dice.js";
+import { Invoice } from "./0_invoice.js";
 import { LinkPreview } from "./0_link_preview.js";
 import { Location } from "./0_location.js";
 import { MessageEntity } from "./0_message_entity.js";
+import { RefundedPayment } from "./0_refunded_payment.js";
 import { Voice } from "./0_voice.js";
 import { Animation } from "./1_animation.js";
 import { Audio } from "./1_audio.js";
@@ -33,14 +35,16 @@ import { Document } from "./1_document.js";
 import { Giveaway } from "./1_giveaway.js";
 import { MessageReaction } from "./1_message_reaction.js";
 import { Photo } from "./1_photo.js";
-import { Poll } from "./1_poll.js";
 import { ReplyQuote } from "./1_reply_quote.js";
 import { Sticker, StickerSetNameGetter } from "./1_sticker.js";
 import { User } from "./1_user.js";
 import { Venue } from "./1_venue.js";
 import { VideoNote } from "./1_video_note.js";
 import { Video } from "./1_video.js";
+import { ForwardHeader } from "./2_forward_header.js";
 import { Game } from "./2_game.js";
+import { Poll } from "./2_poll.js";
+import { SuccessfulPayment } from "./2_successful_payment.js";
 import { ReplyMarkup } from "./3_reply_markup.js";
 /**
  * Properties shared between all message types.
@@ -63,18 +67,8 @@ export interface _MessageBase {
     chat: ChatP;
     /** A link to the message. */
     link?: string;
-    /** The original sender of the message. */
-    forwardFrom?: User;
-    /** The original chat of the message. */
-    forwardFromChat?: ChatP;
-    /** The original identifier of the message. */
-    forwardId?: number;
-    /** The original signature of the message. */
-    forwardSignature?: string;
-    /** The name of the original sender of the message. */
-    forwardSenderName?: string;
-    /** The point in time in which the original message was sent. */
-    forwardDate?: Date;
+    /** Information on the original message. */
+    forwardFrom?: ForwardHeader;
     /** Whether the message was sent in a topic thread. */
     isTopicMessage: boolean;
     /** Whether the message is an automatic forward. */
@@ -103,9 +97,16 @@ export interface _MessageBase {
     forwards?: number;
     /** The message's reply markup. */
     replyMarkup?: ReplyMarkup;
+    /** The identifier of a business conection that the message was sent in. */
     businessConnectionId?: string;
+    /** The number of the boosts made by the sender of the message. */
     senderBoostCount?: number;
+    /** The identifier of the business connection in which the message was sent.*/
     viaBusinessBot?: User;
+    /** The identifier of the message effect that has been attached to the message. */
+    effectId?: string;
+    /** Whether the message is scheduled. */
+    scheduled?: boolean;
 }
 /**
  * Properties shared between media message types.
@@ -271,6 +272,17 @@ export interface MessagePoll extends _MessageBase {
      * @discriminator
      */
     poll: Poll;
+}
+/**
+ * An invoice message.
+ * @unlisted
+ */
+export interface MessageInvoice extends _MessageBase {
+    /**
+     * The invoice included in the message
+     * @discriminator
+     */
+    invoice: Invoice;
 }
 /**
  * A venue message.
@@ -451,8 +463,8 @@ export interface MessageForumTopicCreated extends _MessageBase {
     /** @discriminator */
     forumTopicCreated: {
         name: string;
-        iconColor: string;
-        iconCutsomEmojiId?: string;
+        color: number;
+        customEmojiId?: string;
     };
 }
 /**
@@ -463,7 +475,7 @@ export interface MessageForumTopicEdited extends _MessageBase {
     /** @discriminator */
     forumTopicEdited: {
         name: string;
-        iconCutsomEmojiId?: string;
+        customEmojiId?: string;
     };
 }
 /**
@@ -526,6 +538,22 @@ export interface MessageUnsupported extends _MessageBase {
     /** @discriminator */
     unsupported: true;
 }
+/**
+ * A payment was successfully received. Bot-only.
+ * @unlisted
+ */
+export interface MessageSuccessfulPayment extends _MessageBase {
+    /** @discriminator */
+    successfulPayment: SuccessfulPayment;
+}
+/**
+ * A payment was successfully refunded. Bot-only.
+ * @unlisted
+ */
+export interface MessageRefundedPayment extends _MessageBase {
+    /** @discriminator */
+    refundedPayment: RefundedPayment;
+}
 /** @unlisted */
 export interface MessageTypes {
     text: MessageText;
@@ -542,6 +570,7 @@ export interface MessageTypes {
     contact: MessageContact;
     game: MessageGame;
     poll: MessagePoll;
+    invoice: MessageInvoice;
     venue: MessageVenue;
     location: MessageLocation;
     newChatMembers: MessageNewChatMembers;
@@ -567,18 +596,21 @@ export interface MessageTypes {
     videoChatEnded: MessageVideoChatEnded;
     giveaway: MessageGiveaway;
     unsupported: MessageUnsupported;
+    successfulPayment: MessageSuccessfulPayment;
+    refundedPayment: MessageRefundedPayment;
 }
+export declare function isMessageType<T extends keyof MessageTypes>(message: Message, type: T): message is MessageTypes[T];
 export declare function assertMessageType<T extends keyof MessageTypes>(message: Message, type: T): MessageTypes[T];
 /** Any type of message. */
-export type Message = MessageText | MessageLink | MessagePhoto | MessageDocument | MessageVideo | MessageSticker | MessageAnimation | MessageVoice | MessageAudio | MessageDice | MessageVideoNote | MessageContact | MessageGame | MessagePoll | MessageVenue | MessageLocation | MessageNewChatMembers | MessageLeftChatMember | MessageNewChatTitle | MessageNewChatPhoto | MessageDeletedChatPhoto | MessageGroupCreated | MessageSupergroupCreated | MessageChannelCreated | MessageAutoDeleteTimerChanged | MessageChatMigratedTo | MessageChatMigratedFrom | MessagePinnedMessage | MessageUserShared | MessageWriteAccessAllowed | MessageForumTopicCreated | MessageForumTopicEdited | MessageForumTopicClosed | MessageForumTopicReopened | MessageVideoChatScheduled | MessageVideoChatStarted | MessageVideoChatEnded | MessageGiveaway | MessageUnsupported;
+export type Message = MessageText | MessageLink | MessagePhoto | MessageDocument | MessageVideo | MessageSticker | MessageAnimation | MessageVoice | MessageAudio | MessageDice | MessageVideoNote | MessageContact | MessageGame | MessagePoll | MessageInvoice | MessageVenue | MessageLocation | MessageNewChatMembers | MessageLeftChatMember | MessageNewChatTitle | MessageNewChatPhoto | MessageDeletedChatPhoto | MessageGroupCreated | MessageSupergroupCreated | MessageChannelCreated | MessageAutoDeleteTimerChanged | MessageChatMigratedTo | MessageChatMigratedFrom | MessagePinnedMessage | MessageUserShared | MessageWriteAccessAllowed | MessageForumTopicCreated | MessageForumTopicEdited | MessageForumTopicClosed | MessageForumTopicReopened | MessageVideoChatScheduled | MessageVideoChatStarted | MessageVideoChatEnded | MessageGiveaway | MessageUnsupported | MessageSuccessfulPayment | MessageRefundedPayment;
 /** @unlisted */
 export interface MessageGetter {
     (chatId: number, messageId: number): MaybePromise<Message | null>;
 }
 type Message_MessageGetter = MessageGetter | null;
-export declare function constructMessage(message_: enums.Message, getEntity: EntityGetter, getMessage: Message_MessageGetter, getStickerSetName: StickerSetNameGetter, getReply_?: boolean, business?: {
+export declare function constructMessage(message_: Api.Message, getEntity: EntityGetter, getMessage: Message_MessageGetter, getStickerSetName: StickerSetNameGetter, getReply_?: boolean, business?: {
     connectionId: string;
-    replyToMessage?: enums.Message;
-}): Promise<Message>;
+    replyToMessage?: Api.Message;
+}, poll?: Api.poll, pollResults?: Api.pollResults): Promise<Message>;
 export {};
 //# sourceMappingURL=4_message.d.ts.map

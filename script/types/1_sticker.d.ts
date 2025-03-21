@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { MaybePromise } from "../1_utilities.js";
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { MaskPosition } from "./0_mask_position.js";
 import { Thumbnail } from "./0_thumbnail.js";
 /** A sticker. */
@@ -55,6 +55,7 @@ export interface Sticker {
     fileSize?: number;
 }
 /** @unlisted */
-export type StickerSetNameGetter = (inputStickerSet: types.InputStickerSetID) => MaybePromise<string>;
-export declare function constructSticker(document: types.Document, fileId: string, fileUniqueId: string, getStickerSetName: StickerSetNameGetter, customEmojiId?: string): Promise<Sticker>;
+export type StickerSetNameGetter = (inputStickerSet: Api.inputStickerSetID) => MaybePromise<string>;
+export declare function constructSticker(document: Api.document, fileId: string, fileUniqueId: string, getStickerSetName: StickerSetNameGetter, customEmojiId?: string): Promise<Sticker>;
+export declare function constructSticker2(document: Api.document, fileId: string, fileUniqueId: string, setName: string | undefined, customEmojiId?: string): Sticker;
 //# sourceMappingURL=1_sticker.d.ts.map

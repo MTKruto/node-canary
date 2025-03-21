@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,6 +17,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-export declare function base64EncodeUrlSafe(data: ArrayBuffer | string): string;
+export declare function base64EncodeUrlSafe(data: Uint8Array | ArrayBuffer | string): string;
 export declare function base64DecodeUrlSafe(data: string): Uint8Array;
 //# sourceMappingURL=1_base64.d.ts.map

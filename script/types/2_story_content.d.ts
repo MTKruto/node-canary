@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { enums } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { Photo } from "./1_photo.js";
 import { Video } from "./1_video.js";
 /** @unlisted */
@@ -37,5 +37,5 @@ export interface StoryContentUnsupported {
 }
 /** A story content. */
 export type StoryContent = StoryContentPhoto | StoryContentVideo | StoryContentUnsupported;
-export declare function constructStoryContent(media: enums.MessageMedia): StoryContent;
+export declare function constructStoryContent(media: Api.MessageMedia): StoryContent;
 //# sourceMappingURL=2_story_content.d.ts.map

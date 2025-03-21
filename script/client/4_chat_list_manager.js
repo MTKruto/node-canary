@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -29,7 +29,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _ChatListManager_instances, _ChatListManager_c, _ChatListManager_LgetChats, _ChatListManager_sendChatUpdate, _ChatListManager_chats, _ChatListManager_archivedChats, _ChatListManager_chatsLoadedFromStorage, _ChatListManager_tryGetChatId, _ChatListManager_getChatAnywhere, _ChatListManager_getChatList, _ChatListManager_loadChatsFromStorage, _ChatListManager_getLoadedChats, _ChatListManager_pinnedChats, _ChatListManager_pinnedArchiveChats, _ChatListManager_storageHadPinnedChats, _ChatListManager_pinnedChatsLoaded, _ChatListManager_loadPinnedChats, _ChatListManager_fetchPinnedChats, _ChatListManager_getPinnedChats, _ChatListManager_updateOrAddChat, _ChatListManager_removeChat, _ChatListManager_handleUpdateFolderPeers, _ChatListManager_handleUpdatePinnedDialogs, _ChatListManager_handleUpdateChannel, _ChatListManager_handleUpdateChat, _ChatListManager_handleUpdateUser, _ChatListManager_fetchChats, _ChatListManager_getFullChat;
+var _ChatListManager_instances, _ChatListManager_c, _ChatListManager_sendChatUpdate, _ChatListManager_chats, _ChatListManager_archivedChats, _ChatListManager_getChatAnywhere, _ChatListManager_getChatList, _ChatListManager_pinnedChats, _ChatListManager_pinnedArchiveChats, _ChatListManager_storageHadPinnedChats, _ChatListManager_pinnedChatsLoaded, _ChatListManager_loadPinnedChats, _ChatListManager_fetchPinnedChats, _ChatListManager_getPinnedChats, _ChatListManager_updateOrAddChat, _ChatListManager_removeChat, _ChatListManager_handleUpdateFolderPeers, _ChatListManager_handleUpdatePinnedDialogs, _ChatListManager_handleUpdateChannel, _ChatListManager_handleUpdateChat, _ChatListManager_handleUpdateUser, _ChatListManager_getFullChat, _ChatListManager_checkChatTitle, _ChatListManager_createChannel, _ChatListManager_moveChatsToFolder, _ChatListManager_toggleBusinessBotsPaused;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChatListManager = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
@@ -38,25 +38,31 @@ const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _3_types_js_1 = require("../3_types.js");
 const _0_utilities_js_1 = require("./0_utilities.js");
+const chatListManagerUpdates = [
+    "updateNewMessage",
+    "updateNewChannelMessage",
+    "updatePinnedDialogs",
+    "updateFolderPeers",
+    "updateChannel",
+    "updateChat",
+    "updateUser",
+    "updateUserName",
+];
 class ChatListManager {
     constructor(c) {
         _ChatListManager_instances.add(this);
         _ChatListManager_c.set(this, void 0);
-        _ChatListManager_LgetChats.set(this, void 0);
         _ChatListManager_chats.set(this, new Map());
         _ChatListManager_archivedChats.set(this, new Map());
-        _ChatListManager_chatsLoadedFromStorage.set(this, false);
         _ChatListManager_pinnedChats.set(this, new Array());
         _ChatListManager_pinnedArchiveChats.set(this, new Array());
         _ChatListManager_storageHadPinnedChats.set(this, false);
         _ChatListManager_pinnedChatsLoaded.set(this, false);
         __classPrivateFieldSet(this, _ChatListManager_c, c, "f");
-        const L = (0, _1_utilities_js_1.getLogger)("ChatListManager").client(c.id);
-        __classPrivateFieldSet(this, _ChatListManager_LgetChats, L.branch("getChats"), "f");
     }
     async reassignChatLastMessage(chatId, add = false, sendUpdate = true) {
         try {
-            await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("");
+            __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("");
         }
         catch {
             return () => Promise.resolve();
@@ -87,7 +93,7 @@ class ChatListManager {
             }
             return () => Promise.resolve();
         }
-        const message = await __classPrivateFieldGet(this, _ChatListManager_c, "f").messageManager.getHistory(chatId, { limit: 1 }).then((v) => v[0]);
+        const message = (await __classPrivateFieldGet(this, _ChatListManager_c, "f").messageManager.getHistory(chatId, { limit: 1 }))[0];
         if (message) {
             if (chat) {
                 chat.order = (0, _3_types_js_1.getChatListItemOrder)(message, chat.pinned);
@@ -117,10 +123,7 @@ class ChatListManager {
         return () => Promise.resolve();
     }
     async getChats(from = "main", after, limit = 100) {
-        await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("getChats");
-        if (!__classPrivateFieldGet(this, _ChatListManager_chatsLoadedFromStorage, "f")) {
-            await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_loadChatsFromStorage).call(this);
-        }
+        __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("getChats");
         if (after && !__classPrivateFieldGet(this, _ChatListManager_chats, "f").get(after.chat.id)) {
             throw new _0_errors_js_1.InputError("Invalid after");
         }
@@ -128,49 +131,51 @@ class ChatListManager {
             limit = 100;
         }
         const listId = (0, _0_utilities_js_1.getChatListId)(from);
-        let chats = __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getLoadedChats).call(this, listId);
-        if (after) {
-            chats = chats
-                .filter((v) => v.order < after.order);
+        const dialogs = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "messages.getDialogs", limit, offset_id: after?.lastMessage?.id ?? 0, offset_date: after?.lastMessage?.date ? (0, _1_utilities_js_1.toUnixTimestamp)(after.lastMessage.date) : 0, offset_peer: after ? await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeer(after.chat.id) : { _: "inputPeerEmpty" }, hash: 0n, folder_id: listId });
+        const pinnedChats = await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getPinnedChats).call(this, listId);
+        if (!((0, _2_tl_js_1.is)("messages.dialogs", dialogs)) && !((0, _2_tl_js_1.is)("messages.dialogsSlice", dialogs))) {
+            (0, _0_deps_js_1.unreachable)();
         }
-        if (chats.length < limit) {
-            __classPrivateFieldGet(this, _ChatListManager_LgetChats, "f").debug(`have only ${chats.length} chats but ${limit - chats.length} more is needed`);
-            if (!await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.hasAllChats(listId)) {
-                await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_fetchChats).call(this, listId, limit, after);
-                return await this.getChats(from, after, limit);
-            }
+        if (dialogs.dialogs.length < limit) {
+            await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setHasAllChats(listId, true);
         }
-        chats = chats.slice(0, limit);
+        const chats = new Array();
+        for (const dialog of dialogs.dialogs) {
+            const chat = await (0, _3_types_js_1.constructChatListItem4)(dialog, dialogs, pinnedChats, __classPrivateFieldGet(this, _ChatListManager_c, "f").getEntity, __classPrivateFieldGet(this, _ChatListManager_c, "f").messageManager.getMessage.bind(__classPrivateFieldGet(this, _ChatListManager_c, "f").messageManager), __classPrivateFieldGet(this, _ChatListManager_c, "f").fileManager.getStickerSetName.bind(__classPrivateFieldGet(this, _ChatListManager_c, "f").fileManager));
+            chats.push(chat);
+            await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setChat(listId, chat.chat.id, chat.pinned, chat.lastMessage?.id ?? 0, chat.lastMessage?.date ?? new Date(0));
+        }
         return chats;
     }
-    static canHandleUpdate(update) {
-        return update instanceof _2_tl_js_1.types.UpdateNewMessage || update instanceof _2_tl_js_1.types.UpdateNewChannelMessage || update instanceof _2_tl_js_1.types.UpdatePinnedDialogs || update instanceof _2_tl_js_1.types.UpdateFolderPeers || update instanceof _2_tl_js_1.types.UpdateChannel || update instanceof _2_tl_js_1.types.UpdateChat || update instanceof _2_tl_js_1.types.UpdateUser || update instanceof _2_tl_js_1.types.UpdateUserName;
+    canHandleUpdate(update) {
+        return (0, _2_tl_js_1.isOneOf)(chatListManagerUpdates, update);
     }
     async handleUpdate(update) {
-        if (update instanceof _2_tl_js_1.types.UpdateNewMessage || update instanceof _2_tl_js_1.types.UpdateNewChannelMessage || update instanceof _2_tl_js_1.types.UpdateEditMessage || update instanceof _2_tl_js_1.types.UpdateEditChannelMessage) {
-            if (update.message instanceof _2_tl_js_1.types.Message || update.message instanceof _2_tl_js_1.types.MessageService) {
+        if ((0, _2_tl_js_1.is)("updateNewMessage", update) || (0, _2_tl_js_1.is)("updateNewChannelMessage", update) || (0, _2_tl_js_1.is)("updateEditMessage", update) || (0, _2_tl_js_1.is)("updateEditChannelMessage", update)) {
+            if ((0, _2_tl_js_1.is)("message", update.message) || (0, _2_tl_js_1.is)("messageService", update.message)) {
                 const chatId = (0, _2_tl_js_1.peerToChatId)(update.message.peer_id);
                 await this.reassignChatLastMessage(chatId);
             }
         }
-        else if (update instanceof _2_tl_js_1.types.UpdatePinnedDialogs) {
+        else if ((0, _2_tl_js_1.is)("updatePinnedDialogs", update)) {
             await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_handleUpdatePinnedDialogs).call(this, update);
         }
-        else if (update instanceof _2_tl_js_1.types.UpdateFolderPeers) {
-            await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_handleUpdateFolderPeers).call(this, update);
+        else if ((0, _2_tl_js_1.is)("updateFolderPeers", update)) {
+            __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_handleUpdateFolderPeers).call(this, update);
         }
-        else if (update instanceof _2_tl_js_1.types.UpdateChannel) {
+        else if ((0, _2_tl_js_1.is)("updateChannel", update)) {
             await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_handleUpdateChannel).call(this, update);
         }
-        else if (update instanceof _2_tl_js_1.types.UpdateChat) {
+        else if ((0, _2_tl_js_1.is)("updateChat", update)) {
             await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_handleUpdateChat).call(this, update);
         }
-        else if (update instanceof _2_tl_js_1.types.UpdateUser || update instanceof _2_tl_js_1.types.UpdateUserName) {
+        else if ((0, _2_tl_js_1.is)("updateUser", update) || (0, _2_tl_js_1.is)("updateUserName", update)) {
             await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_handleUpdateUser).call(this, update);
         }
         else {
             (0, _0_deps_js_1.unreachable)();
         }
+        return null;
     }
     async getChat(chatId) {
         const fullChat = await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getFullChat).call(this, chatId);
@@ -179,11 +184,171 @@ class ChatListManager {
         }
         return await (0, _3_types_js_1.constructChat)(fullChat, __classPrivateFieldGet(this, _ChatListManager_c, "f").getEntity);
     }
+    async getChatAdministrators(chatId) {
+        const peer = await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeer(chatId);
+        if ((0, _0_utilities_js_1.canBeInputChannel)(peer)) {
+            const channel = (0, _0_utilities_js_1.toInputChannel)(peer);
+            const participants = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "channels.getParticipants", channel, filter: { _: "channelParticipantsAdmins" }, offset: 0, limit: 100, hash: 0n });
+            if ((0, _2_tl_js_1.is)("channels.channelParticipantsNotModified", participants)) {
+                (0, _0_deps_js_1.unreachable)();
+            }
+            const chatMembers = new Array();
+            for (const p of participants.participants) {
+                chatMembers.push(await (0, _3_types_js_1.constructChatMember)(p, __classPrivateFieldGet(this, _ChatListManager_c, "f").getEntity));
+            }
+            return chatMembers;
+        }
+        else if ((0, _2_tl_js_1.is)("inputPeerChat", peer)) {
+            const fullChat = await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getFullChat).call(this, chatId);
+            if (!fullChat || !("participants" in fullChat) || !(0, _2_tl_js_1.is)("chatParticipants", fullChat.participants)) {
+                (0, _0_deps_js_1.unreachable)();
+            }
+            const chatMembers = new Array();
+            for (const p of fullChat.participants.participants) {
+                chatMembers.push(await (0, _3_types_js_1.constructChatMember)(p, __classPrivateFieldGet(this, _ChatListManager_c, "f").getEntity));
+            }
+            return chatMembers;
+        }
+        else {
+            (0, _0_deps_js_1.unreachable)();
+        }
+    }
+    async getChatMember(chatId, userId) {
+        const peer = await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeer(chatId);
+        if ((0, _0_utilities_js_1.canBeInputChannel)(peer)) {
+            const { participant } = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "channels.getParticipant", channel: (0, _0_utilities_js_1.toInputChannel)(peer), participant: await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeer(userId) });
+            return await (0, _3_types_js_1.constructChatMember)(participant, __classPrivateFieldGet(this, _ChatListManager_c, "f").getEntity);
+        }
+        else if ((0, _2_tl_js_1.is)("inputPeerChat", peer)) {
+            const user = await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputUser(userId);
+            const userId_ = BigInt(await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeerChatId(user));
+            const fullChat = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ ...peer, _: "messages.getFullChat" }).then((v) => (0, _2_tl_js_1.as)("chatFull", v.full_chat));
+            const participant = (0, _2_tl_js_1.as)("chatParticipants", fullChat.participants).participants.find((v) => v.user_id == userId_);
+            return await (0, _3_types_js_1.constructChatMember)(participant, __classPrivateFieldGet(this, _ChatListManager_c, "f").getEntity);
+        }
+        else {
+            throw new _0_errors_js_1.InputError("Expected a channel, supergroup, or group ID. Got a user ID instead.");
+        }
+    }
+    async getChatMembers(chatId, params) {
+        const peer = await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeer(chatId);
+        if ((0, _0_utilities_js_1.canBeInputChannel)(peer)) {
+            const channel = (0, _0_utilities_js_1.toInputChannel)(peer);
+            const participants = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "channels.getParticipants", channel, filter: { _: "channelParticipantsRecent" }, offset: params?.offset ?? 0, limit: params?.limit ?? 100, hash: 0n });
+            if ((0, _2_tl_js_1.is)("channels.channelParticipantsNotModified", participants)) {
+                (0, _0_deps_js_1.unreachable)();
+            }
+            const chatMembers = new Array();
+            for (const p of participants.participants) {
+                chatMembers.push(await (0, _3_types_js_1.constructChatMember)(p, __classPrivateFieldGet(this, _ChatListManager_c, "f").getEntity));
+            }
+            return chatMembers;
+        }
+        else if ((0, _2_tl_js_1.is)("inputPeerChat", peer)) {
+            const fullChat = await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getFullChat).call(this, chatId);
+            if (!fullChat || !("participants" in fullChat) || !(0, _2_tl_js_1.is)("chatParticipants", fullChat.participants)) {
+                (0, _0_deps_js_1.unreachable)();
+            }
+            const chatMembers = new Array();
+            for (const p of fullChat.participants.participants) {
+                chatMembers.push(await (0, _3_types_js_1.constructChatMember)(p, __classPrivateFieldGet(this, _ChatListManager_c, "f").getEntity));
+            }
+            return chatMembers;
+        }
+        else {
+            (0, _0_deps_js_1.unreachable)();
+        }
+    }
+    async createGroup(title, params) {
+        __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("createGroup");
+        title = __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_checkChatTitle).call(this, title);
+        const { updates } = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({
+            _: "messages.createChat",
+            title,
+            users: await Promise.all((params?.users ?? []).map((v) => __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputUser(v))),
+            ttl_period: params?.messageTtl || undefined,
+        });
+        if (!("chats" in updates) || updates.chats.length < 1) {
+            (0, _0_deps_js_1.unreachable)();
+        }
+        const chat = updates.chats[0];
+        if (chat._ != "chat") {
+            (0, _0_deps_js_1.unreachable)();
+        }
+        return (0, _3_types_js_1.constructChatP)(chat);
+    }
+    async createSupergroup(title, params) {
+        __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("createSupergroup");
+        return (await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_createChannel).call(this, "supergroup", title, params));
+    }
+    async createChannel(title, params) {
+        __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("createChannel");
+        return (await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_createChannel).call(this, "channel", title, params));
+    }
+    async setMessageTtl(chatId, messageTtl) {
+        __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("setMessageTtl");
+        const peer = await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeer(chatId);
+        const period = messageTtl;
+        await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "messages.setHistoryTTL", peer, period });
+    }
+    async archiveChats(chatIds) {
+        __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("archiveChats");
+        await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_moveChatsToFolder).call(this, chatIds, 1);
+    }
+    async archiveChat(chatId) {
+        __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("archiveChat");
+        await this.archiveChats([chatId]);
+    }
+    async unarchiveChats(chatIds) {
+        __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("unarchiveChats");
+        await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_moveChatsToFolder).call(this, chatIds, 0);
+    }
+    async unarchiveChat(chatId) {
+        __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("unarchiveChat");
+        await this.unarchiveChats([chatId]);
+    }
+    async getCommonChats(userId, params) {
+        __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("getCommonChats");
+        const max_id = params?.fromChatId ? await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeerChatId(await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeer(params.fromChatId)) : 0;
+        if (max_id < 0) {
+            throw new _0_errors_js_1.InputError("fromChatId must be a chat identifier.");
+        }
+        const user_id = await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputUser(userId);
+        let limit = params?.limit ?? 100;
+        if (limit <= 0) {
+            limit = 1;
+        }
+        if (limit > 100) {
+            limit = 100;
+        }
+        const result = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "messages.getCommonChats", user_id, max_id: (0, _2_tl_js_1.chatIdToPeerId)(max_id), limit });
+        const chats = new Array();
+        for (const chat of result.chats) {
+            if (!(0, _2_tl_js_1.is)("chatEmpty", chat)) {
+                chats.push((0, _3_types_js_1.constructChatP)(chat));
+            }
+        }
+        return chats;
+    }
+    async getChatSettings(chatId) {
+        __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("getChatSettings");
+        const peer = await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeer(chatId);
+        const settings = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "messages.getPeerSettings", peer });
+        return (0, _3_types_js_1.constructChatSettings)(settings);
+    }
+    async disableBusinessBots(chatId) {
+        __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("disableBusinessBots");
+        await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_toggleBusinessBotsPaused).call(this, chatId, true);
+    }
+    async enableBusinessBots(chatId) {
+        __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("enableBusinessBots");
+        await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_toggleBusinessBotsPaused).call(this, chatId, false);
+    }
 }
 exports.ChatListManager = ChatListManager;
-_ChatListManager_c = new WeakMap(), _ChatListManager_LgetChats = new WeakMap(), _ChatListManager_chats = new WeakMap(), _ChatListManager_archivedChats = new WeakMap(), _ChatListManager_chatsLoadedFromStorage = new WeakMap(), _ChatListManager_pinnedChats = new WeakMap(), _ChatListManager_pinnedArchiveChats = new WeakMap(), _ChatListManager_storageHadPinnedChats = new WeakMap(), _ChatListManager_pinnedChatsLoaded = new WeakMap(), _ChatListManager_instances = new WeakSet(), _ChatListManager_sendChatUpdate = async function _ChatListManager_sendChatUpdate(chatId, added) {
+_ChatListManager_c = new WeakMap(), _ChatListManager_chats = new WeakMap(), _ChatListManager_archivedChats = new WeakMap(), _ChatListManager_pinnedChats = new WeakMap(), _ChatListManager_pinnedArchiveChats = new WeakMap(), _ChatListManager_storageHadPinnedChats = new WeakMap(), _ChatListManager_pinnedChatsLoaded = new WeakMap(), _ChatListManager_instances = new WeakSet(), _ChatListManager_sendChatUpdate = function _ChatListManager_sendChatUpdate(chatId, added) {
     try {
-        await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("");
+        __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.assertUser("");
     }
     catch {
         return;
@@ -191,31 +356,6 @@ _ChatListManager_c = new WeakMap(), _ChatListManager_LgetChats = new WeakMap(), 
     const [chat] = __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getChatAnywhere).call(this, chatId);
     const update = chat === undefined ? { deletedChat: { chatId } } : added ? { newChat: chat } : { editedChat: chat };
     __classPrivateFieldGet(this, _ChatListManager_c, "f").handleUpdate(update);
-}, _ChatListManager_tryGetChatId = function _ChatListManager_tryGetChatId(username) {
-    username = username.toLowerCase();
-    for (const chat of __classPrivateFieldGet(this, _ChatListManager_chats, "f").values()) {
-        if ("username" in chat) {
-            if (chat.username === username
-            //     TODO
-            //     ||
-            //     chat.chat.also?.some((v) => v.toLowerCase() === username)
-            ) {
-                return chat.chat.id;
-            }
-        }
-    }
-    for (const chat of __classPrivateFieldGet(this, _ChatListManager_archivedChats, "f").values()) {
-        if ("username" in chat) {
-            if (chat.username === username
-            //    TODO
-            //    ||
-            //   chat.also?.some((v) => v.toLowerCase() === username)
-            ) {
-                return chat.chat.id;
-            }
-        }
-    }
-    return null;
 }, _ChatListManager_getChatAnywhere = function _ChatListManager_getChatAnywhere(chatId) {
     let chat = __classPrivateFieldGet(this, _ChatListManager_chats, "f").get(chatId);
     if (chat) {
@@ -235,33 +375,6 @@ _ChatListManager_c = new WeakMap(), _ChatListManager_LgetChats = new WeakMap(), 
         default:
             throw new Error(`Invalid chat list: ${listId}`);
     }
-}, _ChatListManager_loadChatsFromStorage = async function _ChatListManager_loadChatsFromStorage() {
-    const chats = await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.getChats(0);
-    const archivedChats = await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.getChats(1);
-    for (const { chatId, pinned, topMessageId } of chats) {
-        const chat = await (0, _3_types_js_1.constructChatListItem)(chatId, pinned, topMessageId, __classPrivateFieldGet(this, _ChatListManager_c, "f").getEntity, __classPrivateFieldGet(this, _ChatListManager_c, "f").messageManager.getMessage.bind(__classPrivateFieldGet(this, _ChatListManager_c, "f").messageManager));
-        if (chat == null) {
-            continue;
-        }
-        __classPrivateFieldGet(this, _ChatListManager_chats, "f").set(chat.chat.id, chat);
-    }
-    for (const { chatId, pinned, topMessageId } of archivedChats) {
-        const chat = await (0, _3_types_js_1.constructChatListItem)(chatId, pinned, topMessageId, __classPrivateFieldGet(this, _ChatListManager_c, "f").getEntity, __classPrivateFieldGet(this, _ChatListManager_c, "f").messageManager.getMessage.bind(__classPrivateFieldGet(this, _ChatListManager_c, "f").messageManager));
-        if (chat == null) {
-            continue;
-        }
-        __classPrivateFieldGet(this, _ChatListManager_archivedChats, "f").set(chat.chat.id, chat);
-    }
-    __classPrivateFieldSet(this, _ChatListManager_chatsLoadedFromStorage, true, "f");
-}, _ChatListManager_getLoadedChats = function _ChatListManager_getLoadedChats(listId) {
-    const chats_ = __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getChatList).call(this, listId);
-    const chats = new Array();
-    for (const chat of chats_.values()) {
-        chats.push(chat);
-    }
-    return chats
-        .sort((a, b) => b.chat.id - a.chat.id)
-        .sort((a, b) => b.order.localeCompare(a.order));
 }, _ChatListManager_loadPinnedChats = async function _ChatListManager_loadPinnedChats() {
     const [pinnedChats, pinnedArchiveChats] = await Promise.all([__classPrivateFieldGet(this, _ChatListManager_c, "f").storage.getPinnedChats(0), __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.getPinnedChats(1)]);
     if (pinnedChats != null && pinnedArchiveChats != null) {
@@ -272,7 +385,7 @@ _ChatListManager_c = new WeakMap(), _ChatListManager_LgetChats = new WeakMap(), 
     __classPrivateFieldSet(this, _ChatListManager_pinnedChatsLoaded, true, "f");
 }, _ChatListManager_fetchPinnedChats = async function _ChatListManager_fetchPinnedChats(listId = null) {
     if (listId == null || listId == 0) {
-        const dialogs = await __classPrivateFieldGet(this, _ChatListManager_c, "f").api.messages.getPinnedDialogs({ folder_id: 0 });
+        const dialogs = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "messages.getPinnedDialogs", folder_id: 0 });
         const pinnedChats = new Array();
         for (const dialog of dialogs.dialogs) {
             pinnedChats.push((0, _2_tl_js_1.peerToChatId)(dialog.peer));
@@ -281,7 +394,7 @@ _ChatListManager_c = new WeakMap(), _ChatListManager_LgetChats = new WeakMap(), 
         await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setPinnedChats(0, __classPrivateFieldGet(this, _ChatListManager_pinnedChats, "f"));
     }
     if (listId == null || listId == 1) {
-        const dialogs = await __classPrivateFieldGet(this, _ChatListManager_c, "f").api.messages.getPinnedDialogs({ folder_id: 1 });
+        const dialogs = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "messages.getPinnedDialogs", folder_id: 1 });
         const pinnedArchiveChats = new Array();
         for (const dialog of dialogs.dialogs) {
             pinnedArchiveChats.push((0, _2_tl_js_1.peerToChatId)(dialog.peer));
@@ -313,7 +426,7 @@ _ChatListManager_c = new WeakMap(), _ChatListManager_LgetChats = new WeakMap(), 
         const newChat = await (0, _3_types_js_1.constructChatListItem3)(chatId, chat.pinned, chat.lastMessage, __classPrivateFieldGet(this, _ChatListManager_c, "f").getEntity);
         if (newChat != null) {
             __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getChatList).call(this, listId).set(chatId, newChat);
-            await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_sendChatUpdate).call(this, chatId, false);
+            __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_sendChatUpdate).call(this, chatId, false);
         }
     }
     else {
@@ -321,23 +434,23 @@ _ChatListManager_c = new WeakMap(), _ChatListManager_LgetChats = new WeakMap(), 
         if (chat != null) {
             __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getChatList).call(this, 0).set(chatId, chat);
             await this.reassignChatLastMessage(chatId, false, false);
-            await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_sendChatUpdate).call(this, chatId, true);
+            __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_sendChatUpdate).call(this, chatId, true);
         }
     }
-}, _ChatListManager_removeChat = async function _ChatListManager_removeChat(chatId) {
+}, _ChatListManager_removeChat = function _ChatListManager_removeChat(chatId) {
     const [chat, listId] = __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getChatAnywhere).call(this, chatId);
     if (chat !== undefined) {
         __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getChatList).call(this, listId).delete(chatId);
-        await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_sendChatUpdate).call(this, chatId, false);
+        __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_sendChatUpdate).call(this, chatId, false);
     }
-}, _ChatListManager_handleUpdateFolderPeers = async function _ChatListManager_handleUpdateFolderPeers(update) {
+}, _ChatListManager_handleUpdateFolderPeers = function _ChatListManager_handleUpdateFolderPeers(update) {
     for (const { peer, folder_id: listId } of update.folder_peers) {
         const chatId = (0, _2_tl_js_1.peerToChatId)(peer);
         const [chat, currentListId] = __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getChatAnywhere).call(this, chatId);
         if (chat !== undefined && listId != currentListId) {
             __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getChatList).call(this, currentListId).delete(chatId);
             __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getChatList).call(this, listId).set(chatId, chat);
-            await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_sendChatUpdate).call(this, chatId, true);
+            __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_sendChatUpdate).call(this, chatId, true);
         }
     }
 }, _ChatListManager_handleUpdatePinnedDialogs = async function _ChatListManager_handleUpdatePinnedDialogs(update) {
@@ -362,82 +475,95 @@ _ChatListManager_c = new WeakMap(), _ChatListManager_LgetChats = new WeakMap(), 
     }
     await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setPinnedChats(listId, await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getPinnedChats).call(this, listId));
 }, _ChatListManager_handleUpdateChannel = async function _ChatListManager_handleUpdateChannel(update) {
-    const peer = new _2_tl_js_1.types.PeerChannel(update);
+    const peer = { ...update, _: "peerChannel" };
     const channel = await __classPrivateFieldGet(this, _ChatListManager_c, "f").getEntity(peer);
     const chatId = (0, _2_tl_js_1.peerToChatId)(peer);
     await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setFullChat(chatId, null);
     if (channel != null && "left" in channel && channel.left) {
-        await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_removeChat).call(this, chatId);
+        __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_removeChat).call(this, chatId);
     }
-    else if (channel instanceof _2_tl_js_1.types.ChannelForbidden) {
-        await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_removeChat).call(this, chatId);
+    else if ((0, _2_tl_js_1.is)("channelForbidden", channel)) {
+        __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_removeChat).call(this, chatId);
     }
-    else if (channel instanceof _2_tl_js_1.types.Channel) {
+    else if ((0, _2_tl_js_1.is)("channel", channel)) {
         await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_updateOrAddChat).call(this, chatId);
     }
 }, _ChatListManager_handleUpdateChat = async function _ChatListManager_handleUpdateChat(update) {
-    const peer = new _2_tl_js_1.types.PeerChat(update);
+    const peer = { ...update, _: "peerChat" };
     const chat = await __classPrivateFieldGet(this, _ChatListManager_c, "f").getEntity(peer);
     const chatId = (0, _2_tl_js_1.peerToChatId)(peer);
     await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setFullChat(chatId, null);
     if (chat != null && "left" in chat && chat.left) {
         await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_removeChat).call(this, chatId);
     }
-    else if (chat instanceof _2_tl_js_1.types.ChatForbidden) {
+    else if ((0, _2_tl_js_1.is)("chatForbidden", chat)) {
         await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_removeChat).call(this, chatId);
     }
-    else if (chat instanceof _2_tl_js_1.types.Chat) {
+    else if ((0, _2_tl_js_1.is)("chat", chat)) {
         await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_updateOrAddChat).call(this, chatId);
     }
 }, _ChatListManager_handleUpdateUser = async function _ChatListManager_handleUpdateUser(update) {
-    const peer = new _2_tl_js_1.types.PeerUser(update);
+    const peer = { ...update, _: "peerUser" };
     const chat = await __classPrivateFieldGet(this, _ChatListManager_c, "f").getEntity(peer);
     const chatId = (0, _2_tl_js_1.peerToChatId)(peer);
     await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setFullChat(chatId, null);
     if (chat != null) {
         await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_updateOrAddChat).call(this, chatId);
     }
-}, _ChatListManager_fetchChats = async function _ChatListManager_fetchChats(listId, limit, after) {
-    const dialogs = await __classPrivateFieldGet(this, _ChatListManager_c, "f").api.messages.getDialogs({
-        limit,
-        offset_id: after?.lastMessage?.id ?? 0,
-        offset_date: after?.lastMessage?.date ? (0, _1_utilities_js_1.toUnixTimestamp)(after.lastMessage.date) : 0,
-        offset_peer: after ? await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeer(after.chat.id) : new _2_tl_js_1.types.InputPeerEmpty(),
-        hash: 0n,
-        folder_id: listId,
-    });
-    const pinnedChats = await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getPinnedChats).call(this, listId);
-    if (!(dialogs instanceof _2_tl_js_1.types.messages.Dialogs) && !(dialogs instanceof _2_tl_js_1.types.messages.DialogsSlice)) {
-        (0, _0_deps_js_1.unreachable)();
-    }
-    if (dialogs.dialogs.length < limit) {
-        await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setHasAllChats(listId, true);
-    }
-    const chats = __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getChatList).call(this, listId);
-    for (const dialog of dialogs.dialogs) {
-        const chat = await (0, _3_types_js_1.constructChatListItem4)(dialog, dialogs, pinnedChats, __classPrivateFieldGet(this, _ChatListManager_c, "f").getEntity, __classPrivateFieldGet(this, _ChatListManager_c, "f").messageManager.getMessage.bind(__classPrivateFieldGet(this, _ChatListManager_c, "f").messageManager), __classPrivateFieldGet(this, _ChatListManager_c, "f").fileManager.getStickerSetName.bind(__classPrivateFieldGet(this, _ChatListManager_c, "f").messageManager));
-        chats.set(chat.chat.id, chat);
-        await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setChat(listId, chat.chat.id, chat.pinned, chat.lastMessage?.id ?? 0, chat.lastMessage?.date ?? new Date(0));
-    }
 }, _ChatListManager_getFullChat = async function _ChatListManager_getFullChat(chatId) {
     const inputPeer = await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeer(chatId);
-    const chatId_ = (0, _2_tl_js_1.peerToChatId)(inputPeer);
+    const chatId_ = await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeerChatId(inputPeer);
     let fullChat = await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.getFullChat(chatId_);
     if (fullChat != null) {
         return fullChat;
     }
-    if (inputPeer instanceof _2_tl_js_1.types.InputPeerUser) {
-        fullChat = await __classPrivateFieldGet(this, _ChatListManager_c, "f").api.users.getFullUser({ id: new _2_tl_js_1.types.InputUser(inputPeer) }).then((v) => v.full_user);
+    if ((0, _0_utilities_js_1.canBeInputUser)(inputPeer)) {
+        fullChat = (await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "users.getFullUser", id: (0, _0_utilities_js_1.toInputUser)(inputPeer) })).full_user;
     }
-    else if (inputPeer instanceof _2_tl_js_1.types.InputPeerChat) {
-        fullChat = await __classPrivateFieldGet(this, _ChatListManager_c, "f").api.messages.getFullChat(inputPeer).then((v) => v.full_chat);
+    else if ((0, _2_tl_js_1.is)("inputPeerChat", inputPeer)) {
+        fullChat = (await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ ...inputPeer, _: "messages.getFullChat" })).full_chat;
     }
-    else if (inputPeer instanceof _2_tl_js_1.types.InputPeerChannel) {
-        fullChat = await __classPrivateFieldGet(this, _ChatListManager_c, "f").api.channels.getFullChannel({ channel: new _2_tl_js_1.types.InputChannel(inputPeer) }).then((v) => v.full_chat);
+    else if ((0, _0_utilities_js_1.canBeInputChannel)(inputPeer)) {
+        fullChat = (await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "channels.getFullChannel", channel: (0, _0_utilities_js_1.toInputChannel)(inputPeer) })).full_chat;
     }
     await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setFullChat(chatId_, fullChat);
     if (fullChat != null && "call" in fullChat && fullChat.call) {
         await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setGroupCallAccessHash(fullChat.call.id, fullChat.call.access_hash);
     }
     return fullChat;
+}, _ChatListManager_checkChatTitle = function _ChatListManager_checkChatTitle(title) {
+    title = title.trim();
+    if (!title) {
+        throw new _0_errors_js_1.InputError("Title cannot be empty.");
+    }
+    return title;
+}, _ChatListManager_createChannel = async function _ChatListManager_createChannel(type, title, params) {
+    title = __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_checkChatTitle).call(this, title);
+    const updates = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({
+        _: "channels.createChannel",
+        broadcast: type == "channel" ? true : undefined,
+        megagroup: type == "supergroup" ? true : undefined,
+        forum: params && ("forum" in params) && params.forum ? true : undefined,
+        title,
+        about: params?.description || "",
+        ttl_period: params?.messageTtl || undefined,
+    });
+    if (!("chats" in updates) || updates.chats.length < 1) {
+        (0, _0_deps_js_1.unreachable)();
+    }
+    const chat = updates.chats[0];
+    if (chat._ != "channel") {
+        (0, _0_deps_js_1.unreachable)();
+    }
+    return (0, _3_types_js_1.constructChatP)(chat);
+}, _ChatListManager_moveChatsToFolder = async function _ChatListManager_moveChatsToFolder(chatIds, folderId) {
+    const peers = await Promise.all(chatIds.map((v) => __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeer(v)));
+    const inputFolderPeers = peers.map((v) => ({ _: "inputFolderPeer", peer: v, folder_id: folderId }));
+    await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "folders.editPeerFolders", folder_peers: inputFolderPeers });
+}, _ChatListManager_toggleBusinessBotsPaused = async function _ChatListManager_toggleBusinessBotsPaused(chatId, paused) {
+    const peer = await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeer(chatId);
+    if (!(0, _0_utilities_js_1.canBeInputUser)(peer)) {
+        throw new _0_errors_js_1.InputError("A private chat was expected.");
+    }
+    await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "account.toggleConnectedBotPaused", peer, paused });
 };

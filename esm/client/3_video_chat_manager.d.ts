@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,16 +17,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { enums, types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { ID, Update, VideoChatActive, VideoChatScheduled } from "../3_types.js";
 import { DownloadLiveStreamChunkParams, JoinVideoChatParams, StartVideoChatParams } from "./0_params.js";
+import { UpdateProcessor } from "./0_update_processor.js";
 import { C as C_ } from "./1_types.js";
 import { FileManager } from "./2_file_manager.js";
 interface C extends C_ {
     fileManager: FileManager;
 }
-type VideoChatManagerUpdate = types.UpdateGroupCall;
-export declare class VideoChatManager {
+declare const videoChatManagerUpdates: readonly ["updateGroupCall"];
+type VideoChatManagerUpdate = Api.Types[(typeof videoChatManagerUpdates)[number]];
+export declare class VideoChatManager implements UpdateProcessor<VideoChatManagerUpdate> {
     #private;
     constructor(c: C);
     startVideoChat(chatId: ID, params?: StartVideoChatParams): Promise<VideoChatActive>;
@@ -35,8 +37,8 @@ export declare class VideoChatManager {
     leaveVideoChat(id: string): Promise<void>;
     joinLiveStream(id: string): Promise<void>;
     getVideoChat(id: string): Promise<import("../3_types.js").VideoChat>;
-    static canHandleUpdate(update: enums.Update): update is VideoChatManagerUpdate;
-    handleUpdate(update: VideoChatManagerUpdate): Promise<Update>;
+    canHandleUpdate(update: Api.Update): update is VideoChatManagerUpdate;
+    handleUpdate(update: VideoChatManagerUpdate): Promise<Update | null>;
     getLiveStreamChannels(id: string): Promise<import("../3_types.js").LiveStreamChannel[]>;
     downloadLiveStreamChunk(id: string, channel: number, scale: number, timestamp: number, params?: DownloadLiveStreamChunkParams): AsyncGenerator<Uint8Array, void, unknown>;
 }

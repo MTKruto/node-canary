@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,14 +18,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { ID } from "../3_types.js";
+import { AddContactParams, SetBirthdayParams, SetEmojiStatusParams, SetLocationParams, SetNameColorParams, SetPersonalChannelParams, SetProfileColorParams, UpdateProfileParams } from "./0_params.js";
 import { C } from "./1_types.js";
 export declare class AccountManager {
     #private;
     constructor(c: C);
     showUsername(id: ID, username: string): Promise<void>;
     hideUsername(id: ID, username: string): Promise<void>;
-    reorderUsernames(id: ID, order: string[]): Promise<boolean>;
-    hideUsernames(id: ID): Promise<boolean>;
+    reorderUsernames(id: ID, order: string[]): Promise<NonNullable<boolean | undefined>>;
+    hideUsernames(id: ID): Promise<NonNullable<boolean | undefined>>;
     getInactiveChats(): Promise<import("../3_types.js").InactiveChat[]>;
+    setOnline(online: boolean): Promise<void>;
+    setEmojiStatus(id: string, params?: SetEmojiStatusParams): Promise<void>;
+    setUserEmojiStatus(userId: ID, id: string, params?: SetEmojiStatusParams): Promise<void>;
+    setBotCanSetEmojiStatus(botId: ID, canSetEmojiStatus: boolean): Promise<void>;
+    getContacts(): Promise<import("../3_types.js").User[]>;
+    deleteContacts(userIds: ID[]): Promise<void>;
+    deleteContact(userId: ID): Promise<void>;
+    addContact(userId: ID, params?: AddContactParams): Promise<void>;
+    updateProfile(params?: UpdateProfileParams): Promise<void>;
+    setBirthday(params?: SetBirthdayParams): Promise<void>;
+    setPersonalChannel(params?: SetPersonalChannelParams): Promise<void>;
+    setNameColor(color: number, params?: SetNameColorParams): Promise<void>;
+    setProfileColor(color: number, params?: SetProfileColorParams): Promise<void>;
+    setLocation(params?: SetLocationParams): Promise<void>;
 }
 //# sourceMappingURL=2_account_manager.d.ts.map

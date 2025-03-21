@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,22 +19,22 @@
  */
 import { unreachable } from "../0_deps.js";
 import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
-import { types } from "../2_tl.js";
+import { is } from "../2_tl.js";
 import { constructChatAdministratorRights } from "./0_chat_administrator_rights.js";
 import { constructChatMemberRights } from "./0_chat_member_rights.js";
 import { constructUser } from "./1_user.js";
 export async function constructChatMember(participant, getEntity) {
-    const user_ = "user_id" in participant ? await getEntity(new types.PeerUser(participant)) : "peer" in participant ? participant.peer instanceof types.PeerUser ? await getEntity(participant.peer) : unreachable() : unreachable(); // TODO: support other peer types
+    const user_ = "user_id" in participant ? await getEntity({ ...participant, _: "peerUser" }) : "peer" in participant ? is("peerUser", participant.peer) ? await getEntity(participant.peer) : unreachable() : unreachable(); // TODO: support other peer types
     if (user_ == null)
         unreachable();
     const user = constructUser(user_);
-    if (participant instanceof types.ChannelParticipant || participant instanceof types.ChatParticipant) {
+    if (is("channelParticipant", participant) || is("chatParticipant", participant)) {
         return {
             status: "member",
             user,
         };
     }
-    else if (participant instanceof types.ChannelParticipantCreator) {
+    else if (is("channelParticipantCreator", participant)) {
         return cleanObject({
             status: "creator",
             user,
@@ -42,7 +42,7 @@ export async function constructChatMember(participant, getEntity) {
             title: participant.rank,
         });
     }
-    else if (participant instanceof types.ChannelParticipantAdmin) {
+    else if (is("channelParticipantAdmin", participant)) {
         return cleanObject({
             status: "administrator",
             user,
@@ -50,7 +50,7 @@ export async function constructChatMember(participant, getEntity) {
             title: participant.rank,
         });
     }
-    else if (participant instanceof types.ChannelParticipantBanned) {
+    else if (is("channelParticipantBanned", participant)) {
         const untilDate = participant.banned_rights.until_date ? fromUnixTimestamp(participant.banned_rights.until_date) : undefined;
         if (!participant.banned_rights.view_messages) {
             participant.peer;
@@ -70,13 +70,13 @@ export async function constructChatMember(participant, getEntity) {
             untilDate,
         });
     }
-    else if (participant instanceof types.ChannelParticipantSelf) {
+    else if (is("channelParticipantSelf", participant)) {
         unreachable(); // TODO: implement
     }
-    else if (participant instanceof types.ChannelParticipantLeft) {
+    else if (is("channelParticipantLeft", participant)) {
         return { status: "left", user };
     }
-    else if (participant instanceof types.ChatParticipantAdmin) {
+    else if (is("chatParticipantAdmin", participant)) {
         return cleanObject({
             status: "administrator",
             user,
@@ -96,7 +96,7 @@ export async function constructChatMember(participant, getEntity) {
             },
         });
     }
-    else if (participant instanceof types.ChatParticipantCreator) {
+    else if (is("chatParticipantCreator", participant)) {
         return cleanObject({
             status: "creator",
             user,

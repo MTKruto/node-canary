@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,20 +18,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { types } from "../2_tl.js";
+import { is } from "../2_tl.js";
 export function constructReaction(reaction) {
-    if (reaction instanceof types.ReactionEmoji) {
+    if (is("reactionEmoji", reaction)) {
         return { type: "emoji", emoji: reaction.emoticon };
     }
-    else if (reaction instanceof types.ReactionCustomEmoji) {
-        return { type: "customEmoji", id: String(reaction.document_id) };
+    else if (is("reactionCustomEmoji", reaction)) {
+        return { type: "custom", id: String(reaction.document_id) };
+    }
+    else if (is("reactionPaid", reaction)) {
+        return { type: "paid" };
     }
     else {
         unreachable();
     }
 }
 export function reactionToTlObject(reaction) {
-    return reaction.type == "emoji" ? new types.ReactionEmoji({ emoticon: reaction.emoji }) : new types.ReactionCustomEmoji({ document_id: BigInt(reaction.id) });
+    return reaction.type == "emoji" ? ({ _: "reactionEmoji", emoticon: reaction.emoji }) : reaction.type == "custom" ? ({ _: "reactionCustomEmoji", document_id: BigInt(reaction.id) }) : { _: "reactionPaid" };
 }
 export function reactionEqual(left, right) {
     if (left.type == "emoji") {
@@ -39,8 +42,8 @@ export function reactionEqual(left, right) {
             return true;
         }
     }
-    else if (left.type == "customEmoji") {
-        if (right.type == "customEmoji" && left.id == right.id) {
+    else if (left.type == "custom") {
+        if (right.type == "custom" && left.id == right.id) {
             return true;
         }
     }

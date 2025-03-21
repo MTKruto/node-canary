@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -34,6 +34,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BusinessConnectionManager = void 0;
 const _2_tl_js_1 = require("../2_tl.js");
 const _3_types_js_1 = require("../3_types.js");
+const businessConnectionManagerUpdates = [
+    "updateBotBusinessConnect",
+];
 class BusinessConnectionManager {
     constructor(c) {
         _BusinessConnectionManager_c.set(this, void 0);
@@ -42,9 +45,9 @@ class BusinessConnectionManager {
     async getBusinessConnection(id) {
         const connection_ = await __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").messageStorage.getBusinessConnection(id);
         if (!connection_) {
-            const connection_ = await __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").api.account.getBotBusinessConnection({ connection_id: id })
-                .then((v) => v[_2_tl_js_1.as](_2_tl_js_1.types.Updates))
-                .then((v) => v.updates[0][_2_tl_js_1.as](_2_tl_js_1.types.UpdateBotBusinessConnect).connection);
+            const connection_ = await __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").invoke({ _: "account.getBotBusinessConnection", connection_id: id })
+                .then((v) => (0, _2_tl_js_1.as)("updates", v))
+                .then((v) => (0, _2_tl_js_1.as)("updateBotBusinessConnect", v.updates[0]).connection);
             await __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").messageStorage.setBusinessConnection(id, connection_);
             return await (0, _3_types_js_1.constructBusinessConnection)(connection_, __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").getEntity);
         }
@@ -52,8 +55,8 @@ class BusinessConnectionManager {
             return await (0, _3_types_js_1.constructBusinessConnection)(connection_, __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").getEntity);
         }
     }
-    static canHandleUpdate(update) {
-        return update instanceof _2_tl_js_1.types.UpdateBotBusinessConnect;
+    canHandleUpdate(update) {
+        return (0, _2_tl_js_1.isOneOf)(businessConnectionManagerUpdates, update);
     }
     async handleUpdate(update) {
         if (update.connection.disabled) {

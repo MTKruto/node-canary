@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,12 +19,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructBirthday = void 0;
+exports.constructBirthday = constructBirthday;
+exports.birthdayToTlObject = birthdayToTlObject;
+const _1_utilities_js_1 = require("../1_utilities.js");
 function constructBirthday(birthday) {
+    return (0, _1_utilities_js_1.cleanObject)({
+        day: birthday.day,
+        month: birthday.month,
+        year: birthday.year,
+    });
+}
+function birthdayToTlObject(birthday) {
     return {
+        _: "birthday",
         day: birthday.day,
         month: birthday.month,
         year: birthday.year,
     };
 }
-exports.constructBirthday = constructBirthday;

@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { ChatPhoto } from "./0_chat_photo.js";
 /** A user. */
 export interface User {
@@ -52,5 +52,5 @@ export interface User {
     /** Whether the user is a bot that has been added to the attachment menu by the current user. */
     addedToAttachmentMenu: boolean;
 }
-export declare function constructUser(user_: types.User): User;
+export declare function constructUser(user_: Api.user): User;
 //# sourceMappingURL=1_user.d.ts.map

@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,15 +17,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { enums, types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { Update } from "../3_types.js";
+import { UpdateProcessor } from "./0_update_processor.js";
 import { C } from "./1_types.js";
-export type BusinessConnectionManagerUpdate = types.UpdateBotBusinessConnect;
-export declare class BusinessConnectionManager {
+declare const businessConnectionManagerUpdates: readonly ["updateBotBusinessConnect"];
+type BusinessConnectionManagerUpdate = Api.Types[(typeof businessConnectionManagerUpdates)[number]];
+export declare class BusinessConnectionManager implements UpdateProcessor<BusinessConnectionManagerUpdate> {
     #private;
     constructor(c: C);
     getBusinessConnection(id: string): Promise<import("../3_types.js").BusinessConnection>;
-    static canHandleUpdate(update: enums.Update): update is BusinessConnectionManagerUpdate;
+    canHandleUpdate(update: Api.Update): update is BusinessConnectionManagerUpdate;
     handleUpdate(update: BusinessConnectionManagerUpdate): Promise<Update>;
 }
+export {};
 //# sourceMappingURL=2_business_connection_manager.d.ts.map

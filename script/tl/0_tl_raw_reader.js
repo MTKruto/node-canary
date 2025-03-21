@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -44,6 +44,13 @@ class TLRawReader {
         this._buffer = this._buffer.subarray(count);
         return buffer;
     }
+    unread(count) {
+        const newOffest = this._buffer.byteOffset - count;
+        if (newOffest < 0) {
+            throw new TLError("No data has been read");
+        }
+        this._buffer = new Uint8Array(this._buffer.buffer, newOffest);
+    }
     readInt24(signed = true) {
         const buffer = this.read(24 / 8);
         return Number((0, _1_utilities_js_1.bigIntFromBuffer)(buffer, true, signed));
@@ -51,6 +58,9 @@ class TLRawReader {
     readInt32(signed = true) {
         const buffer = this.read(32 / 8);
         return Number((0, _1_utilities_js_1.bigIntFromBuffer)(buffer, true, signed));
+    }
+    unreadInt32() {
+        this.unread(32 / 8);
     }
     readInt64(signed = true) {
         const buffer = this.read(64 / 8);

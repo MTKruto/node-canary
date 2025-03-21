@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 /**
- * The identifier of a channel, a group, or a user (as provided by MTKruto), a username, or a chat link (e.g., https://mtkruto.t.me, https://telegram.me/mtkruto). `"me"` resolves to current the account.
+ * The identifier of a channel, a group, or a user (as provided by MTKruto), a username, or a chat link (e.g., https://mtkruto.t.me, https://telegram.me/mtkruto). `"me"` resolves to the current account.
  */
 export type ID = number | string | "me";
 //# sourceMappingURL=0_id.d.ts.map

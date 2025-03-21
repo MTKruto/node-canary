@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -37,6 +37,10 @@ const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _3_types_js_1 = require("../3_types.js");
+const _0_utilities_js_1 = require("./0_utilities.js");
+const videoChatManagerUpdates = [
+    "updateGroupCall",
+];
 class VideoChatManager {
     constructor(c) {
         _VideoChatManager_instances.add(this);
@@ -44,41 +48,36 @@ class VideoChatManager {
         __classPrivateFieldSet(this, _VideoChatManager_c, c, "f");
     }
     async startVideoChat(chatId, params) {
-        await __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.assertUser("startVideoChat");
+        __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.assertUser("startVideoChat");
         return await __classPrivateFieldGet(this, _VideoChatManager_instances, "m", _VideoChatManager_createGroupCall).call(this, chatId, params?.title, params?.liveStream || undefined);
     }
     async scheduleVideoChat(chatId, startAt, params) {
-        await __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.assertUser("scheduleVideoChat");
+        __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.assertUser("scheduleVideoChat");
         return await __classPrivateFieldGet(this, _VideoChatManager_instances, "m", _VideoChatManager_createGroupCall).call(this, chatId, params?.title, params?.liveStream || undefined, startAt);
     }
     async joinVideoChat(id, params, params_) {
-        await __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.assertUser("joinVideoChat");
+        __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.assertUser("joinVideoChat");
         const call = await __classPrivateFieldGet(this, _VideoChatManager_instances, "m", _VideoChatManager_getInputGroupCall).call(this, id);
-        const { updates } = await __classPrivateFieldGet(this, _VideoChatManager_c, "f").api.phone.joinGroupCall({
-            call,
-            join_as: params_?.joinAs ? await __classPrivateFieldGet(this, _VideoChatManager_c, "f").getInputPeer(params_.joinAs) : new _2_tl_js_1.types.InputPeerSelf(),
-            params: new _2_tl_js_1.types.DataJSON({ data: params }),
-            invite_hash: params_?.inviteHash,
-            muted: params_?.audio ? undefined : true,
-            video_stopped: params_?.video ? undefined : true,
-        }).then((v) => v[_2_tl_js_1.as](_2_tl_js_1.types.Updates));
+        const { updates } = await __classPrivateFieldGet(this, _VideoChatManager_c, "f").invoke({ _: "phone.joinGroupCall", call, join_as: params_?.joinAs ? await __classPrivateFieldGet(this, _VideoChatManager_c, "f").getInputPeer(params_.joinAs) : { _: "inputPeerSelf" }, params: ({ _: "dataJSON", data: params }), invite_hash: params_?.inviteHash, muted: params_?.audio ? undefined : true, video_stopped: params_?.video ? undefined : true }).then((v) => (0, _2_tl_js_1.as)("updates", v));
         const updateGroupCall = updates
-            .find((v) => v instanceof _2_tl_js_1.types.UpdateGroupCallConnection);
+            .find((v) => (0, _2_tl_js_1.is)("updateGroupCallConnection", v));
         if (!updateGroupCall)
             (0, _0_deps_js_1.unreachable)();
         return updateGroupCall.params.data;
     }
     async leaveVideoChat(id) {
-        await __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.assertUser("leaveVideoChat");
-        await __classPrivateFieldGet(this, _VideoChatManager_c, "f").api.phone.leaveGroupCall({ call: await __classPrivateFieldGet(this, _VideoChatManager_instances, "m", _VideoChatManager_getInputGroupCall).call(this, id), source: 0 });
+        __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.assertUser("leaveVideoChat");
+        await __classPrivateFieldGet(this, _VideoChatManager_c, "f").invoke({ _: "phone.leaveGroupCall", call: await __classPrivateFieldGet(this, _VideoChatManager_instances, "m", _VideoChatManager_getInputGroupCall).call(this, id), source: 0 });
     }
     async joinLiveStream(id) {
-        await __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.assertUser("joinLiveStream");
+        __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.assertUser("joinLiveStream");
         const call = await __classPrivateFieldGet(this, _VideoChatManager_instances, "m", _VideoChatManager_getInputGroupCall).call(this, id);
-        const { updates } = await __classPrivateFieldGet(this, _VideoChatManager_c, "f").api.phone.joinGroupCall({
+        const { updates } = await __classPrivateFieldGet(this, _VideoChatManager_c, "f").invoke({
+            _: "phone.joinGroupCall",
             call,
-            join_as: new _2_tl_js_1.types.InputPeerSelf(),
-            params: new _2_tl_js_1.types.DataJSON({
+            join_as: { _: "inputPeerSelf" },
+            params: ({
+                _: "dataJSON",
                 data: JSON.stringify({
                     fingerprints: [],
                     pwd: "",
@@ -87,24 +86,27 @@ class VideoChatManager {
                     ufrag: "",
                 }),
             }),
-        }).then((v) => v[_2_tl_js_1.as](_2_tl_js_1.types.Updates));
+        }).then((v) => (0, _2_tl_js_1.as)("updates", v));
         const updateGroupCall = updates
-            .find((v) => v instanceof _2_tl_js_1.types.UpdateGroupCallConnection);
+            .find((v) => (0, _2_tl_js_1.is)("updateGroupCallConnection", v));
         if (!updateGroupCall)
             (0, _0_deps_js_1.unreachable)();
     }
     async getVideoChat(id) {
-        await __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.assertUser("getVideoChat");
+        __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.assertUser("getVideoChat");
         return (0, _3_types_js_1.constructVideoChat)(await __classPrivateFieldGet(this, _VideoChatManager_instances, "m", _VideoChatManager_getCall).call(this, id));
     }
-    static canHandleUpdate(update) {
-        return update instanceof _2_tl_js_1.types.UpdateGroupCall;
+    canHandleUpdate(update) {
+        return (0, _2_tl_js_1.isOneOf)(videoChatManagerUpdates, update);
     }
     async handleUpdate(update) {
+        if (!update.chat_id) {
+            return null; // TODO: handle updates with unspecified chat_id
+        }
         let chatId = Number(-update.chat_id);
         const fullChat = await __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.getFullChat(chatId).then((v) => v == null ? __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.getFullChat(chatId = _1_utilities_js_1.ZERO_CHANNEL_ID - Number(update.chat_id)) : v);
         let updateFullChat = false;
-        if (update.call instanceof _2_tl_js_1.types.GroupCallDiscarded) {
+        if ((0, _2_tl_js_1.is)("groupCallDiscarded", update.call)) {
             await __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.setGroupCall(update.call.id, null);
             await __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.setGroupCallAccessHash(update.call.id, null);
             if (fullChat != null) {
@@ -117,7 +119,7 @@ class VideoChatManager {
             await __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.setGroupCallAccessHash(update.call.id, update.call.access_hash);
             if (fullChat != null) {
                 if (!("call" in fullChat) || !fullChat.call || fullChat.call.id != update.call.id) {
-                    fullChat.call = new _2_tl_js_1.types.InputGroupCall(update.call);
+                    fullChat.call = { ...update.call, _: "inputGroupCall" };
                     updateFullChat = true;
                 }
             }
@@ -128,15 +130,15 @@ class VideoChatManager {
         return { videoChat: (0, _3_types_js_1.constructVideoChat)(update.call) };
     }
     async getLiveStreamChannels(id) {
-        await __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.assertUser("getLiveStreamChannels");
+        __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.assertUser("getLiveStreamChannels");
         const call = await __classPrivateFieldGet(this, _VideoChatManager_instances, "m", _VideoChatManager_getCall).call(this, id);
-        if (!(call instanceof _2_tl_js_1.types.GroupCall) || !call.rtmp_stream) {
+        if (!((0, _2_tl_js_1.is)("groupCall", call)) || !call.rtmp_stream) {
             throw new _0_errors_js_1.InputError("Not a live stream.");
         }
         const client = __classPrivateFieldGet(this, _VideoChatManager_c, "f").getCdnConnection(call.stream_dc_id);
         await client.connect();
         try {
-            const streams = await client.api.phone.getGroupCallStreamChannels({ call: await __classPrivateFieldGet(this, _VideoChatManager_instances, "m", _VideoChatManager_getInputGroupCall).call(this, id) });
+            const streams = await client.invoke({ _: "phone.getGroupCallStreamChannels", call: await __classPrivateFieldGet(this, _VideoChatManager_instances, "m", _VideoChatManager_getInputGroupCall).call(this, id) });
             return streams.channels.map(_3_types_js_1.constructLiveStreamChannel);
         }
         finally {
@@ -144,39 +146,34 @@ class VideoChatManager {
         }
     }
     async *downloadLiveStreamChunk(id, channel, scale, timestamp, params) {
-        await __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.assertUser("downloadLiveStreamChunk");
+        __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.assertUser("downloadLiveStreamChunk");
         const call = await __classPrivateFieldGet(this, _VideoChatManager_instances, "m", _VideoChatManager_getCall).call(this, id);
-        if (!(call instanceof _2_tl_js_1.types.GroupCall) || !call.rtmp_stream) {
+        if (!((0, _2_tl_js_1.is)("groupCall", call)) || !call.rtmp_stream) {
             throw new _0_errors_js_1.InputError("Not a live stream.");
         }
         const quality = params?.quality ?? "low";
-        const location = new _2_tl_js_1.types.InputGroupCallStream({
-            call: new _2_tl_js_1.types.InputGroupCall(call),
+        const location = {
+            _: "inputGroupCallStream",
+            call: { ...call, _: "inputGroupCall" },
             scale,
             time_ms: BigInt(timestamp),
             video_channel: channel,
             video_quality: quality == "low" ? 0 : quality == "medium" ? 1 : quality == "high" ? 2 : (() => {
                 throw new _0_errors_js_1.InputError("Got invalid quality.");
             })(),
-        });
-        yield* __classPrivateFieldGet(this, _VideoChatManager_c, "f").fileManager.downloadInner(location, call.stream_dc_id ?? (0, _0_deps_js_1.unreachable)());
+        };
+        yield* __classPrivateFieldGet(this, _VideoChatManager_c, "f").fileManager.downloadInner(location, call.stream_dc_id ?? (0, _0_deps_js_1.unreachable)(), params);
     }
 }
 exports.VideoChatManager = VideoChatManager;
 _VideoChatManager_c = new WeakMap(), _VideoChatManager_instances = new WeakSet(), _VideoChatManager_createGroupCall = async function _VideoChatManager_createGroupCall(chatId, title, liveStream, scheduleDate) {
     const peer = await __classPrivateFieldGet(this, _VideoChatManager_c, "f").getInputPeer(chatId);
-    if (peer instanceof _2_tl_js_1.types.InputPeerUser) {
+    if ((0, _0_utilities_js_1.canBeInputUser)(peer)) {
         throw new _0_errors_js_1.InputError("Video chats are only available for groups and channels.");
     }
-    const { updates } = await __classPrivateFieldGet(this, _VideoChatManager_c, "f").api.phone.createGroupCall({
-        peer,
-        random_id: (0, _1_utilities_js_1.getRandomId)(true),
-        title,
-        rtmp_stream: liveStream,
-        schedule_date: scheduleDate ? (0, _1_utilities_js_1.toUnixTimestamp)(scheduleDate) : undefined,
-    }).then((v) => v[_2_tl_js_1.as](_2_tl_js_1.types.Updates));
+    const { updates } = await __classPrivateFieldGet(this, _VideoChatManager_c, "f").invoke({ _: "phone.createGroupCall", peer, random_id: (0, _1_utilities_js_1.getRandomId)(true), title, rtmp_stream: liveStream, schedule_date: scheduleDate ? (0, _1_utilities_js_1.toUnixTimestamp)(scheduleDate) : undefined }).then((v) => (0, _2_tl_js_1.as)("updates", v));
     const updateGroupCall = updates
-        .find((v) => v instanceof _2_tl_js_1.types.UpdateGroupCall);
+        .find((v) => (0, _2_tl_js_1.is)("updateGroupCall", v));
     if (!updateGroupCall) {
         (0, _0_deps_js_1.unreachable)();
     }
@@ -187,12 +184,12 @@ _VideoChatManager_c = new WeakMap(), _VideoChatManager_instances = new WeakSet()
     if (accessHash == null) {
         throw new _0_errors_js_1.InputError("Video chat not found.");
     }
-    return new _2_tl_js_1.types.InputGroupCall({ id, access_hash: accessHash });
+    return { _: "inputGroupCall", id, access_hash: accessHash };
 }, _VideoChatManager_getCall = async function _VideoChatManager_getCall(id) {
     let groupCall = await __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.getGroupCall(BigInt(id));
     if (groupCall == null) {
         const call = await __classPrivateFieldGet(this, _VideoChatManager_instances, "m", _VideoChatManager_getInputGroupCall).call(this, id);
-        groupCall = await __classPrivateFieldGet(this, _VideoChatManager_c, "f").api.phone.getGroupCall({ call, limit: 1 }).then((v) => v.call);
+        groupCall = (await __classPrivateFieldGet(this, _VideoChatManager_c, "f").invoke({ _: "phone.getGroupCall", call, limit: 1 })).call;
     }
     return groupCall;
 };

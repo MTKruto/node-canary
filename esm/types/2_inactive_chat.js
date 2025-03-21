@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,10 +19,10 @@
  */
 import { unreachable } from "../0_deps.js";
 import { fromUnixTimestamp } from "../1_utilities.js";
-import { types } from "../2_tl.js";
+import { is } from "../2_tl.js";
 import { constructChatP } from "./1_chat_p.js";
 export function constructInactiveChat(chat_, lastActivity) {
-    if (chat_ instanceof types.ChatEmpty) {
+    if (is("chatEmpty", chat_)) {
         unreachable();
     }
     const chat = constructChatP(chat_);

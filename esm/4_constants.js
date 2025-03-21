@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -70,7 +70,7 @@ export const PUBLIC_KEYS = Object.freeze([
     ],
 ]);
 export const INITIAL_DC = "2";
-export const LAYER = 177;
+export const LAYER = 200;
 export const APP_VERSION = "MTKruto";
 // @ts-ignore: lib
 export const DEVICE_MODEL = typeof dntShim.Deno === "undefined" ? typeof navigator === "undefined" ? typeof process === "undefined" ? "Unknown" : process.platform + "-" + process.arch : (navigator.userAgent.split(" ")[0] || "Unknown") : dntShim.Deno.build.os + "-" + dntShim.Deno.build.arch;
@@ -79,9 +79,9 @@ export const LANG_PACK = "";
 export const SYSTEM_LANG_CODE = LANG_CODE;
 // @ts-ignore: lib
 export const SYSTEM_VERSION = typeof navigator === "undefined" ? typeof process === "undefined" ? "Unknown" : "Node.js/" + process.versions.node : navigator.userAgent;
-export const USERNAME_TTL = 86400;
-export const STICKER_SET_NAME_TTL = 172800;
+export const USERNAME_TTL = 86_400;
+export const STICKER_SET_NAME_TTL = 172_800;
 export const MAX_CHAT_ID = 999999999999;
 export const MAX_CHANNEL_ID = 997852516352;
 export const CHANNEL_DIFFERENCE_LIMIT_USER = 100;
-export const CHANNEL_DIFFERENCE_LIMIT_BOT = 100000;
+export const CHANNEL_DIFFERENCE_LIMIT_BOT = 100_000;

@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,10 +17,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 export interface OpeningHours {
     timezone: string;
     intervals: [number, number][];
 }
-export declare function constructOpeningHours(hours: types.BusinessWorkHours): OpeningHours;
+export declare function constructOpeningHours(hours: Api.businessWorkHours): OpeningHours;
 //# sourceMappingURL=0_opening_hours.d.ts.map

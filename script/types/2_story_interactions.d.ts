@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { StoryReaction } from "./1_story_reaction.js";
 /** The interactions made with a story. */
 export interface StoryInteractions {
@@ -26,5 +26,5 @@ export interface StoryInteractions {
     views: number;
     forwards: number;
 }
-export declare function constructStoryInteractions(views_: types.StoryViews): StoryInteractions;
+export declare function constructStoryInteractions(views_: Api.storyViews): StoryInteractions;
 //# sourceMappingURL=2_story_interactions.d.ts.map

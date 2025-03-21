@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,47 +18,48 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { types } from "../2_tl.js";
+import { cleanObject } from "../1_utilities.js";
+import { is } from "../2_tl.js";
+import { constructBirthday } from "./0_birthday.js";
+import { constructLocation } from "./0_location.js";
 import { constructOpeningHours } from "./0_opening_hours.js";
 import { constructChatP } from "./1_chat_p.js";
 import { constructPhoto } from "./1_photo.js";
-import { constructLocation } from "./0_location.js";
-import { constructBirthday } from "./0_birthday.js";
-import { cleanObject } from "../1_utilities.js";
 export async function constructChat(fullChat, getEntity) {
-    if (fullChat instanceof types.UserFull) {
-        const user = await getEntity(new types.PeerUser({ user_id: fullChat.id }));
+    if (is("userFull", fullChat)) {
+        const user = await getEntity({ _: "peerUser", user_id: fullChat.id });
         if (user == null)
             unreachable();
         const chatP = constructChatP(user);
         return cleanObject({
             ...chatP,
             birthday: fullChat.birthday ? constructBirthday(fullChat.birthday) : undefined,
-            photo: fullChat.profile_photo && fullChat.profile_photo instanceof types.Photo ? constructPhoto(fullChat.profile_photo) : undefined,
+            photo: fullChat.profile_photo && is("photo", fullChat.profile_photo) ? constructPhoto(fullChat.profile_photo) : undefined,
             address: fullChat.business_location?.address,
-            location: fullChat.business_location?.geo_point && fullChat.business_location.geo_point instanceof types.GeoPoint ? constructLocation(fullChat.business_location.geo_point) : undefined,
+            location: fullChat.business_location?.geo_point && is("geoPoint", fullChat.business_location.geo_point) ? constructLocation(fullChat.business_location.geo_point) : undefined,
             openingHours: fullChat.business_work_hours ? constructOpeningHours(fullChat.business_work_hours) : undefined,
+            hasMainMiniApp: user.bot ? user.bot_has_main_app : undefined,
         });
     }
-    else if (fullChat instanceof types.ChatFull) {
-        const chat = await getEntity(new types.PeerChat({ chat_id: fullChat.id }));
+    else if (is("chatFull", fullChat)) {
+        const chat = await getEntity({ _: "peerChat", chat_id: fullChat.id });
         if (chat == null)
             unreachable();
         const chatP = constructChatP(chat);
         return cleanObject({
             ...chatP,
-            photo: fullChat.chat_photo && fullChat.chat_photo instanceof types.Photo ? constructPhoto(fullChat.chat_photo) : undefined,
+            photo: fullChat.chat_photo && is("photo", fullChat.chat_photo) ? constructPhoto(fullChat.chat_photo) : undefined,
             videoChatId: fullChat.call ? String(fullChat.call.id) : undefined,
         });
     }
-    else if (fullChat instanceof types.ChannelFull) {
-        const chat = await getEntity(new types.PeerChannel({ channel_id: fullChat.id }));
+    else if (is("channelFull", fullChat)) {
+        const chat = await getEntity({ _: "peerChannel", channel_id: fullChat.id });
         if (chat == null)
             unreachable();
         const chatP = constructChatP(chat);
         return cleanObject({
             ...chatP,
-            photo: fullChat.chat_photo && fullChat.chat_photo instanceof types.Photo ? constructPhoto(fullChat.chat_photo) : undefined,
+            photo: fullChat.chat_photo && is("photo", fullChat.chat_photo) ? constructPhoto(fullChat.chat_photo) : undefined,
             videoChatId: fullChat.call ? String(fullChat.call.id) : undefined,
         });
     }

@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { MessageEntity } from "./0_message_entity.js";
 import { Animation } from "./1_animation.js";
 import { Photo } from "./1_photo.js";
@@ -36,5 +36,5 @@ export interface Game {
     /** An animation that is displayed when the game is shared. */
     animation?: Animation;
 }
-export declare function constructGame(media_: types.MessageMediaGame): Game;
+export declare function constructGame(media_: Api.messageMediaGame): Game;
 //# sourceMappingURL=2_game.d.ts.map

@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,16 +18,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { MaybePromise } from "../1_utilities.js";
-import { enums, functions, types } from "../2_tl.js";
 import { Storage } from "../2_storage.js";
+import { Api } from "../2_tl.js";
 import { DC } from "../3_transport.js";
-import { BotCommand, BusinessConnection, CallbackQueryAnswer, CallbackQueryQuestion, Chat, ChatAction, ChatListItem, ChatMember, ChatP, FileSource, ID, InactiveChat, InlineQueryAnswer, InlineQueryResult, InputMedia, InputStoryContent, InviteLink, LiveStreamChannel, Message, MessageAnimation, MessageAudio, MessageContact, MessageDice, MessageDocument, MessageLocation, MessagePhoto, MessagePoll, MessageSticker, MessageText, MessageVenue, MessageVideo, MessageVideoNote, MessageVoice, NetworkStatistics, ParseMode, Poll, Reaction, Sticker, Story, Update, User, VideoChat, VideoChatActive, VideoChatScheduled } from "../3_types.js";
+import { BotCommand, BusinessConnection, CallbackQueryAnswer, CallbackQueryQuestion, Chat, ChatAction, ChatListItem, ChatMember, ChatP, type ChatPChannel, type ChatPGroup, type ChatPSupergroup, ChatSettings, ClaimedGifts, FailedInvitation, FileSource, Gift, ID, InactiveChat, InlineQueryAnswer, InlineQueryResult, InputMedia, InputStoryContent, InviteLink, LiveStreamChannel, Message, MessageAnimation, MessageAudio, MessageContact, MessageDice, MessageDocument, MessageInvoice, MessageLocation, MessagePhoto, MessagePoll, MessageSticker, MessageText, MessageVenue, MessageVideo, MessageVideoNote, MessageVoice, NetworkStatistics, ParseMode, Poll, PriceTag, Reaction, SlowModeDuration, Sticker, Story, Topic, Translation, Update, User, VideoChat, VideoChatActive, VideoChatScheduled, VoiceTranscription } from "../3_types.js";
 import { Migrate } from "../4_errors.js";
-import { AddReactionParams, AnswerCallbackQueryParams, AnswerInlineQueryParams, BanChatMemberParams, CreateInviteLinkParams, CreateStoryParams, DeleteMessageParams, DeleteMessagesParams, DownloadLiveStreamChunkParams, DownloadParams, EditMessageLiveLocationParams, EditMessageMediaParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetChatsParams, GetCreatedInviteLinksParams, GetHistoryParams, GetMyCommandsParams, JoinVideoChatParams, PinMessageParams, ReplyParams, ScheduleVideoChatParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendInlineQueryParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetMyCommandsParams, SetReactionsParams, SignInParams, StartVideoChatParams, StopPollParams } from "./0_params.js";
-import { Api } from "./1_types.js";
-import { ClientPlainParams } from "./1_client_plain.js";
-import { Composer as Composer_, NextFunction } from "./1_composer.js";
+import { AddChatMemberParams, AddContactParams, AddReactionParams, AnswerCallbackQueryParams, AnswerInlineQueryParams, AnswerPreCheckoutQueryParams, ApproveJoinRequestsParams, BanChatMemberParams, type CreateChannelParams, type CreateGroupParams, CreateInviteLinkParams, CreateStoryParams, type CreateSupergroupParams, CreateTopicParams, DeclineJoinRequestsParams, DeleteMessageParams, DeleteMessagesParams, DownloadLiveStreamChunkParams, DownloadParams, EditInlineMessageCaptionParams, EditInlineMessageMediaParams, EditInlineMessageTextParams, EditMessageCaptionParams, EditMessageLiveLocationParams, EditMessageMediaParams, EditMessageReplyMarkupParams, EditMessageTextParams, EditTopicParams, ForwardMessagesParams, GetChatMembersParams, GetChatsParams, GetClaimedGiftsParams, GetCommonChatsParams, GetCreatedInviteLinksParams, GetHistoryParams, GetMyCommandsParams, GetTranslationsParams, JoinVideoChatParams, PinMessageParams, ReplyParams, ScheduleVideoChatParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendContactParams, SendDiceParams, SendDocumentParams, SendGiftParams, SendInlineQueryParams, SendInvoiceParams, SendLocationParams, SendMediaGroupParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetBirthdayParams, SetChatMemberRightsParams, SetChatPhotoParams, SetEmojiStatusParams, SetLocationParams, SetMyCommandsParams, SetNameColorParams, SetPersonalChannelParams, SetProfileColorParams, SetReactionsParams, SetSignaturesEnabledParams, SignInParams, type StartBotParams, StartVideoChatParams, StopPollParams, UnpinMessageParams, UpdateProfileParams } from "./0_params.js";
 import { StorageOperations } from "./0_storage_operations.js";
+import { ClientPlainParams } from "./1_client_plain.js";
+import { Composer as Composer_, Middleware, MiddlewareFn, MiddlewareObj, NextFunction } from "./1_composer.js";
 export interface Context {
     /** The client that received the update. */
     client: Client;
@@ -35,7 +34,7 @@ export interface Context {
     me?: User;
     /** Resolves to `message`, `editedMessage`, or the `message` field of `callbackQuery`. */
     msg?: Message;
-    /** Resolves to `msg?.chat`. TODO */
+    /** Resolves to `msg?.chat`. */
     chat?: ChatP;
     /** Resolves to the `from` field of `message`, `editedMessage`, `callbackQuery`, or `inlineQuery`. */
     from?: User;
@@ -43,33 +42,37 @@ export interface Context {
     senderChat?: ChatP;
     toJSON: () => Update;
     /** Context-aware alias for `client.sendMessage()`. */
-    reply: (text: string, params?: Omit<SendMessageParams, "replyToMessageId" | "businessConnectionId"> & ReplyParams) => Promise<MessageText>;
+    reply: (text: string, params?: Omit<SendMessageParams, "replyTo" | "businessConnectionId"> & ReplyParams) => Promise<MessageText>;
     /** Context-aware alias for `client.sendPoll()`. */
-    replyPoll: (question: string, options: [string, string, ...string[]], params?: Omit<SendPollParams, "replyToMessageId" | "businessConnectionId"> & ReplyParams) => Promise<MessagePoll>;
+    replyPoll: (question: string, options: string[], params?: Omit<SendPollParams, "replyTo" | "businessConnectionId"> & ReplyParams) => Promise<MessagePoll>;
     /** Context-aware alias for `client.sendPhoto()`. */
-    replyPhoto: (photo: FileSource, params?: Omit<SendPhotoParams, "replyToMessageId" | "businessConnectionId"> & ReplyParams) => Promise<MessagePhoto>;
+    replyPhoto: (photo: FileSource, params?: Omit<SendPhotoParams, "replyTo" | "businessConnectionId"> & ReplyParams) => Promise<MessagePhoto>;
+    /** Context-aware alias for `client.sendMediaGroup()`. */
+    replyMediaGroup: (media: InputMedia[], params?: Omit<SendMediaGroupParams, "replyTo" | "businessConnectionId"> & ReplyParams) => Promise<Message[]>;
+    /** Context-aware alias for `client.sendInvoice()`. */
+    replyInvoice: (title: string, description: string, payload: string, currency: string, prices: PriceTag[], params?: Omit<SendInvoiceParams, "replyTo" | "businessConnectionId"> & ReplyParams) => Promise<MessageInvoice>;
     /** Context-aware alias for `client.sendDocument()`. */
-    replyDocument: (document: FileSource, params?: Omit<SendDocumentParams, "replyToMessageId" | "businessConnectionId"> & ReplyParams) => Promise<MessageDocument>;
+    replyDocument: (document: FileSource, params?: Omit<SendDocumentParams, "replyTo" | "businessConnectionId"> & ReplyParams) => Promise<MessageDocument>;
     /** Context-aware alias for `client.sendSticker()`. */
-    replySticker: (sticker: FileSource, params?: Omit<SendStickerParams, "replyToMessageId" | "businessConnectionId"> & ReplyParams) => Promise<MessageSticker>;
+    replySticker: (sticker: FileSource, params?: Omit<SendStickerParams, "replyTo" | "businessConnectionId"> & ReplyParams) => Promise<MessageSticker>;
     /** Context-aware alias for `client.sendLocation()`. */
-    replyLocation: (latitude: number, longitude: number, params?: Omit<SendLocationParams, "replyToMessageId" | "businessConnectionId"> & ReplyParams) => Promise<MessageLocation>;
+    replyLocation: (latitude: number, longitude: number, params?: Omit<SendLocationParams, "replyTo" | "businessConnectionId"> & ReplyParams) => Promise<MessageLocation>;
     /** Context-aware alias for `client.sendDice()`. */
-    replyDice: (params?: Omit<SendDiceParams, "replyToMessageId" | "businessConnectionId"> & ReplyParams) => Promise<MessageDice>;
+    replyDice: (params?: Omit<SendDiceParams, "replyTo" | "businessConnectionId"> & ReplyParams) => Promise<MessageDice>;
     /** Context-aware alias for `client.sendVenue()`. */
-    replyVenue: (latitude: number, longitude: number, title: string, address: string, params?: Omit<SendVenueParams, "replyToMessageId" | "businessConnectionId"> & ReplyParams) => Promise<MessageVenue>;
+    replyVenue: (latitude: number, longitude: number, title: string, address: string, params?: Omit<SendVenueParams, "replyTo" | "businessConnectionId"> & ReplyParams) => Promise<MessageVenue>;
     /** Context-aware alias for `client.sendContact()`. */
-    replyContact: (firstName: string, number: string, params?: Omit<SendContactParams, "replyToMessageId" | "businessConnectionId"> & ReplyParams) => Promise<MessageContact>;
+    replyContact: (firstName: string, number: string, params?: Omit<SendContactParams, "replyTo" | "businessConnectionId"> & ReplyParams) => Promise<MessageContact>;
     /** Context-aware alias for `client.sendVideo()`. */
-    replyVideo: (video: FileSource, params?: Omit<SendVideoParams, "replyToMessageId" | "businessConnectionId"> & ReplyParams) => Promise<MessageVideo>;
+    replyVideo: (video: FileSource, params?: Omit<SendVideoParams, "replyTo" | "businessConnectionId"> & ReplyParams) => Promise<MessageVideo>;
     /** Context-aware alias for `client.sendAnimation()`. */
-    replyAnimation: (animation: FileSource, params?: Omit<SendAnimationParams, "replyToMessageId" | "businessConnectionId"> & ReplyParams) => Promise<MessageAnimation>;
+    replyAnimation: (animation: FileSource, params?: Omit<SendAnimationParams, "replyTo" | "businessConnectionId"> & ReplyParams) => Promise<MessageAnimation>;
     /** Context-aware alias for `client.sendVoice()`. */
-    replyVoice: (voice: FileSource, params?: Omit<SendVoiceParams, "replyToMessageId" | "businessConnectionId"> & ReplyParams) => Promise<MessageVoice>;
+    replyVoice: (voice: FileSource, params?: Omit<SendVoiceParams, "replyTo" | "businessConnectionId"> & ReplyParams) => Promise<MessageVoice>;
     /** Context-aware alias for `client.sendAudio()`. */
-    replyAudio: (audio: FileSource, params?: Omit<SendAudioParams, "replyToMessageId" | "businessConnectionId"> & ReplyParams) => Promise<MessageAudio>;
+    replyAudio: (audio: FileSource, params?: Omit<SendAudioParams, "replyTo" | "businessConnectionId"> & ReplyParams) => Promise<MessageAudio>;
     /** Context-aware alias for `client.sendPoll()`. */
-    replyVideoNote: (videoNote: FileSource, params?: Omit<SendVideoNoteParams, "replyToMessageId" | "businessConnectionId"> & ReplyParams) => Promise<MessageVideoNote>;
+    replyVideoNote: (videoNote: FileSource, params?: Omit<SendVideoNoteParams, "replyTo" | "businessConnectionId"> & ReplyParams) => Promise<MessageVideoNote>;
     /** Context-aware alias for `client.deleteMessage()`. */
     delete: () => Promise<void>;
     /** Context-aware alias for `client.forwardMessage()`. */
@@ -93,13 +96,21 @@ export interface Context {
         messageThreadId?: number;
     }) => Promise<void>;
     /** Context-aware alias for `client.editInlineMessageText()`. */
-    editInlineMessageText: (text: string, params?: EditMessageParams) => Promise<void>;
+    editInlineMessageText: (text: string, params?: EditInlineMessageTextParams) => Promise<void>;
+    /** Context-aware alias for `client.editInlineMessageCaption()`. */
+    editInlineMessageCaption: (params?: EditInlineMessageCaptionParams) => Promise<void>;
+    /** Context-aware alias for `client.editInlineMessageMedia()`. */
+    editInlineMessageMedia: (media: InputMedia, params?: EditInlineMessageMediaParams) => Promise<void>;
     /** Context-aware alias for `client.editInlineMessageLiveLocation()`. */
     editInlineMessageLiveLocation: (latitude: number, longitude: number, params?: EditMessageLiveLocationParams) => Promise<void>;
     /** Context-aware alias for `client.editInlineMessageReplyMarkup()`. */
     editInlineMessageReplyMarkup: (params?: EditMessageReplyMarkupParams) => Promise<void>;
     /** Context-aware alias for `client.editMessageText()`. */
-    editMessageText: (messageId: number, text: string, params?: EditMessageParams) => Promise<MessageText>;
+    editMessageText: (messageId: number, text: string, params?: EditMessageTextParams) => Promise<MessageText>;
+    /** Context-aware alias for `client.editMessageCaption()`. */
+    editMessageCaption: (messageId: number, params?: EditMessageCaptionParams) => Promise<Message>;
+    /** Context-aware alias for `client.editMessageMedia()`. */
+    editMessageMedia: (messageId: number, media: InputMedia, params?: EditMessageMediaParams) => Promise<Message>;
     /** Context-aware alias for `client.editMessageLiveLocation()`. */
     editMessageLiveLocation: (messageId: number, latitude: number, longitude: number, params?: EditMessageLiveLocationParams) => Promise<MessageLocation>;
     /** Context-aware alias for `client.editMessageReplyMarkup()`. */
@@ -134,6 +145,8 @@ export interface Context {
     removeReaction: (messageId: number, reaction: Reaction) => Promise<void>;
     /** Context-aware alias for `client.setReactions()`. */
     setReactions: (messageId: number, reactions: Reaction[], params?: SetReactionsParams) => Promise<void>;
+    /** Context-aware alias for `client.readMessages()`. */
+    read(): Promise<void>;
     /** Context-aware alias for `client.setChatPhoto()`. */
     setChatPhoto: (photo: FileSource, params?: SetChatPhotoParams) => Promise<void>;
     /** Context-aware alias for `client.deleteChatPhoto()`. */
@@ -164,20 +177,29 @@ export interface Context {
     unblock: () => Promise<void>;
     /** Context-aware alias for `client.getChatMember()`. */
     getChatMember: (userId: ID) => Promise<ChatMember>;
+    /** Context-aware alias for `client.getChatMember()`. */
+    getChatMembers: (params?: GetChatMembersParams) => Promise<ChatMember[]>;
     /** Context-aware alias for `client.setChatStickerSet()`. */
     setChatStickerSet: (setName: string) => Promise<void>;
     /** Context-aware alias for `client.deleteChatStickerSet()`. */
     deleteChatStickerSet: () => Promise<void>;
     /** Context-aware alias for `client.getBusinessConnection()`. */
     getBusinessConnection: () => Promise<BusinessConnection>;
+    /** Context-aware alias for `client.answerPreCheckoutQuery()`. */
+    answerPreCheckoutQuery: (ok: boolean, params?: AnswerPreCheckoutQueryParams) => Promise<void>;
+    /** Context-aware alias for `client.approveJoinRequest()`. */
+    approveJoinRequest: () => Promise<void>;
+    /** Context-aware alias for `client.declineJoinRequest()`. */
+    declineJoinRequest: () => Promise<void>;
 }
 export declare class Composer<C extends Context = Context> extends Composer_<C> {
 }
+export { type Middleware, type MiddlewareFn, type MiddlewareObj, type NextFunction };
 export interface InvokeErrorHandler<C> {
     (ctx: {
         client: C;
         error: unknown;
-        function: types.Type | functions.Function<unknown>;
+        function: Api.AnyObject;
         n: number;
     }, next: NextFunction<boolean>): MaybePromise<boolean>;
 }
@@ -197,18 +219,18 @@ export interface ClientParams extends ClientPlainParams {
     appVersion?: string;
     /** The device_version parameter to be passed to initConnection. The default varies by the current runtime. */
     deviceModel?: string;
-    /** The lang_code parameter to be passed to initConnection. Defaults to the runtime's language or `"en"`. */
-    langCode?: string;
-    /** The lang_pack parameter to be passed to initConnection. Defaults to an empty string. */
-    langPack?: string;
-    /** The system_lang_cde parameter to be passed to initConnection. Defaults to the runtime's language or `"en"`. */
+    /** The client's language to be used for fetching translations. Defaults to the runtime's language or `"en"`. */
+    language?: string;
+    /** The client's platform to be used for fetching translations. Defaults to an empty string. */
+    platform?: string;
+    /** The system_lang_code parameter to be passed to initConnection. Defaults to the runtime's language or `"en"`. */
     systemLangCode?: string;
     /** The system_version parameter to be passed to initConnection. The default varies by the current runtime. */
     systemVersion?: string;
     /** Whether to use default handlers. Defaults to `true`. */
     defaultHandlers?: boolean;
-    /** Whether to ignore outgoing messages. Defaults to `true` for bots, and `false` for users. */
-    ignoreOutgoing?: boolean;
+    /** What types of outgoing messages should be received. `business` is only valid for bots. Defaults to `business` for bots, and `all` for users. */
+    outgoingMessages?: "none" | "business" | "all";
     /** Default command prefixes. Defaults to `"/"` for bots and `"\"` for users. This option must be set separately for nested composers. */
     prefixes?: string | string[];
     /** Whether to guarantee that order-sensitive updates are delivered at least once before delivering next ones. Useful mainly for clients providing a user interface à la Telegram Desktop. Defaults to `false`. */
@@ -227,18 +249,23 @@ export interface ClientParams extends ClientPlainParams {
      * When the provided storage takes advantage of memory, nothing changes, even if set to `true`.
      */
     persistCache?: boolean;
+    /** Whether to disable receiving updates. UpdateConnectionState and UpdatesAuthorizationState will always be received. Defaults to `false`. */
+    disableUpdates?: boolean;
+    /** An auth string to automatically import. Can be overriden by a later importAuthString call. */
+    authString?: string;
 }
 /**
  * An MTKruto client.
  */
 export declare class Client<C extends Context = Context> extends Composer<C> {
     #private;
+    get managers(): Record<string, any>;
     readonly storage: StorageOperations;
     readonly messageStorage: StorageOperations;
     readonly appVersion: string;
     readonly deviceModel: string;
-    readonly langCode: string;
-    readonly langPack: string;
+    readonly language: string;
+    readonly platform: string;
     readonly systemLangCode: string;
     readonly systemVersion: string;
     /**
@@ -247,7 +274,6 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
     constructor(params?: ClientParams);
     get connected(): boolean;
     get disconnected(): boolean;
-    api: Api;
     /**
      * Sets the DC and resets the auth key stored in the session provider
      * if the stored DC was not the same as the `dc` parameter.
@@ -285,15 +311,15 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param function_ The function to invoke.
      */
     invoke: {
-        <T extends (functions.Function<unknown> | types.Type) = functions.Function<unknown>>(function_: T): Promise<T extends functions.Function<unknown> ? T["__R"] : void>;
-        <T extends (functions.Function<unknown> | types.Type) = functions.Function<unknown>>(function_: T, noWait: true): Promise<void>;
-        <T extends (functions.Function<unknown> | types.Type) = functions.Function<unknown>>(function_: T, noWait?: boolean): Promise<T | void>;
-        use(handler: InvokeErrorHandler<Client<C>>): void;
+        <T extends Api.AnyObject, R = T["_"] extends keyof Api.Functions ? Api.ReturnType<T> extends never ? Api.ReturnType<Api.Functions[T["_"]]> : never : never>(function_: T): Promise<R>;
+        <T extends Api.AnyObject>(function_: T, noWait: true): Promise<void>;
+        <T extends Api.AnyObject, R = T["_"] extends keyof Api.Functions ? Api.ReturnType<T> extends never ? Api.ReturnType<Api.Functions[T["_"]]> : never : never>(function_: T, noWait?: boolean): Promise<R | void>;
+        use: (handler: InvokeErrorHandler<Client<C>>) => void;
     };
     /**
      * Alias for `invoke` with its second parameter being `true`.
      */
-    send<T extends (functions.Function<unknown> | types.Type) = functions.Function<unknown>>(function_: T): Promise<void>;
+    send<T extends Api.AnyObject<P>, P extends Api.Function>(function_: T): Promise<void>;
     exportAuthString(): Promise<string>;
     importAuthString(authString: string): Promise<void>;
     /**
@@ -301,19 +327,19 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      *
      * @param id The identifier of the chat.
      */
-    getInputPeer(id: ID): Promise<enums.InputPeer>;
+    getInputPeer(id: ID): Promise<Api.InputPeer>;
     /**
      * Get a channel or a supergroup's inputChannel. Useful when calling API functions directly.
      *
      * @param id The identifier of the channel or the supergroup.
      */
-    getInputChannel(id: ID): Promise<types.InputChannel>;
+    getInputChannel(id: ID): Promise<Api.inputChannel | Api.inputChannelFromMessage>;
     /**
      * Get a user's inputUser. Useful when calling API functions directly.
      *
      * @param id The identifier of the user.
      */
-    getInputUser(id: ID): Promise<types.InputUser>;
+    getInputUser(id: ID): Promise<Api.inputUserSelf | Api.inputUser | Api.inputUserFromMessage>;
     private [getEntity];
     private [getEntity];
     private [getEntity];
@@ -350,7 +376,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      */
     reorderUsernames(id: ID, order: string[]): Promise<boolean>;
     /**
-     * Hide all usernames from the a supergroup or a channel's profile. User-only.
+     * Hide all usernames from a supergroup or a channel's profile. User-only.
      *
      * @method ac
      * @param id A supergroup ID or a channel ID.
@@ -363,6 +389,66 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param id The identifier of the business connection.
      */
     getBusinessConnection(id: string): Promise<BusinessConnection>;
+    /**
+     * Set the current account's online status. User-only.
+     *
+     * @method ac
+     * @param online The new online status.
+     */
+    setOnline(online: boolean): Promise<void>;
+    /**
+     * Set the current account's emoji status. User-only.
+     *
+     * @method ac
+     * @param id The identifier of the emoji to be used as the new status.
+     */
+    setEmojiStatus(id: string, params?: SetEmojiStatusParams): Promise<void>;
+    /**
+     * Set the emoji status of a bot's user. Bot-only.
+     *
+     * @method ac
+     * @param userId The identifier of a user of the bot.
+     * @param id The identifier of the emoji to be used as the new status.
+     */
+    setUserEmojiStatus(userId: ID, id: string, params?: SetEmojiStatusParams): Promise<void>;
+    /**
+     * Update the profile of the current user. At least one parameter must be specified. User-only.
+     *
+     * @method ac
+     */
+    updateProfile(params?: UpdateProfileParams): Promise<void>;
+    /**
+     * Set the birthday of the current user. User-only.
+     *
+     * @method ac
+     */
+    setBirthday(params?: SetBirthdayParams): Promise<void>;
+    /**
+     * Set the personal channel of the current user. User-only.
+     *
+     * @method ac
+     */
+    setPersonalChannel(params?: SetPersonalChannelParams): Promise<void>;
+    /**
+     * Set the name color of the current user. User-only.
+     *
+     * @method ac
+     * @param color The identifier of the color to set.
+     */
+    setNameColor(color: number, params?: SetNameColorParams): Promise<void>;
+    /**
+     * Set the profile color of the current user. User-only.
+     *
+     * @method ac
+     * @param color The identifier of the color to set.
+     */
+    setProfileColor(color: number, params?: SetProfileColorParams): Promise<void>;
+    /**
+     * Set the location of the current user. User-only.
+     *
+     * @method ac
+     */
+    setLocation(params?: SetLocationParams): Promise<void>;
     /**
      * Send a text message.
      *
@@ -436,6 +522,15 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      */
     sendAudio(chatId: ID, audio: FileSource, params?: SendAudioParams): Promise<MessageAudio>;
     /**
+     * Send a media group.
+     *
+     * @method ms
+     * @param chatId The chat to send the media group to.
+     * @param media The media to include in the media group. Animations are not allowed. All of them must be of the same media type, but an exception is that photos and videos can be mixed.
+     * @returns The sent messages.
+     */
+    sendMediaGroup(chatId: ID, media: InputMedia[], params?: SendMediaGroupParams): Promise<Message[]>;
+    /**
      * Send a video note.
      *
      * @method ms
@@ -493,7 +588,20 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param options The poll's options.
      * @returns The sent poll.
      */
-    sendPoll(chatId: ID, question: string, options: [string, string, ...string[]], params?: SendPollParams): Promise<MessagePoll>;
+    sendPoll(chatId: ID, question: string, options: string[], params?: SendPollParams): Promise<MessagePoll>;
+    /**
+     * Send an invoice. Bot-only.
+     *
+     * @method ms
+     * @param chatId The chat to send the invoice to.
+     * @param title The invoice's title.
+     * @param description The invoice's description.
+     * @param payload The invoice's payload.
+     * @param currency The invoice's currency.
+     * @param prices The invoice's price tags.
+     * @returns The sent invoice.
+     */
+    sendInvoice(chatId: ID, title: string, description: string, payload: string, currency: string, prices: PriceTag[], params?: SendInvoiceParams): Promise<MessageInvoice>;
     /**
      * Edit a message's text.
      *
@@ -503,7 +611,17 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param text The new text of the message.
      * @returns The edited text message.
      */
-    editMessageText(chatId: ID, messageId: number, text: string, params?: EditMessageParams): Promise<MessageText>;
+    editMessageText(chatId: ID, messageId: number, text: string, params?: EditMessageTextParams): Promise<MessageText>;
+    /**
+     * Edit a message's caption.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that contains the message.
+     * @param messageId The message's identifier.
+     * @param text The new caption of the message.
+     * @returns The edited message.
+     */
+    editMessageCaption(chatId: ID, messageId: number, params?: EditMessageCaptionParams): Promise<Message>;
     /**
      * Edit a message's media.
      *
@@ -521,7 +639,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param inlineMessageId The inline message's identifier.
      * @param media The new media of the message.
      */
-    editInlineMessageMedia(inlineMessageId: string, media: InputMedia, params?: EditMessageMediaParams): Promise<void>;
+    editInlineMessageMedia(inlineMessageId: string, media: InputMedia, params?: EditInlineMessageMediaParams): Promise<void>;
     /**
      * Edit an inline message's text. Bot-only.
      *
@@ -529,7 +647,14 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param inlineMessageId The inline message's identifier.
      * @param text The new text of the message.
      */
-    editInlineMessageText(inlineMessageId: string, text: string, params?: EditMessageParams): Promise<void>;
+    editInlineMessageText(inlineMessageId: string, text: string, params?: EditInlineMessageTextParams): Promise<void>;
+    /**
+     * Edit an inline message's caption. Bot-only.
+     *
+     * @method ms
+     * @param inlineMessageId The inline message's identifier.
+     */
+    editInlineMessageCaption(inlineMessageId: string, params?: EditInlineMessageCaptionParams): Promise<void>;
     /**
      * Edit a message's reply markup.
      *
@@ -592,6 +717,17 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      */
     getMessage(chatId: ID, messageId: number): Promise<Message | null>;
     /**
+     * Retrieve a message using its link.
+     *
+     * @method ms
+     * @param link A message link.
+     * @example ```ts
+     * const message = await client.resolveMessageLink("https://t.me/MTKruto/212");
+     * ```
+     * @returns The message that was linked to.
+     */
+    resolveMessageLink(link: string): Promise<Message | null>;
+    /**
      * Delete multiple messages.
      *
      * @method ms
@@ -616,6 +752,38 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      */
     deleteChatMemberMessages(chatId: ID, memberId: ID): Promise<void>;
     /**
+     * Delete multiple scheduled messages.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that contains the scheduled messages.
+     * @param messageIds The identifiers of the scheduled messages to delete.
+     */
+    deleteScheduledMessages(chatId: ID, messageIds: number[]): Promise<void>;
+    /**
+     * Delete a scheduled message.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that contains the scheduled message.
+     * @param messageId The identifier of the scheduled message to delete.
+     */
+    deleteScheduledMessage(chatId: ID, messageId: number): Promise<void>;
+    /**
+     * Send multiple scheduled messages before their schedule.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that contains the scheduled messages.
+     * @param messageIds The identifiers of the scheduled messages to send.
+     */
+    sendScheduledMessages(chatId: ID, messageIds: number[]): Promise<Message[]>;
+    /**
+     * Send a scheduled message before its schedule.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that contains the scheduled message.
+     * @param messageId The identifier of the scheduled message to send.
+     */
+    sendScheduledMessage(chatId: ID, messageId: number): Promise<Message>;
+    /**
      * Pin a message in a chat.
      *
      * @method ms
@@ -630,7 +798,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param chatId The identifier of the chat that contains the message.
      * @param messageId The message's identifier.
      */
-    unpinMessage(chatId: ID, messageId: number): Promise<void>;
+    unpinMessage(chatId: ID, messageId: number, params?: UnpinMessageParams): Promise<void>;
     /**
      * Unpin all pinned messages.
      *
@@ -686,6 +854,47 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param query The message search query.
      */
     searchMessages(chatId: ID, query: string, params?: SearchMessagesParams): Promise<Message[]>;
+    /**
+     * Mark messages as read. User-only.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that includes the messages.
+     * @param untilMessageId The identifier of a message that will be marked as read, along with any other unread messages before it.
+     */
+    readMessages(chatId: number, untilMessageId: number): Promise<void>;
+    /**
+     * Start a bot. User-only.
+     *
+     * @method ms
+     * @param botId The identifier of the bot to start.
+     * @returns The start message.
+     */
+    startBot(botId: number, params?: StartBotParams): Promise<Message>;
+    /**
+     * Transcribe a voice message. User-only.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that includes the message.
+     * @param messageId The identifier of the message.
+     */
+    transcribeVoice(chatId: ID, messageId: number): Promise<VoiceTranscription>;
+    /**
+     * Cast a vote. User-only.
+     *
+     * @method pl
+     * @param chatId The identifier of the chat that includes the poll.
+     * @param messageId The identifier of the message that includes the poll.
+     * @param optionIndexes The indexes of the options to cast for.
+     */
+    vote(chatId: ID, messageId: number, optionIndexes: number[]): Promise<void>;
+    /**
+     * Retract a vote. User-only.
+     *
+     * @method pl
+     * @param chatId The identifier of the chat that includes the poll.
+     * @param messageId The identifier of the message that includes the poll.
+     */
+    retractVote(chatId: ID, messageId: number): Promise<void>;
     /**
      * Download a file.
      *
@@ -841,6 +1050,13 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      */
     getChatMember(chatId: ID, userId: ID): Promise<ChatMember>;
     /**
+     * Get the members of a chat.
+     *
+     * @method ch
+     * @param chatId The chat to get its members.
+     */
+    getChatMembers(chatId: ID, params?: GetChatMembersParams): Promise<ChatMember[]>;
+    /**
      * Set a chat's sticker set.
      *
      * @method ch
@@ -871,6 +1087,313 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @returns The newly created invite link.
      */
     createInviteLink(chatId: ID, params?: CreateInviteLinkParams): Promise<InviteLink>;
+    /**
+     * Approve a join request.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat that contains the join request.
+     * @param userId The user who made the join request.
+     */
+    approveJoinRequest(chatId: ID, userId: ID): Promise<void>;
+    /**
+     * Decline a join request.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat that contains the join request.
+     * @param userId The user who made the join request.
+     */
+    declineJoinRequest(chatId: ID, userId: ID): Promise<void>;
+    /**
+     * Approve all join requests. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat that contains the join requests.
+     */
+    approveJoinRequests(chatId: ID, params?: ApproveJoinRequestsParams): Promise<void>;
+    /**
+     * Decline all join requests. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat that contains the join requests.
+     */
+    declineJoinRequests(chatId: ID, params?: DeclineJoinRequestsParams): Promise<void>;
+    /**
+     * Add a single user to a chat.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to add the user to.
+     * @param userId The identifier of the user to add to the chat.
+     * @returns An array of FailedInvitation that has at most a length of 1. If empty, it means that the user was added.
+     */
+    addChatMember(chatId: ID, userId: ID, params?: AddChatMemberParams): Promise<FailedInvitation[]>;
+    /**
+     * Add multiple users at once to a channel or a supergroup.
+     *
+     * @method ch
+     * @param chatId The identifier of the channel or supergroup to add the users to.
+     * @param userId The identifiers of the users to add to the channel or supergroup.
+     */
+    addChatMembers(chatId: ID, userIds: ID[]): Promise<FailedInvitation[]>;
+    /**
+     * Open a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The chat to open.
+     */
+    openChat(chatId: ID): Promise<void>;
+    /**
+     * Close a chat previously opened by openChat. User-only.
+     *
+     * @method ch
+     * @param chatId The chat to close.
+     */
+    closeChat(chatId: ID): Promise<void>;
+    /**
+     * Create a group. User-only.
+     *
+     * @method ch
+     * @param title The title of the group.
+     * @returns The created group.
+     */
+    createGroup(title: string, params?: CreateGroupParams): Promise<ChatPGroup>;
+    /**
+     * Create a supergroup. User-only.
+     *
+     * @method ch
+     * @param title The title of the supergroup.
+     * @returns The created supergroup.
+     */
+    createSupergroup(title: string, params?: CreateSupergroupParams): Promise<ChatPSupergroup>;
+    /**
+     * Create a channel. User-only.
+     *
+     * @method ch
+     * @param title The title of the channel.
+     * @returns The created channel.
+     */
+    createChannel(title: string, params?: CreateChannelParams): Promise<ChatPChannel>;
+    /**
+     * Set the time to live of the messages of a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat.
+     * @param messageTtl The time to live of the messages in seconds.
+     */
+    setMessageTtl(chatId: ID, messageTtl: number): Promise<void>;
+    /**
+     * Archive multiple chats. User-only.
+     *
+     * @method ch
+     * @param chatIds The identifiers of the chats to archive.
+     */
+    archiveChats(chatIds: ID[]): Promise<void>;
+    /**
+     * Archive a single chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to archive.
+     */
+    archiveChat(chatId: ID): Promise<void>;
+    /**
+     * Unarchive multiple chats. User-only.
+     *
+     * @method ch
+     * @param chatIds The identifiers of the chats to unarchive.
+     */
+    unarchiveChats(chatIds: ID[]): Promise<void>;
+    /**
+     * Unarchive a single chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to unarchive.
+     */
+    unarchiveChat(chatId: ID): Promise<void>;
+    /**
+     * Get common chats between a user and the current one. User-only.
+     *
+     * @method ch
+     * @param userId The identifier of the user to get the common chats with them.
+     */
+    getCommonChats(userId: ID, params?: GetCommonChatsParams): Promise<ChatP[]>;
+    /**
+     * Get the settings of a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to get the settings for.
+     */
+    getChatSettings(chatId: ID): Promise<ChatSettings>;
+    /**
+     * Disable business bots in a private chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the private chat to disable business bots in.
+     */
+    disableBusinessBots(chatId: ID): Promise<void>;
+    /**
+     * Enable business bots in a private chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the private chat to enable business bots in.
+     */
+    enableBusinessBots(chatId: ID): Promise<void>;
+    /**
+     * Disable slow mode in a group. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the group to disable slow mode in.
+     */
+    disableSlowMode(chatId: ID): Promise<void>;
+    /**
+     * Change slow mode in a group. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the group to change slow mode in.
+     * @param duration New slow mode duration.
+     */
+    setSlowMode(chatId: ID, duration: SlowModeDuration): Promise<void>;
+    /**
+     * Change the title of a chat.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param title The new title.
+     */
+    setChatTitle(chatId: ID, title: string): Promise<void>;
+    /**
+     * Change the description of a chat.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param description The new description.
+     */
+    setChatDescription(chatId: ID, description: string): Promise<void>;
+    /**
+     * Hide or show the member list of a group to non-admins. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of a group.
+     * @param visible Whether the member list of the group should be visible.
+     */
+    setMemberListVisibility(chatId: ID, visible: boolean): Promise<void>;
+    /**
+     * Enable or disable topics in a group. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of a group.
+     * @param enabled Whether topics should be enabled in the group.
+     */
+    setTopicsEnabled(chatId: ID, enabled: boolean): Promise<void>;
+    /**
+     * Enable or disable automatic anti-spam in a group. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of a group.
+     * @param enabled Whether automatic anti-spam should be enabled in the group.
+     */
+    setAntispamEnabled(chatId: ID, enabled: boolean): Promise<void>;
+    /**
+     * Enable or disable post signatures in a channel. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of a channel.
+     * @param enabled Whether post signatures should be enabled in the channel.
+     */
+    setSignaturesEnabled(chatId: ID, enabled: boolean, params?: SetSignaturesEnabledParams): Promise<void>;
+    /**
+     * Delete a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to delete.
+     */
+    deleteChat(chatId: ID): Promise<void>;
+    /**
+     * Get discussion chat suggestions. User-only.
+     *
+     * @method ch
+     */
+    getDiscussionChatSuggestions(): Promise<ChatP[]>;
+    /**
+     * Set a channel's discussion chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of a channel.
+     * @param discussionChatId The identifier of the chat to use as discussion for the channel.
+     */
+    setDiscussionChat(chatId: ID, discussionChatId: ID): Promise<void>;
+    /**
+     * Transfer the ownership of a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param userId The identifier of the new owner.
+     * @param password The password of the current account.
+     */
+    transferChatOwnership(chatId: ID, userId: ID, password: string): Promise<void>;
+    /**
+     * Create a forum topic.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param title The title of the topic.
+     * @returns The created topic.
+     */
+    createTopic(chatId: ID, title: string, params?: CreateTopicParams): Promise<Topic>;
+    /**
+     * Edit a forum topic.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param topicId The identifier of the topic.
+     * @param title The new title of the topic.
+     * @returns The new topic.
+     */
+    editTopic(chatId: ID, topicId: number, title: string, params?: EditTopicParams): Promise<Topic>;
+    /**
+     * Hide the general forum topic.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     */
+    hideGeneralTopic(chatId: ID): Promise<void>;
+    /**
+     * Show the general forum topic.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     */
+    showGeneralTopic(chatId: ID): Promise<void>;
+    /**
+     * Close a forum topic.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param topicId The identifier of the topic.
+     */
+    closeTopic(chatId: ID, topicId: number): Promise<void>;
+    /**
+     * Reopen a forum topic.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param topicId The identifier of the topic.
+     */
+    reopenTopic(chatId: ID, topicId: number): Promise<void>;
+    /**
+     * Pin a forum topic.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param topicId The identifier of the topic.
+     */
+    pinTopic(chatId: ID, topicId: number): Promise<void>;
+    /**
+     * Unpin a forum topic.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param topicId The identifier of the topic.
+     */
+    unpinTopic(chatId: ID, topicId: number): Promise<void>;
     /**
      * Send a callback query. User-only.
      *
@@ -1157,6 +1680,83 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param timestamp Millisecond timestamp of the chunk to download.
      */
     downloadLiveStreamChunk(id: string, channelId: number, scale: number, timestamp: number, params?: DownloadLiveStreamChunkParams): AsyncGenerator<Uint8Array, void, unknown>;
+    /**
+     * Answer a pre-checkout query. Bot-only.
+     *
+     * @method pa
+     * @param preCheckoutQueryId The identifier of the pre-checkout query.
+     * @param ok Whether the checkout is going to be processed.
+     */
+    answerPreCheckoutQuery(preCheckoutQueryId: string, ok: boolean, params?: AnswerPreCheckoutQueryParams): Promise<void>;
+    /**
+     * Refund a star payment. Bot-only.
+     *
+     * @method pa
+     * @param userId The identifier of the user that was charged.
+     * @param telegramPaymentChargeId The identifier of the charge.
+     */
+    refundStarPayment(userId: ID, telegramPaymentChargeId: string): Promise<void>;
+    /**
+     * Get contacts. User-only.
+     *
+     * @method co
+     */
+    getContacts(): Promise<User[]>;
+    /**
+     * Delete multiple contacts. User-only.
+     *
+     * @method co
+     * @param userIds The identifiers of contacts to delete.
+     */
+    deleteContacts(userIds: ID[]): Promise<void>;
+    /**
+     * Delete a single contact. User-only.
+     *
+     * @method co
+     * @param userId The identifier of the contact to delete.
+     */
+    deleteContact(userId: ID): Promise<void>;
+    /**
+     * Add a contact. User-only.
+     *
+     * @method co
+     * @param userId The identifier of a user to add as contact.
+     */
+    addContact(userId: ID, params?: AddContactParams): Promise<void>;
+    /**
+     * Get translations. User-only.
+     *
+     * @method ta
+     */
+    getTranslations(params?: GetTranslationsParams): Promise<Translation[]>;
+    /**
+     * Get available gifts.
+     *
+     * @method gf
+     */
+    getGifts(): Promise<Gift[]>;
+    /**
+     * Get gifts claimed by a user or a channel. User-only.
+     *
+     * @method gf
+     * @param chatId The identifier of a user or a channel to get gifts for.
+     */
+    getClaimedGifts(chatId: ID, params?: GetClaimedGiftsParams): Promise<ClaimedGifts>;
+    /**
+     * Send a gift.
+     *
+     * @method gf
+     * @param chatId The identifier of a user or a channel to send the gift to.
+     * @param giftId The identifier of the gift to send.
+     */
+    sendGift(chatId: ID, giftId: string, params?: SendGiftParams): Promise<void>;
+    /**
+     * Sell a gift.
+     *
+     * @method gf
+     * @param userId The identifier of the user that sent the gift.
+     * @param messageId The identifier of the service message announcing the receival of the gift.
+     */
+    sellGift(userId: ID, messageId: number): Promise<void>;
 }
-export {};
 //# sourceMappingURL=5_client.d.ts.map

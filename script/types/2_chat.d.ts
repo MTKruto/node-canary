@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,13 +17,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { EntityGetter } from "./_getters.js";
+import { Birthday } from "./0_birthday.js";
+import { Location } from "./0_location.js";
 import { OpeningHours } from "./0_opening_hours.js";
 import { ChatPChannel, ChatPGroup, ChatPPrivate, ChatPSupergroup } from "./1_chat_p.js";
 import { Photo } from "./1_photo.js";
-import { Location } from "./0_location.js";
-import { Birthday } from "./0_birthday.js";
 /** @unlisted */
 export interface ChatBase {
     /** The chat's photo. */
@@ -54,10 +54,12 @@ export interface ChatPrivate extends ChatBase, ChatPPrivate {
     location?: Location;
     /** The opening hours of the business. */
     openingHours?: OpeningHours;
+    /** Whether the bot has specified a main mini app. */
+    hasMainMiniApp?: boolean;
 }
 /**
  * A chat with more fields.
  */
 export type Chat = ChatChannel | ChatSupergroup | ChatGroup | ChatPrivate;
-export declare function constructChat(fullChat: types.UserFull | types.ChatFull | types.ChannelFull, getEntity: EntityGetter): Promise<Chat>;
+export declare function constructChat(fullChat: Api.userFull | Api.chatFull | Api.channelFull, getEntity: EntityGetter): Promise<Chat>;
 //# sourceMappingURL=2_chat.d.ts.map

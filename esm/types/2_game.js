@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,13 +18,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { cleanObject } from "../1_utilities.js";
-import { as, types } from "../2_tl.js";
+import { as, is } from "../2_tl.js";
 import { FileType, serializeFileId, toUniqueFileId } from "./_file_id.js";
 import { constructAnimation } from "./1_animation.js";
 import { constructPhoto } from "./1_photo.js";
 export function constructGame(media_) {
     const game_ = media_.game;
-    const document_ = game_.document ? game_.document[as](types.Document) : undefined;
+    const document_ = game_.document ? as("document", game_.document) : undefined;
     const fileId_ = document_
         ? {
             type: FileType.Animation,
@@ -36,9 +36,9 @@ export function constructGame(media_) {
     return cleanObject({
         title: game_.title,
         description: media_.game.description,
-        photo: constructPhoto(game_.photo[as](types.Photo)),
+        photo: constructPhoto(as("photo", game_.photo)),
         animation: fileId_ && document_
-            ? constructAnimation(document_, document_.attributes.find((v) => v instanceof types.DocumentAttributeVideo), document_.attributes.find((v) => v instanceof types.DocumentAttributeFilename), serializeFileId(fileId_), toUniqueFileId(fileId_))
+            ? constructAnimation(document_, document_.attributes.find((v) => is("documentAttributeVideo", v)), document_.attributes.find((v) => is("documentAttributeFilename", v)), serializeFileId(fileId_), toUniqueFileId(fileId_))
             : undefined,
     });
 }

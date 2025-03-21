@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,14 +17,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { enums, types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { Update } from "../3_types.js";
+import { UpdateProcessor } from "./0_update_processor.js";
 import { C } from "./1_types.js";
-type ReactionManagerUpdate = types.UpdateBotMessageReactions | types.UpdateBotMessageReaction | types.UpdateMessageReactions | types.UpdateChannelMessageViews | types.UpdateChannelMessageForwards;
-export declare class ReactionManager {
+declare const reactionManagerUpdates: readonly ["updateBotMessageReactions", "updateBotMessageReaction", "updateMessageReactions", "updateChannelMessageViews", "updateChannelMessageForwards"];
+type ReactionManagerUpdate = Api.Types[(typeof reactionManagerUpdates)[number]];
+export declare class ReactionManager implements UpdateProcessor<ReactionManagerUpdate> {
     #private;
     constructor(c: C);
-    static canHandleUpdate(update: enums.Update): update is ReactionManagerUpdate;
+    canHandleUpdate(update: Api.Update): update is ReactionManagerUpdate;
     handleUpdate(update: ReactionManagerUpdate): Promise<Update | null>;
 }
 export {};

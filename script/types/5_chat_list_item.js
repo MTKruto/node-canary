@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,8 +19,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructChatListItem4 = exports.constructChatListItem3 = exports.constructChatListItem2 = exports.constructChatListItem = exports.getChatListItemOrder = void 0;
+exports.getChatListItemOrder = getChatListItemOrder;
+exports.constructChatListItem = constructChatListItem;
+exports.constructChatListItem2 = constructChatListItem2;
+exports.constructChatListItem3 = constructChatListItem3;
+exports.constructChatListItem4 = constructChatListItem4;
 const _0_deps_js_1 = require("../0_deps.js");
+const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _1_chat_p_js_1 = require("./1_chat_p.js");
 const _4_message_js_1 = require("./4_message.js");
@@ -31,7 +36,6 @@ function getChatListItemOrder(lastMessage, pinned) {
     }
     return p + String((BigInt(Math.floor(lastMessage.date.getTime())) << 32n) + BigInt(lastMessage.id));
 }
-exports.getChatListItemOrder = getChatListItemOrder;
 async function constructChatListItem(chatId, pinned, lastMessageId, getEntity, getMessage) {
     const entity = await getEntity((0, _2_tl_js_1.chatIdToPeer)(chatId));
     if (entity == null) {
@@ -39,36 +43,33 @@ async function constructChatListItem(chatId, pinned, lastMessageId, getEntity, g
     }
     const lastMessage_ = lastMessageId > 0 ? await getMessage(chatId, lastMessageId) : null;
     const lastMessage = lastMessage_ == null ? undefined : lastMessage_;
-    return {
+    return (0, _1_utilities_js_1.cleanObject)({
         chat: (0, _1_chat_p_js_1.constructChatP)(entity),
         order: getChatListItemOrder(lastMessage, pinned),
         pinned,
         lastMessage,
-    };
+    });
 }
-exports.constructChatListItem = constructChatListItem;
 function constructChatListItem2(entity, pinned, lastMessage) {
-    return {
+    return (0, _1_utilities_js_1.cleanObject)({
         chat: (0, _1_chat_p_js_1.constructChatP)(entity),
         order: getChatListItemOrder(lastMessage, pinned),
         pinned,
         lastMessage,
-    };
+    });
 }
-exports.constructChatListItem2 = constructChatListItem2;
 async function constructChatListItem3(chatId, pinned, lastMessage, getEntity) {
     const entity = await getEntity((0, _2_tl_js_1.chatIdToPeer)(chatId));
     if (entity == null) {
         return null;
     }
-    return {
+    return (0, _1_utilities_js_1.cleanObject)({
         chat: (0, _1_chat_p_js_1.constructChatP)(entity),
         order: getChatListItemOrder(lastMessage, pinned),
         pinned,
         lastMessage,
-    };
+    });
 }
-exports.constructChatListItem3 = constructChatListItem3;
 async function constructChatListItem4(dialog, dialogs, pinnedChats, getEntity, getMessage, getStickerSetName) {
     const topMessage_ = dialogs.messages.find((v) => "id" in v && v.id == dialog.top_message);
     if (!topMessage_) {
@@ -80,15 +81,14 @@ async function constructChatListItem4(dialog, dialogs, pinnedChats, getEntity, g
     const userId = "user_id" in dialog.peer ? dialog.peer.user_id : null;
     const chatId = "chat_id" in dialog.peer ? dialog.peer.chat_id : null;
     const channelId = "channel_id" in dialog.peer ? dialog.peer.channel_id : null;
-    const chat__ = chatId != null ? dialogs.chats.find((v) => v instanceof _2_tl_js_1.types.Chat && v.id == chatId) : channelId != null ? dialogs.chats.find((v) => v instanceof _2_tl_js_1.types.Channel && v.id == channelId) : userId != null ? dialogs.users.find((v) => v instanceof _2_tl_js_1.types.User && v.id == userId) : (0, _0_deps_js_1.unreachable)();
+    const chat__ = chatId != null ? dialogs.chats.find((v) => (0, _2_tl_js_1.is)("chat", v) && v.id == chatId) : channelId != null ? dialogs.chats.find((v) => (0, _2_tl_js_1.is)("channel", v) && v.id == channelId) : userId != null ? dialogs.users.find((v) => (0, _2_tl_js_1.is)("user", v) && v.id == userId) : (0, _0_deps_js_1.unreachable)();
     if (!chat__) {
         (0, _0_deps_js_1.unreachable)();
     }
-    return {
+    return (0, _1_utilities_js_1.cleanObject)({
         chat: (0, _1_chat_p_js_1.constructChatP)(chat__),
         order,
         lastMessage,
         pinned,
-    };
+    });
 }
-exports.constructChatListItem4 = constructChatListItem4;

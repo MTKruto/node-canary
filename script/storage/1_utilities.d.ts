@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -25,7 +25,8 @@ export declare enum ValueType {
     BigInt = 3,
     Date = 4,
     Uint8Array = 5,
-    Array = 6
+    Array = 6,
+    Map = 7
 }
 export declare function toString(value: unknown): string;
 export declare function fromString<T>(string: string): T;

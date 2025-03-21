@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,7 +18,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { chatIdToPeer, peerToChatId, types } from "../2_tl.js";
+import { cleanObject } from "../1_utilities.js";
+import { chatIdToPeer, is, peerToChatId } from "../2_tl.js";
 import { constructChatP } from "./1_chat_p.js";
 import { constructMessage } from "./4_message.js";
 export function getChatListItemOrder(lastMessage, pinned) {
@@ -35,32 +36,32 @@ export async function constructChatListItem(chatId, pinned, lastMessageId, getEn
     }
     const lastMessage_ = lastMessageId > 0 ? await getMessage(chatId, lastMessageId) : null;
     const lastMessage = lastMessage_ == null ? undefined : lastMessage_;
-    return {
+    return cleanObject({
         chat: constructChatP(entity),
         order: getChatListItemOrder(lastMessage, pinned),
         pinned,
         lastMessage,
-    };
+    });
 }
 export function constructChatListItem2(entity, pinned, lastMessage) {
-    return {
+    return cleanObject({
         chat: constructChatP(entity),
         order: getChatListItemOrder(lastMessage, pinned),
         pinned,
         lastMessage,
-    };
+    });
 }
 export async function constructChatListItem3(chatId, pinned, lastMessage, getEntity) {
     const entity = await getEntity(chatIdToPeer(chatId));
     if (entity == null) {
         return null;
     }
-    return {
+    return cleanObject({
         chat: constructChatP(entity),
         order: getChatListItemOrder(lastMessage, pinned),
         pinned,
         lastMessage,
-    };
+    });
 }
 export async function constructChatListItem4(dialog, dialogs, pinnedChats, getEntity, getMessage, getStickerSetName) {
     const topMessage_ = dialogs.messages.find((v) => "id" in v && v.id == dialog.top_message);
@@ -73,14 +74,14 @@ export async function constructChatListItem4(dialog, dialogs, pinnedChats, getEn
     const userId = "user_id" in dialog.peer ? dialog.peer.user_id : null;
     const chatId = "chat_id" in dialog.peer ? dialog.peer.chat_id : null;
     const channelId = "channel_id" in dialog.peer ? dialog.peer.channel_id : null;
-    const chat__ = chatId != null ? dialogs.chats.find((v) => v instanceof types.Chat && v.id == chatId) : channelId != null ? dialogs.chats.find((v) => v instanceof types.Channel && v.id == channelId) : userId != null ? dialogs.users.find((v) => v instanceof types.User && v.id == userId) : unreachable();
+    const chat__ = chatId != null ? dialogs.chats.find((v) => is("chat", v) && v.id == chatId) : channelId != null ? dialogs.chats.find((v) => is("channel", v) && v.id == channelId) : userId != null ? dialogs.users.find((v) => is("user", v) && v.id == userId) : unreachable();
     if (!chat__) {
         unreachable();
     }
-    return {
+    return cleanObject({
         chat: constructChatP(chat__),
         order,
         lastMessage,
         pinned,
-    };
+    });
 }

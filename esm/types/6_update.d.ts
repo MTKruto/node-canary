@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -21,18 +21,23 @@ import { AuthorizationState } from "./0_authorization_state.js";
 import { ConnectionState } from "./0_connection_state.js";
 import { MessageReference } from "./0_message_reference.js";
 import { StoryReference } from "./0_story_reference.js";
+import { Translation } from "./0_translation.js";
+import { VideoChat } from "./0_video_chat.js";
+import { VoiceTranscription } from "./0_voice_transcription.js";
 import { BusinessConnection } from "./2_business_connection.js";
 import { ChosenInlineResult } from "./2_chosen_inline_result.js";
 import { InlineQuery } from "./2_inline_query.js";
 import { MessageInteractions } from "./2_message_interactions.js";
 import { MessageReactionCount } from "./2_message_reaction_count.js";
 import { MessageReactions } from "./2_message_reactions.js";
+import { Poll } from "./2_poll.js";
+import { PreCheckoutQuery } from "./2_pre_checkout_query.js";
 import { ChatMemberUpdated } from "./3_chat_member_updated.js";
+import { JoinRequest } from "./3_join_request.js";
 import { Story } from "./3_story.js";
 import { Message } from "./4_message.js";
 import { CallbackQuery } from "./5_callback_query.js";
 import { ChatListItem } from "./5_chat_list_item.js";
-import { VideoChat } from "./0_video_chat.js";
 /**
  * A client's connection state was changed.
  *
@@ -54,7 +59,7 @@ export interface UpdateConnectionState {
  * A client's authorization state was changed.
  *
  * ```
- * client.on("authorizationState", (ctx) => {
+ * client.on("authorizationState", async (ctx) => {
  *   if (ctx.authorizationState.authorized) {
  *     const me = await ctx.client.getMe();
  *     console.log("The client is now authorized as", me.firstName);
@@ -111,11 +116,30 @@ export interface UpdateNewMessage {
  * ```
  * @unlisted
  */
-export interface UpdateEditedMessage {
-    /** The edited message
+export interface UpdateMessageEdited {
+    /**
+     * The edited message.
      * @discriminator
      */
     editedMessage: Message;
+}
+/**
+ * A message was scheduled. User-only.
+ *
+ * ```
+ * client.on("scheduledMessage", (ctx) => {
+ *   console.log("A message was just schedueld.");
+ *   // ctx.scheduledMessage
+ * });
+ * ```
+ * @unlisted
+ */
+export interface UpdateMessageScheduled {
+    /**
+     * The scheduled message.
+     * @discriminator
+     */
+    scheduledMessage: Message;
 }
 /**
  * One or more messages were deleted.
@@ -129,12 +153,13 @@ export interface UpdateEditedMessage {
  * ```
  * @unlisted
  */
-export interface UpdateDeletedMessages {
+export interface UpdateMessagesDeleted {
     /**
      * The deleted messages
      * @discriminator
      */
     deletedMessages: MessageReference[];
+    scheduled?: boolean;
     businessConnectionId?: string;
 }
 /**
@@ -263,6 +288,12 @@ export interface UpdateMyChatMember {
 }
 /**
  * A story was deleted.
+ *
+ * ```
+ * client.on("deletedStory", (ctx) => {
+ *   console.log("The story", ctx.deletedStory, "was deleted");
+ * });
+ * ```
  * @unlisted
  */
 export interface UpdateDeletedStory {
@@ -271,6 +302,13 @@ export interface UpdateDeletedStory {
 }
 /**
  * A story was posted.
+ *
+ * ```
+ * client.on("story", (ctx) => {
+ *   console.log("title" in ctx.chat ? ctx.chat.title : ctx.chat.firstName, "posted a story");
+ *   console.log(ctx.story);
+ * });
+ * ```
  * @unlisted
  */
 export interface UpdateNewStory {
@@ -279,6 +317,13 @@ export interface UpdateNewStory {
 }
 /**
  * A business connection was added, modified, or removed.
+ *
+ * ```
+ * client.on("businessConnection", (ctx) => {
+ *   console.log("Business connection with", ctx.from.id, ctx.businessConnection.isEnabled ? "created" : "lost");
+ *   console.log(ctx.businessConnection);
+ * });
+ * ```
  * @unlisted
  */
 export interface UpdateBusinessConnection {
@@ -287,6 +332,13 @@ export interface UpdateBusinessConnection {
 }
 /**
  * A video chat was started, scheduled, or ended.
+ *
+ * ```
+ * client.on("videoChat", (ctx) => {
+ *   console.log("Video chat", ctx.videoChat.type);
+ *   console.log(ctx.videoChat);
+ * });
+ * ```
  * @unlisted
  */
 export interface UpdateVideoChat {
@@ -294,12 +346,83 @@ export interface UpdateVideoChat {
     videoChat: VideoChat;
 }
 /** @unlisted */
+export interface UpdatePreCheckoutQuery {
+    /** @discriminator */
+    preCheckoutQuery: PreCheckoutQuery;
+}
+/**
+ * A user requested to join a chat. Bot-only.
+ * @unlisted
+ */
+export interface UpdateJoinRequest {
+    /** @discriminator */
+    joinRequest: JoinRequest;
+}
+/**
+ * Translations were updated.
+ *
+ * ```
+ * client.on("translations", (ctx) => {
+ *   console.log("Translations were just updated.");
+ *   // ctx.translations
+ * });
+ * ```
+ * @unlisted
+ */
+export interface UpdateTranslations {
+    /**
+     * The new translations.
+     * @discriminator
+     */
+    translations: Translation[];
+    /** The platform of the translations that were updated. */
+    platform: string;
+    /** The language of the translations that were updated. */
+    language: string;
+}
+/**
+ * A poll was updated.
+ *
+ * ```
+ * client.on("poll", (ctx) => {
+ *   console.log("A poll just changed.");
+ *   // ctx.poll
+ * });
+ * ```
+ * @unlisted
+ */
+export interface UpdatePoll {
+    /**
+     * The poll with its new state.
+     * @discriminator
+     */
+    poll: Poll;
+}
+/**
+ * A voice transcription was updated.
+ *
+ * ```
+ * client.on("voiceTranscription", (ctx) => {
+ *   // ctx.voiceTranscription
+ * });
+ * ```
+ * @unlisted
+ */
+export interface UpdateVoiceTranscription {
+    /**
+     * The new voice transcription.
+     * @discriminator
+     */
+    voiceTranscription: VoiceTranscription;
+}
+/** @unlisted */
 export interface UpdateMap {
     message: UpdateNewMessage;
-    editedMessage: UpdateEditedMessage;
+    editedMessage: UpdateMessageEdited;
+    scheduledMessage: UpdateMessageScheduled;
     connectionState: UpdateConnectionState;
     authorizationState: UpdateAuthorizationState;
-    deletedMessages: UpdateDeletedMessages;
+    deletedMessages: UpdateMessagesDeleted;
     callbackQuery: UpdateCallbackQuery;
     inlineQuery: UpdateInlineQuery;
     chosenInlineResult: UpdateChosenInlineResult;
@@ -315,9 +438,14 @@ export interface UpdateMap {
     story: UpdateNewStory;
     businessConnection: UpdateBusinessConnection;
     videoChat: UpdateVideoChat;
+    preCheckoutQuery: UpdatePreCheckoutQuery;
+    joinRequest: UpdateJoinRequest;
+    translations: UpdateTranslations;
+    poll: UpdatePoll;
+    voiceTranscription: UpdateVoiceTranscription;
 }
 /** @unlisted */
-export type UpdateIntersection<T> = T & Partial<UpdateConnectionState & UpdateAuthorizationState & UpdateNewMessage & UpdateEditedMessage & UpdateDeletedMessages & UpdateCallbackQuery & UpdateInlineQuery & UpdateChosenInlineResult & UpdateNewChat & UpdateEditedChat & UpdateDeletedChat & UpdateMessageInteractions & UpdateMessageReactionCount & UpdateMessageReactions & UpdateChatMember & UpdateMyChatMember & UpdateDeletedStory & UpdateNewStory & UpdateBusinessConnection & UpdateVideoChat>;
+export type UpdateIntersection = Partial<UpdateConnectionState & UpdateAuthorizationState & UpdateNewMessage & UpdateMessageEdited & UpdateMessageScheduled & UpdateMessagesDeleted & UpdateCallbackQuery & UpdateInlineQuery & UpdateChosenInlineResult & UpdateNewChat & UpdateEditedChat & UpdateDeletedChat & UpdateMessageInteractions & UpdateMessageReactionCount & UpdateMessageReactions & UpdateChatMember & UpdateMyChatMember & UpdateDeletedStory & UpdateNewStory & UpdateBusinessConnection & UpdateVideoChat & UpdatePreCheckoutQuery & UpdateJoinRequest & UpdateTranslations & UpdatePoll & UpdateVoiceTranscription>;
 /** An incoming update. */
-export type Update = UpdateConnectionState | UpdateAuthorizationState | UpdateNewMessage | UpdateEditedMessage | UpdateDeletedMessages | UpdateCallbackQuery | UpdateInlineQuery | UpdateChosenInlineResult | UpdateNewChat | UpdateEditedChat | UpdateDeletedChat | UpdateMessageInteractions | UpdateMessageReactionCount | UpdateMessageReactions | UpdateChatMember | UpdateMyChatMember | UpdateDeletedStory | UpdateNewStory | UpdateBusinessConnection | UpdateVideoChat;
+export type Update = UpdateConnectionState | UpdateAuthorizationState | UpdateNewMessage | UpdateMessageEdited | UpdateMessageScheduled | UpdateMessagesDeleted | UpdateCallbackQuery | UpdateInlineQuery | UpdateChosenInlineResult | UpdateNewChat | UpdateEditedChat | UpdateDeletedChat | UpdateMessageInteractions | UpdateMessageReactionCount | UpdateMessageReactions | UpdateChatMember | UpdateMyChatMember | UpdateDeletedStory | UpdateNewStory | UpdateBusinessConnection | UpdateVideoChat | UpdatePreCheckoutQuery | UpdateJoinRequest | UpdateTranslations | UpdatePoll | UpdateVoiceTranscription;
 //# sourceMappingURL=6_update.d.ts.map

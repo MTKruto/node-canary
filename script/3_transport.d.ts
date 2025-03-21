@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -21,5 +21,6 @@ export * from "./transport/0_transport.js";
 export * from "./transport/1_transport_abridged.js";
 export * from "./transport/1_transport_intermediate.js";
 export * from "./transport/2_transport_provider.js";
+export * from "./transport/3_transport_provider_tcp.js";
 export * from "./transport/3_transport_provider_web_socket.js";
 //# sourceMappingURL=3_transport.d.ts.map

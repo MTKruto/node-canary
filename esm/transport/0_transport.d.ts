@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -23,8 +23,8 @@ export declare abstract class Transport {
         encryptionCTR: CTR;
         decryptionCTR: CTR;
     } | null;
-    protected encrypt(buffer: Uint8Array): void;
-    protected decrypt(buffer: Uint8Array): void;
+    protected encrypt(buffer: Uint8Array<ArrayBuffer>): Promise<Uint8Array>;
+    protected decrypt(buffer: Uint8Array<ArrayBuffer>): Promise<Uint8Array<ArrayBuffer>>;
     abstract get initialized(): boolean;
     abstract initialize(): MaybePromise<void>;
     abstract receive(): MaybePromise<Uint8Array>;

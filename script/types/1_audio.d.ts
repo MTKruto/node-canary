@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { Thumbnail } from "./0_thumbnail.js";
 /** An audio file. */
 export interface Audio {
@@ -38,5 +38,5 @@ export interface Audio {
     /** Thumbnails of the album cover to which the music file belongs. */
     thumbnails: Thumbnail[];
 }
-export declare function constructAudio(document: types.Document, audioAttribute: types.DocumentAttributeAudio | undefined, fileId: string, fileUniqueId: string): Audio;
+export declare function constructAudio(document: Api.document, audioAttribute: Api.documentAttributeAudio | undefined, fileId: string, fileUniqueId: string): Audio;
 //# sourceMappingURL=1_audio.d.ts.map

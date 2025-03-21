@@ -1,13 +1,18 @@
-import { Deno } from "@deno/shim-deno";
-export { Deno } from "@deno/shim-deno";
 import { crypto } from "@deno/shim-crypto";
 export { crypto } from "@deno/shim-crypto";
+import { alert, confirm, prompt } from "@deno/shim-prompts";
+export { alert, confirm, prompt } from "@deno/shim-prompts";
 import { default as WebSocket } from "ws";
 export { default as WebSocket } from "ws";
+import { Deno } from "@deno/shim-deno";
+export { Deno } from "@deno/shim-deno";
 const dntGlobals = {
-    Deno,
     crypto,
+    alert,
+    confirm,
+    prompt,
     WebSocket,
+    Deno,
 };
 export const dntGlobalThis = createMergeProxy(globalThis, dntGlobals);
 function createMergeProxy(baseObj, extObj) {

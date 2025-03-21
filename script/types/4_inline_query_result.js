@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,18 +19,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.inlineQueryResultToTlObject = exports.constructInlineQueryResult = void 0;
+exports.constructInlineQueryResult = constructInlineQueryResult;
+exports.inlineQueryResultToTlObject = inlineQueryResultToTlObject;
 const _0_deps_js_1 = require("../0_deps.js");
-const _2_tl_js_1 = require("../2_tl.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
+const _2_tl_js_1 = require("../2_tl.js");
 const _file_id_js_1 = require("./_file_id.js");
 const _0_message_entity_js_1 = require("./0_message_entity.js");
+const _0_thumbnail_js_1 = require("./0_thumbnail.js");
 const _1_photo_js_1 = require("./1_photo.js");
 const _3_reply_markup_js_1 = require("./3_reply_markup.js");
-const _0_thumbnail_js_1 = require("./0_thumbnail.js");
 function constructInlineQueryResult(result) {
     const id = result.id, title = result.title ?? "", type = result.type, description = result.description;
-    if (result.send_message instanceof _2_tl_js_1.types.BotInlineMessageMediaGeo) {
+    if ((0, _2_tl_js_1.is)("botInlineMessageMediaGeo", result.send_message)) {
         const geoPoint = result.send_message.geo;
         return (0, _1_utilities_js_1.cleanObject)({
             type: "location",
@@ -44,7 +45,7 @@ function constructInlineQueryResult(result) {
             proximityAlertRadius: result.send_message.proximity_notification_radius,
         });
     }
-    else if (result.send_message instanceof _2_tl_js_1.types.BotInlineMessageMediaVenue) {
+    else if ((0, _2_tl_js_1.is)("botInlineMessageMediaVenue", result.send_message)) {
         const geoPoint = result.send_message.geo;
         return (0, _1_utilities_js_1.cleanObject)({
             type: "venue",
@@ -57,7 +58,7 @@ function constructInlineQueryResult(result) {
             foursquareType: result.send_message.venue_type,
         });
     }
-    else if (result.send_message instanceof _2_tl_js_1.types.BotInlineMessageMediaWebPage || result.send_message instanceof _2_tl_js_1.types.BotInlineMessageText) {
+    else if ((0, _2_tl_js_1.is)("botInlineMessageMediaWebPage", result.send_message) || (0, _2_tl_js_1.is)("botInlineMessageText", result.send_message)) {
         return (0, _1_utilities_js_1.cleanObject)({
             type: "article",
             id,
@@ -67,26 +68,26 @@ function constructInlineQueryResult(result) {
                 type: "text",
                 text: result.send_message.message,
                 entities: (result.send_message.entities ?? []).map(_0_message_entity_js_1.constructMessageEntity).filter((v) => v != null),
-                linkPreview: result.send_message instanceof _2_tl_js_1.types.InputBotInlineMessageMediaWebPage ? { url: result.send_message.url, smallMedia: result.send_message.force_small_media, largeMedia: result.send_message.force_large_media, aboveText: result.send_message.invert_media } : undefined,
+                linkPreview: (0, _2_tl_js_1.is)("botInlineMessageMediaWebPage", result.send_message) ? { url: result.send_message.url, smallMedia: result.send_message.force_small_media, largeMedia: result.send_message.force_large_media, aboveText: result.send_message.invert_media } : undefined,
             }),
             replyMarkup: result.send_message.reply_markup ? (0, _3_reply_markup_js_1.constructReplyMarkup)(result.send_message.reply_markup) : undefined,
         });
     }
-    else if (result.send_message instanceof _2_tl_js_1.types.BotInlineMessageMediaAuto) {
+    else if ((0, _2_tl_js_1.is)("botInlineMessageMediaAuto", result.send_message)) {
         let ref;
         let attributes;
         const thumbnailUrl = "thumb" in result ? result.thumb?.url : undefined;
         let photoSizes;
         let photo;
-        if (result instanceof _2_tl_js_1.types.BotInlineMediaResult) {
+        if ((0, _2_tl_js_1.is)("botInlineMediaResult", result)) {
             if (result.photo) {
-                photo = result.photo[_2_tl_js_1.as](_2_tl_js_1.types.Photo);
+                photo = (0, _2_tl_js_1.as)("photo", result.photo);
                 ref = { fileId: (0, _file_id_js_1.getPhotoFileId)(photo).fileId };
                 const { largest } = photoSizes = (0, _1_photo_js_1.getPhotoSizes)(photo);
-                attributes = [new _2_tl_js_1.types.DocumentAttributeImageSize({ w: largest.w, h: largest.h })];
+                attributes = [{ _: "documentAttributeImageSize", w: largest.w, h: largest.h }];
             }
             else if (result.document) {
-                const document = result.document[_2_tl_js_1.as](_2_tl_js_1.types.Document);
+                const document = (0, _2_tl_js_1.as)("document", result.document);
                 ref = {
                     fileId: (0, _file_id_js_1.serializeFileId)({
                         type: _file_id_js_1.FileType.Document, // Should this be changed? The type is already known.
@@ -118,7 +119,7 @@ function constructInlineQueryResult(result) {
         const replyMarkup = result.send_message.reply_markup ? (0, _3_reply_markup_js_1.constructReplyMarkup)(result.send_message.reply_markup) : undefined;
         switch (type) {
             case "audio": {
-                const a = attributes?.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeAudio);
+                const a = attributes?.find((v) => (0, _2_tl_js_1.is)("documentAttributeAudio", v));
                 return (0, _1_utilities_js_1.cleanObject)({
                     id,
                     type,
@@ -132,7 +133,7 @@ function constructInlineQueryResult(result) {
             }
             case "gif":
             case "mpeg4Gif": {
-                const a = attributes.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeVideo);
+                const a = attributes.find((v) => (0, _2_tl_js_1.is)("documentAttributeVideo", v));
                 return (0, _1_utilities_js_1.cleanObject)({
                     id,
                     type,
@@ -147,7 +148,7 @@ function constructInlineQueryResult(result) {
                 });
             }
             case "photo": {
-                const a = attributes.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeImageSize);
+                const a = attributes.find((v) => (0, _2_tl_js_1.is)("documentAttributeImageSize", v));
                 return (0, _1_utilities_js_1.cleanObject)({
                     id,
                     type,
@@ -163,7 +164,7 @@ function constructInlineQueryResult(result) {
                 });
             }
             case "video": {
-                const a = attributes.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeVideo);
+                const a = attributes.find((v) => (0, _2_tl_js_1.is)("documentAttributeVideo", v));
                 return (0, _1_utilities_js_1.cleanObject)({
                     id,
                     type,
@@ -172,7 +173,7 @@ function constructInlineQueryResult(result) {
                     ...ref,
                     messageContent,
                     replyMarkup,
-                    mimeType: "content" in result && result.content ? result.content.mime_type : "video/mp4", // TODO
+                    mimeType: "content" in result && result.content ? result.content.mime_type : "video/mp4",
                     thumbnailUrl: thumbnailUrl,
                     width: a?.w,
                     height: a?.h,
@@ -180,7 +181,7 @@ function constructInlineQueryResult(result) {
                 });
             }
             case "voice": {
-                const a = attributes.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeAudio);
+                const a = attributes.find((v) => (0, _2_tl_js_1.is)("documentAttributeAudio", v));
                 return (0, _1_utilities_js_1.cleanObject)({
                     id,
                     type,
@@ -207,7 +208,6 @@ function constructInlineQueryResult(result) {
     }
     (0, _0_deps_js_1.unreachable)();
 }
-exports.constructInlineQueryResult = constructInlineQueryResult;
 // deno-lint-ignore no-explicit-any
 async function inlineQueryResultToTlObject(result_, parseText, usernameResolver) {
     let document = null;
@@ -216,18 +216,15 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
     switch (result_.type) {
         case "audio":
             if ("url" in result_) {
-                document = new _2_tl_js_1.types.InputWebDocument({
+                document = {
+                    _: "inputWebDocument",
                     url: result_.url,
                     size: 0,
                     mime_type: "audio/mpeg",
                     attributes: [
-                        new _2_tl_js_1.types.DocumentAttributeAudio({
-                            duration: result_.audioDuration ?? 0,
-                            title: result_.title,
-                            performer: result_.performer,
-                        }),
+                        { _: "documentAttributeAudio", duration: result_.audioDuration ?? 0, title: result_.title, performer: result_.performer },
                     ],
-                });
+                };
             }
             else {
                 fileId_ = result_.fileId;
@@ -235,18 +232,15 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
             break;
         case "video":
             if ("url" in result_) {
-                document = new _2_tl_js_1.types.InputWebDocument({
+                document = {
+                    _: "inputWebDocument",
                     url: result_.url,
                     size: 0,
                     mime_type: result_.mimeType ?? "video/mp4",
                     attributes: [
-                        new _2_tl_js_1.types.DocumentAttributeVideo({
-                            duration: result_.videoDuration ?? 0,
-                            h: result_.height ?? 0,
-                            w: result_.width ?? 0,
-                        }),
+                        { _: "documentAttributeVideo", duration: result_.videoDuration ?? 0, h: result_.height ?? 0, w: result_.width ?? 0 },
                     ],
-                });
+                };
             }
             else {
                 fileId_ = result_.fileId;
@@ -254,12 +248,7 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
             break;
         case "document":
             if ("url" in result_) {
-                document = new _2_tl_js_1.types.InputWebDocument({
-                    url: result_.url,
-                    mime_type: "application/octet-stream",
-                    attributes: [],
-                    size: 0,
-                });
+                document = { _: "inputWebDocument", url: result_.url, mime_type: "application/octet-stream", attributes: [], size: 0 };
             }
             else {
                 fileId_ = result_.fileId;
@@ -267,18 +256,15 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
             break;
         case "gif":
             if ("url" in result_) {
-                document = new _2_tl_js_1.types.InputWebDocument({
+                document = {
+                    _: "inputWebDocument",
                     url: result_.url,
                     size: 0,
                     mime_type: "image/gif",
                     attributes: [
-                        new _2_tl_js_1.types.DocumentAttributeVideo({
-                            duration: result_.duration ?? 0,
-                            w: result_.width ?? 0,
-                            h: result_.height ?? 0,
-                        }),
+                        { _: "documentAttributeVideo", duration: result_.duration ?? 0, w: result_.width ?? 0, h: result_.height ?? 0 },
                     ],
-                });
+                };
             }
             else {
                 fileId_ = result_.fileId;
@@ -286,20 +272,15 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
             break;
         case "mpeg4Gif":
             if ("url" in result_) {
-                document = new _2_tl_js_1.types.InputWebDocument({
+                document = {
+                    _: "inputWebDocument",
                     url: result_.url,
                     size: 0,
                     mime_type: "video/mp4",
                     attributes: [
-                        new _2_tl_js_1.types.DocumentAttributeVideo({
-                            nosound: true,
-                            duration: result_.duration ?? 0,
-                            w: result_.width ?? 0,
-                            h: result_.height ?? 0,
-                            supports_streaming: true,
-                        }),
+                        { _: "documentAttributeVideo", nosound: true, duration: result_.duration ?? 0, w: result_.width ?? 0, h: result_.height ?? 0, supports_streaming: true },
                     ],
-                });
+                };
             }
             else {
                 fileId_ = result_.fileId;
@@ -307,12 +288,7 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
             break;
         case "photo":
             if ("url" in result_) {
-                document = new _2_tl_js_1.types.InputWebDocument({
-                    url: result_.url,
-                    size: 0,
-                    mime_type: "image/jpeg",
-                    attributes: [new _2_tl_js_1.types.DocumentAttributeImageSize({ w: result_.width ?? 0, h: result_.height ?? 0 })],
-                });
+                document = { _: "inputWebDocument", url: result_.url, size: 0, mime_type: "image/jpeg", attributes: [{ _: "documentAttributeImageSize", w: result_.width ?? 0, h: result_.height ?? 0 }] };
             }
             else {
                 fileId_ = result_.fileId;
@@ -323,17 +299,15 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
             break;
         case "voice":
             if ("url" in result_) {
-                document = new _2_tl_js_1.types.InputWebDocument({
+                document = {
+                    _: "inputWebDocument",
                     url: result_.url,
                     size: 0,
                     mime_type: "audio/mpeg",
                     attributes: [
-                        new _2_tl_js_1.types.DocumentAttributeAudio({
-                            duration: result_.voiceDuration ?? 0,
-                            voice: true,
-                        }),
+                        { _: "documentAttributeAudio", duration: result_.voiceDuration ?? 0, voice: true },
                     ],
-                });
+                };
             }
             else {
                 fileId_ = result_.fileId;
@@ -342,12 +316,7 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
     }
     const replyMarkup = "replyMarkup" in result_ && result_.replyMarkup ? await (0, _3_reply_markup_js_1.replyMarkupToTlObject)(result_.replyMarkup, usernameResolver) : undefined;
     if ("thumbnailUrl" in result_ && result_.thumbnailUrl) {
-        thumb = new _2_tl_js_1.types.InputWebDocument({
-            url: result_.thumbnailUrl,
-            size: 0,
-            mime_type: "image/jpeg",
-            attributes: [],
-        });
+        thumb = { _: "inputWebDocument", url: result_.thumbnailUrl, size: 0, mime_type: "image/jpeg", attributes: [] };
     }
     else if (result_.type == "photo") {
         thumb = document;
@@ -358,74 +327,34 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
     }
     const { type, id } = result_;
     const [message, entities] = ret;
-    const sendMessage = new _2_tl_js_1.types.InputBotInlineMessageMediaAuto({
-        message,
-        entities,
-        reply_markup: replyMarkup,
-    });
+    const sendMessage = { _: "inputBotInlineMessageMediaAuto", message, entities, reply_markup: replyMarkup };
     const title = "title" in result_ ? result_.title : undefined;
     const description = "description" in result_ ? result_.description : undefined;
     if (document != null) {
-        return new _2_tl_js_1.types.InputBotInlineResult({
-            id,
-            type,
-            title,
-            description,
-            thumb: thumb == null ? undefined : thumb,
-            content: document,
-            send_message: new _2_tl_js_1.types.InputBotInlineMessageMediaAuto({
-                message,
-                entities,
-                reply_markup: replyMarkup,
-            }),
-        });
+        return { _: "inputBotInlineResult", id, type, title, description, thumb: thumb == null ? undefined : thumb, content: document, send_message: ({ _: "inputBotInlineMessageMediaAuto", message, entities, reply_markup: replyMarkup }) };
     }
     else if (fileId_ != null) {
         const fileId = (0, _file_id_js_1.deserializeFileId)(fileId_);
-        return new _2_tl_js_1.types.InputBotInlineResultDocument({
+        return {
+            _: "inputBotInlineResultDocument",
             id,
             type: type == "document" ? "file" : type,
             title,
             description,
-            document: new _2_tl_js_1.types.InputDocument({
-                id: "id" in fileId.location ? fileId.location.id : (0, _0_deps_js_1.unreachable)(), // TODO: Remove UNREACHABLE()?
+            document: ({
+                _: "inputDocument",
+                id: "id" in fileId.location ? fileId.location.id : (0, _0_deps_js_1.unreachable)(),
                 access_hash: fileId.location.accessHash,
                 file_reference: fileId.fileReference ?? new Uint8Array(),
             }),
             send_message: sendMessage,
-        });
+        };
     }
     else if (result_.type == "location") {
-        return new _2_tl_js_1.types.InputBotInlineResult({
-            id,
-            type,
-            title,
-            description,
-            thumb: thumb == null ? undefined : thumb,
-            send_message: new _2_tl_js_1.types.InputBotInlineMessageMediaGeo({
-                geo_point: new _2_tl_js_1.types.InputGeoPoint({
-                    lat: result_.latitude,
-                    long: result_.longitude,
-                    accuracy_radius: result_.horizontalAccuracy,
-                }),
-                heading: result_.heading,
-                period: result_.livePeriod,
-                proximity_notification_radius: result_.proximityAlertRadius,
-                reply_markup: replyMarkup,
-            }),
-        });
+        return { _: "inputBotInlineResult", id, type, title, description, thumb: thumb == null ? undefined : thumb, send_message: ({ _: "inputBotInlineMessageMediaGeo", geo_point: ({ _: "inputGeoPoint", lat: result_.latitude, long: result_.longitude, accuracy_radius: result_.horizontalAccuracy }), heading: result_.heading, period: result_.livePeriod, proximity_notification_radius: result_.proximityAlertRadius, reply_markup: replyMarkup }) };
     }
     else if (result_.type == "game") {
-        return new _2_tl_js_1.types.InputBotInlineResult({
-            id,
-            type,
-            title,
-            description,
-            thumb: thumb == null ? undefined : thumb,
-            send_message: new _2_tl_js_1.types.InputBotInlineMessageGame({
-                reply_markup: replyMarkup,
-            }),
-        });
+        return { _: "inputBotInlineResult", id, type, title, description, thumb: thumb == null ? undefined : thumb, send_message: ({ _: "inputBotInlineMessageGame", reply_markup: replyMarkup }) };
     }
     else if (result_.type == "article") {
         if (!("text" in result_.messageContent)) {
@@ -436,58 +365,20 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
         const invertMedia = result_.messageContent?.linkPreview?.aboveText ? true : undefined;
         let sendMessage;
         if (result_.messageContent.linkPreview?.url) {
-            sendMessage = new _2_tl_js_1.types.InputBotInlineMessageMediaWebPage({
-                url: result_.messageContent.linkPreview.url,
-                force_large_media: result_.messageContent.linkPreview.largeMedia ? true : undefined,
-                force_small_media: result_.messageContent.linkPreview.smallMedia ? true : undefined,
-                optional: message.length ? undefined : true,
-                message,
-                entities,
-                invert_media: invertMedia,
-                reply_markup: replyMarkup,
-            });
+            sendMessage = { _: "inputBotInlineMessageMediaWebPage", url: result_.messageContent.linkPreview.url, force_large_media: result_.messageContent.linkPreview.largeMedia ? true : undefined, force_small_media: result_.messageContent.linkPreview.smallMedia ? true : undefined, optional: message.length ? undefined : true, message, entities, invert_media: invertMedia, reply_markup: replyMarkup };
         }
         else {
-            sendMessage = new _2_tl_js_1.types.InputBotInlineMessageText({
-                message,
-                entities,
-                no_webpage: noWebpage,
-                invert_media: invertMedia,
-                reply_markup: replyMarkup,
-            });
+            sendMessage = { _: "inputBotInlineMessageText", message, entities, no_webpage: noWebpage, invert_media: invertMedia, reply_markup: replyMarkup };
         }
-        return new _2_tl_js_1.types.InputBotInlineResult({
-            id,
-            type,
-            title,
-            description,
-            thumb: thumb == null ? undefined : thumb,
-            send_message: sendMessage,
-        });
+        return { _: "inputBotInlineResult", id, type, title, description, thumb: thumb == null ? undefined : thumb, send_message: sendMessage };
     }
     else if (result_.type == "venue") {
         if (!result_.foursquareId || !result_.foursquareType) {
             (0, _0_deps_js_1.unreachable)();
         }
-        return new _2_tl_js_1.types.InputBotInlineResult({
-            id,
-            type,
-            title,
-            description,
-            thumb: thumb == null ? undefined : thumb,
-            send_message: new _2_tl_js_1.types.InputBotInlineMessageMediaVenue({
-                geo_point: new _2_tl_js_1.types.InputGeoPoint({ long: result_.longitude, lat: result_.latitude }),
-                address: result_.address,
-                provider: "foursquare",
-                title: result_.title,
-                venue_id: result_.foursquareId,
-                venue_type: result_.foursquareType,
-                reply_markup: replyMarkup,
-            }),
-        });
+        return { _: "inputBotInlineResult", id, type, title, description, thumb: thumb == null ? undefined : thumb, send_message: ({ _: "inputBotInlineMessageMediaVenue", geo_point: ({ _: "inputGeoPoint", long: result_.longitude, lat: result_.latitude }), address: result_.address, provider: "foursquare", title: result_.title, venue_id: result_.foursquareId, venue_type: result_.foursquareType, reply_markup: replyMarkup }) };
     }
     else {
         (0, _0_deps_js_1.unreachable)();
     }
 }
-exports.inlineQueryResultToTlObject = inlineQueryResultToTlObject;

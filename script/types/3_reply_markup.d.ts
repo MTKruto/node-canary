@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { enums } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { UsernameResolver } from "./_getters.js";
 import { KeyboardButton } from "./1_keyboard_button.js";
 import { InlineKeyboardButton } from "./2_inline_keyboard_button.js";
@@ -66,6 +66,6 @@ export interface ReplyMarkupForceReply {
 }
 /** A message's reply markup. */
 export type ReplyMarkup = ReplyMarkupInlineKeyboard | ReplyMarkupKeyboard | ReplyMarkupRemoveKeyboard | ReplyMarkupForceReply;
-export declare function constructReplyMarkup(replyMarkup: enums.ReplyMarkup): ReplyMarkup;
-export declare function replyMarkupToTlObject(replyMarkup: ReplyMarkup, usernameResolver: UsernameResolver): Promise<enums.ReplyMarkup>;
+export declare function constructReplyMarkup(replyMarkup: Api.ReplyMarkup): ReplyMarkup;
+export declare function replyMarkupToTlObject(replyMarkup: ReplyMarkup, usernameResolver: UsernameResolver): Promise<Api.ReplyMarkup>;
 //# sourceMappingURL=3_reply_markup.d.ts.map

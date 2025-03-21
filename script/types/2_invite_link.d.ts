@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { EntityGetter } from "./_getters.js";
 import { User } from "./1_user.js";
 /** A chat invite link. */
@@ -32,12 +32,16 @@ export interface InviteLink {
     revoked: boolean;
     /** An optional title. */
     title?: string;
-    /** A point in time within the future in which the ban will be reverted. */
+    /** A point in time within the future in which the invite link will be revoked. */
     expiresAt?: Date;
     /** The times the invite link can be used. */
     limit?: number;
     /** The number of pending join requests originating from this invite link. */
     pendingJoinRequestCount?: number;
+    /** The amount of stars required to renew the subscription. */
+    subscriptionPrice?: number;
+    /** The remaining duration (in seconds) until the subscription expires. */
+    subscriptionExpiresIn?: number;
 }
-export declare function constructInviteLink(inviteLink_: types.ChatInviteExported, getEntity: EntityGetter): Promise<InviteLink>;
+export declare function constructInviteLink(inviteLink_: Api.chatInviteExported, getEntity: EntityGetter): Promise<InviteLink>;
 //# sourceMappingURL=2_invite_link.d.ts.map

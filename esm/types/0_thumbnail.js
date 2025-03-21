@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,11 +17,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { is } from "../2_tl.js";
 import { FileType, PhotoSourceType, serializeFileId, toUniqueFileId } from "./_file_id.js";
 export function constructThumbnail(size, file) {
-    const type = file instanceof types.Photo ? FileType.Photo : FileType.Thumbnail;
-    const fileType = file instanceof types.Photo ? FileType.Photo : FileType.Document;
+    const type = is("photo", file) ? FileType.Photo : FileType.Thumbnail;
+    const fileType = is("photo", file) ? FileType.Photo : FileType.Document;
     const fileId_ = {
         type,
         dcId: file.dc_id,

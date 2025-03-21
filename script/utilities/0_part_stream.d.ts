@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -23,7 +23,7 @@ export interface Part {
     totalParts: number;
     bytes: Uint8Array;
 }
-export declare class PartStream extends TransformStream<Uint8Array, Part> {
+export declare class PartStream extends TransformStream<Uint8Array<ArrayBuffer>, Part> {
     #private;
     constructor(chunkSize: number);
 }

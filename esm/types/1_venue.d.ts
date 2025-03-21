@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { Location } from "./0_location.js";
 /** A shared venue. */
 export interface Venue {
@@ -32,5 +32,5 @@ export interface Venue {
     /** The Foursquare type of the venue. */
     foursquareType?: string;
 }
-export declare function constructVenue(media_: types.MessageMediaVenue | types.MediaAreaVenue): Venue;
+export declare function constructVenue(media_: Api.messageMediaVenue | Api.mediaAreaVenue): Venue;
 //# sourceMappingURL=1_venue.d.ts.map

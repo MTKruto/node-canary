@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -59,16 +59,15 @@ export class TransportIntermediate extends Transport {
     async receive() {
         let length;
         {
-            const buffer = new Uint8Array(4);
+            let buffer = new Uint8Array(4);
             await __classPrivateFieldGet(this, _TransportIntermediate_connection, "f").read(buffer);
-            this.decrypt(buffer);
+            buffer = await this.decrypt(buffer);
             const dataView = new DataView(buffer.buffer, buffer.byteOffset, buffer.byteLength);
             length = dataView.getUint32(0, true);
         }
         const buffer = new Uint8Array(length);
         await __classPrivateFieldGet(this, _TransportIntermediate_connection, "f").read(buffer);
-        this.decrypt(buffer);
-        return buffer;
+        return await this.decrypt(buffer);
     }
     async send(buffer) {
         if (!this.initialized) {
@@ -76,8 +75,7 @@ export class TransportIntermediate extends Transport {
         }
         const length = bufferFromBigInt(buffer.length, 4);
         const data = concat([length, buffer]);
-        this.encrypt(data);
-        await __classPrivateFieldGet(this, _TransportIntermediate_connection, "f").write(data);
+        await __classPrivateFieldGet(this, _TransportIntermediate_connection, "f").write(await this.encrypt(data));
     }
     deinitialize() {
         super.deinitialize();

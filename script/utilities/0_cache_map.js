@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -44,7 +44,10 @@ class CacheMap extends Map {
     set(key, value) {
         super.set(key, value);
         if (this.size > __classPrivateFieldGet(this, _CacheMap_limit, "f")) {
-            this.delete(this.keys().next().value);
+            const k = this.keys().next().value;
+            if (k !== undefined) {
+                this.delete(k);
+            }
         }
         return this;
     }

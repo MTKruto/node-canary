@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { EntityGetter } from "./_getters.js";
 import { Reaction } from "./0_reaction.js";
 import { ChatP } from "./1_chat_p.js";
@@ -39,5 +39,5 @@ export interface MessageReactions {
     /** The current reactions. */
     newReactions: Reaction[];
 }
-export declare function constructMessageReactions(update: types.UpdateBotMessageReaction, getEntity: EntityGetter): Promise<MessageReactions | null>;
+export declare function constructMessageReactions(update: Api.updateBotMessageReaction, getEntity: EntityGetter): Promise<MessageReactions | null>;
 //# sourceMappingURL=2_message_reactions.d.ts.map

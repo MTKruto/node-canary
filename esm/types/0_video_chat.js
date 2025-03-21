@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,10 +18,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { fromUnixTimestamp } from "../1_utilities.js";
-import { types } from "../2_tl.js";
+import { is } from "../2_tl.js";
 export function constructVideoChat(call) {
     const id = String(call.id);
-    if (call instanceof types.GroupCallDiscarded) {
+    if (is("groupCallDiscarded", call)) {
         return {
             type: "ended",
             id,

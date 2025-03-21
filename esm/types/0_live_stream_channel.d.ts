@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 /** A live stream channel. */
 export interface LiveStreamChannel {
     /** The live stream channel's unique identifier. */
@@ -27,5 +27,5 @@ export interface LiveStreamChannel {
     /** The live stream channel's last timestamp. */
     timestamp: number;
 }
-export declare function constructLiveStreamChannel(channel: types.GroupCallStreamChannel): LiveStreamChannel;
+export declare function constructLiveStreamChannel(channel: Api.groupCallStreamChannel): LiveStreamChannel;
 //# sourceMappingURL=0_live_stream_channel.d.ts.map

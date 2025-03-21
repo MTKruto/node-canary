@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,10 +19,9 @@
  */
 import { unreachable } from "../0_deps.js";
 import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
-import { types } from "../2_tl.js";
 import { constructUser } from "./1_user.js";
 export async function constructInviteLink(inviteLink_, getEntity) {
-    const entity = await getEntity(new types.PeerUser({ user_id: inviteLink_.admin_id }));
+    const entity = await getEntity({ _: "peerUser", user_id: inviteLink_.admin_id });
     if (!entity) {
         unreachable();
     }
@@ -43,5 +42,7 @@ export async function constructInviteLink(inviteLink_, getEntity) {
         expiresAt,
         limit,
         pendingJoinRequestCount,
+        subcriptionPrice: inviteLink_.subscription_pricing || undefined,
+        subscriptionExpiresAt: inviteLink_.subscription_expired || undefined,
     });
 }

@@ -23,10 +23,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.rsaPad = void 0;
+exports.rsaPad = rsaPad;
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -72,4 +72,3 @@ async function rsaPad(data, [serverKey, exponent]) {
     (0, _0_deps_js_1.assertEquals)(encryptedData.length, 256);
     return encryptedData;
 }
-exports.rsaPad = rsaPad;

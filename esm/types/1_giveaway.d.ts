@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { GiveawayParameters } from "./0_giveaway_parameters.js";
 /** A giveaway. */
 export interface Giveaway {
@@ -25,7 +25,9 @@ export interface Giveaway {
     /** The quantity of the Telegram Premium subscriptions that will be given away.. */
     winnerCount: number;
     /** The duration of each Telegram Premium subscription that is to be given away in months. */
-    monthCount: number;
+    premiumMonthCount?: number;
+    /** The amount of Telegram Stars that is to be given away to each user. */
+    starCount?: number;
 }
-export declare function constructGiveaway(g: types.MessageMediaGiveaway): Giveaway;
+export declare function constructGiveaway(g: Api.messageMediaGiveaway): Giveaway;
 //# sourceMappingURL=1_giveaway.d.ts.map

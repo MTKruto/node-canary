@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,10 +17,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { enums, types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { ID, Story, Update } from "../3_types.js";
 import { InputStoryContent } from "../types/1_input_story_content.js";
 import { CreateStoryParams } from "./0_params.js";
+import { UpdateProcessor } from "./0_update_processor.js";
 import { C as C_ } from "./1_types.js";
 import { FileManager } from "./2_file_manager.js";
 import { MessageManager } from "./3_message_manager.js";
@@ -28,8 +29,9 @@ type C = C_ & {
     fileManager: FileManager;
     messageManager: MessageManager;
 };
-type StoryManagerUpdate = types.UpdateStory;
-export declare class StoryManager {
+declare const storyManagerUpdates: readonly ["updateStory"];
+type StoryManagerUpdate = Api.Types[(typeof storyManagerUpdates)[number]];
+export declare class StoryManager implements UpdateProcessor<StoryManagerUpdate> {
     #private;
     constructor(c: C);
     createStory(chatId: ID, content: InputStoryContent, params?: CreateStoryParams): Promise<Story>;
@@ -41,7 +43,7 @@ export declare class StoryManager {
     addStoryToHighlights(chatId: ID, storyId: number): Promise<void>;
     removeStoriesFromHighlights(chatId: ID, storyIds: number[]): Promise<void>;
     removeStoryFromHighlights(chatId: ID, storyId: number): Promise<void>;
-    static canHandleUpdate(update: enums.Update): update is StoryManagerUpdate;
+    canHandleUpdate(update: Api.Update): update is StoryManagerUpdate;
     handleUpdate(update: StoryManagerUpdate): Promise<Update | null>;
 }
 export {};

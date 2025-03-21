@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,7 +19,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.replyMarkupToTlObject = exports.constructReplyMarkup = void 0;
+exports.constructReplyMarkup = constructReplyMarkup;
+exports.replyMarkupToTlObject = replyMarkupToTlObject;
 const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
@@ -43,9 +44,9 @@ async function inlineKeyboardMarkupToTlObject(keyboard, usernameResolver) {
         for (const button of row) {
             row_.push(await (0, _2_inline_keyboard_button_js_1.inlineKeyboardButtonToTlObject)(button, usernameResolver));
         }
-        rows_.push(new _2_tl_js_1.types.KeyboardButtonRow({ buttons: row_ }));
+        rows_.push({ _: "keyboardButtonRow", buttons: row_ });
     }
-    return new _2_tl_js_1.types.ReplyInlineMarkup({ rows: rows_ });
+    return { _: "replyInlineMarkup", rows: rows_ };
 }
 function constructReplyKeyboardMarkup(keyboard_) {
     const rows = new Array();
@@ -71,22 +72,15 @@ function replyKeyboardMarkupToTlObject(replyMarkup) {
         for (const button of row) {
             row_.push((0, _1_keyboard_button_js_1.keyboardButtonToTlObject)(button));
         }
-        rows_.push(new _2_tl_js_1.types.KeyboardButtonRow({ buttons: row_ }));
+        rows_.push({ _: "keyboardButtonRow", buttons: row_ });
     }
-    return new _2_tl_js_1.types.ReplyKeyboardMarkup({
-        resize: replyMarkup.resizeKeyboard || undefined,
-        single_use: replyMarkup.oneTimeKeyboard || undefined,
-        selective: replyMarkup.selective || undefined,
-        persistent: replyMarkup.isPersistent || undefined,
-        rows: rows_,
-        placeholder: replyMarkup.inputFieldPlaceholder,
-    });
+    return { _: "replyKeyboardMarkup", resize: replyMarkup.resizeKeyboard || undefined, single_use: replyMarkup.oneTimeKeyboard || undefined, selective: replyMarkup.selective || undefined, persistent: replyMarkup.isPersistent || undefined, rows: rows_, placeholder: replyMarkup.inputFieldPlaceholder };
 }
 function constructReplyKeyboardRemove(replyMarkup_) {
     return (0, _1_utilities_js_1.cleanObject)({ removeKeyboard: true, selective: replyMarkup_.selective });
 }
 function replyKeyboardRemoveToTlObject(replyMarkup) {
-    return new _2_tl_js_1.types.ReplyKeyboardHide({ selective: replyMarkup.selective || undefined });
+    return { _: "replyKeyboardHide", selective: replyMarkup.selective || undefined };
 }
 function constructForceReply(replyMarkup_) {
     const replyMarkup = { forceReply: true };
@@ -99,29 +93,25 @@ function constructForceReply(replyMarkup_) {
     return replyMarkup;
 }
 function forceReplyToTlObject(replyMarkup) {
-    return new _2_tl_js_1.types.ReplyKeyboardForceReply({
-        selective: replyMarkup.selective || undefined,
-        placeholder: replyMarkup.inputFieldPlaceholder,
-    });
+    return { _: "replyKeyboardForceReply", selective: replyMarkup.selective || undefined, placeholder: replyMarkup.inputFieldPlaceholder };
 }
 function constructReplyMarkup(replyMarkup) {
-    if (replyMarkup instanceof _2_tl_js_1.types.ReplyKeyboardMarkup) {
+    if ((0, _2_tl_js_1.is)("replyKeyboardMarkup", replyMarkup)) {
         return constructReplyKeyboardMarkup(replyMarkup);
     }
-    else if (replyMarkup instanceof _2_tl_js_1.types.ReplyInlineMarkup) {
+    else if ((0, _2_tl_js_1.is)("replyInlineMarkup", replyMarkup)) {
         return constructInlineKeyboardMarkup(replyMarkup);
     }
-    else if (replyMarkup instanceof _2_tl_js_1.types.ReplyKeyboardHide) {
+    else if ((0, _2_tl_js_1.is)("replyKeyboardHide", replyMarkup)) {
         return constructReplyKeyboardRemove(replyMarkup);
     }
-    else if (replyMarkup instanceof _2_tl_js_1.types.ReplyKeyboardForceReply) {
+    else if ((0, _2_tl_js_1.is)("replyKeyboardForceReply", replyMarkup)) {
         return constructForceReply(replyMarkup);
     }
     else {
         (0, _0_deps_js_1.unreachable)();
     }
 }
-exports.constructReplyMarkup = constructReplyMarkup;
 async function replyMarkupToTlObject(replyMarkup, usernameResolver) {
     if ("inlineKeyboard" in replyMarkup) {
         return await inlineKeyboardMarkupToTlObject(replyMarkup, usernameResolver);
@@ -139,4 +129,3 @@ async function replyMarkupToTlObject(replyMarkup, usernameResolver) {
         (0, _0_deps_js_1.unreachable)();
     }
 }
-exports.replyMarkupToTlObject = replyMarkupToTlObject;

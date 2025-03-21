@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,7 +19,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructMessageReactionCount = void 0;
+exports.constructMessageReactionCount = constructMessageReactionCount;
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _1_chat_p_js_1 = require("./1_chat_p.js");
 const _1_reaction_count_js_1 = require("./1_reaction_count.js");
@@ -37,4 +37,3 @@ async function constructMessageReactionCount(update, getEntity) {
         return null;
     }
 }
-exports.constructMessageReactionCount = constructMessageReactionCount;

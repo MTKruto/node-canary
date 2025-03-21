@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,7 +19,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPhotoFileId = exports.toUniqueFileId = exports.serializeFileId = exports.deserializeFileId = exports.PhotoSourceType = exports.FileType = void 0;
+exports.PhotoSourceType = exports.FileType = void 0;
+exports.deserializeFileId = deserializeFileId;
+exports.serializeFileId = serializeFileId;
+exports.toUniqueFileId = toUniqueFileId;
+exports.getPhotoFileId = getPhotoFileId;
 const _0_deps_js_1 = require("../0_deps.js");
 const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
@@ -260,7 +264,6 @@ function deserializeFileId(fileId) {
         return { type, dcId, fileReference, location: { type: "common", id, accessHash } };
     }
 }
-exports.deserializeFileId = deserializeFileId;
 function serializeFileId(fileId) {
     const writer = new _2_tl_js_1.TLWriter();
     let type = fileId.type;
@@ -289,7 +292,6 @@ function serializeFileId(fileId) {
     writer.write(new Uint8Array([NEXT_VERSION - 1, PERSISTENT_ID_VERSION]));
     return (0, _1_utilities_js_1.base64EncodeUrlSafe)((0, _1_utilities_js_1.rleEncode)(writer.buffer));
 }
-exports.serializeFileId = serializeFileId;
 function toUniqueFileId(fileId) {
     const writer = new _2_tl_js_1.TLWriter();
     const type = fileId.location.type == "web" ? 0 : (getFileTypeClass(fileId.type) + 1);
@@ -326,18 +328,17 @@ function toUniqueFileId(fileId) {
     }
     return (0, _1_utilities_js_1.base64EncodeUrlSafe)((0, _1_utilities_js_1.rleEncode)(writer.buffer));
 }
-exports.toUniqueFileId = toUniqueFileId;
 function getPhotoFileId(photo) {
     const sizes = photo.sizes
         .map((v) => {
-        if (v instanceof _2_tl_js_1.types.PhotoSizeProgressive) {
-            return new _2_tl_js_1.types.PhotoSize({ type: v.type, w: v.w, h: v.h, size: Math.max(...v.sizes) });
+        if ((0, _2_tl_js_1.is)("photoSizeProgressive", v)) {
+            return { _: "photoSize", type: v.type, w: v.w, h: v.h, size: Math.max(...v.sizes) };
         }
         else {
             return v;
         }
     })
-        .filter((v) => v instanceof _2_tl_js_1.types.PhotoSize)
+        .filter((v) => (0, _2_tl_js_1.is)("photoSize", v))
         .sort((a, b) => a.size - b.size);
     const largest = sizes.slice(-1)[0];
     const { dc_id: dcId, id, access_hash: accessHash, file_reference: fileReference } = photo;
@@ -358,4 +359,3 @@ function getPhotoFileId(photo) {
     };
     return { fileId: serializeFileId(fileId), fileUniqueId: toUniqueFileId(fileId) };
 }
-exports.getPhotoFileId = getPhotoFileId;

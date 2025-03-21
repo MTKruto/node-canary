@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { enums, types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { EntityGetter } from "./_getters.js";
 import { User } from "./1_user.js";
 import { Message, MessageGetter } from "./4_message.js";
@@ -38,6 +38,6 @@ export interface CallbackQuery {
     /** The short name of the game to be returned. */
     gameShortName?: string;
 }
-export declare function deserializeInlineMessageId(inlineMessageId: string): enums.InputBotInlineMessageID;
-export declare function constructCallbackQuery(callbackQuery: types.UpdateBotCallbackQuery | types.UpdateInlineBotCallbackQuery, getEntity: EntityGetter, getMessage: MessageGetter): Promise<CallbackQuery>;
+export declare function deserializeInlineMessageId(inlineMessageId: string): Promise<Api.InputBotInlineMessageID>;
+export declare function constructCallbackQuery(callbackQuery: Api.updateBotCallbackQuery | Api.updateInlineBotCallbackQuery, getEntity: EntityGetter, getMessage: MessageGetter): Promise<CallbackQuery>;
 //# sourceMappingURL=5_callback_query.d.ts.map

@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,46 +17,53 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
 var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
-};
-var _Client_instances, _a, _Client_client, _Client_guaranteeUpdateDelivery, _Client_updateManager, _Client_networkStatisticsManager, _Client_botInfoManager, _Client_fileManager, _Client_reactionManager, _Client_videoChatManager, _Client_businessConnectionManager, _Client_messageManager, _Client_storyManager, _Client_callbackQueryManager, _Client_inlineQueryManager, _Client_chatListManager, _Client_accountManager, _Client_storage_, _Client_messageStorage_, _Client_parseMode, _Client_apiId, _Client_apiHash, _Client_publicKeys, _Client_ignoreOutgoing, _Client_persistCache, _Client_LsignIn, _Client_LpingLoop, _Client_LhandleMigrationError, _Client_L$initConncetion, _Client_namespaceProxies, _Client_getApiId, _Client_getCdnConnectionPool, _Client_getCdnConnection, _Client_constructContext, _Client_propagateConnectionState, _Client_lastPropagatedConnectionState, _Client_stateChangeHandler, _Client_storageInited, _Client_initStorage, _Client_connectionInited, _Client_lastPropagatedAuthorizationState, _Client_propagateAuthorizationState, _Client_getSelfId, _Client_pingLoopStarted, _Client_pingLoopAbortController, _Client_pingInterval, _Client_lastUpdates, _Client_startPingLoop, _Client_pingLoop, _Client_invoke, _Client_handleInvokeError, _Client_getUserAccessHash, _Client_getChannelAccessHash, _Client_getInputPeerInner, _Client_handleCtxUpdate, _Client_queueHandleCtxUpdate, _Client_handleUpdate, _Client_lastGetMe, _Client_getMe;
-import { unreachable } from "../0_deps.js";
-import { AccessError, InputError } from "../0_errors.js";
-import { cleanObject, drop, getLogger, getRandomId, minute, mustPrompt, mustPromptOneOf, second, ZERO_CHANNEL_ID } from "../1_utilities.js";
-import { as, chatIdToPeerId, functions, getChatIdPeerType, name, peerToChatId, types } from "../2_tl.js";
+var _Client_instances, _a, _Client_client, _Client_guaranteeUpdateDelivery, _Client_accountManager, _Client_botInfoManager, _Client_businessConnectionManager, _Client_fileManager, _Client_networkStatisticsManager, _Client_paymentManager, _Client_reactionManager, _Client_translationsManager, _Client_updateManager, _Client_messageManager, _Client_videoChatManager, _Client_callbackQueryManager, _Client_chatListManager, _Client_chatManager, _Client_forumManager, _Client_giftManager, _Client_inlineQueryManager, _Client_pollManager, _Client_storyManager, _Client_managers, _Client_storage_, _Client_messageStorage_, _Client_parseMode, _Client_apiId, _Client_apiHash, _Client_publicKeys, _Client_outgoingMessages, _Client_persistCache, _Client_disableUpdates, _Client_authString, _Client_cdn, _Client_L, _Client_LsignIn, _Client_LupdateGapRecoveryLoop, _Client_LhandleMigrationError, _Client_L$initConncetion, _Client_Lmin, _Client_getApiId, _Client_getCdnConnectionPool, _Client_getCdnConnection, _Client_constructContext, _Client_propagateConnectionState, _Client_lastPropagatedConnectionState, _Client_stateChangeHandler, _Client_storageInited, _Client_initStorage, _Client_connectMutex, _Client_lastConnect, _Client_connectionInited, _Client_lastPropagatedAuthorizationState, _Client_propagateAuthorizationState, _Client_getSelfId, _Client_lastUpdates, _Client_updateGapRecoveryLoopAbortController, _Client_startUpdateGapRecoveryLoop, _Client_updateGapRecoveryLoop, _Client_invoke, _Client_handleInvokeError, _Client_authStringImported, _Client_getUserAccessHash, _Client_getChannelAccessHash, _Client_getInputPeerChatId, _Client_getInputPeerInner, _Client_getMinInputPeer, _Client_handleCtxUpdate, _Client_queueHandleCtxUpdate, _Client_handleUpdate, _Client_lastGetMe, _Client_getMe;
+import { MINUTE, SECOND, unreachable } from "../0_deps.js";
+import { AccessError, ConnectionError, InputError } from "../0_errors.js";
+import { cleanObject, drop, getLogger, mustPrompt, mustPromptOneOf, Mutex, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { StorageMemory } from "../2_storage.js";
+import { as, chatIdToPeerId, getChatIdPeerType, is, isOneOf, peerToChatId } from "../2_tl.js";
+import { getDc } from "../3_transport.js";
 import { constructUser } from "../3_types.js";
 import { APP_VERSION, DEVICE_MODEL, LANG_CODE, LANG_PACK, LAYER, MAX_CHANNEL_ID, MAX_CHAT_ID, SYSTEM_LANG_CODE, SYSTEM_VERSION, USERNAME_TTL } from "../4_constants.js";
-import { AuthKeyUnregistered, ConnectionNotInited, FloodWait, Migrate, PasswordHashInvalid, PhoneNumberInvalid, SessionPasswordNeeded } from "../4_errors.js";
+import { AuthKeyUnregistered, ConnectionNotInited, FloodWait, Migrate, PasswordHashInvalid, PhoneNumberInvalid, SessionPasswordNeeded, SessionRevoked } from "../4_errors.js";
+import { PhoneCodeInvalid } from "../4_errors.js";
 import { checkPassword } from "./0_password.js";
-import { getUsername, isMtprotoFunction, resolve } from "./0_utilities.js";
-import { AccountManager } from "./2_account_manager.js";
-import { BotInfoManager } from "./2_bot_info_manager.js";
-import { BusinessConnectionManager } from "./2_business_connection_manager.js";
+import { StorageOperations } from "./0_storage_operations.js";
+import { canBeInputChannel, canBeInputUser, getUsername, isCdnFunction, isMtprotoFunction, resolve, toInputChannel, toInputUser } from "./0_utilities.js";
 import { ClientEncrypted } from "./1_client_encrypted.js";
 import { ClientPlain } from "./1_client_plain.js";
 import { Composer as Composer_ } from "./1_composer.js";
+import { AccountManager } from "./2_account_manager.js";
+import { BotInfoManager } from "./2_bot_info_manager.js";
+import { BusinessConnectionManager } from "./2_business_connection_manager.js";
 import { FileManager } from "./2_file_manager.js";
 import { NetworkStatisticsManager } from "./2_network_statistics_manager.js";
+import { PaymentManager } from "./2_payment_manager.js";
 import { ReactionManager } from "./2_reaction_manager.js";
+import { TranslationsManager } from "./2_translations_manager.js";
 import { UpdateManager } from "./2_update_manager.js";
 import { MessageManager } from "./3_message_manager.js";
+import { VideoChatManager } from "./3_video_chat_manager.js";
 import { CallbackQueryManager } from "./4_callback_query_manager.js";
 import { ChatListManager } from "./4_chat_list_manager.js";
+import { ChatManager } from "./4_chat_manager.js";
+import { ForumManager } from "./4_forum_manager.js";
+import { GiftManager } from "./4_gift_manager.js";
 import { InlineQueryManager } from "./4_inline_query_manager.js";
+import { PollManager } from "./4_poll_manager.js";
 import { StoryManager } from "./4_story_manager.js";
-import { VideoChatManager } from "./3_video_chat_manager.js";
-import { StorageOperations } from "./0_storage_operations.js";
-import { PhoneCodeInvalid } from "../4_errors.js";
 export class Composer extends Composer_ {
 }
 function skipInvoke() {
@@ -67,11 +74,37 @@ export const handleMigrationError = Symbol("handleMigrationError");
 // global Client ID counter for logs
 let id = 0;
 const getEntity = Symbol();
-const functionNamespaces = Object.entries(functions).filter(([, v]) => !(v instanceof Function)).map(([k]) => k);
 /**
  * An MTKruto client.
  */
 export class Client extends Composer {
+    // deno-lint-ignore no-explicit-any
+    get managers() {
+        return __classPrivateFieldGet(this, _Client_managers, "f") ?? (__classPrivateFieldSet(this, _Client_managers, __classPrivateFieldGet(this, _Client_managers, "f") ?? {
+            // 2_
+            accountManager: __classPrivateFieldGet(this, _Client_accountManager, "f"),
+            botInfoManager: __classPrivateFieldGet(this, _Client_botInfoManager, "f"),
+            businessConnectionManager: __classPrivateFieldGet(this, _Client_businessConnectionManager, "f"),
+            fileManager: __classPrivateFieldGet(this, _Client_fileManager, "f"),
+            networkStatisticsManager: __classPrivateFieldGet(this, _Client_networkStatisticsManager, "f"),
+            paymentManager: __classPrivateFieldGet(this, _Client_paymentManager, "f"),
+            reactionManager: __classPrivateFieldGet(this, _Client_reactionManager, "f"),
+            translationsManager: __classPrivateFieldGet(this, _Client_translationsManager, "f"),
+            updateManager: __classPrivateFieldGet(this, _Client_updateManager, "f"),
+            // 3_
+            messageManager: __classPrivateFieldGet(this, _Client_messageManager, "f"),
+            videoChatManager: __classPrivateFieldGet(this, _Client_videoChatManager, "f"),
+            // 4_
+            callbackQueryManager: __classPrivateFieldGet(this, _Client_callbackQueryManager, "f"),
+            chatListManager: __classPrivateFieldGet(this, _Client_chatListManager, "f"),
+            chatManager: __classPrivateFieldGet(this, _Client_chatManager, "f"),
+            forumManager: __classPrivateFieldGet(this, _Client_forumManager, "f"),
+            giftManager: __classPrivateFieldGet(this, _Client_giftManager, "f"),
+            inlineQueryManager: __classPrivateFieldGet(this, _Client_inlineQueryManager, "f"),
+            pollManager: __classPrivateFieldGet(this, _Client_pollManager, "f"),
+            storyManager: __classPrivateFieldGet(this, _Client_storyManager, "f"),
+        }, "f"));
+    }
     /**
      * Constructs the client.
      */
@@ -80,19 +113,30 @@ export class Client extends Composer {
         _Client_instances.add(this);
         _Client_client.set(this, void 0);
         _Client_guaranteeUpdateDelivery.set(this, void 0);
-        _Client_updateManager.set(this, void 0);
-        _Client_networkStatisticsManager.set(this, void 0);
-        _Client_botInfoManager.set(this, void 0);
-        _Client_fileManager.set(this, void 0);
-        _Client_reactionManager.set(this, void 0);
-        _Client_videoChatManager.set(this, void 0);
-        _Client_businessConnectionManager.set(this, void 0);
-        _Client_messageManager.set(this, void 0);
-        _Client_storyManager.set(this, void 0);
-        _Client_callbackQueryManager.set(this, void 0);
-        _Client_inlineQueryManager.set(this, void 0);
-        _Client_chatListManager.set(this, void 0);
+        // 2_
         _Client_accountManager.set(this, void 0);
+        _Client_botInfoManager.set(this, void 0);
+        _Client_businessConnectionManager.set(this, void 0);
+        _Client_fileManager.set(this, void 0);
+        _Client_networkStatisticsManager.set(this, void 0);
+        _Client_paymentManager.set(this, void 0);
+        _Client_reactionManager.set(this, void 0);
+        _Client_translationsManager.set(this, void 0);
+        _Client_updateManager.set(this, void 0);
+        // 3_
+        _Client_messageManager.set(this, void 0);
+        _Client_videoChatManager.set(this, void 0);
+        // 4_
+        _Client_callbackQueryManager.set(this, void 0);
+        _Client_chatListManager.set(this, void 0);
+        _Client_chatManager.set(this, void 0);
+        _Client_forumManager.set(this, void 0);
+        _Client_giftManager.set(this, void 0);
+        _Client_inlineQueryManager.set(this, void 0);
+        _Client_pollManager.set(this, void 0);
+        _Client_storyManager.set(this, void 0);
+        // deno-lint-ignore no-explicit-any
+        _Client_managers.set(this, void 0);
         _Client_storage_.set(this, void 0);
         _Client_messageStorage_.set(this, void 0);
         Object.defineProperty(this, "storage", {
@@ -122,13 +166,13 @@ export class Client extends Composer {
             writable: true,
             value: void 0
         });
-        Object.defineProperty(this, "langCode", {
+        Object.defineProperty(this, "language", {
             enumerable: true,
             configurable: true,
             writable: true,
             value: void 0
         });
-        Object.defineProperty(this, "langPack", {
+        Object.defineProperty(this, "platform", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -147,74 +191,23 @@ export class Client extends Composer {
             value: void 0
         });
         _Client_publicKeys.set(this, void 0);
-        _Client_ignoreOutgoing.set(this, void 0);
+        _Client_outgoingMessages.set(this, void 0);
         _Client_persistCache.set(this, void 0);
+        _Client_disableUpdates.set(this, void 0);
+        _Client_authString.set(this, void 0);
+        _Client_cdn.set(this, void 0);
+        _Client_L.set(this, void 0);
         _Client_LsignIn.set(this, void 0);
-        _Client_LpingLoop.set(this, void 0);
+        _Client_LupdateGapRecoveryLoop.set(this, void 0);
         _Client_LhandleMigrationError.set(this, void 0);
         _Client_L$initConncetion.set(this, void 0);
-        _Client_namespaceProxies.set(this, (() => {
-            // deno-lint-ignore no-explicit-any
-            const proxies = {};
-            for (const name of functionNamespaces) {
-                const ns = functions[name];
-                proxies[name] = new Proxy({}, {
-                    get: (_, key) => {
-                        if (key in ns) {
-                            // deno-lint-ignore no-explicit-any
-                            const func = ns[key];
-                            if (func instanceof Function) {
-                                // deno-lint-ignore no-explicit-any
-                                return (params) => {
-                                    // deno-lint-ignore ban-ts-comment
-                                    // @ts-ignore
-                                    return this.invoke(new func(params));
-                                };
-                            }
-                            else {
-                                unreachable();
-                            }
-                        }
-                    },
-                    set() {
-                        return true;
-                    },
-                });
-            }
-            return proxies;
-        })());
-        Object.defineProperty(this, "api", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: new Proxy({}, {
-                get: (_, key) => {
-                    if (key in functions) {
-                        const func = functions[key];
-                        if (func instanceof Function) {
-                            // deno-lint-ignore no-explicit-any
-                            return (params) => {
-                                // deno-lint-ignore ban-ts-comment
-                                // @ts-ignore
-                                return this.invoke(new func(params));
-                            };
-                        }
-                        else {
-                            return __classPrivateFieldGet(this, _Client_namespaceProxies, "f")[key];
-                        }
-                    }
-                },
-                set() {
-                    return true;
-                },
-            })
-        });
+        _Client_Lmin.set(this, void 0);
         _Client_constructContext.set(this, async (update) => {
-            const msg = "message" in update ? update.message : "editedMessage" in update ? update.editedMessage : "callbackQuery" in update ? update.callbackQuery.message : undefined;
+            const msg = "message" in update ? update.message : "editedMessage" in update ? update.editedMessage : "scheduledMessage" in update ? update.scheduledMessage : "callbackQuery" in update ? update.callbackQuery.message : undefined;
             const reactions = "messageInteractions" in update ? update.messageInteractions : undefined;
             const mustGetMsg = () => {
                 if (msg !== undefined) {
-                    return { chatId: msg.chat.id, messageId: msg.id, businessConnectionId: msg.businessConnectionId, senderId: (msg.from ?? msg.senderChat)?.id };
+                    return { chatId: msg.chat.id, messageId: msg.id, businessConnectionId: msg.businessConnectionId, senderId: (msg.from ?? msg.senderChat)?.id, userId: msg.from?.id };
                 }
                 else if (reactions !== undefined) {
                     return { chatId: reactions.chatId, messageId: reactions.messageId };
@@ -250,15 +243,17 @@ export class Client extends Composer {
                 }
                 unreachable();
             };
-            const chat_ = "messageReactions" in update ? update.messageReactions.chat : "messageReactionCount" in update ? update.messageReactionCount.chat : "chatMember" in update ? update.chatMember.chat : undefined;
+            const chat_ = "messageReactions" in update ? update.messageReactions.chat : "messageReactionCount" in update ? update.messageReactionCount.chat : "chatMember" in update ? update.chatMember.chat : "joinRequest" in update ? update.joinRequest.chat : "story" in update ? update.story.chat : undefined;
             const chat = chat_ ?? msg?.chat;
-            const from = "callbackQuery" in update ? update.callbackQuery.from : "inlineQuery" in update ? update.inlineQuery.from : "message" in update ? update.message.from : "editedMessage" in update ? update.editedMessage?.from : "chatMember" in update ? update.chatMember.from : "messageReactions" in update ? update.messageReactions.user : undefined;
+            const from = "callbackQuery" in update ? update.callbackQuery.from : "inlineQuery" in update ? update.inlineQuery.from : "chatMember" in update ? update.chatMember.from : "messageReactions" in update ? update.messageReactions.user : "preCheckoutQuery" in update ? update.preCheckoutQuery.from : "joinRequest" in update ? update.joinRequest.user : "businessConnection" in update ? update.businessConnection.user : msg?.from ? msg.from : undefined;
             const senderChat = msg?.senderChat;
-            const getReplyToMessageId = (quote, chatId, messageId) => {
+            const getReplyTo = (quote, chatId, messageId) => {
+                if ("story" in update) {
+                    return { chatId: update.story.chat.id, storyId: update.story.id };
+                }
                 const isPrivate = chatId > 0;
                 const shouldQuote = quote === undefined ? !isPrivate : quote;
-                const replyToMessageId = shouldQuote ? messageId : undefined;
-                return replyToMessageId;
+                return shouldQuote ? { messageId } : undefined;
             };
             const me = "connectionState" in update ? __classPrivateFieldGet(this, _Client_lastGetMe, "f") : ("authorizationState" in update && !update.authorizationState.authorized) ? __classPrivateFieldGet(this, _Client_lastGetMe, "f") : await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getMe).call(this);
             const context = {
@@ -274,73 +269,83 @@ export class Client extends Composer {
                 },
                 reply: (text, params) => {
                     const { chatId, messageId, businessConnectionId } = mustGetMsg();
-                    const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendMessage(chatId, text, { ...params, replyToMessageId, businessConnectionId });
+                    const replyTo = getReplyTo(params?.quote, chatId, messageId);
+                    return this.sendMessage(chatId, text, { ...params, replyTo, businessConnectionId });
                 },
                 replyPoll: (question, options, params) => {
                     const { chatId, messageId, businessConnectionId } = mustGetMsg();
-                    const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendPoll(chatId, question, options, { ...params, replyToMessageId, businessConnectionId });
+                    const replyTo = getReplyTo(params?.quote, chatId, messageId);
+                    return this.sendPoll(chatId, question, options, { ...params, replyTo, businessConnectionId });
                 },
                 replyPhoto: (photo, params) => {
                     const { chatId, messageId, businessConnectionId } = mustGetMsg();
-                    const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendPhoto(chatId, photo, { ...params, replyToMessageId, businessConnectionId });
+                    const replyTo = getReplyTo(params?.quote, chatId, messageId);
+                    return this.sendPhoto(chatId, photo, { ...params, replyTo, businessConnectionId });
+                },
+                replyMediaGroup: (media, params) => {
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
+                    const replyTo = getReplyTo(params?.quote, chatId, messageId);
+                    return this.sendMediaGroup(chatId, media, { ...params, replyTo, businessConnectionId });
+                },
+                replyInvoice: (title, description, payload, currency, prices, params) => {
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
+                    const replyTo = getReplyTo(params?.quote, chatId, messageId);
+                    return this.sendInvoice(chatId, title, description, payload, currency, prices, { ...params, replyTo, businessConnectionId });
                 },
                 replyDocument: (document, params) => {
                     const { chatId, messageId, businessConnectionId } = mustGetMsg();
-                    const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendDocument(chatId, document, { ...params, replyToMessageId, businessConnectionId });
+                    const replyTo = getReplyTo(params?.quote, chatId, messageId);
+                    return this.sendDocument(chatId, document, { ...params, replyTo, businessConnectionId });
                 },
                 replySticker: (sticker, params) => {
                     const { chatId, messageId, businessConnectionId } = mustGetMsg();
-                    const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendSticker(chatId, sticker, { ...params, replyToMessageId, businessConnectionId });
+                    const replyTo = getReplyTo(params?.quote, chatId, messageId);
+                    return this.sendSticker(chatId, sticker, { ...params, replyTo, businessConnectionId });
                 },
                 replyContact: (firstName, number, params) => {
                     const { chatId, messageId, businessConnectionId } = mustGetMsg();
-                    const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendContact(chatId, firstName, number, { ...params, replyToMessageId, businessConnectionId });
+                    const replyTo = getReplyTo(params?.quote, chatId, messageId);
+                    return this.sendContact(chatId, firstName, number, { ...params, replyTo, businessConnectionId });
                 },
                 replyLocation: (latitude, longitude, params) => {
                     const { chatId, messageId, businessConnectionId } = mustGetMsg();
-                    const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendLocation(chatId, latitude, longitude, { ...params, replyToMessageId, businessConnectionId });
+                    const replyTo = getReplyTo(params?.quote, chatId, messageId);
+                    return this.sendLocation(chatId, latitude, longitude, { ...params, replyTo, businessConnectionId });
                 },
                 replyDice: (params) => {
                     const { chatId, messageId, businessConnectionId } = mustGetMsg();
-                    const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendDice(chatId, { ...params, replyToMessageId, businessConnectionId });
+                    const replyTo = getReplyTo(params?.quote, chatId, messageId);
+                    return this.sendDice(chatId, { ...params, replyTo, businessConnectionId });
                 },
                 replyVenue: (latitude, longitude, title, address, params) => {
                     const { chatId, messageId, businessConnectionId } = mustGetMsg();
-                    const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendVenue(chatId, latitude, longitude, title, address, { ...params, replyToMessageId, businessConnectionId });
+                    const replyTo = getReplyTo(params?.quote, chatId, messageId);
+                    return this.sendVenue(chatId, latitude, longitude, title, address, { ...params, replyTo, businessConnectionId });
                 },
                 replyVideo: (video, params) => {
                     const { chatId, messageId, businessConnectionId } = mustGetMsg();
-                    const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendVideo(chatId, video, { ...params, replyToMessageId, businessConnectionId });
+                    const replyTo = getReplyTo(params?.quote, chatId, messageId);
+                    return this.sendVideo(chatId, video, { ...params, replyTo, businessConnectionId });
                 },
                 replyAnimation: (document, params) => {
                     const { chatId, messageId, businessConnectionId } = mustGetMsg();
-                    const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendAnimation(chatId, document, { ...params, replyToMessageId, businessConnectionId });
+                    const replyTo = getReplyTo(params?.quote, chatId, messageId);
+                    return this.sendAnimation(chatId, document, { ...params, replyTo, businessConnectionId });
                 },
                 replyVoice: (document, params) => {
                     const { chatId, messageId, businessConnectionId } = mustGetMsg();
-                    const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendVoice(chatId, document, { ...params, replyToMessageId, businessConnectionId });
+                    const replyTo = getReplyTo(params?.quote, chatId, messageId);
+                    return this.sendVoice(chatId, document, { ...params, replyTo, businessConnectionId });
                 },
                 replyAudio: (document, params) => {
                     const { chatId, messageId, businessConnectionId } = mustGetMsg();
-                    const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendAudio(chatId, document, { ...params, replyToMessageId, businessConnectionId });
+                    const replyTo = getReplyTo(params?.quote, chatId, messageId);
+                    return this.sendAudio(chatId, document, { ...params, replyTo, businessConnectionId });
                 },
                 replyVideoNote: (videoNote, params) => {
                     const { chatId, messageId, businessConnectionId } = mustGetMsg();
-                    const replyToMessageId = getReplyToMessageId(params?.quote, chatId, messageId);
-                    return this.sendVideoNote(chatId, videoNote, { ...params, replyToMessageId, businessConnectionId });
+                    const replyTo = getReplyTo(params?.quote, chatId, messageId);
+                    return this.sendVideoNote(chatId, videoNote, { ...params, replyTo, businessConnectionId });
                 },
                 delete: () => {
                     const { chatId, messageId } = mustGetMsg();
@@ -351,12 +356,12 @@ export class Client extends Composer {
                     return this.forwardMessage(chatId, to, messageId, params);
                 },
                 pin: (params) => {
-                    const { chatId, messageId } = mustGetMsg();
-                    return this.pinMessage(chatId, messageId, params);
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
+                    return this.pinMessage(chatId, messageId, { ...params, businessConnectionId });
                 },
                 unpin: () => {
-                    const { chatId, messageId } = mustGetMsg();
-                    return this.unpinMessage(chatId, messageId);
+                    const { chatId, messageId, businessConnectionId } = mustGetMsg();
+                    return this.unpinMessage(chatId, messageId, { businessConnectionId });
                 },
                 banSender: (params) => {
                     const { chatId, senderId } = mustGetMsg();
@@ -407,6 +412,14 @@ export class Client extends Composer {
                     const inlineMessageId = mustGetInlineMsgId();
                     return this.editInlineMessageText(inlineMessageId, text, params);
                 },
+                editInlineMessageMedia: (media, params) => {
+                    const inlineMessageId = mustGetInlineMsgId();
+                    return this.editInlineMessageMedia(inlineMessageId, media, params);
+                },
+                editInlineMessageCaption: (params) => {
+                    const inlineMessageId = mustGetInlineMsgId();
+                    return this.editInlineMessageCaption(inlineMessageId, params);
+                },
                 editInlineMessageLiveLocation: (latitude, longitude, params) => {
                     const inlineMessageId = mustGetInlineMsgId();
                     return this.editInlineMessageLiveLocation(inlineMessageId, latitude, longitude, params);
@@ -418,6 +431,14 @@ export class Client extends Composer {
                 editMessageText: (messageId, text, params) => {
                     const { chatId } = mustGetMsg();
                     return this.editMessageText(chatId, messageId, text, params);
+                },
+                editMessageCaption: (messageId, params) => {
+                    const { chatId } = mustGetMsg();
+                    return this.editMessageCaption(chatId, messageId, params);
+                },
+                editMessageMedia: (messageId, media, params) => {
+                    const { chatId } = mustGetMsg();
+                    return this.editMessageMedia(chatId, messageId, media, params);
                 },
                 editMessageLiveLocation: (messageId, latitude, longitude, params) => {
                     const { chatId } = mustGetMsg();
@@ -479,6 +500,10 @@ export class Client extends Composer {
                     const { chatId } = mustGetMsg();
                     return this.setReactions(chatId, messageId, reactions, params);
                 },
+                read: () => {
+                    const { chatId, messageId } = mustGetMsg();
+                    return this.readMessages(chatId, messageId);
+                },
                 setChatPhoto: (photo, params) => {
                     const { chatId } = mustGetMsg();
                     return this.setChatPhoto(chatId, photo, params);
@@ -537,6 +562,10 @@ export class Client extends Composer {
                     const { chatId } = mustGetMsg();
                     return this.getChatMember(chatId, userId);
                 },
+                getChatMembers: (params) => {
+                    const { chatId } = mustGetMsg();
+                    return this.getChatMembers(chatId, params);
+                },
                 setChatStickerSet: (setName) => {
                     const { chatId } = mustGetMsg();
                     return this.setChatStickerSet(chatId, setName);
@@ -552,23 +581,43 @@ export class Client extends Composer {
                     }
                     return this.getBusinessConnection(businessConnectionId);
                 },
+                answerPreCheckoutQuery: (ok, params) => {
+                    if (!("preCheckoutQuery" in update)) {
+                        unreachable();
+                    }
+                    return this.answerPreCheckoutQuery(update.preCheckoutQuery.id, ok, params);
+                },
+                approveJoinRequest: () => {
+                    const { chatId, userId } = mustGetMsg();
+                    if (!userId) {
+                        unreachable();
+                    }
+                    return this.approveJoinRequest(chatId, userId);
+                },
+                declineJoinRequest: () => {
+                    const { chatId, userId } = mustGetMsg();
+                    if (!userId) {
+                        unreachable();
+                    }
+                    return this.declineJoinRequest(chatId, userId);
+                },
             };
             return cleanObject(context);
         });
         _Client_lastPropagatedConnectionState.set(this, null);
         _Client_stateChangeHandler.set(this, ((connected) => {
             const connectionState = connected ? "ready" : "notConnected";
-            if (this.connected == connected && __classPrivateFieldGet(this, _Client_lastPropagatedConnectionState, "f") != connectionState) {
+            if (__classPrivateFieldGet(this, _Client_lastPropagatedConnectionState, "f") != connectionState) {
                 __classPrivateFieldGet(this, _Client_instances, "m", _Client_propagateConnectionState).call(this, connectionState);
             }
         }).bind(this));
         _Client_storageInited.set(this, false);
+        _Client_connectMutex.set(this, new Mutex());
+        _Client_lastConnect.set(this, null);
         _Client_connectionInited.set(this, false);
         _Client_lastPropagatedAuthorizationState.set(this, null);
-        _Client_pingLoopStarted.set(this, false);
-        _Client_pingLoopAbortController.set(this, null);
-        _Client_pingInterval.set(this, 1 * minute);
         _Client_lastUpdates.set(this, new Date());
+        _Client_updateGapRecoveryLoopAbortController.set(this, null);
         _Client_handleInvokeError.set(this, skipInvoke());
         /**
          * Invokes a function waiting and returning its reply if the second parameter is not `true`. Requires the client
@@ -595,9 +644,14 @@ export class Client extends Composer {
                 },
             })
         });
+        _Client_authStringImported.set(this, false);
         _Client_lastGetMe.set(this, null);
         __classPrivateFieldSet(this, _Client_client, new ClientEncrypted(params), "f");
-        __classPrivateFieldGet(this, _Client_client, "f").stateChangeHandler = __classPrivateFieldGet(this, _Client_stateChangeHandler, "f").bind(this);
+        const stateChangeHandler = __classPrivateFieldGet(this, _Client_client, "f").stateChangeHandler;
+        __classPrivateFieldGet(this, _Client_client, "f").stateChangeHandler = (connected) => {
+            stateChangeHandler?.(connected);
+            __classPrivateFieldGet(this, _Client_stateChangeHandler, "f").call(this, connected);
+        };
         __classPrivateFieldGet(this, _Client_client, "f").handlers = {
             serverSaltReassigned: async (newServerSalt) => {
                 await this.storage.setServerSalt(newServerSalt);
@@ -616,13 +670,7 @@ export class Client extends Composer {
                         await __classPrivateFieldGet(this, _Client_updateManager, "f").recoverUpdateGap(source);
                         break;
                     case "decryption":
-                        try {
-                            await this.disconnect();
-                        }
-                        catch {
-                            //
-                        }
-                        await this.connect();
+                        await this.reconnect();
                         await __classPrivateFieldGet(this, _Client_updateManager, "f").recoverUpdateGap(source);
                         break;
                 }
@@ -641,29 +689,32 @@ export class Client extends Composer {
         this.storage = new StorageOperations(__classPrivateFieldGet(this, _Client_storage_, "f"));
         this.messageStorage = new StorageOperations(__classPrivateFieldGet(this, _Client_messageStorage_, "f"));
         __classPrivateFieldSet(this, _Client_parseMode, params?.parseMode ?? null, "f");
+        __classPrivateFieldSet(this, _Client_disableUpdates, params?.disableUpdates ?? false, "f");
+        __classPrivateFieldSet(this, _Client_authString, params?.authString, "f");
         this.appVersion = params?.appVersion ?? APP_VERSION;
         this.deviceModel = params?.deviceModel ?? DEVICE_MODEL;
-        this.langCode = params?.langCode ?? LANG_CODE;
-        this.langPack = params?.langPack ?? LANG_PACK;
+        this.language = params?.language ?? LANG_CODE;
+        this.platform = params?.platform ?? LANG_PACK;
         this.systemLangCode = params?.systemLangCode ?? SYSTEM_LANG_CODE;
         this.systemVersion = params?.systemVersion ?? SYSTEM_VERSION;
         __classPrivateFieldSet(this, _Client_publicKeys, params?.publicKeys, "f");
-        __classPrivateFieldSet(this, _Client_ignoreOutgoing, params?.ignoreOutgoing ?? null, "f");
+        __classPrivateFieldSet(this, _Client_outgoingMessages, params?.outgoingMessages ?? null, "f");
         if (params?.prefixes) {
             this.prefixes = params?.prefixes;
         }
         __classPrivateFieldSet(this, _Client_guaranteeUpdateDelivery, params?.guaranteeUpdateDelivery ?? false, "f");
-        const L = getLogger("Client").client(id++);
+        const L = __classPrivateFieldSet(this, _Client_L, getLogger("Client").client(id++), "f");
         __classPrivateFieldSet(this, _Client_LsignIn, L.branch("signIn"), "f");
-        __classPrivateFieldSet(this, _Client_LpingLoop, L.branch("pingLoop"), "f");
+        __classPrivateFieldSet(this, _Client_LupdateGapRecoveryLoop, L.branch("updateGapRecoveryLoop"), "f");
         __classPrivateFieldSet(this, _Client_LhandleMigrationError, L.branch("[handleMigrationError]"), "f");
         __classPrivateFieldSet(this, _Client_L$initConncetion, L.branch("#initConnection"), "f");
+        __classPrivateFieldSet(this, _Client_Lmin, L.branch("min"), "f");
+        __classPrivateFieldSet(this, _Client_cdn, params?.cdn ?? false, "f");
         const c = {
             id,
-            api: this.api,
             invoke: async (function_, businessConnectionId) => {
                 if (businessConnectionId) {
-                    return await this.api.invokeWithBusinessConnection({ connection_id: businessConnectionId, query: function_ });
+                    return await this.invoke({ _: "invokeWithBusinessConnection", connection_id: businessConnectionId, query: function_ });
                 }
                 else {
                     return await this.invoke(function_);
@@ -678,28 +729,41 @@ export class Client extends Composer {
             getInputPeer: this.getInputPeer.bind(this),
             getInputChannel: this.getInputChannel.bind(this),
             getInputUser: this.getInputUser.bind(this),
+            getInputPeerChatId: __classPrivateFieldGet(this, _Client_instances, "m", _Client_getInputPeerChatId).bind(this),
             getEntity: this[getEntity].bind(this),
             handleUpdate: __classPrivateFieldGet(this, _Client_instances, "m", _Client_queueHandleCtxUpdate).bind(this),
             parseMode: __classPrivateFieldGet(this, _Client_parseMode, "f"),
             getCdnConnection: __classPrivateFieldGet(this, _Client_instances, "m", _Client_getCdnConnection).bind(this),
             getCdnConnectionPool: __classPrivateFieldGet(this, _Client_instances, "m", _Client_getCdnConnectionPool).bind(this),
-            cdn: params?.cdn ?? false,
-            ignoreOutgoing: __classPrivateFieldGet(this, _Client_ignoreOutgoing, "f"),
+            cdn: __classPrivateFieldGet(this, _Client_cdn, "f"),
+            outgoingMessages: __classPrivateFieldGet(this, _Client_outgoingMessages, "f"),
             dropPendingUpdates: params?.dropPendingUpdates,
+            disconnected: () => this.disconnected,
+            langPack: this.platform,
+            langCode: this.language,
         };
-        __classPrivateFieldSet(this, _Client_updateManager, new UpdateManager(c), "f");
-        __classPrivateFieldSet(this, _Client_networkStatisticsManager, new NetworkStatisticsManager(c), "f");
-        __classPrivateFieldSet(this, _Client_botInfoManager, new BotInfoManager(c), "f");
-        __classPrivateFieldSet(this, _Client_fileManager, new FileManager(c), "f");
-        __classPrivateFieldSet(this, _Client_reactionManager, new ReactionManager(c), "f");
-        __classPrivateFieldSet(this, _Client_businessConnectionManager, new BusinessConnectionManager(c), "f");
-        __classPrivateFieldSet(this, _Client_videoChatManager, new VideoChatManager({ ...c, fileManager: __classPrivateFieldGet(this, _Client_fileManager, "f") }), "f");
-        __classPrivateFieldSet(this, _Client_messageManager, new MessageManager({ ...c, fileManager: __classPrivateFieldGet(this, _Client_fileManager, "f") }), "f");
-        __classPrivateFieldSet(this, _Client_callbackQueryManager, new CallbackQueryManager({ ...c, messageManager: __classPrivateFieldGet(this, _Client_messageManager, "f") }), "f");
-        __classPrivateFieldSet(this, _Client_storyManager, new StoryManager({ ...c, fileManager: __classPrivateFieldGet(this, _Client_fileManager, "f"), messageManager: __classPrivateFieldGet(this, _Client_messageManager, "f") }), "f");
-        __classPrivateFieldSet(this, _Client_inlineQueryManager, new InlineQueryManager({ ...c, messageManager: __classPrivateFieldGet(this, _Client_messageManager, "f") }), "f");
-        __classPrivateFieldSet(this, _Client_chatListManager, new ChatListManager({ ...c, fileManager: __classPrivateFieldGet(this, _Client_fileManager, "f"), messageManager: __classPrivateFieldGet(this, _Client_messageManager, "f") }), "f");
+        // 2_
         __classPrivateFieldSet(this, _Client_accountManager, new AccountManager(c), "f");
+        __classPrivateFieldSet(this, _Client_botInfoManager, new BotInfoManager(c), "f");
+        __classPrivateFieldSet(this, _Client_businessConnectionManager, new BusinessConnectionManager(c), "f");
+        const fileManager = __classPrivateFieldSet(this, _Client_fileManager, new FileManager(c), "f");
+        __classPrivateFieldSet(this, _Client_networkStatisticsManager, new NetworkStatisticsManager(c), "f");
+        __classPrivateFieldSet(this, _Client_paymentManager, new PaymentManager(c), "f");
+        __classPrivateFieldSet(this, _Client_reactionManager, new ReactionManager(c), "f");
+        __classPrivateFieldSet(this, _Client_translationsManager, new TranslationsManager(c), "f");
+        __classPrivateFieldSet(this, _Client_updateManager, new UpdateManager(c), "f");
+        // 3_
+        const messageManager = __classPrivateFieldSet(this, _Client_messageManager, new MessageManager({ ...c, fileManager }), "f");
+        __classPrivateFieldSet(this, _Client_videoChatManager, new VideoChatManager({ ...c, fileManager }), "f");
+        // 4_
+        __classPrivateFieldSet(this, _Client_callbackQueryManager, new CallbackQueryManager({ ...c, messageManager }), "f");
+        __classPrivateFieldSet(this, _Client_chatListManager, new ChatListManager({ ...c, fileManager, messageManager }), "f");
+        __classPrivateFieldSet(this, _Client_chatManager, new ChatManager({ ...c, fileManager, messageManager }), "f");
+        __classPrivateFieldSet(this, _Client_forumManager, new ForumManager({ ...c, messageManager }), "f");
+        __classPrivateFieldSet(this, _Client_giftManager, new GiftManager({ ...c, messageManager }), "f");
+        __classPrivateFieldSet(this, _Client_inlineQueryManager, new InlineQueryManager({ ...c, messageManager }), "f");
+        __classPrivateFieldSet(this, _Client_pollManager, new PollManager({ ...c, messageManager }), "f");
+        __classPrivateFieldSet(this, _Client_storyManager, new StoryManager({ ...c, fileManager, messageManager }), "f");
         __classPrivateFieldGet(this, _Client_updateManager, "f").setUpdateHandler(__classPrivateFieldGet(this, _Client_instances, "m", _Client_handleUpdate).bind(this));
         const transportProvider = __classPrivateFieldGet(this, _Client_client, "f").transportProvider;
         __classPrivateFieldGet(this, _Client_client, "f").transportProvider = (params) => {
@@ -707,40 +771,29 @@ export class Client extends Composer {
             transport.connection.callback = __classPrivateFieldGet(this, _Client_networkStatisticsManager, "f").getTransportReadWriteCallback();
             return transport;
         };
-        if (params?.defaultHandlers ?? true) {
-            let lastReconnection = null;
-            this.on("connectionState", ({ connectionState }, next) => {
-                drop((async () => {
-                    if (connectionState == "notConnected") {
-                        if (this.disconnected) {
-                            L.debug("not reconnecting");
-                            return;
-                        }
-                        let delay = 5;
-                        if (lastReconnection != null && Date.now() - lastReconnection.getTime() <= 10 * second) {
-                            await new Promise((r) => setTimeout(r, delay * second));
-                        }
-                        while (!this.connected) {
-                            L.debug("reconnecting");
-                            try {
-                                await this.connect();
-                                lastReconnection = new Date();
-                                L.debug("reconnected");
-                                drop(__classPrivateFieldGet(this, _Client_updateManager, "f").recoverUpdateGap("reconnect"));
-                                break;
-                            }
-                            catch (err) {
-                                if (delay < 15) {
-                                    delay += 5;
-                                }
-                                L.debug(`failed to reconnect, retrying in ${delay}:`, err);
-                            }
-                            await new Promise((r) => setTimeout(r, delay * second));
-                        }
+        this.invoke.use(async ({ error }, next) => {
+            if (error instanceof ConnectionError) {
+                while (!this.connected) {
+                    if (this.disconnected) {
+                        return next();
                     }
-                })());
+                    try {
+                        await this.connect();
+                    }
+                    catch {
+                        //
+                    }
+                }
+                return true;
+            }
+            else if (is("bad_msg_notification", error)) {
+                return true;
+            }
+            else {
                 return next();
-            });
+            }
+        });
+        if (params?.defaultHandlers ?? true) {
             this.invoke.use(async ({ error }, next) => {
                 if (error instanceof FloodWait && error.seconds <= 10) {
                     L.warning("sleeping for", error.seconds, "because of:", error);
@@ -781,39 +834,55 @@ export class Client extends Composer {
      * Before establishing the connection, the session is saved.
      */
     async connect() {
-        await __classPrivateFieldGet(this, _Client_instances, "m", _Client_initStorage).call(this);
-        const [authKey, dc] = await Promise.all([this.storage.getAuthKey(), this.storage.getDc()]);
-        if (authKey != null && dc != null) {
-            await __classPrivateFieldGet(this, _Client_client, "f").setAuthKey(authKey);
-            await __classPrivateFieldGet(this, _Client_client, "f").setDc(dc); // TODO: remove await
-            if (__classPrivateFieldGet(this, _Client_client, "f").serverSalt == 0n) {
-                __classPrivateFieldGet(this, _Client_client, "f").serverSalt = await this.storage.getServerSalt() ?? 0n;
+        const unlock = await __classPrivateFieldGet(this, _Client_connectMutex, "f").lock();
+        try {
+            if (this.connected) {
+                return;
             }
-        }
-        else {
-            const plain = new ClientPlain({ initialDc: __classPrivateFieldGet(this, _Client_client, "f").initialDc, transportProvider: __classPrivateFieldGet(this, _Client_client, "f").transportProvider, cdn: __classPrivateFieldGet(this, _Client_client, "f").cdn, publicKeys: __classPrivateFieldGet(this, _Client_publicKeys, "f") });
-            const dc = await this.storage.getDc();
-            if (dc != null) {
-                plain.setDc(dc);
+            if (__classPrivateFieldGet(this, _Client_lastConnect, "f") != null && Date.now() - __classPrivateFieldGet(this, _Client_lastConnect, "f").getTime() <= 10 * SECOND) {
+                await new Promise((r) => setTimeout(r, 3 * SECOND));
+            }
+            await __classPrivateFieldGet(this, _Client_instances, "m", _Client_initStorage).call(this);
+            if (__classPrivateFieldGet(this, _Client_authString, "f") && !__classPrivateFieldGet(this, _Client_authStringImported, "f")) {
+                await this.importAuthString(__classPrivateFieldGet(this, _Client_authString, "f"));
+            }
+            const [authKey, dc] = await Promise.all([this.storage.getAuthKey(), this.storage.getDc()]);
+            if (authKey != null && dc != null) {
+                await __classPrivateFieldGet(this, _Client_client, "f").setAuthKey(authKey);
                 __classPrivateFieldGet(this, _Client_client, "f").setDc(dc);
+                if (__classPrivateFieldGet(this, _Client_client, "f").serverSalt == 0n) {
+                    __classPrivateFieldGet(this, _Client_client, "f").serverSalt = await this.storage.getServerSalt() ?? 0n;
+                }
             }
-            await plain.connect();
-            const [authKey, serverSalt] = await plain.createAuthKey();
-            drop(plain.disconnect());
-            await __classPrivateFieldGet(this, _Client_client, "f").setAuthKey(authKey);
-            __classPrivateFieldGet(this, _Client_client, "f").serverSalt = serverSalt;
+            else {
+                const plain = new ClientPlain({ initialDc: __classPrivateFieldGet(this, _Client_client, "f").initialDc, transportProvider: __classPrivateFieldGet(this, _Client_client, "f").transportProvider, cdn: __classPrivateFieldGet(this, _Client_client, "f").cdn, publicKeys: __classPrivateFieldGet(this, _Client_publicKeys, "f") });
+                const dc = await this.storage.getDc();
+                if (dc != null) {
+                    plain.setDc(dc);
+                    __classPrivateFieldGet(this, _Client_client, "f").setDc(dc);
+                }
+                await plain.connect();
+                const [authKey, serverSalt] = await plain.createAuthKey();
+                drop(plain.disconnect());
+                await __classPrivateFieldGet(this, _Client_client, "f").setAuthKey(authKey);
+                __classPrivateFieldGet(this, _Client_client, "f").serverSalt = serverSalt;
+            }
+            await __classPrivateFieldGet(this, _Client_client, "f").connect();
+            __classPrivateFieldSet(this, _Client_lastConnect, new Date(), "f");
+            await Promise.all([this.storage.setAuthKey(__classPrivateFieldGet(this, _Client_client, "f").authKey), this.storage.setDc(__classPrivateFieldGet(this, _Client_client, "f").dc), this.storage.setServerSalt(__classPrivateFieldGet(this, _Client_client, "f").serverSalt)]);
+            __classPrivateFieldGet(this, _Client_instances, "m", _Client_startUpdateGapRecoveryLoop).call(this);
         }
-        await __classPrivateFieldGet(this, _Client_client, "f").connect();
-        await Promise.all([this.storage.setAuthKey(__classPrivateFieldGet(this, _Client_client, "f").authKey), this.storage.setDc(__classPrivateFieldGet(this, _Client_client, "f").dc), this.storage.setServerSalt(__classPrivateFieldGet(this, _Client_client, "f").serverSalt)]);
+        finally {
+            unlock();
+        }
     }
     async reconnect(dc) {
-        await this.disconnect();
         if (dc) {
             await this.setDc(dc);
         }
-        await this.connect();
+        await __classPrivateFieldGet(this, _Client_client, "f").reconnect();
     }
-    async [(_Client_client = new WeakMap(), _Client_guaranteeUpdateDelivery = new WeakMap(), _Client_updateManager = new WeakMap(), _Client_networkStatisticsManager = new WeakMap(), _Client_botInfoManager = new WeakMap(), _Client_fileManager = new WeakMap(), _Client_reactionManager = new WeakMap(), _Client_videoChatManager = new WeakMap(), _Client_businessConnectionManager = new WeakMap(), _Client_messageManager = new WeakMap(), _Client_storyManager = new WeakMap(), _Client_callbackQueryManager = new WeakMap(), _Client_inlineQueryManager = new WeakMap(), _Client_chatListManager = new WeakMap(), _Client_accountManager = new WeakMap(), _Client_storage_ = new WeakMap(), _Client_messageStorage_ = new WeakMap(), _Client_parseMode = new WeakMap(), _Client_apiId = new WeakMap(), _Client_apiHash = new WeakMap(), _Client_publicKeys = new WeakMap(), _Client_ignoreOutgoing = new WeakMap(), _Client_persistCache = new WeakMap(), _Client_LsignIn = new WeakMap(), _Client_LpingLoop = new WeakMap(), _Client_LhandleMigrationError = new WeakMap(), _Client_L$initConncetion = new WeakMap(), _Client_namespaceProxies = new WeakMap(), _Client_constructContext = new WeakMap(), _Client_lastPropagatedConnectionState = new WeakMap(), _Client_stateChangeHandler = new WeakMap(), _Client_storageInited = new WeakMap(), _Client_connectionInited = new WeakMap(), _Client_lastPropagatedAuthorizationState = new WeakMap(), _Client_pingLoopStarted = new WeakMap(), _Client_pingLoopAbortController = new WeakMap(), _Client_pingInterval = new WeakMap(), _Client_lastUpdates = new WeakMap(), _Client_handleInvokeError = new WeakMap(), _Client_lastGetMe = new WeakMap(), _Client_instances = new WeakSet(), _Client_getApiId = async function _Client_getApiId() {
+    async [(_Client_client = new WeakMap(), _Client_guaranteeUpdateDelivery = new WeakMap(), _Client_accountManager = new WeakMap(), _Client_botInfoManager = new WeakMap(), _Client_businessConnectionManager = new WeakMap(), _Client_fileManager = new WeakMap(), _Client_networkStatisticsManager = new WeakMap(), _Client_paymentManager = new WeakMap(), _Client_reactionManager = new WeakMap(), _Client_translationsManager = new WeakMap(), _Client_updateManager = new WeakMap(), _Client_messageManager = new WeakMap(), _Client_videoChatManager = new WeakMap(), _Client_callbackQueryManager = new WeakMap(), _Client_chatListManager = new WeakMap(), _Client_chatManager = new WeakMap(), _Client_forumManager = new WeakMap(), _Client_giftManager = new WeakMap(), _Client_inlineQueryManager = new WeakMap(), _Client_pollManager = new WeakMap(), _Client_storyManager = new WeakMap(), _Client_managers = new WeakMap(), _Client_storage_ = new WeakMap(), _Client_messageStorage_ = new WeakMap(), _Client_parseMode = new WeakMap(), _Client_apiId = new WeakMap(), _Client_apiHash = new WeakMap(), _Client_publicKeys = new WeakMap(), _Client_outgoingMessages = new WeakMap(), _Client_persistCache = new WeakMap(), _Client_disableUpdates = new WeakMap(), _Client_authString = new WeakMap(), _Client_cdn = new WeakMap(), _Client_L = new WeakMap(), _Client_LsignIn = new WeakMap(), _Client_LupdateGapRecoveryLoop = new WeakMap(), _Client_LhandleMigrationError = new WeakMap(), _Client_L$initConncetion = new WeakMap(), _Client_Lmin = new WeakMap(), _Client_constructContext = new WeakMap(), _Client_lastPropagatedConnectionState = new WeakMap(), _Client_stateChangeHandler = new WeakMap(), _Client_storageInited = new WeakMap(), _Client_connectMutex = new WeakMap(), _Client_lastConnect = new WeakMap(), _Client_connectionInited = new WeakMap(), _Client_lastPropagatedAuthorizationState = new WeakMap(), _Client_lastUpdates = new WeakMap(), _Client_updateGapRecoveryLoopAbortController = new WeakMap(), _Client_handleInvokeError = new WeakMap(), _Client_authStringImported = new WeakMap(), _Client_lastGetMe = new WeakMap(), _Client_instances = new WeakSet(), _Client_getApiId = async function _Client_getApiId() {
         const apiId = __classPrivateFieldGet(this, _Client_apiId, "f") || await this.storage.getApiId();
         if (!apiId) {
             throw new InputError("apiId not set");
@@ -827,11 +896,11 @@ export class Client extends Composer {
         let prev = 0;
         return {
             size: connectionCount,
-            api: () => {
+            invoke: () => {
                 if (prev + 1 > connections.length)
                     prev = 0;
                 const connection = connections[prev++];
-                return connection.api;
+                return connection.invoke;
             },
             connect: async () => {
                 for await (const connection of connections) {
@@ -853,18 +922,19 @@ export class Client extends Composer {
             transportProvider: __classPrivateFieldGet(this, _Client_client, "f").transportProvider,
             appVersion: this.appVersion,
             deviceModel: this.deviceModel,
-            langCode: this.langCode,
-            langPack: this.langPack,
+            language: this.language,
+            platform: this.platform,
             systemLangCode: this.systemLangCode,
             systemVersion: this.systemVersion,
             cdn: true,
+            initialDc: getDc(dcId || __classPrivateFieldGet(this, _Client_client, "f").dcId),
         });
         __classPrivateFieldGet(client, _Client_client, "f").serverSalt = __classPrivateFieldGet(this, _Client_client, "f").serverSalt;
         client.invoke.use(async (ctx, next) => {
             if (ctx.error instanceof AuthKeyUnregistered && dcId) {
                 try {
-                    const exportedAuth = await this.api.auth.exportAuthorization({ dc_id: dcId });
-                    await client.api.auth.importAuthorization(exportedAuth);
+                    const exportedAuth = await this.invoke({ _: "auth.exportAuthorization", dc_id: dcId });
+                    await client.invoke({ ...exportedAuth, _: "auth.importAuthorization" });
                     return true;
                 }
                 catch (err) {
@@ -876,7 +946,7 @@ export class Client extends Composer {
             }
         });
         return {
-            api: client.api,
+            invoke: client.invoke.bind(client),
             connect: async () => {
                 await client.connect();
                 if (dcId && dcId != __classPrivateFieldGet(this, _Client_client, "f").dcId) {
@@ -902,7 +972,7 @@ export class Client extends Composer {
         }
     }, handleMigrationError)](err) {
         let newDc = String(err.dc);
-        if (Math.abs(__classPrivateFieldGet(this, _Client_client, "f").dcId) >= 10000) {
+        if (Math.abs(__classPrivateFieldGet(this, _Client_client, "f").dcId) >= 10_000) {
             newDc += "-test";
         }
         await this.reconnect(newDc);
@@ -911,7 +981,7 @@ export class Client extends Composer {
     async disconnect() {
         __classPrivateFieldSet(this, _Client_connectionInited, false, "f");
         await __classPrivateFieldGet(this, _Client_client, "f").disconnect();
-        __classPrivateFieldGet(this, _Client_pingLoopAbortController, "f")?.abort();
+        __classPrivateFieldGet(this, _Client_updateManager, "f").closeAllChats();
     }
     /**
      * Signs in using the provided parameters if not already signed in.
@@ -930,7 +1000,7 @@ export class Client extends Composer {
             return;
         }
         catch (err) {
-            if (!(err instanceof AuthKeyUnregistered)) {
+            if (!(err instanceof AuthKeyUnregistered) && !(err instanceof SessionRevoked)) {
                 throw err;
             }
         }
@@ -947,12 +1017,12 @@ export class Client extends Composer {
                 params = { phone: () => mustPrompt("Phone number:"), code: () => mustPrompt("Verification code:"), password: () => mustPrompt("Password:") };
             }
         }
-        __classPrivateFieldGet(this, _Client_LsignIn, "f").debug("authorizing with", typeof params === "string" ? "bot token" : params instanceof types.auth.ExportedAuthorization ? "exported authorization" : "AuthorizeUserParams");
+        __classPrivateFieldGet(this, _Client_LsignIn, "f").debug("authorizing with", typeof params === "string" ? "bot token" : is("auth.exportedAuthorization", params) ? "exported authorization" : "AuthorizeUserParams");
         if (params && "botToken" in params) {
             while (true) {
                 try {
-                    const auth = await this.api.auth.importBotAuthorization({ api_id: apiId, api_hash: __classPrivateFieldGet(this, _Client_apiHash, "f"), bot_auth_token: params.botToken, flags: 0 });
-                    await this.storage.setAccountId(Number(auth[as](types.auth.Authorization).user.id));
+                    const auth = await this.invoke({ _: "auth.importBotAuthorization", api_id: apiId, api_hash: __classPrivateFieldGet(this, _Client_apiHash, "f"), bot_auth_token: params.botToken, flags: 0 });
+                    await this.storage.setAccountId(Number(as("auth.authorization", auth).user.id));
                     await this.storage.setAccountType("bot");
                     break;
                 }
@@ -978,12 +1048,13 @@ export class Client extends Composer {
                 while (true) {
                     try {
                         phone = typeof params.phone === "string" ? params.phone : await params.phone();
-                        const sendCode = () => this.api.auth.sendCode({
+                        const sendCode = () => this.invoke({
+                            _: "auth.sendCode",
                             phone_number: phone,
                             api_id: __classPrivateFieldGet(this, _Client_apiId, "f"),
                             api_hash: __classPrivateFieldGet(this, _Client_apiHash, "f"),
-                            settings: new types.CodeSettings(),
-                        }).then((v) => v[as](types.auth.SentCode));
+                            settings: { _: "codeSettings" },
+                        }).then((v) => as("auth.sentCode", v));
                         try {
                             sentCode = await sendCode();
                         }
@@ -1012,12 +1083,13 @@ export class Client extends Composer {
                 code: while (true) {
                     const code = typeof params.code === "string" ? params.code : await params.code();
                     try {
-                        const auth = await this.api.auth.signIn({
+                        const auth = await this.invoke({
+                            _: "auth.signIn",
                             phone_number: phone,
                             phone_code: code,
                             phone_code_hash: sentCode.phone_code_hash,
                         });
-                        await this.storage.setAccountId(Number(auth[as](types.auth.Authorization).user.id));
+                        await this.storage.setAccountId(Number(as("auth.authorization", auth).user.id));
                         await this.storage.setAccountType("user");
                         __classPrivateFieldGet(this, _Client_LsignIn, "f").debug("signed in as user");
                         await __classPrivateFieldGet(this, _Client_instances, "m", _Client_propagateAuthorizationState).call(this, true);
@@ -1038,15 +1110,15 @@ export class Client extends Composer {
                     throw err;
                 }
                 password: while (true) {
-                    const ap = await this.api.account.getPassword();
-                    if (!(ap.current_algo instanceof types.PasswordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow)) {
-                        throw new Error(`Handling ${ap.current_algo?.[name]} not implemented`);
+                    const ap = await this.invoke({ _: "account.getPassword" });
+                    if (!(is("passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow", ap.current_algo))) {
+                        throw new Error(`Handling ${ap.current_algo?._} not implemented`);
                     }
                     try {
                         const password = typeof params.password === "string" ? params.password : await params.password(ap.hint ?? null);
                         const input = await checkPassword(password, ap);
-                        const auth = await this.api.auth.checkPassword({ password: input });
-                        await this.storage.setAccountId(Number(auth[as](types.auth.Authorization).user.id));
+                        const auth = await this.invoke({ _: "auth.checkPassword", password: input });
+                        await this.storage.setAccountId(Number(as("auth.authorization", auth).user.id));
                         await this.storage.setAccountType("user");
                         __classPrivateFieldGet(this, _Client_LsignIn, "f").debug("signed in as user");
                         await __classPrivateFieldGet(this, _Client_instances, "m", _Client_propagateAuthorizationState).call(this, true);
@@ -1077,7 +1149,7 @@ export class Client extends Composer {
         try {
             await Promise.all([
                 this.storage.reset(),
-                this.api.auth.logOut().then(() => {
+                this.invoke({ _: "auth.logOut" }).then(() => {
                     __classPrivateFieldGet(this, _Client_instances, "m", _Client_propagateAuthorizationState).call(this, false);
                 }),
             ]);
@@ -1104,8 +1176,12 @@ export class Client extends Composer {
         return this.storage.exportAuthString(__classPrivateFieldGet(this, _Client_apiId, "f"));
     }
     async importAuthString(authString) {
+        if (this.connected) {
+            throw new Error("Cannot import auth string while the client is connected");
+        }
         await __classPrivateFieldGet(this, _Client_instances, "m", _Client_initStorage).call(this);
         await this.storage.importAuthString(authString);
+        __classPrivateFieldSet(this, _Client_authStringImported, true, "f");
     }
     /**
      * Get a chat's inputPeer. Useful when calling API functions directly.
@@ -1114,10 +1190,10 @@ export class Client extends Composer {
      */
     async getInputPeer(id) {
         if (id === "me" || id == await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getSelfId).call(this)) {
-            return new types.InputPeerSelf();
+            return { _: "inputPeerSelf" };
         }
         const inputPeer = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getInputPeerInner).call(this, id);
-        if (((inputPeer instanceof types.InputPeerUser || inputPeer instanceof types.InputPeerChannel) && inputPeer.access_hash == 0n) && await this.storage.getAccountType() == "bot") {
+        if (((is("inputPeerUser", inputPeer) || is("inputPeerChannel", inputPeer)) && inputPeer.access_hash == 0n) && await this.storage.getAccountType() == "bot") {
             if ("channel_id" in inputPeer) {
                 inputPeer.access_hash = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getChannelAccessHash).call(this, inputPeer.channel_id);
             }
@@ -1125,7 +1201,7 @@ export class Client extends Composer {
                 inputPeer.access_hash = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getUserAccessHash).call(this, inputPeer.user_id);
             }
         }
-        if ((inputPeer instanceof types.InputPeerUser || inputPeer instanceof types.InputPeerChannel) && inputPeer.access_hash == 0n && await this.storage.getAccountType() == "user") {
+        if ((is("inputPeerUser", inputPeer) || is("inputPeerChannel", inputPeer)) && inputPeer.access_hash == 0n && await this.storage.getAccountType() == "user") {
             throw new AccessError(`Cannot access the chat ${id} because there is no access hash for it.`);
         }
         return inputPeer;
@@ -1137,10 +1213,10 @@ export class Client extends Composer {
      */
     async getInputChannel(id) {
         const inputPeer = await this.getInputPeer(id);
-        if (!(inputPeer instanceof types.InputPeerChannel)) {
+        if (!canBeInputChannel(inputPeer)) {
             throw new TypeError(`The chat ${id} is not a channel neither a supergroup.`);
         }
-        return new types.InputChannel(inputPeer);
+        return toInputChannel(inputPeer);
     }
     /**
      * Get a user's inputUser. Useful when calling API functions directly.
@@ -1149,14 +1225,14 @@ export class Client extends Composer {
      */
     async getInputUser(id) {
         const inputPeer = await this.getInputPeer(id);
-        if (!(inputPeer instanceof types.InputPeerUser)) {
+        if (!canBeInputUser(inputPeer)) {
             throw new TypeError(`The chat ${id} is not a private chat.`);
         }
-        return new types.InputUser(inputPeer);
+        return toInputUser(inputPeer);
     }
     async [(_Client_propagateAuthorizationState = async function _Client_propagateAuthorizationState(authorized) {
         if (__classPrivateFieldGet(this, _Client_lastPropagatedAuthorizationState, "f") != authorized) {
-            await this.middleware()(await __classPrivateFieldGet(this, _Client_constructContext, "f").call(this, { authorizationState: { authorized } }), resolve);
+            await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, { authorizationState: { authorized } });
             __classPrivateFieldSet(this, _Client_lastPropagatedAuthorizationState, authorized, "f");
         }
     }, _Client_getSelfId = async function _Client_getSelfId() {
@@ -1165,54 +1241,67 @@ export class Client extends Composer {
             throw new Error("Unauthorized");
         }
         return id;
-    }, _Client_startPingLoop = function _Client_startPingLoop() {
-        drop(__classPrivateFieldGet(this, _Client_instances, "m", _Client_pingLoop).call(this));
-    }, _Client_pingLoop = async function _Client_pingLoop() {
-        __classPrivateFieldSet(this, _Client_pingLoopAbortController, new AbortController(), "f");
+    }, _Client_startUpdateGapRecoveryLoop = function _Client_startUpdateGapRecoveryLoop() {
+        drop(__classPrivateFieldGet(this, _Client_instances, "m", _Client_updateGapRecoveryLoop).call(this));
+    }, _Client_updateGapRecoveryLoop = async function _Client_updateGapRecoveryLoop() {
+        if (__classPrivateFieldGet(this, _Client_cdn, "f")) {
+            return;
+        }
+        __classPrivateFieldSet(this, _Client_updateGapRecoveryLoopAbortController, new AbortController(), "f");
         while (this.connected) {
             try {
                 await new Promise((resolve, reject) => {
-                    const timeout = setTimeout(resolve, __classPrivateFieldGet(this, _Client_pingInterval, "f"));
-                    __classPrivateFieldGet(this, _Client_pingLoopAbortController, "f").signal.onabort = () => {
-                        reject(__classPrivateFieldGet(this, _Client_pingLoopAbortController, "f")?.signal.reason);
+                    const timeout = setTimeout(resolve, 60 * SECOND);
+                    __classPrivateFieldGet(this, _Client_updateGapRecoveryLoopAbortController, "f").signal.onabort = () => {
+                        reject(__classPrivateFieldGet(this, _Client_updateGapRecoveryLoopAbortController, "f")?.signal.reason);
                         clearTimeout(timeout);
                     };
                 });
                 if (!this.connected) {
                     continue;
                 }
-                __classPrivateFieldGet(this, _Client_pingLoopAbortController, "f").signal.throwIfAborted();
-                await this.api.ping_delay_disconnect({ ping_id: getRandomId(), disconnect_delay: __classPrivateFieldGet(this, _Client_pingInterval, "f") / second + 15 });
-                if (Date.now() - __classPrivateFieldGet(this, _Client_lastUpdates, "f").getTime() >= 15 * minute) {
-                    drop(__classPrivateFieldGet(this, _Client_updateManager, "f").recoverUpdateGap("lastUpdates"));
+                __classPrivateFieldGet(this, _Client_updateGapRecoveryLoopAbortController, "f").signal.throwIfAborted();
+                if (Date.now() - __classPrivateFieldGet(this, _Client_lastUpdates, "f").getTime() >= 15 * MINUTE) {
+                    drop(__classPrivateFieldGet(this, _Client_updateManager, "f").recoverUpdateGap("lastUpdates").then(() => {
+                        __classPrivateFieldSet(this, _Client_lastUpdates, new Date(), "f");
+                    }));
                 }
             }
             catch (err) {
+                if (err instanceof DOMException && err.name == "AbortError") {
+                    __classPrivateFieldSet(this, _Client_updateGapRecoveryLoopAbortController, new AbortController(), "f");
+                }
                 if (!this.connected) {
                     continue;
                 }
-                __classPrivateFieldGet(this, _Client_LpingLoop, "f").error(err);
+                __classPrivateFieldGet(this, _Client_LupdateGapRecoveryLoop, "f").error(err);
             }
         }
     }, _Client_invoke = async function _Client_invoke(function_, noWait) {
         let n = 1;
         while (true) {
             try {
-                if (function_ instanceof functions.Function && !__classPrivateFieldGet(this, _Client_connectionInited, "f") && !isMtprotoFunction(function_)) {
-                    const result = await __classPrivateFieldGet(this, _Client_client, "f").invoke(new functions.initConnection({
+                if (__classPrivateFieldGet(this, _Client_disableUpdates, "f") && !isMtprotoFunction(function_) && !isCdnFunction(function_)) {
+                    function_ = { _: "invokeWithoutUpdates", query: function_ };
+                }
+                if (!__classPrivateFieldGet(this, _Client_connectionInited, "f") && !isMtprotoFunction(function_)) {
+                    __classPrivateFieldSet(this, _Client_connectionInited, true, "f");
+                    __classPrivateFieldGet(this, _Client_L, "f").debug("init");
+                    const result = await __classPrivateFieldGet(this, _Client_client, "f").invoke({
+                        _: "initConnection",
                         api_id: await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getApiId).call(this),
                         app_version: this.appVersion,
                         device_model: this.deviceModel,
-                        lang_code: this.langCode,
-                        lang_pack: this.langPack,
-                        query: new functions.invokeWithLayer({
+                        lang_code: this.language,
+                        lang_pack: this.platform,
+                        query: {
+                            _: "invokeWithLayer",
                             layer: LAYER,
                             query: function_,
-                        }),
+                        },
                         system_lang_code: this.systemLangCode,
                         system_version: this.systemVersion,
-                    }), noWait);
-                    __classPrivateFieldSet(this, _Client_connectionInited, true, "f");
+                    }, noWait);
                     __classPrivateFieldGet(this, _Client_L$initConncetion, "f").debug("connection inited");
                     return result;
                 }
@@ -1232,32 +1321,37 @@ export class Client extends Composer {
                     throw err;
                 }
             }
-            finally {
-                if (!__classPrivateFieldGet(this, _Client_pingLoopStarted, "f")) {
-                    __classPrivateFieldGet(this, _Client_instances, "m", _Client_startPingLoop).call(this);
-                    __classPrivateFieldSet(this, _Client_pingLoopStarted, true, "f");
-                }
-            }
         }
     }, _Client_getUserAccessHash = async function _Client_getUserAccessHash(userId) {
-        const users = await this.api.users.getUsers({ id: [new types.InputUser({ user_id: userId, access_hash: 0n })] });
-        const user = users[0]?.[as](types.User);
+        const users = await this.invoke({ _: "users.getUsers", id: [{ _: "inputUser", user_id: userId, access_hash: 0n }] });
+        const user = as("user", users[0]);
         if (user) {
             await this.messageStorage.setEntity(user);
         }
         return user?.access_hash ?? 0n;
     }, _Client_getChannelAccessHash = async function _Client_getChannelAccessHash(channelId) {
-        const channels = await this.api.channels.getChannels({ id: [new types.InputChannel({ channel_id: channelId, access_hash: 0n })] });
-        const channel = channels.chats[0][as](types.Channel);
+        const channels = await this.invoke({ _: "channels.getChannels", id: [{ _: "inputChannel", channel_id: channelId, access_hash: 0n }] });
+        const channel = as("channel", channels.chats[0]);
         if (channel) {
             await this.messageStorage.setEntity(channel);
         }
         return channel?.access_hash ?? 0n;
+    }, _Client_getInputPeerChatId = async function _Client_getInputPeerChatId(inputPeer) {
+        if (isOneOf(["inputPeerSelf", "inputUserSelf"], inputPeer)) {
+            return await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getSelfId).call(this);
+        }
+        else if (isOneOf(["inputPeerEmpty", "inputUserEmpty", "inputChannelEmpty"], inputPeer)) {
+            unreachable();
+        }
+        else {
+            return peerToChatId(inputPeer);
+        }
     }, _Client_getInputPeerInner = async function _Client_getInputPeerInner(id) {
         const idn = Number(id);
         if (!isNaN(idn)) {
             id = idn;
         }
+        let peer;
         if (typeof id === "string") {
             id = getUsername(id);
             let resolvedId = 0;
@@ -1267,13 +1361,13 @@ export class Client extends Composer {
                 resolvedId = id;
             }
             else {
-                const resolved = await this.api.contacts.resolveUsername({ username: id });
-                await __classPrivateFieldGet(this, _Client_updateManager, "f").processChats(resolved.chats);
-                await __classPrivateFieldGet(this, _Client_updateManager, "f").processUsers(resolved.users);
-                if (resolved.peer instanceof types.PeerUser) {
+                const resolved = await this.invoke({ _: "contacts.resolveUsername", username: id });
+                await __classPrivateFieldGet(this, _Client_updateManager, "f").processChats(resolved.chats, resolved);
+                await __classPrivateFieldGet(this, _Client_updateManager, "f").processUsers(resolved.users, resolved);
+                if (is("peerUser", resolved.peer)) {
                     resolvedId = peerToChatId(resolved.peer);
                 }
-                else if (resolved.peer instanceof types.PeerChannel) {
+                else if (is("peerChannel", resolved.peer)) {
                     resolvedId = peerToChatId(resolved.peer);
                 }
                 else {
@@ -1283,11 +1377,11 @@ export class Client extends Composer {
             const resolvedIdType = getChatIdPeerType(resolvedId);
             if (resolvedIdType == "user") {
                 const accessHash = await this.messageStorage.getUserAccessHash(resolvedId);
-                return new types.InputPeerUser({ user_id: chatIdToPeerId(resolvedId), access_hash: accessHash ?? 0n });
+                peer = { _: "inputPeerUser", user_id: chatIdToPeerId(resolvedId), access_hash: accessHash ?? 0n };
             }
             else if (resolvedIdType == "channel") {
                 const accessHash = await this.messageStorage.getChannelAccessHash(resolvedId);
-                return new types.InputPeerChannel({ channel_id: chatIdToPeerId(resolvedId), access_hash: accessHash ?? 0n });
+                peer = { _: "inputPeerChannel", channel_id: chatIdToPeerId(resolvedId), access_hash: accessHash ?? 0n };
             }
             else {
                 unreachable();
@@ -1295,22 +1389,48 @@ export class Client extends Composer {
         }
         else if (id > 0) {
             const accessHash = await this.messageStorage.getUserAccessHash(id);
-            return new types.InputPeerUser({ user_id: chatIdToPeerId(id), access_hash: accessHash ?? 0n });
+            peer = { _: "inputPeerUser", user_id: chatIdToPeerId(id), access_hash: accessHash ?? 0n };
         }
         else if (-MAX_CHAT_ID <= id) {
-            return new types.InputPeerChat({ chat_id: BigInt(Math.abs(id)) });
+            peer = { _: "inputPeerChat", chat_id: BigInt(Math.abs(id)) };
         }
         else if (ZERO_CHANNEL_ID - MAX_CHANNEL_ID <= id && id != ZERO_CHANNEL_ID) {
             const accessHash = await this.messageStorage.getChannelAccessHash(id);
-            return new types.InputPeerChannel({ channel_id: chatIdToPeerId(id), access_hash: accessHash ?? 0n });
+            peer = { _: "inputPeerChannel", channel_id: chatIdToPeerId(id), access_hash: accessHash ?? 0n };
         }
         else {
             throw new InputError("The ID is of an format unknown.");
         }
+        if (!is("inputPeerChat", peer) && !peer.access_hash) {
+            const chatId = peerToChatId(peer);
+            const minPeerReference = await this.messageStorage.getLastMinPeerReference(chatId);
+            if (minPeerReference) {
+                const minInputPeer = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getMinInputPeer).call(this, canBeInputChannel(peer) ? "channel" : "user", { ...minPeerReference, senderId: chatId });
+                if (minInputPeer) {
+                    __classPrivateFieldGet(this, _Client_Lmin, "f").debug("resolved input min peer", minInputPeer);
+                    peer = minInputPeer;
+                }
+            }
+        }
+        return peer;
+    }, _Client_getMinInputPeer = async function _Client_getMinInputPeer(type, reference) {
+        const entity = await this.messageStorage.getEntity(reference.chatId);
+        if (isOneOf(["channel", "channelForbidden"], entity) && entity.access_hash) {
+            const peer = { _: "inputPeerChannel", channel_id: entity.id, access_hash: entity.access_hash };
+            if (type == "user") {
+                return { _: "inputPeerUserFromMessage", peer, msg_id: reference.messageId, user_id: chatIdToPeerId(reference.senderId) };
+            }
+            else {
+                return { _: "inputPeerChannelFromMessage", peer, msg_id: reference.messageId, channel_id: chatIdToPeerId(reference.senderId) };
+            }
+        }
+        else {
+            return null;
+        }
     }, getEntity)](peer) {
         const id = peerToChatId(peer);
         const entity = await this.messageStorage.getEntity(id);
-        if (entity == null && await this.storage.getAccountType() == "bot" && peer instanceof types.PeerUser || peer instanceof types.PeerChannel) {
+        if (entity == null && await this.storage.getAccountType() == "bot" && is("peerUser", peer) || is("peerChannel", peer)) {
             await this.getInputPeer(id);
         }
         else {
@@ -1327,10 +1447,10 @@ export class Client extends Composer {
      * @method ac
      */
     async getMe() {
-        let user_ = await this[getEntity](new types.PeerUser({ user_id: BigInt(await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getSelfId).call(this)) }));
+        let user_ = await this[getEntity]({ _: "peerUser", user_id: BigInt(await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getSelfId).call(this)) });
         if (user_ == null) {
-            const users = await this.api.users.getUsers({ id: [new types.InputUserSelf()] });
-            user_ = users[0][as](types.User);
+            const users = await this.invoke({ _: "users.getUsers", id: [{ _: "inputUserSelf" }] });
+            user_ = as("user", users[0]);
             await this.messageStorage.setEntity(user_);
         }
         const user = constructUser(user_);
@@ -1369,7 +1489,7 @@ export class Client extends Composer {
         return await __classPrivateFieldGet(this, _Client_accountManager, "f").reorderUsernames(id, order);
     }
     /**
-     * Hide all usernames from the a supergroup or a channel's profile. User-only.
+     * Hide all usernames from a supergroup or a channel's profile. User-only.
      *
      * @method ac
      * @param id A supergroup ID or a channel ID.
@@ -1385,6 +1505,84 @@ export class Client extends Composer {
      */
     async getBusinessConnection(id) {
         return await __classPrivateFieldGet(this, _Client_businessConnectionManager, "f").getBusinessConnection(id);
+    }
+    /**
+     * Set the current account's online status. User-only.
+     *
+     * @method ac
+     * @param online The new online status.
+     */
+    async setOnline(online) {
+        await __classPrivateFieldGet(this, _Client_accountManager, "f").setOnline(online);
+    }
+    /**
+     * Set the current account's emoji status. User-only.
+     *
+     * @method ac
+     * @param id The identifier of the emoji to be used as the new status.
+     */
+    async setEmojiStatus(id, params) {
+        await __classPrivateFieldGet(this, _Client_accountManager, "f").setEmojiStatus(id, params);
+    }
+    /**
+     * Set the emoji status of a bot's user. Bot-only.
+     *
+     * @method ac
+     * @param userId The identifier of a user of the bot.
+     * @param id The identifier of the emoji to be used as the new status.
+     */
+    async setUserEmojiStatus(userId, id, params) {
+        await __classPrivateFieldGet(this, _Client_accountManager, "f").setUserEmojiStatus(userId, id, params);
+    }
+    /**
+     * Update the profile of the current user. At least one parameter must be specified. User-only.
+     *
+     * @method ac
+     */
+    async updateProfile(params) {
+        await __classPrivateFieldGet(this, _Client_accountManager, "f").updateProfile(params);
+    }
+    /**
+     * Set the birthday of the current user. User-only.
+     *
+     * @method ac
+     */
+    async setBirthday(params) {
+        await __classPrivateFieldGet(this, _Client_accountManager, "f").setBirthday(params);
+    }
+    /**
+     * Set the personal channel of the current user. User-only.
+     *
+     * @method ac
+     */
+    async setPersonalChannel(params) {
+        await __classPrivateFieldGet(this, _Client_accountManager, "f").setPersonalChannel(params);
+    }
+    /**
+     * Set the name color of the current user. User-only.
+     *
+     * @method ac
+     * @param color The identifier of the color to set.
+     */
+    async setNameColor(color, params) {
+        await __classPrivateFieldGet(this, _Client_accountManager, "f").setNameColor(color, params);
+    }
+    /**
+     * Set the profile color of the current user. User-only.
+     *
+     * @method ac
+     * @param color The identifier of the color to set.
+     */
+    async setProfileColor(color, params) {
+        await __classPrivateFieldGet(this, _Client_accountManager, "f").setProfileColor(color, params);
+    }
+    /**
+     * Set the location of the current user. User-only.
+     *
+     * @method ac
+     */
+    async setLocation(params) {
+        await __classPrivateFieldGet(this, _Client_accountManager, "f").setLocation(params);
     }
     //
     // ========================= MESSAGES ========================= //
@@ -1478,6 +1676,17 @@ export class Client extends Composer {
         return await __classPrivateFieldGet(this, _Client_messageManager, "f").sendAudio(chatId, audio, params);
     }
     /**
+     * Send a media group.
+     *
+     * @method ms
+     * @param chatId The chat to send the media group to.
+     * @param media The media to include in the media group. Animations are not allowed. All of them must be of the same media type, but an exception is that photos and videos can be mixed.
+     * @returns The sent messages.
+     */
+    async sendMediaGroup(chatId, media, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").sendMediaGroup(chatId, media, params);
+    }
+    /**
      * Send a video note.
      *
      * @method ms
@@ -1549,6 +1758,21 @@ export class Client extends Composer {
         return await __classPrivateFieldGet(this, _Client_messageManager, "f").sendPoll(chatId, question, options, params);
     }
     /**
+     * Send an invoice. Bot-only.
+     *
+     * @method ms
+     * @param chatId The chat to send the invoice to.
+     * @param title The invoice's title.
+     * @param description The invoice's description.
+     * @param payload The invoice's payload.
+     * @param currency The invoice's currency.
+     * @param prices The invoice's price tags.
+     * @returns The sent invoice.
+     */
+    async sendInvoice(chatId, title, description, payload, currency, prices, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").sendInvoice(chatId, title, description, payload, currency, prices, params);
+    }
+    /**
      * Edit a message's text.
      *
      * @method ms
@@ -1559,6 +1783,18 @@ export class Client extends Composer {
      */
     async editMessageText(chatId, messageId, text, params) {
         return await __classPrivateFieldGet(this, _Client_messageManager, "f").editMessageText(chatId, messageId, text, params);
+    }
+    /**
+     * Edit a message's caption.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that contains the message.
+     * @param messageId The message's identifier.
+     * @param text The new caption of the message.
+     * @returns The edited message.
+     */
+    async editMessageCaption(chatId, messageId, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").editMessageCaption(chatId, messageId, params);
     }
     /**
      * Edit a message's media.
@@ -1591,6 +1827,15 @@ export class Client extends Composer {
      */
     async editInlineMessageText(inlineMessageId, text, params) {
         await __classPrivateFieldGet(this, _Client_messageManager, "f").editInlineMessageText(inlineMessageId, text, params);
+    }
+    /**
+     * Edit an inline message's caption. Bot-only.
+     *
+     * @method ms
+     * @param inlineMessageId The inline message's identifier.
+     */
+    async editInlineMessageCaption(inlineMessageId, params) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").editInlineMessageCaption(inlineMessageId, params);
     }
     /**
      * Edit a message's reply markup.
@@ -1666,6 +1911,19 @@ export class Client extends Composer {
         return await __classPrivateFieldGet(this, _Client_messageManager, "f").getMessage(chatId, messageId);
     }
     /**
+     * Retrieve a message using its link.
+     *
+     * @method ms
+     * @param link A message link.
+     * @example ```ts
+     * const message = await client.resolveMessageLink("https://t.me/MTKruto/212");
+     * ```
+     * @returns The message that was linked to.
+     */
+    async resolveMessageLink(link) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").resolveMessageLink(link);
+    }
+    /**
      * Delete multiple messages.
      *
      * @method ms
@@ -1696,6 +1954,46 @@ export class Client extends Composer {
         await __classPrivateFieldGet(this, _Client_messageManager, "f").deleteChatMemberMessages(chatId, memberId);
     }
     /**
+     * Delete multiple scheduled messages.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that contains the scheduled messages.
+     * @param messageIds The identifiers of the scheduled messages to delete.
+     */
+    async deleteScheduledMessages(chatId, messageIds) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").deleteScheduledMessages(chatId, messageIds);
+    }
+    /**
+     * Delete a scheduled message.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that contains the scheduled message.
+     * @param messageId The identifier of the scheduled message to delete.
+     */
+    async deleteScheduledMessage(chatId, messageId) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").deleteScheduledMessage(chatId, messageId);
+    }
+    /**
+     * Send multiple scheduled messages before their schedule.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that contains the scheduled messages.
+     * @param messageIds The identifiers of the scheduled messages to send.
+     */
+    async sendScheduledMessages(chatId, messageIds) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").sendScheduledMessages(chatId, messageIds);
+    }
+    /**
+     * Send a scheduled message before its schedule.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that contains the scheduled message.
+     * @param messageId The identifier of the scheduled message to send.
+     */
+    async sendScheduledMessage(chatId, messageId) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").sendScheduledMessage(chatId, messageId);
+    }
+    /**
      * Pin a message in a chat.
      *
      * @method ms
@@ -1712,8 +2010,8 @@ export class Client extends Composer {
      * @param chatId The identifier of the chat that contains the message.
      * @param messageId The message's identifier.
      */
-    async unpinMessage(chatId, messageId) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").unpinMessage(chatId, messageId);
+    async unpinMessage(chatId, messageId, params) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").unpinMessage(chatId, messageId, params);
     }
     /**
      * Unpin all pinned messages.
@@ -1746,7 +2044,7 @@ export class Client extends Composer {
      * @returns The forwarded message.
      */
     async forwardMessage(from, to, messageId, params) {
-        return await this.forwardMessages(from, to, [messageId], params).then((v) => v[0]);
+        return (await this.forwardMessages(from, to, [messageId], params))[0];
     }
     /**
      * Stop a poll.
@@ -1779,6 +2077,60 @@ export class Client extends Composer {
      */
     async searchMessages(chatId, query, params) {
         return await __classPrivateFieldGet(this, _Client_messageManager, "f").searchMessages(chatId, query, params);
+    }
+    /**
+     * Mark messages as read. User-only.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that includes the messages.
+     * @param untilMessageId The identifier of a message that will be marked as read, along with any other unread messages before it.
+     */
+    async readMessages(chatId, untilMessageId) {
+        await __classPrivateFieldGet(this, _Client_messageManager, "f").readMessages(chatId, untilMessageId);
+    }
+    /**
+     * Start a bot. User-only.
+     *
+     * @method ms
+     * @param botId The identifier of the bot to start.
+     * @returns The start message.
+     */
+    async startBot(botId, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").startBot(botId, params);
+    }
+    /**
+     * Transcribe a voice message. User-only.
+     *
+     * @method ms
+     * @param chatId The identifier of the chat that includes the message.
+     * @param messageId The identifier of the message.
+     */
+    async transcribeVoice(chatId, messageId) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").transcribeVoice(chatId, messageId);
+    }
+    //
+    // ========================= POLLS ========================= //
+    //
+    /**
+     * Cast a vote. User-only.
+     *
+     * @method pl
+     * @param chatId The identifier of the chat that includes the poll.
+     * @param messageId The identifier of the message that includes the poll.
+     * @param optionIndexes The indexes of the options to cast for.
+     */
+    async vote(chatId, messageId, optionIndexes) {
+        await __classPrivateFieldGet(this, _Client_pollManager, "f").vote(chatId, messageId, optionIndexes);
+    }
+    /**
+     * Retract a vote. User-only.
+     *
+     * @method pl
+     * @param chatId The identifier of the chat that includes the poll.
+     * @param messageId The identifier of the message that includes the poll.
+     */
+    async retractVote(chatId, messageId) {
+        await __classPrivateFieldGet(this, _Client_pollManager, "f").retractVote(chatId, messageId);
     }
     //
     // ========================= FILES ========================= //
@@ -1846,7 +2198,7 @@ export class Client extends Composer {
      * @param availableReactions The new available reactions.
      */
     async setAvailableReactions(chatId, availableReactions) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").setAvailableReactions(chatId, availableReactions);
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").setAvailableReactions(chatId, availableReactions);
     }
     /**
      * Set a chat's photo.
@@ -1856,7 +2208,7 @@ export class Client extends Composer {
      * @param photo A photo to set as the chat's photo.
      */
     async setChatPhoto(chatId, photo, params) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").setChatPhoto(chatId, photo, params);
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").setChatPhoto(chatId, photo, params);
     }
     /**
      * Delete a chat's photo.
@@ -1865,7 +2217,7 @@ export class Client extends Composer {
      * @param chatId The identifier of the chat.
      */
     async deleteChatPhoto(chatId) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").deleteChatPhoto(chatId);
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").deleteChatPhoto(chatId);
     }
     /**
      * Ban a member from a chat.
@@ -1875,7 +2227,7 @@ export class Client extends Composer {
      * @param memberId The identifier of the member.
      */
     async banChatMember(chatId, memberId, params) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").banChatMember(chatId, memberId, params);
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").banChatMember(chatId, memberId, params);
     }
     /**
      * Unban a member from a chat.
@@ -1885,7 +2237,7 @@ export class Client extends Composer {
      * @param memberId The identifier of the member.
      */
     async unbanChatMember(chatId, memberId) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").unbanChatMember(chatId, memberId);
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").unbanChatMember(chatId, memberId);
     }
     /**
      * Kick a member from a chat. Same as a banChatMember call followed by unbanChatMember.
@@ -1895,8 +2247,8 @@ export class Client extends Composer {
      * @param memberId The identifier of the member.
      */
     async kickChatMember(chatId, memberId) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").banChatMember(chatId, memberId);
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").unbanChatMember(chatId, memberId);
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").banChatMember(chatId, memberId);
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").unbanChatMember(chatId, memberId);
     }
     /**
      * Set the rights of a chat member.
@@ -1906,7 +2258,7 @@ export class Client extends Composer {
      * @param memberId The identifier of a member.
      */
     async setChatMemberRights(chatId, memberId, params) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").setChatMemberRights(chatId, memberId, params);
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").setChatMemberRights(chatId, memberId, params);
     }
     /**
      * Get the administrators of a chat.
@@ -1916,7 +2268,7 @@ export class Client extends Composer {
      * @returns The chat's administrators.
      */
     async getChatAdministrators(chatId) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").getChatAdministrators(chatId);
+        return await __classPrivateFieldGet(this, _Client_chatListManager, "f").getChatAdministrators(chatId);
     }
     /**
      * Enable join requests in a chat. User-only.
@@ -1925,7 +2277,7 @@ export class Client extends Composer {
      * @param chatId The identifier of the chat. Must be a channel or a supergroup.
      */
     async enableJoinRequests(chatId) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").enableJoinRequests(chatId);
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").enableJoinRequests(chatId);
     }
     /**
      * Disable join requests in a chat. User-only.
@@ -1934,7 +2286,7 @@ export class Client extends Composer {
      * @param chatId The identifier of the chat. Must be a channel or a supergroup.
      */
     async disableJoinRequests(chatId) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").disableJoinRequests(chatId);
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").disableJoinRequests(chatId);
     }
     /**
      * Get inactive chats. User-only.
@@ -1953,7 +2305,7 @@ export class Client extends Composer {
      * @returns The invite links created for the chat. This might be a subset of the results if they were less than `limit`. The parameters `afterDate` and `afterInviteLink` can be used for pagination.
      */
     async getCreatedInviteLinks(chatId, params) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").getCreatedInviteLinks(chatId, params);
+        return await __classPrivateFieldGet(this, _Client_chatManager, "f").getCreatedInviteLinks(chatId, params);
     }
     /**
      * Join a chat. User-only.
@@ -1962,7 +2314,7 @@ export class Client extends Composer {
      * @param chatId The identifier of the chat to join.
      */
     async joinChat(chatId) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").joinChat(chatId);
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").joinChat(chatId);
     }
     /**
      * Leave a chat.
@@ -1971,7 +2323,7 @@ export class Client extends Composer {
      * @param chatId The identifier of the chat to leave.
      */
     async leaveChat(chatId) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").leaveChat(chatId);
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").leaveChat(chatId);
     }
     /**
      * Get information on a user's chat membership.
@@ -1981,7 +2333,16 @@ export class Client extends Composer {
      * @param userId The identifier of the user.
      */
     async getChatMember(chatId, userId) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").getChatMember(chatId, userId);
+        return await __classPrivateFieldGet(this, _Client_chatListManager, "f").getChatMember(chatId, userId);
+    }
+    /**
+     * Get the members of a chat.
+     *
+     * @method ch
+     * @param chatId The chat to get its members.
+     */
+    async getChatMembers(chatId, params) {
+        return await __classPrivateFieldGet(this, _Client_chatListManager, "f").getChatMembers(chatId, params);
     }
     /**
      * Set a chat's sticker set.
@@ -2010,7 +2371,7 @@ export class Client extends Composer {
      * @param boosts The number of boosts required to circumvent its restrictions.
      */
     async setBoostsRequiredToCircumventRestrictions(chatId, boosts) {
-        await __classPrivateFieldGet(this, _Client_messageManager, "f").setBoostsRequiredToCircumventRestrictions(chatId, boosts);
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").setBoostsRequiredToCircumventRestrictions(chatId, boosts);
     }
     /**
      * Create an invite link.
@@ -2020,7 +2381,394 @@ export class Client extends Composer {
      * @returns The newly created invite link.
      */
     async createInviteLink(chatId, params) {
-        return await __classPrivateFieldGet(this, _Client_messageManager, "f").createInviteLink(chatId, params);
+        return await __classPrivateFieldGet(this, _Client_chatManager, "f").createInviteLink(chatId, params);
+    }
+    /**
+     * Approve a join request.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat that contains the join request.
+     * @param userId The user who made the join request.
+     */
+    async approveJoinRequest(chatId, userId) {
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").approveJoinRequest(chatId, userId);
+    }
+    /**
+     * Decline a join request.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat that contains the join request.
+     * @param userId The user who made the join request.
+     */
+    async declineJoinRequest(chatId, userId) {
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").declineJoinRequest(chatId, userId);
+    }
+    /**
+     * Approve all join requests. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat that contains the join requests.
+     */
+    async approveJoinRequests(chatId, params) {
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").approveJoinRequests(chatId, params);
+    }
+    /**
+     * Decline all join requests. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat that contains the join requests.
+     */
+    async declineJoinRequests(chatId, params) {
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").declineJoinRequests(chatId, params);
+    }
+    /**
+     * Add a single user to a chat.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to add the user to.
+     * @param userId The identifier of the user to add to the chat.
+     * @returns An array of FailedInvitation that has at most a length of 1. If empty, it means that the user was added.
+     */
+    async addChatMember(chatId, userId, params) {
+        return await __classPrivateFieldGet(this, _Client_chatManager, "f").addChatMember(chatId, userId, params);
+    }
+    /**
+     * Add multiple users at once to a channel or a supergroup.
+     *
+     * @method ch
+     * @param chatId The identifier of the channel or supergroup to add the users to.
+     * @param userId The identifiers of the users to add to the channel or supergroup.
+     */
+    async addChatMembers(chatId, userIds) {
+        return await __classPrivateFieldGet(this, _Client_chatManager, "f").addChatMembers(chatId, userIds);
+    }
+    /**
+     * Open a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The chat to open.
+     */
+    async openChat(chatId) {
+        await __classPrivateFieldGet(this, _Client_updateManager, "f").openChat(chatId);
+    }
+    /**
+     * Close a chat previously opened by openChat. User-only.
+     *
+     * @method ch
+     * @param chatId The chat to close.
+     */
+    async closeChat(chatId) {
+        await __classPrivateFieldGet(this, _Client_updateManager, "f").closeChat(chatId);
+    }
+    /**
+     * Create a group. User-only.
+     *
+     * @method ch
+     * @param title The title of the group.
+     * @returns The created group.
+     */
+    async createGroup(title, params) {
+        return await __classPrivateFieldGet(this, _Client_chatListManager, "f").createGroup(title, params);
+    }
+    /**
+     * Create a supergroup. User-only.
+     *
+     * @method ch
+     * @param title The title of the supergroup.
+     * @returns The created supergroup.
+     */
+    async createSupergroup(title, params) {
+        return await __classPrivateFieldGet(this, _Client_chatListManager, "f").createSupergroup(title, params);
+    }
+    /**
+     * Create a channel. User-only.
+     *
+     * @method ch
+     * @param title The title of the channel.
+     * @returns The created channel.
+     */
+    async createChannel(title, params) {
+        return await __classPrivateFieldGet(this, _Client_chatListManager, "f").createChannel(title, params);
+    }
+    /**
+     * Set the time to live of the messages of a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat.
+     * @param messageTtl The time to live of the messages in seconds.
+     */
+    async setMessageTtl(chatId, messageTtl) {
+        await __classPrivateFieldGet(this, _Client_chatListManager, "f").setMessageTtl(chatId, messageTtl);
+    }
+    /**
+     * Archive multiple chats. User-only.
+     *
+     * @method ch
+     * @param chatIds The identifiers of the chats to archive.
+     */
+    async archiveChats(chatIds) {
+        await __classPrivateFieldGet(this, _Client_chatListManager, "f").archiveChats(chatIds);
+    }
+    /**
+     * Archive a single chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to archive.
+     */
+    async archiveChat(chatId) {
+        await __classPrivateFieldGet(this, _Client_chatListManager, "f").archiveChat(chatId);
+    }
+    /**
+     * Unarchive multiple chats. User-only.
+     *
+     * @method ch
+     * @param chatIds The identifiers of the chats to unarchive.
+     */
+    async unarchiveChats(chatIds) {
+        await __classPrivateFieldGet(this, _Client_chatListManager, "f").unarchiveChats(chatIds);
+    }
+    /**
+     * Unarchive a single chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to unarchive.
+     */
+    async unarchiveChat(chatId) {
+        await __classPrivateFieldGet(this, _Client_chatListManager, "f").unarchiveChat(chatId);
+    }
+    /**
+     * Get common chats between a user and the current one. User-only.
+     *
+     * @method ch
+     * @param userId The identifier of the user to get the common chats with them.
+     */
+    async getCommonChats(userId, params) {
+        return await __classPrivateFieldGet(this, _Client_chatListManager, "f").getCommonChats(userId, params);
+    }
+    /**
+     * Get the settings of a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to get the settings for.
+     */
+    async getChatSettings(chatId) {
+        return await __classPrivateFieldGet(this, _Client_chatListManager, "f").getChatSettings(chatId);
+    }
+    /**
+     * Disable business bots in a private chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the private chat to disable business bots in.
+     */
+    async disableBusinessBots(chatId) {
+        await __classPrivateFieldGet(this, _Client_chatListManager, "f").disableBusinessBots(chatId);
+    }
+    /**
+     * Enable business bots in a private chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the private chat to enable business bots in.
+     */
+    async enableBusinessBots(chatId) {
+        await __classPrivateFieldGet(this, _Client_chatListManager, "f").enableBusinessBots(chatId);
+    }
+    /**
+     * Disable slow mode in a group. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the group to disable slow mode in.
+     */
+    async disableSlowMode(chatId) {
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").disableSlowMode(chatId);
+    }
+    /**
+     * Change slow mode in a group. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the group to change slow mode in.
+     * @param duration New slow mode duration.
+     */
+    async setSlowMode(chatId, duration) {
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").setSlowMode(chatId, duration);
+    }
+    /**
+     * Change the title of a chat.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param title The new title.
+     */
+    async setChatTitle(chatId, title) {
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").setChatTitle(chatId, title);
+    }
+    /**
+     * Change the description of a chat.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param description The new description.
+     */
+    async setChatDescription(chatId, description) {
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").setChatDescription(chatId, description);
+    }
+    /**
+     * Hide or show the member list of a group to non-admins. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of a group.
+     * @param visible Whether the member list of the group should be visible.
+     */
+    async setMemberListVisibility(chatId, visible) {
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").setMemberListVisibility(chatId, visible);
+    }
+    /**
+     * Enable or disable topics in a group. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of a group.
+     * @param enabled Whether topics should be enabled in the group.
+     */
+    async setTopicsEnabled(chatId, enabled) {
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").setTopicsEnabled(chatId, enabled);
+    }
+    /**
+     * Enable or disable automatic anti-spam in a group. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of a group.
+     * @param enabled Whether automatic anti-spam should be enabled in the group.
+     */
+    async setAntispamEnabled(chatId, enabled) {
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").setAntispamEnabled(chatId, enabled);
+    }
+    /**
+     * Enable or disable post signatures in a channel. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of a channel.
+     * @param enabled Whether post signatures should be enabled in the channel.
+     */
+    async setSignaturesEnabled(chatId, enabled, params) {
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").setSignaturesEnabled(chatId, enabled, params);
+    }
+    /**
+     * Delete a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat to delete.
+     */
+    async deleteChat(chatId) {
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").deleteChat(chatId);
+    }
+    /**
+     * Get discussion chat suggestions. User-only.
+     *
+     * @method ch
+     */
+    async getDiscussionChatSuggestions() {
+        return await __classPrivateFieldGet(this, _Client_chatManager, "f").getDiscussionChatSuggestions();
+    }
+    /**
+     * Set a channel's discussion chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of a channel.
+     * @param discussionChatId The identifier of the chat to use as discussion for the channel.
+     */
+    async setDiscussionChat(chatId, discussionChatId) {
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").setDiscussionChat(chatId, discussionChatId);
+    }
+    /**
+     * Transfer the ownership of a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param userId The identifier of the new owner.
+     * @param password The password of the current account.
+     */
+    async transferChatOwnership(chatId, userId, password) {
+        await __classPrivateFieldGet(this, _Client_chatManager, "f").transferChatOwnership(chatId, userId, password);
+    }
+    /**
+     * Create a forum topic.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param title The title of the topic.
+     * @returns The created topic.
+     */
+    async createTopic(chatId, title, params) {
+        return await __classPrivateFieldGet(this, _Client_forumManager, "f").createTopic(chatId, title, params);
+    }
+    /**
+     * Edit a forum topic.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param topicId The identifier of the topic.
+     * @param title The new title of the topic.
+     * @returns The new topic.
+     */
+    async editTopic(chatId, topicId, title, params) {
+        return await __classPrivateFieldGet(this, _Client_forumManager, "f").editTopic(chatId, topicId, title, params);
+    }
+    /**
+     * Hide the general forum topic.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     */
+    async hideGeneralTopic(chatId) {
+        await __classPrivateFieldGet(this, _Client_forumManager, "f").hideGeneralTopic(chatId);
+    }
+    /**
+     * Show the general forum topic.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     */
+    async showGeneralTopic(chatId) {
+        await __classPrivateFieldGet(this, _Client_forumManager, "f").showGeneralTopic(chatId);
+    }
+    /**
+     * Close a forum topic.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param topicId The identifier of the topic.
+     */
+    async closeTopic(chatId, topicId) {
+        await __classPrivateFieldGet(this, _Client_forumManager, "f").closeTopic(chatId, topicId);
+    }
+    /**
+     * Reopen a forum topic.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param topicId The identifier of the topic.
+     */
+    async reopenTopic(chatId, topicId) {
+        await __classPrivateFieldGet(this, _Client_forumManager, "f").reopenTopic(chatId, topicId);
+    }
+    /**
+     * Pin a forum topic.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param topicId The identifier of the topic.
+     */
+    async pinTopic(chatId, topicId) {
+        await __classPrivateFieldGet(this, _Client_forumManager, "f").pinTopic(chatId, topicId);
+    }
+    /**
+     * Unpin a forum topic.
+     *
+     * @method ch
+     * @param chatId The identifier of a chat.
+     * @param topicId The identifier of the topic.
+     */
+    async unpinTopic(chatId, topicId) {
+        await __classPrivateFieldGet(this, _Client_forumManager, "f").unpinTopic(chatId, topicId);
     }
     //
     // ========================= CALLBACK QUERIES ========================= //
@@ -2346,7 +3094,7 @@ export class Client extends Composer {
      * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      */
     async leaveVideoChat(id) {
-        return await __classPrivateFieldGet(this, _Client_videoChatManager, "f").leaveVideoChat(id);
+        await __classPrivateFieldGet(this, _Client_videoChatManager, "f").leaveVideoChat(id);
     }
     /**
      * Join a live stream. User-only.
@@ -2355,7 +3103,7 @@ export class Client extends Composer {
      * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      */
     async joinLiveStream(id) {
-        return await __classPrivateFieldGet(this, _Client_videoChatManager, "f").joinLiveStream(id);
+        await __classPrivateFieldGet(this, _Client_videoChatManager, "f").joinLiveStream(id);
     }
     /**
      * Get a video chat. User-only.
@@ -2387,18 +3135,138 @@ export class Client extends Composer {
     async *downloadLiveStreamChunk(id, channelId, scale, timestamp, params) {
         yield* __classPrivateFieldGet(this, _Client_videoChatManager, "f").downloadLiveStreamChunk(id, channelId, scale, timestamp, params);
     }
+    //
+    // ========================= PAYMENTS ========================= //
+    //
+    /**
+     * Answer a pre-checkout query. Bot-only.
+     *
+     * @method pa
+     * @param preCheckoutQueryId The identifier of the pre-checkout query.
+     * @param ok Whether the checkout is going to be processed.
+     */
+    async answerPreCheckoutQuery(preCheckoutQueryId, ok, params) {
+        await __classPrivateFieldGet(this, _Client_paymentManager, "f").answerPreCheckoutQuery(preCheckoutQueryId, ok, params);
+    }
+    /**
+     * Refund a star payment. Bot-only.
+     *
+     * @method pa
+     * @param userId The identifier of the user that was charged.
+     * @param telegramPaymentChargeId The identifier of the charge.
+     */
+    async refundStarPayment(userId, telegramPaymentChargeId) {
+        await __classPrivateFieldGet(this, _Client_paymentManager, "f").refundStarPayment(userId, telegramPaymentChargeId);
+    }
+    //
+    // ========================= CONTACTS ========================= //
+    //
+    /**
+     * Get contacts. User-only.
+     *
+     * @method co
+     */
+    async getContacts() {
+        return await __classPrivateFieldGet(this, _Client_accountManager, "f").getContacts();
+    }
+    /**
+     * Delete multiple contacts. User-only.
+     *
+     * @method co
+     * @param userIds The identifiers of contacts to delete.
+     */
+    async deleteContacts(userIds) {
+        await __classPrivateFieldGet(this, _Client_accountManager, "f").deleteContacts(userIds);
+    }
+    /**
+     * Delete a single contact. User-only.
+     *
+     * @method co
+     * @param userId The identifier of the contact to delete.
+     */
+    async deleteContact(userId) {
+        await __classPrivateFieldGet(this, _Client_accountManager, "f").deleteContact(userId);
+    }
+    /**
+     * Add a contact. User-only.
+     *
+     * @method co
+     * @param userId The identifier of a user to add as contact.
+     */
+    async addContact(userId, params) {
+        await __classPrivateFieldGet(this, _Client_accountManager, "f").addContact(userId, params);
+    }
+    //
+    // ========================= TRANSLATIONS ========================= //
+    //
+    /**
+     * Get translations. User-only.
+     *
+     * @method ta
+     */
+    async getTranslations(params) {
+        return await __classPrivateFieldGet(this, _Client_translationsManager, "f").getTranslations(params);
+    }
+    //
+    // ========================= GIFTS ========================= //
+    //
+    /**
+     * Get available gifts.
+     *
+     * @method gf
+     */
+    async getGifts() {
+        return await __classPrivateFieldGet(this, _Client_giftManager, "f").getGifts();
+    }
+    /**
+     * Get gifts claimed by a user or a channel. User-only.
+     *
+     * @method gf
+     * @param chatId The identifier of a user or a channel to get gifts for.
+     */
+    async getClaimedGifts(chatId, params) {
+        return await __classPrivateFieldGet(this, _Client_giftManager, "f").getClaimedGifts(chatId, params);
+    }
+    /**
+     * Send a gift.
+     *
+     * @method gf
+     * @param chatId The identifier of a user or a channel to send the gift to.
+     * @param giftId The identifier of the gift to send.
+     */
+    async sendGift(chatId, giftId, params) {
+        await __classPrivateFieldGet(this, _Client_giftManager, "f").sendGift(chatId, giftId, params);
+    }
+    /**
+     * Sell a gift.
+     *
+     * @method gf
+     * @param userId The identifier of the user that sent the gift.
+     * @param messageId The identifier of the service message announcing the receival of the gift.
+     */
+    async sellGift(userId, messageId) {
+        await __classPrivateFieldGet(this, _Client_giftManager, "f").sellGift(userId, messageId);
+    }
 }
 _a = Client, _Client_handleCtxUpdate = async function _Client_handleCtxUpdate(update) {
-    await this.middleware()(await __classPrivateFieldGet(this, _Client_constructContext, "f").call(this, update), resolve);
+    if (__classPrivateFieldGet(this, _Client_disableUpdates, "f") && !("authorizationState" in update) && !("connectionState" in update)) {
+        return;
+    }
+    try {
+        await this.middleware()(await __classPrivateFieldGet(this, _Client_constructContext, "f").call(this, update), resolve);
+    }
+    catch (err) {
+        __classPrivateFieldGet(this, _Client_L, "f").error("Failed to handle update:", err);
+    }
 }, _Client_queueHandleCtxUpdate = function _Client_queueHandleCtxUpdate(update) {
     __classPrivateFieldGet(this, _Client_updateManager, "f").getHandleUpdateQueue(UpdateManager.MAIN_BOX_ID).add(async () => {
         await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, update);
     });
 }, _Client_handleUpdate = async function _Client_handleUpdate(update) {
     const promises = new Array();
-    if (update instanceof types.UpdateUserName) {
+    if (is("updateUserName", update)) {
         await this.messageStorage.updateUsernames(Number(update.user_id), update.usernames.map((v) => v.username));
-        const peer = new types.PeerUser(update);
+        const peer = { ...update, _: "peerUser" };
         const entity = await this[getEntity](peer);
         if (entity != null) {
             entity.usernames = update.usernames;
@@ -2407,52 +3275,102 @@ _a = Client, _Client_handleCtxUpdate = async function _Client_handleCtxUpdate(up
             await this.messageStorage.setEntity(entity);
         }
     }
-    if (MessageManager.canHandleUpdate(update)) {
-        const update_ = await __classPrivateFieldGet(this, _Client_messageManager, "f").handleUpdate(update);
-        if (update_) {
-            promises.push((async () => {
-                try {
-                    await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, update_);
-                }
-                finally {
-                    if ("deletedMessages" in update_) {
-                        for (const { chatId, messageId } of update_.deletedMessages) {
-                            await this.messageStorage.setMessage(chatId, messageId, null);
-                            await __classPrivateFieldGet(this, _Client_chatListManager, "f").reassignChatLastMessage(chatId);
-                        }
+    if (__classPrivateFieldGet(this, _Client_messageManager, "f").canHandleUpdate(update)) {
+        promises.push(async () => {
+            const ctxUpdate = await __classPrivateFieldGet(this, _Client_messageManager, "f").handleUpdate(update);
+            if (!ctxUpdate) {
+                return;
+            }
+            try {
+                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, ctxUpdate);
+            }
+            finally {
+                if ("deletedMessages" in ctxUpdate) {
+                    for (const { chatId, messageId } of ctxUpdate.deletedMessages) {
+                        await this.messageStorage.setMessage(chatId, messageId, null);
+                        await __classPrivateFieldGet(this, _Client_chatListManager, "f").reassignChatLastMessage(chatId);
                     }
                 }
-            })());
-        }
+            }
+        });
     }
-    if (VideoChatManager.canHandleUpdate(update)) {
-        promises.push(__classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, await __classPrivateFieldGet(this, _Client_videoChatManager, "f").handleUpdate(update)));
+    if (__classPrivateFieldGet(this, _Client_chatManager, "f").canHandleUpdate(update)) {
+        promises.push(async () => {
+            const ctxUpdate = await __classPrivateFieldGet(this, _Client_chatManager, "f").handleUpdate(update);
+            if (ctxUpdate) {
+                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, ctxUpdate);
+            }
+        });
     }
-    if (CallbackQueryManager.canHandleUpdate(update)) {
-        promises.push(__classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, await __classPrivateFieldGet(this, _Client_callbackQueryManager, "f").handleUpdate(update)));
+    if (__classPrivateFieldGet(this, _Client_pollManager, "f").canHandleUpdate(update)) {
+        promises.push(async () => {
+            const ctxUpdate = await __classPrivateFieldGet(this, _Client_pollManager, "f").handleUpdate(update);
+            if (ctxUpdate) {
+                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, ctxUpdate);
+            }
+        });
     }
-    if (InlineQueryManager.canHandleUpdate(update)) {
-        promises.push(__classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, await __classPrivateFieldGet(this, _Client_inlineQueryManager, "f").handleUpdate(update)));
+    if (__classPrivateFieldGet(this, _Client_videoChatManager, "f").canHandleUpdate(update)) {
+        promises.push(async () => {
+            const ctxUpdate = await __classPrivateFieldGet(this, _Client_videoChatManager, "f").handleUpdate(update);
+            if (ctxUpdate) {
+                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, ctxUpdate);
+            }
+        });
     }
-    if (ReactionManager.canHandleUpdate(update)) {
-        const upd = await __classPrivateFieldGet(this, _Client_reactionManager, "f").handleUpdate(update);
-        if (upd) {
-            promises.push(__classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, upd));
-        }
+    if (__classPrivateFieldGet(this, _Client_callbackQueryManager, "f").canHandleUpdate(update)) {
+        promises.push(async () => __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, await __classPrivateFieldGet(this, _Client_callbackQueryManager, "f").handleUpdate(update)));
     }
-    if (ChatListManager.canHandleUpdate(update)) {
-        await __classPrivateFieldGet(this, _Client_chatListManager, "f").handleUpdate(update);
+    if (__classPrivateFieldGet(this, _Client_inlineQueryManager, "f").canHandleUpdate(update)) {
+        promises.push(async () => __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, await __classPrivateFieldGet(this, _Client_inlineQueryManager, "f").handleUpdate(update)));
     }
-    if (StoryManager.canHandleUpdate(update)) {
-        const upd = await __classPrivateFieldGet(this, _Client_storyManager, "f").handleUpdate(update);
-        if (upd) {
-            promises.push(__classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, upd));
-        }
+    if (__classPrivateFieldGet(this, _Client_reactionManager, "f").canHandleUpdate(update)) {
+        promises.push(async () => {
+            const upd = await __classPrivateFieldGet(this, _Client_reactionManager, "f").handleUpdate(update);
+            if (upd) {
+                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, upd);
+            }
+        });
     }
-    if (BusinessConnectionManager.canHandleUpdate(update)) {
-        promises.push(__classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, await __classPrivateFieldGet(this, _Client_businessConnectionManager, "f").handleUpdate(update)));
+    if (__classPrivateFieldGet(this, _Client_chatListManager, "f").canHandleUpdate(update)) {
+        promises.push(() => __classPrivateFieldGet(this, _Client_chatListManager, "f").handleUpdate(update));
     }
-    return () => Promise.all(promises);
+    if (__classPrivateFieldGet(this, _Client_storyManager, "f").canHandleUpdate(update)) {
+        promises.push(async () => {
+            const ctxUpdate = await __classPrivateFieldGet(this, _Client_storyManager, "f").handleUpdate(update);
+            if (ctxUpdate) {
+                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, ctxUpdate);
+            }
+        });
+    }
+    if (__classPrivateFieldGet(this, _Client_businessConnectionManager, "f").canHandleUpdate(update)) {
+        promises.push(async () => __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, await __classPrivateFieldGet(this, _Client_businessConnectionManager, "f").handleUpdate(update)));
+    }
+    if (__classPrivateFieldGet(this, _Client_storyManager, "f").canHandleUpdate(update)) {
+        promises.push(async () => {
+            const ctxUpdate = await __classPrivateFieldGet(this, _Client_storyManager, "f").handleUpdate(update);
+            if (ctxUpdate) {
+                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, ctxUpdate);
+            }
+        });
+    }
+    if (__classPrivateFieldGet(this, _Client_paymentManager, "f").canHandleUpdate(update)) {
+        promises.push(async () => {
+            const ctxUpdate = await __classPrivateFieldGet(this, _Client_paymentManager, "f").handleUpdate(update);
+            if (ctxUpdate) {
+                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, ctxUpdate);
+            }
+        });
+    }
+    if (__classPrivateFieldGet(this, _Client_translationsManager, "f").canHandleUpdate(update)) {
+        promises.push(async () => {
+            const ctxUpdate = await __classPrivateFieldGet(this, _Client_translationsManager, "f").handleUpdate(update);
+            if (ctxUpdate) {
+                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, ctxUpdate);
+            }
+        });
+    }
+    return () => Promise.all(promises.map((v) => v()));
 }, _Client_getMe = async function _Client_getMe() {
     if (__classPrivateFieldGet(this, _Client_lastGetMe, "f") != null) {
         return __classPrivateFieldGet(this, _Client_lastGetMe, "f");

@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,6 +18,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { FileSource } from "./0_file_source.js";
+import { MessageEntity } from "./0_message_entity.js";
+import { ParseMode } from "./0_parse_mode.js";
 import { SelfDestructOption } from "./0_self_destruct_option.js";
 /** @unlisted */
 export interface _InputMediaCommon {
@@ -28,16 +30,23 @@ export interface _InputMediaCommon {
     /** Size of each upload chunk in bytes. */
     chunkSize?: number;
     /** Upload abort signal. */
-    signal?: AbortSignal | null;
+    signal?: AbortSignal;
+    /** The caption of the media. */
+    caption?: string;
+    /** The entities of media's caption. */
+    captionEntities?: MessageEntity[];
+    /** Override the parse mode used for the media's caption. */
+    parseMode?: ParseMode;
 }
 /** @unlisted */
 export interface InputMediaAnimation extends _InputMediaCommon {
-    /** The new animation. */
+    /**
+     * The animation.
+     * @discriminator
+     */
     animation: FileSource;
     /** A thumbnail to assign. Cannot be a URL. */
     thumbnail?: FileSource;
-    /** The new caption of the message. */
-    caption?: string;
     /** The duration of the animation in seconds. */
     duration?: number;
     /** The width of the animation file. */
@@ -49,12 +58,13 @@ export interface InputMediaAnimation extends _InputMediaCommon {
 }
 /** @unlisted */
 export interface InputMediaAudio extends _InputMediaCommon {
-    /** The new audio. */
+    /**
+     * The audio.
+     * @discriminator
+     */
     audio: FileSource;
     /** A thumbnail to assign. Cannot be a URL. */
     thumbnail?: FileSource;
-    /** The new caption of the message. */
-    caption?: string;
     /** The duration of the audio file in seconds. */
     duration?: number;
     /** Names of the entities that are being featured in the audio. */
@@ -64,30 +74,35 @@ export interface InputMediaAudio extends _InputMediaCommon {
 }
 /** @unlisted */
 export interface InputMediaDocument extends _InputMediaCommon {
-    /** The new document. */
+    /**
+     * The document.
+     * @discriminator
+     */
     document: FileSource;
     /** A thumbnail to assign. Cannot be a URL. */
     thumbnail?: FileSource;
-    /** The new caption of the message. */
-    caption?: string;
 }
 /** @unlisted */
 export interface InputMediaPhoto extends _InputMediaCommon {
-    /** The new photo. */
+    /**
+     * The photo.
+     * @discriminator
+     */
     photo: FileSource;
     /** The width of the photo in pixels. */
     width?: number;
     /** The height of the photo in pixels. */
     height?: number;
-    /** The new caption of the message. */
-    caption?: string;
     /** Whether to mark the media as a spoiler. */
     hasSpoiler?: boolean;
     selfDestruct?: SelfDestructOption;
 }
 /** @unlisted */
 export interface InputMediaVideo extends _InputMediaCommon {
-    /** The new video. */
+    /**
+     * The video.
+     * @discriminator
+     */
     video: FileSource;
     /** A thumbnail to assign. Cannot be a URL. */
     thumbnail?: FileSource;
@@ -99,8 +114,6 @@ export interface InputMediaVideo extends _InputMediaCommon {
     height?: number;
     /** Whether the video is suitable for streaming. */
     supportsStreaming?: boolean;
-    /** The new caption of the message. */
-    caption?: string;
     /** Whether to mark the media as a spoiler. */
     hasSpoiler?: boolean;
     selfDestruct?: SelfDestructOption;

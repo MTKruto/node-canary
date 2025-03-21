@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,12 +19,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructThumbnail = void 0;
+exports.constructThumbnail = constructThumbnail;
 const _2_tl_js_1 = require("../2_tl.js");
 const _file_id_js_1 = require("./_file_id.js");
 function constructThumbnail(size, file) {
-    const type = file instanceof _2_tl_js_1.types.Photo ? _file_id_js_1.FileType.Photo : _file_id_js_1.FileType.Thumbnail;
-    const fileType = file instanceof _2_tl_js_1.types.Photo ? _file_id_js_1.FileType.Photo : _file_id_js_1.FileType.Document;
+    const type = (0, _2_tl_js_1.is)("photo", file) ? _file_id_js_1.FileType.Photo : _file_id_js_1.FileType.Thumbnail;
+    const fileType = (0, _2_tl_js_1.is)("photo", file) ? _file_id_js_1.FileType.Photo : _file_id_js_1.FileType.Document;
     const fileId_ = {
         type,
         dcId: file.dc_id,
@@ -39,4 +39,3 @@ function constructThumbnail(size, file) {
         fileSize: size.size,
     };
 }
-exports.constructThumbnail = constructThumbnail;

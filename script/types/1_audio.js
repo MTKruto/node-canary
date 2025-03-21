@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,11 +19,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructAudio = void 0;
+exports.constructAudio = constructAudio;
+const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _0_thumbnail_js_1 = require("./0_thumbnail.js");
 function constructAudio(document, audioAttribute, fileId, fileUniqueId) {
-    return {
+    return (0, _1_utilities_js_1.cleanObject)({
         fileId,
         fileUniqueId,
         duration: audioAttribute?.duration ?? 0,
@@ -31,7 +32,6 @@ function constructAudio(document, audioAttribute, fileId, fileUniqueId) {
         title: audioAttribute?.title,
         mimeType: document.mime_type,
         fileSize: Number(document.size),
-        thumbnails: document.thumbs ? document.thumbs.map((v) => v instanceof _2_tl_js_1.types.PhotoSize ? (0, _0_thumbnail_js_1.constructThumbnail)(v, document) : null).filter((v) => v) : [],
-    };
+        thumbnails: document.thumbs ? document.thumbs.map((v) => (0, _2_tl_js_1.is)("photoSize", v) ? (0, _0_thumbnail_js_1.constructThumbnail)(v, document) : null).filter((v) => v) : [],
+    });
 }
-exports.constructAudio = constructAudio;

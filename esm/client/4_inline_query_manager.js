@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -30,36 +30,31 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _a, _InlineQueryManager_c, _InlineQueryManager_isExpired;
 import { unreachable } from "../0_deps.js";
-import { peerToChatId, types } from "../2_tl.js";
+import { is, isOneOf } from "../2_tl.js";
 import { constructChosenInlineResult, constructInlineQuery, constructInlineQueryAnswer, inlineQueryResultToTlObject } from "../3_types.js";
 import { checkInlineQueryId } from "./0_utilities.js";
+const inlineQueryManagerUpdates = [
+    "updateBotInlineQuery",
+    "updateBotInlineSend",
+];
 export class InlineQueryManager {
     constructor(c) {
         _InlineQueryManager_c.set(this, void 0);
         __classPrivateFieldSet(this, _InlineQueryManager_c, c, "f");
     }
     async answerInlineQuery(id, results, params) {
-        await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").storage.assertBot("answerInlineQuery");
+        __classPrivateFieldGet(this, _InlineQueryManager_c, "f").storage.assertBot("answerInlineQuery");
         checkInlineQueryId(id);
-        await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").api.messages.setInlineBotResults({
-            query_id: BigInt(id),
-            results: await Promise.all(results.map((v) => inlineQueryResultToTlObject(v, __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager.parseText.bind(__classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager), __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager.usernameResolver.bind(__classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager)))),
-            cache_time: params?.cacheTime ?? 300,
-            private: params?.isPersonal ? true : undefined,
-            switch_webview: params?.button && params.button.miniApp ? new types.InlineBotWebView({ text: params.button.text, url: params.button.miniApp.url }) : undefined,
-            switch_pm: params?.button && params.button.startParameter ? new types.InlineBotSwitchPM({ text: params.button.text, start_param: params.button.startParameter }) : undefined,
-            gallery: params?.isGallery ? true : undefined,
-            next_offset: params?.nextOffset,
-        });
+        await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").invoke({ _: "messages.setInlineBotResults", query_id: BigInt(id), results: await Promise.all(results.map((v) => inlineQueryResultToTlObject(v, __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager.parseText.bind(__classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager), __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager.usernameResolver.bind(__classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager)))), cache_time: params?.cacheTime ?? 300, private: params?.isPersonal ? true : undefined, switch_webview: params?.button && params.button.miniApp ? ({ _: "inlineBotWebView", text: params.button.text, url: params.button.miniApp.url }) : undefined, switch_pm: params?.button && params.button.startParameter ? ({ _: "inlineBotSwitchPM", text: params.button.text, start_param: params.button.startParameter }) : undefined, gallery: params?.isGallery ? true : undefined, next_offset: params?.nextOffset });
     }
-    static canHandleUpdate(update) {
-        return update instanceof types.UpdateBotInlineQuery || update instanceof types.UpdateBotInlineSend;
+    canHandleUpdate(update) {
+        return isOneOf(inlineQueryManagerUpdates, update);
     }
     async handleUpdate(update) {
-        if (update instanceof types.UpdateBotInlineQuery) {
+        if (is("updateBotInlineQuery", update)) {
             return { inlineQuery: await constructInlineQuery(update, __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getEntity) };
         }
-        else if (update instanceof types.UpdateBotInlineSend) {
+        else if (is("updateBotInlineSend", update)) {
             return { chosenInlineResult: await constructChosenInlineResult(update, __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getEntity) };
         }
         else {
@@ -67,15 +62,15 @@ export class InlineQueryManager {
         }
     }
     async sendInlineQuery(userId, chatId, params) {
-        await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").storage.assertUser("sendInlineQuery");
+        __classPrivateFieldGet(this, _InlineQueryManager_c, "f").storage.assertUser("sendInlineQuery");
         const bot = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputUser(userId), peer = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputPeer(chatId), query = params?.query ?? "", offset = params?.offset ?? "";
-        const botId = peerToChatId(bot), peerId = peerToChatId(peer);
+        const botId = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputPeerChatId(bot), peerId = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputPeerChatId(peer);
         const maybeResults = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageStorage.getInlineQueryAnswer(botId, peerId, query, offset);
         if (maybeResults != null && !__classPrivateFieldGet(_a, _a, "m", _InlineQueryManager_isExpired).call(_a, maybeResults[1], maybeResults[0].cache_time)) {
             return constructInlineQueryAnswer(maybeResults[0]);
         }
         const then = new Date();
-        const results = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").api.messages.getInlineBotResults({ bot, peer, query, offset });
+        const results = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").invoke({ _: "messages.getInlineBotResults", bot, peer, query, offset });
         if (results.cache_time > 0) {
             await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageStorage.setInlineQueryAnswer(botId, peerId, query, offset, results, then);
         }

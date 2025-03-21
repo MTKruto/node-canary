@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { Thumbnail } from "./0_thumbnail.js";
 /** A photo. */
 export interface Photo {
@@ -33,9 +33,9 @@ export interface Photo {
     fileSize: number;
     thumbnails: Thumbnail[];
 }
-export declare function constructPhoto(photo: types.Photo): Photo;
-export declare function getPhotoSizes(photo: types.Photo): {
-    sizes: types.PhotoSize[];
-    largest: types.PhotoSize;
+export declare function constructPhoto(photo: Api.photo): Photo;
+export declare function getPhotoSizes(photo: Api.photo): {
+    sizes: Api.photoSize[];
+    largest: Api.photoSize;
 };
 //# sourceMappingURL=1_photo.d.ts.map

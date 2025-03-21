@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { is } from "../2_tl.js";
 import { getPhotoFileId } from "./_file_id.js";
 import { constructThumbnail } from "./0_thumbnail.js";
 export function constructPhoto(photo) {
@@ -33,14 +33,14 @@ export function constructPhoto(photo) {
 export function getPhotoSizes(photo) {
     const sizes = photo.sizes
         .map((v) => {
-        if (v instanceof types.PhotoSizeProgressive) {
-            return new types.PhotoSize({ type: v.type, w: v.w, h: v.h, size: Math.max(...v.sizes) });
+        if (is("photoSizeProgressive", v)) {
+            return { _: "photoSize", type: v.type, w: v.w, h: v.h, size: Math.max(...v.sizes) };
         }
         else {
             return v;
         }
     })
-        .filter((v) => v instanceof types.PhotoSize)
+        .filter((v) => is("photoSize", v))
         .sort((a, b) => a.size - b.size);
     const largest = sizes.slice(-1)[0];
     return { sizes, largest };

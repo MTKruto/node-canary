@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -20,10 +20,22 @@
 export class MtkrutoError extends Error {
 }
 export class ConnectionError extends MtkrutoError {
+    constructor(...args) {
+        super(...args);
+        this.name = "ConnectionError";
+    }
 }
 export class AccessError extends MtkrutoError {
+    constructor(...args) {
+        super(...args);
+        this.name = "AccessError";
+    }
 }
 export class InputError extends MtkrutoError {
+    constructor(...args) {
+        super(...args);
+        this.name = "InputError";
+    }
 }
 export class TransportError extends MtkrutoError {
     constructor(code) {
@@ -34,5 +46,6 @@ export class TransportError extends MtkrutoError {
             writable: true,
             value: code
         });
+        this.name = "TransportError";
     }
 }

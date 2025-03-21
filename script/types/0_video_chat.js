@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,12 +19,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructVideoChat = void 0;
+exports.constructVideoChat = constructVideoChat;
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 function constructVideoChat(call) {
     const id = String(call.id);
-    if (call instanceof _2_tl_js_1.types.GroupCallDiscarded) {
+    if ((0, _2_tl_js_1.is)("groupCallDiscarded", call)) {
         return {
             type: "ended",
             id,
@@ -57,4 +57,3 @@ function constructVideoChat(call) {
         }
     }
 }
-exports.constructVideoChat = constructVideoChat;

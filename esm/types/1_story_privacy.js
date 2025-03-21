@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,16 +18,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { types } from "../2_tl.js";
+import { is } from "../2_tl.js";
 async function resolveUsers(ids, getEntity) {
     const users = new Array();
     for (const id of ids) {
-        const entity = await getEntity(new types.PeerUser({ user_id: BigInt(id) }));
-        if (!(entity instanceof types.User)) {
+        const entity = await getEntity({ _: "peerUser", user_id: BigInt(id) });
+        if (!(is("user", entity))) {
             unreachable();
         }
         else {
-            users.push(new types.InputUser({ user_id: entity.id, access_hash: entity.access_hash ?? 0n }));
+            users.push({ _: "inputUser", user_id: entity.id, access_hash: entity.access_hash ?? 0n });
         }
     }
     return users;
@@ -35,42 +35,42 @@ async function resolveUsers(ids, getEntity) {
 async function restrict(users_, rules, getEntity) {
     if (users_.length) {
         const users = await resolveUsers(users_, getEntity);
-        rules.push(new types.InputPrivacyValueDisallowUsers({ users }));
+        rules.push({ _: "inputPrivacyValueDisallowUsers", users });
     }
 }
 export async function storyPrivacyToTlObject(privacy, getEntity) {
     const rules = new Array();
     if ("everyoneExcept" in privacy) {
         await restrict(privacy.everyoneExcept, rules, getEntity);
-        rules.push(new types.InputPrivacyValueAllowAll());
+        rules.push({ _: "inputPrivacyValueAllowAll" });
     }
     else if ("contactsExcept" in privacy) {
         await restrict(privacy.contactsExcept, rules, getEntity);
-        rules.push(new types.InputPrivacyValueAllowContacts());
+        rules.push({ _: "inputPrivacyValueAllowContacts" });
     }
     else if ("closeFriends" in privacy) {
-        rules.push(new types.InputPrivacyValueAllowCloseFriends());
+        rules.push({ _: "inputPrivacyValueAllowCloseFriends" });
     }
     else if ("only" in privacy) {
         if (!privacy.only.length) {
             unreachable();
         }
         const users = await resolveUsers(privacy.only, getEntity);
-        rules.push(new types.InputPrivacyValueAllowUsers({ users }));
+        rules.push({ _: "inputPrivacyValueAllowUsers", users });
     }
     return rules;
 }
 export function constructStoryPrivacy(privacy) {
-    const except = privacy.find((v) => v instanceof types.PrivacyValueDisallowUsers)?.users?.map(Number) ?? [];
-    if (privacy.some((v) => v instanceof types.PrivacyValueAllowAll)) {
+    const except = privacy.find((v) => is("privacyValueDisallowUsers", v))?.users?.map(Number) ?? [];
+    if (privacy.some((v) => is("privacyValueAllowAll", v))) {
         return { everyoneExcept: except };
     }
-    else if (privacy.some((v) => v instanceof types.PrivacyValueAllowContacts)) {
+    else if (privacy.some((v) => is("privacyValueAllowContacts", v))) {
         return { contactsExcept: except };
     }
-    else if (privacy.some((v) => v instanceof types.PrivacyValueAllowCloseFriends)) {
+    else if (privacy.some((v) => is("privacyValueAllowCloseFriends", v))) {
         return { closeFriends: true };
     }
-    const only = privacy.find((v) => v instanceof types.PrivacyValueAllowUsers)?.users?.map(Number) ?? [];
+    const only = privacy.find((v) => is("privacyValueAllowUsers", v))?.users?.map(Number) ?? [];
     return { only };
 }

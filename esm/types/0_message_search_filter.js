@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,37 +18,36 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { types } from "../2_tl.js";
 export function messageSearchFilterToTlObject(filter) {
     switch (filter) {
         case "empty":
-            return new types.InputMessagesFilterEmpty();
+            return { _: "inputMessagesFilterEmpty" };
         case "animations":
-            return new types.InputMessagesFilterGif();
+            return { _: "inputMessagesFilterGif" };
         case "audios":
-            return new types.InputMessagesFilterMusic();
+            return { _: "inputMessagesFilterMusic" };
         case "documents":
-            return new types.InputMessagesFilterDocument();
+            return { _: "inputMessagesFilterDocument" };
         case "photos":
-            return new types.InputMessagesFilterPhotos();
+            return { _: "inputMessagesFilterPhotos" };
         case "videos":
-            return new types.InputMessagesFilterVideo();
+            return { _: "inputMessagesFilterVideo" };
         case "voiceMessages":
-            return new types.InputMessagesFilterVoice();
+            return { _: "inputMessagesFilterVoice" };
         case "photosAndVideos":
-            return new types.InputMessagesFilterPhotoVideo();
+            return { _: "inputMessagesFilterPhotoVideo" };
         case "links":
-            return new types.InputMessagesFilterUrl();
+            return { _: "inputMessagesFilterUrl" };
         case "chatPhotos":
-            return new types.InputMessagesFilterChatPhotos();
+            return { _: "inputMessagesFilterChatPhotos" };
         case "videoNotes":
-            return new types.InputMessagesFilterRoundVideo();
+            return { _: "inputMessagesFilterRoundVideo" };
         case "voiceMessagesAndVideoNotes":
-            return new types.InputMessagesFilterRoundVoice();
+            return { _: "inputMessagesFilterRoundVoice" };
         case "mentions":
-            return new types.InputMessagesFilterMyMentions();
+            return { _: "inputMessagesFilterMyMentions" };
         case "pinned":
-            return new types.InputMessagesFilterPinned();
+            return { _: "inputMessagesFilterPinned" };
         default:
             unreachable();
     }

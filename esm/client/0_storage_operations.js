@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -29,10 +29,10 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _StorageOperations_instances, _StorageOperations_storage, _StorageOperations_supportsFiles, _StorageOperations_mustSerialize, _StorageOperations_authKeyId, _StorageOperations_resetAuthKeyId, _StorageOperations_accountId, _StorageOperations_accountType, _StorageOperations_getUpdateId;
-import { AssertionError, unreachable } from "../0_deps.js";
+import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { base64DecodeUrlSafe, base64EncodeUrlSafe, bigIntFromBuffer, rleDecode, rleEncode, sha1, ZERO_CHANNEL_ID } from "../1_utilities.js";
-import { peerToChatId, serialize, TLObject, TLReader, TLWriter, types } from "../2_tl.js";
+import { as, is, isValidType, peerToChatId, TLReader, TLWriter } from "../2_tl.js";
 // key parts
 export const K = {
     connection: {
@@ -84,6 +84,20 @@ export const K = {
         groupCall: (id) => [...K.cache.groupCalls(), id],
         groupCallAccessHashes: () => [K.cache.P("groupCallAccessHashes")],
         groupCallAccessHash: (id) => [...K.cache.groupCallAccessHashes(), id],
+        minPeerReferences: () => [K.cache.P("minPeerReferences")],
+        minPeerReference: (senderId, chatId) => [...K.cache.minPeerReferences(), senderId, chatId],
+        minPeerReferenceSender: (senderId) => [...K.cache.minPeerReferences(), senderId],
+        allTranslations: () => [K.cache.P("translations")],
+        platformTranslations: (platform) => [...K.cache.allTranslations(), platform],
+        translations: (platform, language) => [...K.cache.platformTranslations(platform), language],
+        pollResults: () => [K.cache.P("pollResults")],
+        pollResult: (pollId) => [...K.cache.pollResults(), pollId],
+        polls: () => [K.cache.P("polls")],
+        poll: (pollId) => [...K.cache.polls(), pollId],
+        voiceTranscriptions: () => [K.cache.P("voiceTranscriptions")],
+        voiceTranscription: (transcriptionId) => [...K.cache.voiceTranscriptions(), transcriptionId],
+        voiceTranscriptionReferences: () => [K.cache.P("voiceTranscriptions")],
+        voiceTranscriptionReference: (chatId, messageId, messageEditDate) => [...K.cache.voiceTranscriptionReferences(), chatId, messageId, messageEditDate],
     },
     messages: {
         P: (string) => `messages.${string}`,
@@ -121,6 +135,7 @@ export class StorageOperations {
     }
     async initialize() {
         await __classPrivateFieldGet(this, _StorageOperations_storage, "f").initialize();
+        await this.getAccountType();
     }
     set(...args) {
         return __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(...args);
@@ -186,8 +201,11 @@ export class StorageOperations {
     async getChannelAccessHash(id) {
         const channel = await this.getEntity(id);
         if (channel) {
-            if (!(channel instanceof types.Channel) && !(channel instanceof types.ChannelForbidden)) {
+            if (!(is("channel", channel)) && !is("channelForbidden", channel)) {
                 unreachable();
+            }
+            if (is("channel", channel) && channel.min) {
+                return null;
             }
             return typeof channel.access_hash === "bigint" ? channel.access_hash : null;
         }
@@ -198,8 +216,11 @@ export class StorageOperations {
     async getUserAccessHash(id) {
         const user = await this.getEntity(id);
         if (user) {
-            if (!(user instanceof types.User)) {
+            if (!is("user", user)) {
                 unreachable();
+            }
+            if (user.min) {
+                return null;
             }
             return typeof user.access_hash === "bigint" ? user.access_hash : null;
         }
@@ -222,14 +243,15 @@ export class StorageOperations {
             await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(key, null);
         }
         else {
-            await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(key, __classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? rleEncode(value[serialize]()) : value);
+            await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(key, __classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? [value._, rleEncode(new TLWriter().serialize(value).buffer)] : value);
         }
     }
     async getTlObject(keyOrBuffer) {
-        const buffer = (keyOrBuffer instanceof Uint8Array || keyOrBuffer instanceof TLObject) ? keyOrBuffer : await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(keyOrBuffer);
+        // @ts-ignore: TBD
+        const buffer = (keyOrBuffer instanceof Uint8Array || isValidType(keyOrBuffer)) ? keyOrBuffer : await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(keyOrBuffer);
         if (buffer != null) {
-            if (buffer instanceof Uint8Array) {
-                return new TLReader(rleDecode(buffer)).readObject();
+            if (Array.isArray(buffer)) {
+                return await new TLReader(rleDecode(buffer[1])).deserialize(buffer[0]);
             }
             else {
                 return buffer;
@@ -254,7 +276,7 @@ export class StorageOperations {
     async deleteMessages() {
         const maybePromises = new Array();
         for await (const [k, o] of await __classPrivateFieldGet(this, _StorageOperations_storage, "f").getMany({ prefix: K.messages.allMessageRefs() })) {
-            maybePromises.push(Promise.all([__classPrivateFieldGet(this, _StorageOperations_storage, "f").set(k, null), o == null ? Promise.resolve() : __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.messages.message(o, k[1]), null)]).then(() => { }));
+            maybePromises.push(Promise.all([__classPrivateFieldGet(this, _StorageOperations_storage, "f").set(k, null), o == null ? Promise.resolve() : __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.messages.message(o, k[1]), null)]));
         }
         await Promise.all(maybePromises.filter((v) => v instanceof Promise));
     }
@@ -277,7 +299,7 @@ export class StorageOperations {
         return __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(K.updates.channelPts(channelId));
     }
     async setEntity(entity) {
-        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.cache.peer(peerToChatId(entity)), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? rleEncode(entity[serialize]()) : entity, new Date()]);
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.cache.peer(peerToChatId(entity)), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? rleEncode(new TLWriter().serialize(entity).buffer) : entity, new Date()]);
     }
     async getEntity(key) {
         const peer_ = await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(K.cache.peer(key));
@@ -301,18 +323,8 @@ export class StorageOperations {
         }
     }
     async setAccountType(type) {
-        try {
-            await this.getAccountType();
-            unreachable();
-        }
-        catch (err) {
-            if (!(err instanceof AssertionError)) {
-                throw err;
-            }
-            else {
-                await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.auth.accountType(), type);
-            }
-        }
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.auth.accountType(), type);
+        await this.getAccountType();
     }
     async getAccountType() {
         if (__classPrivateFieldGet(this, _StorageOperations_accountType, "f") != null) {
@@ -321,6 +333,12 @@ export class StorageOperations {
         else {
             return __classPrivateFieldSet(this, _StorageOperations_accountType, await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(K.auth.accountType()), "f");
         }
+    }
+    get accountType() {
+        if (__classPrivateFieldGet(this, _StorageOperations_accountType, "f") == null) {
+            unreachable();
+        }
+        return __classPrivateFieldGet(this, _StorageOperations_accountType, "f");
     }
     async updateStickerSetName(id, accessHash, name) {
         await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.cache.stickerSetName(id, accessHash), [name, new Date()]);
@@ -388,11 +406,12 @@ export class StorageOperations {
         }
         return await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(K.cache.file(id));
     }
-    async *iterFileParts(id, partCount, offset) {
+    async *iterFileParts(id, partCount, offset, signal) {
         if (!__classPrivateFieldGet(this, _StorageOperations_supportsFiles, "f")) {
             return;
         }
         for (let i = offset; i < partCount; i++) {
+            signal?.throwIfAborted();
             const part = await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(K.cache.filePart(id, i));
             if (part == null) {
                 continue;
@@ -413,7 +432,7 @@ export class StorageOperations {
         await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.cache.file(id), [partCount, chunkSize]);
     }
     async setCustomEmojiDocument(id, document) {
-        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.cache.customEmojiDocument(id), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? rleEncode(document[serialize]()) : document, new Date()]);
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.cache.customEmojiDocument(id), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? rleEncode(new TLWriter().serialize(document).buffer) : document, new Date()]);
     }
     async getCustomEmojiDocument(id) {
         const v = await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(K.cache.customEmojiDocument(id));
@@ -425,7 +444,7 @@ export class StorageOperations {
         }
     }
     async setBusinessConnection(id, connection) {
-        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.cache.businessConnection(id), connection == null ? null : __classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? rleEncode(connection[serialize]()) : connection);
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.cache.businessConnection(id), connection == null ? null : __classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? rleEncode(new TLWriter().serialize(connection).buffer) : connection);
     }
     async getBusinessConnection(id) {
         const v = await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(K.cache.businessConnection(id));
@@ -437,26 +456,26 @@ export class StorageOperations {
         }
     }
     async setInlineQueryAnswer(userId, chatId, query, offset, results, date) {
-        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.cache.inlineQueryAnswer(userId, chatId, query, offset), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? rleEncode(results[serialize]()) : results, date]);
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.cache.inlineQueryAnswer(userId, chatId, query, offset), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? rleEncode(new TLWriter().serialize(results).buffer) : results, date]);
     }
     async getInlineQueryAnswer(userId, chatId, query, offset) {
         const peer_ = await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(K.cache.inlineQueryAnswer(userId, chatId, query, offset));
         if (peer_ != null) {
             const [obj_, date] = peer_;
-            return [await this.getTlObject(obj_), date];
+            return [as("messages.botResults", await this.getTlObject(obj_)), date];
         }
         else {
             return null;
         }
     }
     async setCallbackQueryAnswer(chatId, messageId, question, answer) {
-        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.cache.callbackQueryAnswer(chatId, messageId, question), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? rleEncode(answer[serialize]()) : answer, new Date()]);
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.cache.callbackQueryAnswer(chatId, messageId, question), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? rleEncode(new TLWriter().serialize(answer).buffer) : answer, new Date()]);
     }
     async getCallbackQueryAnswer(chatId, messageId, question) {
         const peer_ = await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(K.cache.callbackQueryAnswer(chatId, messageId, question));
         if (peer_ != null) {
             const [obj_, date] = peer_;
-            return [await this.getTlObject(obj_), date];
+            return [as("messages.botCallbackAnswer", await this.getTlObject(obj_)), date];
         }
         else {
             return null;
@@ -492,17 +511,17 @@ export class StorageOperations {
     }
     async getFirstUpdate(boxId) {
         for await (const [key, update] of await __classPrivateFieldGet(this, _StorageOperations_storage, "f").getMany({ prefix: K.updates.updates(boxId) }, { limit: 1 })) {
-            return [key, await this.getTlObject(update).then((v) => v)];
+            return [key, (await this.getTlObject(update))];
         }
         return null;
     }
-    async assertUser(source) {
-        if (await this.getAccountType() != "user") {
+    assertUser(source) {
+        if (this.accountType != "user") {
             throw new InputError(`${source}: not user a client`);
         }
     }
-    async assertBot(source) {
-        if (await this.getAccountType() != "bot") {
+    assertBot(source) {
+        if (this.accountType != "bot") {
             throw new InputError(`${source}: not a bot client`);
         }
     }
@@ -578,6 +597,11 @@ export class StorageOperations {
             this.deleteStickerSetNames(),
             this.deletePeers(),
             this.deleteUsernames(),
+            this.deleteTranslations(),
+            this.deletePollResults(),
+            this.deletePolls(),
+            this.deleteVoiceTranscriptions(),
+            this.deleteVoiceTranscriptionReferences(),
         ]);
     }
     async setApiId(apiId) {
@@ -591,10 +615,85 @@ export class StorageOperations {
             await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(key, null);
         }
     }
+    async setMinPeerReference(chatId, senderId, messageId) {
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.cache.minPeerReference(senderId, chatId), [{ chatId, messageId }, new Date()]);
+    }
+    async getLastMinPeerReference(senderId) {
+        const references = new Array();
+        for await (const [, reference] of await __classPrivateFieldGet(this, _StorageOperations_storage, "f").getMany({ prefix: K.cache.minPeerReferenceSender(senderId) })) {
+            references.push(reference);
+        }
+        return references.sort((a, b) => b[1].getTime() - a[1].getTime())[0]?.[0] ?? null;
+    }
+    async deleteTranslations() {
+        const maybePromises = new Array();
+        for await (const [key] of await __classPrivateFieldGet(this, _StorageOperations_storage, "f").getMany({ prefix: K.cache.allTranslations() })) {
+            maybePromises.push(__classPrivateFieldGet(this, _StorageOperations_storage, "f").set(key, null));
+        }
+        await Promise.all(maybePromises);
+    }
+    async getTranslations(platform, language) {
+        return await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(K.cache.translations(platform, language));
+    }
+    async setTranslations(platform, language, version, translations) {
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.cache.translations(platform, language), [version, translations, new Date()]);
+    }
+    async setPollResults(pollId, pollResults) {
+        await this.setTlObject(K.cache.pollResult(pollId), pollResults);
+    }
+    async getPollResults(pollId) {
+        return await this.getTlObject(K.cache.pollResult(pollId));
+    }
+    async deletePollResults() {
+        const maybePromises = new Array();
+        for await (const [key] of await __classPrivateFieldGet(this, _StorageOperations_storage, "f").getMany({ prefix: K.cache.pollResults() })) {
+            maybePromises.push(__classPrivateFieldGet(this, _StorageOperations_storage, "f").set(key, null));
+        }
+        await Promise.all(maybePromises);
+    }
+    async setPoll(pollId, poll) {
+        await this.setTlObject(K.cache.poll(pollId), poll);
+    }
+    async getPoll(pollId) {
+        return await this.getTlObject(K.cache.poll(pollId));
+    }
+    async deletePolls() {
+        const maybePromises = new Array();
+        for await (const [key] of await __classPrivateFieldGet(this, _StorageOperations_storage, "f").getMany({ prefix: K.cache.polls() })) {
+            maybePromises.push(__classPrivateFieldGet(this, _StorageOperations_storage, "f").set(key, null));
+        }
+        await Promise.all(maybePromises);
+    }
+    async setVoiceTranscription(voiceTranscription) {
+        await this.set(K.cache.voiceTranscription(BigInt(voiceTranscription.id)), voiceTranscription);
+    }
+    async getVoiceTranscription(transcriptionId) {
+        return await this.get(K.cache.voiceTranscription(transcriptionId));
+    }
+    async deleteVoiceTranscriptions() {
+        const maybePromises = new Array();
+        for await (const [key] of await __classPrivateFieldGet(this, _StorageOperations_storage, "f").getMany({ prefix: K.cache.voiceTranscriptions() })) {
+            maybePromises.push(__classPrivateFieldGet(this, _StorageOperations_storage, "f").set(key, null));
+        }
+        await Promise.all(maybePromises);
+    }
+    async setVoiceTranscriptionReference(chatId, messageId, messageEditDate, transcriptionId) {
+        await this.set(K.cache.voiceTranscriptionReference(chatId, messageId, messageEditDate.getTime()), transcriptionId);
+    }
+    async getVoiceTranscriptionReference(chatId, messageId, messageEditDate) {
+        return await this.get(K.cache.voiceTranscriptionReference(chatId, messageId, messageEditDate.getTime()));
+    }
+    async deleteVoiceTranscriptionReferences() {
+        const maybePromises = new Array();
+        for await (const [key] of await __classPrivateFieldGet(this, _StorageOperations_storage, "f").getMany({ prefix: K.cache.voiceTranscriptions() })) {
+            maybePromises.push(__classPrivateFieldGet(this, _StorageOperations_storage, "f").set(key, null));
+        }
+        await Promise.all(maybePromises);
+    }
 }
 _StorageOperations_storage = new WeakMap(), _StorageOperations_supportsFiles = new WeakMap(), _StorageOperations_mustSerialize = new WeakMap(), _StorageOperations_authKeyId = new WeakMap(), _StorageOperations_accountId = new WeakMap(), _StorageOperations_accountType = new WeakMap(), _StorageOperations_instances = new WeakSet(), _StorageOperations_resetAuthKeyId = async function _StorageOperations_resetAuthKeyId(authKey) {
     if (authKey != null) {
-        __classPrivateFieldSet(this, _StorageOperations_authKeyId, await sha1(authKey).then((hash) => bigIntFromBuffer(hash.subarray(-8), true, false)), "f");
+        __classPrivateFieldSet(this, _StorageOperations_authKeyId, bigIntFromBuffer((await sha1(authKey)).subarray(-8), true, false), "f");
     }
     else {
         __classPrivateFieldSet(this, _StorageOperations_authKeyId, null, "f");

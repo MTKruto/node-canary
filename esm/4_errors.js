@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,9 +18,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "./0_deps.js";
-import { ErrorWithCall, map } from "./3_errors.js";
+import { map, TelegramError } from "./3_errors.js";
 export * from "./3_errors.js";
-export class FloodWait extends ErrorWithCall {
+export class FloodWait extends TelegramError {
     constructor(params) {
         super(params);
         Object.defineProperty(this, "seconds", {
@@ -36,7 +36,7 @@ export class FloodWait extends ErrorWithCall {
         }
     }
 }
-export class Migrate extends ErrorWithCall {
+export class Migrate extends TelegramError {
     constructor(params) {
         super(params);
         Object.defineProperty(this, "dc", {
@@ -67,7 +67,7 @@ const prefixMap = {
     "STATS_MIGRATE_": StatsMigrate,
     "FLOOD_WAIT_": FloodWait,
 };
-export function upgradeInstance(error, call) {
+export function constructTelegramError(error, call) {
     for (const [k, v] of Object.entries(prefixMap)) {
         if (error.error_message.startsWith(k)) {
             return new v({ ...error, call });
@@ -76,5 +76,5 @@ export function upgradeInstance(error, call) {
     if (error.error_message in map) {
         return new map[error.error_message]({ ...error, call });
     }
-    return error;
+    return new TelegramError({ ...error, call });
 }

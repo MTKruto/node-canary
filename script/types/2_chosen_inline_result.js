@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,23 +19,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructChosenInlineResult = void 0;
+exports.constructChosenInlineResult = constructChosenInlineResult;
 const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _0_location_js_1 = require("./0_location.js");
 const _1_user_js_1 = require("./1_user.js");
 async function constructChosenInlineResult(ubis, getEntity) {
-    const entity = await getEntity(new _2_tl_js_1.types.PeerUser(ubis));
-    if (!entity || !(entity instanceof _2_tl_js_1.types.User)) {
+    const entity = await getEntity({ ...ubis, _: "peerUser" });
+    if (!entity || !((0, _2_tl_js_1.is)("user", entity))) {
         (0, _0_deps_js_1.unreachable)();
     }
     return (0, _1_utilities_js_1.cleanObject)({
         resultId: ubis.id,
         from: (0, _1_user_js_1.constructUser)(entity),
-        location: ubis.geo instanceof _2_tl_js_1.types.GeoPoint ? (0, _0_location_js_1.constructLocation)(ubis.geo) : undefined,
-        inlineMessageId: ubis.msg_id === undefined ? undefined : (0, _1_utilities_js_1.base64EncodeUrlSafe)(ubis.msg_id[_2_tl_js_1.serialize]()),
+        location: (0, _2_tl_js_1.is)("geoPoint", ubis.geo) ? (0, _0_location_js_1.constructLocation)(ubis.geo) : undefined,
+        inlineMessageId: ubis.msg_id === undefined ? undefined : (0, _1_utilities_js_1.base64EncodeUrlSafe)(new _2_tl_js_1.TLWriter().serialize(ubis.msg_id).buffer),
         query: ubis.query,
     });
 }
-exports.constructChosenInlineResult = constructChosenInlineResult;

@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -30,18 +30,25 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _ReactionManager_c;
 import { unreachable } from "../0_deps.js";
-import { peerToChatId, types } from "../2_tl.js";
+import { is, isOneOf, peerToChatId } from "../2_tl.js";
 import { constructMessageReaction, constructMessageReactionCount, constructMessageReactions } from "../3_types.js";
+const reactionManagerUpdates = [
+    "updateBotMessageReactions",
+    "updateBotMessageReaction",
+    "updateMessageReactions",
+    "updateChannelMessageViews",
+    "updateChannelMessageForwards",
+];
 export class ReactionManager {
     constructor(c) {
         _ReactionManager_c.set(this, void 0);
         __classPrivateFieldSet(this, _ReactionManager_c, c, "f");
     }
-    static canHandleUpdate(update) {
-        return update instanceof types.UpdateBotMessageReactions || update instanceof types.UpdateBotMessageReaction || update instanceof types.UpdateMessageReactions || update instanceof types.UpdateChannelMessageViews || update instanceof types.UpdateChannelMessageForwards;
+    canHandleUpdate(update) {
+        return isOneOf(reactionManagerUpdates, update);
     }
     async handleUpdate(update) {
-        if (update instanceof types.UpdateBotMessageReactions) {
+        if (is("updateBotMessageReactions", update)) {
             const messageReactionCount = await constructMessageReactionCount(update, __classPrivateFieldGet(this, _ReactionManager_c, "f").getEntity);
             if (messageReactionCount) {
                 return { messageReactionCount };
@@ -50,7 +57,7 @@ export class ReactionManager {
                 return null;
             }
         }
-        else if (update instanceof types.UpdateBotMessageReaction) {
+        else if (is("updateBotMessageReaction", update)) {
             const messageReactions = await constructMessageReactions(update, __classPrivateFieldGet(this, _ReactionManager_c, "f").getEntity);
             if (messageReactions) {
                 return { messageReactions };
@@ -59,26 +66,26 @@ export class ReactionManager {
                 return null;
             }
         }
-        else if (update instanceof types.UpdateMessageReactions) {
+        else if (is("updateMessageReactions", update)) {
             const chatId = peerToChatId(update.peer);
             const message = await __classPrivateFieldGet(this, _ReactionManager_c, "f").messageStorage.getMessage(chatId, update.msg_id);
-            if (message instanceof types.Message) {
+            if (is("message", message)) {
                 message.reactions = update.reactions;
                 await __classPrivateFieldGet(this, _ReactionManager_c, "f").messageStorage.setMessage(chatId, update.msg_id, message);
                 const views = message.views ?? 0;
                 const forwards = message.forwards ?? 0;
                 const recentReactions = update.reactions.recent_reactions ?? [];
                 const reactions = update.reactions.results.map((v) => constructMessageReaction(v, recentReactions));
-                return ({ messageInteractions: { chatId, messageId: update.msg_id, reactions, views, forwards } });
+                return { messageInteractions: { chatId, messageId: update.msg_id, reactions, views, forwards } };
             }
             else {
                 return null;
             }
         }
-        else if (update instanceof types.UpdateChannelMessageViews || update instanceof types.UpdateChannelMessageForwards) {
-            const chatId = peerToChatId(new types.PeerChannel(update));
+        else if (isOneOf(["updateChannelMessageViews", "updateChannelMessageForwards"], update)) {
+            const chatId = peerToChatId({ ...update, _: "peerChannel" });
             const message = await __classPrivateFieldGet(this, _ReactionManager_c, "f").messageStorage.getMessage(chatId, update.id);
-            if (message instanceof types.Message) {
+            if (is("message", message)) {
                 if ("views" in update) {
                     message.views = update.views;
                 }

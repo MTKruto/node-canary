@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,33 +17,34 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { as, types } from "../2_tl.js";
+import { cleanObject } from "../1_utilities.js";
+import { as, is } from "../2_tl.js";
 export function constructLocation(geo_) {
-    if (geo_ instanceof types.MessageMediaGeo) {
-        const geo = geo_.geo[as](types.GeoPoint);
-        return {
+    if (is("messageMediaGeo", geo_)) {
+        const geo = as("geoPoint", geo_.geo);
+        return cleanObject({
             latitude: geo.lat,
             longitude: geo.long,
             horizontalAccuracy: geo.accuracy_radius,
-        };
+        });
     }
-    else if (geo_ instanceof types.MessageMediaGeoLive) {
+    else if (is("messageMediaGeoLive", geo_)) {
         const media = geo_;
-        const geo = media.geo[as](types.GeoPoint);
-        return {
+        const geo = as("geoPoint", media.geo);
+        return cleanObject({
             latitude: geo.lat,
             longitude: geo.long,
             horizontalAccuracy: geo.accuracy_radius,
             livePeriod: media.period,
             heading: media.heading,
             proximityAlertRadius: media.proximity_notification_radius,
-        };
+        });
     }
     else {
-        return {
+        return cleanObject({
             latitude: geo_.lat,
             longitude: geo_.long,
             horizontalAccuracy: geo_.accuracy_radius,
-        };
+        });
     }
 }

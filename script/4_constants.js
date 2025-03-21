@@ -26,7 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CHANNEL_DIFFERENCE_LIMIT_BOT = exports.CHANNEL_DIFFERENCE_LIMIT_USER = exports.MAX_CHANNEL_ID = exports.MAX_CHAT_ID = exports.STICKER_SET_NAME_TTL = exports.USERNAME_TTL = exports.SYSTEM_VERSION = exports.SYSTEM_LANG_CODE = exports.LANG_PACK = exports.LANG_CODE = exports.DEVICE_MODEL = exports.APP_VERSION = exports.LAYER = exports.INITIAL_DC = exports.PUBLIC_KEYS = void 0;
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -96,7 +96,7 @@ exports.PUBLIC_KEYS = Object.freeze([
     ],
 ]);
 exports.INITIAL_DC = "2";
-exports.LAYER = 177;
+exports.LAYER = 200;
 exports.APP_VERSION = "MTKruto";
 // @ts-ignore: lib
 exports.DEVICE_MODEL = typeof dntShim.Deno === "undefined" ? typeof navigator === "undefined" ? typeof process === "undefined" ? "Unknown" : process.platform + "-" + process.arch : (navigator.userAgent.split(" ")[0] || "Unknown") : dntShim.Deno.build.os + "-" + dntShim.Deno.build.arch;
@@ -105,9 +105,9 @@ exports.LANG_PACK = "";
 exports.SYSTEM_LANG_CODE = exports.LANG_CODE;
 // @ts-ignore: lib
 exports.SYSTEM_VERSION = typeof navigator === "undefined" ? typeof process === "undefined" ? "Unknown" : "Node.js/" + process.versions.node : navigator.userAgent;
-exports.USERNAME_TTL = 86400;
-exports.STICKER_SET_NAME_TTL = 172800;
+exports.USERNAME_TTL = 86_400;
+exports.STICKER_SET_NAME_TTL = 172_800;
 exports.MAX_CHAT_ID = 999999999999;
 exports.MAX_CHANNEL_ID = 997852516352;
 exports.CHANNEL_DIFFERENCE_LIMIT_USER = 100;
-exports.CHANNEL_DIFFERENCE_LIMIT_BOT = 100000;
+exports.CHANNEL_DIFFERENCE_LIMIT_BOT = 100_000;

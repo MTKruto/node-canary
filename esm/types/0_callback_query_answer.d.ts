@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 /** An answer to a callback query. */
 export interface CallbackQueryAnswer {
     /** Whether the answer should be shown as an alert. */
@@ -27,5 +27,5 @@ export interface CallbackQueryAnswer {
     /** A potential URL that is to be opened. */
     url: string;
 }
-export declare function constructCallbackQueryAnswer(answer: types.messages.BotCallbackAnswer): CallbackQueryAnswer;
+export declare function constructCallbackQueryAnswer(answer: Api.messages_botCallbackAnswer): CallbackQueryAnswer;
 //# sourceMappingURL=0_callback_query_answer.d.ts.map

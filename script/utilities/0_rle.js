@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,7 +19,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.rleDecode = exports.rleEncode = void 0;
+exports.rleEncode = rleEncode;
+exports.rleDecode = rleDecode;
 function rleEncode(s) {
     const r = new Array();
     let n = 0;
@@ -49,7 +50,6 @@ function rleEncode(s) {
     }
     return new Uint8Array(r);
 }
-exports.rleEncode = rleEncode;
 function rleDecode(s) {
     const r = new Array();
     let z = false;
@@ -70,4 +70,3 @@ function rleDecode(s) {
     }
     return new Uint8Array(r);
 }
-exports.rleDecode = rleDecode;

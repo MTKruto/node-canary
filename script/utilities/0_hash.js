@@ -23,10 +23,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sha1 = exports.sha256 = void 0;
+exports.sha256 = sha256;
+exports.sha1 = sha1;
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -47,8 +48,6 @@ const dntShim = __importStar(require("../_dnt.shims.js"));
 async function sha256(payload) {
     return new Uint8Array(await dntShim.crypto.subtle.digest("SHA-256", payload));
 }
-exports.sha256 = sha256;
 async function sha1(payload) {
     return new Uint8Array(await dntShim.crypto.subtle.digest("SHA-1", payload));
 }
-exports.sha1 = sha1;

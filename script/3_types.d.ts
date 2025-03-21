@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -31,9 +31,11 @@ export * from "./types/0_chat_photo.js";
 export * from "./types/0_connection_state.js";
 export * from "./types/0_contact.js";
 export * from "./types/0_dice.js";
+export * from "./types/0_failed_invitation.js";
 export * from "./types/0_file_source.js";
 export * from "./types/0_giveaway_parameters.js";
 export * from "./types/0_id.js";
+export * from "./types/0_invoice.js";
 export * from "./types/0_keyboard_button_poll_type.js";
 export * from "./types/0_link_preview.js";
 export * from "./types/0_live_stream_channel.js";
@@ -47,15 +49,20 @@ export * from "./types/0_mini_app_info.js";
 export * from "./types/0_network_statistics_entry.js";
 export * from "./types/0_opening_hours.js";
 export * from "./types/0_parse_mode.js";
-export * from "./types/0_poll_option.js";
 export * from "./types/0_price_tag.js";
 export * from "./types/0_reaction.js";
+export * from "./types/0_refunded_payment.js";
 export * from "./types/0_restriction_reason.js";
 export * from "./types/0_self_destruct_option.js";
+export * from "./types/0_shipping_address.js";
+export * from "./types/0_slow_mode_duration.js";
 export * from "./types/0_story_reference.js";
+export * from "./types/0_switch_inline_query_chosen_chats.js";
 export * from "./types/0_thumbnail.js";
+export * from "./types/0_translation.js";
 export * from "./types/0_video_chat.js";
 export * from "./types/0_voice.js";
+export * from "./types/0_voice_transcription.js";
 export * from "./types/1_animation.js";
 export * from "./types/1_audio.js";
 export * from "./types/1_bot_command_scope.js";
@@ -69,8 +76,9 @@ export * from "./types/1_keyboard_button.js";
 export * from "./types/1_message_content.js";
 export * from "./types/1_message_reaction.js";
 export * from "./types/1_network_statistics.js";
+export * from "./types/1_order_info.js";
 export * from "./types/1_photo.js";
-export * from "./types/1_poll.js";
+export * from "./types/1_poll_option.js";
 export * from "./types/1_reaction_count.js";
 export * from "./types/1_reply_quote.js";
 export * from "./types/1_sticker.js";
@@ -81,9 +89,13 @@ export * from "./types/1_venue.js";
 export * from "./types/1_video.js";
 export * from "./types/1_video_note.js";
 export * from "./types/2_business_connection.js";
+export * from "./types/2_chat.js";
 export * from "./types/2_chat_member.js";
+export * from "./types/2_chat_settings.js";
 export * from "./types/2_chosen_inline_result.js";
+export * from "./types/2_forward_header.js";
 export * from "./types/2_game.js";
+export * from "./types/2_gift_upgraded_component.js";
 export * from "./types/2_inactive_chat.js";
 export * from "./types/2_inline_keyboard_button.js";
 export * from "./types/2_inline_query.js";
@@ -91,17 +103,25 @@ export * from "./types/2_invite_link.js";
 export * from "./types/2_message_interactions.js";
 export * from "./types/2_message_reaction_count.js";
 export * from "./types/2_message_reactions.js";
+export * from "./types/2_poll.js";
+export * from "./types/2_pre_checkout_query.js";
+export * from "./types/2_reply_to.js";
 export * from "./types/2_story_content.js";
 export * from "./types/2_story_interactions.js";
 export * from "./types/2_story_interactive_area.js";
+export * from "./types/2_successful_payment.js";
 export * from "./types/3_chat_member_updated.js";
+export * from "./types/3_gift.js";
+export * from "./types/3_join_request.js";
 export * from "./types/3_reply_markup.js";
 export * from "./types/3_story.js";
+export * from "./types/4_claimed_gift.js";
 export * from "./types/4_inline_query_result.js";
 export * from "./types/4_message.js";
 export * from "./types/5_callback_query.js";
 export * from "./types/5_chat_list_item.js";
-export * from "./types/2_chat.js";
+export * from "./types/5_claimed_gifts.js";
 export * from "./types/5_inline_query_answer.js";
+export * from "./types/5_topic.js";
 export * from "./types/6_update.js";
 //# sourceMappingURL=3_types.d.ts.map

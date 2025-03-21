@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,16 +18,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { peerToChatId, types } from "../2_tl.js";
+import { is, peerToChatId } from "../2_tl.js";
 import { constructReaction } from "./0_reaction.js";
 export function constructMessageReaction(reaction_, recentReactions) {
     const choosers = recentReactions
         .filter((v) => {
-        if (reaction_.reaction instanceof types.ReactionEmoji) {
-            return v.reaction instanceof types.ReactionEmoji && v.reaction.emoticon == reaction_.reaction.emoticon;
+        if (is("reactionEmoji", reaction_.reaction)) {
+            return is("reactionEmoji", v.reaction) && v.reaction.emoticon == reaction_.reaction.emoticon;
         }
-        else if (reaction_.reaction instanceof types.ReactionCustomEmoji) {
-            return v.reaction instanceof types.ReactionCustomEmoji && v.reaction.document_id == reaction_.reaction.document_id;
+        else if (is("reactionCustomEmoji", reaction_.reaction)) {
+            return is("reactionCustomEmoji", v.reaction) && v.reaction.document_id == reaction_.reaction.document_id;
         }
         else {
             unreachable();

@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -63,7 +63,7 @@ export function parseHtml(html) {
                     if (attribs.class != "tg-spoiler") {
                         throw new InputError('The class attribute must be "tg-spoiler."');
                     }
-                // falls through
+                /* falls through */
                 case "tg-spoiler":
                     stack.push({ type: "spoiler", offset: text.length, length: 0 });
                     break;
@@ -75,6 +75,9 @@ export function parseHtml(html) {
                     break;
                 case "blockquote":
                     stack.push({ type: "blockquote", offset: text.length, length: 0 });
+                    if (attribs.collapsible) {
+                        stack[stack.length - 1].collapsible = true;
+                    }
             }
         },
         ontext(data) {

@@ -23,10 +23,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getObfuscationParameters = void 0;
+exports.getObfuscationParameters = getObfuscationParameters;
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -66,14 +66,14 @@ async function getObfuscationParameters(protocol, connection) {
     }
     const encryptKey = init.slice(8, 8 + 32);
     const encryptIv = init.slice(40, 40 + 16);
-    const encryptionCTR = new _1_utilities_js_1.CTR(encryptKey, encryptIv);
-    const encryptedInit = new Uint8Array(init);
-    encryptionCTR.call(encryptedInit);
+    const importedEncryptedKey = await _1_utilities_js_1.CTR.importKey(encryptKey);
+    const encryptionCTR = new _1_utilities_js_1.CTR(importedEncryptedKey, encryptIv);
+    const encryptedInit = await encryptionCTR.call(init);
     const initRev = new Uint8Array(init).reverse();
     const decryptKey = initRev.slice(8, 8 + 32);
     const decryptIv = initRev.slice(40, 40 + 16);
-    const decryptionCTR = new _1_utilities_js_1.CTR(decryptKey, decryptIv);
+    const importedDecryptKey = await _1_utilities_js_1.CTR.importKey(decryptKey);
+    const decryptionCTR = new _1_utilities_js_1.CTR(importedDecryptKey, decryptIv);
     await connection.write((0, _0_deps_js_1.concat)([init.subarray(0, 56), encryptedInit.subarray(56, 56 + 8)]));
     return { encryptionCTR, decryptionCTR };
 }
-exports.getObfuscationParameters = getObfuscationParameters;

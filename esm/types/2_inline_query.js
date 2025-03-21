@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,37 +18,37 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { types } from "../2_tl.js";
+import { is } from "../2_tl.js";
 import { constructLocation } from "./0_location.js";
 import { constructUser } from "./1_user.js";
 export async function constructInlineQuery(query_, getEntity) {
-    const user_ = await getEntity(new types.PeerUser({ user_id: query_.user_id }));
+    const user_ = await getEntity({ _: "peerUser", user_id: query_.user_id });
     if (user_ == null) {
         unreachable();
     }
     const user = constructUser(user_);
     let chatType;
     if (query_.peer_type !== undefined) {
-        if (query_.peer_type instanceof types.InlineQueryPeerTypeSameBotPM) {
+        if (is("inlineQueryPeerTypeSameBotPM", query_.peer_type)) {
             chatType = "private";
         }
-        else if (query_.peer_type instanceof types.InlineQueryPeerTypeBotPM || query_.peer_type instanceof types.InlineQueryPeerTypePM) {
+        else if (is("inlineQueryPeerTypeBotPM", query_.peer_type) || is("inlineQueryPeerTypePM", query_.peer_type)) {
             chatType = "sender";
         }
-        else if (query_.peer_type instanceof types.InlineQueryPeerTypeChat) {
+        else if (is("inlineQueryPeerTypeChat", query_.peer_type)) {
             chatType = "group";
         }
-        else if (query_.peer_type instanceof types.InlineQueryPeerTypeMegagroup) {
+        else if (is("inlineQueryPeerTypeMegagroup", query_.peer_type)) {
             chatType = "supergroup";
         }
-        else if (query_.peer_type instanceof types.InlineQueryPeerTypeBroadcast) {
+        else if (is("inlineQueryPeerTypeBroadcast", query_.peer_type)) {
             chatType = "channel";
         }
         else {
             unreachable();
         }
     }
-    const location = query_.geo !== undefined && query_.geo instanceof types.GeoPoint ? constructLocation(query_.geo) : undefined;
+    const location = query_.geo !== undefined && is("geoPoint", query_.geo) ? constructLocation(query_.geo) : undefined;
     return {
         id: String(query_.query_id),
         from: user,

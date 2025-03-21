@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -31,6 +31,9 @@ export function match(filter, value) {
         }
         else if ("editedMessage" in value) {
             type = "editedMessage";
+        }
+        else if ("scheduledMessage" in value) {
+            type = "scheduledMessage";
         }
         else {
             return false;

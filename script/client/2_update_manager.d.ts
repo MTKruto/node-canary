@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,28 +18,32 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { Queue } from "../1_utilities.js";
-import { enums, ReadObject, TLObject, types } from "../2_tl.js";
+import { Api, ReadObject } from "../2_tl.js";
+import { ID } from "../3_types.js";
 import { C } from "./1_types.js";
-type UpdateHandler = (update: enums.Update) => Promise<(() => Promise<unknown>)>;
-export type PtsUpdate = types.UpdateNewMessage | types.UpdateDeleteMessages | types.UpdateReadHistoryInbox | types.UpdateReadHistoryOutbox | types.UpdatePinnedChannelMessages | types.UpdatePinnedMessages | types.UpdateFolderPeers | types.UpdateChannelWebPage | types.UpdateEditMessage | types.UpdateReadMessagesContents | types.UpdateWebPage;
-export type ChannelPtsUpdate = types.UpdateNewChannelMessage | types.UpdateEditChannelMessage | types.UpdateDeleteChannelMessages | types.UpdateChannelTooLong;
-export type QtsUpdate = types.UpdateNewEncryptedMessage | types.UpdateMessagePollVote | types.UpdateBotStopped | types.UpdateChatParticipant | types.UpdateChannelParticipant | types.UpdateBotChatInviteRequester | types.UpdateBotChatBoost | types.UpdateBotMessageReaction | types.UpdateBotMessageReactions | types.UpdateBotBusinessConnect | types.UpdateBotNewBusinessMessage | types.UpdateBotEditBusinessMessage | types.UpdateBotDeleteBusinessMessage;
+type UpdateHandler = (update: Api.Update) => Promise<(() => Promise<unknown>)>;
+export type PtsUpdate = Api.updateNewMessage | Api.updateDeleteMessages | Api.updateReadHistoryInbox | Api.updateReadHistoryOutbox | Api.updatePinnedChannelMessages | Api.updatePinnedMessages | Api.updateFolderPeers | Api.updateChannelWebPage | Api.updateEditMessage | Api.updateReadMessagesContents | Api.updateWebPage;
+export type ChannelPtsUpdate = Api.updateNewChannelMessage | Api.updateEditChannelMessage | Api.updateDeleteChannelMessages | Api.updateChannelTooLong;
+export type QtsUpdate = Api.updateNewEncryptedMessage | Api.updateMessagePollVote | Api.updateBotStopped | Api.updateChatParticipant | Api.updateChannelParticipant | Api.updateBotChatInviteRequester | Api.updateBotChatBoost | Api.updateBotMessageReaction | Api.updateBotMessageReactions | Api.updateBotBusinessConnect | Api.updateBotNewBusinessMessage | Api.updateBotEditBusinessMessage | Api.updateBotDeleteBusinessMessage;
 export declare class UpdateManager {
     #private;
     static readonly QTS_COUNT = 1;
     static readonly MAIN_BOX_ID = 0n;
     constructor(c: C);
-    static isPtsUpdate(v: enums.Update): v is PtsUpdate;
-    static isQtsUpdate(v: enums.Update): v is QtsUpdate;
-    static isChannelPtsUpdate(v: enums.Update | enums.Updates): v is ChannelPtsUpdate;
+    static isPtsUpdate(v: Api.Update): v is PtsUpdate;
+    static isQtsUpdate(v: Api.Update): v is QtsUpdate;
+    static isChannelPtsUpdate(v: Api.Update | Api.Updates): v is ChannelPtsUpdate;
     fetchState(source: string): Promise<void>;
-    processChats(chats: enums.Chat[]): Promise<void>;
+    processChats(chats: Api.Chat[], context: ReadObject): Promise<void>;
     processResult(result: ReadObject): Promise<void>;
-    processUsers(users: enums.User[]): Promise<void>;
+    processUsers(users: Api.User[], context: ReadObject): Promise<void>;
     getHandleUpdateQueue(boxId: bigint): Queue;
-    processUpdates(updates: enums.Update | enums.Updates, checkGap: boolean, call?: TLObject | null, callback?: () => void): void;
+    processUpdates(updates: Api.Update | Api.Updates, checkGap: boolean, call?: Api.AnyObject | null, callback?: () => void): void;
     recoverUpdateGap(source: string): Promise<void>;
     setUpdateHandler(handler: UpdateHandler): void;
+    openChat(chatId: ID): Promise<void>;
+    closeChat(chatId: ID): Promise<void>;
+    closeAllChats(): void;
 }
 export {};
 //# sourceMappingURL=2_update_manager.d.ts.map

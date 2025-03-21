@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,41 +19,39 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.messageSearchFilterToTlObject = void 0;
+exports.messageSearchFilterToTlObject = messageSearchFilterToTlObject;
 const _0_deps_js_1 = require("../0_deps.js");
-const _2_tl_js_1 = require("../2_tl.js");
 function messageSearchFilterToTlObject(filter) {
     switch (filter) {
         case "empty":
-            return new _2_tl_js_1.types.InputMessagesFilterEmpty();
+            return { _: "inputMessagesFilterEmpty" };
         case "animations":
-            return new _2_tl_js_1.types.InputMessagesFilterGif();
+            return { _: "inputMessagesFilterGif" };
         case "audios":
-            return new _2_tl_js_1.types.InputMessagesFilterMusic();
+            return { _: "inputMessagesFilterMusic" };
         case "documents":
-            return new _2_tl_js_1.types.InputMessagesFilterDocument();
+            return { _: "inputMessagesFilterDocument" };
         case "photos":
-            return new _2_tl_js_1.types.InputMessagesFilterPhotos();
+            return { _: "inputMessagesFilterPhotos" };
         case "videos":
-            return new _2_tl_js_1.types.InputMessagesFilterVideo();
+            return { _: "inputMessagesFilterVideo" };
         case "voiceMessages":
-            return new _2_tl_js_1.types.InputMessagesFilterVoice();
+            return { _: "inputMessagesFilterVoice" };
         case "photosAndVideos":
-            return new _2_tl_js_1.types.InputMessagesFilterPhotoVideo();
+            return { _: "inputMessagesFilterPhotoVideo" };
         case "links":
-            return new _2_tl_js_1.types.InputMessagesFilterUrl();
+            return { _: "inputMessagesFilterUrl" };
         case "chatPhotos":
-            return new _2_tl_js_1.types.InputMessagesFilterChatPhotos();
+            return { _: "inputMessagesFilterChatPhotos" };
         case "videoNotes":
-            return new _2_tl_js_1.types.InputMessagesFilterRoundVideo();
+            return { _: "inputMessagesFilterRoundVideo" };
         case "voiceMessagesAndVideoNotes":
-            return new _2_tl_js_1.types.InputMessagesFilterRoundVoice();
+            return { _: "inputMessagesFilterRoundVoice" };
         case "mentions":
-            return new _2_tl_js_1.types.InputMessagesFilterMyMentions();
+            return { _: "inputMessagesFilterMyMentions" };
         case "pinned":
-            return new _2_tl_js_1.types.InputMessagesFilterPinned();
+            return { _: "inputMessagesFilterPinned" };
         default:
             (0, _0_deps_js_1.unreachable)();
     }
 }
-exports.messageSearchFilterToTlObject = messageSearchFilterToTlObject;

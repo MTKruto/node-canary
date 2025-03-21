@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -36,11 +36,11 @@ export declare class Composer<C extends {
     set prefixes(value: string | string[]);
     constructor(...middleware: Middleware<C>[]);
     middleware(): MiddlewareFn<C>;
-    use(...middleware: Middleware<UpdateIntersection<C>>[]): Composer<C>;
-    branch(predicate: (ctx: UpdateIntersection<C>) => MaybePromise<boolean>, trueHandler_: Middleware<UpdateIntersection<C>>, falseHandler_: Middleware<UpdateIntersection<C>>): Composer<C>;
-    filter<D extends C>(predicate: (ctx: UpdateIntersection<C>) => ctx is D, ...middleware: Middleware<D>[]): Composer<D>;
-    filter(predicate: (ctx: UpdateIntersection<C>) => MaybePromise<boolean>, ...middleware: Middleware<UpdateIntersection<C>>[]): Composer<C>;
-    on<Q extends FilterQuery>(filter: Q, ...middleware: Middleware<WithFilter<C, Q>>[]): Composer<UpdateIntersection<WithFilter<C, Q>>>;
+    use(...middleware: Middleware<C & UpdateIntersection>[]): Composer<C>;
+    branch(predicate: (ctx: C & UpdateIntersection) => MaybePromise<boolean>, trueHandler_: Middleware<C & UpdateIntersection>, falseHandler_: Middleware<C & UpdateIntersection>): Composer<C>;
+    filter<D extends C>(predicate: (ctx: C & UpdateIntersection) => ctx is D, ...middleware: Middleware<D>[]): Composer<D>;
+    filter(predicate: (ctx: C & UpdateIntersection) => MaybePromise<boolean>, ...middleware: Middleware<C & UpdateIntersection>[]): Composer<C>;
+    on<Q extends FilterQuery>(filter: Q, ...middleware: Middleware<WithFilter<C, Q>>[]): Composer<WithFilter<C, Q> & UpdateIntersection>;
     command(commands: string | RegExp | (string | RegExp)[] | {
         names: string | RegExp | (string | RegExp)[];
         prefixes: string | string[];

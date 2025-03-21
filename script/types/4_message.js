@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,7 +19,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructMessage = exports.assertMessageType = void 0;
+exports.isMessageType = isMessageType;
+exports.assertMessageType = assertMessageType;
+exports.constructMessage = constructMessage;
 const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
@@ -27,9 +29,11 @@ const _file_id_js_1 = require("./_file_id.js");
 const _file_id_js_2 = require("./_file_id.js");
 const _0_contact_js_1 = require("./0_contact.js");
 const _0_dice_js_1 = require("./0_dice.js");
+const _0_invoice_js_1 = require("./0_invoice.js");
 const _0_link_preview_js_1 = require("./0_link_preview.js");
 const _0_location_js_1 = require("./0_location.js");
 const _0_message_entity_js_1 = require("./0_message_entity.js");
+const _0_refunded_payment_js_1 = require("./0_refunded_payment.js");
 const _0_voice_js_1 = require("./0_voice.js");
 const _1_animation_js_1 = require("./1_animation.js");
 const _1_audio_js_1 = require("./1_audio.js");
@@ -38,14 +42,16 @@ const _1_document_js_1 = require("./1_document.js");
 const _1_giveaway_js_1 = require("./1_giveaway.js");
 const _1_message_reaction_js_1 = require("./1_message_reaction.js");
 const _1_photo_js_1 = require("./1_photo.js");
-const _1_poll_js_1 = require("./1_poll.js");
 const _1_reply_quote_js_1 = require("./1_reply_quote.js");
 const _1_sticker_js_1 = require("./1_sticker.js");
 const _1_user_js_1 = require("./1_user.js");
 const _1_venue_js_1 = require("./1_venue.js");
 const _1_video_note_js_1 = require("./1_video_note.js");
 const _1_video_js_1 = require("./1_video.js");
+const _2_forward_header_js_1 = require("./2_forward_header.js");
 const _2_game_js_1 = require("./2_game.js");
+const _2_poll_js_1 = require("./2_poll.js");
+const _2_successful_payment_js_1 = require("./2_successful_payment.js");
 const _3_reply_markup_js_1 = require("./3_reply_markup.js");
 const L = (0, _1_utilities_js_1.getLogger)("Message");
 const keys = {
@@ -63,6 +69,7 @@ const keys = {
     contact: ["contact"],
     game: ["game"],
     poll: ["poll"],
+    invoice: ["invoice"],
     venue: ["venue"],
     location: ["location"],
     newChatMembers: ["newChatMembers"],
@@ -88,18 +95,25 @@ const keys = {
     videoChatEnded: ["videoChatEnded"],
     giveaway: ["giveaway"],
     unsupported: ["unsupported"],
+    successfulPayment: ["successfulPayment"],
+    refundedPayment: ["refundedPayment"],
 };
-function assertMessageType(message, type) {
+function isMessageType(message, type) {
     for (const key of keys[type]) {
         if (!(key in message) || message[key] === undefined) {
-            (0, _0_deps_js_1.unreachable)();
+            return false;
         }
+    }
+    return true;
+}
+function assertMessageType(message, type) {
+    if (!isMessageType(message, type)) {
+        (0, _0_deps_js_1.unreachable)();
     }
     return message;
 }
-exports.assertMessageType = assertMessageType;
 async function getSender(message_, getEntity) {
-    if (message_.from_id instanceof _2_tl_js_1.types.PeerUser) {
+    if ((0, _2_tl_js_1.is)("peerUser", message_.from_id)) {
         const entity = await getEntity(message_.from_id);
         if (entity) {
             return { from: (0, _1_user_js_1.constructUser)(entity) };
@@ -108,7 +122,7 @@ async function getSender(message_, getEntity) {
             (0, _0_deps_js_1.unreachable)();
         }
     }
-    else if (message_.from_id instanceof _2_tl_js_1.types.PeerChannel) {
+    else if ((0, _2_tl_js_1.is)("peerChannel", message_.from_id)) {
         const entity = await getEntity(message_.from_id);
         if (entity) {
             return { senderChat: (0, _1_chat_p_js_1.constructChatP)(entity) };
@@ -117,7 +131,7 @@ async function getSender(message_, getEntity) {
             (0, _0_deps_js_1.unreachable)();
         }
     }
-    else if (message_.peer_id instanceof _2_tl_js_1.types.PeerUser) {
+    else if ((0, _2_tl_js_1.is)("peerUser", message_.peer_id)) {
         const entity = await getEntity(message_.peer_id);
         if (entity) {
             return { from: (0, _1_user_js_1.constructUser)(entity) };
@@ -128,7 +142,7 @@ async function getSender(message_, getEntity) {
     }
 }
 async function getReply(message_, chat, getMessage) {
-    if (getMessage && message_.reply_to instanceof _2_tl_js_1.types.MessageReplyHeader && message_.reply_to.reply_to_msg_id) {
+    if (getMessage && (0, _2_tl_js_1.is)("messageReplyHeader", message_.reply_to) && message_.reply_to.reply_to_msg_id) {
         let isTopicMessage = false;
         if (message_.reply_to.forum_topic) {
             isTopicMessage = true;
@@ -143,20 +157,27 @@ async function getReply(message_, chat, getMessage) {
     }
     return { replyToMessage: undefined, threadId: undefined, isTopicMessage: false };
 }
-async function constructServiceMessage(message_, chat, getEntity, getMessage) {
+async function constructServiceMessage(message_, chat, getEntity, getMessage, getReply_) {
     const message = {
         out: message_.out ?? false,
         id: message_.id,
-        chat: chat,
+        chat,
         date: (0, _1_utilities_js_1.fromUnixTimestamp)(message_.date),
-        isTopicMessage: false,
+        isTopicMessage: message_.reply_to && (0, _2_tl_js_1.is)("messageReplyHeader", message_.reply_to) && message_.reply_to.forum_topic ? true : false,
     };
+    if ((0, _2_tl_js_1.is)("messageReplyHeader", message_.reply_to) && message_.reply_to.reply_to_msg_id) {
+        message.replyToMessageId = message_.reply_to.reply_to_top_id;
+        message.replyToMessageId = message_.reply_to.reply_to_msg_id;
+    }
+    if (getReply_) {
+        Object.assign(message, await getReply(message_, chat, getMessage));
+    }
     Object.assign(message, await getSender(message_, getEntity));
-    if (message_.action instanceof _2_tl_js_1.types.MessageActionChatAddUser || message_.action instanceof _2_tl_js_1.types.MessageActionChatJoinedByLink || message_.action instanceof _2_tl_js_1.types.MessageActionChatJoinedByRequest) {
+    if ((0, _2_tl_js_1.is)("messageActionChatAddUser", message_.action) || (0, _2_tl_js_1.is)("messageActionChatJoinedByLink", message_.action) || (0, _2_tl_js_1.is)("messageActionChatJoinedByRequest", message_.action)) {
         const newChatMembers = new Array();
         const users = "users" in message_.action ? message_.action.users : [message_.from_id && "user_id" in message_.from_id ? message_.from_id.user_id : (0, _0_deps_js_1.unreachable)()];
         for (const user_ of users) {
-            const entity = await getEntity(new _2_tl_js_1.types.PeerUser({ user_id: user_ }));
+            const entity = await getEntity({ _: "peerUser", user_id: user_ });
             if (entity) {
                 const user = (0, _1_user_js_1.constructUser)(entity);
                 newChatMembers.push(user);
@@ -167,31 +188,31 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage) {
         }
         return { ...message, newChatMembers };
     }
-    else if (message_.action instanceof _2_tl_js_1.types.MessageActionChatDeleteUser) {
-        const entity = await getEntity(new _2_tl_js_1.types.PeerUser({ user_id: message_.action.user_id }));
+    else if ((0, _2_tl_js_1.is)("messageActionChatDeleteUser", message_.action)) {
+        const entity = await getEntity({ _: "peerUser", user_id: message_.action.user_id });
         if (entity) {
             const user = (0, _1_user_js_1.constructUser)(entity);
             const leftChatMember = user;
             return { ...message, leftChatMember };
         }
     }
-    else if (message_.action instanceof _2_tl_js_1.types.MessageActionChatEditTitle) {
+    else if ((0, _2_tl_js_1.is)("messageActionChatEditTitle", message_.action)) {
         const newChatTitle = message_.action.title;
         return { ...message, newChatTitle };
     }
-    else if (message_.action instanceof _2_tl_js_1.types.MessageActionChatEditPhoto) {
-        const newChatPhoto = (0, _1_photo_js_1.constructPhoto)(message_.action.photo[_2_tl_js_1.as](_2_tl_js_1.types.Photo));
+    else if ((0, _2_tl_js_1.is)("messageActionChatEditPhoto", message_.action)) {
+        const newChatPhoto = (0, _1_photo_js_1.constructPhoto)((0, _2_tl_js_1.as)("photo", message_.action.photo));
         return { ...message, newChatPhoto };
     }
-    else if (message_.action instanceof _2_tl_js_1.types.MessageActionChatDeletePhoto) {
+    else if ((0, _2_tl_js_1.is)("messageActionChatDeletePhoto", message_.action)) {
         const deletedChatPhoto = true;
         return { ...message, deletedChatPhoto };
     }
-    else if (message_.action instanceof _2_tl_js_1.types.MessageActionChatCreate) {
+    else if ((0, _2_tl_js_1.is)("messageActionChatCreate", message_.action)) {
         const groupCreated = true;
         const newChatMembers = new Array();
         for (const user_ of message_.action.users) {
-            const entity = await getEntity(new _2_tl_js_1.types.PeerUser({ user_id: user_ }));
+            const entity = await getEntity({ _: "peerUser", user_id: user_ });
             if (entity) {
                 const user = (0, _1_user_js_1.constructUser)(entity);
                 newChatMembers.push(user);
@@ -199,7 +220,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage) {
         }
         return { ...message, groupCreated, newChatMembers };
     }
-    else if (message_.action instanceof _2_tl_js_1.types.MessageActionChannelCreate) {
+    else if ((0, _2_tl_js_1.is)("messageActionChannelCreate", message_.action)) {
         if (message.chat.type == "channel") {
             const channelCreated = true;
             return { ...message, channelCreated };
@@ -212,40 +233,40 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage) {
             // unreachable();
         }
     }
-    else if (message_.action instanceof _2_tl_js_1.types.MessageActionChatMigrateTo) {
+    else if ((0, _2_tl_js_1.is)("messageActionChatMigrateTo", message_.action)) {
         const chatMigratedTo = _1_utilities_js_1.ZERO_CHANNEL_ID + Number(-message_.action.channel_id);
         return { ...message, chatMigratedTo };
     }
-    else if (message_.action instanceof _2_tl_js_1.types.MessageActionChannelMigrateFrom) {
+    else if ((0, _2_tl_js_1.is)("messageActionChannelMigrateFrom", message_.action)) {
         const chatMigratedFrom = Number(-message_.action.chat_id);
         return { ...message, chatMigratedFrom };
     }
-    else if (message_.action instanceof _2_tl_js_1.types.MessageActionPinMessage) {
+    else if ((0, _2_tl_js_1.is)("messageActionPinMessage", message_.action)) {
         const { replyToMessage } = await getReply(message_, chat, getMessage);
         if (replyToMessage) {
             const pinnedMessage = replyToMessage;
             return { ...message, pinnedMessage };
         }
     }
-    else if (message_.action instanceof _2_tl_js_1.types.MessageActionRequestedPeer) {
-        const user = message_.action.peers[0][_2_tl_js_1.as](_2_tl_js_1.types.PeerUser);
+    else if ((0, _2_tl_js_1.is)("messageActionRequestedPeer", message_.action)) {
+        const user = (0, _2_tl_js_1.as)("peerUser", message_.action.peers[0]);
         const userShared = { requestId: message_.action.button_id, userId: Number(user.user_id) };
         return { ...message, userShared };
     }
-    else if (message_.action instanceof _2_tl_js_1.types.MessageActionBotAllowed) {
-        const miniAppName = message_.action.app ? message_.action.app[_2_tl_js_1.as](_2_tl_js_1.types.BotApp).title : undefined;
+    else if ((0, _2_tl_js_1.is)("messageActionBotAllowed", message_.action)) {
+        const miniAppName = message_.action.app ? (0, _2_tl_js_1.as)("botApp", message_.action.app).title : undefined;
         const writeAccessAllowed = { miniAppName };
         return { ...message, writeAccessAllowed };
     }
-    else if (message_.action instanceof _2_tl_js_1.types.MessageActionTopicCreate) {
+    else if ((0, _2_tl_js_1.is)("messageActionTopicCreate", message_.action)) {
         const forumTopicCreated = {
             name: message_.action.title,
-            iconColor: "#" + message_.action.icon_color.toString(16).padStart(6, "0"),
-            iconCutsomEmojiId: message_.action.icon_emoji_id ? String(message_.action.icon_emoji_id) : undefined,
+            color: message_.action.icon_color,
+            cutsomEmojiId: message_.action.icon_emoji_id ? String(message_.action.icon_emoji_id) : undefined,
         };
         return { ...message, forumTopicCreated };
     }
-    else if (message_.action instanceof _2_tl_js_1.types.MessageActionTopicEdit) {
+    else if ((0, _2_tl_js_1.is)("messageActionTopicEdit", message_.action)) {
         if (message_.action.closed) {
             const forumTopicClosed = true;
             return { ...message, forumTopicClosed };
@@ -253,7 +274,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage) {
         else if (message_.action.title || message_.action.icon_emoji_id) {
             const forumTopicEdited = {
                 name: message_.action.title ?? "",
-                iconCutsomEmojiId: message_.action.icon_emoji_id ? String(message_.action.icon_emoji_id) : undefined,
+                customEmojiId: message_.action.icon_emoji_id ? String(message_.action.icon_emoji_id) : undefined,
             };
             return { ...message, forumTopicEdited };
         }
@@ -262,11 +283,11 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage) {
             return { ...message, forumTopicReopened };
         }
     }
-    else if (message_.action instanceof _2_tl_js_1.types.MessageActionGroupCallScheduled) {
+    else if ((0, _2_tl_js_1.is)("messageActionGroupCallScheduled", message_.action)) {
         const videoChatScheduled = { startDate: new Date(message_.action.schedule_date * 1000) };
         return { ...message, videoChatScheduled };
     }
-    else if (message_.action instanceof _2_tl_js_1.types.MessageActionGroupCall) {
+    else if ((0, _2_tl_js_1.is)("messageActionGroupCall", message_.action)) {
         if (message_.action.duration) {
             const videoChatEnded = { duration: message_.action.duration };
             return { ...message, videoChatEnded };
@@ -276,19 +297,27 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage) {
             return { ...message, videoChatStarted };
         }
     }
-    else if (message_.action instanceof _2_tl_js_1.types.MessageActionSetMessagesTTL) {
+    else if ((0, _2_tl_js_1.is)("messageActionSetMessagesTTL", message_.action)) {
         const newAutoDeleteTime = message_.action.period || 0;
         return { ...message, newAutoDeleteTime };
     }
+    else if ((0, _2_tl_js_1.is)("messageActionPaymentSentMe", message_.action)) {
+        const successfulPayment = (0, _2_successful_payment_js_1.constructSuccessfulPayment)(message_.action);
+        return { ...message, successfulPayment };
+    }
+    else if ((0, _2_tl_js_1.is)("messageActionPaymentRefunded", message_.action)) {
+        const refundedPayment = (0, _0_refunded_payment_js_1.constructRefundedPayment)(message_.action);
+        return { ...message, refundedPayment };
+    }
     return { ...message, unsupported: true };
 }
-async function constructMessage(message_, getEntity, getMessage, getStickerSetName, getReply_ = true, business) {
-    if (!(message_ instanceof _2_tl_js_1.types.Message) && !(message_ instanceof _2_tl_js_1.types.MessageService)) {
+async function constructMessage(message_, getEntity, getMessage, getStickerSetName, getReply_ = true, business, poll, pollResults) {
+    if (!((0, _2_tl_js_1.is)("message", message_)) && !((0, _2_tl_js_1.is)("messageService", message_))) {
         (0, _0_deps_js_1.unreachable)();
     }
     let link;
     let chat_ = null;
-    if (message_.peer_id instanceof _2_tl_js_1.types.PeerUser) {
+    if ((0, _2_tl_js_1.is)("peerUser", message_.peer_id)) {
         const entity = await getEntity(message_.peer_id);
         if (entity) {
             chat_ = (0, _1_chat_p_js_1.constructChatP)(entity);
@@ -297,7 +326,7 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
             (0, _0_deps_js_1.unreachable)();
         }
     }
-    else if (message_.peer_id instanceof _2_tl_js_1.types.PeerChat) {
+    else if ((0, _2_tl_js_1.is)("peerChat", message_.peer_id)) {
         const entity = await getEntity(message_.peer_id);
         if (entity) {
             chat_ = (0, _1_chat_p_js_1.constructChatP)(entity);
@@ -306,11 +335,16 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
             (0, _0_deps_js_1.unreachable)();
         }
     }
-    else if (message_.peer_id instanceof _2_tl_js_1.types.PeerChannel) {
-        link = `https://t.me/c/${message_.peer_id.channel_id}/${message_.id}`;
+    else if ((0, _2_tl_js_1.is)("peerChannel", message_.peer_id)) {
+        const reply_to_top_id = message_.reply_to && (0, _2_tl_js_1.is)("messageReplyHeader", message_.reply_to) && message_.reply_to.reply_to_top_id;
+        const threadId = reply_to_top_id && typeof reply_to_top_id === "number" ? reply_to_top_id + "/" : "";
+        link = `https://t.me/c/${message_.peer_id.channel_id}/${threadId}${message_.id}`;
         const entity = await getEntity(message_.peer_id);
         if (entity) {
             chat_ = (0, _1_chat_p_js_1.constructChatP)(entity);
+            if (chat_.username) {
+                link = link.replace(`/c/${message_.peer_id.channel_id}/`, `/${chat_.username}/`);
+            }
         }
         else {
             (0, _0_deps_js_1.unreachable)();
@@ -319,8 +353,8 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
     else {
         (0, _0_deps_js_1.unreachable)();
     }
-    if (message_ instanceof _2_tl_js_1.types.MessageService) {
-        return await constructServiceMessage(message_, chat_, getEntity, getMessage);
+    if ((0, _2_tl_js_1.is)("messageService", message_)) {
+        return await constructServiceMessage(message_, chat_, getEntity, getMessage, getReply_);
     }
     const message = {
         out: message_.out ?? false,
@@ -330,18 +364,21 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
         date: (0, _1_utilities_js_1.fromUnixTimestamp)(message_.date),
         views: message_.views,
         forwards: message_.forwards,
-        isTopicMessage: message_.reply_to && message_.reply_to instanceof _2_tl_js_1.types.MessageReplyHeader && message_.reply_to.reply_to_top_id ? true : false,
+        isTopicMessage: message_.reply_to && (0, _2_tl_js_1.is)("messageReplyHeader", message_.reply_to) && message_.reply_to.forum_topic ? true : false,
         hasProtectedContent: message_.noforwards || false,
         senderBoostCount: message_.from_boosts_applied,
+        effectId: message_.effect ? String(message_.effect) : undefined,
+        scheduled: message_.from_scheduled ? true : undefined,
     };
     if (message_.reactions) {
         const recentReactions = message_.reactions.recent_reactions ?? [];
         message.reactions = message_.reactions.results.map((v) => (0, _1_message_reaction_js_1.constructMessageReaction)(v, recentReactions));
     }
-    if (message_.reply_to instanceof _2_tl_js_1.types.MessageReplyHeader && message_.reply_to.reply_to_msg_id) {
+    if ((0, _2_tl_js_1.is)("messageReplyHeader", message_.reply_to) && message_.reply_to.reply_to_msg_id) {
         if (message_.reply_to.quote) {
             message.replyQuote = (0, _1_reply_quote_js_1.constructReplyQuote)(message_.reply_to.quote_text, message_.reply_to.quote_offset, message_.reply_to.quote_entities);
         }
+        message.threadId = message_.reply_to.reply_to_top_id;
         message.replyToMessageId = message_.reply_to.reply_to_msg_id;
     }
     if (business) {
@@ -359,7 +396,7 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
         message.replyMarkup = (0, _3_reply_markup_js_1.constructReplyMarkup)(message_.reply_markup);
     }
     if (message_.via_bot_id != undefined) {
-        const viaBot = await getEntity(new _2_tl_js_1.types.PeerUser({ user_id: message_.via_bot_id }));
+        const viaBot = await getEntity({ _: "peerUser", user_id: message_.via_bot_id });
         if (viaBot) {
             message.viaBot = (0, _1_user_js_1.constructUser)(viaBot);
         }
@@ -368,7 +405,7 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
         }
     }
     if (message_.via_business_bot_id != undefined) {
-        const viaBusinessBot = await getEntity(new _2_tl_js_1.types.PeerUser({ user_id: message_.via_business_bot_id }));
+        const viaBusinessBot = await getEntity({ _: "peerUser", user_id: message_.via_business_bot_id });
         if (viaBusinessBot) {
             message.viaBusinessBot = (0, _1_user_js_1.constructUser)(viaBusinessBot);
         }
@@ -379,30 +416,9 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
     if (message_.post_author != undefined) {
         message.authorSignature = message_.post_author;
     }
-    if (message_.fwd_from instanceof _2_tl_js_1.types.MessageFwdHeader) {
+    if ((0, _2_tl_js_1.is)("messageFwdHeader", message_.fwd_from)) {
         message.isAutomaticForward = message_.fwd_from.saved_from_peer != undefined && message_.fwd_from.saved_from_msg_id != undefined;
-        message.forwardSenderName = message_.fwd_from.from_name;
-        message.forwardId = message_.fwd_from.channel_post;
-        message.forwardSignature = message_.fwd_from.post_author;
-        message.forwardDate = (0, _1_utilities_js_1.fromUnixTimestamp)(message_.fwd_from.date);
-        if (message_.fwd_from.from_id instanceof _2_tl_js_1.types.PeerUser) {
-            const entity = await getEntity(message_.fwd_from.from_id);
-            if (entity) {
-                message.forwardFrom = (0, _1_user_js_1.constructUser)(entity);
-            }
-        }
-        else if (message_.fwd_from.from_id instanceof _2_tl_js_1.types.PeerChat) {
-            const entity = await getEntity(message_.fwd_from.from_id);
-            if (entity) {
-                message.forwardFromChat = (0, _1_chat_p_js_1.constructChatP)(entity);
-            }
-        }
-        else if (message_.fwd_from.from_id instanceof _2_tl_js_1.types.PeerChannel) {
-            const entity = await getEntity(message_.fwd_from.from_id);
-            if (entity) {
-                message.forwardFromChat = (0, _1_chat_p_js_1.constructChatP)(entity);
-            }
-        }
+        message.forwardFrom = await (0, _2_forward_header_js_1.constructForwardHeader)(message_.fwd_from, getEntity);
     }
     if (message_.grouped_id != undefined) {
         message.mediaGroupId = String(message_.grouped_id);
@@ -416,42 +432,42 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
         entities: message_.entities?.map(_0_message_entity_js_1.constructMessageEntity).filter((v) => !!v) ?? [],
     };
     if (message_.message && message_.media === undefined) {
-        return messageText;
+        return (0, _1_utilities_js_1.cleanObject)(messageText);
     }
     const messageMedia = {
         ...message,
         caption: message_.message,
         captionEntities: message_.entities?.map(_0_message_entity_js_1.constructMessageEntity).filter((v) => !!v) ?? [],
     };
-    if (message_.media instanceof _2_tl_js_1.types.MessageMediaPhoto || message_.media instanceof _2_tl_js_1.types.MessageMediaDocument) {
+    if ((0, _2_tl_js_1.is)("messageMediaPhoto", message_.media) || (0, _2_tl_js_1.is)("messageMediaDocument", message_.media)) {
         messageMedia.hasMediaSpoiler = message_.media.spoiler || false;
     }
     let m = null;
-    if (message_.media instanceof _2_tl_js_1.types.MessageMediaPhoto) {
+    if ((0, _2_tl_js_1.is)("messageMediaPhoto", message_.media)) {
         if (!message_.media.photo) {
             (0, _0_deps_js_1.unreachable)();
         }
-        const photo = (0, _1_photo_js_1.constructPhoto)(message_.media.photo[_2_tl_js_1.as](_2_tl_js_1.types.Photo));
+        const photo = (0, _1_photo_js_1.constructPhoto)((0, _2_tl_js_1.as)("photo", message_.media.photo));
         m = { ...messageMedia, photo };
     }
-    else if (message_.media instanceof _2_tl_js_1.types.MessageMediaDice) {
+    else if ((0, _2_tl_js_1.is)("messageMediaDice", message_.media)) {
         const dice = (0, _0_dice_js_1.constructDice)(message_.media);
         m = { ...message, dice };
     }
-    else if (message_.media instanceof _2_tl_js_1.types.MessageMediaDocument) {
+    else if ((0, _2_tl_js_1.is)("messageMediaDocument", message_.media)) {
         const { document } = message_.media;
-        if (document instanceof _2_tl_js_1.types.Document) {
+        if ((0, _2_tl_js_1.is)("document", document)) {
             const getFileId = (type) => ({
                 type,
                 dcId: document.dc_id,
                 fileReference: document.file_reference,
                 location: { type: "common", id: document.id, accessHash: document.access_hash },
             });
-            const animated = document.attributes.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeAnimated);
-            const audio = document.attributes.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeAudio);
-            const fileName = document.attributes.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeFilename);
-            const sticker = document.attributes.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeSticker);
-            const video = document.attributes.find((v) => v instanceof _2_tl_js_1.types.DocumentAttributeVideo);
+            const animated = document.attributes.find((v) => (0, _2_tl_js_1.is)("documentAttributeAnimated", v));
+            const audio = document.attributes.find((v) => (0, _2_tl_js_1.is)("documentAttributeAudio", v));
+            const fileName = document.attributes.find((v) => (0, _2_tl_js_1.is)("documentAttributeFilename", v));
+            const sticker = document.attributes.find((v) => (0, _2_tl_js_1.is)("documentAttributeSticker", v));
+            const video = document.attributes.find((v) => (0, _2_tl_js_1.is)("documentAttributeVideo", v));
             if (animated) {
                 const fileId = getFileId(_file_id_js_1.FileType.Animation);
                 const animation = (0, _1_animation_js_1.constructAnimation)(document, video, fileName, (0, _file_id_js_2.serializeFileId)(fileId), (0, _file_id_js_1.toUniqueFileId)(fileId));
@@ -488,32 +504,38 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
             }
             else {
                 const fileId = getFileId(_file_id_js_1.FileType.Document);
-                const document_ = (0, _1_document_js_1.constructDocument)(document, fileName ?? new _2_tl_js_1.types.DocumentAttributeFilename({ file_name: "Unknown" }), (0, _file_id_js_2.serializeFileId)(fileId), (0, _file_id_js_1.toUniqueFileId)(fileId));
+                const document_ = (0, _1_document_js_1.constructDocument)(document, fileName ?? ({ _: "documentAttributeFilename", file_name: "Unknown" }), (0, _file_id_js_2.serializeFileId)(fileId), (0, _file_id_js_1.toUniqueFileId)(fileId));
                 m = { ...messageMedia, document: document_ };
             }
         }
     }
-    else if (message_.media instanceof _2_tl_js_1.types.MessageMediaContact) {
+    else if ((0, _2_tl_js_1.is)("messageMediaContact", message_.media)) {
         const contact = (0, _0_contact_js_1.constructContact)(message_.media);
         m = { ...messageMedia, contact };
     }
-    else if (message_.media instanceof _2_tl_js_1.types.MessageMediaGame) {
+    else if ((0, _2_tl_js_1.is)("messageMediaGame", message_.media)) {
         const game = (0, _2_game_js_1.constructGame)(message_.media);
         m = { ...message, game };
     }
-    else if (message_.media instanceof _2_tl_js_1.types.MessageMediaPoll) {
-        const poll = (0, _1_poll_js_1.constructPoll)(message_.media);
-        m = { ...message, poll };
+    else if ((0, _2_tl_js_1.is)("messageMediaPoll", message_.media)) {
+        if (poll) {
+            message_.media.poll = poll;
+        }
+        if (pollResults) {
+            message_.media.results = pollResults;
+        }
+        const poll_ = (0, _2_poll_js_1.constructPoll)(message_.media);
+        m = { ...message, poll: poll_ };
     }
-    else if (message_.media instanceof _2_tl_js_1.types.MessageMediaVenue) {
+    else if ((0, _2_tl_js_1.is)("messageMediaVenue", message_.media)) {
         const venue = (0, _1_venue_js_1.constructVenue)(message_.media);
         m = { ...message, venue };
     }
-    else if (message_.media instanceof _2_tl_js_1.types.MessageMediaGeo || message_.media instanceof _2_tl_js_1.types.MessageMediaGeoLive) {
+    else if ((0, _2_tl_js_1.is)("messageMediaGeo", message_.media) || (0, _2_tl_js_1.is)("messageMediaGeoLive", message_.media)) {
         const location = (0, _0_location_js_1.constructLocation)(message_.media);
         m = { ...message, location };
     }
-    else if (message_.media instanceof _2_tl_js_1.types.MessageMediaWebPage) {
+    else if ((0, _2_tl_js_1.is)("messageMediaWebPage", message_.media)) {
         const linkPreview = (0, _0_link_preview_js_1.constructLinkPreview)(message_.media, message_.invert_media);
         if (message_.message) {
             m = { ...messageText, linkPreview };
@@ -522,9 +544,13 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
             m = { ...message, linkPreview: { ...linkPreview, url: linkPreview.url ? linkPreview.url : (0, _0_deps_js_1.unreachable)() } };
         }
     }
-    else if (message_.media instanceof _2_tl_js_1.types.MessageMediaGiveaway) {
+    else if ((0, _2_tl_js_1.is)("messageMediaGiveaway", message_.media)) {
         const giveaway = (0, _1_giveaway_js_1.constructGiveaway)(message_.media);
         m = { ...message, giveaway };
+    }
+    else if ((0, _2_tl_js_1.is)("messageMediaInvoice", message_.media)) {
+        const invoice = (0, _0_invoice_js_1.constructInvoice)(message_.media);
+        m = { ...message, invoice };
     }
     if (m == null) {
         const unsupported = true;
@@ -532,4 +558,3 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
     }
     return (0, _1_utilities_js_1.cleanObject)(m);
 }
-exports.constructMessage = constructMessage;

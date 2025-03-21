@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,12 +19,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructGiveaway = void 0;
+exports.constructGiveaway = constructGiveaway;
+const _1_utilities_js_1 = require("../1_utilities.js");
 const _0_giveaway_parameters_js_1 = require("./0_giveaway_parameters.js");
 function constructGiveaway(g) {
     const winnerCount = g.quantity;
-    const monthCount = g.months;
+    const premiumMonthCount = g.months;
+    const starCount = g.stars;
     const parameters = (0, _0_giveaway_parameters_js_1.constructGiveawayParameters)(g);
-    return { parameters, winnerCount, monthCount };
+    return (0, _1_utilities_js_1.cleanObject)({ parameters, winnerCount, premiumMonthCount, starCount: starCount ? Number(starCount) : undefined });
 }
-exports.constructGiveaway = constructGiveaway;

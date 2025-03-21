@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,7 +19,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isInRange = exports.getPrefixKeyRange = exports.restoreKey = exports.fixKey = exports.fromString = exports.toString = exports.ValueType = void 0;
+exports.ValueType = void 0;
+exports.toString = toString;
+exports.fromString = fromString;
+exports.fixKey = fixKey;
+exports.restoreKey = restoreKey;
+exports.getPrefixKeyRange = getPrefixKeyRange;
+exports.isInRange = isInRange;
 const _0_deps_js_1 = require("../0_deps.js");
 const _0_deps_js_2 = require("../0_deps.js");
 var ValueType;
@@ -31,6 +37,7 @@ var ValueType;
     ValueType[ValueType["Date"] = 4] = "Date";
     ValueType[ValueType["Uint8Array"] = 5] = "Uint8Array";
     ValueType[ValueType["Array"] = 6] = "Array";
+    ValueType[ValueType["Map"] = 7] = "Map";
 })(ValueType || (exports.ValueType = ValueType = {}));
 function toString(value) {
     if (typeof value === "boolean") {
@@ -63,11 +70,13 @@ function toString(value) {
         });
         return `${ValueType.Array}${items.join("\n")}`;
     }
+    else if (typeof value === "object" && value != null && Object.getPrototypeOf(value) == Object.prototype) {
+        return `${ValueType.Map}${toString(Object.entries(value)).slice(1)}`;
+    }
     else {
         (0, _0_deps_js_2.unreachable)();
     }
 }
-exports.toString = toString;
 function fromString(string) {
     const [type, value] = [Number(string[0]), string.slice(1)];
     switch (type) {
@@ -108,13 +117,14 @@ function fromString(string) {
             }
             return arr;
         }
+        case ValueType.Map:
+            //deno-lint-ignore no-explicit-any
+            return Object.fromEntries(fromString(`${ValueType.Array}${value}`));
     }
 }
-exports.fromString = fromString;
 function fixKey(key) {
     return key.map((v) => typeof v === "bigint" ? String(ValueType.BigInt) + String(v) : typeof v === "string" ? String(ValueType.String) + v : v);
 }
-exports.fixKey = fixKey;
 function restoreKey(key) {
     return key.map((v) => {
         if (typeof v === "string") {
@@ -134,7 +144,6 @@ function restoreKey(key) {
         }
     });
 }
-exports.restoreKey = restoreKey;
 // Source: https://gist.github.com/inexorabletash/5462871
 // deno-lint-ignore no-explicit-any
 function getPrefixKeyRange(prefix) {
@@ -146,7 +155,6 @@ function getPrefixKeyRange(prefix) {
         return IDBKeyRange.lowerBound(prefix);
     return IDBKeyRange.bound(prefix, upperKey, false, true);
 }
-exports.getPrefixKeyRange = getPrefixKeyRange;
 const MAX_DATE_VALUE = 8640000000000000;
 const UPPER_BOUND = {
     NUMBER: new Date(-MAX_DATE_VALUE),
@@ -203,6 +211,9 @@ function isInRange(key, start, end) {
     for (const [i, part] of key.entries()) {
         const left = start[i];
         const right = end[i];
+        if (!left || !right) {
+            continue;
+        }
         if (left === undefined || right === undefined) {
             return false;
         }
@@ -213,4 +224,3 @@ function isInRange(key, start, end) {
     }
     return true;
 }
-exports.isInRange = isInRange;

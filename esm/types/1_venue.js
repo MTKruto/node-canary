@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,15 +17,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { as, types } from "../2_tl.js";
+import { as } from "../2_tl.js";
+import { constructLocation } from "./0_location.js";
 export function constructVenue(media_) {
-    const geo = media_.geo[as](types.GeoPoint);
+    const geo = as("geoPoint", media_.geo);
     return {
-        location: {
-            latitude: geo.lat,
-            longitude: geo.long,
-            horizontalAccuracy: geo.accuracy_radius,
-        },
+        location: constructLocation(geo),
         title: media_.title,
         address: media_.address,
         foursquareId: media_.venue_id,

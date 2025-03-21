@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -31,4 +31,5 @@ export type TransportProvider = (params: TransportProviderParams) => {
     dcId: number;
 };
 export declare function getDcId(dc: DC, cdn: boolean): number;
+export declare function getDc(dcId: number): DC;
 //# sourceMappingURL=2_transport_provider.d.ts.map

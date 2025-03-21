@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,17 +17,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { enums, types } from "../2_tl.js";
-import { InputMedia } from "../3_types.js";
-import { ChatAction, ChatMember, FileSource, FileType, ID, Message, MessageEntity, ParseMode, Reaction, Update, UsernameResolver } from "../3_types.js";
-import { AddReactionParams, BanChatMemberParams, CreateInviteLinkParams, DeleteMessagesParams, EditMessageLiveLocationParams, EditMessageMediaParams, EditMessageParams, EditMessageReplyMarkupParams, ForwardMessagesParams, GetCreatedInviteLinksParams, GetHistoryParams, PinMessageParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendChatActionParams, SendContactParams, SendDiceParams, SendDocumentParams, SendLocationParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetChatMemberRightsParams, SetChatPhotoParams, SetReactionsParams, StopPollParams } from "./0_params.js";
+import { Api } from "../2_tl.js";
+import { InputMedia, PollOption, PriceTag, VoiceTranscription } from "../3_types.js";
+import { ChatAction, FileSource, FileType, ID, Message, MessageEntity, ParseMode, Reaction, Update, UsernameResolver } from "../3_types.js";
+import { AddReactionParams, DeleteMessagesParams, EditInlineMessageCaptionParams, EditInlineMessageMediaParams, EditInlineMessageTextParams, EditMessageCaptionParams, EditMessageLiveLocationParams, EditMessageMediaParams, EditMessageReplyMarkupParams, EditMessageTextParams, ForwardMessagesParams, GetHistoryParams, PinMessageParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendChatActionParams, SendContactParams, SendDiceParams, SendDocumentParams, SendInvoiceParams, SendLocationParams, SendMediaGroupParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetReactionsParams, type StartBotParams, StopPollParams, UnpinMessageParams } from "./0_params.js";
+import { UpdateProcessor } from "./0_update_processor.js";
 import { C as C_ } from "./1_types.js";
 import { FileManager } from "./2_file_manager.js";
 interface C extends C_ {
     fileManager: FileManager;
 }
-type MessageManagerUpdate = types.UpdateNewMessage | types.UpdateNewChannelMessage | types.UpdateEditMessage | types.UpdateEditChannelMessage | types.UpdateBotNewBusinessMessage | types.UpdateBotEditBusinessMessage | types.UpdateBotDeleteBusinessMessage | types.UpdateDeleteMessages | types.UpdateDeleteChannelMessages | types.UpdateChannelParticipant | types.UpdateChatParticipant;
-export declare class MessageManager {
+declare const messageManagerUpdates: readonly ["updateNewMessage", "updateNewChannelMessage", "updateEditMessage", "updateNewScheduledMessage", "updateEditChannelMessage", "updateBotNewBusinessMessage", "updateBotEditBusinessMessage", "updateBotDeleteBusinessMessage", "updateDeleteMessages", "updateDeleteChannelMessages", "updateDeleteScheduledMessages", "updateTranscribedAudio"];
+type MessageManagerUpdate = Api.Types[(typeof messageManagerUpdates)[number]];
+export declare class MessageManager implements UpdateProcessor<MessageManagerUpdate> {
     #private;
     constructor(c: C);
     getMessages(chatId: ID, messageIds: number[]): Promise<Message[]>;
@@ -37,10 +39,11 @@ export declare class MessageManager {
     parseText(text_: string, params?: {
         parseMode?: ParseMode;
         entities?: MessageEntity[];
-    }): Promise<readonly [string, enums.MessageEntity[] | undefined]>;
-    constructMessage(message_: enums.Message, r?: boolean, business?: {
+    }): Promise<readonly [string, Api.MessageEntity[] | undefined]>;
+    updatesToMessages(chatId: ID, updates: Api.Updates, businessConnectionId?: string): Promise<Message[]>;
+    constructMessage(message_: Api.Message, r?: boolean, business?: {
         connectionId: string;
-        replyToMessage?: enums.Message;
+        replyToMessage?: Api.Message;
     }): Promise<Message>;
     forwardMessages(from: ID, to: ID, messageIds: number[], params?: ForwardMessagesParams): Promise<Message[]>;
     getHistory(chatId: ID, params?: GetHistoryParams): Promise<Message[]>;
@@ -63,47 +66,45 @@ export declare class MessageManager {
         access_hash: bigint;
         file_reference: Uint8Array;
     } | null;
-    sendPoll(chatId: ID, question: string, options: [string, string, ...string[]], params?: SendPollParams): Promise<import("../3_types.js").MessagePoll>;
-    editMessageReplyMarkup(chatId: ID, messageId: number, params?: EditMessageReplyMarkupParams): Promise<import("../3_types.js").MessageText | import("../3_types.js").MessageLink | import("../3_types.js").MessagePhoto | import("../3_types.js").MessageDocument | import("../3_types.js").MessageVideo | import("../3_types.js").MessageSticker | import("../3_types.js").MessageAnimation | import("../3_types.js").MessageVoice | import("../3_types.js").MessageAudio | import("../3_types.js").MessageDice | import("../3_types.js").MessageVideoNote | import("../3_types.js").MessageContact | import("../3_types.js").MessageGame | import("../3_types.js").MessagePoll | import("../3_types.js").MessageVenue | import("../3_types.js").MessageLocation | import("../3_types.js").MessageNewChatMembers | import("../3_types.js").MessageLeftChatMember | import("../3_types.js").MessageNewChatTitle | import("../3_types.js").MessageNewChatPhoto | import("../3_types.js").MessageDeletedChatPhoto | import("../3_types.js").MessageGroupCreated | import("../3_types.js").MessageSupergroupCreated | import("../3_types.js").MessageChannelCreated | import("../3_types.js").MessageAutoDeleteTimerChanged | import("../3_types.js").MessageChatMigratedTo | import("../3_types.js").MessageChatMigratedFrom | import("../3_types.js").MessagePinnedMessage | import("../3_types.js").MessageUserShared | import("../3_types.js").MessageWriteAccessAllowed | import("../3_types.js").MessageForumTopicCreated | import("../3_types.js").MessageForumTopicEdited | import("../3_types.js").MessageForumTopicClosed | import("../3_types.js").MessageForumTopicReopened | import("../3_types.js").MessageVideoChatScheduled | import("../3_types.js").MessageVideoChatStarted | import("../3_types.js").MessageVideoChatEnded | import("../3_types.js").MessageGiveaway | import("../3_types.js").MessageUnsupported>;
+    sendPoll(chatId: ID, question: string, options: (string | PollOption)[], params?: SendPollParams): Promise<import("../3_types.js").MessagePoll>;
+    editMessageReplyMarkup(chatId: ID, messageId: number, params?: EditMessageReplyMarkupParams): Promise<Message>;
     editInlineMessageReplyMarkup(inlineMessageId: string, params?: EditMessageReplyMarkupParams): Promise<void>;
-    editMessageText(chatId: ID, messageId: number, text: string, params?: EditMessageParams): Promise<import("../3_types.js").MessageText>;
-    editInlineMessageText(inlineMessageId: string, text: string, params?: EditMessageParams): Promise<void>;
-    editMessageMedia(chatId: ID, messageId: number, media: InputMedia, params?: EditMessageMediaParams): Promise<import("../3_types.js").MessageText | import("../3_types.js").MessageLink | import("../3_types.js").MessagePhoto | import("../3_types.js").MessageDocument | import("../3_types.js").MessageVideo | import("../3_types.js").MessageSticker | import("../3_types.js").MessageAnimation | import("../3_types.js").MessageVoice | import("../3_types.js").MessageAudio | import("../3_types.js").MessageDice | import("../3_types.js").MessageVideoNote | import("../3_types.js").MessageContact | import("../3_types.js").MessageGame | import("../3_types.js").MessagePoll | import("../3_types.js").MessageVenue | import("../3_types.js").MessageLocation | import("../3_types.js").MessageNewChatMembers | import("../3_types.js").MessageLeftChatMember | import("../3_types.js").MessageNewChatTitle | import("../3_types.js").MessageNewChatPhoto | import("../3_types.js").MessageDeletedChatPhoto | import("../3_types.js").MessageGroupCreated | import("../3_types.js").MessageSupergroupCreated | import("../3_types.js").MessageChannelCreated | import("../3_types.js").MessageAutoDeleteTimerChanged | import("../3_types.js").MessageChatMigratedTo | import("../3_types.js").MessageChatMigratedFrom | import("../3_types.js").MessagePinnedMessage | import("../3_types.js").MessageUserShared | import("../3_types.js").MessageWriteAccessAllowed | import("../3_types.js").MessageForumTopicCreated | import("../3_types.js").MessageForumTopicEdited | import("../3_types.js").MessageForumTopicClosed | import("../3_types.js").MessageForumTopicReopened | import("../3_types.js").MessageVideoChatScheduled | import("../3_types.js").MessageVideoChatStarted | import("../3_types.js").MessageVideoChatEnded | import("../3_types.js").MessageGiveaway | import("../3_types.js").MessageUnsupported>;
-    editInlineMessageMedia(inlineMessageId: string, media: InputMedia, params?: EditMessageMediaParams): Promise<void>;
+    editMessageText(chatId: ID, messageId: number, text: string, params?: EditMessageTextParams): Promise<import("../3_types.js").MessageText>;
+    editMessageCaption(chatId: ID, messageId: number, params?: EditMessageCaptionParams): Promise<Message>;
+    editInlineMessageText(inlineMessageId: string, text: string, params?: EditInlineMessageTextParams): Promise<void>;
+    editInlineMessageCaption(inlineMessageId: string, params?: EditInlineMessageCaptionParams): Promise<void>;
+    editMessageMedia(chatId: ID, messageId: number, media: InputMedia, params?: EditMessageMediaParams): Promise<Message>;
+    editInlineMessageMedia(inlineMessageId: string, media: InputMedia, params?: EditInlineMessageMediaParams): Promise<void>;
     deleteMessages(chatId: ID, messageIds: number[], params?: DeleteMessagesParams): Promise<void>;
+    deleteScheduledMessages(chatId: ID, messageIds: number[]): Promise<void>;
+    deleteScheduledMessage(chatId: ID, messageId: number): Promise<void>;
+    sendScheduledMessages(chatId: ID, messageIds: number[]): Promise<Message[]>;
+    sendScheduledMessage(chatId: ID, messageId: number): Promise<Message>;
     deleteChatMemberMessages(chatId: ID, memberId: ID): Promise<void>;
     pinMessage(chatId: ID, messageId: number, params?: PinMessageParams): Promise<void>;
-    unpinMessage(chatId: ID, messageId: number): Promise<void>;
+    unpinMessage(chatId: ID, messageId: number, params?: UnpinMessageParams): Promise<void>;
     unpinMessages(chatId: ID): Promise<void>;
-    setAvailableReactions(chatId: ID, availableReactions: "none" | "all" | Reaction[]): Promise<void>;
     setReactions(chatId: ID, messageId: number, reactions: Reaction[], params?: SetReactionsParams): Promise<void>;
     addReaction(chatId: ID, messageId: number, reaction: Reaction, params?: AddReactionParams): Promise<void>;
     removeReaction(chatId: ID, messageId: number, reaction: Reaction): Promise<void>;
-    static canHandleUpdate(update: enums.Update): update is MessageManagerUpdate;
+    canHandleUpdate(update: Api.Update): update is MessageManagerUpdate;
     handleUpdate(update: MessageManagerUpdate): Promise<Update | null>;
     sendChatAction(chatId: ID, action: ChatAction, params?: SendChatActionParams): Promise<void>;
-    deleteChatPhoto(chatId: number): Promise<void>;
-    setChatPhoto(chatId: number, photo: FileSource, params?: SetChatPhotoParams): Promise<void>;
-    banChatMember(chatId: ID, memberId: ID, params?: BanChatMemberParams): Promise<void>;
-    unbanChatMember(chatId: ID, memberId: ID): Promise<void>;
-    setChatMemberRights(chatId: ID, memberId: ID, params?: SetChatMemberRightsParams): Promise<void>;
-    getChatAdministrators(chatId: ID): Promise<ChatMember[]>;
-    enableJoinRequests(chatId: ID): Promise<void>;
-    disableJoinRequests(chatId: ID): Promise<void>;
     searchMessages(chatId: ID, query: string, params?: SearchMessagesParams): Promise<Message[]>;
-    setBoostsRequiredToCircumventRestrictions(chatId: ID, boosts: number): Promise<void>;
-    createInviteLink(chatId: ID, params?: CreateInviteLinkParams): Promise<import("../3_types.js").InviteLink>;
-    getCreatedInviteLinks(chatId: ID, params?: GetCreatedInviteLinksParams): Promise<import("../3_types.js").InviteLink[]>;
-    joinChat(chatId: ID): Promise<void>;
-    leaveChat(chatId: ID): Promise<void>;
     blockUser(userId: ID): Promise<void>;
     unblockUser(userId: ID): Promise<void>;
-    getChatMember(chatId: ID, userId: ID): Promise<ChatMember>;
     setChatStickerSet(chatId: ID, setName: string): Promise<void>;
     deleteChatStickerSet(chatId: ID): Promise<void>;
     stopPoll(chatId: ID, messageId: number, params?: StopPollParams): Promise<import("../3_types.js").Poll>;
     editMessageLiveLocation(chatId: ID, messageId: number, latitude: number, longitude: number, params?: EditMessageLiveLocationParams): Promise<import("../3_types.js").MessageLocation>;
     editInlineMessageLiveLocation(inlineMessageId: string, latitude: number, longitude: number, params?: EditMessageLiveLocationParams): Promise<void>;
+    sendInvoice(chatId: ID, title: string, description: string, payload: string, currency: string, prices: PriceTag[], params?: SendInvoiceParams): Promise<import("../3_types.js").MessageInvoice>;
+    sendMediaGroup(chatId: ID, media: InputMedia[], params?: SendMediaGroupParams): Promise<Message[]>;
+    readMessages(chatId: ID, untilMessageId: number): Promise<void>;
+    startBot(botId: ID, params?: StartBotParams): Promise<Message>;
+    transcribeVoice(chatId: ID, messageId: number): Promise<VoiceTranscription>;
+    resolveMessageLink(link: string): Promise<Message>;
+    static parseMessageLink(link: string): [ID, number] | null;
 }
 export {};
 //# sourceMappingURL=3_message_manager.d.ts.map

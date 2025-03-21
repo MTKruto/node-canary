@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { EntityGetter } from "./_getters.js";
 import { ChatP } from "./1_chat_p.js";
 import { User } from "./1_user.js";
@@ -40,5 +40,5 @@ export interface ChatMemberUpdated {
     /** Whether the user joined from a shared folder. */
     viaSharedFolder?: boolean;
 }
-export declare function constructChatMemberUpdated(update: types.UpdateChannelParticipant | types.UpdateChatParticipant, getEntity: EntityGetter): Promise<ChatMemberUpdated>;
+export declare function constructChatMemberUpdated(update: Api.updateChannelParticipant | Api.updateChatParticipant, getEntity: EntityGetter): Promise<ChatMemberUpdated>;
 //# sourceMappingURL=3_chat_member_updated.d.ts.map

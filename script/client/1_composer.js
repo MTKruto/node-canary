@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -31,13 +31,15 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
 };
 var _Composer_handle, _Composer_prefixes;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Composer = exports.skip = exports.concat = exports.flatten = void 0;
+exports.Composer = void 0;
+exports.flatten = flatten;
+exports.concat = concat;
+exports.skip = skip;
 const _0_errors_js_1 = require("../0_errors.js");
 const _0_filters_js_1 = require("./0_filters.js");
 function flatten(mw) {
     return typeof mw === "function" ? mw : (ctx, next) => mw.middleware()(ctx, next);
 }
-exports.flatten = flatten;
 function concat(left, right) {
     return async (ctx, next) => {
         let called = false;
@@ -52,11 +54,9 @@ function concat(left, right) {
         });
     };
 }
-exports.concat = concat;
 function skip(_ctx, next) {
     return next();
 }
-exports.skip = skip;
 class Composer {
     set prefixes(value) {
         if (__classPrivateFieldGet(this, _Composer_prefixes, "f") !== undefined) {

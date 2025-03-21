@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,42 +17,49 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { enums } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { InputPeerGetter } from "./_getters.js";
 import { ID } from "./0_id.js";
 /** @unlisted */
 export interface BotCommandScopeDefault {
+    /** @discriminator */
     type: "default";
 }
 /** @unlisted */
 export interface BotCommandScopeAllPrivateChats {
+    /** @discriminator */
     type: "allPrivateChats";
 }
 /** @unlisted */
 export interface BotCommandScopeAllGroupChats {
+    /** @discriminator */
     type: "allGroupChats";
 }
 /** @unlisted */
 export interface BotCommandScopeAllChatAdministrators {
+    /** @discriminator */
     type: "allChatAdministrators";
 }
 /** @unlisted */
 export interface BotCommandScopeChat {
+    /** @discriminator */
     type: "chat";
     chatId: ID;
 }
 /** @unlisted */
 export interface BotCommandScopeChatAdministrators {
+    /** @discriminator */
     type: "chatAdministrators";
     chatId: ID;
 }
 /** @unlisted */
 export interface BotCommandScopeChatMember {
+    /** @discriminator */
     type: "chatMember";
     chatId: ID;
     userId: number;
 }
 /** A type specifying where bot commads are available. */
 export type BotCommandScope = BotCommandScopeDefault | BotCommandScopeAllPrivateChats | BotCommandScopeAllGroupChats | BotCommandScopeAllChatAdministrators | BotCommandScopeChat | BotCommandScopeChatAdministrators | BotCommandScopeChatMember;
-export declare function botCommandScopeToTlObject(scope: BotCommandScope, getInputPeer: InputPeerGetter): Promise<enums.BotCommandScope>;
+export declare function botCommandScopeToTlObject(scope: BotCommandScope, getInputPeer: InputPeerGetter): Promise<Api.BotCommandScope>;
 //# sourceMappingURL=1_bot_command_scope.d.ts.map

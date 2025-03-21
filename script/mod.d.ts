@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,8 +17,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-export * from "./0_errors.js";
-export { getColorFromPeerId, getColorName, getRandomId, type LoggingProvider, setLoggingProvider, setLogVerbosity } from "./1_utilities.js";
+import "./_dnt.polyfills.js";
+export { getColorFromPeerId, getColorName, getRandomId, type LoggingProvider, setLogFilter, setLoggingProvider, setLogVerbosity } from "./1_utilities.js";
 export { checkPassword } from "./client/0_password.js";
 export * from "./2_connection.js";
 export * from "./2_storage.js";

@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,7 +19,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateCallbackQueryQuestion = void 0;
+exports.validateCallbackQueryQuestion = validateCallbackQueryQuestion;
 const _0_errors_js_1 = require("../0_errors.js");
 function validateCallbackQueryQuestion(q) {
     if (!["game", "password", "button"].includes(q.type)) {
@@ -32,4 +32,3 @@ function validateCallbackQueryQuestion(q) {
         throw new _0_errors_js_1.InputError("Got empty button data.");
     }
 }
-exports.validateCallbackQueryQuestion = validateCallbackQueryQuestion;

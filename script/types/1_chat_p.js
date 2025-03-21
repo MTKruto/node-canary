@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,13 +19,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructChatP = void 0;
+exports.constructChatP = constructChatP;
 const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _0_restriction_reason_js_1 = require("./0_restriction_reason.js");
 function constructChatP(chat) {
-    if (chat instanceof _2_tl_js_1.types.User) {
+    if ((0, _2_tl_js_1.is)("user", chat)) {
         const id = Number(chat.id);
         const chat_ = {
             id,
@@ -45,7 +45,7 @@ function constructChatP(chat) {
         }
         return (0, _1_utilities_js_1.cleanObject)(chat_);
     }
-    else if (chat instanceof _2_tl_js_1.types.Chat || chat instanceof _2_tl_js_1.types.ChatForbidden) {
+    else if ((0, _2_tl_js_1.is)("chat", chat) || (0, _2_tl_js_1.is)("chatForbidden", chat)) {
         const id = Number(-chat.id);
         const chat_ = {
             id,
@@ -54,15 +54,15 @@ function constructChatP(chat) {
             title: chat.title,
             isCreator: false,
         };
-        if (chat instanceof _2_tl_js_1.types.Chat) {
+        if ((0, _2_tl_js_1.is)("chat", chat)) {
             chat_.isCreator = chat.creator || false;
         }
         return (0, _1_utilities_js_1.cleanObject)(chat_);
     }
-    else if (chat instanceof _2_tl_js_1.types.Channel || chat instanceof _2_tl_js_1.types.ChannelForbidden) {
+    else if ((0, _2_tl_js_1.is)("channel", chat) || (0, _2_tl_js_1.is)("channelForbidden", chat)) {
         let chat_;
         const id = _1_utilities_js_1.ZERO_CHANNEL_ID + -Number(chat.id);
-        if (chat instanceof _2_tl_js_1.types.ChannelForbidden) {
+        if ((0, _2_tl_js_1.is)("channelForbidden", chat)) {
             const { title } = chat;
             if (chat.megagroup) {
                 return { id, color: (0, _1_utilities_js_1.getColorFromPeerId)(id), title, type: "supergroup", isScam: false, isFake: false, isVerified: false, isRestricted: false, isForum: false };
@@ -109,4 +109,3 @@ function constructChatP(chat) {
         (0, _0_deps_js_1.unreachable)();
     }
 }
-exports.constructChatP = constructChatP;

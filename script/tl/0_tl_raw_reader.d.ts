@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -24,8 +24,10 @@ export declare class TLRawReader {
     constructor(_buffer: Uint8Array);
     get buffer(): Uint8Array;
     read(count: number): Uint8Array;
+    unread(count: number): void;
     readInt24(signed?: boolean): number;
     readInt32(signed?: boolean): number;
+    unreadInt32(): void;
     readInt64(signed?: boolean): bigint;
     readDouble(): number;
     readInt128(signed?: boolean): bigint;

@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,7 +19,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPhotoSizes = exports.constructPhoto = void 0;
+exports.constructPhoto = constructPhoto;
+exports.getPhotoSizes = getPhotoSizes;
 const _2_tl_js_1 = require("../2_tl.js");
 const _file_id_js_1 = require("./_file_id.js");
 const _0_thumbnail_js_1 = require("./0_thumbnail.js");
@@ -33,20 +34,18 @@ function constructPhoto(photo) {
         thumbnails: sizes.slice(0, -1).map((v) => (0, _0_thumbnail_js_1.constructThumbnail)(v, photo)),
     };
 }
-exports.constructPhoto = constructPhoto;
 function getPhotoSizes(photo) {
     const sizes = photo.sizes
         .map((v) => {
-        if (v instanceof _2_tl_js_1.types.PhotoSizeProgressive) {
-            return new _2_tl_js_1.types.PhotoSize({ type: v.type, w: v.w, h: v.h, size: Math.max(...v.sizes) });
+        if ((0, _2_tl_js_1.is)("photoSizeProgressive", v)) {
+            return { _: "photoSize", type: v.type, w: v.w, h: v.h, size: Math.max(...v.sizes) };
         }
         else {
             return v;
         }
     })
-        .filter((v) => v instanceof _2_tl_js_1.types.PhotoSize)
+        .filter((v) => (0, _2_tl_js_1.is)("photoSize", v))
         .sort((a, b) => a.size - b.size);
     const largest = sizes.slice(-1)[0];
     return { sizes, largest };
 }
-exports.getPhotoSizes = getPhotoSizes;

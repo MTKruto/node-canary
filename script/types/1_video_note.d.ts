@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { types } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { Thumbnail } from "./0_thumbnail.js";
 /** A video note. */
 export interface VideoNote {
@@ -36,5 +36,5 @@ export interface VideoNote {
     /** Size of the file in bytes. */
     fileSize: number;
 }
-export declare function constructVideoNote(document: types.Document, videoAttribute: types.DocumentAttributeVideo, fileId: string, fileUniqueId: string): VideoNote;
+export declare function constructVideoNote(document: Api.document, videoAttribute: Api.documentAttributeVideo, fileId: string, fileUniqueId: string): VideoNote;
 //# sourceMappingURL=1_video_note.d.ts.map

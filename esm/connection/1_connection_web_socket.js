@@ -12,7 +12,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _ConnectionWebSocket_instances, _ConnectionWebSocket_url, _ConnectionWebSocket_webSocket, _ConnectionWebSocket_rMutex, _ConnectionWebSocket_wMutex, _ConnectionWebSocket_buffer, _ConnectionWebSocket_nextResolve, _ConnectionWebSocket_initWs, _ConnectionWebSocket_isConnecting, _ConnectionWebSocket_assertConnected, _ConnectionWebSocket_rejectRead;
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -34,7 +34,7 @@ import { concat, unreachable } from "../0_deps.js";
 import { ConnectionError } from "../0_errors.js";
 import { getLogger, Mutex } from "../1_utilities.js";
 const L = getLogger("ConnectionWebSocket");
-const errConnectionNotOpen = new Error("Connection not open");
+const errConnectionNotOpen = new ConnectionError("Connection not open");
 export class ConnectionWebSocket {
     constructor(url) {
         _ConnectionWebSocket_instances.add(this);
@@ -116,6 +116,7 @@ _ConnectionWebSocket_url = new WeakMap(), _ConnectionWebSocket_webSocket = new W
         webSocket.addEventListener("open", () => {
             this.stateChangeHandler?.(true);
             resolve(webSocket);
+            L.debug("connected to", __classPrivateFieldGet(this, _ConnectionWebSocket_url, "f"));
         });
         webSocket.addEventListener("message", async (e) => {
             if (typeof e.data === "string") {

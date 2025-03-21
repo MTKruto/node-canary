@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,138 +19,139 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sortMessageEntities = exports.messageEntityToTlObject = exports.constructMessageEntity = void 0;
+exports.constructMessageEntity = constructMessageEntity;
+exports.messageEntityToTlObject = messageEntityToTlObject;
+exports.sortMessageEntities = sortMessageEntities;
 const _0_deps_js_1 = require("../0_deps.js");
+const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 function constructMessageEntity(obj) {
-    if (obj instanceof _2_tl_js_1.types.MessageEntityMention) {
+    if ((0, _2_tl_js_1.is)("messageEntityMention", obj)) {
         return { type: "mention", offset: obj.offset, length: obj.length };
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntityHashtag) {
+    else if ((0, _2_tl_js_1.is)("messageEntityHashtag", obj)) {
         return { type: "hashtag", offset: obj.offset, length: obj.length };
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntityBotCommand) {
+    else if ((0, _2_tl_js_1.is)("messageEntityBotCommand", obj)) {
         return { type: "botCommand", offset: obj.offset ?? 0, length: obj.length };
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntityUrl) {
+    else if ((0, _2_tl_js_1.is)("messageEntityUrl", obj)) {
         return { type: "url", offset: obj.offset, length: obj.length };
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntityEmail) {
+    else if ((0, _2_tl_js_1.is)("messageEntityEmail", obj)) {
         return { type: "email", offset: obj.offset, length: obj.length };
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntityBold) {
+    else if ((0, _2_tl_js_1.is)("messageEntityBold", obj)) {
         return { type: "bold", offset: obj.offset, length: obj.length };
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntityItalic) {
+    else if ((0, _2_tl_js_1.is)("messageEntityItalic", obj)) {
         return { type: "italic", offset: obj.offset, length: obj.length };
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntityCode) {
+    else if ((0, _2_tl_js_1.is)("messageEntityCode", obj)) {
         return { type: "code", offset: obj.offset, length: obj.length };
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntityPre) {
+    else if ((0, _2_tl_js_1.is)("messageEntityPre", obj)) {
         return { type: "pre", offset: obj.offset, length: obj.length, language: obj.language };
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntityTextUrl) {
+    else if ((0, _2_tl_js_1.is)("messageEntityTextUrl", obj)) {
         return { type: "textLink", offset: obj.offset, length: obj.length, url: obj.url };
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntityMentionName) {
+    else if ((0, _2_tl_js_1.is)("messageEntityMentionName", obj)) {
         return { type: "textMention", offset: obj.offset, length: obj.length, userId: Number(obj.user_id) };
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntityCashtag) {
+    else if ((0, _2_tl_js_1.is)("messageEntityCashtag", obj)) {
         return { type: "cashtag", offset: obj.offset, length: obj.length };
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntityPhone) {
+    else if ((0, _2_tl_js_1.is)("messageEntityPhone", obj)) {
         return { type: "phoneNumber", offset: obj.offset, length: obj.length };
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntityUnderline) {
+    else if ((0, _2_tl_js_1.is)("messageEntityUnderline", obj)) {
         return { type: "underline", offset: obj.offset, length: obj.length };
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntityStrike) {
+    else if ((0, _2_tl_js_1.is)("messageEntityStrike", obj)) {
         return { type: "strikethrough", offset: obj.offset, length: obj.length };
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntityBlockquote) {
-        return { type: "blockquote", offset: obj.offset, length: obj.length };
+    else if ((0, _2_tl_js_1.is)("messageEntityBlockquote", obj)) {
+        return (0, _1_utilities_js_1.cleanObject)({ type: "blockquote", offset: obj.offset, length: obj.length, collapsible: obj.collapsed ? true : undefined });
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntityBankCard) {
+    else if ((0, _2_tl_js_1.is)("messageEntityBankCard", obj)) {
         return { type: "bankCard", offset: obj.offset, length: obj.length };
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntitySpoiler) {
+    else if ((0, _2_tl_js_1.is)("messageEntitySpoiler", obj)) {
         return { type: "spoiler", offset: obj.offset, length: obj.length };
     }
-    else if (obj instanceof _2_tl_js_1.types.MessageEntityCustomEmoji) {
+    else if ((0, _2_tl_js_1.is)("messageEntityCustomEmoji", obj)) {
         return { type: "customEmoji", offset: obj.offset, length: obj.length, customEmojiId: String(obj.document_id) };
     }
     else {
         return null;
     }
 }
-exports.constructMessageEntity = constructMessageEntity;
 async function messageEntityToTlObject(entity, getEntity) {
     const { offset, length } = entity;
     switch (entity.type) {
         case "mention":
-            return new _2_tl_js_1.types.MessageEntityMention({ offset, length });
+            return { _: "messageEntityMention", offset, length };
         case "hashtag":
-            return new _2_tl_js_1.types.MessageEntityHashtag({ offset, length });
+            return { _: "messageEntityHashtag", offset, length };
         case "botCommand":
-            return new _2_tl_js_1.types.MessageEntityBotCommand({ offset, length });
+            return { _: "messageEntityBotCommand", offset, length };
         case "url":
-            return new _2_tl_js_1.types.MessageEntityUrl({ offset, length });
+            return { _: "messageEntityUrl", offset, length };
         case "email":
-            return new _2_tl_js_1.types.MessageEntityEmail({ offset, length });
+            return { _: "messageEntityEmail", offset, length };
         case "bold":
-            return new _2_tl_js_1.types.MessageEntityBold({ offset, length });
+            return { _: "messageEntityBold", offset, length };
         case "italic":
-            return new _2_tl_js_1.types.MessageEntityItalic({ offset, length });
+            return { _: "messageEntityItalic", offset, length };
         case "code":
-            return new _2_tl_js_1.types.MessageEntityCode({ offset, length });
+            return { _: "messageEntityCode", offset, length };
         case "pre":
-            return new _2_tl_js_1.types.MessageEntityPre({ offset, length, language: entity.language });
+            return { _: "messageEntityPre", offset, length, language: entity.language };
         case "textLink": {
             try {
                 const url = new URL(entity.url);
                 if (url.protocol == "tg:" && url.hostname == "user" && (url.pathname == "/" || url.pathname == "")) {
                     const id = Number(url.searchParams.get("id"));
                     if (!isNaN(id)) {
-                        const entity_ = await getEntity(new _2_tl_js_1.types.PeerUser({ user_id: BigInt(id) }));
+                        const entity_ = await getEntity({ _: "peerUser", user_id: BigInt(id) });
                         if (!entity_) {
                             (0, _0_deps_js_1.unreachable)();
                         }
-                        return new _2_tl_js_1.types.InputMessageEntityMentionName({ offset, length, user_id: new _2_tl_js_1.types.InputUser({ user_id: entity_.id, access_hash: entity_.access_hash ?? 0n }) });
+                        return { _: "inputMessageEntityMentionName", offset, length, user_id: ({ _: "inputUser", user_id: entity_.id, access_hash: entity_.access_hash ?? 0n }) };
                     }
                 }
             }
             catch {
                 //
             }
-            return new _2_tl_js_1.types.MessageEntityTextUrl({ offset, length, url: entity.url });
+            return { _: "messageEntityTextUrl", offset, length, url: entity.url };
         }
         case "textMention": {
-            const entity_ = await getEntity(new _2_tl_js_1.types.PeerUser({ user_id: BigInt(entity.userId) }));
+            const entity_ = await getEntity({ _: "peerUser", user_id: BigInt(entity.userId) });
             if (!entity_) {
                 (0, _0_deps_js_1.unreachable)();
             }
-            return new _2_tl_js_1.types.InputMessageEntityMentionName({ offset, length, user_id: new _2_tl_js_1.types.InputUser({ user_id: entity_.id, access_hash: entity_.access_hash ?? 0n }) });
+            return { _: "inputMessageEntityMentionName", offset, length, user_id: ({ _: "inputUser", user_id: entity_.id, access_hash: entity_.access_hash ?? 0n }) };
         }
         case "cashtag":
-            return new _2_tl_js_1.types.MessageEntityCashtag({ offset, length });
+            return { _: "messageEntityCashtag", offset, length };
         case "phoneNumber":
-            return new _2_tl_js_1.types.MessageEntityPhone({ offset, length });
+            return { _: "messageEntityPhone", offset, length };
         case "underline":
-            return new _2_tl_js_1.types.MessageEntityUnderline({ offset, length });
+            return { _: "messageEntityUnderline", offset, length };
         case "strikethrough":
-            return new _2_tl_js_1.types.MessageEntityStrike({ offset, length });
+            return { _: "messageEntityStrike", offset, length };
         case "blockquote":
-            return new _2_tl_js_1.types.MessageEntityBlockquote({ offset, length });
+            return { _: "messageEntityBlockquote", offset, length, collapsed: entity.collapsible };
         case "bankCard":
-            return new _2_tl_js_1.types.MessageEntityBankCard({ offset, length });
+            return { _: "messageEntityBankCard", offset, length };
         case "spoiler":
-            return new _2_tl_js_1.types.MessageEntitySpoiler({ offset, length });
+            return { _: "messageEntitySpoiler", offset, length };
         case "customEmoji":
-            return new _2_tl_js_1.types.MessageEntityCustomEmoji({ offset, length, document_id: BigInt(entity.customEmojiId) });
+            return { _: "messageEntityCustomEmoji", offset, length, document_id: BigInt(entity.customEmojiId) };
     }
 }
-exports.messageEntityToTlObject = messageEntityToTlObject;
 const priorities = {
     "mention": 50,
     "hashtag": 50,
@@ -185,4 +186,3 @@ function sortMessageEntities(entities) {
         return priority < otherPriority ? -1 : 1;
     });
 }
-exports.sortMessageEntities = sortMessageEntities;

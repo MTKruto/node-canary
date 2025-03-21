@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { enums } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { MessageEntity } from "./0_message_entity.js";
 /** A reference to a specific part of a message that is being replied to. */
 export interface ReplyQuote {
@@ -28,5 +28,5 @@ export interface ReplyQuote {
     /** The entities of the quoted text. */
     entities: MessageEntity[];
 }
-export declare function constructReplyQuote(quoteText: string | undefined, quoteOffset: number | undefined, quoteEntities: enums.MessageEntity[] | undefined): ReplyQuote;
+export declare function constructReplyQuote(quoteText: string | undefined, quoteOffset: number | undefined, quoteEntities: Api.MessageEntity[] | undefined): ReplyQuote;
 //# sourceMappingURL=1_reply_quote.d.ts.map

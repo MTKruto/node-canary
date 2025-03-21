@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,35 +19,35 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructLocation = void 0;
+exports.constructLocation = constructLocation;
+const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 function constructLocation(geo_) {
-    if (geo_ instanceof _2_tl_js_1.types.MessageMediaGeo) {
-        const geo = geo_.geo[_2_tl_js_1.as](_2_tl_js_1.types.GeoPoint);
-        return {
+    if ((0, _2_tl_js_1.is)("messageMediaGeo", geo_)) {
+        const geo = (0, _2_tl_js_1.as)("geoPoint", geo_.geo);
+        return (0, _1_utilities_js_1.cleanObject)({
             latitude: geo.lat,
             longitude: geo.long,
             horizontalAccuracy: geo.accuracy_radius,
-        };
+        });
     }
-    else if (geo_ instanceof _2_tl_js_1.types.MessageMediaGeoLive) {
+    else if ((0, _2_tl_js_1.is)("messageMediaGeoLive", geo_)) {
         const media = geo_;
-        const geo = media.geo[_2_tl_js_1.as](_2_tl_js_1.types.GeoPoint);
-        return {
+        const geo = (0, _2_tl_js_1.as)("geoPoint", media.geo);
+        return (0, _1_utilities_js_1.cleanObject)({
             latitude: geo.lat,
             longitude: geo.long,
             horizontalAccuracy: geo.accuracy_radius,
             livePeriod: media.period,
             heading: media.heading,
             proximityAlertRadius: media.proximity_notification_radius,
-        };
+        });
     }
     else {
-        return {
+        return (0, _1_utilities_js_1.cleanObject)({
             latitude: geo_.lat,
             longitude: geo_.long,
             horizontalAccuracy: geo_.accuracy_radius,
-        };
+        });
     }
 }
-exports.constructLocation = constructLocation;

@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,9 +17,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-export const millisecond = 1;
-export const second = 1000 * millisecond;
-export const minute = 60 * second;
 export const byte = 1;
-export const kilobyte = 1024 * byte;
-export const megabyte = 1024 * kilobyte;
+export const kilobyte = 1_024 * byte;
+export const megabyte = 1_024 * kilobyte;

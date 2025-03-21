@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
-import { types } from "../2_tl.js";
+import { is } from "../2_tl.js";
 import { constructReaction } from "./0_reaction.js";
 import { constructChatP } from "./1_chat_p.js";
 import { constructUser } from "./1_user.js";
@@ -38,7 +38,7 @@ export async function constructMessageReactions(update, getEntity) {
     if (!entity) {
         return null;
     }
-    if (entity instanceof types.User) {
+    if (is("user", entity)) {
         user = constructUser(entity);
     }
     else {

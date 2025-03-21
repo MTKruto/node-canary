@@ -3,20 +3,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dntGlobalThis = exports.WebSocket = exports.crypto = exports.Deno = void 0;
-const shim_deno_1 = require("@deno/shim-deno");
-var shim_deno_2 = require("@deno/shim-deno");
-Object.defineProperty(exports, "Deno", { enumerable: true, get: function () { return shim_deno_2.Deno; } });
+exports.dntGlobalThis = exports.Deno = exports.WebSocket = exports.prompt = exports.confirm = exports.alert = exports.crypto = void 0;
 const shim_crypto_1 = require("@deno/shim-crypto");
 var shim_crypto_2 = require("@deno/shim-crypto");
 Object.defineProperty(exports, "crypto", { enumerable: true, get: function () { return shim_crypto_2.crypto; } });
+const shim_prompts_1 = require("@deno/shim-prompts");
+var shim_prompts_2 = require("@deno/shim-prompts");
+Object.defineProperty(exports, "alert", { enumerable: true, get: function () { return shim_prompts_2.alert; } });
+Object.defineProperty(exports, "confirm", { enumerable: true, get: function () { return shim_prompts_2.confirm; } });
+Object.defineProperty(exports, "prompt", { enumerable: true, get: function () { return shim_prompts_2.prompt; } });
 const ws_1 = __importDefault(require("ws"));
 var ws_2 = require("ws");
 Object.defineProperty(exports, "WebSocket", { enumerable: true, get: function () { return __importDefault(ws_2).default; } });
+const shim_deno_1 = require("@deno/shim-deno");
+var shim_deno_2 = require("@deno/shim-deno");
+Object.defineProperty(exports, "Deno", { enumerable: true, get: function () { return shim_deno_2.Deno; } });
 const dntGlobals = {
-    Deno: shim_deno_1.Deno,
     crypto: shim_crypto_1.crypto,
+    alert: shim_prompts_1.alert,
+    confirm: shim_prompts_1.confirm,
+    prompt: shim_prompts_1.prompt,
     WebSocket: ws_1.default,
+    Deno: shim_deno_1.Deno,
 };
 exports.dntGlobalThis = createMergeProxy(globalThis, dntGlobals);
 function createMergeProxy(baseObj, extObj) {

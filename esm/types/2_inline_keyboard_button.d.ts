@@ -1,6 +1,6 @@
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -17,56 +17,122 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { enums } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { UsernameResolver } from "./_getters.js";
 import { LoginUrl } from "./0_login_url.js";
 import { MiniAppInfo } from "./0_mini_app_info.js";
 /** @unlisted */
 export interface _InlineKeyboardButtonBase {
+    /** The text of the button. */
     text: string;
 }
-/** @unlisted */
+/**
+ * An inline keyboard button that, when pressed, opens the specified URL.
+ * @unlisted
+ */
 export interface InlineKeyboardButtonURL extends _InlineKeyboardButtonBase {
-    /** @discriminator */
+    /**
+     * The URL to open.
+     * @discriminator
+     */
     url: string;
 }
-/** @unlisted */
+/**
+ * An inline keyboard button that, when pressed, sends back the specified callback data.
+ * @unlisted
+ */
 export interface InlineKeyboardButtonCallback extends _InlineKeyboardButtonBase {
-    /** @discriminator */
+    /**
+     * The callback data to send back.
+     * @discriminator
+     */
     callbackData: string;
 }
+/**
+ * An inline keyboard button that, when pressed, launches the specified mini app.
+ * @unlisted
+ */
 /** @unlisted */
 export interface InlineKeyboardButtonMiniApp extends _InlineKeyboardButtonBase {
-    /** @discriminator */
+    /**
+     * The mini app to launch.
+     * @discriminator
+     */
     miniApp: MiniAppInfo;
 }
-/** @unlisted */
+/**
+ * An inline keyboard button that, when pressed, logs the user into the specified URL.
+ * @unlisted
+ */
 export interface InlineKeyboardButtonLogin extends _InlineKeyboardButtonBase {
-    /** @discriminator */
+    /**
+     * The URL to log into.
+     * @discriminator
+     */
     loginUrl: LoginUrl;
 }
-/** @unlisted */
+/**
+ * An inline keyboard button that, when pressed, switches to inline mode in a chat chosen by the user.
+ * @unlisted
+ */
 export interface InlineKeyboardButtonSwitchInline extends _InlineKeyboardButtonBase {
-    /** @discriminator */
+    /**
+     * The query to type into the user's message box once switched to inline.
+     * @discriminator
+     */
     switchInlineQuery: string;
 }
-/** @unlisted */
+/**
+ * An inline keyboard button that, when pressed, switches to inline mode in the current chat.
+ * @unlisted
+ */
 export interface InlineKeyboardButtonSwitchInlineCurrent extends _InlineKeyboardButtonBase {
-    /** @discriminator */
+    /**
+     * The query to type into the user's message box once switched to inline.
+     * @discriminator
+     */
     switchInlineQueryCurrentChat: string;
 }
-/** @unlisted */
+/**
+ * An inline keyboard button that, when pressed, switches to inline mode in a chat chosen by the user from a limited subset of chats.
+ * @unlisted
+ */
+export interface InlineKeyboardButtonSwitchInlineChosen extends _InlineKeyboardButtonBase {
+    /** @discriminator */
+    switchInlineQueryChosenChats: {
+        query: string;
+        allowUsers?: boolean;
+        allowBots?: boolean;
+        allowGroups?: boolean;
+        allowChannels?: boolean;
+    };
+}
+/**
+ * An inline keyboard button that, when pressed, launches the bot's game.
+ * @unlisted
+ */
 export interface InlineKeyboardButtonGame extends _InlineKeyboardButtonBase {
     /** @discriminator */
     callbackGame: Record<never, never>;
 }
-/** @unlisted */
+/**
+ * An inline keyboard that, when pressed, initiates a payment.
+ * @unlisted
+ */
 export interface InlineKeyboardButtonPay extends _InlineKeyboardButtonBase {
     /** @discriminator */
     pay: boolean;
 }
+/**
+ * An inline keyboard that, when pressed, copies the text inside its `copy` field.
+ * @unlisted
+ */
+export interface InlineKeyboardButtonCopy extends _InlineKeyboardButtonBase {
+    /** @discriminator */
+    copy: string;
+}
 /** A button of an inline keyboard. */
-export type InlineKeyboardButton = InlineKeyboardButtonURL | InlineKeyboardButtonCallback | InlineKeyboardButtonMiniApp | InlineKeyboardButtonLogin | InlineKeyboardButtonSwitchInline | InlineKeyboardButtonSwitchInlineCurrent | InlineKeyboardButtonGame | InlineKeyboardButtonPay;
-export declare function constructInlineKeyboardButton(button_: enums.KeyboardButton): InlineKeyboardButton;
-export declare function inlineKeyboardButtonToTlObject(button: InlineKeyboardButton, usernameResolver: UsernameResolver): Promise<enums.KeyboardButton>;
+export type InlineKeyboardButton = InlineKeyboardButtonURL | InlineKeyboardButtonCallback | InlineKeyboardButtonMiniApp | InlineKeyboardButtonLogin | InlineKeyboardButtonSwitchInline | InlineKeyboardButtonSwitchInlineCurrent | InlineKeyboardButtonSwitchInlineChosen | InlineKeyboardButtonGame | InlineKeyboardButtonPay | InlineKeyboardButtonCopy;
+export declare function constructInlineKeyboardButton(button_: Api.KeyboardButton): InlineKeyboardButton;
+export declare function inlineKeyboardButtonToTlObject(button: InlineKeyboardButton, usernameResolver: UsernameResolver): Promise<Api.KeyboardButton>;
 //# sourceMappingURL=2_inline_keyboard_button.d.ts.map

@@ -1,7 +1,7 @@
 "use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
- * Copyright (C) 2023-2024 Roj <https://roj.im/>
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
  *
  * This file is part of MTKruto.
  *
@@ -19,7 +19,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getColorName = exports.getColorFromPeerId = void 0;
+exports.getColorFromPeerId = getColorFromPeerId;
+exports.getColorName = getColorName;
 function getColorFromPeerId(id) {
     id = Number(String(id).replaceAll("-100", "-"));
     if (id < 0) {
@@ -27,7 +28,6 @@ function getColorFromPeerId(id) {
     }
     return Math.floor(id % 7);
 }
-exports.getColorFromPeerId = getColorFromPeerId;
 function getColorName(id) {
     switch (id) {
         case 0:
@@ -76,4 +76,3 @@ function getColorName(id) {
             return "blue";
     }
 }
-exports.getColorName = getColorName;

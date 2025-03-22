@@ -45,13 +45,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Api = exports.TLError = void 0;
+exports.Api = exports.Mtproto = exports.TLError = void 0;
 var _0_tl_error_js_1 = require("./tl/0_tl_error.js");
 Object.defineProperty(exports, "TLError", { enumerable: true, get: function () { return _0_tl_error_js_1.TLError; } });
 __exportStar(require("./tl/0_utilities.js"), exports);
-exports.Api = __importStar(require("./tl/1_api.js"));
 __exportStar(require("./tl/1_tl_reader.js"), exports);
 __exportStar(require("./tl/1_tl_writer.js"), exports);
 __exportStar(require("./tl/2_message.js"), exports);
-__exportStar(require("./tl/2_telegram.js"), exports);
-__exportStar(require("./tl/2_utilities.js"), exports);
+exports.Mtproto = __importStar(require("./tl/2_mtproto.js"));
+exports.Api = __importStar(require("./tl/2_telegram.js"));

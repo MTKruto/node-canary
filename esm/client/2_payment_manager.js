@@ -30,7 +30,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _PaymentManager_c;
 import { InputError } from "../0_errors.js";
-import { is, isOneOf } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructPreCheckoutQuery } from "../3_types.js";
 const paymentManagerUpdates = [
     "updateBotPrecheckoutQuery",
@@ -41,10 +41,10 @@ export class PaymentManager {
         __classPrivateFieldSet(this, _PaymentManager_c, c, "f");
     }
     canHandleUpdate(update) {
-        return isOneOf(paymentManagerUpdates, update);
+        return Api.isOneOf(paymentManagerUpdates, update);
     }
     async handleUpdate(update) {
-        if (is("updateBotPrecheckoutQuery", update)) {
+        if (Api.is("updateBotPrecheckoutQuery", update)) {
             const preCheckoutQuery = await constructPreCheckoutQuery(update, __classPrivateFieldGet(this, _PaymentManager_c, "f").getEntity);
             return { preCheckoutQuery };
         }

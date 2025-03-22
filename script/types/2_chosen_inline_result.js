@@ -27,14 +27,14 @@ const _0_location_js_1 = require("./0_location.js");
 const _1_user_js_1 = require("./1_user.js");
 async function constructChosenInlineResult(ubis, getEntity) {
     const entity = await getEntity({ ...ubis, _: "peerUser" });
-    if (!entity || !((0, _2_tl_js_1.is)("user", entity))) {
+    if (!entity || !(_2_tl_js_1.Api.is("user", entity))) {
         (0, _0_deps_js_1.unreachable)();
     }
     return (0, _1_utilities_js_1.cleanObject)({
         resultId: ubis.id,
         from: (0, _1_user_js_1.constructUser)(entity),
-        location: (0, _2_tl_js_1.is)("geoPoint", ubis.geo) ? (0, _0_location_js_1.constructLocation)(ubis.geo) : undefined,
-        inlineMessageId: ubis.msg_id === undefined ? undefined : (0, _1_utilities_js_1.base64EncodeUrlSafe)((0, _2_tl_js_1.serializeTelegramObject)(ubis.msg_id)),
+        location: _2_tl_js_1.Api.is("geoPoint", ubis.geo) ? (0, _0_location_js_1.constructLocation)(ubis.geo) : undefined,
+        inlineMessageId: ubis.msg_id === undefined ? undefined : (0, _1_utilities_js_1.base64EncodeUrlSafe)(_2_tl_js_1.Api.serializeObject(ubis.msg_id)),
         query: ubis.query,
     });
 }

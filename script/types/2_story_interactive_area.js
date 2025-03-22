@@ -37,18 +37,18 @@ function constructStoryInteractiveAreaPosition(position) {
 }
 function constructStoryInteractiveArea(area) {
     const position = constructStoryInteractiveAreaPosition(area.coordinates);
-    if ((0, _2_tl_js_1.is)("mediaAreaGeoPoint", area)) {
-        if ((0, _2_tl_js_1.is)("geoPointEmpty", area.geo)) {
+    if (_2_tl_js_1.Api.is("mediaAreaGeoPoint", area)) {
+        if (_2_tl_js_1.Api.is("geoPointEmpty", area.geo)) {
             (0, _0_deps_js_1.unreachable)(); // will this ever be empty?
         }
         const location = (0, _0_location_js_1.constructLocation)(area.geo);
         return { position, location };
     }
-    else if ((0, _2_tl_js_1.is)("mediaAreaVenue", area)) {
+    else if (_2_tl_js_1.Api.is("mediaAreaVenue", area)) {
         const venue = (0, _1_venue_js_1.constructVenue)(area);
         return { position, venue };
     }
-    else if ((0, _2_tl_js_1.is)("mediaAreaSuggestedReaction", area)) {
+    else if (_2_tl_js_1.Api.is("mediaAreaSuggestedReaction", area)) {
         const reaction = (0, _0_reaction_js_1.constructReaction)(area.reaction);
         return {
             position,
@@ -58,11 +58,11 @@ function constructStoryInteractiveArea(area) {
             dark: area.dark ? true : false,
         };
     }
-    else if ((0, _2_tl_js_1.is)("mediaAreaChannelPost", area)) {
+    else if (_2_tl_js_1.Api.is("mediaAreaChannelPost", area)) {
         return {
             position,
             messageReference: {
-                chatId: (0, _2_tl_js_1.peerToChatId)(area),
+                chatId: _2_tl_js_1.Api.peerToChatId(area),
                 messageId: area.msg_id,
             },
         };
@@ -98,8 +98,8 @@ async function storyInteractiveAreaToTlObject(area, getEntity) {
         return { _: "mediaAreaSuggestedReaction", coordinates, reaction, dark: area.dark ? true : undefined, flipped: area.flipped ? true : undefined };
     }
     else if ("messageReference" in area) {
-        const entity = await getEntity((0, _2_tl_js_1.chatIdToPeer)(area.messageReference.chatId));
-        if (!((0, _2_tl_js_1.is)("channel", entity))) {
+        const entity = await getEntity(_2_tl_js_1.Api.chatIdToPeer(area.messageReference.chatId));
+        if (!(_2_tl_js_1.Api.is("channel", entity))) {
             (0, _0_deps_js_1.unreachable)();
         }
         const channel = { _: "inputChannel", channel_id: entity.id, access_hash: entity.access_hash ?? 0n };

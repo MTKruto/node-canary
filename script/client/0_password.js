@@ -124,7 +124,7 @@ function pad(bigint) {
 async function checkPassword(password_, ap) {
     const password = new TextEncoder().encode(password_);
     const algo = ap.current_algo;
-    if (!((0, _2_tl_js_1.is)("passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow", algo))) {
+    if (!(_2_tl_js_1.Api.is("passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow", algo))) {
         throw new Error("Unexpected algorithm");
     }
     // g := algo.g

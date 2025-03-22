@@ -30,8 +30,8 @@ const ERR_INVALID_INLINE_MESSAGE_ID = new _0_errors_js_1.InputError("Invalid inl
 async function deserializeInlineMessageId(inlineMessageId) {
     try {
         const buffer = (0, _1_utilities_js_1.base64DecodeUrlSafe)(inlineMessageId);
-        const object = await (0, _2_tl_js_1.deserializeTelegramType)("InputBotInlineMessageID", buffer);
-        if ((0, _2_tl_js_1.is)("inputBotInlineMessageID64", object) || (0, _2_tl_js_1.is)("inputBotInlineMessageID", object)) {
+        const object = await _2_tl_js_1.Api.deserializeType("InputBotInlineMessageID", buffer);
+        if (_2_tl_js_1.Api.is("inputBotInlineMessageID64", object) || _2_tl_js_1.Api.is("inputBotInlineMessageID", object)) {
             return object;
         }
     }
@@ -50,14 +50,14 @@ async function constructCallbackQuery(callbackQuery, getEntity, getMessage) {
     const gameShortName = callbackQuery.game_short_name;
     const data = callbackQuery.data !== undefined ? new TextDecoder().decode(callbackQuery.data) : undefined;
     const chatInstance = callbackQuery.chat_instance == 0n ? "" : String(callbackQuery.chat_instance);
-    if ((0, _2_tl_js_1.is)("updateBotCallbackQuery", callbackQuery)) {
-        const message = await getMessage((0, _2_tl_js_1.peerToChatId)(callbackQuery.peer), Number(callbackQuery.msg_id));
+    if (_2_tl_js_1.Api.is("updateBotCallbackQuery", callbackQuery)) {
+        const message = await getMessage(_2_tl_js_1.Api.peerToChatId(callbackQuery.peer), Number(callbackQuery.msg_id));
         if (message == null) {
             (0, _0_deps_js_1.unreachable)();
         }
         return (0, _1_utilities_js_1.cleanObject)({ id, from: user, message, chatInstance, data, gameShortName });
     }
     else {
-        return (0, _1_utilities_js_1.cleanObject)({ id, from: user, inlineMessageId: (0, _1_utilities_js_1.base64EncodeUrlSafe)((0, _2_tl_js_1.serializeTelegramObject)(callbackQuery.msg_id)), chatInstance, data, gameShortName });
+        return (0, _1_utilities_js_1.cleanObject)({ id, from: user, inlineMessageId: (0, _1_utilities_js_1.base64EncodeUrlSafe)(_2_tl_js_1.Api.serializeObject(callbackQuery.msg_id)), chatInstance, data, gameShortName });
     }
 }

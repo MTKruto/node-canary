@@ -33,7 +33,7 @@ import { MINUTE, SECOND, unreachable } from "../0_deps.js";
 import { AccessError, ConnectionError, InputError } from "../0_errors.js";
 import { cleanObject, drop, getLogger, mustPrompt, mustPromptOneOf, Mutex, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { StorageMemory } from "../2_storage.js";
-import { as, chatIdToPeerId, getChatIdPeerType, is, isOneOf, peerToChatId } from "../2_tl.js";
+import { Api, Mtproto } from "../2_tl.js";
 import { getDc } from "../3_transport.js";
 import { constructUser } from "../3_types.js";
 import { APP_VERSION, DEVICE_MODEL, LANG_CODE, LANG_PACK, LAYER, MAX_CHANNEL_ID, MAX_CHAT_ID, SYSTEM_LANG_CODE, SYSTEM_VERSION, USERNAME_TTL } from "../4_constants.js";
@@ -41,7 +41,7 @@ import { AuthKeyUnregistered, ConnectionNotInited, FloodWait, Migrate, PasswordH
 import { PhoneCodeInvalid } from "../4_errors.js";
 import { checkPassword } from "./0_password.js";
 import { StorageOperations } from "./0_storage_operations.js";
-import { canBeInputChannel, canBeInputUser, getUsername, isCdnFunction, isMtprotoFunction, resolve, toInputChannel, toInputUser } from "./0_utilities.js";
+import { canBeInputChannel, canBeInputUser, getUsername, isCdnFunction, resolve, toInputChannel, toInputUser } from "./0_utilities.js";
 import { ClientEncrypted } from "./1_client_encrypted.js";
 import { ClientPlain } from "./1_client_plain.js";
 import { Composer as Composer_ } from "./1_composer.js";
@@ -786,7 +786,7 @@ export class Client extends Composer {
                 }
                 return true;
             }
-            else if (is("bad_msg_notification", error)) {
+            else if (Mtproto.is("bad_msg_notification", error)) {
                 return true;
             }
             else {
@@ -1017,12 +1017,12 @@ export class Client extends Composer {
                 params = { phone: () => mustPrompt("Phone number:"), code: () => mustPrompt("Verification code:"), password: () => mustPrompt("Password:") };
             }
         }
-        __classPrivateFieldGet(this, _Client_LsignIn, "f").debug("authorizing with", typeof params === "string" ? "bot token" : is("auth.exportedAuthorization", params) ? "exported authorization" : "AuthorizeUserParams");
+        __classPrivateFieldGet(this, _Client_LsignIn, "f").debug("authorizing with", typeof params === "string" ? "bot token" : Api.is("auth.exportedAuthorization", params) ? "exported authorization" : "AuthorizeUserParams");
         if (params && "botToken" in params) {
             while (true) {
                 try {
                     const auth = await this.invoke({ _: "auth.importBotAuthorization", api_id: apiId, api_hash: __classPrivateFieldGet(this, _Client_apiHash, "f"), bot_auth_token: params.botToken, flags: 0 });
-                    await this.storage.setAccountId(Number(as("auth.authorization", auth).user.id));
+                    await this.storage.setAccountId(Number(Api.as("auth.authorization", auth).user.id));
                     await this.storage.setAccountType("bot");
                     break;
                 }
@@ -1054,7 +1054,7 @@ export class Client extends Composer {
                             api_id: __classPrivateFieldGet(this, _Client_apiId, "f"),
                             api_hash: __classPrivateFieldGet(this, _Client_apiHash, "f"),
                             settings: { _: "codeSettings" },
-                        }).then((v) => as("auth.sentCode", v));
+                        }).then((v) => Api.as("auth.sentCode", v));
                         try {
                             sentCode = await sendCode();
                         }
@@ -1089,7 +1089,7 @@ export class Client extends Composer {
                             phone_code: code,
                             phone_code_hash: sentCode.phone_code_hash,
                         });
-                        await this.storage.setAccountId(Number(as("auth.authorization", auth).user.id));
+                        await this.storage.setAccountId(Number(Api.as("auth.authorization", auth).user.id));
                         await this.storage.setAccountType("user");
                         __classPrivateFieldGet(this, _Client_LsignIn, "f").debug("signed in as user");
                         await __classPrivateFieldGet(this, _Client_instances, "m", _Client_propagateAuthorizationState).call(this, true);
@@ -1111,14 +1111,14 @@ export class Client extends Composer {
                 }
                 password: while (true) {
                     const ap = await this.invoke({ _: "account.getPassword" });
-                    if (!(is("passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow", ap.current_algo))) {
+                    if (!(Api.is("passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow", ap.current_algo))) {
                         throw new Error(`Handling ${ap.current_algo?._} not implemented`);
                     }
                     try {
                         const password = typeof params.password === "string" ? params.password : await params.password(ap.hint ?? null);
                         const input = await checkPassword(password, ap);
                         const auth = await this.invoke({ _: "auth.checkPassword", password: input });
-                        await this.storage.setAccountId(Number(as("auth.authorization", auth).user.id));
+                        await this.storage.setAccountId(Number(Api.as("auth.authorization", auth).user.id));
                         await this.storage.setAccountType("user");
                         __classPrivateFieldGet(this, _Client_LsignIn, "f").debug("signed in as user");
                         await __classPrivateFieldGet(this, _Client_instances, "m", _Client_propagateAuthorizationState).call(this, true);
@@ -1193,7 +1193,7 @@ export class Client extends Composer {
             return { _: "inputPeerSelf" };
         }
         const inputPeer = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getInputPeerInner).call(this, id);
-        if (((is("inputPeerUser", inputPeer) || is("inputPeerChannel", inputPeer)) && inputPeer.access_hash == 0n) && await this.storage.getAccountType() == "bot") {
+        if (((Api.is("inputPeerUser", inputPeer) || Api.is("inputPeerChannel", inputPeer)) && inputPeer.access_hash == 0n) && await this.storage.getAccountType() == "bot") {
             if ("channel_id" in inputPeer) {
                 inputPeer.access_hash = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getChannelAccessHash).call(this, inputPeer.channel_id);
             }
@@ -1201,7 +1201,7 @@ export class Client extends Composer {
                 inputPeer.access_hash = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getUserAccessHash).call(this, inputPeer.user_id);
             }
         }
-        if ((is("inputPeerUser", inputPeer) || is("inputPeerChannel", inputPeer)) && inputPeer.access_hash == 0n && await this.storage.getAccountType() == "user") {
+        if ((Api.is("inputPeerUser", inputPeer) || Api.is("inputPeerChannel", inputPeer)) && inputPeer.access_hash == 0n && await this.storage.getAccountType() == "user") {
             throw new AccessError(`Cannot access the chat ${id} because there is no access hash for it.`);
         }
         return inputPeer;
@@ -1281,10 +1281,10 @@ export class Client extends Composer {
         let n = 1;
         while (true) {
             try {
-                if (__classPrivateFieldGet(this, _Client_disableUpdates, "f") && !isMtprotoFunction(function_) && !isCdnFunction(function_)) {
+                if (__classPrivateFieldGet(this, _Client_disableUpdates, "f") && !Mtproto.isValidObject(function_) && !isCdnFunction(function_)) {
                     function_ = { _: "invokeWithoutUpdates", query: function_ };
                 }
-                if (!__classPrivateFieldGet(this, _Client_connectionInited, "f") && !isMtprotoFunction(function_)) {
+                if (!__classPrivateFieldGet(this, _Client_connectionInited, "f") && !Mtproto.isValidObject(function_)) {
                     __classPrivateFieldSet(this, _Client_connectionInited, true, "f");
                     __classPrivateFieldGet(this, _Client_L, "f").debug("init");
                     const result = await __classPrivateFieldGet(this, _Client_client, "f").invoke({
@@ -1324,27 +1324,27 @@ export class Client extends Composer {
         }
     }, _Client_getUserAccessHash = async function _Client_getUserAccessHash(userId) {
         const users = await this.invoke({ _: "users.getUsers", id: [{ _: "inputUser", user_id: userId, access_hash: 0n }] });
-        const user = as("user", users[0]);
+        const user = Api.as("user", users[0]);
         if (user) {
             await this.messageStorage.setEntity(user);
         }
         return user?.access_hash ?? 0n;
     }, _Client_getChannelAccessHash = async function _Client_getChannelAccessHash(channelId) {
         const channels = await this.invoke({ _: "channels.getChannels", id: [{ _: "inputChannel", channel_id: channelId, access_hash: 0n }] });
-        const channel = as("channel", channels.chats[0]);
+        const channel = Api.as("channel", channels.chats[0]);
         if (channel) {
             await this.messageStorage.setEntity(channel);
         }
         return channel?.access_hash ?? 0n;
     }, _Client_getInputPeerChatId = async function _Client_getInputPeerChatId(inputPeer) {
-        if (isOneOf(["inputPeerSelf", "inputUserSelf"], inputPeer)) {
+        if (Api.isOneOf(["inputPeerSelf", "inputUserSelf"], inputPeer)) {
             return await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getSelfId).call(this);
         }
-        else if (isOneOf(["inputPeerEmpty", "inputUserEmpty", "inputChannelEmpty"], inputPeer)) {
+        else if (Api.isOneOf(["inputPeerEmpty", "inputUserEmpty", "inputChannelEmpty"], inputPeer)) {
             unreachable();
         }
         else {
-            return peerToChatId(inputPeer);
+            return Api.peerToChatId(inputPeer);
         }
     }, _Client_getInputPeerInner = async function _Client_getInputPeerInner(id) {
         const idn = Number(id);
@@ -1364,24 +1364,24 @@ export class Client extends Composer {
                 const resolved = await this.invoke({ _: "contacts.resolveUsername", username: id });
                 await __classPrivateFieldGet(this, _Client_updateManager, "f").processChats(resolved.chats, resolved);
                 await __classPrivateFieldGet(this, _Client_updateManager, "f").processUsers(resolved.users, resolved);
-                if (is("peerUser", resolved.peer)) {
-                    resolvedId = peerToChatId(resolved.peer);
+                if (Api.is("peerUser", resolved.peer)) {
+                    resolvedId = Api.peerToChatId(resolved.peer);
                 }
-                else if (is("peerChannel", resolved.peer)) {
-                    resolvedId = peerToChatId(resolved.peer);
+                else if (Api.is("peerChannel", resolved.peer)) {
+                    resolvedId = Api.peerToChatId(resolved.peer);
                 }
                 else {
                     unreachable();
                 }
             }
-            const resolvedIdType = getChatIdPeerType(resolvedId);
+            const resolvedIdType = Api.getChatIdPeerType(resolvedId);
             if (resolvedIdType == "user") {
                 const accessHash = await this.messageStorage.getUserAccessHash(resolvedId);
-                peer = { _: "inputPeerUser", user_id: chatIdToPeerId(resolvedId), access_hash: accessHash ?? 0n };
+                peer = { _: "inputPeerUser", user_id: Api.chatIdToPeerId(resolvedId), access_hash: accessHash ?? 0n };
             }
             else if (resolvedIdType == "channel") {
                 const accessHash = await this.messageStorage.getChannelAccessHash(resolvedId);
-                peer = { _: "inputPeerChannel", channel_id: chatIdToPeerId(resolvedId), access_hash: accessHash ?? 0n };
+                peer = { _: "inputPeerChannel", channel_id: Api.chatIdToPeerId(resolvedId), access_hash: accessHash ?? 0n };
             }
             else {
                 unreachable();
@@ -1389,20 +1389,20 @@ export class Client extends Composer {
         }
         else if (id > 0) {
             const accessHash = await this.messageStorage.getUserAccessHash(id);
-            peer = { _: "inputPeerUser", user_id: chatIdToPeerId(id), access_hash: accessHash ?? 0n };
+            peer = { _: "inputPeerUser", user_id: Api.chatIdToPeerId(id), access_hash: accessHash ?? 0n };
         }
         else if (-MAX_CHAT_ID <= id) {
             peer = { _: "inputPeerChat", chat_id: BigInt(Math.abs(id)) };
         }
         else if (ZERO_CHANNEL_ID - MAX_CHANNEL_ID <= id && id != ZERO_CHANNEL_ID) {
             const accessHash = await this.messageStorage.getChannelAccessHash(id);
-            peer = { _: "inputPeerChannel", channel_id: chatIdToPeerId(id), access_hash: accessHash ?? 0n };
+            peer = { _: "inputPeerChannel", channel_id: Api.chatIdToPeerId(id), access_hash: accessHash ?? 0n };
         }
         else {
             throw new InputError("The ID is of an format unknown.");
         }
-        if (!is("inputPeerChat", peer) && !peer.access_hash) {
-            const chatId = peerToChatId(peer);
+        if (!Api.is("inputPeerChat", peer) && !peer.access_hash) {
+            const chatId = Api.peerToChatId(peer);
             const minPeerReference = await this.messageStorage.getLastMinPeerReference(chatId);
             if (minPeerReference) {
                 const minInputPeer = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getMinInputPeer).call(this, canBeInputChannel(peer) ? "channel" : "user", { ...minPeerReference, senderId: chatId });
@@ -1415,22 +1415,22 @@ export class Client extends Composer {
         return peer;
     }, _Client_getMinInputPeer = async function _Client_getMinInputPeer(type, reference) {
         const entity = await this.messageStorage.getEntity(reference.chatId);
-        if (isOneOf(["channel", "channelForbidden"], entity) && entity.access_hash) {
+        if (Api.isOneOf(["channel", "channelForbidden"], entity) && entity.access_hash) {
             const peer = { _: "inputPeerChannel", channel_id: entity.id, access_hash: entity.access_hash };
             if (type == "user") {
-                return { _: "inputPeerUserFromMessage", peer, msg_id: reference.messageId, user_id: chatIdToPeerId(reference.senderId) };
+                return { _: "inputPeerUserFromMessage", peer, msg_id: reference.messageId, user_id: Api.chatIdToPeerId(reference.senderId) };
             }
             else {
-                return { _: "inputPeerChannelFromMessage", peer, msg_id: reference.messageId, channel_id: chatIdToPeerId(reference.senderId) };
+                return { _: "inputPeerChannelFromMessage", peer, msg_id: reference.messageId, channel_id: Api.chatIdToPeerId(reference.senderId) };
             }
         }
         else {
             return null;
         }
     }, getEntity)](peer) {
-        const id = peerToChatId(peer);
+        const id = Api.peerToChatId(peer);
         const entity = await this.messageStorage.getEntity(id);
-        if (entity == null && await this.storage.getAccountType() == "bot" && is("peerUser", peer) || is("peerChannel", peer)) {
+        if (entity == null && await this.storage.getAccountType() == "bot" && Api.is("peerUser", peer) || Api.is("peerChannel", peer)) {
             await this.getInputPeer(id);
         }
         else {
@@ -1450,7 +1450,7 @@ export class Client extends Composer {
         let user_ = await this[getEntity]({ _: "peerUser", user_id: BigInt(await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getSelfId).call(this)) });
         if (user_ == null) {
             const users = await this.invoke({ _: "users.getUsers", id: [{ _: "inputUserSelf" }] });
-            user_ = as("user", users[0]);
+            user_ = Api.as("user", users[0]);
             await this.messageStorage.setEntity(user_);
         }
         const user = constructUser(user_);
@@ -3264,7 +3264,7 @@ _a = Client, _Client_handleCtxUpdate = async function _Client_handleCtxUpdate(up
     });
 }, _Client_handleUpdate = async function _Client_handleUpdate(update) {
     const promises = new Array();
-    if (is("updateUserName", update)) {
+    if (Api.is("updateUserName", update)) {
         await this.messageStorage.updateUsernames(Number(update.user_id), update.usernames.map((v) => v.username));
         const peer = { ...update, _: "peerUser" };
         const entity = await this[getEntity](peer);

@@ -28,7 +28,7 @@ function constructVideoNote(document, videoAttribute, fileId, fileUniqueId) {
         fileUniqueId,
         length: videoAttribute.w,
         duration: videoAttribute.duration,
-        thumbnails: document.thumbs ? document.thumbs.map((v) => (0, _2_tl_js_1.is)("photoSize", v) ? (0, _0_thumbnail_js_1.constructThumbnail)(v, document) : null).filter((v) => v) : [],
+        thumbnails: document.thumbs ? document.thumbs.map((v) => _2_tl_js_1.Api.is("photoSize", v) ? (0, _0_thumbnail_js_1.constructThumbnail)(v, document) : null).filter((v) => v) : [],
         fileSize: Number(document.size),
     };
 }

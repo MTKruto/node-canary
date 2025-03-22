@@ -17,11 +17,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { FileType, PhotoSourceType, serializeFileId, toUniqueFileId } from "./_file_id.js";
 export function constructThumbnail(size, file) {
-    const type = is("photo", file) ? FileType.Photo : FileType.Thumbnail;
-    const fileType = is("photo", file) ? FileType.Photo : FileType.Document;
+    const type = Api.is("photo", file) ? FileType.Photo : FileType.Thumbnail;
+    const fileType = Api.is("photo", file) ? FileType.Photo : FileType.Document;
     const fileId_ = {
         type,
         dcId: file.dc_id,

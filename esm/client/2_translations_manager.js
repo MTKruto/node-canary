@@ -32,7 +32,7 @@ var _TranslationsManager_instances, _TranslationsManager_c, _TranslationsManager
 import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { Queue } from "../1_utilities.js";
-import { is, isOneOf } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructTranslation } from "../3_types.js";
 const translationsManagerUpdates = [
     "updateLangPackTooLong",
@@ -46,7 +46,7 @@ export class TranslationsManager {
         __classPrivateFieldSet(this, _TranslationsManager_c, c, "f");
     }
     canHandleUpdate(update) {
-        return isOneOf(translationsManagerUpdates, update);
+        return Api.isOneOf(translationsManagerUpdates, update);
     }
     async getTranslations(params) {
         __classPrivateFieldGet(this, _TranslationsManager_c, "f").storage.assertUser("getTranslations");
@@ -64,12 +64,12 @@ export class TranslationsManager {
         if (!__classPrivateFieldGet(this, _TranslationsManager_c, "f").langPack) {
             return null;
         }
-        if (is("updateLangPackTooLong", update)) {
+        if (Api.is("updateLangPackTooLong", update)) {
             await __classPrivateFieldGet(this, _TranslationsManager_instances, "m", _TranslationsManager_updateTranslations).call(this, __classPrivateFieldGet(this, _TranslationsManager_c, "f").langPack, update.lang_code);
             const translations = await __classPrivateFieldGet(this, _TranslationsManager_instances, "m", _TranslationsManager_getTranslationsInner).call(this, __classPrivateFieldGet(this, _TranslationsManager_c, "f").langPack, update.lang_code, true);
             return { platform: __classPrivateFieldGet(this, _TranslationsManager_c, "f").langPack, language: update.lang_code, translations };
         }
-        else if (is("updateLangPack", update)) {
+        else if (Api.is("updateLangPack", update)) {
             if (!__classPrivateFieldGet(this, _TranslationsManager_c, "f").langCode) {
                 return null;
             }
@@ -149,7 +149,7 @@ _TranslationsManager_c = new WeakMap(), _TranslationsManager_updateTranslationsQ
     }
 }, _TranslationsManager_applyLangPackDifference = function _TranslationsManager_applyLangPackDifference(translations, strings) {
     for (const string of strings) {
-        if (is("langPackStringDeleted", string)) {
+        if (Api.is("langPackStringDeleted", string)) {
             translations = translations.filter((v) => v.key != string.key);
         }
         else {

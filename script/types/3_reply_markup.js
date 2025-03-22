@@ -96,16 +96,16 @@ function forceReplyToTlObject(replyMarkup) {
     return { _: "replyKeyboardForceReply", selective: replyMarkup.selective || undefined, placeholder: replyMarkup.inputFieldPlaceholder };
 }
 function constructReplyMarkup(replyMarkup) {
-    if ((0, _2_tl_js_1.is)("replyKeyboardMarkup", replyMarkup)) {
+    if (_2_tl_js_1.Api.is("replyKeyboardMarkup", replyMarkup)) {
         return constructReplyKeyboardMarkup(replyMarkup);
     }
-    else if ((0, _2_tl_js_1.is)("replyInlineMarkup", replyMarkup)) {
+    else if (_2_tl_js_1.Api.is("replyInlineMarkup", replyMarkup)) {
         return constructInlineKeyboardMarkup(replyMarkup);
     }
-    else if ((0, _2_tl_js_1.is)("replyKeyboardHide", replyMarkup)) {
+    else if (_2_tl_js_1.Api.is("replyKeyboardHide", replyMarkup)) {
         return constructReplyKeyboardRemove(replyMarkup);
     }
-    else if ((0, _2_tl_js_1.is)("replyKeyboardForceReply", replyMarkup)) {
+    else if (_2_tl_js_1.Api.is("replyKeyboardForceReply", replyMarkup)) {
         return constructForceReply(replyMarkup);
     }
     else {

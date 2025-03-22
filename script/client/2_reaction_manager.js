@@ -48,10 +48,10 @@ class ReactionManager {
         __classPrivateFieldSet(this, _ReactionManager_c, c, "f");
     }
     canHandleUpdate(update) {
-        return (0, _2_tl_js_1.isOneOf)(reactionManagerUpdates, update);
+        return _2_tl_js_1.Api.isOneOf(reactionManagerUpdates, update);
     }
     async handleUpdate(update) {
-        if ((0, _2_tl_js_1.is)("updateBotMessageReactions", update)) {
+        if (_2_tl_js_1.Api.is("updateBotMessageReactions", update)) {
             const messageReactionCount = await (0, _3_types_js_1.constructMessageReactionCount)(update, __classPrivateFieldGet(this, _ReactionManager_c, "f").getEntity);
             if (messageReactionCount) {
                 return { messageReactionCount };
@@ -60,7 +60,7 @@ class ReactionManager {
                 return null;
             }
         }
-        else if ((0, _2_tl_js_1.is)("updateBotMessageReaction", update)) {
+        else if (_2_tl_js_1.Api.is("updateBotMessageReaction", update)) {
             const messageReactions = await (0, _3_types_js_1.constructMessageReactions)(update, __classPrivateFieldGet(this, _ReactionManager_c, "f").getEntity);
             if (messageReactions) {
                 return { messageReactions };
@@ -69,10 +69,10 @@ class ReactionManager {
                 return null;
             }
         }
-        else if ((0, _2_tl_js_1.is)("updateMessageReactions", update)) {
-            const chatId = (0, _2_tl_js_1.peerToChatId)(update.peer);
+        else if (_2_tl_js_1.Api.is("updateMessageReactions", update)) {
+            const chatId = _2_tl_js_1.Api.peerToChatId(update.peer);
             const message = await __classPrivateFieldGet(this, _ReactionManager_c, "f").messageStorage.getMessage(chatId, update.msg_id);
-            if ((0, _2_tl_js_1.is)("message", message)) {
+            if (_2_tl_js_1.Api.is("message", message)) {
                 message.reactions = update.reactions;
                 await __classPrivateFieldGet(this, _ReactionManager_c, "f").messageStorage.setMessage(chatId, update.msg_id, message);
                 const views = message.views ?? 0;
@@ -85,10 +85,10 @@ class ReactionManager {
                 return null;
             }
         }
-        else if ((0, _2_tl_js_1.isOneOf)(["updateChannelMessageViews", "updateChannelMessageForwards"], update)) {
-            const chatId = (0, _2_tl_js_1.peerToChatId)({ ...update, _: "peerChannel" });
+        else if (_2_tl_js_1.Api.isOneOf(["updateChannelMessageViews", "updateChannelMessageForwards"], update)) {
+            const chatId = _2_tl_js_1.Api.peerToChatId({ ...update, _: "peerChannel" });
             const message = await __classPrivateFieldGet(this, _ReactionManager_c, "f").messageStorage.getMessage(chatId, update.id);
-            if ((0, _2_tl_js_1.is)("message", message)) {
+            if (_2_tl_js_1.Api.is("message", message)) {
                 if ("views" in update) {
                     message.views = update.views;
                 }

@@ -33,7 +33,7 @@ import * as dntShim from "../_dnt.shims.js";
 import { AssertionError, basename, extension, extname, isAbsolute, MINUTE, SECOND, toFileUrl, unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { drop, getLogger, getRandomId, iterateReadableStream, kilobyte, megabyte, mod, PartStream } from "../1_utilities.js";
-import { as, is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructSticker, deserializeFileId, FileType, PhotoSourceType, serializeFileId, toUniqueFileId } from "../3_types.js";
 import { STICKER_SET_NAME_TTL } from "../4_constants.js";
 export class FileManager {
@@ -114,7 +114,7 @@ export class FileManager {
                 try {
                     const file = await connection.invoke({ _: "upload.getFile", location, offset, limit });
                     signal?.throwIfAborted();
-                    if (is("upload.file", file)) {
+                    if (Api.is("upload.file", file)) {
                         yield file.bytes;
                         if (id != null) {
                             await __classPrivateFieldGet(this, _FileManager_c, "f").storage.saveFilePart(id, part, file.bytes);
@@ -241,7 +241,7 @@ export class FileManager {
         }
         else {
             const stickerSet = await __classPrivateFieldGet(this, _FileManager_c, "f").invoke({ _: "messages.getStickerSet", stickerset: inputStickerSet, hash });
-            const name = as("messages.stickerSet", stickerSet).set.short_name;
+            const name = Api.as("messages.stickerSet", stickerSet).set.short_name;
             await __classPrivateFieldGet(this, _FileManager_c, "f").messageStorage.updateStickerSetName(inputStickerSet.id, inputStickerSet.access_hash, name);
             return name;
         }
@@ -276,7 +276,7 @@ export class FileManager {
         if (!shouldFetch) {
             return stickers;
         }
-        const documents_ = (await __classPrivateFieldGet(this, _FileManager_c, "f").invoke({ _: "messages.getCustomEmojiDocuments", document_id: id.map(BigInt) })).map((v) => as("document", v));
+        const documents_ = (await __classPrivateFieldGet(this, _FileManager_c, "f").invoke({ _: "messages.getCustomEmojiDocuments", document_id: id.map(BigInt) })).map((v) => Api.as("document", v));
         for (const [i, document_] of documents_.entries()) {
             await __classPrivateFieldGet(this, _FileManager_c, "f").messageStorage.setCustomEmojiDocument(document_.id, document_);
             const fileId_ = {

@@ -24,7 +24,7 @@ const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 function constructVideoChat(call) {
     const id = String(call.id);
-    if ((0, _2_tl_js_1.is)("groupCallDiscarded", call)) {
+    if (_2_tl_js_1.Api.is("groupCallDiscarded", call)) {
         return {
             type: "ended",
             id,

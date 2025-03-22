@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { cleanObject } from "../1_utilities.js";
-import { is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { FileType, PhotoSourceType, serializeFileId, toUniqueFileId } from "./_file_id.js";
 export function constructChatPhoto(photo, chatId, chatAccessHash) {
     const smallFileId_ = {
@@ -35,7 +35,7 @@ export function constructChatPhoto(photo, chatId, chatAccessHash) {
     };
     const bigFileId = serializeFileId(bigFileId_);
     const bigFileUniqueId = toUniqueFileId(bigFileId_);
-    if (is("chatPhoto", photo)) {
+    if (Api.is("chatPhoto", photo)) {
         return cleanObject({
             smallFileId,
             smallFileUniqueId,

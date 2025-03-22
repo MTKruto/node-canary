@@ -19,12 +19,12 @@
  */
 import { unreachable } from "../0_deps.js";
 import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
-import { is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { FileType, serializeFileId, toUniqueFileId } from "./_file_id.js";
 import { constructSticker2 } from "./1_sticker.js";
 import { constructGiftUpgradedComponent } from "./2_gift_upgraded_component.js";
 export function constructGift(gift) {
-    if (is("starGiftUnique", gift)) {
+    if (Api.is("starGiftUnique", gift)) {
         return constructGiftUpgraded(gift);
     }
     else {
@@ -51,7 +51,7 @@ export function constructGiftUpgraded(gift) {
     };
 }
 export function constructGiftNonUpgraded(gift) {
-    if (!is("document", gift.sticker)) {
+    if (!Api.is("document", gift.sticker)) {
         unreachable();
     }
     const id = String(gift.id);

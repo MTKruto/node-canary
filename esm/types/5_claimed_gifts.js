@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { cleanObject } from "../1_utilities.js";
-import { is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructClaimedGift } from "./4_claimed_gift.js";
 export function constructClaimedGifts(savedStarGifts) {
     return cleanObject({
@@ -26,14 +26,14 @@ export function constructClaimedGifts(savedStarGifts) {
         offset: savedStarGifts.next_offset,
         gifts: savedStarGifts.gifts.map((v) => {
             const fromId = v.from_id;
-            if (is("peerUser", fromId)) {
-                return [v, savedStarGifts.users.find((u) => is("user", u) && u.id == fromId.user_id)];
+            if (Api.is("peerUser", fromId)) {
+                return [v, savedStarGifts.users.find((u) => Api.is("user", u) && u.id == fromId.user_id)];
             }
-            else if (is("peerChat", fromId)) {
-                return [v, savedStarGifts.chats.find((u) => is("chat", u) && u.id == fromId.chat_id)];
+            else if (Api.is("peerChat", fromId)) {
+                return [v, savedStarGifts.chats.find((u) => Api.is("chat", u) && u.id == fromId.chat_id)];
             }
             else if (fromId) {
-                return [v, savedStarGifts.chats.find((u) => is("channel", u) && u.id == fromId.channel_id)];
+                return [v, savedStarGifts.chats.find((u) => Api.is("channel", u) && u.id == fromId.channel_id)];
             }
             else {
                 return [v, undefined];

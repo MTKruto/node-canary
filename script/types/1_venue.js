@@ -23,7 +23,7 @@ exports.constructVenue = constructVenue;
 const _2_tl_js_1 = require("../2_tl.js");
 const _0_location_js_1 = require("./0_location.js");
 function constructVenue(media_) {
-    const geo = (0, _2_tl_js_1.as)("geoPoint", media_.geo);
+    const geo = _2_tl_js_1.Api.as("geoPoint", media_.geo);
     return {
         location: (0, _0_location_js_1.constructLocation)(geo),
         title: media_.title,

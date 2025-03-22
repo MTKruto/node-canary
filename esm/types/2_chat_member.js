@@ -19,22 +19,22 @@
  */
 import { unreachable } from "../0_deps.js";
 import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
-import { is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructChatAdministratorRights } from "./0_chat_administrator_rights.js";
 import { constructChatMemberRights } from "./0_chat_member_rights.js";
 import { constructUser } from "./1_user.js";
 export async function constructChatMember(participant, getEntity) {
-    const user_ = "user_id" in participant ? await getEntity({ ...participant, _: "peerUser" }) : "peer" in participant ? is("peerUser", participant.peer) ? await getEntity(participant.peer) : unreachable() : unreachable(); // TODO: support other peer types
+    const user_ = "user_id" in participant ? await getEntity({ ...participant, _: "peerUser" }) : "peer" in participant ? Api.is("peerUser", participant.peer) ? await getEntity(participant.peer) : unreachable() : unreachable(); // TODO: support other peer types
     if (user_ == null)
         unreachable();
     const user = constructUser(user_);
-    if (is("channelParticipant", participant) || is("chatParticipant", participant)) {
+    if (Api.is("channelParticipant", participant) || Api.is("chatParticipant", participant)) {
         return {
             status: "member",
             user,
         };
     }
-    else if (is("channelParticipantCreator", participant)) {
+    else if (Api.is("channelParticipantCreator", participant)) {
         return cleanObject({
             status: "creator",
             user,
@@ -42,7 +42,7 @@ export async function constructChatMember(participant, getEntity) {
             title: participant.rank,
         });
     }
-    else if (is("channelParticipantAdmin", participant)) {
+    else if (Api.is("channelParticipantAdmin", participant)) {
         return cleanObject({
             status: "administrator",
             user,
@@ -50,7 +50,7 @@ export async function constructChatMember(participant, getEntity) {
             title: participant.rank,
         });
     }
-    else if (is("channelParticipantBanned", participant)) {
+    else if (Api.is("channelParticipantBanned", participant)) {
         const untilDate = participant.banned_rights.until_date ? fromUnixTimestamp(participant.banned_rights.until_date) : undefined;
         if (!participant.banned_rights.view_messages) {
             participant.peer;
@@ -70,13 +70,13 @@ export async function constructChatMember(participant, getEntity) {
             untilDate,
         });
     }
-    else if (is("channelParticipantSelf", participant)) {
+    else if (Api.is("channelParticipantSelf", participant)) {
         unreachable(); // TODO: implement
     }
-    else if (is("channelParticipantLeft", participant)) {
+    else if (Api.is("channelParticipantLeft", participant)) {
         return { status: "left", user };
     }
-    else if (is("chatParticipantAdmin", participant)) {
+    else if (Api.is("chatParticipantAdmin", participant)) {
         return cleanObject({
             status: "administrator",
             user,
@@ -96,7 +96,7 @@ export async function constructChatMember(participant, getEntity) {
             },
         });
     }
-    else if (is("chatParticipantCreator", participant)) {
+    else if (Api.is("chatParticipantCreator", participant)) {
         return cleanObject({
             status: "creator",
             user,

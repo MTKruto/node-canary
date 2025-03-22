@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 export async function botCommandScopeToTlObject(scope, getInputPeer) {
     switch (scope.type) {
         case "default":
@@ -35,7 +35,7 @@ export async function botCommandScopeToTlObject(scope, getInputPeer) {
             return { _: "botCommandScopePeerAdmins", peer: await getInputPeer(scope.chatId) };
         case "chatMember": {
             const user = await getInputPeer(scope.userId);
-            if (!is("inputPeerUser", user)) {
+            if (!Api.is("inputPeerUser", user)) {
                 unreachable();
             }
             return { _: "botCommandScopePeerUser", peer: await getInputPeer(scope.chatId), user_id: ({ _: "inputUser", user_id: user.user_id, access_hash: user.access_hash }) };

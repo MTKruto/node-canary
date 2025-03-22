@@ -25,7 +25,7 @@ const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _0_restriction_reason_js_1 = require("./0_restriction_reason.js");
 function constructChatP(chat) {
-    if ((0, _2_tl_js_1.is)("user", chat)) {
+    if (_2_tl_js_1.Api.is("user", chat)) {
         const id = Number(chat.id);
         const chat_ = {
             id,
@@ -45,7 +45,7 @@ function constructChatP(chat) {
         }
         return (0, _1_utilities_js_1.cleanObject)(chat_);
     }
-    else if ((0, _2_tl_js_1.is)("chat", chat) || (0, _2_tl_js_1.is)("chatForbidden", chat)) {
+    else if (_2_tl_js_1.Api.is("chat", chat) || _2_tl_js_1.Api.is("chatForbidden", chat)) {
         const id = Number(-chat.id);
         const chat_ = {
             id,
@@ -54,15 +54,15 @@ function constructChatP(chat) {
             title: chat.title,
             isCreator: false,
         };
-        if ((0, _2_tl_js_1.is)("chat", chat)) {
+        if (_2_tl_js_1.Api.is("chat", chat)) {
             chat_.isCreator = chat.creator || false;
         }
         return (0, _1_utilities_js_1.cleanObject)(chat_);
     }
-    else if ((0, _2_tl_js_1.is)("channel", chat) || (0, _2_tl_js_1.is)("channelForbidden", chat)) {
+    else if (_2_tl_js_1.Api.is("channel", chat) || _2_tl_js_1.Api.is("channelForbidden", chat)) {
         let chat_;
         const id = _1_utilities_js_1.ZERO_CHANNEL_ID + -Number(chat.id);
-        if ((0, _2_tl_js_1.is)("channelForbidden", chat)) {
+        if (_2_tl_js_1.Api.is("channelForbidden", chat)) {
             const { title } = chat;
             if (chat.megagroup) {
                 return { id, color: (0, _1_utilities_js_1.getColorFromPeerId)(id), title, type: "supergroup", isScam: false, isFake: false, isVerified: false, isRestricted: false, isForum: false };

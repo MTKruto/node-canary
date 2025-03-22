@@ -19,7 +19,7 @@
  */
 import { unreachable } from "../0_deps.js";
 import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
-import { is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { FileType, serializeFileId, toUniqueFileId } from "./_file_id.js";
 import { constructMessageEntity } from "./0_message_entity.js";
 import { constructSticker2 } from "./1_sticker.js";
@@ -28,7 +28,7 @@ export function constructGiftUpgradedComponent(attribute) {
     const rarityLevel = "rarity_permille" in attribute ? attribute.rarity_permille : 0;
     switch (attribute._) {
         case "starGiftAttributeModel": {
-            if (!is("document", attribute.document)) {
+            if (!Api.is("document", attribute.document)) {
                 unreachable();
             }
             const fileId = {
@@ -46,7 +46,7 @@ export function constructGiftUpgradedComponent(attribute) {
             };
         }
         case "starGiftAttributePattern": {
-            if (!is("document", attribute.document)) {
+            if (!Api.is("document", attribute.document)) {
                 unreachable();
             }
             const fileId = {

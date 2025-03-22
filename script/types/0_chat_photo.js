@@ -38,7 +38,7 @@ function constructChatPhoto(photo, chatId, chatAccessHash) {
     };
     const bigFileId = (0, _file_id_js_1.serializeFileId)(bigFileId_);
     const bigFileUniqueId = (0, _file_id_js_1.toUniqueFileId)(bigFileId_);
-    if ((0, _2_tl_js_1.is)("chatPhoto", photo)) {
+    if (_2_tl_js_1.Api.is("chatPhoto", photo)) {
         return (0, _1_utilities_js_1.cleanObject)({
             smallFileId,
             smallFileUniqueId,

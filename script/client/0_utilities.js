@@ -29,7 +29,6 @@ exports.checkPollOption = checkPollOption;
 exports.checkArray = checkArray;
 exports.checkCallbackQueryId = checkCallbackQueryId;
 exports.checkInlineQueryId = checkInlineQueryId;
-exports.isMtprotoFunction = isMtprotoFunction;
 exports.isCdnFunction = isCdnFunction;
 exports.canBeInputUser = canBeInputUser;
 exports.toInputUser = toInputUser;
@@ -153,20 +152,6 @@ function checkInlineQueryId(id) {
         throw new _0_errors_js_1.InputError("Invalid inline query ID.");
     }
 }
-const MTPROTO_FUNCTIONS = [
-    "ping",
-    "ping_delay_disconnect",
-    "req_pq_multi",
-    "rpc_drop_answer",
-    "get_future_salts",
-    "destroy_session",
-    "destroy_auth_key",
-    "req_DH_params",
-    "set_client_DH_params",
-];
-function isMtprotoFunction(value) {
-    return (0, _2_tl_js_1.isOneOf)(MTPROTO_FUNCTIONS, value);
-}
 const CDN_FUNCTIONS = [
     "upload.saveFilePart",
     "upload.getFile",
@@ -178,20 +163,20 @@ const CDN_FUNCTIONS = [
     "upload.getFileHashes",
 ];
 function isCdnFunction(value) {
-    return (0, _2_tl_js_1.isOneOf)(CDN_FUNCTIONS, value);
+    return _2_tl_js_1.Api.isOneOf(CDN_FUNCTIONS, value);
 }
 function canBeInputUser(inputPeer) {
-    return (0, _2_tl_js_1.isOneOf)(["inputPeerSelf", "inputPeerUser", "inputPeerUserFromMessage"], inputPeer);
+    return _2_tl_js_1.Api.isOneOf(["inputPeerSelf", "inputPeerUser", "inputPeerUserFromMessage"], inputPeer);
 }
 function toInputUser(inputPeer) {
     let id;
-    if ((0, _2_tl_js_1.is)("inputPeerUser", inputPeer)) {
+    if (_2_tl_js_1.Api.is("inputPeerUser", inputPeer)) {
         id = { ...inputPeer, _: "inputUser" };
     }
-    else if ((0, _2_tl_js_1.is)("inputPeerUserFromMessage", inputPeer)) {
+    else if (_2_tl_js_1.Api.is("inputPeerUserFromMessage", inputPeer)) {
         id = { ...inputPeer, _: "inputUserFromMessage" };
     }
-    else if ((0, _2_tl_js_1.is)("inputPeerSelf", inputPeer)) {
+    else if (_2_tl_js_1.Api.is("inputPeerSelf", inputPeer)) {
         id = { _: "inputUserSelf" };
     }
     else {
@@ -200,14 +185,14 @@ function toInputUser(inputPeer) {
     return id;
 }
 function canBeInputChannel(inputPeer) {
-    return (0, _2_tl_js_1.isOneOf)(["inputPeerChannel", "inputPeerChannelFromMessage"], inputPeer);
+    return _2_tl_js_1.Api.isOneOf(["inputPeerChannel", "inputPeerChannelFromMessage"], inputPeer);
 }
 function toInputChannel(inputPeer) {
     let id;
-    if ((0, _2_tl_js_1.is)("inputPeerChannel", inputPeer)) {
+    if (_2_tl_js_1.Api.is("inputPeerChannel", inputPeer)) {
         id = { ...inputPeer, _: "inputChannel" };
     }
-    else if ((0, _2_tl_js_1.is)("inputPeerChannelFromMessage", inputPeer)) {
+    else if (_2_tl_js_1.Api.is("inputPeerChannelFromMessage", inputPeer)) {
         id = { ...inputPeer, _: "inputChannelFromMessage" };
     }
     else {

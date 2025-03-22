@@ -31,7 +31,7 @@ function constructGiftUpgradedComponent(attribute) {
     const rarityLevel = "rarity_permille" in attribute ? attribute.rarity_permille : 0;
     switch (attribute._) {
         case "starGiftAttributeModel": {
-            if (!(0, _2_tl_js_1.is)("document", attribute.document)) {
+            if (!_2_tl_js_1.Api.is("document", attribute.document)) {
                 (0, _0_deps_js_1.unreachable)();
             }
             const fileId = {
@@ -49,7 +49,7 @@ function constructGiftUpgradedComponent(attribute) {
             };
         }
         case "starGiftAttributePattern": {
-            if (!(0, _2_tl_js_1.is)("document", attribute.document)) {
+            if (!_2_tl_js_1.Api.is("document", attribute.document)) {
                 (0, _0_deps_js_1.unreachable)();
             }
             const fileId = {

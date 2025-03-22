@@ -31,7 +31,7 @@ const _1_photo_js_1 = require("./1_photo.js");
 const _3_reply_markup_js_1 = require("./3_reply_markup.js");
 function constructInlineQueryResult(result) {
     const id = result.id, title = result.title ?? "", type = result.type, description = result.description;
-    if ((0, _2_tl_js_1.is)("botInlineMessageMediaGeo", result.send_message)) {
+    if (_2_tl_js_1.Api.is("botInlineMessageMediaGeo", result.send_message)) {
         const geoPoint = result.send_message.geo;
         return (0, _1_utilities_js_1.cleanObject)({
             type: "location",
@@ -45,7 +45,7 @@ function constructInlineQueryResult(result) {
             proximityAlertRadius: result.send_message.proximity_notification_radius,
         });
     }
-    else if ((0, _2_tl_js_1.is)("botInlineMessageMediaVenue", result.send_message)) {
+    else if (_2_tl_js_1.Api.is("botInlineMessageMediaVenue", result.send_message)) {
         const geoPoint = result.send_message.geo;
         return (0, _1_utilities_js_1.cleanObject)({
             type: "venue",
@@ -58,7 +58,7 @@ function constructInlineQueryResult(result) {
             foursquareType: result.send_message.venue_type,
         });
     }
-    else if ((0, _2_tl_js_1.is)("botInlineMessageMediaWebPage", result.send_message) || (0, _2_tl_js_1.is)("botInlineMessageText", result.send_message)) {
+    else if (_2_tl_js_1.Api.is("botInlineMessageMediaWebPage", result.send_message) || _2_tl_js_1.Api.is("botInlineMessageText", result.send_message)) {
         return (0, _1_utilities_js_1.cleanObject)({
             type: "article",
             id,
@@ -68,26 +68,26 @@ function constructInlineQueryResult(result) {
                 type: "text",
                 text: result.send_message.message,
                 entities: (result.send_message.entities ?? []).map(_0_message_entity_js_1.constructMessageEntity).filter((v) => v != null),
-                linkPreview: (0, _2_tl_js_1.is)("botInlineMessageMediaWebPage", result.send_message) ? { url: result.send_message.url, smallMedia: result.send_message.force_small_media, largeMedia: result.send_message.force_large_media, aboveText: result.send_message.invert_media } : undefined,
+                linkPreview: _2_tl_js_1.Api.is("botInlineMessageMediaWebPage", result.send_message) ? { url: result.send_message.url, smallMedia: result.send_message.force_small_media, largeMedia: result.send_message.force_large_media, aboveText: result.send_message.invert_media } : undefined,
             }),
             replyMarkup: result.send_message.reply_markup ? (0, _3_reply_markup_js_1.constructReplyMarkup)(result.send_message.reply_markup) : undefined,
         });
     }
-    else if ((0, _2_tl_js_1.is)("botInlineMessageMediaAuto", result.send_message)) {
+    else if (_2_tl_js_1.Api.is("botInlineMessageMediaAuto", result.send_message)) {
         let ref;
         let attributes;
         const thumbnailUrl = "thumb" in result ? result.thumb?.url : undefined;
         let photoSizes;
         let photo;
-        if ((0, _2_tl_js_1.is)("botInlineMediaResult", result)) {
+        if (_2_tl_js_1.Api.is("botInlineMediaResult", result)) {
             if (result.photo) {
-                photo = (0, _2_tl_js_1.as)("photo", result.photo);
+                photo = _2_tl_js_1.Api.as("photo", result.photo);
                 ref = { fileId: (0, _file_id_js_1.getPhotoFileId)(photo).fileId };
                 const { largest } = photoSizes = (0, _1_photo_js_1.getPhotoSizes)(photo);
                 attributes = [{ _: "documentAttributeImageSize", w: largest.w, h: largest.h }];
             }
             else if (result.document) {
-                const document = (0, _2_tl_js_1.as)("document", result.document);
+                const document = _2_tl_js_1.Api.as("document", result.document);
                 ref = {
                     fileId: (0, _file_id_js_1.serializeFileId)({
                         type: _file_id_js_1.FileType.Document, // Should this be changed? The type is already known.
@@ -119,7 +119,7 @@ function constructInlineQueryResult(result) {
         const replyMarkup = result.send_message.reply_markup ? (0, _3_reply_markup_js_1.constructReplyMarkup)(result.send_message.reply_markup) : undefined;
         switch (type) {
             case "audio": {
-                const a = attributes?.find((v) => (0, _2_tl_js_1.is)("documentAttributeAudio", v));
+                const a = attributes?.find((v) => _2_tl_js_1.Api.is("documentAttributeAudio", v));
                 return (0, _1_utilities_js_1.cleanObject)({
                     id,
                     type,
@@ -133,7 +133,7 @@ function constructInlineQueryResult(result) {
             }
             case "gif":
             case "mpeg4Gif": {
-                const a = attributes.find((v) => (0, _2_tl_js_1.is)("documentAttributeVideo", v));
+                const a = attributes.find((v) => _2_tl_js_1.Api.is("documentAttributeVideo", v));
                 return (0, _1_utilities_js_1.cleanObject)({
                     id,
                     type,
@@ -148,7 +148,7 @@ function constructInlineQueryResult(result) {
                 });
             }
             case "photo": {
-                const a = attributes.find((v) => (0, _2_tl_js_1.is)("documentAttributeImageSize", v));
+                const a = attributes.find((v) => _2_tl_js_1.Api.is("documentAttributeImageSize", v));
                 return (0, _1_utilities_js_1.cleanObject)({
                     id,
                     type,
@@ -164,7 +164,7 @@ function constructInlineQueryResult(result) {
                 });
             }
             case "video": {
-                const a = attributes.find((v) => (0, _2_tl_js_1.is)("documentAttributeVideo", v));
+                const a = attributes.find((v) => _2_tl_js_1.Api.is("documentAttributeVideo", v));
                 return (0, _1_utilities_js_1.cleanObject)({
                     id,
                     type,
@@ -181,7 +181,7 @@ function constructInlineQueryResult(result) {
                 });
             }
             case "voice": {
-                const a = attributes.find((v) => (0, _2_tl_js_1.is)("documentAttributeAudio", v));
+                const a = attributes.find((v) => _2_tl_js_1.Api.is("documentAttributeAudio", v));
                 return (0, _1_utilities_js_1.cleanObject)({
                     id,
                     type,

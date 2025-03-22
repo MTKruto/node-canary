@@ -19,9 +19,8 @@
  */
 export { TLError } from "./tl/0_tl_error.js";
 export * from "./tl/0_utilities.js";
-export * as Api from "./tl/1_api.js";
 export * from "./tl/1_tl_reader.js";
 export * from "./tl/1_tl_writer.js";
 export * from "./tl/2_message.js";
-export * from "./tl/2_telegram.js";
-export * from "./tl/2_utilities.js";
+export * as Mtproto from "./tl/2_mtproto.js";
+export * as Api from "./tl/2_telegram.js";

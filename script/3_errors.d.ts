@@ -17,13 +17,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { Api } from "./2_tl.js";
 import { MtkrutoError } from "./0_errors.js";
 export * from "./0_errors.js";
 export interface TelegramErrorParams {
     error_code: number;
     error_message: string;
-    call: Api.AnyObject;
+    call: unknown;
 }
 export declare class TelegramError extends MtkrutoError {
     errorCode: number;

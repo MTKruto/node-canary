@@ -32,7 +32,7 @@ var _StoryManager_instances, _StoryManager_c, _StoryManager_updatesToStory, _Sto
 import { contentType, unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { getRandomId } from "../1_utilities.js";
-import { as, inputPeerToPeer, is, isOneOf, peerToChatId } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructStory, FileType, storyInteractiveAreaToTlObject, storyPrivacyToTlObject } from "../3_types.js";
 import { checkArray, checkStoryId, isHttpUrl } from "./0_utilities.js";
 const storyManagerUpdates = [
@@ -60,7 +60,7 @@ export class StoryManager {
             }
             else {
                 const file = await __classPrivateFieldGet(this, _StoryManager_c, "f").fileManager.upload(source, params, null, "video" in content);
-                if (is("inputFileStoryDocument", file)) {
+                if (Api.is("inputFileStoryDocument", file)) {
                     unreachable();
                 }
                 const mimeType = contentType(file.name.split(".").slice(-1)[0]) ?? "application/octet-stream";
@@ -95,7 +95,7 @@ export class StoryManager {
         const stories_ = await __classPrivateFieldGet(this, _StoryManager_c, "f").invoke({ _: "stories.getStoriesByID", peer, id: storyIds });
         const stories = new Array();
         for (const story of stories_.stories) {
-            stories.push(await constructStory(as("storyItem", story), inputPeerToPeer(peer), __classPrivateFieldGet(this, _StoryManager_c, "f").getEntity));
+            stories.push(await constructStory(Api.as("storyItem", story), Api.inputPeerToPeer(peer), __classPrivateFieldGet(this, _StoryManager_c, "f").getEntity));
         }
         return stories;
     }
@@ -129,15 +129,15 @@ export class StoryManager {
         await this.removeStoriesFromHighlights(chatId, [storyId]);
     }
     canHandleUpdate(update) {
-        return isOneOf(storyManagerUpdates, update);
+        return Api.isOneOf(storyManagerUpdates, update);
     }
     async handleUpdate(update) {
-        if (is("storyItemDeleted", update.story)) {
-            const chatId = peerToChatId(update.peer);
+        if (Api.is("storyItemDeleted", update.story)) {
+            const chatId = Api.peerToChatId(update.peer);
             const storyId = update.story.id;
             return { deletedStory: { chatId, storyId } };
         }
-        else if (is("storyItem", update.story)) {
+        else if (Api.is("storyItem", update.story)) {
             const story = await constructStory(update.story, update.peer, __classPrivateFieldGet(this, _StoryManager_c, "f").getEntity);
             return { story };
         }
@@ -147,9 +147,9 @@ export class StoryManager {
     }
 }
 _StoryManager_c = new WeakMap(), _StoryManager_instances = new WeakSet(), _StoryManager_updatesToStory = async function _StoryManager_updatesToStory(updates) {
-    if (is("updates", updates)) {
-        const updateStory = updates.updates.find((v) => is("updateStory", v));
-        if (updateStory && is("storyItem", updateStory.story)) {
+    if (Api.is("updates", updates)) {
+        const updateStory = updates.updates.find((v) => Api.is("updateStory", v));
+        if (updateStory && Api.is("storyItem", updateStory.story)) {
             return await constructStory(updateStory.story, updateStory.peer, __classPrivateFieldGet(this, _StoryManager_c, "f").getEntity);
         }
     }

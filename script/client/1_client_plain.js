@@ -56,7 +56,7 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
             throw new _0_errors_js_1.ConnectionError("Not connected.");
         }
         const messageId = __classPrivateFieldSet(this, _ClientPlain_lastMessageId, (0, _0_message_js_1.getMessageId)(__classPrivateFieldGet(this, _ClientPlain_lastMessageId, "f"), 0), "f");
-        const payload = (0, _0_message_js_1.packUnencryptedMessage)((0, _2_tl_js_1.serializeTelegramObject)(function_), messageId);
+        const payload = (0, _0_message_js_1.packUnencryptedMessage)(_2_tl_js_1.Mtproto.serializeObject(function_), messageId);
         await this.transport.transport.send(payload);
         L.out(function_);
         L.outBin(payload);
@@ -67,7 +67,7 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
             throw new _0_errors_js_1.TransportError(Number(int));
         }
         const { message } = (0, _0_message_js_1.unpackUnencryptedMessage)(buffer);
-        const result = await (0, _2_tl_js_1.deserializeTelegramType)((0, _2_tl_js_1.mustGetReturnType)(function_._), message);
+        const result = await _2_tl_js_1.Mtproto.deserializeType(_2_tl_js_1.Mtproto.mustGetReturnType(function_._), message);
         L.in(result);
         return result;
     }
@@ -79,7 +79,7 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
             try {
                 LcreateAuthKey.debug(`req_pq_multi [${i + 1}]`);
                 resPq = await this.invoke({ _: "req_pq_multi", nonce });
-                (0, _0_deps_js_1.assert)((0, _2_tl_js_1.is)("resPQ", resPq));
+                (0, _0_deps_js_1.assert)(_2_tl_js_1.Mtproto.is("resPQ", resPq));
                 (0, _0_deps_js_1.assertEquals)(resPq.nonce, nonce);
                 LcreateAuthKey.debug("got res_pq");
                 break;
@@ -115,7 +115,7 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
         const pq = resPq.pq;
         const serverNonce = resPq.server_nonce;
         const newNonce = (0, _1_utilities_js_1.getRandomBigInt)(32, false, true);
-        let encryptedData = await (0, _1_utilities_js_1.rsaPad)((0, _2_tl_js_1.serializeTelegramObject)({
+        let encryptedData = await (0, _1_utilities_js_1.rsaPad)(_2_tl_js_1.Mtproto.serializeObject({
             _: "p_q_inner_data_dc",
             pq,
             p,
@@ -134,21 +134,20 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
             public_key_fingerprint: publicKeyFingerprint,
             encrypted_data: encryptedData,
         });
-        (0, _0_deps_js_1.assert)((0, _2_tl_js_1.is)("server_DH_params_ok", dhParams));
+        (0, _0_deps_js_1.assert)(_2_tl_js_1.Mtproto.is("server_DH_params_ok", dhParams));
         LcreateAuthKey.debug("got server_DH_params_ok");
         const newNonce_ = (0, _1_utilities_js_1.bufferFromBigInt)(newNonce, 32, true, true);
         const serverNonce_ = (0, _1_utilities_js_1.bufferFromBigInt)(serverNonce, 16, true, true);
         const tmpAesKey = (0, _0_deps_js_1.concat)([await (0, _1_utilities_js_1.sha1)((0, _0_deps_js_1.concat)([newNonce_, serverNonce_])), (await (0, _1_utilities_js_1.sha1)((0, _0_deps_js_1.concat)([serverNonce_, newNonce_]))).subarray(0, 0 + 12)]);
         const tmpAesIv = (0, _0_deps_js_1.concat)([(await (0, _1_utilities_js_1.sha1)((0, _0_deps_js_1.concat)([serverNonce_, newNonce_]))).subarray(12, 12 + 8), await (0, _1_utilities_js_1.sha1)((0, _0_deps_js_1.concat)([newNonce_, newNonce_])), newNonce_.subarray(0, 0 + 4)]);
         const answerWithHash = (0, _0_deps_js_1.ige256Decrypt)(dhParams.encrypted_answer, tmpAesKey, tmpAesIv);
-        const dhInnerData = await (0, _2_tl_js_1.deserializeTelegramType)("server_DH_inner_data", answerWithHash.slice(20));
-        (0, _0_deps_js_1.assert)((0, _2_tl_js_1.is)("server_DH_inner_data", dhInnerData));
+        const dhInnerData = await _2_tl_js_1.Mtproto.deserializeType("server_DH_inner_data", answerWithHash.slice(20));
         const { g, g_a: gA_, dh_prime: dhPrime_ } = dhInnerData;
         const gA = (0, _1_utilities_js_1.bigIntFromBuffer)(gA_, false, false);
         const dhPrime = (0, _1_utilities_js_1.bigIntFromBuffer)(dhPrime_, false, false);
         const b = (0, _1_utilities_js_1.getRandomBigInt)(256, false, false);
         const gB = (0, _1_utilities_js_1.modExp)(BigInt(g), b, dhPrime);
-        const data = (0, _2_tl_js_1.serializeTelegramObject)({
+        const data = _2_tl_js_1.Mtproto.serializeObject({
             _: "client_DH_inner_data",
             nonce,
             server_nonce: serverNonce,
@@ -166,7 +165,7 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
             server_nonce: serverNonce,
             encrypted_data: encryptedData,
         });
-        (0, _0_deps_js_1.assert)((0, _2_tl_js_1.is)("dh_gen_ok", dhGenOk));
+        (0, _0_deps_js_1.assert)(_2_tl_js_1.Mtproto.is("dh_gen_ok", dhGenOk));
         LcreateAuthKey.debug("got dh_gen_ok");
         const serverNonceSlice = serverNonce_.subarray(0, 8);
         const salt = newNonce_.subarray(0, 0 + 8).map((v, i) => v ^ serverNonceSlice[i]);

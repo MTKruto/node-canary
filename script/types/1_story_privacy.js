@@ -27,7 +27,7 @@ async function resolveUsers(ids, getEntity) {
     const users = new Array();
     for (const id of ids) {
         const entity = await getEntity({ _: "peerUser", user_id: BigInt(id) });
-        if (!((0, _2_tl_js_1.is)("user", entity))) {
+        if (!(_2_tl_js_1.Api.is("user", entity))) {
             (0, _0_deps_js_1.unreachable)();
         }
         else {
@@ -65,16 +65,16 @@ async function storyPrivacyToTlObject(privacy, getEntity) {
     return rules;
 }
 function constructStoryPrivacy(privacy) {
-    const except = privacy.find((v) => (0, _2_tl_js_1.is)("privacyValueDisallowUsers", v))?.users?.map(Number) ?? [];
-    if (privacy.some((v) => (0, _2_tl_js_1.is)("privacyValueAllowAll", v))) {
+    const except = privacy.find((v) => _2_tl_js_1.Api.is("privacyValueDisallowUsers", v))?.users?.map(Number) ?? [];
+    if (privacy.some((v) => _2_tl_js_1.Api.is("privacyValueAllowAll", v))) {
         return { everyoneExcept: except };
     }
-    else if (privacy.some((v) => (0, _2_tl_js_1.is)("privacyValueAllowContacts", v))) {
+    else if (privacy.some((v) => _2_tl_js_1.Api.is("privacyValueAllowContacts", v))) {
         return { contactsExcept: except };
     }
-    else if (privacy.some((v) => (0, _2_tl_js_1.is)("privacyValueAllowCloseFriends", v))) {
+    else if (privacy.some((v) => _2_tl_js_1.Api.is("privacyValueAllowCloseFriends", v))) {
         return { closeFriends: true };
     }
-    const only = privacy.find((v) => (0, _2_tl_js_1.is)("privacyValueAllowUsers", v))?.users?.map(Number) ?? [];
+    const only = privacy.find((v) => _2_tl_js_1.Api.is("privacyValueAllowUsers", v))?.users?.map(Number) ?? [];
     return { only };
 }

@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { TelegramError, TelegramErrorParams } from "./3_errors.js";
-import { Api } from "./2_tl.js";
+import { Mtproto } from "./2_tl.js";
 export * from "./3_errors.js";
 export declare class FloodWait extends TelegramError {
     seconds: number;
@@ -36,5 +36,5 @@ export declare class FileMigrate extends Migrate {
 }
 export declare class StatsMigrate extends Migrate {
 }
-export declare function constructTelegramError(error: Api.rpc_error, call: Api.AnyObject): TelegramError;
+export declare function constructTelegramError(error: Mtproto.rpc_error, call: unknown): TelegramError;
 //# sourceMappingURL=4_errors.d.ts.map

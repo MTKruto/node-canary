@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
-import { is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructUser } from "./1_user.js";
 export function constructChatSettings(settings_) {
     const settings = {
@@ -44,7 +44,7 @@ export function constructChatSettings(settings_) {
         photoChangeDate: settings_.settings.photo_change_date ? fromUnixTimestamp(settings_.settings.photo_change_date) : undefined,
     };
     const bot = settings_.users.find((v) => v.id == settings_.settings.business_bot_id);
-    if (is("user", bot)) {
+    if (Api.is("user", bot)) {
         settings.businessBot = constructUser(bot);
     }
     return cleanObject(settings);

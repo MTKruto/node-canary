@@ -29,7 +29,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _CallbackQueryManager_instances, _a, _CallbackQueryManager_c, _CallbackQueryManager_enc, _CallbackQueryManager_isExpired, _CallbackQueryManager_getPasswordCheck;
-import { isOneOf } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructCallbackQuery, constructCallbackQueryAnswer, validateCallbackQueryQuestion } from "../3_types.js";
 import { checkPassword } from "./0_password.js";
 import { checkCallbackQueryId, checkMessageId } from "./0_utilities.js";
@@ -64,7 +64,7 @@ export class CallbackQueryManager {
         return constructCallbackQueryAnswer(answer);
     }
     canHandleUpdate(update) {
-        return isOneOf(callbackQueryManagerUpdates, update);
+        return Api.isOneOf(callbackQueryManagerUpdates, update);
     }
     async handleUpdate(update) {
         return { callbackQuery: await constructCallbackQuery(update, __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").getEntity, __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").messageManager.getMessageWithReply.bind(__classPrivateFieldGet(this, _CallbackQueryManager_c, "f").messageManager)) };

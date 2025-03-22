@@ -790,7 +790,7 @@ class Client extends Composer {
                 }
                 return true;
             }
-            else if ((0, _2_tl_js_1.is)("bad_msg_notification", error)) {
+            else if (_2_tl_js_1.Mtproto.is("bad_msg_notification", error)) {
                 return true;
             }
             else {
@@ -1021,12 +1021,12 @@ class Client extends Composer {
                 params = { phone: () => (0, _1_utilities_js_1.mustPrompt)("Phone number:"), code: () => (0, _1_utilities_js_1.mustPrompt)("Verification code:"), password: () => (0, _1_utilities_js_1.mustPrompt)("Password:") };
             }
         }
-        __classPrivateFieldGet(this, _Client_LsignIn, "f").debug("authorizing with", typeof params === "string" ? "bot token" : (0, _2_tl_js_1.is)("auth.exportedAuthorization", params) ? "exported authorization" : "AuthorizeUserParams");
+        __classPrivateFieldGet(this, _Client_LsignIn, "f").debug("authorizing with", typeof params === "string" ? "bot token" : _2_tl_js_1.Api.is("auth.exportedAuthorization", params) ? "exported authorization" : "AuthorizeUserParams");
         if (params && "botToken" in params) {
             while (true) {
                 try {
                     const auth = await this.invoke({ _: "auth.importBotAuthorization", api_id: apiId, api_hash: __classPrivateFieldGet(this, _Client_apiHash, "f"), bot_auth_token: params.botToken, flags: 0 });
-                    await this.storage.setAccountId(Number((0, _2_tl_js_1.as)("auth.authorization", auth).user.id));
+                    await this.storage.setAccountId(Number(_2_tl_js_1.Api.as("auth.authorization", auth).user.id));
                     await this.storage.setAccountType("bot");
                     break;
                 }
@@ -1058,7 +1058,7 @@ class Client extends Composer {
                             api_id: __classPrivateFieldGet(this, _Client_apiId, "f"),
                             api_hash: __classPrivateFieldGet(this, _Client_apiHash, "f"),
                             settings: { _: "codeSettings" },
-                        }).then((v) => (0, _2_tl_js_1.as)("auth.sentCode", v));
+                        }).then((v) => _2_tl_js_1.Api.as("auth.sentCode", v));
                         try {
                             sentCode = await sendCode();
                         }
@@ -1093,7 +1093,7 @@ class Client extends Composer {
                             phone_code: code,
                             phone_code_hash: sentCode.phone_code_hash,
                         });
-                        await this.storage.setAccountId(Number((0, _2_tl_js_1.as)("auth.authorization", auth).user.id));
+                        await this.storage.setAccountId(Number(_2_tl_js_1.Api.as("auth.authorization", auth).user.id));
                         await this.storage.setAccountType("user");
                         __classPrivateFieldGet(this, _Client_LsignIn, "f").debug("signed in as user");
                         await __classPrivateFieldGet(this, _Client_instances, "m", _Client_propagateAuthorizationState).call(this, true);
@@ -1115,14 +1115,14 @@ class Client extends Composer {
                 }
                 password: while (true) {
                     const ap = await this.invoke({ _: "account.getPassword" });
-                    if (!((0, _2_tl_js_1.is)("passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow", ap.current_algo))) {
+                    if (!(_2_tl_js_1.Api.is("passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow", ap.current_algo))) {
                         throw new Error(`Handling ${ap.current_algo?._} not implemented`);
                     }
                     try {
                         const password = typeof params.password === "string" ? params.password : await params.password(ap.hint ?? null);
                         const input = await (0, _0_password_js_1.checkPassword)(password, ap);
                         const auth = await this.invoke({ _: "auth.checkPassword", password: input });
-                        await this.storage.setAccountId(Number((0, _2_tl_js_1.as)("auth.authorization", auth).user.id));
+                        await this.storage.setAccountId(Number(_2_tl_js_1.Api.as("auth.authorization", auth).user.id));
                         await this.storage.setAccountType("user");
                         __classPrivateFieldGet(this, _Client_LsignIn, "f").debug("signed in as user");
                         await __classPrivateFieldGet(this, _Client_instances, "m", _Client_propagateAuthorizationState).call(this, true);
@@ -1197,7 +1197,7 @@ class Client extends Composer {
             return { _: "inputPeerSelf" };
         }
         const inputPeer = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getInputPeerInner).call(this, id);
-        if ((((0, _2_tl_js_1.is)("inputPeerUser", inputPeer) || (0, _2_tl_js_1.is)("inputPeerChannel", inputPeer)) && inputPeer.access_hash == 0n) && await this.storage.getAccountType() == "bot") {
+        if (((_2_tl_js_1.Api.is("inputPeerUser", inputPeer) || _2_tl_js_1.Api.is("inputPeerChannel", inputPeer)) && inputPeer.access_hash == 0n) && await this.storage.getAccountType() == "bot") {
             if ("channel_id" in inputPeer) {
                 inputPeer.access_hash = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getChannelAccessHash).call(this, inputPeer.channel_id);
             }
@@ -1205,7 +1205,7 @@ class Client extends Composer {
                 inputPeer.access_hash = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getUserAccessHash).call(this, inputPeer.user_id);
             }
         }
-        if (((0, _2_tl_js_1.is)("inputPeerUser", inputPeer) || (0, _2_tl_js_1.is)("inputPeerChannel", inputPeer)) && inputPeer.access_hash == 0n && await this.storage.getAccountType() == "user") {
+        if ((_2_tl_js_1.Api.is("inputPeerUser", inputPeer) || _2_tl_js_1.Api.is("inputPeerChannel", inputPeer)) && inputPeer.access_hash == 0n && await this.storage.getAccountType() == "user") {
             throw new _0_errors_js_1.AccessError(`Cannot access the chat ${id} because there is no access hash for it.`);
         }
         return inputPeer;
@@ -1285,10 +1285,10 @@ class Client extends Composer {
         let n = 1;
         while (true) {
             try {
-                if (__classPrivateFieldGet(this, _Client_disableUpdates, "f") && !(0, _0_utilities_js_1.isMtprotoFunction)(function_) && !(0, _0_utilities_js_1.isCdnFunction)(function_)) {
+                if (__classPrivateFieldGet(this, _Client_disableUpdates, "f") && !_2_tl_js_1.Mtproto.isValidObject(function_) && !(0, _0_utilities_js_1.isCdnFunction)(function_)) {
                     function_ = { _: "invokeWithoutUpdates", query: function_ };
                 }
-                if (!__classPrivateFieldGet(this, _Client_connectionInited, "f") && !(0, _0_utilities_js_1.isMtprotoFunction)(function_)) {
+                if (!__classPrivateFieldGet(this, _Client_connectionInited, "f") && !_2_tl_js_1.Mtproto.isValidObject(function_)) {
                     __classPrivateFieldSet(this, _Client_connectionInited, true, "f");
                     __classPrivateFieldGet(this, _Client_L, "f").debug("init");
                     const result = await __classPrivateFieldGet(this, _Client_client, "f").invoke({
@@ -1328,27 +1328,27 @@ class Client extends Composer {
         }
     }, _Client_getUserAccessHash = async function _Client_getUserAccessHash(userId) {
         const users = await this.invoke({ _: "users.getUsers", id: [{ _: "inputUser", user_id: userId, access_hash: 0n }] });
-        const user = (0, _2_tl_js_1.as)("user", users[0]);
+        const user = _2_tl_js_1.Api.as("user", users[0]);
         if (user) {
             await this.messageStorage.setEntity(user);
         }
         return user?.access_hash ?? 0n;
     }, _Client_getChannelAccessHash = async function _Client_getChannelAccessHash(channelId) {
         const channels = await this.invoke({ _: "channels.getChannels", id: [{ _: "inputChannel", channel_id: channelId, access_hash: 0n }] });
-        const channel = (0, _2_tl_js_1.as)("channel", channels.chats[0]);
+        const channel = _2_tl_js_1.Api.as("channel", channels.chats[0]);
         if (channel) {
             await this.messageStorage.setEntity(channel);
         }
         return channel?.access_hash ?? 0n;
     }, _Client_getInputPeerChatId = async function _Client_getInputPeerChatId(inputPeer) {
-        if ((0, _2_tl_js_1.isOneOf)(["inputPeerSelf", "inputUserSelf"], inputPeer)) {
+        if (_2_tl_js_1.Api.isOneOf(["inputPeerSelf", "inputUserSelf"], inputPeer)) {
             return await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getSelfId).call(this);
         }
-        else if ((0, _2_tl_js_1.isOneOf)(["inputPeerEmpty", "inputUserEmpty", "inputChannelEmpty"], inputPeer)) {
+        else if (_2_tl_js_1.Api.isOneOf(["inputPeerEmpty", "inputUserEmpty", "inputChannelEmpty"], inputPeer)) {
             (0, _0_deps_js_1.unreachable)();
         }
         else {
-            return (0, _2_tl_js_1.peerToChatId)(inputPeer);
+            return _2_tl_js_1.Api.peerToChatId(inputPeer);
         }
     }, _Client_getInputPeerInner = async function _Client_getInputPeerInner(id) {
         const idn = Number(id);
@@ -1368,24 +1368,24 @@ class Client extends Composer {
                 const resolved = await this.invoke({ _: "contacts.resolveUsername", username: id });
                 await __classPrivateFieldGet(this, _Client_updateManager, "f").processChats(resolved.chats, resolved);
                 await __classPrivateFieldGet(this, _Client_updateManager, "f").processUsers(resolved.users, resolved);
-                if ((0, _2_tl_js_1.is)("peerUser", resolved.peer)) {
-                    resolvedId = (0, _2_tl_js_1.peerToChatId)(resolved.peer);
+                if (_2_tl_js_1.Api.is("peerUser", resolved.peer)) {
+                    resolvedId = _2_tl_js_1.Api.peerToChatId(resolved.peer);
                 }
-                else if ((0, _2_tl_js_1.is)("peerChannel", resolved.peer)) {
-                    resolvedId = (0, _2_tl_js_1.peerToChatId)(resolved.peer);
+                else if (_2_tl_js_1.Api.is("peerChannel", resolved.peer)) {
+                    resolvedId = _2_tl_js_1.Api.peerToChatId(resolved.peer);
                 }
                 else {
                     (0, _0_deps_js_1.unreachable)();
                 }
             }
-            const resolvedIdType = (0, _2_tl_js_1.getChatIdPeerType)(resolvedId);
+            const resolvedIdType = _2_tl_js_1.Api.getChatIdPeerType(resolvedId);
             if (resolvedIdType == "user") {
                 const accessHash = await this.messageStorage.getUserAccessHash(resolvedId);
-                peer = { _: "inputPeerUser", user_id: (0, _2_tl_js_1.chatIdToPeerId)(resolvedId), access_hash: accessHash ?? 0n };
+                peer = { _: "inputPeerUser", user_id: _2_tl_js_1.Api.chatIdToPeerId(resolvedId), access_hash: accessHash ?? 0n };
             }
             else if (resolvedIdType == "channel") {
                 const accessHash = await this.messageStorage.getChannelAccessHash(resolvedId);
-                peer = { _: "inputPeerChannel", channel_id: (0, _2_tl_js_1.chatIdToPeerId)(resolvedId), access_hash: accessHash ?? 0n };
+                peer = { _: "inputPeerChannel", channel_id: _2_tl_js_1.Api.chatIdToPeerId(resolvedId), access_hash: accessHash ?? 0n };
             }
             else {
                 (0, _0_deps_js_1.unreachable)();
@@ -1393,20 +1393,20 @@ class Client extends Composer {
         }
         else if (id > 0) {
             const accessHash = await this.messageStorage.getUserAccessHash(id);
-            peer = { _: "inputPeerUser", user_id: (0, _2_tl_js_1.chatIdToPeerId)(id), access_hash: accessHash ?? 0n };
+            peer = { _: "inputPeerUser", user_id: _2_tl_js_1.Api.chatIdToPeerId(id), access_hash: accessHash ?? 0n };
         }
         else if (-_4_constants_js_1.MAX_CHAT_ID <= id) {
             peer = { _: "inputPeerChat", chat_id: BigInt(Math.abs(id)) };
         }
         else if (_1_utilities_js_1.ZERO_CHANNEL_ID - _4_constants_js_1.MAX_CHANNEL_ID <= id && id != _1_utilities_js_1.ZERO_CHANNEL_ID) {
             const accessHash = await this.messageStorage.getChannelAccessHash(id);
-            peer = { _: "inputPeerChannel", channel_id: (0, _2_tl_js_1.chatIdToPeerId)(id), access_hash: accessHash ?? 0n };
+            peer = { _: "inputPeerChannel", channel_id: _2_tl_js_1.Api.chatIdToPeerId(id), access_hash: accessHash ?? 0n };
         }
         else {
             throw new _0_errors_js_1.InputError("The ID is of an format unknown.");
         }
-        if (!(0, _2_tl_js_1.is)("inputPeerChat", peer) && !peer.access_hash) {
-            const chatId = (0, _2_tl_js_1.peerToChatId)(peer);
+        if (!_2_tl_js_1.Api.is("inputPeerChat", peer) && !peer.access_hash) {
+            const chatId = _2_tl_js_1.Api.peerToChatId(peer);
             const minPeerReference = await this.messageStorage.getLastMinPeerReference(chatId);
             if (minPeerReference) {
                 const minInputPeer = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getMinInputPeer).call(this, (0, _0_utilities_js_1.canBeInputChannel)(peer) ? "channel" : "user", { ...minPeerReference, senderId: chatId });
@@ -1419,22 +1419,22 @@ class Client extends Composer {
         return peer;
     }, _Client_getMinInputPeer = async function _Client_getMinInputPeer(type, reference) {
         const entity = await this.messageStorage.getEntity(reference.chatId);
-        if ((0, _2_tl_js_1.isOneOf)(["channel", "channelForbidden"], entity) && entity.access_hash) {
+        if (_2_tl_js_1.Api.isOneOf(["channel", "channelForbidden"], entity) && entity.access_hash) {
             const peer = { _: "inputPeerChannel", channel_id: entity.id, access_hash: entity.access_hash };
             if (type == "user") {
-                return { _: "inputPeerUserFromMessage", peer, msg_id: reference.messageId, user_id: (0, _2_tl_js_1.chatIdToPeerId)(reference.senderId) };
+                return { _: "inputPeerUserFromMessage", peer, msg_id: reference.messageId, user_id: _2_tl_js_1.Api.chatIdToPeerId(reference.senderId) };
             }
             else {
-                return { _: "inputPeerChannelFromMessage", peer, msg_id: reference.messageId, channel_id: (0, _2_tl_js_1.chatIdToPeerId)(reference.senderId) };
+                return { _: "inputPeerChannelFromMessage", peer, msg_id: reference.messageId, channel_id: _2_tl_js_1.Api.chatIdToPeerId(reference.senderId) };
             }
         }
         else {
             return null;
         }
     }, getEntity)](peer) {
-        const id = (0, _2_tl_js_1.peerToChatId)(peer);
+        const id = _2_tl_js_1.Api.peerToChatId(peer);
         const entity = await this.messageStorage.getEntity(id);
-        if (entity == null && await this.storage.getAccountType() == "bot" && (0, _2_tl_js_1.is)("peerUser", peer) || (0, _2_tl_js_1.is)("peerChannel", peer)) {
+        if (entity == null && await this.storage.getAccountType() == "bot" && _2_tl_js_1.Api.is("peerUser", peer) || _2_tl_js_1.Api.is("peerChannel", peer)) {
             await this.getInputPeer(id);
         }
         else {
@@ -1454,7 +1454,7 @@ class Client extends Composer {
         let user_ = await this[getEntity]({ _: "peerUser", user_id: BigInt(await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getSelfId).call(this)) });
         if (user_ == null) {
             const users = await this.invoke({ _: "users.getUsers", id: [{ _: "inputUserSelf" }] });
-            user_ = (0, _2_tl_js_1.as)("user", users[0]);
+            user_ = _2_tl_js_1.Api.as("user", users[0]);
             await this.messageStorage.setEntity(user_);
         }
         const user = (0, _3_types_js_1.constructUser)(user_);
@@ -3269,7 +3269,7 @@ _a = Client, _Client_handleCtxUpdate = async function _Client_handleCtxUpdate(up
     });
 }, _Client_handleUpdate = async function _Client_handleUpdate(update) {
     const promises = new Array();
-    if ((0, _2_tl_js_1.is)("updateUserName", update)) {
+    if (_2_tl_js_1.Api.is("updateUserName", update)) {
         await this.messageStorage.updateUsernames(Number(update.user_id), update.usernames.map((v) => v.username));
         const peer = { ...update, _: "peerUser" };
         const entity = await this[getEntity](peer);

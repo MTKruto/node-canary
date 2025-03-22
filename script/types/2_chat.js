@@ -29,7 +29,7 @@ const _0_opening_hours_js_1 = require("./0_opening_hours.js");
 const _1_chat_p_js_1 = require("./1_chat_p.js");
 const _1_photo_js_1 = require("./1_photo.js");
 async function constructChat(fullChat, getEntity) {
-    if ((0, _2_tl_js_1.is)("userFull", fullChat)) {
+    if (_2_tl_js_1.Api.is("userFull", fullChat)) {
         const user = await getEntity({ _: "peerUser", user_id: fullChat.id });
         if (user == null)
             (0, _0_deps_js_1.unreachable)();
@@ -37,32 +37,32 @@ async function constructChat(fullChat, getEntity) {
         return (0, _1_utilities_js_1.cleanObject)({
             ...chatP,
             birthday: fullChat.birthday ? (0, _0_birthday_js_1.constructBirthday)(fullChat.birthday) : undefined,
-            photo: fullChat.profile_photo && (0, _2_tl_js_1.is)("photo", fullChat.profile_photo) ? (0, _1_photo_js_1.constructPhoto)(fullChat.profile_photo) : undefined,
+            photo: fullChat.profile_photo && _2_tl_js_1.Api.is("photo", fullChat.profile_photo) ? (0, _1_photo_js_1.constructPhoto)(fullChat.profile_photo) : undefined,
             address: fullChat.business_location?.address,
-            location: fullChat.business_location?.geo_point && (0, _2_tl_js_1.is)("geoPoint", fullChat.business_location.geo_point) ? (0, _0_location_js_1.constructLocation)(fullChat.business_location.geo_point) : undefined,
+            location: fullChat.business_location?.geo_point && _2_tl_js_1.Api.is("geoPoint", fullChat.business_location.geo_point) ? (0, _0_location_js_1.constructLocation)(fullChat.business_location.geo_point) : undefined,
             openingHours: fullChat.business_work_hours ? (0, _0_opening_hours_js_1.constructOpeningHours)(fullChat.business_work_hours) : undefined,
             hasMainMiniApp: user.bot ? user.bot_has_main_app : undefined,
         });
     }
-    else if ((0, _2_tl_js_1.is)("chatFull", fullChat)) {
+    else if (_2_tl_js_1.Api.is("chatFull", fullChat)) {
         const chat = await getEntity({ _: "peerChat", chat_id: fullChat.id });
         if (chat == null)
             (0, _0_deps_js_1.unreachable)();
         const chatP = (0, _1_chat_p_js_1.constructChatP)(chat);
         return (0, _1_utilities_js_1.cleanObject)({
             ...chatP,
-            photo: fullChat.chat_photo && (0, _2_tl_js_1.is)("photo", fullChat.chat_photo) ? (0, _1_photo_js_1.constructPhoto)(fullChat.chat_photo) : undefined,
+            photo: fullChat.chat_photo && _2_tl_js_1.Api.is("photo", fullChat.chat_photo) ? (0, _1_photo_js_1.constructPhoto)(fullChat.chat_photo) : undefined,
             videoChatId: fullChat.call ? String(fullChat.call.id) : undefined,
         });
     }
-    else if ((0, _2_tl_js_1.is)("channelFull", fullChat)) {
+    else if (_2_tl_js_1.Api.is("channelFull", fullChat)) {
         const chat = await getEntity({ _: "peerChannel", channel_id: fullChat.id });
         if (chat == null)
             (0, _0_deps_js_1.unreachable)();
         const chatP = (0, _1_chat_p_js_1.constructChatP)(chat);
         return (0, _1_utilities_js_1.cleanObject)({
             ...chatP,
-            photo: fullChat.chat_photo && (0, _2_tl_js_1.is)("photo", fullChat.chat_photo) ? (0, _1_photo_js_1.constructPhoto)(fullChat.chat_photo) : undefined,
+            photo: fullChat.chat_photo && _2_tl_js_1.Api.is("photo", fullChat.chat_photo) ? (0, _1_photo_js_1.constructPhoto)(fullChat.chat_photo) : undefined,
             videoChatId: fullChat.call ? String(fullChat.call.id) : undefined,
         });
     }

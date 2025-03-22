@@ -25,13 +25,13 @@ exports.reactionEqual = reactionEqual;
 const _0_deps_js_1 = require("../0_deps.js");
 const _2_tl_js_1 = require("../2_tl.js");
 function constructReaction(reaction) {
-    if ((0, _2_tl_js_1.is)("reactionEmoji", reaction)) {
+    if (_2_tl_js_1.Api.is("reactionEmoji", reaction)) {
         return { type: "emoji", emoji: reaction.emoticon };
     }
-    else if ((0, _2_tl_js_1.is)("reactionCustomEmoji", reaction)) {
+    else if (_2_tl_js_1.Api.is("reactionCustomEmoji", reaction)) {
         return { type: "custom", id: String(reaction.document_id) };
     }
-    else if ((0, _2_tl_js_1.is)("reactionPaid", reaction)) {
+    else if (_2_tl_js_1.Api.is("reactionPaid", reaction)) {
         return { type: "paid" };
     }
     else {

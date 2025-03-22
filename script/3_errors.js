@@ -45,10 +45,11 @@ exports.TtlPeriodInvalid = exports.TtlMediaInvalid = exports.TtlDaysInvalid = ex
 exports.WebdocumentInvalid = exports.WcConvertUrlInvalid = exports.WallpaperMimeInvalid = exports.WallpaperInvalid = exports.WallpaperFileInvalid = exports.VoiceMessagesForbidden = exports.VideoTitleEmpty = exports.VideoFileInvalid = exports.VideoContentTypeInvalid = exports.UserVolumeInvalid = exports.UserRestricted = exports.UserPrivacyRestricted = exports.UserNotParticipant = exports.UserNotMutualContact = exports.UserKicked = exports.UserIsBot = exports.UserIsBlocked = exports.UserInvalid = exports.UserIdInvalid = exports.UserDeleted = exports.UserDeactivatedBan = exports.UserDeactivated = exports.UserCreator = exports.UserChannelsTooMuch = exports.UserBotRequired = exports.UserBotInvalid = exports.UserBot = exports.UserBlocked = exports.UserBannedInChannel = exports.UserAlreadyParticipant = exports.UserAlreadyInvited = exports.UserAdminInvalid = exports.UsersTooMuch = exports.UsersTooFew = exports.UserpicUploadRequired = exports.UserpicPrivacyRequired = exports.UsernamePurchaseAvailable = exports.UsernameOccupied = exports.UsernameNotOccupied = exports.UsernameNotModified = exports.UsernameInvalid = exports.UsageLimitInvalid = exports.UrlInvalid = exports.UpdateAppToLogin = exports.UntilDateInvalid = exports.UnknownMethod = exports.UnknownError = exports.Timedout = exports.TypeConstructorInvalid = exports.TypesEmpty = void 0;
 exports.map = exports.YouBlockedUser = exports.WorkerBusyTooLongRetry = exports.WebpushTokenInvalid = exports.WebpushKeyInvalid = exports.WebpushAuthInvalid = exports.WebpageMediaEmpty = exports.WebpageCurlFailed = exports.WebdocumentUrlInvalid = exports.WebdocumentSizeTooBig = exports.WebdocumentMimeInvalid = void 0;
 const _0_errors_js_1 = require("./0_errors.js");
+const _2_tl_js_1 = require("./2_tl.js");
 __exportStar(require("./0_errors.js"), exports);
 class TelegramError extends _0_errors_js_1.MtkrutoError {
     constructor(params) {
-        super(`${params.error_code}: ${params.error_message} (${params.call._})`);
+        super(`${params.error_code}: ${params.error_message} (${(0, _2_tl_js_1.repr)(params.call)})`);
         Object.defineProperty(this, "errorCode", {
             enumerable: true,
             configurable: true,

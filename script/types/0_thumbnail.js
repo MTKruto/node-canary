@@ -23,8 +23,8 @@ exports.constructThumbnail = constructThumbnail;
 const _2_tl_js_1 = require("../2_tl.js");
 const _file_id_js_1 = require("./_file_id.js");
 function constructThumbnail(size, file) {
-    const type = (0, _2_tl_js_1.is)("photo", file) ? _file_id_js_1.FileType.Photo : _file_id_js_1.FileType.Thumbnail;
-    const fileType = (0, _2_tl_js_1.is)("photo", file) ? _file_id_js_1.FileType.Photo : _file_id_js_1.FileType.Document;
+    const type = _2_tl_js_1.Api.is("photo", file) ? _file_id_js_1.FileType.Photo : _file_id_js_1.FileType.Thumbnail;
+    const fileType = _2_tl_js_1.Api.is("photo", file) ? _file_id_js_1.FileType.Photo : _file_id_js_1.FileType.Document;
     const fileId_ = {
         type,
         dcId: file.dc_id,

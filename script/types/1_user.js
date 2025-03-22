@@ -43,7 +43,7 @@ function constructUser(user_) {
         isSupport: user_.support || false,
         addedToAttachmentMenu: user_.attach_menu_enabled || false,
     };
-    if ((0, _2_tl_js_1.is)("userProfilePhoto", user_.photo)) {
+    if (_2_tl_js_1.Api.is("userProfilePhoto", user_.photo)) {
         user.photo = (0, _0_chat_photo_js_1.constructChatPhoto)(user_.photo, user.id, user_.access_hash ?? 0n);
     }
     return (0, _1_utilities_js_1.cleanObject)(user);

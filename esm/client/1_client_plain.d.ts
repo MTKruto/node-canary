@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { Api } from "../2_tl.js";
+import { Mtproto } from "../2_tl.js";
 import { PublicKeys } from "../4_constants.js";
 import { ClientAbstract, ClientAbstractParams } from "./0_client_abstract.js";
 export interface ClientPlainParams extends ClientAbstractParams {
@@ -32,7 +32,7 @@ export interface ClientPlainParams extends ClientAbstractParams {
 export declare class ClientPlain extends ClientAbstract {
     #private;
     constructor(params?: ClientPlainParams);
-    invoke<T extends Api.AnyObject, R = T extends Api.AnyGenericFunction<infer X> ? Api.ReturnType<X> : T["_"] extends keyof Api.Functions ? Api.ReturnType<T> extends never ? Api.ReturnType<Api.Functions[T["_"]]> : never : never>(function_: T): Promise<R>;
+    invoke<T extends Mtproto.AnyObject, R = T["_"] extends keyof Mtproto.Functions ? Mtproto.ReturnType<T> extends never ? Mtproto.ReturnType<Mtproto.Functions[T["_"]]> : never : never>(function_: T): Promise<R>;
     createAuthKey(): Promise<[Uint8Array<ArrayBuffer>, bigint]>;
 }
 //# sourceMappingURL=1_client_plain.d.ts.map

@@ -51,13 +51,13 @@ class InlineQueryManager {
         await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").invoke({ _: "messages.setInlineBotResults", query_id: BigInt(id), results: await Promise.all(results.map((v) => (0, _3_types_js_1.inlineQueryResultToTlObject)(v, __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager.parseText.bind(__classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager), __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager.usernameResolver.bind(__classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager)))), cache_time: params?.cacheTime ?? 300, private: params?.isPersonal ? true : undefined, switch_webview: params?.button && params.button.miniApp ? ({ _: "inlineBotWebView", text: params.button.text, url: params.button.miniApp.url }) : undefined, switch_pm: params?.button && params.button.startParameter ? ({ _: "inlineBotSwitchPM", text: params.button.text, start_param: params.button.startParameter }) : undefined, gallery: params?.isGallery ? true : undefined, next_offset: params?.nextOffset });
     }
     canHandleUpdate(update) {
-        return (0, _2_tl_js_1.isOneOf)(inlineQueryManagerUpdates, update);
+        return _2_tl_js_1.Api.isOneOf(inlineQueryManagerUpdates, update);
     }
     async handleUpdate(update) {
-        if ((0, _2_tl_js_1.is)("updateBotInlineQuery", update)) {
+        if (_2_tl_js_1.Api.is("updateBotInlineQuery", update)) {
             return { inlineQuery: await (0, _3_types_js_1.constructInlineQuery)(update, __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getEntity) };
         }
-        else if ((0, _2_tl_js_1.is)("updateBotInlineSend", update)) {
+        else if (_2_tl_js_1.Api.is("updateBotInlineSend", update)) {
             return { chosenInlineResult: await (0, _3_types_js_1.constructChosenInlineResult)(update, __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getEntity) };
         }
         else {

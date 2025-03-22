@@ -30,7 +30,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _a, _InlineQueryManager_c, _InlineQueryManager_isExpired;
 import { unreachable } from "../0_deps.js";
-import { is, isOneOf } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructChosenInlineResult, constructInlineQuery, constructInlineQueryAnswer, inlineQueryResultToTlObject } from "../3_types.js";
 import { checkInlineQueryId } from "./0_utilities.js";
 const inlineQueryManagerUpdates = [
@@ -48,13 +48,13 @@ export class InlineQueryManager {
         await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").invoke({ _: "messages.setInlineBotResults", query_id: BigInt(id), results: await Promise.all(results.map((v) => inlineQueryResultToTlObject(v, __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager.parseText.bind(__classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager), __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager.usernameResolver.bind(__classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageManager)))), cache_time: params?.cacheTime ?? 300, private: params?.isPersonal ? true : undefined, switch_webview: params?.button && params.button.miniApp ? ({ _: "inlineBotWebView", text: params.button.text, url: params.button.miniApp.url }) : undefined, switch_pm: params?.button && params.button.startParameter ? ({ _: "inlineBotSwitchPM", text: params.button.text, start_param: params.button.startParameter }) : undefined, gallery: params?.isGallery ? true : undefined, next_offset: params?.nextOffset });
     }
     canHandleUpdate(update) {
-        return isOneOf(inlineQueryManagerUpdates, update);
+        return Api.isOneOf(inlineQueryManagerUpdates, update);
     }
     async handleUpdate(update) {
-        if (is("updateBotInlineQuery", update)) {
+        if (Api.is("updateBotInlineQuery", update)) {
             return { inlineQuery: await constructInlineQuery(update, __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getEntity) };
         }
-        else if (is("updateBotInlineSend", update)) {
+        else if (Api.is("updateBotInlineSend", update)) {
             return { chosenInlineResult: await constructChosenInlineResult(update, __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getEntity) };
         }
         else {

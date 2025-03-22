@@ -19,7 +19,7 @@
  */
 import { unreachable } from "../0_deps.js";
 import { cleanObject, fromUnixTimestamp, getLogger, ZERO_CHANNEL_ID } from "../1_utilities.js";
-import { as, is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { FileType, toUniqueFileId } from "./_file_id.js";
 import { serializeFileId } from "./_file_id.js";
 import { constructContact } from "./0_contact.js";
@@ -108,7 +108,7 @@ export function assertMessageType(message, type) {
     return message;
 }
 async function getSender(message_, getEntity) {
-    if (is("peerUser", message_.from_id)) {
+    if (Api.is("peerUser", message_.from_id)) {
         const entity = await getEntity(message_.from_id);
         if (entity) {
             return { from: constructUser(entity) };
@@ -117,7 +117,7 @@ async function getSender(message_, getEntity) {
             unreachable();
         }
     }
-    else if (is("peerChannel", message_.from_id)) {
+    else if (Api.is("peerChannel", message_.from_id)) {
         const entity = await getEntity(message_.from_id);
         if (entity) {
             return { senderChat: constructChatP(entity) };
@@ -126,7 +126,7 @@ async function getSender(message_, getEntity) {
             unreachable();
         }
     }
-    else if (is("peerUser", message_.peer_id)) {
+    else if (Api.is("peerUser", message_.peer_id)) {
         const entity = await getEntity(message_.peer_id);
         if (entity) {
             return { from: constructUser(entity) };
@@ -137,7 +137,7 @@ async function getSender(message_, getEntity) {
     }
 }
 async function getReply(message_, chat, getMessage) {
-    if (getMessage && is("messageReplyHeader", message_.reply_to) && message_.reply_to.reply_to_msg_id) {
+    if (getMessage && Api.is("messageReplyHeader", message_.reply_to) && message_.reply_to.reply_to_msg_id) {
         let isTopicMessage = false;
         if (message_.reply_to.forum_topic) {
             isTopicMessage = true;
@@ -158,9 +158,9 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage, ge
         id: message_.id,
         chat,
         date: fromUnixTimestamp(message_.date),
-        isTopicMessage: message_.reply_to && is("messageReplyHeader", message_.reply_to) && message_.reply_to.forum_topic ? true : false,
+        isTopicMessage: message_.reply_to && Api.is("messageReplyHeader", message_.reply_to) && message_.reply_to.forum_topic ? true : false,
     };
-    if (is("messageReplyHeader", message_.reply_to) && message_.reply_to.reply_to_msg_id) {
+    if (Api.is("messageReplyHeader", message_.reply_to) && message_.reply_to.reply_to_msg_id) {
         message.replyToMessageId = message_.reply_to.reply_to_top_id;
         message.replyToMessageId = message_.reply_to.reply_to_msg_id;
     }
@@ -168,7 +168,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage, ge
         Object.assign(message, await getReply(message_, chat, getMessage));
     }
     Object.assign(message, await getSender(message_, getEntity));
-    if (is("messageActionChatAddUser", message_.action) || is("messageActionChatJoinedByLink", message_.action) || is("messageActionChatJoinedByRequest", message_.action)) {
+    if (Api.is("messageActionChatAddUser", message_.action) || Api.is("messageActionChatJoinedByLink", message_.action) || Api.is("messageActionChatJoinedByRequest", message_.action)) {
         const newChatMembers = new Array();
         const users = "users" in message_.action ? message_.action.users : [message_.from_id && "user_id" in message_.from_id ? message_.from_id.user_id : unreachable()];
         for (const user_ of users) {
@@ -183,7 +183,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage, ge
         }
         return { ...message, newChatMembers };
     }
-    else if (is("messageActionChatDeleteUser", message_.action)) {
+    else if (Api.is("messageActionChatDeleteUser", message_.action)) {
         const entity = await getEntity({ _: "peerUser", user_id: message_.action.user_id });
         if (entity) {
             const user = constructUser(entity);
@@ -191,19 +191,19 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage, ge
             return { ...message, leftChatMember };
         }
     }
-    else if (is("messageActionChatEditTitle", message_.action)) {
+    else if (Api.is("messageActionChatEditTitle", message_.action)) {
         const newChatTitle = message_.action.title;
         return { ...message, newChatTitle };
     }
-    else if (is("messageActionChatEditPhoto", message_.action)) {
-        const newChatPhoto = constructPhoto(as("photo", message_.action.photo));
+    else if (Api.is("messageActionChatEditPhoto", message_.action)) {
+        const newChatPhoto = constructPhoto(Api.as("photo", message_.action.photo));
         return { ...message, newChatPhoto };
     }
-    else if (is("messageActionChatDeletePhoto", message_.action)) {
+    else if (Api.is("messageActionChatDeletePhoto", message_.action)) {
         const deletedChatPhoto = true;
         return { ...message, deletedChatPhoto };
     }
-    else if (is("messageActionChatCreate", message_.action)) {
+    else if (Api.is("messageActionChatCreate", message_.action)) {
         const groupCreated = true;
         const newChatMembers = new Array();
         for (const user_ of message_.action.users) {
@@ -215,7 +215,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage, ge
         }
         return { ...message, groupCreated, newChatMembers };
     }
-    else if (is("messageActionChannelCreate", message_.action)) {
+    else if (Api.is("messageActionChannelCreate", message_.action)) {
         if (message.chat.type == "channel") {
             const channelCreated = true;
             return { ...message, channelCreated };
@@ -228,32 +228,32 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage, ge
             // unreachable();
         }
     }
-    else if (is("messageActionChatMigrateTo", message_.action)) {
+    else if (Api.is("messageActionChatMigrateTo", message_.action)) {
         const chatMigratedTo = ZERO_CHANNEL_ID + Number(-message_.action.channel_id);
         return { ...message, chatMigratedTo };
     }
-    else if (is("messageActionChannelMigrateFrom", message_.action)) {
+    else if (Api.is("messageActionChannelMigrateFrom", message_.action)) {
         const chatMigratedFrom = Number(-message_.action.chat_id);
         return { ...message, chatMigratedFrom };
     }
-    else if (is("messageActionPinMessage", message_.action)) {
+    else if (Api.is("messageActionPinMessage", message_.action)) {
         const { replyToMessage } = await getReply(message_, chat, getMessage);
         if (replyToMessage) {
             const pinnedMessage = replyToMessage;
             return { ...message, pinnedMessage };
         }
     }
-    else if (is("messageActionRequestedPeer", message_.action)) {
-        const user = as("peerUser", message_.action.peers[0]);
+    else if (Api.is("messageActionRequestedPeer", message_.action)) {
+        const user = Api.as("peerUser", message_.action.peers[0]);
         const userShared = { requestId: message_.action.button_id, userId: Number(user.user_id) };
         return { ...message, userShared };
     }
-    else if (is("messageActionBotAllowed", message_.action)) {
-        const miniAppName = message_.action.app ? as("botApp", message_.action.app).title : undefined;
+    else if (Api.is("messageActionBotAllowed", message_.action)) {
+        const miniAppName = message_.action.app ? Api.as("botApp", message_.action.app).title : undefined;
         const writeAccessAllowed = { miniAppName };
         return { ...message, writeAccessAllowed };
     }
-    else if (is("messageActionTopicCreate", message_.action)) {
+    else if (Api.is("messageActionTopicCreate", message_.action)) {
         const forumTopicCreated = {
             name: message_.action.title,
             color: message_.action.icon_color,
@@ -261,7 +261,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage, ge
         };
         return { ...message, forumTopicCreated };
     }
-    else if (is("messageActionTopicEdit", message_.action)) {
+    else if (Api.is("messageActionTopicEdit", message_.action)) {
         if (message_.action.closed) {
             const forumTopicClosed = true;
             return { ...message, forumTopicClosed };
@@ -278,11 +278,11 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage, ge
             return { ...message, forumTopicReopened };
         }
     }
-    else if (is("messageActionGroupCallScheduled", message_.action)) {
+    else if (Api.is("messageActionGroupCallScheduled", message_.action)) {
         const videoChatScheduled = { startDate: new Date(message_.action.schedule_date * 1000) };
         return { ...message, videoChatScheduled };
     }
-    else if (is("messageActionGroupCall", message_.action)) {
+    else if (Api.is("messageActionGroupCall", message_.action)) {
         if (message_.action.duration) {
             const videoChatEnded = { duration: message_.action.duration };
             return { ...message, videoChatEnded };
@@ -292,27 +292,27 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage, ge
             return { ...message, videoChatStarted };
         }
     }
-    else if (is("messageActionSetMessagesTTL", message_.action)) {
+    else if (Api.is("messageActionSetMessagesTTL", message_.action)) {
         const newAutoDeleteTime = message_.action.period || 0;
         return { ...message, newAutoDeleteTime };
     }
-    else if (is("messageActionPaymentSentMe", message_.action)) {
+    else if (Api.is("messageActionPaymentSentMe", message_.action)) {
         const successfulPayment = constructSuccessfulPayment(message_.action);
         return { ...message, successfulPayment };
     }
-    else if (is("messageActionPaymentRefunded", message_.action)) {
+    else if (Api.is("messageActionPaymentRefunded", message_.action)) {
         const refundedPayment = constructRefundedPayment(message_.action);
         return { ...message, refundedPayment };
     }
     return { ...message, unsupported: true };
 }
 export async function constructMessage(message_, getEntity, getMessage, getStickerSetName, getReply_ = true, business, poll, pollResults) {
-    if (!(is("message", message_)) && !(is("messageService", message_))) {
+    if (!(Api.is("message", message_)) && !(Api.is("messageService", message_))) {
         unreachable();
     }
     let link;
     let chat_ = null;
-    if (is("peerUser", message_.peer_id)) {
+    if (Api.is("peerUser", message_.peer_id)) {
         const entity = await getEntity(message_.peer_id);
         if (entity) {
             chat_ = constructChatP(entity);
@@ -321,7 +321,7 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
             unreachable();
         }
     }
-    else if (is("peerChat", message_.peer_id)) {
+    else if (Api.is("peerChat", message_.peer_id)) {
         const entity = await getEntity(message_.peer_id);
         if (entity) {
             chat_ = constructChatP(entity);
@@ -330,8 +330,8 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
             unreachable();
         }
     }
-    else if (is("peerChannel", message_.peer_id)) {
-        const reply_to_top_id = message_.reply_to && is("messageReplyHeader", message_.reply_to) && message_.reply_to.reply_to_top_id;
+    else if (Api.is("peerChannel", message_.peer_id)) {
+        const reply_to_top_id = message_.reply_to && Api.is("messageReplyHeader", message_.reply_to) && message_.reply_to.reply_to_top_id;
         const threadId = reply_to_top_id && typeof reply_to_top_id === "number" ? reply_to_top_id + "/" : "";
         link = `https://t.me/c/${message_.peer_id.channel_id}/${threadId}${message_.id}`;
         const entity = await getEntity(message_.peer_id);
@@ -348,7 +348,7 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
     else {
         unreachable();
     }
-    if (is("messageService", message_)) {
+    if (Api.is("messageService", message_)) {
         return await constructServiceMessage(message_, chat_, getEntity, getMessage, getReply_);
     }
     const message = {
@@ -359,7 +359,7 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
         date: fromUnixTimestamp(message_.date),
         views: message_.views,
         forwards: message_.forwards,
-        isTopicMessage: message_.reply_to && is("messageReplyHeader", message_.reply_to) && message_.reply_to.forum_topic ? true : false,
+        isTopicMessage: message_.reply_to && Api.is("messageReplyHeader", message_.reply_to) && message_.reply_to.forum_topic ? true : false,
         hasProtectedContent: message_.noforwards || false,
         senderBoostCount: message_.from_boosts_applied,
         effectId: message_.effect ? String(message_.effect) : undefined,
@@ -369,7 +369,7 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
         const recentReactions = message_.reactions.recent_reactions ?? [];
         message.reactions = message_.reactions.results.map((v) => constructMessageReaction(v, recentReactions));
     }
-    if (is("messageReplyHeader", message_.reply_to) && message_.reply_to.reply_to_msg_id) {
+    if (Api.is("messageReplyHeader", message_.reply_to) && message_.reply_to.reply_to_msg_id) {
         if (message_.reply_to.quote) {
             message.replyQuote = constructReplyQuote(message_.reply_to.quote_text, message_.reply_to.quote_offset, message_.reply_to.quote_entities);
         }
@@ -411,7 +411,7 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
     if (message_.post_author != undefined) {
         message.authorSignature = message_.post_author;
     }
-    if (is("messageFwdHeader", message_.fwd_from)) {
+    if (Api.is("messageFwdHeader", message_.fwd_from)) {
         message.isAutomaticForward = message_.fwd_from.saved_from_peer != undefined && message_.fwd_from.saved_from_msg_id != undefined;
         message.forwardFrom = await constructForwardHeader(message_.fwd_from, getEntity);
     }
@@ -434,35 +434,35 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
         caption: message_.message,
         captionEntities: message_.entities?.map(constructMessageEntity).filter((v) => !!v) ?? [],
     };
-    if (is("messageMediaPhoto", message_.media) || is("messageMediaDocument", message_.media)) {
+    if (Api.is("messageMediaPhoto", message_.media) || Api.is("messageMediaDocument", message_.media)) {
         messageMedia.hasMediaSpoiler = message_.media.spoiler || false;
     }
     let m = null;
-    if (is("messageMediaPhoto", message_.media)) {
+    if (Api.is("messageMediaPhoto", message_.media)) {
         if (!message_.media.photo) {
             unreachable();
         }
-        const photo = constructPhoto(as("photo", message_.media.photo));
+        const photo = constructPhoto(Api.as("photo", message_.media.photo));
         m = { ...messageMedia, photo };
     }
-    else if (is("messageMediaDice", message_.media)) {
+    else if (Api.is("messageMediaDice", message_.media)) {
         const dice = constructDice(message_.media);
         m = { ...message, dice };
     }
-    else if (is("messageMediaDocument", message_.media)) {
+    else if (Api.is("messageMediaDocument", message_.media)) {
         const { document } = message_.media;
-        if (is("document", document)) {
+        if (Api.is("document", document)) {
             const getFileId = (type) => ({
                 type,
                 dcId: document.dc_id,
                 fileReference: document.file_reference,
                 location: { type: "common", id: document.id, accessHash: document.access_hash },
             });
-            const animated = document.attributes.find((v) => is("documentAttributeAnimated", v));
-            const audio = document.attributes.find((v) => is("documentAttributeAudio", v));
-            const fileName = document.attributes.find((v) => is("documentAttributeFilename", v));
-            const sticker = document.attributes.find((v) => is("documentAttributeSticker", v));
-            const video = document.attributes.find((v) => is("documentAttributeVideo", v));
+            const animated = document.attributes.find((v) => Api.is("documentAttributeAnimated", v));
+            const audio = document.attributes.find((v) => Api.is("documentAttributeAudio", v));
+            const fileName = document.attributes.find((v) => Api.is("documentAttributeFilename", v));
+            const sticker = document.attributes.find((v) => Api.is("documentAttributeSticker", v));
+            const video = document.attributes.find((v) => Api.is("documentAttributeVideo", v));
             if (animated) {
                 const fileId = getFileId(FileType.Animation);
                 const animation = constructAnimation(document, video, fileName, serializeFileId(fileId), toUniqueFileId(fileId));
@@ -504,15 +504,15 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
             }
         }
     }
-    else if (is("messageMediaContact", message_.media)) {
+    else if (Api.is("messageMediaContact", message_.media)) {
         const contact = constructContact(message_.media);
         m = { ...messageMedia, contact };
     }
-    else if (is("messageMediaGame", message_.media)) {
+    else if (Api.is("messageMediaGame", message_.media)) {
         const game = constructGame(message_.media);
         m = { ...message, game };
     }
-    else if (is("messageMediaPoll", message_.media)) {
+    else if (Api.is("messageMediaPoll", message_.media)) {
         if (poll) {
             message_.media.poll = poll;
         }
@@ -522,15 +522,15 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
         const poll_ = constructPoll(message_.media);
         m = { ...message, poll: poll_ };
     }
-    else if (is("messageMediaVenue", message_.media)) {
+    else if (Api.is("messageMediaVenue", message_.media)) {
         const venue = constructVenue(message_.media);
         m = { ...message, venue };
     }
-    else if (is("messageMediaGeo", message_.media) || is("messageMediaGeoLive", message_.media)) {
+    else if (Api.is("messageMediaGeo", message_.media) || Api.is("messageMediaGeoLive", message_.media)) {
         const location = constructLocation(message_.media);
         m = { ...message, location };
     }
-    else if (is("messageMediaWebPage", message_.media)) {
+    else if (Api.is("messageMediaWebPage", message_.media)) {
         const linkPreview = constructLinkPreview(message_.media, message_.invert_media);
         if (message_.message) {
             m = { ...messageText, linkPreview };
@@ -539,11 +539,11 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
             m = { ...message, linkPreview: { ...linkPreview, url: linkPreview.url ? linkPreview.url : unreachable() } };
         }
     }
-    else if (is("messageMediaGiveaway", message_.media)) {
+    else if (Api.is("messageMediaGiveaway", message_.media)) {
         const giveaway = constructGiveaway(message_.media);
         m = { ...message, giveaway };
     }
-    else if (is("messageMediaInvoice", message_.media)) {
+    else if (Api.is("messageMediaInvoice", message_.media)) {
         const invoice = constructInvoice(message_.media);
         m = { ...message, invoice };
     }

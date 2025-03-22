@@ -31,7 +31,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _PollManager_instances, _PollManager_c, _PollManager_voteInner;
 import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
-import { is, isOneOf, peerToChatId } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructPoll } from "../3_types.js";
 const pollManagerUpdates = [
     "updateMessagePoll",
@@ -54,7 +54,7 @@ export class PollManager {
         await __classPrivateFieldGet(this, _PollManager_instances, "m", _PollManager_voteInner).call(this, chatId, messageId, []);
     }
     canHandleUpdate(update) {
-        return isOneOf(pollManagerUpdates, update);
+        return Api.isOneOf(pollManagerUpdates, update);
     }
     async handleUpdate(update) {
         await __classPrivateFieldGet(this, _PollManager_c, "f").storage.setPollResults(update.poll_id, update.results);
@@ -95,13 +95,13 @@ _PollManager_c = new WeakMap(), _PollManager_instances = new WeakSet(), _PollMan
         throw new InputError("The same options are already casted.");
     }
     const peer = await __classPrivateFieldGet(this, _PollManager_c, "f").getInputPeer(chatId);
-    const chatId_ = peerToChatId(peer);
+    const chatId_ = Api.peerToChatId(peer);
     const message_ = await __classPrivateFieldGet(this, _PollManager_c, "f").messageStorage.getMessage(chatId_, messageId);
-    if (!is("message", message_)) {
+    if (!Api.is("message", message_)) {
         unreachable();
     }
     const media = message_.media;
-    if (!is("messageMediaPoll", media)) {
+    if (!Api.is("messageMediaPoll", media)) {
         unreachable();
     }
     const poll = media.poll;

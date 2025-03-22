@@ -27,17 +27,17 @@ const _0_chat_administrator_rights_js_1 = require("./0_chat_administrator_rights
 const _0_chat_member_rights_js_1 = require("./0_chat_member_rights.js");
 const _1_user_js_1 = require("./1_user.js");
 async function constructChatMember(participant, getEntity) {
-    const user_ = "user_id" in participant ? await getEntity({ ...participant, _: "peerUser" }) : "peer" in participant ? (0, _2_tl_js_1.is)("peerUser", participant.peer) ? await getEntity(participant.peer) : (0, _0_deps_js_1.unreachable)() : (0, _0_deps_js_1.unreachable)(); // TODO: support other peer types
+    const user_ = "user_id" in participant ? await getEntity({ ...participant, _: "peerUser" }) : "peer" in participant ? _2_tl_js_1.Api.is("peerUser", participant.peer) ? await getEntity(participant.peer) : (0, _0_deps_js_1.unreachable)() : (0, _0_deps_js_1.unreachable)(); // TODO: support other peer types
     if (user_ == null)
         (0, _0_deps_js_1.unreachable)();
     const user = (0, _1_user_js_1.constructUser)(user_);
-    if ((0, _2_tl_js_1.is)("channelParticipant", participant) || (0, _2_tl_js_1.is)("chatParticipant", participant)) {
+    if (_2_tl_js_1.Api.is("channelParticipant", participant) || _2_tl_js_1.Api.is("chatParticipant", participant)) {
         return {
             status: "member",
             user,
         };
     }
-    else if ((0, _2_tl_js_1.is)("channelParticipantCreator", participant)) {
+    else if (_2_tl_js_1.Api.is("channelParticipantCreator", participant)) {
         return (0, _1_utilities_js_1.cleanObject)({
             status: "creator",
             user,
@@ -45,7 +45,7 @@ async function constructChatMember(participant, getEntity) {
             title: participant.rank,
         });
     }
-    else if ((0, _2_tl_js_1.is)("channelParticipantAdmin", participant)) {
+    else if (_2_tl_js_1.Api.is("channelParticipantAdmin", participant)) {
         return (0, _1_utilities_js_1.cleanObject)({
             status: "administrator",
             user,
@@ -53,7 +53,7 @@ async function constructChatMember(participant, getEntity) {
             title: participant.rank,
         });
     }
-    else if ((0, _2_tl_js_1.is)("channelParticipantBanned", participant)) {
+    else if (_2_tl_js_1.Api.is("channelParticipantBanned", participant)) {
         const untilDate = participant.banned_rights.until_date ? (0, _1_utilities_js_1.fromUnixTimestamp)(participant.banned_rights.until_date) : undefined;
         if (!participant.banned_rights.view_messages) {
             participant.peer;
@@ -73,13 +73,13 @@ async function constructChatMember(participant, getEntity) {
             untilDate,
         });
     }
-    else if ((0, _2_tl_js_1.is)("channelParticipantSelf", participant)) {
+    else if (_2_tl_js_1.Api.is("channelParticipantSelf", participant)) {
         (0, _0_deps_js_1.unreachable)(); // TODO: implement
     }
-    else if ((0, _2_tl_js_1.is)("channelParticipantLeft", participant)) {
+    else if (_2_tl_js_1.Api.is("channelParticipantLeft", participant)) {
         return { status: "left", user };
     }
-    else if ((0, _2_tl_js_1.is)("chatParticipantAdmin", participant)) {
+    else if (_2_tl_js_1.Api.is("chatParticipantAdmin", participant)) {
         return (0, _1_utilities_js_1.cleanObject)({
             status: "administrator",
             user,
@@ -99,7 +99,7 @@ async function constructChatMember(participant, getEntity) {
             },
         });
     }
-    else if ((0, _2_tl_js_1.is)("chatParticipantCreator", participant)) {
+    else if (_2_tl_js_1.Api.is("chatParticipantCreator", participant)) {
         return (0, _1_utilities_js_1.cleanObject)({
             status: "creator",
             user,

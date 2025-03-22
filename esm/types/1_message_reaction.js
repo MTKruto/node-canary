@@ -18,22 +18,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { is, peerToChatId } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructReaction } from "./0_reaction.js";
 export function constructMessageReaction(reaction_, recentReactions) {
     const choosers = recentReactions
         .filter((v) => {
-        if (is("reactionEmoji", reaction_.reaction)) {
-            return is("reactionEmoji", v.reaction) && v.reaction.emoticon == reaction_.reaction.emoticon;
+        if (Api.is("reactionEmoji", reaction_.reaction)) {
+            return Api.is("reactionEmoji", v.reaction) && v.reaction.emoticon == reaction_.reaction.emoticon;
         }
-        else if (is("reactionCustomEmoji", reaction_.reaction)) {
-            return is("reactionCustomEmoji", v.reaction) && v.reaction.document_id == reaction_.reaction.document_id;
+        else if (Api.is("reactionCustomEmoji", reaction_.reaction)) {
+            return Api.is("reactionCustomEmoji", v.reaction) && v.reaction.document_id == reaction_.reaction.document_id;
         }
         else {
             unreachable();
         }
     })
-        .map((v) => peerToChatId(v.peer_id));
+        .map((v) => Api.peerToChatId(v.peer_id));
     const reaction = constructReaction(reaction_.reaction);
     const count = reaction_.count;
     const chosen = reaction_.chosen_order !== undefined ? true : false;

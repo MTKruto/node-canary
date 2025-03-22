@@ -44,10 +44,10 @@ class PaymentManager {
         __classPrivateFieldSet(this, _PaymentManager_c, c, "f");
     }
     canHandleUpdate(update) {
-        return (0, _2_tl_js_1.isOneOf)(paymentManagerUpdates, update);
+        return _2_tl_js_1.Api.isOneOf(paymentManagerUpdates, update);
     }
     async handleUpdate(update) {
-        if ((0, _2_tl_js_1.is)("updateBotPrecheckoutQuery", update)) {
+        if (_2_tl_js_1.Api.is("updateBotPrecheckoutQuery", update)) {
             const preCheckoutQuery = await (0, _3_types_js_1.constructPreCheckoutQuery)(update, __classPrivateFieldGet(this, _PaymentManager_c, "f").getEntity);
             return { preCheckoutQuery };
         }

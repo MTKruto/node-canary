@@ -18,24 +18,24 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { as, is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { FileType, serializeFileId, toUniqueFileId } from "./_file_id.js";
 import { constructPhoto } from "./1_photo.js";
 import { constructVideo } from "./1_video.js";
 export function constructStoryContent(media) {
-    if (is("messageMediaPhoto", media)) {
+    if (Api.is("messageMediaPhoto", media)) {
         if (!media.photo) {
             unreachable();
         }
-        const photo = constructPhoto(as("photo", media.photo));
+        const photo = constructPhoto(Api.as("photo", media.photo));
         return { photo };
     }
-    else if (is("messageMediaDocument", media)) {
+    else if (Api.is("messageMediaDocument", media)) {
         const document = media.document;
-        if (!(is("document", document))) {
+        if (!(Api.is("document", document))) {
             unreachable();
         }
-        const video = document.attributes.find((v) => is("documentAttributeVideo", v));
+        const video = document.attributes.find((v) => Api.is("documentAttributeVideo", v));
         if (!video) {
             unreachable();
         }

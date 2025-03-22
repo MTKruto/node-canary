@@ -67,7 +67,7 @@ class CallbackQueryManager {
         return (0, _3_types_js_1.constructCallbackQueryAnswer)(answer);
     }
     canHandleUpdate(update) {
-        return (0, _2_tl_js_1.isOneOf)(callbackQueryManagerUpdates, update);
+        return _2_tl_js_1.Api.isOneOf(callbackQueryManagerUpdates, update);
     }
     async handleUpdate(update) {
         return { callbackQuery: await (0, _3_types_js_1.constructCallbackQuery)(update, __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").getEntity, __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").messageManager.getMessageWithReply.bind(__classPrivateFieldGet(this, _CallbackQueryManager_c, "f").messageManager)) };

@@ -68,7 +68,7 @@ class MessageManager {
             configurable: true,
             writable: true,
             value: async (v) => {
-                const inputPeer = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(v).then((v) => (0, _2_tl_js_1.as)("inputPeerUser", v));
+                const inputPeer = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(v).then((v) => _2_tl_js_1.Api.as("inputPeerUser", v));
                 return { ...inputPeer, _: "inputUser" };
             }
         });
@@ -95,18 +95,18 @@ class MessageManager {
         }
         if (shouldFetch) {
             if ((0, _0_utilities_js_1.canBeInputChannel)(peer)) {
-                messages_ = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "channels.getMessages", channel: (0, _0_utilities_js_1.toInputChannel)(peer), id: messageIds.map((v) => ({ _: "inputMessageID", id: v })) }).then((v) => (0, _2_tl_js_1.as)("messages.channelMessages", v).messages);
+                messages_ = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "channels.getMessages", channel: (0, _0_utilities_js_1.toInputChannel)(peer), id: messageIds.map((v) => ({ _: "inputMessageID", id: v })) }).then((v) => _2_tl_js_1.Api.as("messages.channelMessages", v).messages);
             }
             else {
                 messages_ = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({
                     _: "messages.getMessages",
                     id: messageIds.map((v) => ({ _: "inputMessageID", id: v })),
-                }).then((v) => (0, _2_tl_js_1.as)("messages.messages", v).messages);
+                }).then((v) => _2_tl_js_1.Api.as("messages.messages", v).messages);
             }
         }
         const messages = new Array();
         for (const message_ of messages_) {
-            if ((0, _2_tl_js_1.is)("messageEmpty", message_)) {
+            if (_2_tl_js_1.Api.is("messageEmpty", message_)) {
                 continue;
             }
             const message = await this.constructMessage(message_);
@@ -168,30 +168,30 @@ class MessageManager {
     }
     async updatesToMessages(chatId, updates, businessConnectionId) {
         const messages = new Array();
-        if ((0, _2_tl_js_1.is)("updates", updates)) {
+        if (_2_tl_js_1.Api.is("updates", updates)) {
             for (const update of updates.updates) {
-                if ("message" in update && (0, _2_tl_js_1.is)("messageEmpty", update.message)) {
+                if ("message" in update && _2_tl_js_1.Api.is("messageEmpty", update.message)) {
                     continue;
                 }
-                if ((0, _2_tl_js_1.is)("updateNewMessage", update) || (0, _2_tl_js_1.is)("updateEditMessage", update) || (0, _2_tl_js_1.is)("updateNewScheduledMessage", update)) {
+                if (_2_tl_js_1.Api.is("updateNewMessage", update) || _2_tl_js_1.Api.is("updateEditMessage", update) || _2_tl_js_1.Api.is("updateNewScheduledMessage", update)) {
                     const message = await this.constructMessage(update.message);
-                    if ((0, _2_tl_js_1.is)("updateNewScheduledMessage", update)) {
+                    if (_2_tl_js_1.Api.is("updateNewScheduledMessage", update)) {
                         message.scheduled = true;
                     }
                     messages.push(message);
                 }
-                else if ((0, _2_tl_js_1.is)("updateNewChannelMessage", update) || (0, _2_tl_js_1.is)("updateEditChannelMessage", update)) {
+                else if (_2_tl_js_1.Api.is("updateNewChannelMessage", update) || _2_tl_js_1.Api.is("updateEditChannelMessage", update)) {
                     messages.push(await this.constructMessage(update.message));
                 }
-                else if ((0, _2_tl_js_1.is)("updateBotNewBusinessMessage", update)) {
+                else if (_2_tl_js_1.Api.is("updateBotNewBusinessMessage", update)) {
                     messages.push(await this.constructMessage(update.message, false, { connectionId: businessConnectionId ?? update.connection_id, replyToMessage: update.reply_to_message }));
                 }
-                else if ((0, _2_tl_js_1.is)("updateBotEditBusinessMessage", update)) {
+                else if (_2_tl_js_1.Api.is("updateBotEditBusinessMessage", update)) {
                     messages.push(await this.constructMessage(update.message, false, { connectionId: businessConnectionId ?? update.connection_id, replyToMessage: update.reply_to_message }));
                 }
             }
         }
-        else if ((0, _2_tl_js_1.is)("updateShortSentMessage", updates)) {
+        else if (_2_tl_js_1.Api.is("updateShortSentMessage", updates)) {
             const message = await this.getMessage(chatId, updates.id);
             if (message != null) {
                 messages.push(message);
@@ -200,7 +200,7 @@ class MessageManager {
         return messages;
     }
     async constructMessage(message_, r, business) {
-        const mediaPoll = "media" in message_ && (0, _2_tl_js_1.is)("messageMediaPoll", message_.media) ? message_.media : null;
+        const mediaPoll = "media" in message_ && _2_tl_js_1.Api.is("messageMediaPoll", message_.media) ? message_.media : null;
         const pollId = mediaPoll?.poll.id;
         let poll = null;
         let pollResults = null;
@@ -782,23 +782,25 @@ class MessageManager {
         }
     }
     canHandleUpdate(update) {
-        return (0, _2_tl_js_1.isOneOf)(messageManagerUpdates, update);
+        return _2_tl_js_1.Api.isOneOf(messageManagerUpdates, update);
     }
     async handleUpdate(update) {
-        if ((0, _2_tl_js_1.is)("updateNewMessage", update) || (0, _2_tl_js_1.is)("updateNewChannelMessage", update) || (0, _2_tl_js_1.is)("updateEditMessage", update) || (0, _2_tl_js_1.is)("updateEditChannelMessage", update)) {
-            if ((0, _2_tl_js_1.is)("message", update.message) || (0, _2_tl_js_1.is)("messageService", update.message)) {
-                const chatId = (0, _2_tl_js_1.peerToChatId)(update.message.peer_id);
+        if (_2_tl_js_1.Api.is("updateNewMessage", update) || _2_tl_js_1.Api.is("updateNewChannelMessage", update) || _2_tl_js_1.Api.is("updateEditMessage", update) || _2_tl_js_1.Api.is("updateEditChannelMessage", update)) {
+            if (_2_tl_js_1.Api.is("message", update.message) || _2_tl_js_1.Api.is("messageService", update.message)) {
+                const chatId = _2_tl_js_1.Api.peerToChatId(update.message.peer_id);
                 await __classPrivateFieldGet(this, _MessageManager_c, "f").messageStorage.setMessage(chatId, update.message.id, update.message);
             }
         }
-        if ((0, _2_tl_js_1.is)("updateNewMessage", update) ||
-            (0, _2_tl_js_1.is)("updateNewChannelMessage", update) ||
-            (0, _2_tl_js_1.is)("updateEditMessage", update) ||
-            (0, _2_tl_js_1.is)("updateEditChannelMessage", update) ||
-            (0, _2_tl_js_1.is)("updateBotNewBusinessMessage", update) ||
-            (0, _2_tl_js_1.is)("updateBotEditBusinessMessage", update) ||
-            (0, _2_tl_js_1.is)("updateNewScheduledMessage", update)) {
-            if (!((0, _2_tl_js_1.is)("messageEmpty", update.message))) {
+        if (_2_tl_js_1.Api.isOneOf([
+            "updateNewMessage",
+            "updateNewChannelMessage",
+            "updateEditMessage",
+            "updateEditChannelMessage",
+            "updateBotNewBusinessMessage",
+            "updateBotEditBusinessMessage",
+            "updateNewScheduledMessage",
+        ], update)) {
+            if (!(_2_tl_js_1.Api.is("messageEmpty", update.message))) {
                 const isOutgoing = update.message.out;
                 let shouldIgnore = false;
                 if (isOutgoing) {
@@ -809,7 +811,7 @@ class MessageManager {
                         shouldIgnore = true;
                     }
                     else if (__classPrivateFieldGet(this, _MessageManager_c, "f").outgoingMessages == "business") {
-                        if (!(0, _2_tl_js_1.is)("updateBotNewBusinessMessage", update) && !(0, _2_tl_js_1.is)("updateBotEditBusinessMessage", update)) {
+                        if (!_2_tl_js_1.Api.is("updateBotNewBusinessMessage", update) && !_2_tl_js_1.Api.is("updateBotEditBusinessMessage", update)) {
                             shouldIgnore = true;
                         }
                     }
@@ -817,10 +819,10 @@ class MessageManager {
                 if (!shouldIgnore) {
                     const business = "connection_id" in update ? { connectionId: update.connection_id, replyToMessage: update.reply_to_message } : undefined;
                     const message = await this.constructMessage(update.message, undefined, business);
-                    if ((0, _2_tl_js_1.is)("updateNewMessage", update) || (0, _2_tl_js_1.is)("updateNewChannelMessage", update) || (0, _2_tl_js_1.is)("updateBotNewBusinessMessage", update)) {
+                    if (_2_tl_js_1.Api.is("updateNewMessage", update) || _2_tl_js_1.Api.is("updateNewChannelMessage", update) || _2_tl_js_1.Api.is("updateBotNewBusinessMessage", update)) {
                         return { message };
                     }
-                    else if ((0, _2_tl_js_1.is)("updateNewScheduledMessage", update)) {
+                    else if (_2_tl_js_1.Api.is("updateNewScheduledMessage", update)) {
                         message.scheduled = true;
                         return { scheduledMessage: message };
                     }
@@ -830,7 +832,7 @@ class MessageManager {
                 }
             }
         }
-        if ((0, _2_tl_js_1.is)("updateDeleteMessages", update)) {
+        if (_2_tl_js_1.Api.is("updateDeleteMessages", update)) {
             const deletedMessages = new Array();
             for (const messageId of update.messages) {
                 const chatId = await __classPrivateFieldGet(this, _MessageManager_c, "f").messageStorage.getMessageChat(messageId);
@@ -842,8 +844,8 @@ class MessageManager {
                 return { deletedMessages };
             }
         }
-        else if ((0, _2_tl_js_1.is)("updateDeleteChannelMessages", update)) {
-            const chatId = (0, _2_tl_js_1.getChannelChatId)(update.channel_id);
+        else if (_2_tl_js_1.Api.is("updateDeleteChannelMessages", update)) {
+            const chatId = _2_tl_js_1.Api.getChannelChatId(update.channel_id);
             const deletedMessages = new Array();
             for (const messageId of update.messages) {
                 const message = await __classPrivateFieldGet(this, _MessageManager_c, "f").messageStorage.getMessage(chatId, messageId);
@@ -853,17 +855,17 @@ class MessageManager {
             }
             return { deletedMessages };
         }
-        else if ((0, _2_tl_js_1.is)("updateDeleteScheduledMessages", update)) {
-            const chatId = (0, _2_tl_js_1.peerToChatId)(update.peer);
+        else if (_2_tl_js_1.Api.is("updateDeleteScheduledMessages", update)) {
+            const chatId = _2_tl_js_1.Api.peerToChatId(update.peer);
             const deletedMessages = update.messages.map((v) => ({ chatId, messageId: v }));
             return { deletedMessages, scheduled: true };
         }
-        else if ((0, _2_tl_js_1.is)("updateBotDeleteBusinessMessage", update)) {
-            const chatId = (0, _2_tl_js_1.peerToChatId)(update.peer);
+        else if (_2_tl_js_1.Api.is("updateBotDeleteBusinessMessage", update)) {
+            const chatId = _2_tl_js_1.Api.peerToChatId(update.peer);
             const deletedMessages = update.messages.map((v) => ({ chatId, messageId: v }));
             return { deletedMessages, businessConnectionId: update.connection_id };
         }
-        if ((0, _2_tl_js_1.is)("updateTranscribedAudio", update)) {
+        if (_2_tl_js_1.Api.is("updateTranscribedAudio", update)) {
             const voiceTranscription = (0, _3_types_js_1.constructVoiceTranscription)(update);
             await __classPrivateFieldGet(this, _MessageManager_c, "f").messageStorage.setVoiceTranscription(voiceTranscription);
             return { voiceTranscription };
@@ -928,7 +930,7 @@ class MessageManager {
     async blockUser(userId) {
         __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertUser("blockUser");
         const id = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(userId);
-        if (!((0, _2_tl_js_1.is)("user", id))) {
+        if (!(_2_tl_js_1.Api.is("user", id))) {
             throw new _0_errors_js_1.InputError("Only users can be blocked or unblocked.");
         }
         await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "contacts.block", id });
@@ -936,7 +938,7 @@ class MessageManager {
     async unblockUser(userId) {
         __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertUser("unblockUser");
         const id = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(userId);
-        if (!((0, _2_tl_js_1.is)("user", id))) {
+        if (!(_2_tl_js_1.Api.is("user", id))) {
             throw new _0_errors_js_1.InputError("Only users can be blocked or unblocked.");
         }
         await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "contacts.unblock", id });
@@ -1078,14 +1080,14 @@ class MessageManager {
         }
         const peer = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId);
         for (const [i, media_] of multiMedia.entries()) {
-            if ((0, _2_tl_js_1.is)("inputMediaUploadedPhoto", media_.media)) {
-                const result = (0, _2_tl_js_1.as)("messageMediaPhoto", await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.uploadMedia", media: media_.media, peer }));
-                const photo = (0, _2_tl_js_1.as)("photo", result.photo);
+            if (_2_tl_js_1.Api.is("inputMediaUploadedPhoto", media_.media)) {
+                const result = _2_tl_js_1.Api.as("messageMediaPhoto", await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.uploadMedia", media: media_.media, peer }));
+                const photo = _2_tl_js_1.Api.as("photo", result.photo);
                 multiMedia[i] = { ...media_, media: { _: "inputMediaPhoto", id: { ...photo, _: "inputPhoto" } } };
             }
-            else if ((0, _2_tl_js_1.is)("inputMediaUploadedDocument", media_.media)) {
-                const result = (0, _2_tl_js_1.as)("messageMediaDocument", await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.uploadMedia", media: media_.media, peer }));
-                const document = (0, _2_tl_js_1.as)("document", result.document);
+            else if (_2_tl_js_1.Api.is("inputMediaUploadedDocument", media_.media)) {
+                const result = _2_tl_js_1.Api.as("messageMediaDocument", await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.uploadMedia", media: media_.media, peer }));
+                const document = _2_tl_js_1.Api.as("document", result.document);
                 multiMedia[i] = { ...media_, media: { _: "inputMediaDocument", id: { ...document, _: "inputDocument" } } };
             }
         }
@@ -1198,7 +1200,7 @@ class MessageManager {
             if (isNaN(Number(parts[2]))) {
                 return null;
             }
-            peer = (0, _2_tl_js_1.getChannelChatId)(BigInt(peer));
+            peer = _2_tl_js_1.Api.getChannelChatId(BigInt(peer));
         }
         else {
             if (parts.length > 3) {
@@ -1278,7 +1280,7 @@ _a = MessageManager, _MessageManager_c = new WeakMap(), _MessageManager_Lresolve
     if (typeof document === "string") {
         const fileId = this.resolveFileId(document, fileType);
         if (fileId != null) {
-            media = { _: "inputMediaDocument", id: { ...fileId, _: "inputDocument" }, spoiler, query: otherAttribs.find((v) => (0, _2_tl_js_1.is)("documentAttributeSticker", v))?.alt || undefined, ttl_seconds };
+            media = { _: "inputMediaDocument", id: { ...fileId, _: "inputDocument" }, spoiler, query: otherAttribs.find((v) => _2_tl_js_1.Api.is("documentAttributeSticker", v))?.alt || undefined, ttl_seconds };
         }
     }
     if (media == null) {
@@ -1300,7 +1302,7 @@ _a = MessageManager, _MessageManager_c = new WeakMap(), _MessageManager_Lresolve
                 }
                 return name;
             });
-            if ((0, _2_tl_js_1.is)("inputFileStoryDocument", file)) {
+            if (_2_tl_js_1.Api.is("inputFileStoryDocument", file)) {
                 (0, _0_deps_js_1.unreachable)();
             }
             let thumb = undefined;
@@ -1366,7 +1368,7 @@ _a = MessageManager, _MessageManager_c = new WeakMap(), _MessageManager_Lresolve
     if (typeof document === "string") {
         const fileId = this.resolveFileId(document, fileType);
         if (fileId != null) {
-            media_ = { _: "inputMediaDocument", id: { ...fileId, _: "inputDocument" }, spoiler, query: otherAttribs.find((v) => (0, _2_tl_js_1.is)("documentAttributeSticker", v))?.alt || undefined };
+            media_ = { _: "inputMediaDocument", id: { ...fileId, _: "inputDocument" }, spoiler, query: otherAttribs.find((v) => _2_tl_js_1.Api.is("documentAttributeSticker", v))?.alt || undefined };
         }
     }
     if (media_ == null) {
@@ -1382,7 +1384,7 @@ _a = MessageManager, _MessageManager_c = new WeakMap(), _MessageManager_Lresolve
                 }
                 return name;
             });
-            if ((0, _2_tl_js_1.is)("inputFileStoryDocument", file)) {
+            if (_2_tl_js_1.Api.is("inputFileStoryDocument", file)) {
                 (0, _0_deps_js_1.unreachable)();
             }
             let thumb = undefined;

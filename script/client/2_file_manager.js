@@ -140,7 +140,7 @@ class FileManager {
                 try {
                     const file = await connection.invoke({ _: "upload.getFile", location, offset, limit });
                     signal?.throwIfAborted();
-                    if ((0, _2_tl_js_1.is)("upload.file", file)) {
+                    if (_2_tl_js_1.Api.is("upload.file", file)) {
                         yield file.bytes;
                         if (id != null) {
                             await __classPrivateFieldGet(this, _FileManager_c, "f").storage.saveFilePart(id, part, file.bytes);
@@ -267,7 +267,7 @@ class FileManager {
         }
         else {
             const stickerSet = await __classPrivateFieldGet(this, _FileManager_c, "f").invoke({ _: "messages.getStickerSet", stickerset: inputStickerSet, hash });
-            const name = (0, _2_tl_js_1.as)("messages.stickerSet", stickerSet).set.short_name;
+            const name = _2_tl_js_1.Api.as("messages.stickerSet", stickerSet).set.short_name;
             await __classPrivateFieldGet(this, _FileManager_c, "f").messageStorage.updateStickerSetName(inputStickerSet.id, inputStickerSet.access_hash, name);
             return name;
         }
@@ -302,7 +302,7 @@ class FileManager {
         if (!shouldFetch) {
             return stickers;
         }
-        const documents_ = (await __classPrivateFieldGet(this, _FileManager_c, "f").invoke({ _: "messages.getCustomEmojiDocuments", document_id: id.map(BigInt) })).map((v) => (0, _2_tl_js_1.as)("document", v));
+        const documents_ = (await __classPrivateFieldGet(this, _FileManager_c, "f").invoke({ _: "messages.getCustomEmojiDocuments", document_id: id.map(BigInt) })).map((v) => _2_tl_js_1.Api.as("document", v));
         for (const [i, document_] of documents_.entries()) {
             await __classPrivateFieldGet(this, _FileManager_c, "f").messageStorage.setCustomEmojiDocument(document_.id, document_);
             const fileId_ = {

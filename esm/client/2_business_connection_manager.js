@@ -29,7 +29,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _BusinessConnectionManager_c;
-import { as, isOneOf } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructBusinessConnection } from "../3_types.js";
 const businessConnectionManagerUpdates = [
     "updateBotBusinessConnect",
@@ -43,8 +43,8 @@ export class BusinessConnectionManager {
         const connection_ = await __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").messageStorage.getBusinessConnection(id);
         if (!connection_) {
             const connection_ = await __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").invoke({ _: "account.getBotBusinessConnection", connection_id: id })
-                .then((v) => as("updates", v))
-                .then((v) => as("updateBotBusinessConnect", v.updates[0]).connection);
+                .then((v) => Api.as("updates", v))
+                .then((v) => Api.as("updateBotBusinessConnect", v.updates[0]).connection);
             await __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").messageStorage.setBusinessConnection(id, connection_);
             return await constructBusinessConnection(connection_, __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").getEntity);
         }
@@ -53,7 +53,7 @@ export class BusinessConnectionManager {
         }
     }
     canHandleUpdate(update) {
-        return isOneOf(businessConnectionManagerUpdates, update);
+        return Api.isOneOf(businessConnectionManagerUpdates, update);
     }
     async handleUpdate(update) {
         if (update.connection.disabled) {

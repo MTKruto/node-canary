@@ -52,10 +52,10 @@ class ChatManager {
         __classPrivateFieldSet(this, _ChatManager_c, c, "f");
     }
     canHandleUpdate(update) {
-        return (0, _2_tl_js_1.isOneOf)(chatManagerUpdates, update);
+        return _2_tl_js_1.Api.isOneOf(chatManagerUpdates, update);
     }
     async handleUpdate(update) {
-        if ((0, _2_tl_js_1.is)("updateChannelParticipant", update) || (0, _2_tl_js_1.is)("updateChatParticipant", update)) {
+        if (_2_tl_js_1.Api.is("updateChannelParticipant", update) || _2_tl_js_1.Api.is("updateChatParticipant", update)) {
             const chatMember = await (0, _3_types_js_1.constructChatMemberUpdated)(update, __classPrivateFieldGet(this, _ChatManager_c, "f").getEntity);
             const selfId = await __classPrivateFieldGet(this, _ChatManager_c, "f").getSelfId();
             if (chatMember.oldChatMember.user.id == selfId) {
@@ -65,7 +65,7 @@ class ChatManager {
                 return { chatMember };
             }
         }
-        if ((0, _2_tl_js_1.is)("updateBotChatInviteRequester", update)) {
+        if (_2_tl_js_1.Api.is("updateBotChatInviteRequester", update)) {
             const joinRequest = await (0, _3_types_js_1.constructJoinRequest)(update, __classPrivateFieldGet(this, _ChatManager_c, "f").getEntity);
             return { joinRequest };
         }
@@ -109,12 +109,12 @@ class ChatManager {
             throw new _0_errors_js_1.InputError("requireApproval cannot be true while limit is specified.");
         }
         const result = await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "messages.exportChatInvite", peer: await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId), title: params?.title, expire_date: params?.expireAt ? (0, _1_utilities_js_1.toUnixTimestamp)(params.expireAt) : undefined, request_needed: params?.requireApproval ? true : undefined, usage_limit: params?.limit });
-        return await (0, _3_types_js_1.constructInviteLink)((0, _2_tl_js_1.as)("chatInviteExported", result), __classPrivateFieldGet(this, _ChatManager_c, "f").getEntity);
+        return await (0, _3_types_js_1.constructInviteLink)(_2_tl_js_1.Api.as("chatInviteExported", result), __classPrivateFieldGet(this, _ChatManager_c, "f").getEntity);
     }
     async getCreatedInviteLinks(chatId, params) {
         __classPrivateFieldGet(this, _ChatManager_c, "f").storage.assertUser("getCreatedInviteLinks");
         const { invites } = await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "messages.getExportedChatInvites", peer: await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId), revoked: params?.revoked ? true : undefined, admin_id: params?.by ? await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputUser(params.by) : { _: "inputUserEmpty" }, limit: params?.limit ?? 100, offset_date: params?.afterDate ? (0, _1_utilities_js_1.toUnixTimestamp)(params.afterDate) : undefined, offset_link: params?.afterInviteLink });
-        return await Promise.all(invites.map((v) => (0, _2_tl_js_1.as)("chatInviteExported", v)).map((v) => (0, _3_types_js_1.constructInviteLink)(v, __classPrivateFieldGet(this, _ChatManager_c, "f").getEntity)));
+        return await Promise.all(invites.map((v) => _2_tl_js_1.Api.as("chatInviteExported", v)).map((v) => (0, _3_types_js_1.constructInviteLink)(v, __classPrivateFieldGet(this, _ChatManager_c, "f").getEntity)));
     }
     // JOINING AND LEAVING CHATS //
     async joinChat(chatId) {
@@ -126,7 +126,7 @@ class ChatManager {
         else if ((0, _0_utilities_js_1.canBeInputChannel)(peer)) {
             await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "channels.joinChannel", channel: (0, _0_utilities_js_1.toInputChannel)(peer) });
         }
-        else if ((0, _2_tl_js_1.is)("inputPeerChat", peer)) {
+        else if (_2_tl_js_1.Api.is("inputPeerChat", peer)) {
             await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "messages.addChatUser", chat_id: peer.chat_id, user_id: { _: "inputUserSelf" }, fwd_limit: 0 }); // TODO: use potential high-level method for adding participants to chats
         }
         else {
@@ -141,7 +141,7 @@ class ChatManager {
         else if ((0, _0_utilities_js_1.canBeInputChannel)(peer)) {
             await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "channels.leaveChannel", channel: (0, _0_utilities_js_1.toInputChannel)(peer) });
         }
-        else if ((0, _2_tl_js_1.is)("inputPeerChat", peer)) {
+        else if (_2_tl_js_1.Api.is("inputPeerChat", peer)) {
             await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "messages.deleteChatUser", chat_id: peer.chat_id, user_id: { _: "inputUserSelf" } }); // TODO: use potential high-level method for adding participants to chats
         }
         else {
@@ -151,11 +151,11 @@ class ChatManager {
     // RESTRICTING, BANNING, AND UNBANNING CHAT MEMBERS //
     async banChatMember(chatId, memberId, params) {
         const chat = await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId);
-        if (!((0, _2_tl_js_1.is)("inputPeerChannel", chat)) && !((0, _2_tl_js_1.is)("inputPeerChat", chat))) {
+        if (!(_2_tl_js_1.Api.is("inputPeerChannel", chat)) && !(_2_tl_js_1.Api.is("inputPeerChat", chat))) {
             throw new _0_errors_js_1.InputError("Expected a channel, supergroup, or group ID.");
         }
         const member = await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(memberId);
-        if ((0, _2_tl_js_1.is)("inputPeerChannel", chat)) {
+        if (_2_tl_js_1.Api.is("inputPeerChannel", chat)) {
             if (params?.deleteMessages) {
                 try {
                     await __classPrivateFieldGet(this, _ChatManager_c, "f").messageManager.deleteChatMemberMessages(chatId, memberId);
@@ -182,7 +182,7 @@ class ChatManager {
                 }),
             });
         }
-        else if ((0, _2_tl_js_1.is)("inputPeerChat", chat)) {
+        else if (_2_tl_js_1.Api.is("inputPeerChat", chat)) {
             if (!(0, _0_utilities_js_1.canBeInputUser)(member)) {
                 throw new _0_errors_js_1.InputError(`Invalid user ID: ${memberId}`);
             }
@@ -227,19 +227,19 @@ class ChatManager {
     // CHAT PHOTOS //
     async deleteChatPhoto(chatId) {
         const peer = await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId);
-        if (!((0, _0_utilities_js_1.canBeInputChannel)(peer)) && !((0, _2_tl_js_1.is)("inputPeerChat", peer))) {
+        if (!((0, _0_utilities_js_1.canBeInputChannel)(peer)) && !(_2_tl_js_1.Api.is("inputPeerChat", peer))) {
             (0, _0_deps_js_1.unreachable)();
         }
         if ((0, _0_utilities_js_1.canBeInputChannel)(peer)) {
             await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "channels.editPhoto", channel: (0, _0_utilities_js_1.toInputChannel)(peer), photo: { _: "inputChatPhotoEmpty" } });
         }
-        else if ((0, _2_tl_js_1.is)("inputPeerChat", peer)) {
+        else if (_2_tl_js_1.Api.is("inputPeerChat", peer)) {
             await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "messages.editChatPhoto", chat_id: peer.chat_id, photo: { _: "inputChatPhotoEmpty" } });
         }
     }
     async setChatPhoto(chatId, photo, params) {
         const peer = await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId);
-        if (!((0, _0_utilities_js_1.canBeInputChannel)(peer)) && !((0, _2_tl_js_1.is)("inputPeerChat", peer))) {
+        if (!((0, _0_utilities_js_1.canBeInputChannel)(peer)) && !(_2_tl_js_1.Api.is("inputPeerChat", peer))) {
             (0, _0_deps_js_1.unreachable)();
         }
         const file = await __classPrivateFieldGet(this, _ChatManager_c, "f").fileManager.upload(photo, params);
@@ -247,7 +247,7 @@ class ChatManager {
         if ((0, _0_utilities_js_1.canBeInputChannel)(peer)) {
             await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "channels.editPhoto", channel: (0, _0_utilities_js_1.toInputChannel)(peer), photo: photo_ });
         }
-        else if ((0, _2_tl_js_1.is)("inputPeerChat", peer)) {
+        else if (_2_tl_js_1.Api.is("inputPeerChat", peer)) {
             await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "messages.editChatPhoto", chat_id: peer.chat_id, photo: photo_ });
         }
     }
@@ -255,15 +255,15 @@ class ChatManager {
     async addChatMember(chatId, userId, params) {
         __classPrivateFieldGet(this, _ChatManager_c, "f").storage.assertUser("addChatMember");
         const chat = await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId);
-        if ((0, _2_tl_js_1.isOneOf)(["inputPeerEmpty", "inputPeerSelf", "inputPeerUser", "inputPeerUserFromMessage"], chat)) {
+        if (_2_tl_js_1.Api.isOneOf(["inputPeerEmpty", "inputPeerSelf", "inputPeerUser", "inputPeerUserFromMessage"], chat)) {
             throw new _0_errors_js_1.InputError("Cannot add members to private chats");
         }
         const user = await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputUser(userId);
-        if ((0, _2_tl_js_1.is)("inputPeerChat", chat)) {
+        if (_2_tl_js_1.Api.is("inputPeerChat", chat)) {
             const result = await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "messages.addChatUser", chat_id: chat.chat_id, user_id: user, fwd_limit: params?.historyLimit ?? 0 });
             return result.missing_invitees.map(_3_types_js_1.constructFailedInvitation);
         }
-        else if ((0, _2_tl_js_1.is)("inputPeerChannel", chat)) {
+        else if (_2_tl_js_1.Api.is("inputPeerChannel", chat)) {
             const result = await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "channels.inviteToChannel", channel: { ...chat, _: "inputChannel" }, users: [user] });
             return result.missing_invitees.map(_3_types_js_1.constructFailedInvitation);
         }
@@ -272,14 +272,14 @@ class ChatManager {
     async addChatMembers(chatId, userIds) {
         __classPrivateFieldGet(this, _ChatManager_c, "f").storage.assertUser("addChatMembers");
         const chat = await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId);
-        if ((0, _2_tl_js_1.isOneOf)(["inputPeerEmpty", "inputPeerSelf", "inputPeerUser", "inputPeerUserFromMessage"], chat)) {
+        if (_2_tl_js_1.Api.isOneOf(["inputPeerEmpty", "inputPeerSelf", "inputPeerUser", "inputPeerUserFromMessage"], chat)) {
             throw new _0_errors_js_1.InputError("Cannot add members to private chats");
         }
         const users = new Array();
         for (const userId of userIds) {
             users.push(await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputUser(userId));
         }
-        if ((0, _2_tl_js_1.is)("inputPeerChat", chat)) {
+        if (_2_tl_js_1.Api.is("inputPeerChat", chat)) {
             throw new _0_errors_js_1.InputError("addChatMembers cannot be used with basic groups");
         }
         else if ((0, _0_utilities_js_1.canBeInputChannel)(chat)) {
@@ -302,7 +302,7 @@ class ChatManager {
     }
     async setChatTitle(chatId, title) {
         const peer = await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId);
-        if ((0, _2_tl_js_1.is)("inputPeerChat", peer)) {
+        if (_2_tl_js_1.Api.is("inputPeerChat", peer)) {
             await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "messages.editChatTitle", chat_id: peer.chat_id, title });
         }
         else if ((0, _0_utilities_js_1.canBeInputChannel)(peer)) {
@@ -344,7 +344,7 @@ class ChatManager {
     async deleteChat(chatId) {
         __classPrivateFieldGet(this, _ChatManager_c, "f").storage.assertUser("deleteChat");
         const peer = await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId);
-        if ((0, _2_tl_js_1.is)("inputPeerChat", peer)) {
+        if (_2_tl_js_1.Api.is("inputPeerChat", peer)) {
             await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "messages.deleteChat", chat_id: peer.chat_id });
         }
         else if ((0, _0_utilities_js_1.canBeInputChannel)(peer)) {
@@ -360,7 +360,7 @@ class ChatManager {
         const { chats } = await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "channels.getGroupsForDiscussion" });
         return chats
             .map((v) => {
-            if (!(0, _2_tl_js_1.isOneOf)(["chat", "channel"], v)) {
+            if (!_2_tl_js_1.Api.isOneOf(["chat", "channel"], v)) {
                 return v;
             }
             else {
@@ -377,8 +377,8 @@ class ChatManager {
     async transferChatOwnership(chatId, userId, password) {
         __classPrivateFieldGet(this, _ChatManager_c, "f").storage.assertUser("transferChat");
         const user_id = await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputUser(userId);
-        const isSelf = (0, _2_tl_js_1.is)("inputUserSelf", user_id);
-        if (isSelf || (0, _2_tl_js_1.peerToChatId)(user_id) == await __classPrivateFieldGet(this, _ChatManager_c, "f").getSelfId()) {
+        const isSelf = _2_tl_js_1.Api.is("inputUserSelf", user_id);
+        if (isSelf || _2_tl_js_1.Api.peerToChatId(user_id) == await __classPrivateFieldGet(this, _ChatManager_c, "f").getSelfId()) {
             throw new _0_errors_js_1.InputError("A user ID except that of the current one was expected.");
         }
         const channel = await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputChannel(chatId);

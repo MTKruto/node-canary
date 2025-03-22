@@ -19,7 +19,7 @@
  */
 import { unreachable } from "../0_deps.js";
 import { cleanObject } from "../1_utilities.js";
-import { as, is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { deserializeFileId, FileType, getPhotoFileId, serializeFileId } from "./_file_id.js";
 import { constructMessageEntity } from "./0_message_entity.js";
 import { constructThumbnail } from "./0_thumbnail.js";
@@ -27,7 +27,7 @@ import { getPhotoSizes } from "./1_photo.js";
 import { constructReplyMarkup, replyMarkupToTlObject } from "./3_reply_markup.js";
 export function constructInlineQueryResult(result) {
     const id = result.id, title = result.title ?? "", type = result.type, description = result.description;
-    if (is("botInlineMessageMediaGeo", result.send_message)) {
+    if (Api.is("botInlineMessageMediaGeo", result.send_message)) {
         const geoPoint = result.send_message.geo;
         return cleanObject({
             type: "location",
@@ -41,7 +41,7 @@ export function constructInlineQueryResult(result) {
             proximityAlertRadius: result.send_message.proximity_notification_radius,
         });
     }
-    else if (is("botInlineMessageMediaVenue", result.send_message)) {
+    else if (Api.is("botInlineMessageMediaVenue", result.send_message)) {
         const geoPoint = result.send_message.geo;
         return cleanObject({
             type: "venue",
@@ -54,7 +54,7 @@ export function constructInlineQueryResult(result) {
             foursquareType: result.send_message.venue_type,
         });
     }
-    else if (is("botInlineMessageMediaWebPage", result.send_message) || is("botInlineMessageText", result.send_message)) {
+    else if (Api.is("botInlineMessageMediaWebPage", result.send_message) || Api.is("botInlineMessageText", result.send_message)) {
         return cleanObject({
             type: "article",
             id,
@@ -64,26 +64,26 @@ export function constructInlineQueryResult(result) {
                 type: "text",
                 text: result.send_message.message,
                 entities: (result.send_message.entities ?? []).map(constructMessageEntity).filter((v) => v != null),
-                linkPreview: is("botInlineMessageMediaWebPage", result.send_message) ? { url: result.send_message.url, smallMedia: result.send_message.force_small_media, largeMedia: result.send_message.force_large_media, aboveText: result.send_message.invert_media } : undefined,
+                linkPreview: Api.is("botInlineMessageMediaWebPage", result.send_message) ? { url: result.send_message.url, smallMedia: result.send_message.force_small_media, largeMedia: result.send_message.force_large_media, aboveText: result.send_message.invert_media } : undefined,
             }),
             replyMarkup: result.send_message.reply_markup ? constructReplyMarkup(result.send_message.reply_markup) : undefined,
         });
     }
-    else if (is("botInlineMessageMediaAuto", result.send_message)) {
+    else if (Api.is("botInlineMessageMediaAuto", result.send_message)) {
         let ref;
         let attributes;
         const thumbnailUrl = "thumb" in result ? result.thumb?.url : undefined;
         let photoSizes;
         let photo;
-        if (is("botInlineMediaResult", result)) {
+        if (Api.is("botInlineMediaResult", result)) {
             if (result.photo) {
-                photo = as("photo", result.photo);
+                photo = Api.as("photo", result.photo);
                 ref = { fileId: getPhotoFileId(photo).fileId };
                 const { largest } = photoSizes = getPhotoSizes(photo);
                 attributes = [{ _: "documentAttributeImageSize", w: largest.w, h: largest.h }];
             }
             else if (result.document) {
-                const document = as("document", result.document);
+                const document = Api.as("document", result.document);
                 ref = {
                     fileId: serializeFileId({
                         type: FileType.Document, // Should this be changed? The type is already known.
@@ -115,7 +115,7 @@ export function constructInlineQueryResult(result) {
         const replyMarkup = result.send_message.reply_markup ? constructReplyMarkup(result.send_message.reply_markup) : undefined;
         switch (type) {
             case "audio": {
-                const a = attributes?.find((v) => is("documentAttributeAudio", v));
+                const a = attributes?.find((v) => Api.is("documentAttributeAudio", v));
                 return cleanObject({
                     id,
                     type,
@@ -129,7 +129,7 @@ export function constructInlineQueryResult(result) {
             }
             case "gif":
             case "mpeg4Gif": {
-                const a = attributes.find((v) => is("documentAttributeVideo", v));
+                const a = attributes.find((v) => Api.is("documentAttributeVideo", v));
                 return cleanObject({
                     id,
                     type,
@@ -144,7 +144,7 @@ export function constructInlineQueryResult(result) {
                 });
             }
             case "photo": {
-                const a = attributes.find((v) => is("documentAttributeImageSize", v));
+                const a = attributes.find((v) => Api.is("documentAttributeImageSize", v));
                 return cleanObject({
                     id,
                     type,
@@ -160,7 +160,7 @@ export function constructInlineQueryResult(result) {
                 });
             }
             case "video": {
-                const a = attributes.find((v) => is("documentAttributeVideo", v));
+                const a = attributes.find((v) => Api.is("documentAttributeVideo", v));
                 return cleanObject({
                     id,
                     type,
@@ -177,7 +177,7 @@ export function constructInlineQueryResult(result) {
                 });
             }
             case "voice": {
-                const a = attributes.find((v) => is("documentAttributeAudio", v));
+                const a = attributes.find((v) => Api.is("documentAttributeAudio", v));
                 return cleanObject({
                     id,
                     type,

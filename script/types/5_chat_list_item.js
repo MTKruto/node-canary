@@ -37,7 +37,7 @@ function getChatListItemOrder(lastMessage, pinned) {
     return p + String((BigInt(Math.floor(lastMessage.date.getTime())) << 32n) + BigInt(lastMessage.id));
 }
 async function constructChatListItem(chatId, pinned, lastMessageId, getEntity, getMessage) {
-    const entity = await getEntity((0, _2_tl_js_1.chatIdToPeer)(chatId));
+    const entity = await getEntity(_2_tl_js_1.Api.chatIdToPeer(chatId));
     if (entity == null) {
         return null;
     }
@@ -59,7 +59,7 @@ function constructChatListItem2(entity, pinned, lastMessage) {
     });
 }
 async function constructChatListItem3(chatId, pinned, lastMessage, getEntity) {
-    const entity = await getEntity((0, _2_tl_js_1.chatIdToPeer)(chatId));
+    const entity = await getEntity(_2_tl_js_1.Api.chatIdToPeer(chatId));
     if (entity == null) {
         return null;
     }
@@ -75,13 +75,13 @@ async function constructChatListItem4(dialog, dialogs, pinnedChats, getEntity, g
     if (!topMessage_) {
         (0, _0_deps_js_1.unreachable)();
     }
-    const pinned = pinnedChats.indexOf((0, _2_tl_js_1.peerToChatId)(dialog.peer));
+    const pinned = pinnedChats.indexOf(_2_tl_js_1.Api.peerToChatId(dialog.peer));
     const lastMessage = await (0, _4_message_js_1.constructMessage)(topMessage_, getEntity, getMessage, getStickerSetName, false);
     const order = getChatListItemOrder(lastMessage, pinned);
     const userId = "user_id" in dialog.peer ? dialog.peer.user_id : null;
     const chatId = "chat_id" in dialog.peer ? dialog.peer.chat_id : null;
     const channelId = "channel_id" in dialog.peer ? dialog.peer.channel_id : null;
-    const chat__ = chatId != null ? dialogs.chats.find((v) => (0, _2_tl_js_1.is)("chat", v) && v.id == chatId) : channelId != null ? dialogs.chats.find((v) => (0, _2_tl_js_1.is)("channel", v) && v.id == channelId) : userId != null ? dialogs.users.find((v) => (0, _2_tl_js_1.is)("user", v) && v.id == userId) : (0, _0_deps_js_1.unreachable)();
+    const chat__ = chatId != null ? dialogs.chats.find((v) => _2_tl_js_1.Api.is("chat", v) && v.id == chatId) : channelId != null ? dialogs.chats.find((v) => _2_tl_js_1.Api.is("channel", v) && v.id == channelId) : userId != null ? dialogs.users.find((v) => _2_tl_js_1.Api.is("user", v) && v.id == userId) : (0, _0_deps_js_1.unreachable)();
     if (!chat__) {
         (0, _0_deps_js_1.unreachable)();
     }

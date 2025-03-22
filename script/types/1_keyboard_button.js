@@ -25,11 +25,11 @@ const _0_deps_js_1 = require("../0_deps.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _0_chat_administrator_rights_js_1 = require("./0_chat_administrator_rights.js");
 function constructKeyboardButton(button_) {
-    if ((0, _2_tl_js_1.is)("keyboardButton", button_)) {
+    if (_2_tl_js_1.Api.is("keyboardButton", button_)) {
         return { text: button_.text };
     }
-    else if ((0, _2_tl_js_1.is)("keyboardButtonRequestPeer", button_)) {
-        if ((0, _2_tl_js_1.is)("requestPeerTypeUser", button_.peer_type)) {
+    else if (_2_tl_js_1.Api.is("keyboardButtonRequestPeer", button_)) {
+        if (_2_tl_js_1.Api.is("requestPeerTypeUser", button_.peer_type)) {
             return {
                 text: button_.text,
                 requestUser: {
@@ -39,7 +39,7 @@ function constructKeyboardButton(button_) {
                 },
             };
         }
-        else if ((0, _2_tl_js_1.is)("requestPeerTypeChat", button_.peer_type)) {
+        else if (_2_tl_js_1.Api.is("requestPeerTypeChat", button_.peer_type)) {
             const button = {
                 text: button_.text,
                 requestChat: {
@@ -59,7 +59,7 @@ function constructKeyboardButton(button_) {
             }
             return button;
         }
-        else if ((0, _2_tl_js_1.is)("requestPeerTypeBroadcast", button_.peer_type)) {
+        else if (_2_tl_js_1.Api.is("requestPeerTypeBroadcast", button_.peer_type)) {
             const button = {
                 text: button_.text,
                 requestChat: {
@@ -81,20 +81,20 @@ function constructKeyboardButton(button_) {
             (0, _0_deps_js_1.unreachable)();
         }
     }
-    else if ((0, _2_tl_js_1.is)("keyboardButtonRequestPhone", button_)) {
+    else if (_2_tl_js_1.Api.is("keyboardButtonRequestPhone", button_)) {
         return { text: button_.text, requestContact: true };
     }
-    else if ((0, _2_tl_js_1.is)("keyboardButtonRequestGeoLocation", button_)) {
+    else if (_2_tl_js_1.Api.is("keyboardButtonRequestGeoLocation", button_)) {
         return { text: button_.text, requestLocation: true };
     }
-    else if ((0, _2_tl_js_1.is)("keyboardButtonRequestPoll", button_)) {
+    else if (_2_tl_js_1.Api.is("keyboardButtonRequestPoll", button_)) {
         const button = { text: button_.text, requestPoll: {} };
         if (button_.quiz) {
             button.requestPoll.type = "quiz";
         }
         return button;
     }
-    else if ((0, _2_tl_js_1.is)("keyboardButtonWebView", button_) || (0, _2_tl_js_1.is)("keyboardButtonSimpleWebView", button_)) {
+    else if (_2_tl_js_1.Api.is("keyboardButtonWebView", button_) || _2_tl_js_1.Api.is("keyboardButtonSimpleWebView", button_)) {
         return { text: button_.text, miniApp: { url: button_.url } };
     }
     else {

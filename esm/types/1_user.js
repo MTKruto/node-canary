@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { cleanObject, getColorFromPeerId } from "../1_utilities.js";
-import { is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructChatPhoto } from "./0_chat_photo.js";
 export function constructUser(user_) {
     const id = Number(user_.id);
@@ -40,7 +40,7 @@ export function constructUser(user_) {
         isSupport: user_.support || false,
         addedToAttachmentMenu: user_.attach_menu_enabled || false,
     };
-    if (is("userProfilePhoto", user_.photo)) {
+    if (Api.is("userProfilePhoto", user_.photo)) {
         user.photo = constructChatPhoto(user_.photo, user.id, user_.access_hash ?? 0n);
     }
     return cleanObject(user);

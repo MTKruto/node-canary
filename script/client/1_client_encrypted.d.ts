@@ -17,14 +17,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { Api, DeserializedType } from "../2_tl.js";
+import { Api, Mtproto } from "../2_tl.js";
 import { ClientAbstract } from "./0_client_abstract.js";
 import { ClientAbstractParams } from "./0_client_abstract.js";
 export type ErrorSource = "deserialization" | "decryption" | "unknown";
 export interface Handlers {
     serverSaltReassigned?: (newServerSalt: bigint) => void;
     updates?: (updates: Api.Updates | Api.Update, call: Api.AnyType | null, callback?: () => void) => void;
-    result?: (result: DeserializedType, callback: () => void) => void;
+    result?: (result: Api.DeserializedType, callback: () => void) => void;
     error?: (err: unknown, source: ErrorSource) => void;
 }
 /**
@@ -48,6 +48,6 @@ export declare class ClientEncrypted extends ClientAbstract {
     get authKey(): Uint8Array;
     set serverSalt(serverSalt: bigint);
     get serverSalt(): bigint;
-    invoke<T extends Api.AnyObject, R = T extends Api.AnyGenericFunction<infer X> ? Api.ReturnType<X> : T["_"] extends keyof Api.Functions ? Api.ReturnType<T> extends never ? Api.ReturnType<Api.Functions[T["_"]]> : never : never>(function_: T, noWait?: boolean): Promise<R | void>;
+    invoke<T extends Api.AnyObject | Mtproto.AnyObject, R = T["_"] extends keyof Mtproto.Functions ? Mtproto.ReturnType<T> extends never ? Mtproto.ReturnType<Mtproto.Functions[T["_"]]> : never : T extends Api.AnyGenericFunction<infer X> ? Api.ReturnType<X> : T["_"] extends keyof Api.Functions ? Api.ReturnType<T> extends never ? Api.ReturnType<Api.Functions[T["_"]]> : never : never>(function_: T, noWait?: boolean): Promise<R | void>;
 }
 //# sourceMappingURL=1_client_encrypted.d.ts.map

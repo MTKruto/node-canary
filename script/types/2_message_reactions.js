@@ -41,7 +41,7 @@ async function constructMessageReactions(update, getEntity) {
     if (!entity) {
         return null;
     }
-    if ((0, _2_tl_js_1.is)("user", entity)) {
+    if (_2_tl_js_1.Api.is("user", entity)) {
         user = (0, _1_user_js_1.constructUser)(entity);
     }
     else {

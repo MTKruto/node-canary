@@ -17,10 +17,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { as } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructLocation } from "./0_location.js";
 export function constructVenue(media_) {
-    const geo = as("geoPoint", media_.geo);
+    const geo = Api.as("geoPoint", media_.geo);
     return {
         location: constructLocation(geo),
         title: media_.title,

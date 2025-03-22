@@ -27,7 +27,7 @@ const _0_message_entity_js_1 = require("./0_message_entity.js");
 const _1_chat_p_js_1 = require("./1_chat_p.js");
 const _3_gift_js_1 = require("./3_gift.js");
 function constructClaimedGift(savedStarGift, fromPeer) {
-    if (fromPeer && !(0, _2_tl_js_1.isOneOf)(["user", "chat", "channel"], fromPeer)) {
+    if (fromPeer && !_2_tl_js_1.Api.isOneOf(["user", "chat", "channel"], fromPeer)) {
         (0, _0_deps_js_1.unreachable)();
     }
     const gift = (0, _3_gift_js_1.constructGift)(savedStarGift.gift);

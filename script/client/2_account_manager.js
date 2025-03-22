@@ -55,7 +55,7 @@ class AccountManager {
     async reorderUsernames(id, order) {
         __classPrivateFieldGet(this, _AccountManager_c, "f").storage.assertUser("reorderUsernames");
         const peer = await __classPrivateFieldGet(this, _AccountManager_c, "f").getInputPeer(id);
-        if ((0, _2_tl_js_1.is)("inputPeerSelf", peer)) {
+        if (_2_tl_js_1.Api.is("inputPeerSelf", peer)) {
             return await __classPrivateFieldGet(this, _AccountManager_c, "f").invoke({ _: "account.reorderUsernames", order });
         }
         else if ((0, _0_utilities_js_1.canBeInputUser)(peer)) {
@@ -111,10 +111,10 @@ class AccountManager {
     async getContacts() {
         __classPrivateFieldGet(this, _AccountManager_c, "f").storage.assertUser("getContacts");
         const result = await __classPrivateFieldGet(this, _AccountManager_c, "f").invoke({ _: "contacts.getContacts", hash: 0n });
-        if (!(0, _2_tl_js_1.is)("contacts.contacts", result)) {
+        if (!_2_tl_js_1.Api.is("contacts.contacts", result)) {
             (0, _0_deps_js_1.unreachable)();
         }
-        return result.users.map((v) => (0, _2_tl_js_1.is)("user", v) ? (0, _3_types_js_1.constructUser)(v) : null).filter((v) => v != null);
+        return result.users.map((v) => _2_tl_js_1.Api.is("user", v) ? (0, _3_types_js_1.constructUser)(v) : null).filter((v) => v != null);
     }
     async deleteContacts(userIds) {
         __classPrivateFieldGet(this, _AccountManager_c, "f").storage.assertUser("deleteContacts");
@@ -128,10 +128,10 @@ class AccountManager {
     async addContact(userId, params) {
         __classPrivateFieldGet(this, _AccountManager_c, "f").storage.assertUser("addContact");
         const id = await __classPrivateFieldGet(this, _AccountManager_c, "f").getInputUser(userId);
-        if (!(0, _2_tl_js_1.is)("inputPeerUser", id)) {
+        if (!_2_tl_js_1.Api.is("inputPeerUser", id)) {
             (0, _0_deps_js_1.unreachable)();
         }
-        const user = await __classPrivateFieldGet(this, _AccountManager_c, "f").getEntity((0, _2_tl_js_1.inputPeerToPeer)(id));
+        const user = await __classPrivateFieldGet(this, _AccountManager_c, "f").getEntity(_2_tl_js_1.Api.inputPeerToPeer(id));
         if (!user || !("first_name" in user)) {
             (0, _0_deps_js_1.unreachable)();
         }
@@ -145,8 +145,8 @@ class AccountManager {
         __classPrivateFieldGet(this, _AccountManager_c, "f").storage.assertUser("updateProfile");
         const selfId = await __classPrivateFieldGet(this, _AccountManager_c, "f").getSelfId();
         const userFull = await __classPrivateFieldGet(this, _AccountManager_instances, "m", _AccountManager_getUserFull).call(this, selfId);
-        const entity = await __classPrivateFieldGet(this, _AccountManager_c, "f").getEntity((0, _2_tl_js_1.chatIdToPeer)(selfId));
-        if (!(0, _2_tl_js_1.is)("user", entity)) {
+        const entity = await __classPrivateFieldGet(this, _AccountManager_c, "f").getEntity(_2_tl_js_1.Api.chatIdToPeer(selfId));
+        if (!_2_tl_js_1.Api.is("user", entity)) {
             (0, _0_deps_js_1.unreachable)();
         }
         params ??= {};
@@ -218,7 +218,7 @@ class AccountManager {
 exports.AccountManager = AccountManager;
 _AccountManager_c = new WeakMap(), _AccountManager_instances = new WeakSet(), _AccountManager_toggleUsername = async function _AccountManager_toggleUsername(id, username, active) {
     const peer = await __classPrivateFieldGet(this, _AccountManager_c, "f").getInputPeer(id);
-    if ((0, _2_tl_js_1.is)("inputPeerSelf", peer)) {
+    if (_2_tl_js_1.Api.is("inputPeerSelf", peer)) {
         await __classPrivateFieldGet(this, _AccountManager_c, "f").invoke({ _: "account.toggleUsername", username, active });
     }
     else if ((0, _0_utilities_js_1.canBeInputUser)(peer)) {
@@ -235,7 +235,7 @@ _AccountManager_c = new WeakMap(), _AccountManager_instances = new WeakSet(), _A
     const chatId_ = await __classPrivateFieldGet(this, _AccountManager_c, "f").getInputPeerChatId(inputPeer);
     let fullChat = await __classPrivateFieldGet(this, _AccountManager_c, "f").storage.getFullChat(chatId_);
     if (fullChat != null) {
-        if (!(0, _2_tl_js_1.is)("userFull", fullChat)) {
+        if (!_2_tl_js_1.Api.is("userFull", fullChat)) {
             (0, _0_deps_js_1.unreachable)();
         }
         return fullChat;

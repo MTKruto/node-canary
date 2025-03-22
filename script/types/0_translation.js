@@ -22,13 +22,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.constructTranslation = constructTranslation;
 const _2_tl_js_1 = require("../2_tl.js");
 function constructTranslation(langPackString) {
-    if ((0, _2_tl_js_1.is)("langPackString", langPackString)) {
+    if (_2_tl_js_1.Api.is("langPackString", langPackString)) {
         return {
             key: langPackString.key,
             value: langPackString.value,
         };
     }
-    else if ((0, _2_tl_js_1.is)("langPackStringPluralized", langPackString)) {
+    else if (_2_tl_js_1.Api.is("langPackStringPluralized", langPackString)) {
         return {
             key: langPackString.key,
             value: langPackString.other_value,

@@ -57,7 +57,7 @@ class PollManager {
         await __classPrivateFieldGet(this, _PollManager_instances, "m", _PollManager_voteInner).call(this, chatId, messageId, []);
     }
     canHandleUpdate(update) {
-        return (0, _2_tl_js_1.isOneOf)(pollManagerUpdates, update);
+        return _2_tl_js_1.Api.isOneOf(pollManagerUpdates, update);
     }
     async handleUpdate(update) {
         await __classPrivateFieldGet(this, _PollManager_c, "f").storage.setPollResults(update.poll_id, update.results);
@@ -99,13 +99,13 @@ _PollManager_c = new WeakMap(), _PollManager_instances = new WeakSet(), _PollMan
         throw new _0_errors_js_1.InputError("The same options are already casted.");
     }
     const peer = await __classPrivateFieldGet(this, _PollManager_c, "f").getInputPeer(chatId);
-    const chatId_ = (0, _2_tl_js_1.peerToChatId)(peer);
+    const chatId_ = _2_tl_js_1.Api.peerToChatId(peer);
     const message_ = await __classPrivateFieldGet(this, _PollManager_c, "f").messageStorage.getMessage(chatId_, messageId);
-    if (!(0, _2_tl_js_1.is)("message", message_)) {
+    if (!_2_tl_js_1.Api.is("message", message_)) {
         (0, _0_deps_js_1.unreachable)();
     }
     const media = message_.media;
-    if (!(0, _2_tl_js_1.is)("messageMediaPoll", media)) {
+    if (!_2_tl_js_1.Api.is("messageMediaPoll", media)) {
         (0, _0_deps_js_1.unreachable)();
     }
     const poll = media.poll;

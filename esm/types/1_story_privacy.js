@@ -18,12 +18,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 async function resolveUsers(ids, getEntity) {
     const users = new Array();
     for (const id of ids) {
         const entity = await getEntity({ _: "peerUser", user_id: BigInt(id) });
-        if (!(is("user", entity))) {
+        if (!(Api.is("user", entity))) {
             unreachable();
         }
         else {
@@ -61,16 +61,16 @@ export async function storyPrivacyToTlObject(privacy, getEntity) {
     return rules;
 }
 export function constructStoryPrivacy(privacy) {
-    const except = privacy.find((v) => is("privacyValueDisallowUsers", v))?.users?.map(Number) ?? [];
-    if (privacy.some((v) => is("privacyValueAllowAll", v))) {
+    const except = privacy.find((v) => Api.is("privacyValueDisallowUsers", v))?.users?.map(Number) ?? [];
+    if (privacy.some((v) => Api.is("privacyValueAllowAll", v))) {
         return { everyoneExcept: except };
     }
-    else if (privacy.some((v) => is("privacyValueAllowContacts", v))) {
+    else if (privacy.some((v) => Api.is("privacyValueAllowContacts", v))) {
         return { contactsExcept: except };
     }
-    else if (privacy.some((v) => is("privacyValueAllowCloseFriends", v))) {
+    else if (privacy.some((v) => Api.is("privacyValueAllowCloseFriends", v))) {
         return { closeFriends: true };
     }
-    const only = privacy.find((v) => is("privacyValueAllowUsers", v))?.users?.map(Number) ?? [];
+    const only = privacy.find((v) => Api.is("privacyValueAllowUsers", v))?.users?.map(Number) ?? [];
     return { only };
 }

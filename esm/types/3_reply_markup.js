@@ -19,7 +19,7 @@
  */
 import { unreachable } from "../0_deps.js";
 import { cleanObject } from "../1_utilities.js";
-import { is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructKeyboardButton, keyboardButtonToTlObject } from "./1_keyboard_button.js";
 import { constructInlineKeyboardButton, inlineKeyboardButtonToTlObject } from "./2_inline_keyboard_button.js";
 function constructInlineKeyboardMarkup(keyboard_) {
@@ -92,16 +92,16 @@ function forceReplyToTlObject(replyMarkup) {
     return { _: "replyKeyboardForceReply", selective: replyMarkup.selective || undefined, placeholder: replyMarkup.inputFieldPlaceholder };
 }
 export function constructReplyMarkup(replyMarkup) {
-    if (is("replyKeyboardMarkup", replyMarkup)) {
+    if (Api.is("replyKeyboardMarkup", replyMarkup)) {
         return constructReplyKeyboardMarkup(replyMarkup);
     }
-    else if (is("replyInlineMarkup", replyMarkup)) {
+    else if (Api.is("replyInlineMarkup", replyMarkup)) {
         return constructInlineKeyboardMarkup(replyMarkup);
     }
-    else if (is("replyKeyboardHide", replyMarkup)) {
+    else if (Api.is("replyKeyboardHide", replyMarkup)) {
         return constructReplyKeyboardRemove(replyMarkup);
     }
-    else if (is("replyKeyboardForceReply", replyMarkup)) {
+    else if (Api.is("replyKeyboardForceReply", replyMarkup)) {
         return constructForceReply(replyMarkup);
     }
     else {

@@ -32,7 +32,7 @@ var _AccountManager_instances, _AccountManager_c, _AccountManager_toggleUsername
 import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { toUnixTimestamp } from "../1_utilities.js";
-import { chatIdToPeer, inputPeerToPeer, is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { birthdayToTlObject, constructInactiveChat, constructUser } from "../3_types.js";
 import { canBeInputChannel, canBeInputUser, toInputChannel, toInputUser } from "./0_utilities.js";
 export class AccountManager {
@@ -52,7 +52,7 @@ export class AccountManager {
     async reorderUsernames(id, order) {
         __classPrivateFieldGet(this, _AccountManager_c, "f").storage.assertUser("reorderUsernames");
         const peer = await __classPrivateFieldGet(this, _AccountManager_c, "f").getInputPeer(id);
-        if (is("inputPeerSelf", peer)) {
+        if (Api.is("inputPeerSelf", peer)) {
             return await __classPrivateFieldGet(this, _AccountManager_c, "f").invoke({ _: "account.reorderUsernames", order });
         }
         else if (canBeInputUser(peer)) {
@@ -108,10 +108,10 @@ export class AccountManager {
     async getContacts() {
         __classPrivateFieldGet(this, _AccountManager_c, "f").storage.assertUser("getContacts");
         const result = await __classPrivateFieldGet(this, _AccountManager_c, "f").invoke({ _: "contacts.getContacts", hash: 0n });
-        if (!is("contacts.contacts", result)) {
+        if (!Api.is("contacts.contacts", result)) {
             unreachable();
         }
-        return result.users.map((v) => is("user", v) ? constructUser(v) : null).filter((v) => v != null);
+        return result.users.map((v) => Api.is("user", v) ? constructUser(v) : null).filter((v) => v != null);
     }
     async deleteContacts(userIds) {
         __classPrivateFieldGet(this, _AccountManager_c, "f").storage.assertUser("deleteContacts");
@@ -125,10 +125,10 @@ export class AccountManager {
     async addContact(userId, params) {
         __classPrivateFieldGet(this, _AccountManager_c, "f").storage.assertUser("addContact");
         const id = await __classPrivateFieldGet(this, _AccountManager_c, "f").getInputUser(userId);
-        if (!is("inputPeerUser", id)) {
+        if (!Api.is("inputPeerUser", id)) {
             unreachable();
         }
-        const user = await __classPrivateFieldGet(this, _AccountManager_c, "f").getEntity(inputPeerToPeer(id));
+        const user = await __classPrivateFieldGet(this, _AccountManager_c, "f").getEntity(Api.inputPeerToPeer(id));
         if (!user || !("first_name" in user)) {
             unreachable();
         }
@@ -142,8 +142,8 @@ export class AccountManager {
         __classPrivateFieldGet(this, _AccountManager_c, "f").storage.assertUser("updateProfile");
         const selfId = await __classPrivateFieldGet(this, _AccountManager_c, "f").getSelfId();
         const userFull = await __classPrivateFieldGet(this, _AccountManager_instances, "m", _AccountManager_getUserFull).call(this, selfId);
-        const entity = await __classPrivateFieldGet(this, _AccountManager_c, "f").getEntity(chatIdToPeer(selfId));
-        if (!is("user", entity)) {
+        const entity = await __classPrivateFieldGet(this, _AccountManager_c, "f").getEntity(Api.chatIdToPeer(selfId));
+        if (!Api.is("user", entity)) {
             unreachable();
         }
         params ??= {};
@@ -214,7 +214,7 @@ export class AccountManager {
 }
 _AccountManager_c = new WeakMap(), _AccountManager_instances = new WeakSet(), _AccountManager_toggleUsername = async function _AccountManager_toggleUsername(id, username, active) {
     const peer = await __classPrivateFieldGet(this, _AccountManager_c, "f").getInputPeer(id);
-    if (is("inputPeerSelf", peer)) {
+    if (Api.is("inputPeerSelf", peer)) {
         await __classPrivateFieldGet(this, _AccountManager_c, "f").invoke({ _: "account.toggleUsername", username, active });
     }
     else if (canBeInputUser(peer)) {
@@ -231,7 +231,7 @@ _AccountManager_c = new WeakMap(), _AccountManager_instances = new WeakSet(), _A
     const chatId_ = await __classPrivateFieldGet(this, _AccountManager_c, "f").getInputPeerChatId(inputPeer);
     let fullChat = await __classPrivateFieldGet(this, _AccountManager_c, "f").storage.getFullChat(chatId_);
     if (fullChat != null) {
-        if (!is("userFull", fullChat)) {
+        if (!Api.is("userFull", fullChat)) {
             unreachable();
         }
         return fullChat;

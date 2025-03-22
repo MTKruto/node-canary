@@ -42,7 +42,7 @@ const _0_message_js_1 = require("./0_message.js");
 const COMPRESSION_THRESHOLD = 1024;
 // global ClientEncrypted ID counter for logs
 let id = 0;
-const RPC_ERROR = _2_tl_js_1.Api.schema.definitions["rpc_error"][0];
+const RPC_ERROR = _2_tl_js_1.Mtproto.schema.definitions["rpc_error"][0];
 /**
  * An MTProto client for making encrypted connections. Most users won't need to interact with this. Used internally by `Client`.
  *
@@ -129,10 +129,19 @@ class ClientEncrypted extends _0_client_abstract_js_1.ClientAbstract {
     }
     async invoke(function_, noWait) {
         const messageId = __classPrivateFieldGet(this, _ClientEncrypted_instances, "m", _ClientEncrypted_nextMessageId).call(this);
-        let body = (0, _2_tl_js_1.serializeTelegramObject)(function_);
+        let body;
+        if (_2_tl_js_1.Mtproto.isValidObject(function_)) {
+            body = _2_tl_js_1.Mtproto.serializeObject(function_);
+        }
+        else if (_2_tl_js_1.Api.isValidObject(function_)) {
+            body = _2_tl_js_1.Api.serializeObject(function_);
+        }
+        else {
+            (0, _0_deps_js_1.unreachable)();
+        }
         if (body.length > COMPRESSION_THRESHOLD) {
             body = new _2_tl_js_1.TLWriter()
-                .writeInt32(_2_tl_js_1.GZIP_PACKED, false)
+                .writeInt32(_2_tl_js_1.Mtproto.GZIP_PACKED, false)
                 .writeBytes(await (0, _1_utilities_js_1.gzip)(body))
                 .buffer;
         }
@@ -149,7 +158,7 @@ class ClientEncrypted extends _0_client_abstract_js_1.ClientAbstract {
                 _: "message",
                 msg_id: __classPrivateFieldGet(this, _ClientEncrypted_instances, "m", _ClientEncrypted_nextMessageId).call(this),
                 seqno: __classPrivateFieldGet(this, _ClientEncrypted_instances, "m", _ClientEncrypted_nextSeqNo).call(this, false),
-                body: (0, _2_tl_js_1.serializeTelegramObject)({ _: "msgs_ack", msg_ids: __classPrivateFieldGet(this, _ClientEncrypted_toAcknowledge, "f").splice(0, 8192) }),
+                body: _2_tl_js_1.Mtproto.serializeObject({ _: "msgs_ack", msg_ids: __classPrivateFieldGet(this, _ClientEncrypted_toAcknowledge, "f").splice(0, 8192) }),
             };
             __classPrivateFieldGet(this, _ClientEncrypted_recentAcks, "f").set(ack.msg_id, { container, message: ack });
             message_ = {
@@ -295,10 +304,10 @@ async function _ClientEncrypted_receiveLoop() {
     }
     let reader = new _2_tl_js_1.TLReader(body);
     const id = reader.readInt32(false);
-    if (id == _2_tl_js_1.GZIP_PACKED) {
+    if (id == _2_tl_js_1.Mtproto.GZIP_PACKED) {
         reader = new _2_tl_js_1.TLReader(await (0, _1_utilities_js_1.gunzip)(reader.readBytes()));
     }
-    else if (id == _2_tl_js_1.RPC_RESULT) {
+    else if (id == _2_tl_js_1.Mtproto.RPC_RESULT) {
         await __classPrivateFieldGet(this, _ClientEncrypted_instances, "m", _ClientEncrypted_handleRpcResult).call(this, reader);
     }
     else {
@@ -314,7 +323,7 @@ async function _ClientEncrypted_receiveLoop() {
         return;
     }
     let id = reader.readInt32(false);
-    if (id == _2_tl_js_1.GZIP_PACKED) {
+    if (id == _2_tl_js_1.Mtproto.GZIP_PACKED) {
         reader = new _2_tl_js_1.TLReader(await (0, _1_utilities_js_1.gunzip)(reader.readBytes()));
         id = reader.readInt32(false);
         reader.unreadInt32();
@@ -324,21 +333,21 @@ async function _ClientEncrypted_receiveLoop() {
     }
     // deno-lint-ignore no-explicit-any
     let call = promise?.call ?? null;
-    while ((0, _2_tl_js_1.isGenericFunction)(call)) {
+    while (_2_tl_js_1.Api.isGenericFunction(call)) {
         call = call.query;
     }
     // deno-lint-ignore no-explicit-any
     let result;
     if (id == RPC_ERROR) {
-        result = await (0, _2_tl_js_1.deserializeTelegramType)("rpc_error", reader);
+        result = await _2_tl_js_1.Mtproto.deserializeType("rpc_error", reader);
         __classPrivateFieldGet(this, _ClientEncrypted_LreceiveLoop, "f").debug("RPCResult:", result.error_code, result.error_message);
     }
     else {
-        result = await (0, _2_tl_js_1.deserializeTelegramType)((0, _2_tl_js_1.mustGetReturnType)(call._), reader);
+        result = await _2_tl_js_1.Api.deserializeType(_2_tl_js_1.Api.mustGetReturnType(call._), reader);
         __classPrivateFieldGet(this, _ClientEncrypted_LreceiveLoop, "f").debug("RPCResult:", Array.isArray(result) ? "Array" : typeof result === "object" ? result._ : result);
     }
     const resolvePromise = () => {
-        if ((0, _2_tl_js_1.is)("rpc_error", result)) {
+        if (_2_tl_js_1.Mtproto.is("rpc_error", result)) {
             promise.reject?.((0, _4_errors_js_1.constructTelegramError)(result, promise.call));
         }
         else {
@@ -346,32 +355,38 @@ async function _ClientEncrypted_receiveLoop() {
         }
         __classPrivateFieldGet(this, _ClientEncrypted_promises, "f").delete(messageId);
     };
-    if ((0, _2_tl_js_1.isOfEnum)("Updates", result) || (0, _2_tl_js_1.isOfEnum)("Update", result)) {
+    if (_2_tl_js_1.Api.isOfEnum("Updates", result) || _2_tl_js_1.Api.isOfEnum("Update", result)) {
         (0, _1_utilities_js_1.drop)(this.handlers.updates?.(result, call, resolvePromise));
     }
     else {
         (0, _1_utilities_js_1.drop)(this.handlers.result?.(result, resolvePromise));
     }
 }, _ClientEncrypted_handleType = async function _ClientEncrypted_handleType(message, reader) {
-    const body = await (0, _2_tl_js_1.deserializeTelegramType)(_2_tl_js_1.X, reader);
+    let body;
+    try {
+        body = await _2_tl_js_1.Mtproto.deserializeType(_2_tl_js_1.X, reader);
+    }
+    catch {
+        body = await _2_tl_js_1.Api.deserializeType(_2_tl_js_1.X, reader);
+    }
     __classPrivateFieldGet(this, _ClientEncrypted_LreceiveLoop, "f").debug("received", (0, _2_tl_js_1.repr)(body));
     let sendAck = true;
-    if ((0, _2_tl_js_1.isOfEnum)("Updates", body) || (0, _2_tl_js_1.isOfEnum)("Update", body)) {
+    if (_2_tl_js_1.Api.isOfEnum("Updates", body) || _2_tl_js_1.Api.isOfEnum("Update", body)) {
         (0, _1_utilities_js_1.drop)(this.handlers.updates?.(body, null));
     }
-    else if ((0, _2_tl_js_1.is)("new_session_created", body)) {
+    else if (_2_tl_js_1.Mtproto.is("new_session_created", body)) {
         this.serverSalt = body.server_salt;
         (0, _1_utilities_js_1.drop)(this.handlers.serverSaltReassigned?.(this.serverSalt));
         __classPrivateFieldGet(this, _ClientEncrypted_LreceiveLoop, "f").debug("new session created with ID", body.unique_id);
     }
-    else if ((0, _2_tl_js_1.is)("pong", body)) {
+    else if (_2_tl_js_1.Mtproto.is("pong", body)) {
         const promise = __classPrivateFieldGet(this, _ClientEncrypted_promises, "f").get(body.msg_id);
         if (promise) {
             promise.resolve?.(body);
             __classPrivateFieldGet(this, _ClientEncrypted_promises, "f").delete(body.msg_id);
         }
     }
-    else if ((0, _2_tl_js_1.is)("bad_server_salt", body)) {
+    else if (_2_tl_js_1.Mtproto.is("bad_server_salt", body)) {
         sendAck = false;
         __classPrivateFieldGet(this, _ClientEncrypted_LreceiveLoop, "f").debug("server salt reassigned");
         this.serverSalt = body.new_server_salt;
@@ -397,7 +412,7 @@ async function _ClientEncrypted_receiveLoop() {
             }
         }
     }
-    else if ((0, _2_tl_js_1.is)("bad_msg_notification", body)) {
+    else if (_2_tl_js_1.Mtproto.is("bad_msg_notification", body)) {
         sendAck = false;
         let low = false;
         switch (body.error_code) {
@@ -431,7 +446,7 @@ async function _ClientEncrypted_receiveLoop() {
             __classPrivateFieldGet(this, _ClientEncrypted_promises, "f").delete(body.bad_msg_id);
         }
     }
-    else if ((0, _2_tl_js_1.isOneOf)(["msg_detailed_info", "msg_new_detailed_info"], body)) {
+    else if (_2_tl_js_1.Mtproto.isOneOf(["msg_detailed_info", "msg_new_detailed_info"], body)) {
         sendAck = false;
         __classPrivateFieldGet(this, _ClientEncrypted_toAcknowledge, "f").push(body.answer_msg_id);
     }

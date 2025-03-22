@@ -46,8 +46,8 @@ class BusinessConnectionManager {
         const connection_ = await __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").messageStorage.getBusinessConnection(id);
         if (!connection_) {
             const connection_ = await __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").invoke({ _: "account.getBotBusinessConnection", connection_id: id })
-                .then((v) => (0, _2_tl_js_1.as)("updates", v))
-                .then((v) => (0, _2_tl_js_1.as)("updateBotBusinessConnect", v.updates[0]).connection);
+                .then((v) => _2_tl_js_1.Api.as("updates", v))
+                .then((v) => _2_tl_js_1.Api.as("updateBotBusinessConnect", v.updates[0]).connection);
             await __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").messageStorage.setBusinessConnection(id, connection_);
             return await (0, _3_types_js_1.constructBusinessConnection)(connection_, __classPrivateFieldGet(this, _BusinessConnectionManager_c, "f").getEntity);
         }
@@ -56,7 +56,7 @@ class BusinessConnectionManager {
         }
     }
     canHandleUpdate(update) {
-        return (0, _2_tl_js_1.isOneOf)(businessConnectionManagerUpdates, update);
+        return _2_tl_js_1.Api.isOneOf(businessConnectionManagerUpdates, update);
     }
     async handleUpdate(update) {
         if (update.connection.disabled) {

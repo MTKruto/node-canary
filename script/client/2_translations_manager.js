@@ -49,7 +49,7 @@ class TranslationsManager {
         __classPrivateFieldSet(this, _TranslationsManager_c, c, "f");
     }
     canHandleUpdate(update) {
-        return (0, _2_tl_js_1.isOneOf)(translationsManagerUpdates, update);
+        return _2_tl_js_1.Api.isOneOf(translationsManagerUpdates, update);
     }
     async getTranslations(params) {
         __classPrivateFieldGet(this, _TranslationsManager_c, "f").storage.assertUser("getTranslations");
@@ -67,12 +67,12 @@ class TranslationsManager {
         if (!__classPrivateFieldGet(this, _TranslationsManager_c, "f").langPack) {
             return null;
         }
-        if ((0, _2_tl_js_1.is)("updateLangPackTooLong", update)) {
+        if (_2_tl_js_1.Api.is("updateLangPackTooLong", update)) {
             await __classPrivateFieldGet(this, _TranslationsManager_instances, "m", _TranslationsManager_updateTranslations).call(this, __classPrivateFieldGet(this, _TranslationsManager_c, "f").langPack, update.lang_code);
             const translations = await __classPrivateFieldGet(this, _TranslationsManager_instances, "m", _TranslationsManager_getTranslationsInner).call(this, __classPrivateFieldGet(this, _TranslationsManager_c, "f").langPack, update.lang_code, true);
             return { platform: __classPrivateFieldGet(this, _TranslationsManager_c, "f").langPack, language: update.lang_code, translations };
         }
-        else if ((0, _2_tl_js_1.is)("updateLangPack", update)) {
+        else if (_2_tl_js_1.Api.is("updateLangPack", update)) {
             if (!__classPrivateFieldGet(this, _TranslationsManager_c, "f").langCode) {
                 return null;
             }
@@ -153,7 +153,7 @@ _TranslationsManager_c = new WeakMap(), _TranslationsManager_updateTranslationsQ
     }
 }, _TranslationsManager_applyLangPackDifference = function _TranslationsManager_applyLangPackDifference(translations, strings) {
     for (const string of strings) {
-        if ((0, _2_tl_js_1.is)("langPackStringDeleted", string)) {
+        if (_2_tl_js_1.Api.is("langPackStringDeleted", string)) {
             translations = translations.filter((v) => v.key != string.key);
         }
         else {

@@ -43,7 +43,7 @@ class GiftManager {
     }
     async getGifts() {
         const gifts = await __classPrivateFieldGet(this, _GiftManager_c, "f").invoke({ _: "payments.getStarGifts", hash: 0 });
-        if (!((0, _2_tl_js_1.is)("payments.starGifts", gifts))) {
+        if (!(_2_tl_js_1.Api.is("payments.starGifts", gifts))) {
             (0, _0_deps_js_1.unreachable)();
         }
         return gifts.gifts.map(_3_types_js_1.constructGift);

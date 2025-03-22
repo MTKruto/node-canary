@@ -47,7 +47,7 @@ function constructChatSettings(settings_) {
         photoChangeDate: settings_.settings.photo_change_date ? (0, _1_utilities_js_1.fromUnixTimestamp)(settings_.settings.photo_change_date) : undefined,
     };
     const bot = settings_.users.find((v) => v.id == settings_.settings.business_bot_id);
-    if ((0, _2_tl_js_1.is)("user", bot)) {
+    if (_2_tl_js_1.Api.is("user", bot)) {
         settings.businessBot = (0, _1_user_js_1.constructUser)(bot);
     }
     return (0, _1_utilities_js_1.cleanObject)(settings);

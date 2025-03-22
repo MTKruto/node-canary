@@ -19,19 +19,19 @@
  */
 import { unreachable } from "../0_deps.js";
 import { base64EncodeUrlSafe, cleanObject } from "../1_utilities.js";
-import { is, serializeTelegramObject } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructLocation } from "./0_location.js";
 import { constructUser } from "./1_user.js";
 export async function constructChosenInlineResult(ubis, getEntity) {
     const entity = await getEntity({ ...ubis, _: "peerUser" });
-    if (!entity || !(is("user", entity))) {
+    if (!entity || !(Api.is("user", entity))) {
         unreachable();
     }
     return cleanObject({
         resultId: ubis.id,
         from: constructUser(entity),
-        location: is("geoPoint", ubis.geo) ? constructLocation(ubis.geo) : undefined,
-        inlineMessageId: ubis.msg_id === undefined ? undefined : base64EncodeUrlSafe(serializeTelegramObject(ubis.msg_id)),
+        location: Api.is("geoPoint", ubis.geo) ? constructLocation(ubis.geo) : undefined,
+        inlineMessageId: ubis.msg_id === undefined ? undefined : base64EncodeUrlSafe(Api.serializeObject(ubis.msg_id)),
         query: ubis.query,
     });
 }

@@ -26,19 +26,19 @@ const _file_id_js_1 = require("./_file_id.js");
 const _1_photo_js_1 = require("./1_photo.js");
 const _1_video_js_1 = require("./1_video.js");
 function constructStoryContent(media) {
-    if ((0, _2_tl_js_1.is)("messageMediaPhoto", media)) {
+    if (_2_tl_js_1.Api.is("messageMediaPhoto", media)) {
         if (!media.photo) {
             (0, _0_deps_js_1.unreachable)();
         }
-        const photo = (0, _1_photo_js_1.constructPhoto)((0, _2_tl_js_1.as)("photo", media.photo));
+        const photo = (0, _1_photo_js_1.constructPhoto)(_2_tl_js_1.Api.as("photo", media.photo));
         return { photo };
     }
-    else if ((0, _2_tl_js_1.is)("messageMediaDocument", media)) {
+    else if (_2_tl_js_1.Api.is("messageMediaDocument", media)) {
         const document = media.document;
-        if (!((0, _2_tl_js_1.is)("document", document))) {
+        if (!(_2_tl_js_1.Api.is("document", document))) {
             (0, _0_deps_js_1.unreachable)();
         }
-        const video = document.attributes.find((v) => (0, _2_tl_js_1.is)("documentAttributeVideo", v));
+        const video = document.attributes.find((v) => _2_tl_js_1.Api.is("documentAttributeVideo", v));
         if (!video) {
             (0, _0_deps_js_1.unreachable)();
         }

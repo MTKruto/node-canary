@@ -23,17 +23,17 @@ exports.constructLocation = constructLocation;
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 function constructLocation(geo_) {
-    if ((0, _2_tl_js_1.is)("messageMediaGeo", geo_)) {
-        const geo = (0, _2_tl_js_1.as)("geoPoint", geo_.geo);
+    if (_2_tl_js_1.Api.is("messageMediaGeo", geo_)) {
+        const geo = _2_tl_js_1.Api.as("geoPoint", geo_.geo);
         return (0, _1_utilities_js_1.cleanObject)({
             latitude: geo.lat,
             longitude: geo.long,
             horizontalAccuracy: geo.accuracy_radius,
         });
     }
-    else if ((0, _2_tl_js_1.is)("messageMediaGeoLive", geo_)) {
+    else if (_2_tl_js_1.Api.is("messageMediaGeoLive", geo_)) {
         const media = geo_;
-        const geo = (0, _2_tl_js_1.as)("geoPoint", media.geo);
+        const geo = _2_tl_js_1.Api.as("geoPoint", media.geo);
         return (0, _1_utilities_js_1.cleanObject)({
             latitude: geo.lat,
             longitude: geo.long,

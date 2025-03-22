@@ -31,7 +31,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _GiftManager_c;
 import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
-import { is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructClaimedGifts, constructGift } from "../3_types.js";
 export class GiftManager {
     constructor(c) {
@@ -40,7 +40,7 @@ export class GiftManager {
     }
     async getGifts() {
         const gifts = await __classPrivateFieldGet(this, _GiftManager_c, "f").invoke({ _: "payments.getStarGifts", hash: 0 });
-        if (!(is("payments.starGifts", gifts))) {
+        if (!(Api.is("payments.starGifts", gifts))) {
             unreachable();
         }
         return gifts.gifts.map(constructGift);

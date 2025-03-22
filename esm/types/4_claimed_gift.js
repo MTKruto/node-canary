@@ -19,12 +19,12 @@
  */
 import { unreachable } from "../0_deps.js";
 import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
-import { isOneOf } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructMessageEntity } from "./0_message_entity.js";
 import { constructChatP } from "./1_chat_p.js";
 import { constructGift } from "./3_gift.js";
 export function constructClaimedGift(savedStarGift, fromPeer) {
-    if (fromPeer && !isOneOf(["user", "chat", "channel"], fromPeer)) {
+    if (fromPeer && !Api.isOneOf(["user", "chat", "channel"], fromPeer)) {
         unreachable();
     }
     const gift = constructGift(savedStarGift.gift);

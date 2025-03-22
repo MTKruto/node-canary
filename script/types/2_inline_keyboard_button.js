@@ -27,19 +27,19 @@ const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _0_mini_app_info_js_1 = require("./0_mini_app_info.js");
 function constructInlineKeyboardButton(button_) {
-    if ((0, _2_tl_js_1.is)("keyboardButtonUrl", button_)) {
+    if (_2_tl_js_1.Api.is("keyboardButtonUrl", button_)) {
         return { text: button_.text, url: button_.url };
     }
-    else if ((0, _2_tl_js_1.is)("keyboardButtonCallback", button_)) {
+    else if (_2_tl_js_1.Api.is("keyboardButtonCallback", button_)) {
         return { text: button_.text, callbackData: new TextDecoder().decode(button_.data) };
     }
-    else if ((0, _2_tl_js_1.is)("keyboardButtonWebView", button_) || (0, _2_tl_js_1.is)("keyboardButtonSimpleWebView", button_)) {
+    else if (_2_tl_js_1.Api.is("keyboardButtonWebView", button_) || _2_tl_js_1.Api.is("keyboardButtonSimpleWebView", button_)) {
         return { text: button_.text, miniApp: (0, _0_mini_app_info_js_1.constructMiniAppInfo)(button_.url) };
     }
-    else if ((0, _2_tl_js_1.is)("keyboardButtonUrlAuth", button_)) {
+    else if (_2_tl_js_1.Api.is("keyboardButtonUrlAuth", button_)) {
         return { text: button_.text, loginUrl: { url: button_.url, forwardText: button_.fwd_text } };
     }
-    else if ((0, _2_tl_js_1.is)("keyboardButtonSwitchInline", button_)) {
+    else if (_2_tl_js_1.Api.is("keyboardButtonSwitchInline", button_)) {
         if (button_.same_peer) {
             return { text: button_.text, switchInlineQueryCurrentChat: button_.query };
         }
@@ -54,16 +54,16 @@ function constructInlineKeyboardButton(button_) {
             return { text: button_.text, switchInlineQuery: button_.query };
         }
     }
-    else if ((0, _2_tl_js_1.is)("keyboardButtonBuy", button_)) {
+    else if (_2_tl_js_1.Api.is("keyboardButtonBuy", button_)) {
         return { text: button_.text, pay: true };
     }
-    else if ((0, _2_tl_js_1.is)("keyboardButtonGame", button_)) {
+    else if (_2_tl_js_1.Api.is("keyboardButtonGame", button_)) {
         return { text: button_.text, callbackGame: {} };
     }
-    else if ((0, _2_tl_js_1.is)("keyboardButtonCopy", button_)) {
+    else if (_2_tl_js_1.Api.is("keyboardButtonCopy", button_)) {
         return { text: button_.text, copy: button_.copy_text };
     }
-    else if ((0, _2_tl_js_1.is)("keyboardButtonRequestPeer", button_)) {
+    else if (_2_tl_js_1.Api.is("keyboardButtonRequestPeer", button_)) {
         (0, _0_deps_js_1.unreachable)();
     }
     else {

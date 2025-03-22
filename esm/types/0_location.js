@@ -18,19 +18,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { cleanObject } from "../1_utilities.js";
-import { as, is } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 export function constructLocation(geo_) {
-    if (is("messageMediaGeo", geo_)) {
-        const geo = as("geoPoint", geo_.geo);
+    if (Api.is("messageMediaGeo", geo_)) {
+        const geo = Api.as("geoPoint", geo_.geo);
         return cleanObject({
             latitude: geo.lat,
             longitude: geo.long,
             horizontalAccuracy: geo.accuracy_radius,
         });
     }
-    else if (is("messageMediaGeoLive", geo_)) {
+    else if (Api.is("messageMediaGeoLive", geo_)) {
         const media = geo_;
-        const geo = as("geoPoint", media.geo);
+        const geo = Api.as("geoPoint", media.geo);
         return cleanObject({
             latitude: geo.lat,
             longitude: geo.long,

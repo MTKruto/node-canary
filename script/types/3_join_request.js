@@ -37,7 +37,7 @@ async function constructJoinRequest(update, getEntity) {
         (0, _0_deps_js_1.unreachable)();
     }
     const user = (0, _1_user_js_1.constructUser)(user_);
-    const inviteLink = update.invite && (0, _2_tl_js_1.is)("chatInviteExported", update.invite) ? await (0, _2_invite_link_js_1.constructInviteLink)(update.invite, getEntity) : undefined;
+    const inviteLink = update.invite && _2_tl_js_1.Api.is("chatInviteExported", update.invite) ? await (0, _2_invite_link_js_1.constructInviteLink)(update.invite, getEntity) : undefined;
     return (0, _1_utilities_js_1.cleanObject)({
         chat,
         user,

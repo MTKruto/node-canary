@@ -26,61 +26,61 @@ const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 function constructMessageEntity(obj) {
-    if ((0, _2_tl_js_1.is)("messageEntityMention", obj)) {
+    if (_2_tl_js_1.Api.is("messageEntityMention", obj)) {
         return { type: "mention", offset: obj.offset, length: obj.length };
     }
-    else if ((0, _2_tl_js_1.is)("messageEntityHashtag", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntityHashtag", obj)) {
         return { type: "hashtag", offset: obj.offset, length: obj.length };
     }
-    else if ((0, _2_tl_js_1.is)("messageEntityBotCommand", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntityBotCommand", obj)) {
         return { type: "botCommand", offset: obj.offset ?? 0, length: obj.length };
     }
-    else if ((0, _2_tl_js_1.is)("messageEntityUrl", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntityUrl", obj)) {
         return { type: "url", offset: obj.offset, length: obj.length };
     }
-    else if ((0, _2_tl_js_1.is)("messageEntityEmail", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntityEmail", obj)) {
         return { type: "email", offset: obj.offset, length: obj.length };
     }
-    else if ((0, _2_tl_js_1.is)("messageEntityBold", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntityBold", obj)) {
         return { type: "bold", offset: obj.offset, length: obj.length };
     }
-    else if ((0, _2_tl_js_1.is)("messageEntityItalic", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntityItalic", obj)) {
         return { type: "italic", offset: obj.offset, length: obj.length };
     }
-    else if ((0, _2_tl_js_1.is)("messageEntityCode", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntityCode", obj)) {
         return { type: "code", offset: obj.offset, length: obj.length };
     }
-    else if ((0, _2_tl_js_1.is)("messageEntityPre", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntityPre", obj)) {
         return { type: "pre", offset: obj.offset, length: obj.length, language: obj.language };
     }
-    else if ((0, _2_tl_js_1.is)("messageEntityTextUrl", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntityTextUrl", obj)) {
         return { type: "textLink", offset: obj.offset, length: obj.length, url: obj.url };
     }
-    else if ((0, _2_tl_js_1.is)("messageEntityMentionName", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntityMentionName", obj)) {
         return { type: "textMention", offset: obj.offset, length: obj.length, userId: Number(obj.user_id) };
     }
-    else if ((0, _2_tl_js_1.is)("messageEntityCashtag", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntityCashtag", obj)) {
         return { type: "cashtag", offset: obj.offset, length: obj.length };
     }
-    else if ((0, _2_tl_js_1.is)("messageEntityPhone", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntityPhone", obj)) {
         return { type: "phoneNumber", offset: obj.offset, length: obj.length };
     }
-    else if ((0, _2_tl_js_1.is)("messageEntityUnderline", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntityUnderline", obj)) {
         return { type: "underline", offset: obj.offset, length: obj.length };
     }
-    else if ((0, _2_tl_js_1.is)("messageEntityStrike", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntityStrike", obj)) {
         return { type: "strikethrough", offset: obj.offset, length: obj.length };
     }
-    else if ((0, _2_tl_js_1.is)("messageEntityBlockquote", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntityBlockquote", obj)) {
         return (0, _1_utilities_js_1.cleanObject)({ type: "blockquote", offset: obj.offset, length: obj.length, collapsible: obj.collapsed ? true : undefined });
     }
-    else if ((0, _2_tl_js_1.is)("messageEntityBankCard", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntityBankCard", obj)) {
         return { type: "bankCard", offset: obj.offset, length: obj.length };
     }
-    else if ((0, _2_tl_js_1.is)("messageEntitySpoiler", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntitySpoiler", obj)) {
         return { type: "spoiler", offset: obj.offset, length: obj.length };
     }
-    else if ((0, _2_tl_js_1.is)("messageEntityCustomEmoji", obj)) {
+    else if (_2_tl_js_1.Api.is("messageEntityCustomEmoji", obj)) {
         return { type: "customEmoji", offset: obj.offset, length: obj.length, customEmojiId: String(obj.document_id) };
     }
     else {

@@ -32,7 +32,7 @@ var _MessageManager_instances, _a, _MessageManager_c, _MessageManager_LresolveFi
 import { contentType, unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { getLogger, getRandomId, toUnixTimestamp } from "../1_utilities.js";
-import { as, getChannelChatId, is, isOneOf, peerToChatId } from "../2_tl.js";
+import { Api } from "../2_tl.js";
 import { constructVoiceTranscription, deserializeFileId, isMessageType, selfDestructOptionToInt } from "../3_types.js";
 import { assertMessageType, constructMessage as constructMessage_, deserializeInlineMessageId, FileType, messageEntityToTlObject, reactionEqual, reactionToTlObject, replyMarkupToTlObject } from "../3_types.js";
 import { messageSearchFilterToTlObject } from "../types/0_message_search_filter.js";
@@ -65,7 +65,7 @@ export class MessageManager {
             configurable: true,
             writable: true,
             value: async (v) => {
-                const inputPeer = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(v).then((v) => as("inputPeerUser", v));
+                const inputPeer = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(v).then((v) => Api.as("inputPeerUser", v));
                 return { ...inputPeer, _: "inputUser" };
             }
         });
@@ -92,18 +92,18 @@ export class MessageManager {
         }
         if (shouldFetch) {
             if (canBeInputChannel(peer)) {
-                messages_ = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "channels.getMessages", channel: toInputChannel(peer), id: messageIds.map((v) => ({ _: "inputMessageID", id: v })) }).then((v) => as("messages.channelMessages", v).messages);
+                messages_ = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "channels.getMessages", channel: toInputChannel(peer), id: messageIds.map((v) => ({ _: "inputMessageID", id: v })) }).then((v) => Api.as("messages.channelMessages", v).messages);
             }
             else {
                 messages_ = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({
                     _: "messages.getMessages",
                     id: messageIds.map((v) => ({ _: "inputMessageID", id: v })),
-                }).then((v) => as("messages.messages", v).messages);
+                }).then((v) => Api.as("messages.messages", v).messages);
             }
         }
         const messages = new Array();
         for (const message_ of messages_) {
-            if (is("messageEmpty", message_)) {
+            if (Api.is("messageEmpty", message_)) {
                 continue;
             }
             const message = await this.constructMessage(message_);
@@ -165,30 +165,30 @@ export class MessageManager {
     }
     async updatesToMessages(chatId, updates, businessConnectionId) {
         const messages = new Array();
-        if (is("updates", updates)) {
+        if (Api.is("updates", updates)) {
             for (const update of updates.updates) {
-                if ("message" in update && is("messageEmpty", update.message)) {
+                if ("message" in update && Api.is("messageEmpty", update.message)) {
                     continue;
                 }
-                if (is("updateNewMessage", update) || is("updateEditMessage", update) || is("updateNewScheduledMessage", update)) {
+                if (Api.is("updateNewMessage", update) || Api.is("updateEditMessage", update) || Api.is("updateNewScheduledMessage", update)) {
                     const message = await this.constructMessage(update.message);
-                    if (is("updateNewScheduledMessage", update)) {
+                    if (Api.is("updateNewScheduledMessage", update)) {
                         message.scheduled = true;
                     }
                     messages.push(message);
                 }
-                else if (is("updateNewChannelMessage", update) || is("updateEditChannelMessage", update)) {
+                else if (Api.is("updateNewChannelMessage", update) || Api.is("updateEditChannelMessage", update)) {
                     messages.push(await this.constructMessage(update.message));
                 }
-                else if (is("updateBotNewBusinessMessage", update)) {
+                else if (Api.is("updateBotNewBusinessMessage", update)) {
                     messages.push(await this.constructMessage(update.message, false, { connectionId: businessConnectionId ?? update.connection_id, replyToMessage: update.reply_to_message }));
                 }
-                else if (is("updateBotEditBusinessMessage", update)) {
+                else if (Api.is("updateBotEditBusinessMessage", update)) {
                     messages.push(await this.constructMessage(update.message, false, { connectionId: businessConnectionId ?? update.connection_id, replyToMessage: update.reply_to_message }));
                 }
             }
         }
-        else if (is("updateShortSentMessage", updates)) {
+        else if (Api.is("updateShortSentMessage", updates)) {
             const message = await this.getMessage(chatId, updates.id);
             if (message != null) {
                 messages.push(message);
@@ -197,7 +197,7 @@ export class MessageManager {
         return messages;
     }
     async constructMessage(message_, r, business) {
-        const mediaPoll = "media" in message_ && is("messageMediaPoll", message_.media) ? message_.media : null;
+        const mediaPoll = "media" in message_ && Api.is("messageMediaPoll", message_.media) ? message_.media : null;
         const pollId = mediaPoll?.poll.id;
         let poll = null;
         let pollResults = null;
@@ -779,23 +779,25 @@ export class MessageManager {
         }
     }
     canHandleUpdate(update) {
-        return isOneOf(messageManagerUpdates, update);
+        return Api.isOneOf(messageManagerUpdates, update);
     }
     async handleUpdate(update) {
-        if (is("updateNewMessage", update) || is("updateNewChannelMessage", update) || is("updateEditMessage", update) || is("updateEditChannelMessage", update)) {
-            if (is("message", update.message) || is("messageService", update.message)) {
-                const chatId = peerToChatId(update.message.peer_id);
+        if (Api.is("updateNewMessage", update) || Api.is("updateNewChannelMessage", update) || Api.is("updateEditMessage", update) || Api.is("updateEditChannelMessage", update)) {
+            if (Api.is("message", update.message) || Api.is("messageService", update.message)) {
+                const chatId = Api.peerToChatId(update.message.peer_id);
                 await __classPrivateFieldGet(this, _MessageManager_c, "f").messageStorage.setMessage(chatId, update.message.id, update.message);
             }
         }
-        if (is("updateNewMessage", update) ||
-            is("updateNewChannelMessage", update) ||
-            is("updateEditMessage", update) ||
-            is("updateEditChannelMessage", update) ||
-            is("updateBotNewBusinessMessage", update) ||
-            is("updateBotEditBusinessMessage", update) ||
-            is("updateNewScheduledMessage", update)) {
-            if (!(is("messageEmpty", update.message))) {
+        if (Api.isOneOf([
+            "updateNewMessage",
+            "updateNewChannelMessage",
+            "updateEditMessage",
+            "updateEditChannelMessage",
+            "updateBotNewBusinessMessage",
+            "updateBotEditBusinessMessage",
+            "updateNewScheduledMessage",
+        ], update)) {
+            if (!(Api.is("messageEmpty", update.message))) {
                 const isOutgoing = update.message.out;
                 let shouldIgnore = false;
                 if (isOutgoing) {
@@ -806,7 +808,7 @@ export class MessageManager {
                         shouldIgnore = true;
                     }
                     else if (__classPrivateFieldGet(this, _MessageManager_c, "f").outgoingMessages == "business") {
-                        if (!is("updateBotNewBusinessMessage", update) && !is("updateBotEditBusinessMessage", update)) {
+                        if (!Api.is("updateBotNewBusinessMessage", update) && !Api.is("updateBotEditBusinessMessage", update)) {
                             shouldIgnore = true;
                         }
                     }
@@ -814,10 +816,10 @@ export class MessageManager {
                 if (!shouldIgnore) {
                     const business = "connection_id" in update ? { connectionId: update.connection_id, replyToMessage: update.reply_to_message } : undefined;
                     const message = await this.constructMessage(update.message, undefined, business);
-                    if (is("updateNewMessage", update) || is("updateNewChannelMessage", update) || is("updateBotNewBusinessMessage", update)) {
+                    if (Api.is("updateNewMessage", update) || Api.is("updateNewChannelMessage", update) || Api.is("updateBotNewBusinessMessage", update)) {
                         return { message };
                     }
-                    else if (is("updateNewScheduledMessage", update)) {
+                    else if (Api.is("updateNewScheduledMessage", update)) {
                         message.scheduled = true;
                         return { scheduledMessage: message };
                     }
@@ -827,7 +829,7 @@ export class MessageManager {
                 }
             }
         }
-        if (is("updateDeleteMessages", update)) {
+        if (Api.is("updateDeleteMessages", update)) {
             const deletedMessages = new Array();
             for (const messageId of update.messages) {
                 const chatId = await __classPrivateFieldGet(this, _MessageManager_c, "f").messageStorage.getMessageChat(messageId);
@@ -839,8 +841,8 @@ export class MessageManager {
                 return { deletedMessages };
             }
         }
-        else if (is("updateDeleteChannelMessages", update)) {
-            const chatId = getChannelChatId(update.channel_id);
+        else if (Api.is("updateDeleteChannelMessages", update)) {
+            const chatId = Api.getChannelChatId(update.channel_id);
             const deletedMessages = new Array();
             for (const messageId of update.messages) {
                 const message = await __classPrivateFieldGet(this, _MessageManager_c, "f").messageStorage.getMessage(chatId, messageId);
@@ -850,17 +852,17 @@ export class MessageManager {
             }
             return { deletedMessages };
         }
-        else if (is("updateDeleteScheduledMessages", update)) {
-            const chatId = peerToChatId(update.peer);
+        else if (Api.is("updateDeleteScheduledMessages", update)) {
+            const chatId = Api.peerToChatId(update.peer);
             const deletedMessages = update.messages.map((v) => ({ chatId, messageId: v }));
             return { deletedMessages, scheduled: true };
         }
-        else if (is("updateBotDeleteBusinessMessage", update)) {
-            const chatId = peerToChatId(update.peer);
+        else if (Api.is("updateBotDeleteBusinessMessage", update)) {
+            const chatId = Api.peerToChatId(update.peer);
             const deletedMessages = update.messages.map((v) => ({ chatId, messageId: v }));
             return { deletedMessages, businessConnectionId: update.connection_id };
         }
-        if (is("updateTranscribedAudio", update)) {
+        if (Api.is("updateTranscribedAudio", update)) {
             const voiceTranscription = constructVoiceTranscription(update);
             await __classPrivateFieldGet(this, _MessageManager_c, "f").messageStorage.setVoiceTranscription(voiceTranscription);
             return { voiceTranscription };
@@ -925,7 +927,7 @@ export class MessageManager {
     async blockUser(userId) {
         __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertUser("blockUser");
         const id = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(userId);
-        if (!(is("user", id))) {
+        if (!(Api.is("user", id))) {
             throw new InputError("Only users can be blocked or unblocked.");
         }
         await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "contacts.block", id });
@@ -933,7 +935,7 @@ export class MessageManager {
     async unblockUser(userId) {
         __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertUser("unblockUser");
         const id = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(userId);
-        if (!(is("user", id))) {
+        if (!(Api.is("user", id))) {
             throw new InputError("Only users can be blocked or unblocked.");
         }
         await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "contacts.unblock", id });
@@ -1075,14 +1077,14 @@ export class MessageManager {
         }
         const peer = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId);
         for (const [i, media_] of multiMedia.entries()) {
-            if (is("inputMediaUploadedPhoto", media_.media)) {
-                const result = as("messageMediaPhoto", await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.uploadMedia", media: media_.media, peer }));
-                const photo = as("photo", result.photo);
+            if (Api.is("inputMediaUploadedPhoto", media_.media)) {
+                const result = Api.as("messageMediaPhoto", await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.uploadMedia", media: media_.media, peer }));
+                const photo = Api.as("photo", result.photo);
                 multiMedia[i] = { ...media_, media: { _: "inputMediaPhoto", id: { ...photo, _: "inputPhoto" } } };
             }
-            else if (is("inputMediaUploadedDocument", media_.media)) {
-                const result = as("messageMediaDocument", await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.uploadMedia", media: media_.media, peer }));
-                const document = as("document", result.document);
+            else if (Api.is("inputMediaUploadedDocument", media_.media)) {
+                const result = Api.as("messageMediaDocument", await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.uploadMedia", media: media_.media, peer }));
+                const document = Api.as("document", result.document);
                 multiMedia[i] = { ...media_, media: { _: "inputMediaDocument", id: { ...document, _: "inputDocument" } } };
             }
         }
@@ -1195,7 +1197,7 @@ export class MessageManager {
             if (isNaN(Number(parts[2]))) {
                 return null;
             }
-            peer = getChannelChatId(BigInt(peer));
+            peer = Api.getChannelChatId(BigInt(peer));
         }
         else {
             if (parts.length > 3) {
@@ -1274,7 +1276,7 @@ _a = MessageManager, _MessageManager_c = new WeakMap(), _MessageManager_Lresolve
     if (typeof document === "string") {
         const fileId = this.resolveFileId(document, fileType);
         if (fileId != null) {
-            media = { _: "inputMediaDocument", id: { ...fileId, _: "inputDocument" }, spoiler, query: otherAttribs.find((v) => is("documentAttributeSticker", v))?.alt || undefined, ttl_seconds };
+            media = { _: "inputMediaDocument", id: { ...fileId, _: "inputDocument" }, spoiler, query: otherAttribs.find((v) => Api.is("documentAttributeSticker", v))?.alt || undefined, ttl_seconds };
         }
     }
     if (media == null) {
@@ -1296,7 +1298,7 @@ _a = MessageManager, _MessageManager_c = new WeakMap(), _MessageManager_Lresolve
                 }
                 return name;
             });
-            if (is("inputFileStoryDocument", file)) {
+            if (Api.is("inputFileStoryDocument", file)) {
                 unreachable();
             }
             let thumb = undefined;
@@ -1362,7 +1364,7 @@ _a = MessageManager, _MessageManager_c = new WeakMap(), _MessageManager_Lresolve
     if (typeof document === "string") {
         const fileId = this.resolveFileId(document, fileType);
         if (fileId != null) {
-            media_ = { _: "inputMediaDocument", id: { ...fileId, _: "inputDocument" }, spoiler, query: otherAttribs.find((v) => is("documentAttributeSticker", v))?.alt || undefined };
+            media_ = { _: "inputMediaDocument", id: { ...fileId, _: "inputDocument" }, spoiler, query: otherAttribs.find((v) => Api.is("documentAttributeSticker", v))?.alt || undefined };
         }
     }
     if (media_ == null) {
@@ -1378,7 +1380,7 @@ _a = MessageManager, _MessageManager_c = new WeakMap(), _MessageManager_Lresolve
                 }
                 return name;
             });
-            if (is("inputFileStoryDocument", file)) {
+            if (Api.is("inputFileStoryDocument", file)) {
                 unreachable();
             }
             let thumb = undefined;

@@ -204,10 +204,10 @@ class StorageOperations {
     async getChannelAccessHash(id) {
         const channel = await this.getEntity(id);
         if (channel) {
-            if (!((0, _2_tl_js_1.is)("channel", channel)) && !(0, _2_tl_js_1.is)("channelForbidden", channel)) {
+            if (!(_2_tl_js_1.Api.is("channel", channel)) && !_2_tl_js_1.Api.is("channelForbidden", channel)) {
                 (0, _0_deps_js_1.unreachable)();
             }
-            if ((0, _2_tl_js_1.is)("channel", channel) && channel.min) {
+            if (_2_tl_js_1.Api.is("channel", channel) && channel.min) {
                 return null;
             }
             return typeof channel.access_hash === "bigint" ? channel.access_hash : null;
@@ -219,7 +219,7 @@ class StorageOperations {
     async getUserAccessHash(id) {
         const user = await this.getEntity(id);
         if (user) {
-            if (!(0, _2_tl_js_1.is)("user", user)) {
+            if (!_2_tl_js_1.Api.is("user", user)) {
                 (0, _0_deps_js_1.unreachable)();
             }
             if (user.min) {
@@ -246,15 +246,15 @@ class StorageOperations {
             await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(key, null);
         }
         else {
-            await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(key, __classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? [value._, (0, _1_utilities_js_1.rleEncode)((0, _2_tl_js_1.serializeTelegramObject)(value))] : value);
+            await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(key, __classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? [value._, (0, _1_utilities_js_1.rleEncode)(_2_tl_js_1.Api.serializeObject(value))] : value);
         }
     }
     async getTlObject(keyOrBuffer) {
         // @ts-ignore: TBD
-        const buffer = (keyOrBuffer instanceof Uint8Array || (0, _2_tl_js_1.isValidType)(keyOrBuffer)) ? keyOrBuffer : await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(keyOrBuffer);
+        const buffer = (keyOrBuffer instanceof Uint8Array || _2_tl_js_1.Api.isValidObject(keyOrBuffer)) ? keyOrBuffer : await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(keyOrBuffer);
         if (buffer != null) {
             if (Array.isArray(buffer)) {
-                return await (0, _2_tl_js_1.deserializeTelegramType)(buffer[0], (0, _1_utilities_js_1.rleDecode)(buffer[1]));
+                return await _2_tl_js_1.Api.deserializeType(buffer[0], (0, _1_utilities_js_1.rleDecode)(buffer[1]));
             }
             else {
                 return buffer;
@@ -302,7 +302,7 @@ class StorageOperations {
         return __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(exports.K.updates.channelPts(channelId));
     }
     async setEntity(entity) {
-        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.peer((0, _2_tl_js_1.peerToChatId)(entity)), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)((0, _2_tl_js_1.serializeTelegramObject)(entity)) : entity, new Date()]);
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.peer(_2_tl_js_1.Api.peerToChatId(entity)), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)(_2_tl_js_1.Api.serializeObject(entity)) : entity, new Date()]);
     }
     async getEntity(key) {
         const peer_ = await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(exports.K.cache.peer(key));
@@ -435,7 +435,7 @@ class StorageOperations {
         await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.file(id), [partCount, chunkSize]);
     }
     async setCustomEmojiDocument(id, document) {
-        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.customEmojiDocument(id), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)((0, _2_tl_js_1.serializeTelegramObject)(document)) : document, new Date()]);
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.customEmojiDocument(id), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)(_2_tl_js_1.Api.serializeObject(document)) : document, new Date()]);
     }
     async getCustomEmojiDocument(id) {
         const v = await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(exports.K.cache.customEmojiDocument(id));
@@ -447,7 +447,7 @@ class StorageOperations {
         }
     }
     async setBusinessConnection(id, connection) {
-        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.businessConnection(id), connection == null ? null : __classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)((0, _2_tl_js_1.serializeTelegramObject)(connection)) : connection);
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.businessConnection(id), connection == null ? null : __classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)(_2_tl_js_1.Api.serializeObject(connection)) : connection);
     }
     async getBusinessConnection(id) {
         const v = await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(exports.K.cache.businessConnection(id));
@@ -459,26 +459,26 @@ class StorageOperations {
         }
     }
     async setInlineQueryAnswer(userId, chatId, query, offset, results, date) {
-        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.inlineQueryAnswer(userId, chatId, query, offset), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)((0, _2_tl_js_1.serializeTelegramObject)(results)) : results, date]);
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.inlineQueryAnswer(userId, chatId, query, offset), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)(_2_tl_js_1.Api.serializeObject(results)) : results, date]);
     }
     async getInlineQueryAnswer(userId, chatId, query, offset) {
         const peer_ = await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(exports.K.cache.inlineQueryAnswer(userId, chatId, query, offset));
         if (peer_ != null) {
             const [obj_, date] = peer_;
-            return [(0, _2_tl_js_1.as)("messages.botResults", await this.getTlObject(obj_)), date];
+            return [_2_tl_js_1.Api.as("messages.botResults", await this.getTlObject(obj_)), date];
         }
         else {
             return null;
         }
     }
     async setCallbackQueryAnswer(chatId, messageId, question, answer) {
-        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.callbackQueryAnswer(chatId, messageId, question), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)((0, _2_tl_js_1.serializeTelegramObject)(answer)) : answer, new Date()]);
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.callbackQueryAnswer(chatId, messageId, question), [__classPrivateFieldGet(this, _StorageOperations_mustSerialize, "f") ? (0, _1_utilities_js_1.rleEncode)(_2_tl_js_1.Api.serializeObject(answer)) : answer, new Date()]);
     }
     async getCallbackQueryAnswer(chatId, messageId, question) {
         const peer_ = await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(exports.K.cache.callbackQueryAnswer(chatId, messageId, question));
         if (peer_ != null) {
             const [obj_, date] = peer_;
-            return [(0, _2_tl_js_1.as)("messages.botCallbackAnswer", await this.getTlObject(obj_)), date];
+            return [_2_tl_js_1.Api.as("messages.botCallbackAnswer", await this.getTlObject(obj_)), date];
         }
         else {
             return null;

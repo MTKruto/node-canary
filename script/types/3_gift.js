@@ -29,7 +29,7 @@ const _file_id_js_1 = require("./_file_id.js");
 const _1_sticker_js_1 = require("./1_sticker.js");
 const _2_gift_upgraded_component_js_1 = require("./2_gift_upgraded_component.js");
 function constructGift(gift) {
-    if ((0, _2_tl_js_1.is)("starGiftUnique", gift)) {
+    if (_2_tl_js_1.Api.is("starGiftUnique", gift)) {
         return constructGiftUpgraded(gift);
     }
     else {
@@ -56,7 +56,7 @@ function constructGiftUpgraded(gift) {
     };
 }
 function constructGiftNonUpgraded(gift) {
-    if (!(0, _2_tl_js_1.is)("document", gift.sticker)) {
+    if (!_2_tl_js_1.Api.is("document", gift.sticker)) {
         (0, _0_deps_js_1.unreachable)();
     }
     const id = String(gift.id);

@@ -57,7 +57,7 @@ function isOneOf(typeNames, value) {
     return typeNames.some((v) => is(v, value));
 }
 function isOfEnum(enumName, value) {
-    return !isValidType(value) || _1_api_js_1.schema.definitions[value._][2] != enumName;
+    return isValidType(value) && _1_api_js_1.schema.definitions[value._][2] == enumName;
 }
 function as(typeName, value) {
     if (is(typeName, value)) {

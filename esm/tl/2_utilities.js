@@ -41,7 +41,7 @@ export function isOneOf(typeNames, value) {
     return typeNames.some((v) => is(v, value));
 }
 export function isOfEnum(enumName, value) {
-    return !isValidType(value) || schema_.definitions[value._][2] != enumName;
+    return isValidType(value) && schema_.definitions[value._][2] == enumName;
 }
 export function as(typeName, value) {
     if (is(typeName, value)) {

@@ -92,7 +92,9 @@ class ClientEncrypted extends _0_client_abstract_js_1.ClientAbstract {
         __classPrivateFieldSet(this, _ClientEncrypted_Linvoke, L.branch("invoke"), "f");
         __classPrivateFieldSet(this, _ClientEncrypted_LpingLoop, L.branch("pingLoop"), "f");
         this.stateChangeHandler = () => {
-            (0, _1_utilities_js_1.drop)(__classPrivateFieldGet(this, _ClientEncrypted_instances, "m", _ClientEncrypted_reconnect).call(this));
+            setTimeout(() => {
+                (0, _1_utilities_js_1.drop)(__classPrivateFieldGet(this, _ClientEncrypted_instances, "m", _ClientEncrypted_reconnect).call(this));
+            });
         };
     }
     async connect() {

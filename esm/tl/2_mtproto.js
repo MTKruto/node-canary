@@ -18,7 +18,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 // deno-lint-ignore-file no-explicit-any
-import { gunzip } from "../1_utilities.js";
 import { schema } from "./1_mtproto_api.js";
 import { TLReader } from "./1_tl_reader.js";
 import { TLWriter } from "./1_tl_writer.js";
@@ -26,16 +25,8 @@ import { as as as_, assertIsValidObject as assertIsValidObject_, is as is_, isOf
 export * from "./1_mtproto_api.js";
 export async function deserializeType(name, bufferOrReader) {
     const reader = bufferOrReader instanceof Uint8Array ? new TLReader(bufferOrReader) : bufferOrReader;
-    const id = reader.readInt32(false);
-    if (id == GZIP_PACKED) {
-        const buffer = await gunzip(reader.readBytes());
-        return await deserializeType(name, buffer);
-    }
-    reader.unreadInt32();
     return await reader.readType(name, schema);
 }
-export const GZIP_PACKED = 0x3072CFA1;
-export const RPC_RESULT = 0xF35C6D01;
 export function serializeObject(object) {
     return new TLWriter().writeObject(object, schema).buffer;
 }

@@ -29,47 +29,38 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _ClientPlain_publicKeys, _ClientPlain_lastMessageId;
+var _ClientPlain_publicKeys;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClientPlain = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
-const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
+const _3_transport_js_1 = require("../3_transport.js");
 const _4_constants_js_1 = require("../4_constants.js");
+const _4_session_js_1 = require("../4_session.js");
 const _0_client_abstract_js_1 = require("./0_client_abstract.js");
-const _0_message_js_1 = require("./0_message.js");
 const L = (0, _1_utilities_js_1.getLogger)("ClientPlain");
 const LcreateAuthKey = L.branch("createAuthKey");
 /**
  * An MTProto client for making plain connections. Most users won't need to interact with this. Used internally for creating authorization keys.
  */
 class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
-    constructor(params) {
-        super(params);
+    constructor(dc, params) {
+        super();
         _ClientPlain_publicKeys.set(this, void 0);
-        _ClientPlain_lastMessageId.set(this, 0n);
+        Object.defineProperty(this, "session", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         __classPrivateFieldSet(this, _ClientPlain_publicKeys, params?.publicKeys ?? _4_constants_js_1.PUBLIC_KEYS, "f");
+        this.session = new _4_session_js_1.SessionPlain(dc, params);
     }
     async invoke(function_) {
-        if (!this.transport) {
-            throw new _0_errors_js_1.ConnectionError("Not connected.");
-        }
-        const messageId = __classPrivateFieldSet(this, _ClientPlain_lastMessageId, (0, _0_message_js_1.getMessageId)(__classPrivateFieldGet(this, _ClientPlain_lastMessageId, "f"), 0), "f");
-        const payload = (0, _0_message_js_1.packUnencryptedMessage)(_2_tl_js_1.Mtproto.serializeObject(function_), messageId);
-        await this.transport.transport.send(payload);
-        L.out(function_);
-        L.outBin(payload);
-        const buffer = await this.transport.transport.receive();
-        L.inBin(payload);
-        if (buffer.length == 4) {
-            const int = (0, _1_utilities_js_1.bigIntFromBuffer)(buffer, true, true);
-            throw new _0_errors_js_1.TransportError(Number(int));
-        }
-        const { message } = (0, _0_message_js_1.unpackUnencryptedMessage)(buffer);
-        const result = await _2_tl_js_1.Mtproto.deserializeType(_2_tl_js_1.Mtproto.mustGetReturnType(function_._), message);
-        L.in(result);
-        return result;
+        await this.session.send(_2_tl_js_1.Mtproto.serializeObject(function_));
+        const body = await this.session.receive();
+        return await _2_tl_js_1.Mtproto.deserializeType(_2_tl_js_1.Mtproto.mustGetReturnType(function_._), body);
     }
     async createAuthKey() {
         const nonce = (0, _1_utilities_js_1.getRandomBigInt)(16, false, true);
@@ -111,7 +102,7 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
         if (!publicKeyFingerprint || !publicKey) {
             throw new Error("No corresponding public key found");
         }
-        const dc = this.dcId;
+        const dc = (0, _3_transport_js_1.getDcId)(this.dc, this.cdn);
         const pq = resPq.pq;
         const serverNonce = resPq.server_nonce;
         const newNonce = (0, _1_utilities_js_1.getRandomBigInt)(32, false, true);
@@ -176,4 +167,4 @@ class ClientPlain extends _0_client_abstract_js_1.ClientAbstract {
     }
 }
 exports.ClientPlain = ClientPlain;
-_ClientPlain_publicKeys = new WeakMap(), _ClientPlain_lastMessageId = new WeakMap();
+_ClientPlain_publicKeys = new WeakMap();

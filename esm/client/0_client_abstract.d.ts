@@ -1,33 +1,35 @@
-import { DC, TransportProvider } from "../3_transport.js";
-export interface ClientAbstractParams {
-    /**
-     * The first DC to connect to. This is commonly used to decide whether to connect to test or production servers. It is not necessarily the DC that the client will directly connect to or is currently connected to. Defaults to the default initial DC.
-     */
-    initialDc?: DC;
-    /**
-     * The transport provider to use. Defaults to `webSocketTransportProvider` with its default options.
-     */
-    transportProvider?: TransportProvider;
-    /**
-     * Whether the connection is with a CDN server. Defaults to false.
-     */
-    cdn?: boolean;
-}
+/**
+ * MTKruto - Cross-runtime JavaScript library for building Telegram clients
+ * Copyright (C) 2023-2025 Roj <https://roj.im/>
+ *
+ * This file is part of MTKruto.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+import { Connection, ConnectionCallback } from "../2_connection.js";
+import { DC } from "../3_transport.js";
+import { Session } from "../4_session.js";
 export declare abstract class ClientAbstract {
-    #private;
-    readonly initialDc: DC;
-    transportProvider: TransportProvider;
-    readonly cdn: boolean;
-    protected transport?: ReturnType<TransportProvider>;
-    constructor(params?: ClientAbstractParams);
-    stateChangeHandler?: (connected: boolean) => void;
+    abstract session: Session;
     get dc(): DC;
-    get dcId(): number;
-    setDc(dc: DC): void;
+    get cdn(): boolean;
+    set serverSalt(serverSalt: bigint);
     get connected(): boolean;
     connect(): Promise<void>;
-    reconnect(dc?: DC): Promise<void>;
-    disconnect(): Promise<void>;
     get disconnected(): boolean;
+    disconnect(): void;
+    set connectionCallback(connectionCallback: ConnectionCallback | undefined);
+    set onConnectionStateChange(onConnectionStateChange: Connection["stateChangeHandler"]);
 }
 //# sourceMappingURL=0_client_abstract.d.ts.map

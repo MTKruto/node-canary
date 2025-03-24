@@ -84,11 +84,11 @@ class ConnectionWebSocket {
     }
     async open() {
         if (__classPrivateFieldGet(this, _ConnectionWebSocket_isConnecting, "f")) {
-            throw new Error("Already connecting");
+            throw new _0_errors_js_1.ConnectionError("Already connecting");
         }
         __classPrivateFieldSet(this, _ConnectionWebSocket_isConnecting, true, "f");
         if (this.connected) {
-            throw new Error("Already connected");
+            throw new _0_errors_js_1.ConnectionError("Already connected");
         }
         try {
             __classPrivateFieldSet(this, _ConnectionWebSocket_webSocket, await __classPrivateFieldGet(this, _ConnectionWebSocket_instances, "m", _ConnectionWebSocket_initWs).call(this), "f");

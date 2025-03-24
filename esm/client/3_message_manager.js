@@ -33,6 +33,7 @@ import { contentType, unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { getLogger, getRandomId, toUnixTimestamp } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
+import { getDc } from "../3_transport.js";
 import { constructVoiceTranscription, deserializeFileId, isMessageType, selfDestructOptionToInt } from "../3_types.js";
 import { assertMessageType, constructMessage as constructMessage_, deserializeInlineMessageId, FileType, messageEntityToTlObject, reactionEqual, reactionToTlObject, replyMarkupToTlObject } from "../3_types.js";
 import { messageSearchFilterToTlObject } from "../types/0_message_search_filter.js";
@@ -284,7 +285,7 @@ export class MessageManager {
                 effect,
                 schedule_date,
                 allow_paid_floodskip,
-            }, params?.businessConnectionId);
+            }, { businessConnectionId: params?.businessConnectionId });
         }
         else {
             result = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({
@@ -303,7 +304,7 @@ export class MessageManager {
                 effect,
                 schedule_date,
                 allow_paid_floodskip,
-            }, params?.businessConnectionId);
+            }, { businessConnectionId: params?.businessConnectionId });
         }
         const message_ = (await this.updatesToMessages(chatId, result, params?.businessConnectionId))[0];
         return assertMessageType(message_, "text");
@@ -342,7 +343,7 @@ export class MessageManager {
             effect: params?.effectId ? BigInt(params.effectId) : undefined,
             schedule_date: params?.sendAt ? toUnixTimestamp(params.sendAt) : undefined,
             allow_paid_floodskip: params?.paidBroadcast ? true : undefined,
-        }, params?.businessConnectionId);
+        }, { businessConnectionId: params?.businessConnectionId });
         const message = (await this.updatesToMessages(chatId, result, params?.businessConnectionId))[0];
         return assertMessageType(message, "venue");
     }
@@ -374,7 +375,7 @@ export class MessageManager {
             effect: params?.effectId ? BigInt(params.effectId) : undefined,
             schedule_date: params?.sendAt ? toUnixTimestamp(params.sendAt) : undefined,
             allow_paid_floodskip: params?.paidBroadcast ? true : undefined,
-        }, params?.businessConnectionId);
+        }, { businessConnectionId: params?.businessConnectionId });
         const message = (await this.updatesToMessages(chatId, result, params?.businessConnectionId))[0];
         return assertMessageType(message, "contact");
     }
@@ -403,7 +404,7 @@ export class MessageManager {
             effect: params?.effectId ? BigInt(params.effectId) : undefined,
             schedule_date: params?.sendAt ? toUnixTimestamp(params.sendAt) : undefined,
             allow_paid_floodskip: params?.paidBroadcast ? true : undefined,
-        }, params?.businessConnectionId);
+        }, { businessConnectionId: params?.businessConnectionId });
         const message = (await this.updatesToMessages(chatId, result, params?.businessConnectionId))[0];
         return assertMessageType(message, "dice");
     }
@@ -450,7 +451,7 @@ export class MessageManager {
             effect: params?.effectId ? BigInt(params.effectId) : undefined,
             schedule_date: params?.sendAt ? toUnixTimestamp(params.sendAt) : undefined,
             allow_paid_floodskip: params?.paidBroadcast ? true : undefined,
-        }, params?.businessConnectionId);
+        }, { businessConnectionId: params?.businessConnectionId });
         const message = (await this.updatesToMessages(chatId, result, params?.businessConnectionId))[0];
         return assertMessageType(message, "location");
     }
@@ -586,7 +587,7 @@ export class MessageManager {
             effect: params?.effectId ? BigInt(params.effectId) : undefined,
             schedule_date: params?.sendAt ? toUnixTimestamp(params.sendAt) : undefined,
             allow_paid_floodskip: params?.paidBroadcast ? true : undefined,
-        }, params?.businessConnectionId);
+        }, { businessConnectionId: params?.businessConnectionId });
         const message = (await this.updatesToMessages(chatId, result, params?.businessConnectionId))[0];
         return assertMessageType(message, "poll");
     }
@@ -597,7 +598,7 @@ export class MessageManager {
             id: checkMessageId(messageId),
             peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId),
             reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
-        }, params?.businessConnectionId);
+        }, { businessConnectionId: params?.businessConnectionId });
         const message_ = (await this.updatesToMessages(chatId, result))[0];
         return message_;
     }
@@ -636,7 +637,7 @@ export class MessageManager {
             no_webpage: noWebpage,
             invert_media: invertMedia,
             reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
-        }, params?.businessConnectionId);
+        }, { businessConnectionId: params?.businessConnectionId });
         const message_ = (await this.updatesToMessages(chatId, result))[0];
         return assertMessageType(message_, "text");
     }
@@ -662,7 +663,7 @@ export class MessageManager {
             entities: message ? entities : [],
             message,
             reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
-        }, params?.businessConnectionId);
+        }, { businessConnectionId: params?.businessConnectionId });
         return (await this.updatesToMessages(chatId, result))[0];
     }
     async editInlineMessageText(inlineMessageId, text, params) {
@@ -689,7 +690,7 @@ export class MessageManager {
             reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
             message: text,
             entities,
-        }, params?.businessConnectionId);
+        }, { businessConnectionId: params?.businessConnectionId });
         const message_ = (await this.updatesToMessages(chatId, result))[0];
         return message_;
     }
@@ -742,7 +743,7 @@ export class MessageManager {
     }
     async unpinMessage(chatId, messageId, params) {
         __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_checkParams).call(this, params);
-        await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.updatePinnedMessage", peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId), id: checkMessageId(messageId), unpin: true }, params?.businessConnectionId);
+        await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.updatePinnedMessage", peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId), id: checkMessageId(messageId), unpin: true }, { businessConnectionId: params?.businessConnectionId });
     }
     async unpinMessages(chatId) {
         await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.unpinAllMessages", peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId) });
@@ -909,7 +910,7 @@ export class MessageManager {
             default:
                 throw new InputError(`Invalid chat action: ${action}`);
         }
-        await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.setTyping", peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId), action: action_, top_msg_id: params?.messageThreadId }, params?.businessConnectionId);
+        await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.setTyping", peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId), action: action_, top_msg_id: params?.messageThreadId }, { businessConnectionId: params?.businessConnectionId });
     }
     async searchMessages(chatId, query, params) {
         __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertUser("searchMessages");
@@ -966,7 +967,7 @@ export class MessageManager {
             id: messageId,
             media: ({ _: "inputMediaPoll", poll: ({ _: "poll", id: BigInt(message.poll.id), closed: true, question: { _: "textWithEntities", text: "", entities: [] }, answers: [] }) }),
             reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
-        }, params?.businessConnectionId);
+        }, { businessConnectionId: params?.businessConnectionId });
         const message_ = (await this.updatesToMessages(chatId, result))[0];
         return assertMessageType(message_, "poll").poll;
     }
@@ -980,7 +981,7 @@ export class MessageManager {
                 id: messageId,
                 media: ({ _: "inputMediaGeoLive", geo_point: ({ _: "inputGeoPoint", lat: latitude, long: longitude, accuracy_radius: params?.horizontalAccuracy }), heading: params?.heading, proximity_notification_radius: params?.proximityAlertRadius }),
                 reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
-            }, params?.businessConnectionId);
+            }, { businessConnectionId: params?.businessConnectionId });
             const message = (await this.updatesToMessages(chatId, result))[0];
             return assertMessageType(message, "location");
         }
@@ -1342,7 +1343,7 @@ _a = MessageManager, _MessageManager_c = new WeakMap(), _MessageManager_Lresolve
         effect: params?.effectId ? BigInt(params.effectId) : undefined,
         schedule_date: params?.sendAt ? toUnixTimestamp(params.sendAt) : undefined,
         allow_paid_floodskip: params?.paidBroadcast ? true : undefined,
-    }, params?.businessConnectionId);
+    }, { businessConnectionId: params?.businessConnectionId });
     return (await this.updatesToMessages(chatId, result, params?.businessConnectionId))[0];
 }, _MessageManager_editInlineMessageTextInner = async function _MessageManager_editInlineMessageTextInner(inlineMessageId, text, params, allowEmpty = true) {
     __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_checkParams).call(this, params);
@@ -1357,7 +1358,7 @@ _a = MessageManager, _MessageManager_c = new WeakMap(), _MessageManager_Lresolve
     if (!noWebpage && params?.linkPreview?.url) {
         media = { _: "inputMediaWebPage", url: params.linkPreview.url, force_large_media: params.linkPreview.largeMedia ? true : undefined, force_small_media: params.linkPreview.smallMedia ? true : undefined, optional: message.length ? undefined : true };
     }
-    await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.editInlineBotMessage", id, entities, message, media, no_webpage: noWebpage, invert_media: invertMedia, reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params) });
+    await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.editInlineBotMessage", id, entities, message, media, no_webpage: noWebpage, invert_media: invertMedia, reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params) }, { dc: getDc(id.dc_id) });
 }, _MessageManager_resolveInputMediaInner = async function _MessageManager_resolveInputMediaInner(document, media, fileType, otherAttribs) {
     let media_ = null;
     const spoiler = "hasSpoiler" in media && media.hasSpoiler ? true : undefined;

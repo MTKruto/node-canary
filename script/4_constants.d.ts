@@ -2,7 +2,6 @@ import { DC } from "./3_transport.js";
 export type PublicKeys = readonly [bigint, [bigint, bigint]][];
 export declare const PUBLIC_KEYS: PublicKeys;
 export declare const INITIAL_DC: DC;
-export declare const LAYER = 200;
 export declare const APP_VERSION = "MTKruto";
 export declare const DEVICE_MODEL: string;
 export declare const LANG_CODE: string;

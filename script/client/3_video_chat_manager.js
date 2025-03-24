@@ -36,6 +36,7 @@ const _0_deps_js_1 = require("../0_deps.js");
 const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
+const _3_transport_js_1 = require("../3_transport.js");
 const _3_types_js_1 = require("../3_types.js");
 const _0_utilities_js_1 = require("./0_utilities.js");
 const videoChatManagerUpdates = [
@@ -135,15 +136,9 @@ class VideoChatManager {
         if (!(_2_tl_js_1.Api.is("groupCall", call)) || !call.rtmp_stream) {
             throw new _0_errors_js_1.InputError("Not a live stream.");
         }
-        const client = __classPrivateFieldGet(this, _VideoChatManager_c, "f").getCdnConnection(call.stream_dc_id);
-        await client.connect();
-        try {
-            const streams = await client.invoke({ _: "phone.getGroupCallStreamChannels", call: await __classPrivateFieldGet(this, _VideoChatManager_instances, "m", _VideoChatManager_getInputGroupCall).call(this, id) });
-            return streams.channels.map(_3_types_js_1.constructLiveStreamChannel);
-        }
-        finally {
-            await client.disconnect();
-        }
+        const dc = call.stream_dc_id ? (0, _3_transport_js_1.getDc)(call.stream_dc_id) : undefined;
+        const streams = await __classPrivateFieldGet(this, _VideoChatManager_c, "f").invoke({ _: "phone.getGroupCallStreamChannels", call: await __classPrivateFieldGet(this, _VideoChatManager_instances, "m", _VideoChatManager_getInputGroupCall).call(this, id) }, { dc, type: "download" });
+        return streams.channels.map(_3_types_js_1.constructLiveStreamChannel);
     }
     async *downloadLiveStreamChunk(id, channel, scale, timestamp, params) {
         __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.assertUser("downloadLiveStreamChunk");

@@ -19,7 +19,7 @@
  */
 import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
-import { Api } from "../2_tl.js";
+import { Api, repr as repr_ } from "../2_tl.js";
 export const resolve = () => Promise.resolve();
 export function isHttpUrl(string) {
     try {
@@ -182,3 +182,15 @@ export function toInputChannel(inputPeer) {
     }
     return id;
 }
+export function repr(value) {
+    if (Api.isGenericFunction(value) && "query" in value) {
+        return `${repr_(value)}<${repr(value.query)}>`;
+    }
+    else {
+        return repr_(value);
+    }
+}
+export const UPLOAD_POOL_SIZE = 3;
+export const UPLOAD_REQUEST_PER_CONNECTION = 2;
+export const DOWNLOAD_POOL_SIZE = 1;
+export const DOWNLOAD_REQUEST_PER_CONNECTION = 1;

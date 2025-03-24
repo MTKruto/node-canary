@@ -19,7 +19,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.schema = void 0;
+exports.LAYER = exports.schema = void 0;
 exports.schema = Object.freeze({
     definitions: {
         true: [
@@ -20287,3 +20287,4 @@ exports.schema = Object.freeze({
         [0xB4F67E93]: "requirementToContactPaidMessages",
     },
 });
+exports.LAYER = 200;

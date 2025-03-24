@@ -19,7 +19,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.resolve = void 0;
+exports.DOWNLOAD_REQUEST_PER_CONNECTION = exports.DOWNLOAD_POOL_SIZE = exports.UPLOAD_REQUEST_PER_CONNECTION = exports.UPLOAD_POOL_SIZE = exports.resolve = void 0;
 exports.isHttpUrl = isHttpUrl;
 exports.getUsername = getUsername;
 exports.getChatListId = getChatListId;
@@ -34,6 +34,7 @@ exports.canBeInputUser = canBeInputUser;
 exports.toInputUser = toInputUser;
 exports.canBeInputChannel = canBeInputChannel;
 exports.toInputChannel = toInputChannel;
+exports.repr = repr;
 const _0_deps_js_1 = require("../0_deps.js");
 const _0_errors_js_1 = require("../0_errors.js");
 const _2_tl_js_1 = require("../2_tl.js");
@@ -200,3 +201,15 @@ function toInputChannel(inputPeer) {
     }
     return id;
 }
+function repr(value) {
+    if (_2_tl_js_1.Api.isGenericFunction(value) && "query" in value) {
+        return `${(0, _2_tl_js_1.repr)(value)}<${repr(value.query)}>`;
+    }
+    else {
+        return (0, _2_tl_js_1.repr)(value);
+    }
+}
+exports.UPLOAD_POOL_SIZE = 3;
+exports.UPLOAD_REQUEST_PER_CONNECTION = 2;
+exports.DOWNLOAD_POOL_SIZE = 1;
+exports.DOWNLOAD_REQUEST_PER_CONNECTION = 1;

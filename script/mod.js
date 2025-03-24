@@ -26,7 +26,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.errors = exports.SYSTEM_VERSION = exports.SYSTEM_LANG_CODE = exports.LAYER = exports.LANG_PACK = exports.LANG_CODE = exports.INITIAL_DC = exports.DEVICE_MODEL = exports.APP_VERSION = exports.checkPassword = exports.setLogVerbosity = exports.setLoggingProvider = exports.setLogFilter = exports.getRandomId = exports.getColorName = exports.getColorFromPeerId = void 0;
+exports.errors = exports.SYSTEM_VERSION = exports.SYSTEM_LANG_CODE = exports.LANG_PACK = exports.LANG_CODE = exports.INITIAL_DC = exports.DEVICE_MODEL = exports.APP_VERSION = exports.checkPassword = exports.setLogVerbosity = exports.setLoggingProvider = exports.setLogFilter = exports.getRandomId = exports.getColorName = exports.getColorFromPeerId = void 0;
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
  * Copyright (C) 2023-2025 Roj <https://roj.im/>
@@ -67,7 +67,6 @@ Object.defineProperty(exports, "DEVICE_MODEL", { enumerable: true, get: function
 Object.defineProperty(exports, "INITIAL_DC", { enumerable: true, get: function () { return _4_constants_js_1.INITIAL_DC; } });
 Object.defineProperty(exports, "LANG_CODE", { enumerable: true, get: function () { return _4_constants_js_1.LANG_CODE; } });
 Object.defineProperty(exports, "LANG_PACK", { enumerable: true, get: function () { return _4_constants_js_1.LANG_PACK; } });
-Object.defineProperty(exports, "LAYER", { enumerable: true, get: function () { return _4_constants_js_1.LAYER; } });
 Object.defineProperty(exports, "SYSTEM_LANG_CODE", { enumerable: true, get: function () { return _4_constants_js_1.SYSTEM_LANG_CODE; } });
 Object.defineProperty(exports, "SYSTEM_VERSION", { enumerable: true, get: function () { return _4_constants_js_1.SYSTEM_VERSION; } });
 exports.errors = __importStar(require("./4_errors.js"));

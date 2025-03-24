@@ -88,9 +88,6 @@ class UpdateManager {
         ], v);
     }
     async fetchState(source) {
-        if (__classPrivateFieldGet(this, _UpdateManager_c, "f").cdn) {
-            return;
-        }
         let state = await __classPrivateFieldGet(this, _UpdateManager_c, "f").invoke({ _: "updates.getState" });
         const difference = await __classPrivateFieldGet(this, _UpdateManager_c, "f").invoke({ ...state, _: "updates.getDifference" });
         if (_2_tl_js_1.Api.is("updates.difference", difference)) {
@@ -271,15 +268,9 @@ class UpdateManager {
         }
     }
     processUpdates(updates, checkGap, call = null, callback) {
-        if (__classPrivateFieldGet(this, _UpdateManager_c, "f").cdn) {
-            return;
-        }
-        __classPrivateFieldGet(this, _UpdateManager_processUpdatesQueue, "f").add(() => __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_processUpdates).call(this, updates, checkGap, call).then(callback));
+        __classPrivateFieldGet(this, _UpdateManager_processUpdatesQueue, "f").add(() => __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_processUpdates).call(this, updates, checkGap, call).finally(callback));
     }
     async recoverUpdateGap(source) {
-        if (__classPrivateFieldGet(this, _UpdateManager_c, "f").cdn) {
-            return;
-        }
         const wasRecoveringUpdateGap = __classPrivateFieldGet(this, _UpdateManager_recoveringUpdateGap, "f");
         const unlock = await __classPrivateFieldGet(this, _UpdateManager_recoverUpdateGapMutex, "f").lock();
         if (wasRecoveringUpdateGap) {
@@ -359,9 +350,6 @@ class UpdateManager {
         }
     }
     setUpdateHandler(handler) {
-        if (__classPrivateFieldGet(this, _UpdateManager_c, "f").cdn) {
-            return;
-        }
         __classPrivateFieldSet(this, _UpdateManager_updateHandler, handler, "f");
     }
     async openChat(chatId) {

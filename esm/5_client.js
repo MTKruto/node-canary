@@ -18,6 +18,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 export * from "./client/0_params.js";
-export * from "./client/1_client_encrypted.js";
+export * from "./client/2_client_encrypted.js";
 export * from "./client/1_client_plain.js";
 export * from "./client/5_client.js";

@@ -18,9 +18,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { Mtproto } from "../2_tl.js";
+import { DC } from "../3_transport.js";
 import { PublicKeys } from "../4_constants.js";
-import { ClientAbstract, ClientAbstractParams } from "./0_client_abstract.js";
-export interface ClientPlainParams extends ClientAbstractParams {
+import { SessionParams, SessionPlain } from "../4_session.js";
+import { ClientAbstract } from "./0_client_abstract.js";
+export interface ClientPlainParams extends SessionParams {
     /**
      * MTProto public keys to use in the `[keyId, [key, exponent]][]` format. Don't set this unless you know what you are doing. Defaults to Telegram servers' public keys.
      */
@@ -29,9 +31,10 @@ export interface ClientPlainParams extends ClientAbstractParams {
 /**
  * An MTProto client for making plain connections. Most users won't need to interact with this. Used internally for creating authorization keys.
  */
-export declare class ClientPlain extends ClientAbstract {
+export declare class ClientPlain extends ClientAbstract implements ClientAbstract {
     #private;
-    constructor(params?: ClientPlainParams);
+    session: SessionPlain;
+    constructor(dc: DC, params?: ClientPlainParams);
     invoke<T extends Mtproto.AnyObject, R = T["_"] extends keyof Mtproto.Functions ? Mtproto.ReturnType<T> extends never ? Mtproto.ReturnType<Mtproto.Functions[T["_"]]> : never : never>(function_: T): Promise<R>;
     createAuthKey(): Promise<[Uint8Array<ArrayBuffer>, bigint]>;
 }

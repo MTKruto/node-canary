@@ -34,6 +34,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./client/0_params.js"), exports);
-__exportStar(require("./client/1_client_encrypted.js"), exports);
+__exportStar(require("./client/2_client_encrypted.js"), exports);
 __exportStar(require("./client/1_client_plain.js"), exports);
 __exportStar(require("./client/5_client.js"), exports);

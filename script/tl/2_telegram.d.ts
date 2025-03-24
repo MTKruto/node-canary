@@ -23,8 +23,6 @@ import * as Api from "./1_telegram_api.js";
 export * from "./1_telegram_api.js";
 export type DeserializedType = boolean | number | bigint | string | Uint8Array | AnyType | Array<DeserializedType>;
 export declare function deserializeType<T extends (keyof Types) | "X" | string>(name: T, bufferOrReader: TLReader | Uint8Array): Promise<T extends keyof Types ? Types[T] : DeserializedType>;
-export declare const GZIP_PACKED = 812830625;
-export declare const RPC_RESULT = 4082920705;
 export declare function serializeObject(object: AnyObject): Uint8Array;
 export declare function isValidObject(object: any): object is AnyType;
 export declare function assertIsValidObject(object: any): asserts object is AnyType;
@@ -33,7 +31,7 @@ export declare function isOneOf<S extends keyof (Types & Functions)>(names: S[] 
 export declare function isOfEnum<S extends keyof Enums>(name: S, value: unknown): value is Enums[S];
 export declare function as<S extends keyof Types>(name: S, value: unknown): Types[S];
 export declare function mustGetReturnType(name: string): string;
-export declare function isGenericFunction(value: unknown): boolean;
+export declare function isGenericFunction(value: unknown): value is Api.AnyGenericFunction<Api.AnyFunction>;
 export declare function getChannelChatId(channelId: bigint): number;
 export type AnyEntity = Api.user | Api.channel | Api.channelForbidden | Api.chat | Api.chatForbidden;
 export type InputPeerWithIdentifier = Api.inputPeerChat | Api.inputPeerUser | Api.inputPeerChannel | Api.inputPeerUserFromMessage | Api.inputPeerChannelFromMessage;

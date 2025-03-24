@@ -34,7 +34,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RPC_RESULT = exports.GZIP_PACKED = void 0;
 exports.deserializeType = deserializeType;
 exports.serializeObject = serializeObject;
 exports.isValidObject = isValidObject;
@@ -44,45 +43,36 @@ exports.isOneOf = isOneOf;
 exports.isOfEnum = isOfEnum;
 exports.as = as;
 exports.mustGetReturnType = mustGetReturnType;
-const _1_utilities_js_1 = require("../1_utilities.js");
 const _1_mtproto_api_js_1 = require("./1_mtproto_api.js");
 const _1_tl_reader_js_1 = require("./1_tl_reader.js");
 const _1_tl_writer_js_1 = require("./1_tl_writer.js");
-const _1_utilities_js_2 = require("./1_utilities.js");
+const _1_utilities_js_1 = require("./1_utilities.js");
 __exportStar(require("./1_mtproto_api.js"), exports);
 async function deserializeType(name, bufferOrReader) {
     const reader = bufferOrReader instanceof Uint8Array ? new _1_tl_reader_js_1.TLReader(bufferOrReader) : bufferOrReader;
-    const id = reader.readInt32(false);
-    if (id == exports.GZIP_PACKED) {
-        const buffer = await (0, _1_utilities_js_1.gunzip)(reader.readBytes());
-        return await deserializeType(name, buffer);
-    }
-    reader.unreadInt32();
     return await reader.readType(name, _1_mtproto_api_js_1.schema);
 }
-exports.GZIP_PACKED = 0x3072CFA1;
-exports.RPC_RESULT = 0xF35C6D01;
 function serializeObject(object) {
     return new _1_tl_writer_js_1.TLWriter().writeObject(object, _1_mtproto_api_js_1.schema).buffer;
 }
 function isValidObject(object) {
-    return (0, _1_utilities_js_2.isValidObject)(object, _1_mtproto_api_js_1.schema);
+    return (0, _1_utilities_js_1.isValidObject)(object, _1_mtproto_api_js_1.schema);
 }
 function assertIsValidObject(object) {
-    return (0, _1_utilities_js_2.assertIsValidObject)(object, _1_mtproto_api_js_1.schema);
+    return (0, _1_utilities_js_1.assertIsValidObject)(object, _1_mtproto_api_js_1.schema);
 }
 function is(name, value) {
-    return (0, _1_utilities_js_2.is)(name, value, _1_mtproto_api_js_1.schema);
+    return (0, _1_utilities_js_1.is)(name, value, _1_mtproto_api_js_1.schema);
 }
 function isOneOf(names, value) {
-    return (0, _1_utilities_js_2.isOneOf)(names, value, _1_mtproto_api_js_1.schema);
+    return (0, _1_utilities_js_1.isOneOf)(names, value, _1_mtproto_api_js_1.schema);
 }
 function isOfEnum(name, value) {
-    return (0, _1_utilities_js_2.isOfEnum)(name, value, _1_mtproto_api_js_1.schema);
+    return (0, _1_utilities_js_1.isOfEnum)(name, value, _1_mtproto_api_js_1.schema);
 }
 function as(name, value) {
-    return (0, _1_utilities_js_2.as)(name, value, _1_mtproto_api_js_1.schema);
+    return (0, _1_utilities_js_1.as)(name, value, _1_mtproto_api_js_1.schema);
 }
 function mustGetReturnType(name) {
-    return (0, _1_utilities_js_2.mustGetReturnType)(name, _1_mtproto_api_js_1.schema);
+    return (0, _1_utilities_js_1.mustGetReturnType)(name, _1_mtproto_api_js_1.schema);
 }

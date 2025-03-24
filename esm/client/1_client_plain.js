@@ -28,45 +28,36 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _ClientPlain_publicKeys, _ClientPlain_lastMessageId;
+var _ClientPlain_publicKeys;
 import { assert, assertEquals, concat, ige256Decrypt, ige256Encrypt, unreachable } from "../0_deps.js";
-import { ConnectionError, TransportError } from "../0_errors.js";
 import { bigIntFromBuffer, bufferFromBigInt, factorize, getLogger, getRandomBigInt, modExp, rsaPad, sha1 } from "../1_utilities.js";
 import { Mtproto } from "../2_tl.js";
+import { getDcId } from "../3_transport.js";
 import { PUBLIC_KEYS } from "../4_constants.js";
+import { SessionPlain } from "../4_session.js";
 import { ClientAbstract } from "./0_client_abstract.js";
-import { getMessageId, packUnencryptedMessage, unpackUnencryptedMessage } from "./0_message.js";
 const L = getLogger("ClientPlain");
 const LcreateAuthKey = L.branch("createAuthKey");
 /**
  * An MTProto client for making plain connections. Most users won't need to interact with this. Used internally for creating authorization keys.
  */
 export class ClientPlain extends ClientAbstract {
-    constructor(params) {
-        super(params);
+    constructor(dc, params) {
+        super();
         _ClientPlain_publicKeys.set(this, void 0);
-        _ClientPlain_lastMessageId.set(this, 0n);
+        Object.defineProperty(this, "session", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         __classPrivateFieldSet(this, _ClientPlain_publicKeys, params?.publicKeys ?? PUBLIC_KEYS, "f");
+        this.session = new SessionPlain(dc, params);
     }
     async invoke(function_) {
-        if (!this.transport) {
-            throw new ConnectionError("Not connected.");
-        }
-        const messageId = __classPrivateFieldSet(this, _ClientPlain_lastMessageId, getMessageId(__classPrivateFieldGet(this, _ClientPlain_lastMessageId, "f"), 0), "f");
-        const payload = packUnencryptedMessage(Mtproto.serializeObject(function_), messageId);
-        await this.transport.transport.send(payload);
-        L.out(function_);
-        L.outBin(payload);
-        const buffer = await this.transport.transport.receive();
-        L.inBin(payload);
-        if (buffer.length == 4) {
-            const int = bigIntFromBuffer(buffer, true, true);
-            throw new TransportError(Number(int));
-        }
-        const { message } = unpackUnencryptedMessage(buffer);
-        const result = await Mtproto.deserializeType(Mtproto.mustGetReturnType(function_._), message);
-        L.in(result);
-        return result;
+        await this.session.send(Mtproto.serializeObject(function_));
+        const body = await this.session.receive();
+        return await Mtproto.deserializeType(Mtproto.mustGetReturnType(function_._), body);
     }
     async createAuthKey() {
         const nonce = getRandomBigInt(16, false, true);
@@ -108,7 +99,7 @@ export class ClientPlain extends ClientAbstract {
         if (!publicKeyFingerprint || !publicKey) {
             throw new Error("No corresponding public key found");
         }
-        const dc = this.dcId;
+        const dc = getDcId(this.dc, this.cdn);
         const pq = resPq.pq;
         const serverNonce = resPq.server_nonce;
         const newNonce = getRandomBigInt(32, false, true);
@@ -172,4 +163,4 @@ export class ClientPlain extends ClientAbstract {
         return [authKey, bigIntFromBuffer(salt, true, false)];
     }
 }
-_ClientPlain_publicKeys = new WeakMap(), _ClientPlain_lastMessageId = new WeakMap();
+_ClientPlain_publicKeys = new WeakMap();

@@ -16187,5 +16187,6 @@ export type PaidReactionPrivacy = paidReactionPrivacyDefault | paidReactionPriva
 export type account_PaidMessagesRevenue = account_paidMessagesRevenue;
 export type RequirementToContact = requirementToContactEmpty | requirementToContactPremium | requirementToContactPaidMessages;
 export declare const schema: Schema;
+export declare const LAYER = 200;
 export {};
 //# sourceMappingURL=1_telegram_api.d.ts.map

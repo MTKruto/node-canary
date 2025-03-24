@@ -31,7 +31,7 @@ export declare class NetworkStatisticsManager {
             received: number;
         };
     }>;
-    getTransportReadWriteCallback(): {
+    getTransportReadWriteCallback(cdn: boolean): {
         read: (count: number) => Promise<void>;
         write: (count: number) => Promise<void>;
     };

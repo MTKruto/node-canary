@@ -51,14 +51,14 @@ export class NetworkStatisticsManager {
         };
         return { messages, cdn };
     }
-    getTransportReadWriteCallback() {
+    getTransportReadWriteCallback(cdn) {
         return {
             read: async (count) => {
-                const key = __classPrivateFieldGet(this, _NetworkStatisticsManager_c, "f").cdn ? "netstat_cdn_read" : "netstat_messages_read";
+                const key = cdn ? "netstat_cdn_read" : "netstat_messages_read";
                 await __classPrivateFieldGet(this, _NetworkStatisticsManager_c, "f").storage.incr([key], count);
             },
             write: async (count) => {
-                const key = __classPrivateFieldGet(this, _NetworkStatisticsManager_c, "f").cdn ? "netstat_cdn_write" : "netstat_messages_write";
+                const key = cdn ? "netstat_cdn_write" : "netstat_messages_write";
                 await __classPrivateFieldGet(this, _NetworkStatisticsManager_c, "f").storage.incr([key], count);
             },
         };

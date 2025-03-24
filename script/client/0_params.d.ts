@@ -18,8 +18,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { MaybePromise } from "../1_utilities.js";
+import { DC } from "../3_transport.js";
 import { Birthday, BotCommandScope, ChatListItem, ChatMemberRights, FileSource, ID, InlineQueryResultButton, LinkPreview, MessageEntity, MessageSearchFilter, ParseMode, ReplyMarkup, SelfDestructOption, StoryInteractiveArea, StoryPrivacy } from "../3_types.js";
 import { ReplyTo } from "../types/2_reply_to.js";
+export interface InvokeParams {
+    dc?: DC;
+    type?: "download" | "upload";
+}
 export interface AnswerCallbackQueryParams {
     /** A text to be shown to the user. */
     text?: string;

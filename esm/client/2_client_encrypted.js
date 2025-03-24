@@ -167,7 +167,6 @@ _a = ClientEncrypted, _ClientEncrypted_L = new WeakMap(), _ClientEncrypted_plain
             system_lang_code: __classPrivateFieldGet(this, _ClientEncrypted_systemLangCode, "f"),
             system_version: __classPrivateFieldGet(this, _ClientEncrypted_systemVersion, "f"),
         };
-        __classPrivateFieldSet(this, _ClientEncrypted_connectionInited, true, "f");
     }
     const body = Api.serializeObject(function_);
     let lastErr;
@@ -259,6 +258,9 @@ _a = ClientEncrypted, _ClientEncrypted_L = new WeakMap(), _ClientEncrypted_plain
         finally {
             __classPrivateFieldGet(this, _ClientEncrypted_pendingRequests, "f").delete(msgId);
         }
+    }
+    if (!__classPrivateFieldGet(this, _ClientEncrypted_connectionInited, "f")) {
+        __classPrivateFieldSet(this, _ClientEncrypted_connectionInited, true, "f");
     }
 };
 _ClientEncrypted_SEND_MAX_TRIES = { value: 10 };

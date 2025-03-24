@@ -607,7 +607,11 @@ class MessageManager {
     }
     async editInlineMessageReplyMarkup(inlineMessageId, params) {
         const id = await (0, _3_types_js_2.deserializeInlineMessageId)(inlineMessageId);
-        await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.editInlineBotMessage", id, reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params) });
+        await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({
+            _: "messages.editInlineBotMessage",
+            id,
+            reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
+        }, { dc: (0, _3_transport_js_1.getDc)(id.dc_id) });
     }
     async editMessageText(chatId, messageId, text, params) {
         __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_checkParams).call(this, params);
@@ -701,7 +705,12 @@ class MessageManager {
         __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_checkParams).call(this, params);
         __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertBot("editInlineMessageMedia");
         const id = await (0, _3_types_js_2.deserializeInlineMessageId)(inlineMessageId);
-        await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.editInlineBotMessage", id, media: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveInputMedia).call(this, media), reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params) });
+        await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({
+            _: "messages.editInlineBotMessage",
+            id,
+            media: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveInputMedia).call(this, media),
+            reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
+        }, { dc: (0, _3_transport_js_1.getDc)(id.dc_id) });
     }
     async deleteMessages(chatId, messageIds, params) {
         (0, _0_utilities_js_1.checkArray)(messageIds, _0_utilities_js_1.checkMessageId);
@@ -994,7 +1003,12 @@ class MessageManager {
         __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_checkParams).call(this, params);
         __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertBot("editInlineMessageLiveLocation");
         const id = await (0, _3_types_js_2.deserializeInlineMessageId)(inlineMessageId);
-        await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.editInlineBotMessage", id, media: ({ _: "inputMediaGeoLive", geo_point: ({ _: "inputGeoPoint", lat: latitude, long: longitude, accuracy_radius: params?.horizontalAccuracy }), heading: params?.heading, proximity_notification_radius: params?.proximityAlertRadius }), reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params) });
+        await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({
+            _: "messages.editInlineBotMessage",
+            id,
+            media: ({ _: "inputMediaGeoLive", geo_point: ({ _: "inputGeoPoint", lat: latitude, long: longitude, accuracy_radius: params?.horizontalAccuracy }), heading: params?.heading, proximity_notification_radius: params?.proximityAlertRadius }),
+            reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
+        }, { dc: (0, _3_transport_js_1.getDc)(id.dc_id) });
     }
     async sendInvoice(chatId, title, description, payload, currency, prices, params) {
         __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertBot("sendInvoice");
@@ -1362,7 +1376,16 @@ _a = MessageManager, _MessageManager_c = new WeakMap(), _MessageManager_Lresolve
     if (!noWebpage && params?.linkPreview?.url) {
         media = { _: "inputMediaWebPage", url: params.linkPreview.url, force_large_media: params.linkPreview.largeMedia ? true : undefined, force_small_media: params.linkPreview.smallMedia ? true : undefined, optional: message.length ? undefined : true };
     }
-    await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.editInlineBotMessage", id, entities, message, media, no_webpage: noWebpage, invert_media: invertMedia, reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params) }, { dc: (0, _3_transport_js_1.getDc)(id.dc_id) });
+    await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({
+        _: "messages.editInlineBotMessage",
+        id,
+        entities,
+        message,
+        media,
+        no_webpage: noWebpage,
+        invert_media: invertMedia,
+        reply_markup: await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyMarkup).call(this, params),
+    }, { dc: (0, _3_transport_js_1.getDc)(id.dc_id) });
 }, _MessageManager_resolveInputMediaInner = async function _MessageManager_resolveInputMediaInner(document, media, fileType, otherAttribs) {
     let media_ = null;
     const spoiler = "hasSpoiler" in media && media.hasSpoiler ? true : undefined;

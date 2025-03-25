@@ -30,7 +30,7 @@ var _Session_instances, _Session_dc, _Session_cdn, _Session_lastConnect, _Sessio
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import * as dntShim from "../_dnt.shims.js";
-import { SECOND } from "../0_deps.js";
+import { delay, SECOND } from "../0_deps.js";
 import { drop, getLogger, Mutex } from "../1_utilities.js";
 import { transportProviderTcp, transportProviderWebSocket } from "../3_transport.js";
 import { SessionState } from "./0_session_state.js";
@@ -140,7 +140,7 @@ _Session_dc = new WeakMap(), _Session_cdn = new WeakMap(), _Session_lastConnect 
     }
     if (__classPrivateFieldGet(this, _Session_lastConnect, "f") && Date.now() - __classPrivateFieldGet(this, _Session_lastConnect, "f").getTime() <= 10 * SECOND) {
         __classPrivateFieldGet(this, _Session_L, "f").debug("reconnecting after a delay");
-        await new Promise((r) => setTimeout(r, 3 * SECOND));
+        await delay(3 * SECOND);
     }
     else {
         __classPrivateFieldGet(this, _Session_L, "f").debug("reconnecting");

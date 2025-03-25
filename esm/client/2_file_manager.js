@@ -30,7 +30,7 @@ var _FileManager_instances, _a, _FileManager_c, _FileManager_Lupload, _FileManag
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import * as dntShim from "../_dnt.shims.js";
-import { AssertionError, basename, extension, extname, isAbsolute, MINUTE, SECOND, toFileUrl, unreachable } from "../0_deps.js";
+import { AssertionError, basename, delay, extension, extname, isAbsolute, MINUTE, SECOND, toFileUrl, unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { getLogger, getRandomId, iterateReadableStream, kilobyte, megabyte, mod, PartStream } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
@@ -98,6 +98,7 @@ export class FileManager {
         const limit = chunkSize;
         let offset = params?.offset ? BigInt(params.offset) : 0n;
         let part = 0;
+        let ms = 0.05;
         while (true) {
             signal?.throwIfAborted();
             let retryIn = 1;
@@ -126,6 +127,8 @@ export class FileManager {
                 else {
                     unreachable();
                 }
+                await delay(ms);
+                ms = Math.max(ms * .8, 0.003);
             }
             catch (err) {
                 if (typeof err === "object" && err instanceof AssertionError) {
@@ -327,7 +330,7 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
     const partCount = Math.ceil(buffer.byteLength / chunkSize);
     let promises = new Array();
     let started = false;
-    let delay = 0.05;
+    let ms = 0.05;
     main: for (let part = 0; part < partCount;) {
         for (let i = 0; i < UPLOAD_POOL_SIZE; ++i) {
             for (let i = 0; i < __classPrivateFieldGet(_a, _a, "f", _FileManager_UPLOAD_REQUEST_PER_CONNECTION); ++i) {
@@ -342,8 +345,8 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
                     started = true;
                 }
                 else if (isBig) {
-                    await new Promise((r) => setTimeout(r, delay));
-                    delay = Math.max(delay * .8, 0.003);
+                    await delay(ms);
+                    ms = Math.max(ms * .8, 0.003);
                 }
                 promises.push((async () => {
                     let retryIn = 1;
@@ -386,7 +389,7 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
 }, _FileManager_handleError = async function _FileManager_handleError(err, retryIn, logPrefix) {
     if (retryIn > 0) {
         __classPrivateFieldGet(this, _FileManager_Lupload, "f").warning(`${logPrefix} retrying in ${retryIn} seconds`);
-        await new Promise((r) => setTimeout(r, retryIn * SECOND));
+        await delay(retryIn * SECOND);
     }
     else {
         throw err;

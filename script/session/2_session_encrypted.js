@@ -390,13 +390,7 @@ async function _SessionEncrypted_onMessage(msgId, body) {
     while (this.connected) {
         const then = Date.now();
         try {
-            await new Promise((resolve, reject) => {
-                const timeout = setTimeout(resolve, __classPrivateFieldGet(this, _SessionEncrypted_pingInterval, "f") - timeElapsed);
-                __classPrivateFieldGet(this, _SessionEncrypted_pingLoopAbortController, "f").signal.onabort = () => {
-                    reject(__classPrivateFieldGet(this, _SessionEncrypted_pingLoopAbortController, "f")?.signal.reason);
-                    clearTimeout(timeout);
-                };
-            });
+            await (0, _0_deps_js_1.delay)(__classPrivateFieldGet(this, _SessionEncrypted_pingInterval, "f") - timeElapsed, { signal: __classPrivateFieldGet(this, _SessionEncrypted_pingLoopAbortController, "f").signal });
             if (!this.connected) {
                 continue;
             }

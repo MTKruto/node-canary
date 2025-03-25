@@ -29,7 +29,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _UpdateManager_instances, _a, _UpdateManager_c, _UpdateManager_updateState, _UpdateManager_updateHandler, _UpdateManager_LrecoverUpdateGap, _UpdateManager_LrecoverChannelUpdateGap, _UpdateManager_L$handleUpdate, _UpdateManager_L$processUpdates, _UpdateManager_LfetchState, _UpdateManager_LopenChat, _UpdateManager_Lmin, _UpdateManager_defaultDropPendingUpdates, _UpdateManager_mustDropPendingUpdates, _UpdateManager_state, _UpdateManager_getState, _UpdateManager_setState, _UpdateManager_extractMessages, _UpdateManager_extractMinPeerReferences, _UpdateManager_handleUpdateQueues, _UpdateManager_nonFirst, _UpdateManager_getChannelPtsWithDropPendingUpdatesCheck, _UpdateManager_checkGap, _UpdateManager_checkGapQts, _UpdateManager_checkChannelGap, _UpdateManager_channelUpdateQueues, _UpdateManager_processChannelPtsUpdateInner, _UpdateManager_queueUpdate, _UpdateManager_processChannelPtsUpdate, _UpdateManager_processPtsUpdateInner, _UpdateManager_ptsUpdateQueue, _UpdateManager_processPtsUpdate, _UpdateManager_processQtsUpdateInner, _UpdateManager_qtsUpdateQueue, _UpdateManager_processQtsUpdate, _UpdateManager_processUpdatesQueue, _UpdateManager_processUpdates, _UpdateManager_setUpdateStateDate, _UpdateManager_setUpdatePts, _UpdateManager_setUpdateQts, _UpdateManager_getLocalState, _UpdateManager_recoveringUpdateGap, _UpdateManager_recoverUpdateGapMutex, _UpdateManager_recoverChannelUpdateGap, _UpdateManager_handleUpdatesSet, _UpdateManager_handleStoredUpdates, _UpdateManager_handleUpdate, _UpdateManager_openChats;
-import { SECOND, unreachable } from "../0_deps.js";
+import { delay, SECOND, unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { getLogger, Mutex, Queue, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
@@ -279,7 +279,7 @@ export class UpdateManager {
         __classPrivateFieldGet(this, _UpdateManager_LrecoverUpdateGap, "f").debug(`recovering from update gap [${source}]`);
         __classPrivateFieldGet(this, _UpdateManager_c, "f").setConnectionState("updating");
         try {
-            let delay = 5;
+            let retryIn = 5;
             let state = await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_getLocalState).call(this);
             while (true) {
                 let difference;
@@ -288,10 +288,10 @@ export class UpdateManager {
                 }
                 catch (err) {
                     if (err instanceof PersistentTimestampInvalid) {
-                        await new Promise((r) => setTimeout(r, delay * SECOND));
-                        ++delay;
-                        if (delay > 60) {
-                            delay = 60;
+                        await delay(retryIn * SECOND);
+                        ++retryIn;
+                        if (retryIn > 60) {
+                            retryIn = 60;
                         }
                         continue;
                     }
@@ -804,7 +804,7 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
     __classPrivateFieldGet(this, _UpdateManager_LrecoverChannelUpdateGap, "f").debug(`recovering channel update gap [${channelId}, ${source}]`);
     const pts_ = await __classPrivateFieldGet(this, _UpdateManager_c, "f").storage.getChannelPts(channelId);
     let pts = pts_ == null ? 1 : pts_;
-    let delay = 5;
+    let retryIn = 5;
     while (true) {
         const { access_hash } = await __classPrivateFieldGet(this, _UpdateManager_c, "f").getInputPeer(ZERO_CHANNEL_ID + -Number(channelId)).then((v) => Api.as("inputPeerChannel", v));
         let difference;
@@ -820,10 +820,10 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
         }
         catch (err) {
             if (err instanceof PersistentTimestampInvalid) {
-                await new Promise((r) => setTimeout(r, delay * SECOND));
-                delay += 5;
-                if (delay > 60) {
-                    delay = 60;
+                await delay(retryIn * SECOND);
+                retryIn += 5;
+                if (retryIn > 60) {
+                    retryIn = 60;
                 }
                 continue;
             }

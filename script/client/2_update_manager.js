@@ -282,7 +282,7 @@ class UpdateManager {
         __classPrivateFieldGet(this, _UpdateManager_LrecoverUpdateGap, "f").debug(`recovering from update gap [${source}]`);
         __classPrivateFieldGet(this, _UpdateManager_c, "f").setConnectionState("updating");
         try {
-            let delay = 5;
+            let retryIn = 5;
             let state = await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_getLocalState).call(this);
             while (true) {
                 let difference;
@@ -291,10 +291,10 @@ class UpdateManager {
                 }
                 catch (err) {
                     if (err instanceof _3_errors_js_1.PersistentTimestampInvalid) {
-                        await new Promise((r) => setTimeout(r, delay * _0_deps_js_1.SECOND));
-                        ++delay;
-                        if (delay > 60) {
-                            delay = 60;
+                        await (0, _0_deps_js_1.delay)(retryIn * _0_deps_js_1.SECOND);
+                        ++retryIn;
+                        if (retryIn > 60) {
+                            retryIn = 60;
                         }
                         continue;
                     }
@@ -808,7 +808,7 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
     __classPrivateFieldGet(this, _UpdateManager_LrecoverChannelUpdateGap, "f").debug(`recovering channel update gap [${channelId}, ${source}]`);
     const pts_ = await __classPrivateFieldGet(this, _UpdateManager_c, "f").storage.getChannelPts(channelId);
     let pts = pts_ == null ? 1 : pts_;
-    let delay = 5;
+    let retryIn = 5;
     while (true) {
         const { access_hash } = await __classPrivateFieldGet(this, _UpdateManager_c, "f").getInputPeer(_1_utilities_js_1.ZERO_CHANNEL_ID + -Number(channelId)).then((v) => _2_tl_js_1.Api.as("inputPeerChannel", v));
         let difference;
@@ -824,10 +824,10 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
         }
         catch (err) {
             if (err instanceof _3_errors_js_1.PersistentTimestampInvalid) {
-                await new Promise((r) => setTimeout(r, delay * _0_deps_js_1.SECOND));
-                delay += 5;
-                if (delay > 60) {
-                    delay = 60;
+                await (0, _0_deps_js_1.delay)(retryIn * _0_deps_js_1.SECOND);
+                retryIn += 5;
+                if (retryIn > 60) {
+                    retryIn = 60;
                 }
                 continue;
             }

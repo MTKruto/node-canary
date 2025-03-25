@@ -167,7 +167,7 @@ _Session_dc = new WeakMap(), _Session_cdn = new WeakMap(), _Session_lastConnect 
     }
     if (__classPrivateFieldGet(this, _Session_lastConnect, "f") && Date.now() - __classPrivateFieldGet(this, _Session_lastConnect, "f").getTime() <= 10 * _0_deps_js_1.SECOND) {
         __classPrivateFieldGet(this, _Session_L, "f").debug("reconnecting after a delay");
-        await new Promise((r) => setTimeout(r, 3 * _0_deps_js_1.SECOND));
+        await (0, _0_deps_js_1.delay)(3 * _0_deps_js_1.SECOND);
     }
     else {
         __classPrivateFieldGet(this, _Session_L, "f").debug("reconnecting");

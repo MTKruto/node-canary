@@ -29,7 +29,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _SessionEncrypted_instances, _a, _SessionEncrypted_id, _SessionEncrypted_authKey, _SessionEncrypted_authKeyId, _SessionEncrypted_toAcknowledge, _SessionEncrypted_pendingMessages, _SessionEncrypted_pendingPings, _SessionEncrypted_L, _SessionEncrypted_TGCRYPTO_INITED, _SessionEncrypted_assertNotDisconnected, _SessionEncrypted_invalidateSession, _SessionEncrypted_rejectAllPending, _SessionEncrypted_onMessageFailed, _SessionEncrypted_setServerSalt, _SessionEncrypted_receive, _SessionEncrypted_encryptMessage, _SessionEncrypted_decryptMessage, _SessionEncrypted_startReceiveLoop, _SessionEncrypted_receiveLoopActive, _SessionEncrypted_receiveLoop, _SessionEncrypted_onMessage, _SessionEncrypted_onRpcResult, _SessionEncrypted_onMsgDetailedInfo, _SessionEncrypted_onMsgNewDetailedInfo, _SessionEncrypted_onBadMsgNotification, _SessionEncrypted_onBadServerSalt, _SessionEncrypted_onPong, _SessionEncrypted_onNewSessionCreated, _SessionEncrypted_onMessageContainer, _SessionEncrypted_pingInterval, _SessionEncrypted_startPingLoop, _SessionEncrypted_pingLoopAbortController, _SessionEncrypted_LpingLoop, _SessionEncrypted_pingLoop, _SessionEncrypted_sendPingDelayDisconnect, _SessionEncrypted_resendPendingPing;
-import { assertEquals, concat, ige256Decrypt, ige256Encrypt, initTgCrypto, SECOND } from "../0_deps.js";
+import { assertEquals, concat, delay, ige256Decrypt, ige256Encrypt, initTgCrypto, SECOND } from "../0_deps.js";
 import { ConnectionError, TransportError } from "../0_errors.js";
 import { bigIntFromBuffer, bufferFromBigInt, drop, getLogger, getRandomId, gunzip, mod, sha1, sha256, toUnixTimestamp } from "../1_utilities.js";
 import { deserializeMessage, Mtproto, repr, serializeMessage, TLReader, X } from "../2_tl.js";
@@ -386,13 +386,7 @@ async function _SessionEncrypted_onMessage(msgId, body) {
     while (this.connected) {
         const then = Date.now();
         try {
-            await new Promise((resolve, reject) => {
-                const timeout = setTimeout(resolve, __classPrivateFieldGet(this, _SessionEncrypted_pingInterval, "f") - timeElapsed);
-                __classPrivateFieldGet(this, _SessionEncrypted_pingLoopAbortController, "f").signal.onabort = () => {
-                    reject(__classPrivateFieldGet(this, _SessionEncrypted_pingLoopAbortController, "f")?.signal.reason);
-                    clearTimeout(timeout);
-                };
-            });
+            await delay(__classPrivateFieldGet(this, _SessionEncrypted_pingInterval, "f") - timeElapsed, { signal: __classPrivateFieldGet(this, _SessionEncrypted_pingLoopAbortController, "f").signal });
             if (!this.connected) {
                 continue;
             }

@@ -1130,13 +1130,7 @@ class Client extends Composer {
         __classPrivateFieldSet(this, _Client_updateGapRecoveryLoopAbortController, new AbortController(), "f");
         while (this.connected) {
             try {
-                await new Promise((resolve, reject) => {
-                    const timeout = setTimeout(resolve, 60 * _0_deps_js_1.SECOND);
-                    __classPrivateFieldGet(this, _Client_updateGapRecoveryLoopAbortController, "f").signal.onabort = () => {
-                        reject(__classPrivateFieldGet(this, _Client_updateGapRecoveryLoopAbortController, "f")?.signal.reason);
-                        clearTimeout(timeout);
-                    };
-                });
+                await (0, _0_deps_js_1.delay)(60 * _0_deps_js_1.SECOND, { signal: __classPrivateFieldGet(this, _Client_updateGapRecoveryLoopAbortController, "f").signal });
                 if (!this.connected) {
                     continue;
                 }

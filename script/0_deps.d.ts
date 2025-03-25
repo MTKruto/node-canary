@@ -17,16 +17,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-export * from "./deps/jsr.io/@std/assert/1.0.11/mod.js";
-export { basename } from "./deps/jsr.io/@std/path/1.0.8/basename.js";
-export { extname } from "./deps/jsr.io/@std/path/1.0.8/extname.js";
-export { isAbsolute } from "./deps/jsr.io/@std/path/1.0.8/is_absolute.js";
+export { assert } from "./deps/jsr.io/@std/assert/1.0.12/assert.js";
+export { assertFalse } from "./deps/jsr.io/@std/assert/1.0.12/false.js";
+export { assertEquals } from "./deps/jsr.io/@std/assert/1.0.12/equals.js";
+export { unreachable } from "./deps/jsr.io/@std/assert/1.0.12/unreachable.js";
+export { AssertionError } from "./deps/jsr.io/@std/assert/1.0.12/assertion_error.js";
 export { join } from "./deps/jsr.io/@std/path/1.0.8/join.js";
+export { extname } from "./deps/jsr.io/@std/path/1.0.8/extname.js";
+export { basename } from "./deps/jsr.io/@std/path/1.0.8/basename.js";
 export { toFileUrl } from "./deps/jsr.io/@std/path/1.0.8/to_file_url.js";
+export { isAbsolute } from "./deps/jsr.io/@std/path/1.0.8/is_absolute.js";
+export { delay } from "./deps/jsr.io/@std/async/1.0.12/mod.js";
 export { concat } from "./deps/jsr.io/@std/bytes/1.0.5/concat.js";
+export { iterateReader } from "./deps/jsr.io/@std/io/0.225.2/iterate_reader.js";
 export { MINUTE, SECOND } from "./deps/jsr.io/@std/datetime/0.225.3/constants.js";
 export { toArrayBuffer } from "./deps/jsr.io/@std/streams/1.0.9/to_array_buffer.js";
-export { iterateReader } from "./deps/jsr.io/@std/io/0.225.2/iterate_reader.js";
 export { decodeBase64, encodeBase64 } from "./deps/jsr.io/@std/encoding/1.0.7/base64.js";
 import { contentType as contentType_ } from "./deps/jsr.io/@std/media-types/1.1.0/content_type.js";
 export declare const contentType: typeof contentType_;

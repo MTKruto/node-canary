@@ -124,6 +124,7 @@ class FileManager {
         const limit = chunkSize;
         let offset = params?.offset ? BigInt(params.offset) : 0n;
         let part = 0;
+        let ms = 0.05;
         while (true) {
             signal?.throwIfAborted();
             let retryIn = 1;
@@ -152,6 +153,8 @@ class FileManager {
                 else {
                     (0, _0_deps_js_1.unreachable)();
                 }
+                await (0, _0_deps_js_1.delay)(ms);
+                ms = Math.max(ms * .8, 0.003);
             }
             catch (err) {
                 if (typeof err === "object" && err instanceof _0_deps_js_1.AssertionError) {
@@ -354,7 +357,7 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
     const partCount = Math.ceil(buffer.byteLength / chunkSize);
     let promises = new Array();
     let started = false;
-    let delay = 0.05;
+    let ms = 0.05;
     main: for (let part = 0; part < partCount;) {
         for (let i = 0; i < _0_utilities_js_1.UPLOAD_POOL_SIZE; ++i) {
             for (let i = 0; i < __classPrivateFieldGet(_a, _a, "f", _FileManager_UPLOAD_REQUEST_PER_CONNECTION); ++i) {
@@ -369,8 +372,8 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
                     started = true;
                 }
                 else if (isBig) {
-                    await new Promise((r) => setTimeout(r, delay));
-                    delay = Math.max(delay * .8, 0.003);
+                    await (0, _0_deps_js_1.delay)(ms);
+                    ms = Math.max(ms * .8, 0.003);
                 }
                 promises.push((async () => {
                     let retryIn = 1;
@@ -413,7 +416,7 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
 }, _FileManager_handleError = async function _FileManager_handleError(err, retryIn, logPrefix) {
     if (retryIn > 0) {
         __classPrivateFieldGet(this, _FileManager_Lupload, "f").warning(`${logPrefix} retrying in ${retryIn} seconds`);
-        await new Promise((r) => setTimeout(r, retryIn * _0_deps_js_1.SECOND));
+        await (0, _0_deps_js_1.delay)(retryIn * _0_deps_js_1.SECOND);
     }
     else {
         throw err;

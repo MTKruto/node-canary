@@ -24,6 +24,7 @@ export interface Handlers {
     onUpdate?: (body: Uint8Array) => void;
     onNewServerSalt?: (serverSalt: bigint) => void;
     onMessageFailed?: (id: bigint, reason: unknown) => void;
+    onPong?: (pong: Mtproto.pong) => void;
     onRpcError?: (id: bigint, error: Mtproto.rpc_error) => void;
     onRpcResult?: (id: bigint, result: Uint8Array) => void;
 }

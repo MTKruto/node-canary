@@ -28,9 +28,10 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _ClientEncrypted_instances, _a, _ClientEncrypted_SEND_MAX_TRIES, _ClientEncrypted_AUTH_KEY_CREATION_MAX_TRIES, _ClientEncrypted_L, _ClientEncrypted_plain, _ClientEncrypted_pendingRequests, _ClientEncrypted_apiId, _ClientEncrypted_appVersion, _ClientEncrypted_deviceModel, _ClientEncrypted_langCode, _ClientEncrypted_langPack, _ClientEncrypted_systemLangCode, _ClientEncrypted_systemVersion, _ClientEncrypted_disableUpdates, _ClientEncrypted_createAuthKeyPromise, _ClientEncrypted_createAuthKey, _ClientEncrypted_createAuthKeyInner, _ClientEncrypted_connectionInited, _ClientEncrypted_send, _ClientEncrypted_resend, _ClientEncrypted_onUpdate, _ClientEncrypted_onNewServerSalt, _ClientEncrypted_onMessageFailed, _ClientEncrypted_onRpcError, _ClientEncrypted_onRpcResult;
+var _ClientEncrypted_instances, _a, _ClientEncrypted_SEND_MAX_TRIES, _ClientEncrypted_AUTH_KEY_CREATION_MAX_TRIES, _ClientEncrypted_L, _ClientEncrypted_plain, _ClientEncrypted_pendingRequests, _ClientEncrypted_apiId, _ClientEncrypted_appVersion, _ClientEncrypted_deviceModel, _ClientEncrypted_langCode, _ClientEncrypted_langPack, _ClientEncrypted_systemLangCode, _ClientEncrypted_systemVersion, _ClientEncrypted_disableUpdates, _ClientEncrypted_createAuthKeyPromise, _ClientEncrypted_createAuthKey, _ClientEncrypted_createAuthKeyInner, _ClientEncrypted_connectionInited, _ClientEncrypted_send, _ClientEncrypted_resend, _ClientEncrypted_onUpdate, _ClientEncrypted_onNewServerSalt, _ClientEncrypted_onMessageFailed, _ClientEncrypted_onRpcError, _ClientEncrypted_onRpcResult, _ClientEncrypted_onPong;
+import { InputError } from "../0_errors.js";
 import { getLogger } from "../1_utilities.js";
-import { Api, X } from "../2_tl.js";
+import { Api, Mtproto, X } from "../2_tl.js";
 import { ConnectionNotInited } from "../3_errors.js";
 import { APP_VERSION, DEVICE_MODEL, LANG_CODE, LANG_PACK, SYSTEM_LANG_CODE, SYSTEM_VERSION } from "../4_constants.js";
 import { constructTelegramError } from "../4_errors.js";
@@ -83,6 +84,7 @@ export class ClientEncrypted extends ClientAbstract {
         this.session.handlers.onMessageFailed = __classPrivateFieldGet(this, _ClientEncrypted_instances, "m", _ClientEncrypted_onMessageFailed).bind(this);
         this.session.handlers.onRpcError = __classPrivateFieldGet(this, _ClientEncrypted_instances, "m", _ClientEncrypted_onRpcError).bind(this);
         this.session.handlers.onRpcResult = __classPrivateFieldGet(this, _ClientEncrypted_instances, "m", _ClientEncrypted_onRpcResult).bind(this);
+        this.session.handlers.onPong = __classPrivateFieldGet(this, _ClientEncrypted_instances, "m", _ClientEncrypted_onPong).bind(this);
         __classPrivateFieldSet(this, _ClientEncrypted_apiId, apiId, "f");
         __classPrivateFieldSet(this, _ClientEncrypted_appVersion, params?.appVersion ?? APP_VERSION, "f");
         __classPrivateFieldSet(this, _ClientEncrypted_deviceModel, params?.deviceModel ?? DEVICE_MODEL, "f");
@@ -148,27 +150,36 @@ _a = ClientEncrypted, _ClientEncrypted_L = new WeakMap(), _ClientEncrypted_plain
     }
 }, _ClientEncrypted_send = async function _ClientEncrypted_send(function_) {
     this.lastRequest = new Date();
-    if (__classPrivateFieldGet(this, _ClientEncrypted_disableUpdates, "f") && !isCdnFunction(function_)) {
-        function_ = { _: "invokeWithoutUpdates", query: function_ };
+    let body;
+    if (Mtproto.is("ping", function_)) {
+        body = Mtproto.serializeObject(function_);
     }
-    if (!__classPrivateFieldGet(this, _ClientEncrypted_connectionInited, "f")) {
-        function_ = {
-            _: "initConnection",
-            api_id: __classPrivateFieldGet(this, _ClientEncrypted_apiId, "f"),
-            app_version: __classPrivateFieldGet(this, _ClientEncrypted_appVersion, "f"),
-            device_model: __classPrivateFieldGet(this, _ClientEncrypted_deviceModel, "f"),
-            lang_code: __classPrivateFieldGet(this, _ClientEncrypted_langCode, "f"),
-            lang_pack: __classPrivateFieldGet(this, _ClientEncrypted_langPack, "f"),
-            query: {
-                _: "invokeWithLayer",
-                layer: Api.LAYER,
-                query: function_,
-            },
-            system_lang_code: __classPrivateFieldGet(this, _ClientEncrypted_systemLangCode, "f"),
-            system_version: __classPrivateFieldGet(this, _ClientEncrypted_systemVersion, "f"),
-        };
+    else {
+        if (__classPrivateFieldGet(this, _ClientEncrypted_disableUpdates, "f") && !isCdnFunction(function_)) {
+            function_ = { _: "invokeWithoutUpdates", query: function_ };
+        }
+        if (!__classPrivateFieldGet(this, _ClientEncrypted_connectionInited, "f")) {
+            if (!__classPrivateFieldGet(this, _ClientEncrypted_apiId, "f")) {
+                throw new InputError("apiId not set");
+            }
+            function_ = {
+                _: "initConnection",
+                api_id: __classPrivateFieldGet(this, _ClientEncrypted_apiId, "f"),
+                app_version: __classPrivateFieldGet(this, _ClientEncrypted_appVersion, "f"),
+                device_model: __classPrivateFieldGet(this, _ClientEncrypted_deviceModel, "f"),
+                lang_code: __classPrivateFieldGet(this, _ClientEncrypted_langCode, "f"),
+                lang_pack: __classPrivateFieldGet(this, _ClientEncrypted_langPack, "f"),
+                query: {
+                    _: "invokeWithLayer",
+                    layer: Api.LAYER,
+                    query: function_,
+                },
+                system_lang_code: __classPrivateFieldGet(this, _ClientEncrypted_systemLangCode, "f"),
+                system_version: __classPrivateFieldGet(this, _ClientEncrypted_systemVersion, "f"),
+            };
+        }
+        body = Api.serializeObject(function_);
     }
-    const body = Api.serializeObject(function_);
     let lastErr;
     for (let i = 0; i < __classPrivateFieldGet(_a, _a, "f", _ClientEncrypted_SEND_MAX_TRIES); ++i) {
         let errored = false;
@@ -261,6 +272,12 @@ _a = ClientEncrypted, _ClientEncrypted_L = new WeakMap(), _ClientEncrypted_plain
     }
     if (!__classPrivateFieldGet(this, _ClientEncrypted_connectionInited, "f")) {
         __classPrivateFieldSet(this, _ClientEncrypted_connectionInited, true, "f");
+    }
+}, _ClientEncrypted_onPong = function _ClientEncrypted_onPong(pong) {
+    const pendingRequest = __classPrivateFieldGet(this, _ClientEncrypted_pendingRequests, "f").get(pong.msg_id);
+    if (pendingRequest) {
+        pendingRequest.resolve(pong);
+        __classPrivateFieldGet(this, _ClientEncrypted_pendingRequests, "f").delete(pong.msg_id);
     }
 };
 _ClientEncrypted_SEND_MAX_TRIES = { value: 10 };

@@ -29,7 +29,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _SessionEncrypted_instances, _a, _SessionEncrypted_id, _SessionEncrypted_authKey, _SessionEncrypted_authKeyId, _SessionEncrypted_toAcknowledge, _SessionEncrypted_pendingMessages, _SessionEncrypted_pendingPings, _SessionEncrypted_L, _SessionEncrypted_TGCRYPTO_INITED, _SessionEncrypted_assertNotDisconnected, _SessionEncrypted_invalidateSession, _SessionEncrypted_rejectAllPending, _SessionEncrypted_onMessageFailed, _SessionEncrypted_setServerSalt, _SessionEncrypted_receive, _SessionEncrypted_encryptMessage, _SessionEncrypted_decryptMessage, _SessionEncrypted_startReceiveLoop, _SessionEncrypted_receiveLoopActive, _SessionEncrypted_receiveLoop, _SessionEncrypted_onMessage, _SessionEncrypted_onRpcResult, _SessionEncrypted_onMsgDetailedInfo, _SessionEncrypted_onMsgNewDetailedInfo, _SessionEncrypted_onBadMsgNotification, _SessionEncrypted_onBadServerSalt, _SessionEncrypted_onPong, _SessionEncrypted_onNewSessionCreated, _SessionEncrypted_onMessageContainer, _SessionEncrypted_pingInterval, _SessionEncrypted_startPingLoop, _SessionEncrypted_pingLoopAbortController, _SessionEncrypted_LpingLoop, _SessionEncrypted_pingLoop, _SessionEncrypted_sendPingDelayDisconnect;
+var _SessionEncrypted_instances, _a, _SessionEncrypted_id, _SessionEncrypted_authKey, _SessionEncrypted_authKeyId, _SessionEncrypted_toAcknowledge, _SessionEncrypted_pendingMessages, _SessionEncrypted_pendingPings, _SessionEncrypted_L, _SessionEncrypted_TGCRYPTO_INITED, _SessionEncrypted_assertNotDisconnected, _SessionEncrypted_invalidateSession, _SessionEncrypted_rejectAllPending, _SessionEncrypted_onMessageFailed, _SessionEncrypted_setServerSalt, _SessionEncrypted_receive, _SessionEncrypted_encryptMessage, _SessionEncrypted_decryptMessage, _SessionEncrypted_startReceiveLoop, _SessionEncrypted_receiveLoopActive, _SessionEncrypted_receiveLoop, _SessionEncrypted_onMessage, _SessionEncrypted_onRpcResult, _SessionEncrypted_onMsgDetailedInfo, _SessionEncrypted_onMsgNewDetailedInfo, _SessionEncrypted_onBadMsgNotification, _SessionEncrypted_onBadServerSalt, _SessionEncrypted_onPong, _SessionEncrypted_onNewSessionCreated, _SessionEncrypted_onMessageContainer, _SessionEncrypted_pingInterval, _SessionEncrypted_startPingLoop, _SessionEncrypted_pingLoopAbortController, _SessionEncrypted_LpingLoop, _SessionEncrypted_pingLoop, _SessionEncrypted_sendPingDelayDisconnect, _SessionEncrypted_resendPendingPing;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SessionEncrypted = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
@@ -146,17 +146,26 @@ _a = SessionEncrypted, _SessionEncrypted_id = new WeakMap(), _SessionEncrypted_a
     for (const id of __classPrivateFieldGet(this, _SessionEncrypted_pendingMessages, "f")) {
         __classPrivateFieldGet(this, _SessionEncrypted_instances, "m", _SessionEncrypted_onMessageFailed).call(this, id, reason);
     }
+    __classPrivateFieldGet(this, _SessionEncrypted_pendingMessages, "f").clear();
     for (const pendingPing of __classPrivateFieldGet(this, _SessionEncrypted_pendingPings, "f").values()) {
         pendingPing.reject(reason);
     }
     __classPrivateFieldGet(this, _SessionEncrypted_pendingPings, "f").clear();
 }, _SessionEncrypted_onMessageFailed = function _SessionEncrypted_onMessageFailed(id, reason) {
     __classPrivateFieldGet(this, _SessionEncrypted_pendingMessages, "f").delete(id);
-    this.handlers.onMessageFailed?.(id, reason);
     const pendingPing = __classPrivateFieldGet(this, _SessionEncrypted_pendingPings, "f").get(id);
     if (pendingPing) {
-        pendingPing.reject(reason);
         __classPrivateFieldGet(this, _SessionEncrypted_pendingPings, "f").delete(id);
+        if (reason instanceof _0_session_error_js_1.SessionError) {
+            (0, _1_utilities_js_1.drop)(__classPrivateFieldGet(this, _SessionEncrypted_instances, "m", _SessionEncrypted_resendPendingPing).call(this, pendingPing));
+        }
+        else {
+            pendingPing.reject(reason);
+        }
+    }
+    else {
+        // message was not sent by us
+        this.handlers.onMessageFailed?.(id, reason);
     }
 }, _SessionEncrypted_setServerSalt = function _SessionEncrypted_setServerSalt(newServerSalt) {
     this.state.serverSalt = newServerSalt;
@@ -349,10 +358,14 @@ async function _SessionEncrypted_onMessage(msgId, body) {
     __classPrivateFieldGet(this, _SessionEncrypted_instances, "m", _SessionEncrypted_onMessageFailed).call(this, badServerSalt.bad_msg_id, new _0_session_error_js_1.SessionError(badServerSalt._));
 }, _SessionEncrypted_onPong = function _SessionEncrypted_onPong(msgId, pong) {
     __classPrivateFieldGet(this, _SessionEncrypted_toAcknowledge, "f").push(msgId);
-    const pendingPing = __classPrivateFieldGet(this, _SessionEncrypted_pendingPings, "f").get(msgId);
+    const pendingPing = __classPrivateFieldGet(this, _SessionEncrypted_pendingPings, "f").get(pong.msg_id);
     if (pendingPing) {
         pendingPing.resolve(pong);
-        __classPrivateFieldGet(this, _SessionEncrypted_pendingPings, "f").delete(msgId);
+        __classPrivateFieldGet(this, _SessionEncrypted_pendingPings, "f").delete(pong.msg_id);
+    }
+    else {
+        // pong is not ours
+        this.handlers.onPong?.(pong);
     }
 }, _SessionEncrypted_onNewSessionCreated = function _SessionEncrypted_onNewSessionCreated(msgId, newSessionCreated) {
     __classPrivateFieldGet(this, _SessionEncrypted_instances, "m", _SessionEncrypted_setServerSalt).call(this, newSessionCreated.server_salt);
@@ -403,18 +416,18 @@ async function _SessionEncrypted_onMessage(msgId, body) {
     }
 }, _SessionEncrypted_sendPingDelayDisconnect = async function _SessionEncrypted_sendPingDelayDisconnect(disconnect_delay) {
     const ping_id = (0, _1_utilities_js_1.getRandomId)();
-    const request = { _: "ping_delay_disconnect", ping_id, disconnect_delay };
+    const call = { _: "ping_delay_disconnect", ping_id, disconnect_delay };
+    const messageId = await this.send(_2_tl_js_1.Mtproto.serializeObject(call));
     await new Promise((resolve, reject) => {
-        Promise.resolve().then(async () => {
-            __classPrivateFieldGet(this, _SessionEncrypted_pendingPings, "f").set(ping_id, { resolve, reject });
-            try {
-                await this.send(_2_tl_js_1.Mtproto.serializeObject(request));
-            }
-            catch (err) {
-                reject(err);
-                __classPrivateFieldGet(this, _SessionEncrypted_pendingMessages, "f").delete(ping_id);
-            }
-        });
+        __classPrivateFieldGet(this, _SessionEncrypted_pendingPings, "f").set(messageId, { call, resolve, reject });
     });
+}, _SessionEncrypted_resendPendingPing = async function _SessionEncrypted_resendPendingPing(pendingPing) {
+    try {
+        const messageId = await this.send(_2_tl_js_1.Mtproto.serializeObject(pendingPing.call));
+        __classPrivateFieldGet(this, _SessionEncrypted_pendingPings, "f").set(messageId, pendingPing);
+    }
+    catch (err) {
+        pendingPing.reject(err);
+    }
 };
 _SessionEncrypted_TGCRYPTO_INITED = { value: false };

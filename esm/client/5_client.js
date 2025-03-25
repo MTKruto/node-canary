@@ -687,6 +687,9 @@ export class Client extends Composer {
             id,
             invoke: async (function_, params) => {
                 if (params?.businessConnectionId) {
+                    if (Mtproto.is("ping", function_)) {
+                        unreachable();
+                    }
                     return await this.invoke({ _: "invokeWithBusinessConnection", connection_id: params.businessConnectionId, query: function_ }, params);
                 }
                 else {
@@ -882,10 +885,7 @@ export class Client extends Composer {
         return __classPrivateFieldGet(this, _Client_clients, "f")[0];
     }, _Client_getApiId = async function _Client_getApiId() {
         const apiId = __classPrivateFieldGet(this, _Client_apiId, "f") || await this.storage.getApiId();
-        if (!apiId) {
-            throw new InputError("apiId not set");
-        }
-        return apiId;
+        return apiId || 0;
     }, _Client_propagateConnectionState = function _Client_propagateConnectionState(connectionState) {
         __classPrivateFieldGet(this, _Client_instances, "m", _Client_queueHandleCtxUpdate).call(this, { connectionState });
         __classPrivateFieldSet(this, _Client_lastPropagatedConnectionState, connectionState, "f");

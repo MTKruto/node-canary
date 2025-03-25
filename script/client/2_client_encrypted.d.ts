@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { Api } from "../2_tl.js";
+import { Api, Mtproto } from "../2_tl.js";
 import { DC } from "../3_transport.js";
 import { SessionEncrypted } from "../4_session.js";
 import { ClientAbstract } from "./0_client_abstract.js";
@@ -53,6 +53,6 @@ export declare class ClientEncrypted extends ClientAbstract {
     get authKey(): Uint8Array;
     setAuthKey(authKey: Uint8Array<ArrayBuffer>): Promise<void>;
     lastRequest?: Date;
-    invoke<T extends Api.AnyFunction, R = T extends Api.AnyGenericFunction<infer X> ? Api.ReturnType<X> : T["_"] extends keyof Api.Functions ? Api.ReturnType<T> extends never ? Api.ReturnType<Api.Functions[T["_"]]> : never : never>(function_: T): Promise<R>;
+    invoke<T extends Api.AnyFunction | Mtproto.ping, R = T extends Mtproto.ping ? Mtproto.pong : T extends Api.AnyGenericFunction<infer X> ? Api.ReturnType<X> : T["_"] extends keyof Api.Functions ? Api.ReturnType<T> extends never ? Api.ReturnType<Api.Functions[T["_"]]> : never : never>(function_: T): Promise<R>;
 }
 //# sourceMappingURL=2_client_encrypted.d.ts.map

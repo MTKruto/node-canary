@@ -691,6 +691,9 @@ class Client extends Composer {
             id,
             invoke: async (function_, params) => {
                 if (params?.businessConnectionId) {
+                    if (_2_tl_js_1.Mtproto.is("ping", function_)) {
+                        (0, _0_deps_js_1.unreachable)();
+                    }
                     return await this.invoke({ _: "invokeWithBusinessConnection", connection_id: params.businessConnectionId, query: function_ }, params);
                 }
                 else {
@@ -886,10 +889,7 @@ class Client extends Composer {
         return __classPrivateFieldGet(this, _Client_clients, "f")[0];
     }, _Client_getApiId = async function _Client_getApiId() {
         const apiId = __classPrivateFieldGet(this, _Client_apiId, "f") || await this.storage.getApiId();
-        if (!apiId) {
-            throw new _0_errors_js_1.InputError("apiId not set");
-        }
-        return apiId;
+        return apiId || 0;
     }, _Client_propagateConnectionState = function _Client_propagateConnectionState(connectionState) {
         __classPrivateFieldGet(this, _Client_instances, "m", _Client_queueHandleCtxUpdate).call(this, { connectionState });
         __classPrivateFieldSet(this, _Client_lastPropagatedConnectionState, connectionState, "f");

@@ -19,7 +19,7 @@
  */
 import { MaybePromise } from "../1_utilities.js";
 import { Storage } from "../2_storage.js";
-import { Api } from "../2_tl.js";
+import { Api, Mtproto } from "../2_tl.js";
 import { DC } from "../3_transport.js";
 import { BotCommand, BusinessConnection, CallbackQueryAnswer, CallbackQueryQuestion, Chat, ChatAction, ChatListItem, ChatMember, ChatP, type ChatPChannel, type ChatPGroup, type ChatPSupergroup, ChatSettings, ClaimedGifts, FailedInvitation, FileSource, Gift, ID, InactiveChat, InlineQueryAnswer, InlineQueryResult, InputMedia, InputStoryContent, InviteLink, LiveStreamChannel, Message, MessageAnimation, MessageAudio, MessageContact, MessageDice, MessageDocument, MessageInvoice, MessageLocation, MessagePhoto, MessagePoll, MessageSticker, MessageText, MessageVenue, MessageVideo, MessageVideoNote, MessageVoice, NetworkStatistics, ParseMode, Poll, PriceTag, Reaction, SlowModeDuration, Sticker, Story, Topic, Translation, Update, User, VideoChat, VideoChatActive, VideoChatScheduled, VoiceTranscription } from "../3_types.js";
 import { Migrate } from "../4_errors.js";
@@ -199,7 +199,7 @@ export interface InvokeErrorHandler<C> {
     (ctx: {
         client: C;
         error: unknown;
-        function: Api.AnyObject;
+        function: Api.AnyFunction | Mtproto.ping;
         n: number;
     }, next: NextFunction<boolean>): MaybePromise<boolean>;
 }
@@ -311,7 +311,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param function_ The function to invoke.
      */
     invoke: {
-        <T extends Api.AnyFunction, R = T["_"] extends keyof Api.Functions ? Api.ReturnType<T> extends never ? Api.ReturnType<Api.Functions[T["_"]]> : never : never>(function_: T, params?: InvokeParams): Promise<R>;
+        <T extends Api.AnyFunction | Mtproto.ping, R = T extends Mtproto.ping ? Mtproto.pong : T extends Api.AnyGenericFunction<infer X> ? Api.ReturnType<X> : T["_"] extends keyof Api.Functions ? Api.ReturnType<T> extends never ? Api.ReturnType<Api.Functions[T["_"]]> : never : never>(function_: T, params?: InvokeParams): Promise<R>;
         use: (handler: InvokeErrorHandler<Client<C>>) => void;
     };
     exportAuthString(): Promise<string>;

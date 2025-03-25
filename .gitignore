@@ -27,6 +27,10 @@
 /esm/client/2_file_manager_test.d.ts
 /script/client/2_file_manager_test.js
 /script/client/2_file_manager_test.d.ts
+/esm/client/3_client_encrypted_pool_test.js
+/esm/client/3_client_encrypted_pool_test.d.ts
+/script/client/3_client_encrypted_pool_test.js
+/script/client/3_client_encrypted_pool_test.d.ts
 /esm/client/3_message_manager_test.js
 /esm/client/3_message_manager_test.d.ts
 /script/client/3_message_manager_test.js

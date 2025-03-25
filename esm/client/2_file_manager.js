@@ -9,7 +9,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _FileManager_instances, _a, _FileManager_c, _FileManager_Lupload, _FileManager_UPLOAD_MAX_CHUNK_SIZE, _FileManager_DOWNLOAD_MAX_CHUNK_SIZE, _FileManager_BIG_FILE_THRESHOLD, _FileManager_UPLOAD_REQUEST_PER_CONNECTION, _FileManager_uploadStream, _FileManager_uploadBuffer, _FileManager_handleError, _FileManager_getFileContents, _FileManager_CUSTOM_EMOJI_TTL;
+var _FileManager_instances, _a, _FileManager_c, _FileManager_Lupload, _FileManager_UPLOAD_MAX_CHUNK_SIZE, _FileManager_DOWNLOAD_MAX_CHUNK_SIZE, _FileManager_BIG_FILE_THRESHOLD, _FileManager_uploadStream, _FileManager_uploadBuffer, _FileManager_uploadPart, _FileManager_handleError, _FileManager_getFileContents, _FileManager_CUSTOM_EMOJI_TTL;
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
  * Copyright (C) 2023-2025 Roj <https://roj.im/>
@@ -286,38 +286,13 @@ export class FileManager {
 _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new WeakMap(), _FileManager_instances = new WeakSet(), _FileManager_uploadStream = async function _FileManager_uploadStream(stream, fileId, chunkSize, signal) {
     let part;
     let promises = new Array();
+    let ms = 0.05;
     for await (part of iterateReadableStream(stream.pipeThrough(new PartStream(chunkSize)))) {
-        promises.push((async () => {
-            let retryIn = 1;
-            let errorCount = 0;
-            while (true) {
-                try {
-                    signal?.throwIfAborted();
-                    __classPrivateFieldGet(this, _FileManager_Lupload, "f").debug(`[${fileId}] uploading part ` + (part.part + 1));
-                    if (part.small) {
-                        await __classPrivateFieldGet(this, _FileManager_c, "f").invoke({ _: "upload.saveFilePart", file_id: fileId, bytes: part.bytes, file_part: part.part });
-                    }
-                    else {
-                        await __classPrivateFieldGet(this, _FileManager_c, "f").invoke({ _: "upload.saveBigFilePart", file_id: fileId, file_part: part.part, bytes: part.bytes, file_total_parts: part.totalParts });
-                    }
-                    __classPrivateFieldGet(this, _FileManager_Lupload, "f").debug(`[${fileId}] uploaded part ` + (part.part + 1));
-                    break;
-                }
-                catch (err) {
-                    signal?.throwIfAborted();
-                    __classPrivateFieldGet(this, _FileManager_Lupload, "f").debug(`[${fileId}] failed to upload part ` + (part.part + 1));
-                    ++errorCount;
-                    if (errorCount > 20) {
-                        retryIn = 0;
-                    }
-                    await __classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_handleError).call(this, err, retryIn, `[${fileId}-${part.part + 1}]`);
-                    retryIn += 2;
-                    if (retryIn > 11) {
-                        retryIn = 11;
-                    }
-                }
-            }
-        })());
+        if (!part.small && part.part > 0) {
+            await delay(ms);
+            ms = Math.max(ms * .8, 0.003);
+        }
+        promises.push(__classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_uploadPart).call(this, fileId, part.totalParts, !part.small, part.part, part.bytes, signal));
         if (promises.length == UPLOAD_POOL_SIZE * UPLOAD_REQUEST_PER_CONNECTION) {
             await Promise.all(promises);
             promises = [];
@@ -333,52 +308,25 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
     let ms = 0.05;
     main: for (let part = 0; part < partCount;) {
         for (let i = 0; i < UPLOAD_POOL_SIZE; ++i) {
-            for (let i = 0; i < __classPrivateFieldGet(_a, _a, "f", _FileManager_UPLOAD_REQUEST_PER_CONNECTION); ++i) {
+            for (let i = 0; i < UPLOAD_REQUEST_PER_CONNECTION; ++i) {
                 const start = part * chunkSize;
                 const end = start + chunkSize;
                 const bytes = buffer.subarray(start, end);
                 if (!bytes.length) {
                     break main;
                 }
-                const thisPart = part++; // `thisPart` must be used instead of `part` in the promise body
                 if (!started) {
                     started = true;
                 }
-                else if (isBig) {
+                else if (isBig && part > 0) {
                     await delay(ms);
                     ms = Math.max(ms * .8, 0.003);
                 }
-                promises.push((async () => {
-                    let retryIn = 1;
-                    let errorCount = 0;
-                    while (true) {
-                        try {
-                            signal?.throwIfAborted();
-                            __classPrivateFieldGet(this, _FileManager_Lupload, "f").debug(`[${fileId}] uploading part ` + (thisPart + 1));
-                            if (isBig) {
-                                await __classPrivateFieldGet(this, _FileManager_c, "f").invoke({ _: "upload.saveBigFilePart", file_id: fileId, file_part: thisPart, bytes, file_total_parts: partCount }, { type: "upload" });
-                            }
-                            else {
-                                await __classPrivateFieldGet(this, _FileManager_c, "f").invoke({ _: "upload.saveFilePart", file_id: fileId, bytes, file_part: thisPart }, { type: "upload" });
-                            }
-                            __classPrivateFieldGet(this, _FileManager_Lupload, "f").debug(`[${fileId}] uploaded part ` + (thisPart + 1) + " / " + partCount);
-                            break;
-                        }
-                        catch (err) {
-                            signal?.throwIfAborted();
-                            __classPrivateFieldGet(this, _FileManager_Lupload, "f").debug(`[${fileId}] failed to upload part ` + (thisPart + 1) + " / " + partCount, err);
-                            ++errorCount;
-                            if (errorCount > 20) {
-                                retryIn = 0;
-                            }
-                            await __classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_handleError).call(this, err, retryIn, `[${fileId}-${thisPart + 1}]`);
-                            retryIn += 2;
-                            if (retryIn > 11) {
-                                retryIn = 11;
-                            }
-                        }
-                    }
-                })());
+                promises.push(__classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_uploadPart).call(this, fileId, partCount, isBig, part++, bytes, signal));
+                if (promises.length == UPLOAD_POOL_SIZE * UPLOAD_REQUEST_PER_CONNECTION) {
+                    await Promise.all(promises);
+                    promises = [];
+                }
             }
         }
         await Promise.all(promises);
@@ -386,6 +334,36 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
     }
     await Promise.all(promises);
     return { small: !isBig, parts: partCount };
+}, _FileManager_uploadPart = async function _FileManager_uploadPart(fileId, partCount, isBig, index, bytes, signal) {
+    let retryIn = 1;
+    let errorCount = 0;
+    while (true) {
+        try {
+            signal?.throwIfAborted();
+            __classPrivateFieldGet(this, _FileManager_Lupload, "f").debug(`[${fileId}] uploading part ` + (index + 1));
+            if (isBig) {
+                await __classPrivateFieldGet(this, _FileManager_c, "f").invoke({ _: "upload.saveBigFilePart", file_id: fileId, file_part: index, bytes: bytes, file_total_parts: partCount }, { type: "upload" });
+            }
+            else {
+                await __classPrivateFieldGet(this, _FileManager_c, "f").invoke({ _: "upload.saveFilePart", file_id: fileId, bytes: bytes, file_part: index }, { type: "upload" });
+            }
+            __classPrivateFieldGet(this, _FileManager_Lupload, "f").debug(`[${fileId}] uploaded part ` + (index + 1));
+            break;
+        }
+        catch (err) {
+            signal?.throwIfAborted();
+            __classPrivateFieldGet(this, _FileManager_Lupload, "f").debug(`[${fileId}] failed to upload part ` + (index + 1));
+            ++errorCount;
+            if (errorCount > 20) {
+                retryIn = 0;
+            }
+            await __classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_handleError).call(this, err, retryIn, `[${fileId}-${index + 1}]`);
+            retryIn += 2;
+            if (retryIn > 11) {
+                retryIn = 11;
+            }
+        }
+    }
 }, _FileManager_handleError = async function _FileManager_handleError(err, retryIn, logPrefix) {
     if (retryIn > 0) {
         __classPrivateFieldGet(this, _FileManager_Lupload, "f").warning(`${logPrefix} retrying in ${retryIn} seconds`);
@@ -481,5 +459,4 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
 _FileManager_UPLOAD_MAX_CHUNK_SIZE = { value: 512 * kilobyte };
 _FileManager_DOWNLOAD_MAX_CHUNK_SIZE = { value: 1 * megabyte };
 _FileManager_BIG_FILE_THRESHOLD = { value: 10 * megabyte };
-_FileManager_UPLOAD_REQUEST_PER_CONNECTION = { value: 2 };
 _FileManager_CUSTOM_EMOJI_TTL = { value: 30 * MINUTE };

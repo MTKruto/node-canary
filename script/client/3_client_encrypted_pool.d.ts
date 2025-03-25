@@ -20,7 +20,6 @@
 import { ClientEncrypted } from "./2_client_encrypted.js";
 export declare class ClientEncryptedPool {
     #private;
-    constructor(requestPerClient: number);
     get size(): number;
     add(client: ClientEncrypted): void;
     nextClient(): ClientEncrypted;

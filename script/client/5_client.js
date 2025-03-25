@@ -813,6 +813,9 @@ class Client extends Composer {
         client.handlers.onDeserializationError = async () => {
             await __classPrivateFieldGet(this, _Client_updateManager, "f").recoverUpdateGap("deserialization error");
         };
+        client.handlers.onNewServerSalt = async (serverSalt) => {
+            await this.storage.setServerSalt(serverSalt);
+        };
         client.onConnectionStateChange = __classPrivateFieldGet(this, _Client_instances, "m", _Client_onConnectionStateChange).bind(this);
     }, _Client_newClient = async function _Client_newClient(dc, main, cdn) {
         const apiId = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getApiId).call(this);
@@ -1226,7 +1229,7 @@ class Client extends Composer {
         }
     }, _Client_getDownloadClient = async function _Client_getDownloadClient(dc) {
         dc ??= __classPrivateFieldGet(this, _Client_instances, "a", _Client_client_get).dc;
-        const pool = __classPrivateFieldGet(this, _Client_downloadPools, "f")[dc] ??= new _3_client_encrypted_pool_js_1.ClientEncryptedPool(_0_utilities_js_1.DOWNLOAD_REQUEST_PER_CONNECTION);
+        const pool = __classPrivateFieldGet(this, _Client_downloadPools, "f")[dc] ??= new _3_client_encrypted_pool_js_1.ClientEncryptedPool();
         if (!pool.size) {
             for (let i = 0; i < _0_utilities_js_1.DOWNLOAD_POOL_SIZE; ++i) {
                 pool.add(await __classPrivateFieldGet(this, _Client_instances, "m", _Client_newClient).call(this, dc, false, true));
@@ -1240,7 +1243,7 @@ class Client extends Composer {
         return client;
     }, _Client_getUploadClient = async function _Client_getUploadClient() {
         const dc = __classPrivateFieldGet(this, _Client_instances, "a", _Client_client_get).dc;
-        const pool = __classPrivateFieldGet(this, _Client_uploadPools, "f")[dc] ??= new _3_client_encrypted_pool_js_1.ClientEncryptedPool(_0_utilities_js_1.UPLOAD_REQUEST_PER_CONNECTION);
+        const pool = __classPrivateFieldGet(this, _Client_uploadPools, "f")[dc] ??= new _3_client_encrypted_pool_js_1.ClientEncryptedPool();
         if (!pool.size) {
             for (let i = 0; i < _0_utilities_js_1.UPLOAD_POOL_SIZE; ++i) {
                 pool.add(await __classPrivateFieldGet(this, _Client_instances, "m", _Client_newClient).call(this, dc, false, true));
@@ -1258,6 +1261,7 @@ class Client extends Composer {
         if (authKey) {
             await client.setAuthKey(authKey);
             if (serverSalt) {
+                console.log("set server salt");
                 client.serverSalt = serverSalt;
             }
         }
@@ -1265,10 +1269,13 @@ class Client extends Composer {
         if (!authKey) {
             await __classPrivateFieldGet(this, _Client_instances, "m", _Client_importAuthorization).call(this, client);
         }
-        await Promise.all([storage.setAuthKey(client.authKey), storage.setServerSalt(client.serverSalt)]);
-        client.handlers.onNewServerSalt = async (serverSalt) => {
-            await storage.setServerSalt(serverSalt);
-        };
+        await storage.setAuthKey(client.authKey);
+        if (client.dc !== __classPrivateFieldGet(this, _Client_instances, "a", _Client_client_get).dc) {
+            await storage.setServerSalt(client.serverSalt);
+            client.handlers.onNewServerSalt = async (serverSalt) => {
+                await storage.setServerSalt(serverSalt);
+            };
+        }
     }, _Client_importAuthorization = async function _Client_importAuthorization(client) {
         if (__classPrivateFieldGet(this, _Client_instances, "a", _Client_client_get).dc == client.dc && __classPrivateFieldGet(this, _Client_instances, "a", _Client_client_get).cdn == client.cdn) {
             const [authKey, serverSalt] = await Promise.all([this.storage.getAuthKey(), this.storage.getServerSalt()]);

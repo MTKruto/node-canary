@@ -1257,7 +1257,6 @@ export class Client extends Composer {
         if (authKey) {
             await client.setAuthKey(authKey);
             if (serverSalt) {
-                console.log("set server salt");
                 client.serverSalt = serverSalt;
             }
         }

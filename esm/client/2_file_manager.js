@@ -101,19 +101,21 @@ export class FileManager {
         let ms = 0.05;
         let promises = new Array();
         while (true) {
-            promises.push(__classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_downloadPart).call(this, dc, location, part++, offset, limit, id, ms, signal));
-            ms = Math.max(ms * .8, 0.003);
-            offset += BigInt(limit);
-            if (promises.length == DOWNLOAD_POOL_SIZE * DOWNLOAD_REQUEST_PER_CONNECTION) {
-                const chunks = await Promise.all(promises);
-                promises = [];
-                for (const chunk of chunks) {
-                    if (chunk.length) {
-                        yield chunk;
-                    }
-                    if (chunk.length < limit) {
-                        return;
-                    }
+            for (let i = 0; i < DOWNLOAD_POOL_SIZE; ++i) {
+                for (let i = 0; i < DOWNLOAD_REQUEST_PER_CONNECTION; ++i) {
+                    promises.push(__classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_downloadPart).call(this, dc, location, part++, offset, limit, id, ms, signal));
+                    offset += BigInt(limit);
+                    ms = Math.max(ms * .8, 0.003);
+                }
+            }
+            const chunks = await Promise.all(promises);
+            promises = [];
+            for (const chunk of chunks) {
+                if (chunk.length) {
+                    yield chunk;
+                }
+                if (chunk.length < limit) {
+                    return;
                 }
             }
         }

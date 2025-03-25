@@ -381,25 +381,26 @@ async function _SessionEncrypted_onMessage(msgId, body) {
 }, _SessionEncrypted_startPingLoop = function _SessionEncrypted_startPingLoop() {
     drop(__classPrivateFieldGet(this, _SessionEncrypted_instances, "m", _SessionEncrypted_pingLoop).call(this));
 }, _SessionEncrypted_pingLoop = async function _SessionEncrypted_pingLoop() {
-    __classPrivateFieldSet(this, _SessionEncrypted_pingLoopAbortController, new AbortController(), "f");
+    __classPrivateFieldGet(this, _SessionEncrypted_pingLoopAbortController, "f")?.abort();
+    const controller = __classPrivateFieldSet(this, _SessionEncrypted_pingLoopAbortController, new AbortController(), "f");
     let timeElapsed = 0;
     while (this.connected) {
         const then = Date.now();
         try {
-            await delay(__classPrivateFieldGet(this, _SessionEncrypted_pingInterval, "f") - timeElapsed, { signal: __classPrivateFieldGet(this, _SessionEncrypted_pingLoopAbortController, "f").signal });
+            await delay(__classPrivateFieldGet(this, _SessionEncrypted_pingInterval, "f") - timeElapsed, { signal: controller.signal });
             if (!this.connected) {
                 continue;
             }
-            __classPrivateFieldGet(this, _SessionEncrypted_pingLoopAbortController, "f").signal.throwIfAborted();
+            controller.signal.throwIfAborted();
             await __classPrivateFieldGet(this, _SessionEncrypted_instances, "m", _SessionEncrypted_sendPingDelayDisconnect).call(this, __classPrivateFieldGet(this, _SessionEncrypted_pingInterval, "f") / SECOND + 15);
-            __classPrivateFieldGet(this, _SessionEncrypted_pingLoopAbortController, "f").signal.throwIfAborted();
+            controller.signal.throwIfAborted();
         }
         catch (err) {
             if (err instanceof DOMException && err.name == "AbortError") {
-                __classPrivateFieldSet(this, _SessionEncrypted_pingLoopAbortController, new AbortController(), "f");
+                break;
             }
-            if (!this.connected) {
-                continue;
+            else if (!this.connected) {
+                break;
             }
             __classPrivateFieldGet(this, _SessionEncrypted_LpingLoop, "f").error(err);
         }

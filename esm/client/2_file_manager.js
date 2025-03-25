@@ -9,7 +9,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _FileManager_instances, _a, _FileManager_c, _FileManager_Lupload, _FileManager_UPLOAD_MAX_CHUNK_SIZE, _FileManager_DOWNLOAD_MAX_CHUNK_SIZE, _FileManager_BIG_FILE_THRESHOLD, _FileManager_uploadStream, _FileManager_uploadBuffer, _FileManager_uploadPart, _FileManager_handleError, _FileManager_getFileContents, _FileManager_downloadPart, _FileManager_CUSTOM_EMOJI_TTL;
+var _FileManager_instances, _a, _FileManager_c, _FileManager_Lupload, _FileManager_UPLOAD_MAX_CHUNK_SIZE, _FileManager_DOWNLOAD_MAX_CHUNK_SIZE, _FileManager_BIG_FILE_THRESHOLD, _FileManager_uploadStream, _FileManager_uploadBuffer, _FileManager_uploadPart, _FileManager_handleError, _FileManager_getFileContents, _FileManager_CUSTOM_EMOJI_TTL;
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
  * Copyright (C) 2023-2025 Roj <https://roj.im/>
@@ -37,7 +37,7 @@ import { Api } from "../2_tl.js";
 import { getDc } from "../3_transport.js";
 import { constructSticker, deserializeFileId, FileType, PhotoSourceType, serializeFileId, toUniqueFileId } from "../3_types.js";
 import { STICKER_SET_NAME_TTL } from "../4_constants.js";
-import { DOWNLOAD_POOL_SIZE, DOWNLOAD_REQUEST_PER_CONNECTION, UPLOAD_POOL_SIZE, UPLOAD_REQUEST_PER_CONNECTION } from "./0_utilities.js";
+import { UPLOAD_POOL_SIZE, UPLOAD_REQUEST_PER_CONNECTION } from "./0_utilities.js";
 export class FileManager {
     constructor(c) {
         _FileManager_instances.add(this);
@@ -99,23 +99,50 @@ export class FileManager {
         let offset = params?.offset ? BigInt(params.offset) : 0n;
         let part = 0;
         let ms = 0.05;
-        let promises = new Array();
         while (true) {
-            for (let i = 0; i < DOWNLOAD_POOL_SIZE; ++i) {
-                for (let i = 0; i < DOWNLOAD_REQUEST_PER_CONNECTION; ++i) {
-                    promises.push(__classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_downloadPart).call(this, dc, location, part++, offset, limit, id, ms, signal));
-                    offset += BigInt(limit);
-                    ms = Math.max(ms * .8, 0.003);
+            signal?.throwIfAborted();
+            let retryIn = 1;
+            let errorCount = 0;
+            try {
+                const file = await __classPrivateFieldGet(this, _FileManager_c, "f").invoke({ _: "upload.getFile", location, offset, limit }, { dc, type: "download" });
+                signal?.throwIfAborted();
+                if (Api.is("upload.file", file)) {
+                    yield file.bytes;
+                    if (id != null) {
+                        await __classPrivateFieldGet(this, _FileManager_c, "f").storage.saveFilePart(id, part, file.bytes);
+                        signal?.throwIfAborted();
+                    }
+                    ++part;
+                    if (file.bytes.length < limit) {
+                        if (id != null) {
+                            await __classPrivateFieldGet(this, _FileManager_c, "f").storage.setFilePartCount(id, part + 1, chunkSize);
+                            signal?.throwIfAborted();
+                        }
+                        break;
+                    }
+                    else {
+                        offset += BigInt(file.bytes.length);
+                    }
                 }
+                else {
+                    unreachable();
+                }
+                await delay(ms);
+                ms = Math.max(ms * .8, 0.003);
             }
-            const chunks = await Promise.all(promises);
-            promises = [];
-            for (const chunk of chunks) {
-                if (chunk.length) {
-                    yield chunk;
+            catch (err) {
+                if (typeof err === "object" && err instanceof AssertionError) {
+                    throw err;
                 }
-                if (chunk.length < limit) {
-                    return;
+                ++errorCount;
+                if (errorCount > 20) {
+                    retryIn = 0;
+                }
+                await __classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_handleError).call(this, err, retryIn, `[${id}-${part + 1}]`);
+                signal?.throwIfAborted();
+                retryIn += 2;
+                if (retryIn > 11) {
+                    retryIn = 11;
                 }
             }
         }
@@ -261,8 +288,11 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
     let promises = new Array();
     let ms = 0.05;
     for await (part of iterateReadableStream(stream.pipeThrough(new PartStream(chunkSize)))) {
-        promises.push(__classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_uploadPart).call(this, fileId, part.totalParts, !part.small, part.part, part.bytes, ms, signal));
-        ms = Math.max(ms * .8, 0.003);
+        if (!part.small && part.part > 0) {
+            await delay(ms);
+            ms = Math.max(ms * .8, 0.003);
+        }
+        promises.push(__classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_uploadPart).call(this, fileId, part.totalParts, !part.small, part.part, part.bytes, signal));
         if (promises.length == UPLOAD_POOL_SIZE * UPLOAD_REQUEST_PER_CONNECTION) {
             await Promise.all(promises);
             promises = [];
@@ -288,8 +318,11 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
                 if (!started) {
                     started = true;
                 }
-                promises.push(__classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_uploadPart).call(this, fileId, partCount, isBig, part++, bytes, ms, signal));
-                ms = Math.max(ms * .8, 0.003);
+                else if (isBig && part > 0) {
+                    await delay(ms);
+                    ms = Math.max(ms * .8, 0.003);
+                }
+                promises.push(__classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_uploadPart).call(this, fileId, partCount, isBig, part++, bytes, signal));
                 if (promises.length == UPLOAD_POOL_SIZE * UPLOAD_REQUEST_PER_CONNECTION) {
                     await Promise.all(promises);
                     promises = [];
@@ -301,10 +334,7 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
     }
     await Promise.all(promises);
     return { small: !isBig, parts: partCount };
-}, _FileManager_uploadPart = async function _FileManager_uploadPart(fileId, partCount, isBig, index, bytes, ms, signal) {
-    if (index > 0) {
-        await delay(ms);
-    }
+}, _FileManager_uploadPart = async function _FileManager_uploadPart(fileId, partCount, isBig, index, bytes, signal) {
     let retryIn = 1;
     let errorCount = 0;
     while (true) {
@@ -425,53 +455,6 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
         }
     }
     return { size: params?.fileSize ? params.fileSize : size, name, contents };
-}, _FileManager_downloadPart = async function _FileManager_downloadPart(dc, location, index, offset, limit, id, ms, signal) {
-    if (index > 0) {
-        await delay(ms);
-    }
-    while (true) {
-        signal?.throwIfAborted();
-        let retryIn = 1;
-        let errorCount = 0;
-        try {
-            const file = await __classPrivateFieldGet(this, _FileManager_c, "f").invoke({ _: "upload.getFile", location, offset, limit }, { dc, type: "download" });
-            signal?.throwIfAborted();
-            if (Api.is("upload.file", file)) {
-                if (id != null) {
-                    await __classPrivateFieldGet(this, _FileManager_c, "f").storage.saveFilePart(id, index, file.bytes);
-                    signal?.throwIfAborted();
-                }
-                if (file.bytes.length < limit) {
-                    if (id != null) {
-                        await __classPrivateFieldGet(this, _FileManager_c, "f").storage.setFilePartCount(id, index + 1, limit);
-                        signal?.throwIfAborted();
-                    }
-                }
-                else {
-                    offset += BigInt(file.bytes.length);
-                }
-                return file.bytes;
-            }
-            else {
-                unreachable();
-            }
-        }
-        catch (err) {
-            if (typeof err === "object" && err instanceof AssertionError) {
-                throw err;
-            }
-            ++errorCount;
-            if (errorCount > 20) {
-                retryIn = 0;
-            }
-            await __classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_handleError).call(this, err, retryIn, `[${id}-${index + 1}]`);
-            signal?.throwIfAborted();
-            retryIn += 2;
-            if (retryIn > 11) {
-                retryIn = 11;
-            }
-        }
-    }
 };
 _FileManager_UPLOAD_MAX_CHUNK_SIZE = { value: 512 * kilobyte };
 _FileManager_DOWNLOAD_MAX_CHUNK_SIZE = { value: 1 * megabyte };

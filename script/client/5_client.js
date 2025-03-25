@@ -620,8 +620,8 @@ class Client extends Composer {
         _Client_connectMutex.set(this, new _1_utilities_js_1.Mutex());
         _Client_lastPropagatedAuthorizationState.set(this, null);
         _Client_lastUpdates.set(this, new Date());
-        _Client_updateGapRecoveryLoopAbortController.set(this, null);
-        _Client_clientDisconnectionLoopAbortController.set(this, null);
+        _Client_updateGapRecoveryLoopAbortController.set(this, void 0);
+        _Client_clientDisconnectionLoopAbortController.set(this, void 0);
         _Client_getMainClientMutex.set(this, new _1_utilities_js_1.Mutex());
         _Client_handleInvokeError.set(this, skipInvoke());
         /**
@@ -872,6 +872,8 @@ class Client extends Composer {
     }
     disconnect() {
         __classPrivateFieldGet(this, _Client_instances, "m", _Client_disconnectAllClients).call(this);
+        __classPrivateFieldGet(this, _Client_clientDisconnectionLoopAbortController, "f")?.abort();
+        __classPrivateFieldGet(this, _Client_updateGapRecoveryLoopAbortController, "f")?.abort();
         __classPrivateFieldGet(this, _Client_updateManager, "f").closeAllChats();
     }
     /**
@@ -1130,14 +1132,15 @@ class Client extends Composer {
     }, _Client_startUpdateGapRecoveryLoop = function _Client_startUpdateGapRecoveryLoop() {
         (0, _1_utilities_js_1.drop)(__classPrivateFieldGet(this, _Client_instances, "m", _Client_updateGapRecoveryLoop).call(this));
     }, _Client_updateGapRecoveryLoop = async function _Client_updateGapRecoveryLoop() {
-        __classPrivateFieldSet(this, _Client_updateGapRecoveryLoopAbortController, new AbortController(), "f");
+        __classPrivateFieldGet(this, _Client_updateGapRecoveryLoopAbortController, "f")?.abort();
+        const controller = __classPrivateFieldSet(this, _Client_updateGapRecoveryLoopAbortController, new AbortController(), "f");
         while (this.connected) {
             try {
-                await (0, _0_deps_js_1.delay)(60 * _0_deps_js_1.SECOND, { signal: __classPrivateFieldGet(this, _Client_updateGapRecoveryLoopAbortController, "f").signal });
+                await (0, _0_deps_js_1.delay)(60 * _0_deps_js_1.SECOND, { signal: controller.signal });
                 if (!this.connected) {
-                    continue;
+                    break;
                 }
-                __classPrivateFieldGet(this, _Client_updateGapRecoveryLoopAbortController, "f").signal.throwIfAborted();
+                controller.signal.throwIfAborted();
                 if (Date.now() - __classPrivateFieldGet(this, _Client_lastUpdates, "f").getTime() >= 15 * _0_deps_js_1.MINUTE) {
                     (0, _1_utilities_js_1.drop)(__classPrivateFieldGet(this, _Client_updateManager, "f").recoverUpdateGap("lastUpdates").then(() => {
                         __classPrivateFieldSet(this, _Client_lastUpdates, new Date(), "f");
@@ -1146,10 +1149,10 @@ class Client extends Composer {
             }
             catch (err) {
                 if (err instanceof DOMException && err.name == "AbortError") {
-                    __classPrivateFieldSet(this, _Client_updateGapRecoveryLoopAbortController, new AbortController(), "f");
+                    break;
                 }
-                if (!this.connected) {
-                    continue;
+                else if (!this.connected) {
+                    break;
                 }
                 __classPrivateFieldGet(this, _Client_LupdateGapRecoveryLoop, "f").error(err);
             }
@@ -1157,20 +1160,14 @@ class Client extends Composer {
     }, _Client_startClientDisconnectionLoop = function _Client_startClientDisconnectionLoop() {
         (0, _1_utilities_js_1.drop)(__classPrivateFieldGet(this, _Client_instances, "m", _Client_clientDisconnectionLoop).call(this));
     }, _Client_clientDisconnectionLoop = async function _Client_clientDisconnectionLoop() {
-        __classPrivateFieldSet(this, _Client_clientDisconnectionLoopAbortController, new AbortController(), "f");
+        const controller = __classPrivateFieldSet(this, _Client_clientDisconnectionLoopAbortController, new AbortController(), "f");
         while (this.connected) {
             try {
-                await new Promise((resolve, reject) => {
-                    const timeout = setTimeout(resolve, 60 * _0_deps_js_1.SECOND);
-                    __classPrivateFieldGet(this, _Client_clientDisconnectionLoopAbortController, "f").signal.onabort = () => {
-                        reject(__classPrivateFieldGet(this, _Client_clientDisconnectionLoopAbortController, "f")?.signal.reason);
-                        clearTimeout(timeout);
-                    };
-                });
+                await (0, _0_deps_js_1.delay)(60 * _0_deps_js_1.SECOND, { signal: controller.signal });
                 if (!this.connected) {
-                    continue;
+                    break;
                 }
-                __classPrivateFieldGet(this, _Client_clientDisconnectionLoopAbortController, "f").signal.throwIfAborted();
+                controller.signal.throwIfAborted();
                 const now = Date.now();
                 const disconnectAfter = 5 * _0_deps_js_1.MINUTE;
                 __classPrivateFieldGet(this, _Client_clients, "f").map((client, i) => {
@@ -1181,10 +1178,10 @@ class Client extends Composer {
             }
             catch (err) {
                 if (err instanceof DOMException && err.name == "AbortError") {
-                    __classPrivateFieldSet(this, _Client_clientDisconnectionLoopAbortController, new AbortController(), "f");
+                    break;
                 }
-                if (!this.connected) {
-                    continue;
+                else if (!this.connected) {
+                    break;
                 }
             }
         }

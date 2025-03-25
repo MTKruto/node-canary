@@ -91,7 +91,7 @@ export class Session {
         return this.transport.connection.connected;
     }
     async connect() {
-        const release = await __classPrivateFieldGet(this, _Session_connectMutex, "f").lock();
+        const unlock = await __classPrivateFieldGet(this, _Session_connectMutex, "f").lock();
         try {
             if (this.connected) {
                 return;
@@ -102,7 +102,7 @@ export class Session {
             __classPrivateFieldSet(this, _Session_disconnected, false, "f");
         }
         finally {
-            release();
+            unlock();
         }
     }
     async waitUntilConnected() {

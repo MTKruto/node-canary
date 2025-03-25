@@ -201,6 +201,7 @@ _a = ClientEncrypted, _ClientEncrypted_L = new WeakMap(), _ClientEncrypted_plain
         finally {
             if (!errored) {
                 __classPrivateFieldGet(this, _ClientEncrypted_L, "f").debug("invoked", (0, _0_utilities_js_1.repr)(function_));
+                __classPrivateFieldGet(this, _ClientEncrypted_L, "f").out(function_);
             }
         }
     }
@@ -261,6 +262,7 @@ _a = ClientEncrypted, _ClientEncrypted_L = new WeakMap(), _ClientEncrypted_plain
         let type;
         try {
             type = await _2_tl_js_1.Api.deserializeType(_2_tl_js_1.Api.mustGetReturnType(request.call._), body);
+            __classPrivateFieldGet(this, _ClientEncrypted_L, "f").in(type);
             __classPrivateFieldGet(this, _ClientEncrypted_L, "f").debug("received rpc_result", (0, _0_utilities_js_1.repr)(type));
             request.resolve(type);
         }

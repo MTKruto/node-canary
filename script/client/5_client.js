@@ -742,28 +742,6 @@ class Client extends Composer {
         __classPrivateFieldSet(this, _Client_pollManager, new _4_poll_manager_js_1.PollManager({ ...c, messageManager }), "f");
         __classPrivateFieldSet(this, _Client_storyManager, new _4_story_manager_js_1.StoryManager({ ...c, fileManager, messageManager }), "f");
         __classPrivateFieldGet(this, _Client_updateManager, "f").setUpdateHandler(__classPrivateFieldGet(this, _Client_instances, "m", _Client_handleUpdate).bind(this));
-        this.invoke.use(async ({ error }, next) => {
-            if (error instanceof _0_errors_js_1.ConnectionError) {
-                while (!this.connected) {
-                    if (this.disconnected) {
-                        return next();
-                    }
-                    try {
-                        await this.connect();
-                    }
-                    catch {
-                        //
-                    }
-                }
-                return true;
-            }
-            else if (_2_tl_js_1.Mtproto.is("bad_msg_notification", error)) {
-                return true;
-            }
-            else {
-                return next();
-            }
-        });
         if (params?.defaultHandlers ?? true) {
             this.invoke.use(async ({ error }, next) => {
                 if (error instanceof _4_errors_js_1.FloodWait && error.seconds <= 10) {

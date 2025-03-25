@@ -78,6 +78,9 @@ class SessionEncrypted extends _1_session_js_1.Session {
         return __classPrivateFieldGet(this, _SessionEncrypted_authKey, "f");
     }
     async connect() {
+        if (!this.connected) {
+            __classPrivateFieldGet(this, _SessionEncrypted_instances, "m", _SessionEncrypted_rejectAllPending).call(this, new _0_errors_js_1.ConnectionError("Not connected."));
+        }
         await super.connect();
         if (!__classPrivateFieldGet(_a, _a, "f", _SessionEncrypted_TGCRYPTO_INITED)) {
             await (0, _0_deps_js_1.initTgCrypto)();

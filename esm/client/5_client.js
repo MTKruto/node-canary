@@ -1040,7 +1040,8 @@ export class Client extends Composer {
         }
         finally {
             __classPrivateFieldSet(this, _Client_lastGetMe, null, "f");
-            await this.reconnect();
+            this.disconnect();
+            await this.connect();
         }
     }
     /**

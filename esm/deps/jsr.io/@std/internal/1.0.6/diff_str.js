@@ -1,3 +1,5 @@
+// Copyright 2018-2025 the Deno authors. MIT license.
+// This module is browser compatible.
 import { diff } from "./diff.js";
 /**
  * Unescape invisible characters.
@@ -18,6 +20,7 @@ import { diff } from "./diff.js";
  */
 export function unescape(string) {
     return string
+        .replaceAll("\\", "\\\\")
         .replaceAll("\b", "\\b")
         .replaceAll("\f", "\\f")
         .replaceAll("\t", "\\t")
@@ -25,7 +28,7 @@ export function unescape(string) {
         // This does not remove line breaks
         .replaceAll(/\r\n|\r|\n/g, (str) => str === "\r" ? "\\r" : str === "\n" ? "\\n\n" : "\\r\\n\r\n");
 }
-const WHITESPACE_SYMBOLS = /([^\S\r\n]+|[()[\]{}'"\r\n]|\b)/;
+const WHITESPACE_SYMBOLS = /((?:\\[bftv]|[^\S\r\n])+|\\[rn\\]|[()[\]{}'"\r\n]|\b)/;
 /**
  * Tokenizes a string into an array of tokens.
  *

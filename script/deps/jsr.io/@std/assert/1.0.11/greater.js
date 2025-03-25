@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.assertGreater = assertGreater;
 // Copyright 2018-2025 the Deno authors. MIT license.
 // This module is browser compatible.
-const format_js_1 = require("../../internal/1.0.5/format.js");
+const format_js_1 = require("../../internal/1.0.6/format.js");
 const assertion_error_js_1 = require("./assertion_error.js");
 /**
  * Make an assertion that `actual` is greater than `expected`.

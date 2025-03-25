@@ -4,7 +4,7 @@ exports.assertIsError = assertIsError;
 // Copyright 2018-2025 the Deno authors. MIT license.
 // This module is browser compatible.
 const assertion_error_js_1 = require("./assertion_error.js");
-const styles_js_1 = require("../../internal/1.0.5/styles.js");
+const styles_js_1 = require("../../internal/1.0.6/styles.js");
 /**
  * Make an assertion that `error` is an `Error`.
  * If not then an error will be thrown.

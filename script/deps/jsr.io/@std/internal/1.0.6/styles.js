@@ -1,5 +1,5 @@
 "use strict";
-// Copyright 2018-2024 the Deno authors. All rights reserved. MIT license.
+// Copyright 2018-2025 the Deno authors. MIT license.
 // This module is browser compatible.
 // A module to print ANSI terminal colors. Inspired by chalk, kleur, and colors
 // on npm.

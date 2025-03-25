@@ -2,7 +2,7 @@
 // This module is browser compatible.
 import { equal } from "./equal.js";
 import { AssertionError } from "./assertion_error.js";
-import { format } from "../../internal/1.0.5/format.js";
+import { format } from "../../internal/1.0.6/format.js";
 /**
  * Make an assertion that `actual` and `expected` are not equal, deeply.
  * If not then throw.

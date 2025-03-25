@@ -1,4 +1,6 @@
 "use strict";
+// Copyright 2018-2025 the Deno authors. MIT license.
+// This module is browser compatible.
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.unescape = unescape;
 exports.tokenize = tokenize;
@@ -24,6 +26,7 @@ const diff_js_1 = require("./diff.js");
  */
 function unescape(string) {
     return string
+        .replaceAll("\\", "\\\\")
         .replaceAll("\b", "\\b")
         .replaceAll("\f", "\\f")
         .replaceAll("\t", "\\t")
@@ -31,7 +34,7 @@ function unescape(string) {
         // This does not remove line breaks
         .replaceAll(/\r\n|\r|\n/g, (str) => str === "\r" ? "\\r" : str === "\n" ? "\\n\n" : "\\r\\n\r\n");
 }
-const WHITESPACE_SYMBOLS = /([^\S\r\n]+|[()[\]{}'"\r\n]|\b)/;
+const WHITESPACE_SYMBOLS = /((?:\\[bftv]|[^\S\r\n])+|\\[rn\\]|[()[\]{}'"\r\n]|\b)/;
 /**
  * Tokenizes a string into an array of tokens.
  *

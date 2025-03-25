@@ -127,11 +127,8 @@ class FileManager {
         let ms = 0.05;
         let promises = new Array();
         while (true) {
-            if (part > 0) {
-                await (0, _0_deps_js_1.delay)(ms);
-                ms = Math.max(ms * .8, 0.003);
-            }
-            promises.push(__classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_downloadPart).call(this, dc, location, part++, offset, limit, id, signal));
+            promises.push(__classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_downloadPart).call(this, dc, location, part++, offset, limit, id, ms, signal));
+            ms = Math.max(ms * .8, 0.003);
             offset += BigInt(limit);
             if (promises.length == _0_utilities_js_1.DOWNLOAD_POOL_SIZE * _0_utilities_js_1.DOWNLOAD_REQUEST_PER_CONNECTION) {
                 const chunks = await Promise.all(promises);
@@ -289,11 +286,8 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
     let promises = new Array();
     let ms = 0.05;
     for await (part of (0, _1_utilities_js_1.iterateReadableStream)(stream.pipeThrough(new _1_utilities_js_1.PartStream(chunkSize)))) {
-        if (!part.small && part.part > 0) {
-            await (0, _0_deps_js_1.delay)(ms);
-            ms = Math.max(ms * .8, 0.003);
-        }
-        promises.push(__classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_uploadPart).call(this, fileId, part.totalParts, !part.small, part.part, part.bytes, signal));
+        promises.push(__classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_uploadPart).call(this, fileId, part.totalParts, !part.small, part.part, part.bytes, ms, signal));
+        ms = Math.max(ms * .8, 0.003);
         if (promises.length == _0_utilities_js_1.UPLOAD_POOL_SIZE * _0_utilities_js_1.UPLOAD_REQUEST_PER_CONNECTION) {
             await Promise.all(promises);
             promises = [];
@@ -319,11 +313,8 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
                 if (!started) {
                     started = true;
                 }
-                else if (isBig && part > 0) {
-                    await (0, _0_deps_js_1.delay)(ms);
-                    ms = Math.max(ms * .8, 0.003);
-                }
-                promises.push(__classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_uploadPart).call(this, fileId, partCount, isBig, part++, bytes, signal));
+                promises.push(__classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_uploadPart).call(this, fileId, partCount, isBig, part++, bytes, ms, signal));
+                ms = Math.max(ms * .8, 0.003);
                 if (promises.length == _0_utilities_js_1.UPLOAD_POOL_SIZE * _0_utilities_js_1.UPLOAD_REQUEST_PER_CONNECTION) {
                     await Promise.all(promises);
                     promises = [];
@@ -335,7 +326,10 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
     }
     await Promise.all(promises);
     return { small: !isBig, parts: partCount };
-}, _FileManager_uploadPart = async function _FileManager_uploadPart(fileId, partCount, isBig, index, bytes, signal) {
+}, _FileManager_uploadPart = async function _FileManager_uploadPart(fileId, partCount, isBig, index, bytes, ms, signal) {
+    if (index > 0) {
+        await (0, _0_deps_js_1.delay)(ms);
+    }
     let retryIn = 1;
     let errorCount = 0;
     while (true) {
@@ -456,7 +450,10 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
         }
     }
     return { size: params?.fileSize ? params.fileSize : size, name, contents };
-}, _FileManager_downloadPart = async function _FileManager_downloadPart(dc, location, index, offset, limit, id, signal) {
+}, _FileManager_downloadPart = async function _FileManager_downloadPart(dc, location, index, offset, limit, id, ms, signal) {
+    if (index > 0) {
+        await (0, _0_deps_js_1.delay)(ms);
+    }
     while (true) {
         signal?.throwIfAborted();
         let retryIn = 1;

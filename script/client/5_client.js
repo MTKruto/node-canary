@@ -29,7 +29,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _Client_instances, _Client_clients, _Client_downloadPools, _Client_uploadPools, _Client_guaranteeUpdateDelivery, _Client_accountManager, _Client_botInfoManager, _Client_businessConnectionManager, _Client_fileManager, _Client_networkStatisticsManager, _Client_paymentManager, _Client_reactionManager, _Client_translationsManager, _Client_updateManager, _Client_messageManager, _Client_videoChatManager, _Client_callbackQueryManager, _Client_chatListManager, _Client_chatManager, _Client_forumManager, _Client_giftManager, _Client_inlineQueryManager, _Client_pollManager, _Client_storyManager, _Client_managers, _Client_storage_, _Client_messageStorage_, _Client_parseMode, _Client_apiId, _Client_apiHash, _Client_transportProvider, _Client_publicKeys, _Client_outgoingMessages, _Client_persistCache, _Client_disableUpdates, _Client_authString, _Client_L, _Client_LsignIn, _Client_LupdateGapRecoveryLoop, _Client_LhandleMigrationError, _Client_Lmin, _Client_setMainClient, _Client_newClient, _Client_disconnectAllClients, _Client_client_get, _Client_getApiId, _Client_constructContext, _Client_propagateConnectionState, _Client_lastPropagatedConnectionState, _Client_stateChangeHandler, _Client_storageInited, _Client_initStorage, _Client_connectMutex, _Client_lastPropagatedAuthorizationState, _Client_propagateAuthorizationState, _Client_getSelfId, _Client_lastUpdates, _Client_updateGapRecoveryLoopAbortController, _Client_startUpdateGapRecoveryLoop, _Client_updateGapRecoveryLoop, _Client_clientDisconnectionLoopAbortController, _Client_startClientDisconnectionLoop, _Client_clientDisconnectionLoop, _Client_getClient, _Client_getMainClientMutex, _Client_getMainClient, _Client_getDownloadClient, _Client_getUploadClient, _Client_setupClient, _Client_importAuthorization, _Client_invoke, _Client_handleInvokeError, _Client_authStringImported, _Client_getUserAccessHash, _Client_getChannelAccessHash, _Client_getInputPeerChatId, _Client_getInputPeerInner, _Client_getMinInputPeer, _Client_handleCtxUpdate, _Client_queueHandleCtxUpdate, _Client_handleUpdate, _Client_lastGetMe, _Client_getMe, _Client_previouslyConnected, _Client_lastConnectionState, _Client_onConnectionStateChange;
+var _Client_instances, _Client_clients, _Client_downloadPools, _Client_uploadPools, _Client_guaranteeUpdateDelivery, _Client_accountManager, _Client_botInfoManager, _Client_businessConnectionManager, _Client_fileManager, _Client_networkStatisticsManager, _Client_paymentManager, _Client_reactionManager, _Client_translationsManager, _Client_updateManager, _Client_messageManager, _Client_videoChatManager, _Client_callbackQueryManager, _Client_chatListManager, _Client_chatManager, _Client_forumManager, _Client_giftManager, _Client_inlineQueryManager, _Client_pollManager, _Client_storyManager, _Client_managers, _Client_storage_, _Client_messageStorage_, _Client_parseMode, _Client_apiId, _Client_apiHash, _Client_transportProvider, _Client_publicKeys, _Client_outgoingMessages, _Client_persistCache, _Client_disableUpdates, _Client_authString, _Client_L, _Client_LsignIn, _Client_LupdateGapRecoveryLoop, _Client_LhandleMigrationError, _Client_Lmin, _Client_setMainClient, _Client_newClient, _Client_disconnectAllClients, _Client_client_get, _Client_constructContext, _Client_propagateConnectionState, _Client_lastPropagatedConnectionState, _Client_stateChangeHandler, _Client_storageInited, _Client_initStorage, _Client_connectMutex, _Client_lastPropagatedAuthorizationState, _Client_propagateAuthorizationState, _Client_getSelfId, _Client_lastUpdates, _Client_updateGapRecoveryLoopAbortController, _Client_startUpdateGapRecoveryLoop, _Client_updateGapRecoveryLoop, _Client_clientDisconnectionLoopAbortController, _Client_startClientDisconnectionLoop, _Client_clientDisconnectionLoop, _Client_getClient, _Client_getMainClientMutex, _Client_getMainClient, _Client_getDownloadClient, _Client_getUploadClient, _Client_setupClient, _Client_importAuthorization, _Client_invoke, _Client_handleInvokeError, _Client_authStringImported, _Client_getUserAccessHash, _Client_getChannelAccessHash, _Client_getInputPeerChatId, _Client_getInputPeerInner, _Client_getMinInputPeer, _Client_handleCtxUpdate, _Client_queueHandleCtxUpdate, _Client_handleUpdate, _Client_lastGetMe, _Client_getMe, _Client_previouslyConnected, _Client_lastConnectionState, _Client_onConnectionStateChange;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Client = exports.handleMigrationError = exports.restartAuth = exports.Composer = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
@@ -780,7 +780,7 @@ class Client extends Composer {
             if (authKey != null && dc != null) {
                 if (!__classPrivateFieldGet(this, _Client_instances, "a", _Client_client_get) || __classPrivateFieldGet(this, _Client_instances, "a", _Client_client_get).dc != dc) {
                     __classPrivateFieldGet(this, _Client_instances, "a", _Client_client_get)?.disconnect();
-                    __classPrivateFieldGet(this, _Client_instances, "m", _Client_setMainClient).call(this, await __classPrivateFieldGet(this, _Client_instances, "m", _Client_newClient).call(this, dc, true, false));
+                    __classPrivateFieldGet(this, _Client_instances, "m", _Client_setMainClient).call(this, __classPrivateFieldGet(this, _Client_instances, "m", _Client_newClient).call(this, dc, true, false));
                 }
                 await __classPrivateFieldGet(this, _Client_instances, "a", _Client_client_get).setAuthKey(authKey);
                 if (__classPrivateFieldGet(this, _Client_instances, "a", _Client_client_get).serverSalt == 0n) {
@@ -791,7 +791,7 @@ class Client extends Composer {
                 const dc = await this.storage.getDc() ?? _4_constants_js_1.INITIAL_DC;
                 if (!__classPrivateFieldGet(this, _Client_instances, "a", _Client_client_get) || __classPrivateFieldGet(this, _Client_instances, "a", _Client_client_get).dc != dc) {
                     __classPrivateFieldGet(this, _Client_instances, "a", _Client_client_get)?.disconnect();
-                    __classPrivateFieldGet(this, _Client_instances, "m", _Client_setMainClient).call(this, await __classPrivateFieldGet(this, _Client_instances, "m", _Client_newClient).call(this, dc, true, false));
+                    __classPrivateFieldGet(this, _Client_instances, "m", _Client_setMainClient).call(this, __classPrivateFieldGet(this, _Client_instances, "m", _Client_newClient).call(this, dc, true, false));
                 }
             }
             await __classPrivateFieldGet(this, _Client_instances, "a", _Client_client_get).connect();
@@ -817,9 +817,8 @@ class Client extends Composer {
             await this.storage.setServerSalt(serverSalt);
         };
         client.onConnectionStateChange = __classPrivateFieldGet(this, _Client_instances, "m", _Client_onConnectionStateChange).bind(this);
-    }, _Client_newClient = async function _Client_newClient(dc, main, cdn) {
-        const apiId = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getApiId).call(this);
-        const client = new _2_client_encrypted_js_1.ClientEncrypted(dc, apiId, {
+    }, _Client_newClient = function _Client_newClient(dc, main, cdn) {
+        const client = new _2_client_encrypted_js_1.ClientEncrypted(dc, __classPrivateFieldGet(this, _Client_apiId, "f"), {
             appVersion: this.appVersion,
             deviceModel: this.deviceModel,
             langCode: this.language,
@@ -845,9 +844,6 @@ class Client extends Composer {
         }
     }, _Client_client_get = function _Client_client_get() {
         return __classPrivateFieldGet(this, _Client_clients, "f")[0];
-    }, _Client_getApiId = async function _Client_getApiId() {
-        const apiId = __classPrivateFieldGet(this, _Client_apiId, "f") || await this.storage.getApiId();
-        return apiId || 0;
     }, _Client_propagateConnectionState = function _Client_propagateConnectionState(connectionState) {
         __classPrivateFieldGet(this, _Client_instances, "m", _Client_queueHandleCtxUpdate).call(this, { connectionState });
         __classPrivateFieldSet(this, _Client_lastPropagatedConnectionState, connectionState, "f");
@@ -856,6 +852,9 @@ class Client extends Composer {
             await this.storage.initialize();
             if (!__classPrivateFieldGet(this, _Client_guaranteeUpdateDelivery, "f")) {
                 await this.storage.deleteUpdates();
+            }
+            if (!__classPrivateFieldGet(this, _Client_apiId, "f")) {
+                __classPrivateFieldSet(this, _Client_apiId, await this.storage.getApiId() ?? 0, "f");
             }
             __classPrivateFieldSet(this, _Client_storageInited, true, "f");
         }
@@ -897,7 +896,9 @@ class Client extends Composer {
                 throw err;
             }
         }
-        const apiId = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getApiId).call(this);
+        if (!__classPrivateFieldGet(this, _Client_apiId, "f")) {
+            throw new _0_errors_js_1.InputError("apiId not set");
+        }
         if (!__classPrivateFieldGet(this, _Client_apiHash, "f")) {
             throw new _0_errors_js_1.InputError("apiHash not set");
         }
@@ -914,7 +915,7 @@ class Client extends Composer {
         if (params && "botToken" in params) {
             while (true) {
                 try {
-                    const auth = await this.invoke({ _: "auth.importBotAuthorization", api_id: apiId, api_hash: __classPrivateFieldGet(this, _Client_apiHash, "f"), bot_auth_token: params.botToken, flags: 0 });
+                    const auth = await this.invoke({ _: "auth.importBotAuthorization", api_id: __classPrivateFieldGet(this, _Client_apiId, "f"), api_hash: __classPrivateFieldGet(this, _Client_apiHash, "f"), bot_auth_token: params.botToken, flags: 0 });
                     await this.storage.setAccountId(Number(_2_tl_js_1.Api.as("auth.authorization", auth).user.id));
                     await this.storage.setAccountType("bot");
                     break;
@@ -1216,7 +1217,7 @@ class Client extends Composer {
             return client;
         }
         try {
-            client = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_newClient).call(this, dc, false, false);
+            client = __classPrivateFieldGet(this, _Client_instances, "m", _Client_newClient).call(this, dc, false, false);
             await __classPrivateFieldGet(this, _Client_instances, "m", _Client_setupClient).call(this, client);
             __classPrivateFieldGet(this, _Client_clients, "f").push(client);
             return client;
@@ -1228,8 +1229,10 @@ class Client extends Composer {
         dc ??= __classPrivateFieldGet(this, _Client_instances, "a", _Client_client_get).dc;
         const pool = __classPrivateFieldGet(this, _Client_downloadPools, "f")[dc] ??= new _3_client_encrypted_pool_js_1.ClientEncryptedPool();
         if (!pool.size) {
-            for (let i = 0; i < _0_utilities_js_1.DOWNLOAD_POOL_SIZE; ++i) {
-                pool.add(await __classPrivateFieldGet(this, _Client_instances, "m", _Client_newClient).call(this, dc, false, true));
+            if (!pool.size) {
+                for (let i = 0; i < _0_utilities_js_1.DOWNLOAD_POOL_SIZE; ++i) {
+                    pool.add(__classPrivateFieldGet(this, _Client_instances, "m", _Client_newClient).call(this, dc, false, true));
+                }
             }
         }
         const client = pool.nextClient();

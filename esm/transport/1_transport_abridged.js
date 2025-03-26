@@ -67,7 +67,7 @@ export class TransportAbridged extends Transport {
                 let buffer = new Uint8Array(3);
                 await __classPrivateFieldGet(this, _TransportAbridged_connection, "f").read(buffer);
                 buffer = await this.decrypt(buffer);
-                length = Number(bigIntFromBuffer(buffer, true, true));
+                length = Number(bigIntFromBuffer(buffer));
             }
         }
         length *= 4;

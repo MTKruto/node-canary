@@ -137,6 +137,7 @@ export class FileManager {
                 ++errorCount;
                 if (errorCount > 20) {
                     retryIn = 0;
+                    errorCount = 0;
                 }
                 await __classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_handleError).call(this, err, retryIn, `[${id}-${part + 1}]`);
                 signal?.throwIfAborted();
@@ -356,6 +357,7 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
             ++errorCount;
             if (errorCount > 20) {
                 retryIn = 0;
+                errorCount = 20;
             }
             await __classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_handleError).call(this, err, retryIn, `[${fileId}-${index + 1}]`);
             retryIn += 2;

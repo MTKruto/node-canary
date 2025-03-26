@@ -42,9 +42,4 @@ export class Transport {
             return buffer;
         }
     }
-    deinitialize() {
-        if (this.obfuscationParameters) {
-            this.obfuscationParameters = null;
-        }
-    }
 }

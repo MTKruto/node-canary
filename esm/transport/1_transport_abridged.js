@@ -28,30 +28,25 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _TransportAbridged_initialized, _TransportAbridged_connection, _TransportAbridged_obfuscated;
+var _TransportAbridged_connection, _TransportAbridged_obfuscated;
 import { concat } from "../0_deps.js";
-import { ConnectionError } from "../0_errors.js";
 import { bigIntFromBuffer, bufferFromBigInt } from "../1_utilities.js";
 import { getObfuscationParameters } from "./0_obfuscation.js";
 import { Transport } from "./0_transport.js";
 export class TransportAbridged extends Transport {
     constructor(connection, obfuscated = false) {
         super();
-        _TransportAbridged_initialized.set(this, false);
         _TransportAbridged_connection.set(this, void 0);
         _TransportAbridged_obfuscated.set(this, void 0);
         __classPrivateFieldSet(this, _TransportAbridged_connection, connection, "f");
         __classPrivateFieldSet(this, _TransportAbridged_obfuscated, obfuscated, "f");
     }
     async initialize() {
-        if (!__classPrivateFieldGet(this, _TransportAbridged_initialized, "f")) {
-            if (__classPrivateFieldGet(this, _TransportAbridged_obfuscated, "f")) {
-                this.obfuscationParameters = await getObfuscationParameters(0xEFEFEFEF, __classPrivateFieldGet(this, _TransportAbridged_connection, "f"));
-            }
-            else {
-                await __classPrivateFieldGet(this, _TransportAbridged_connection, "f").write(new Uint8Array([0xEF]));
-            }
-            __classPrivateFieldSet(this, _TransportAbridged_initialized, true, "f");
+        if (__classPrivateFieldGet(this, _TransportAbridged_obfuscated, "f")) {
+            this.obfuscationParameters = await getObfuscationParameters(0xEFEFEFEF, __classPrivateFieldGet(this, _TransportAbridged_connection, "f"));
+        }
+        else {
+            await __classPrivateFieldGet(this, _TransportAbridged_connection, "f").write(new Uint8Array([0xEF]));
         }
     }
     async receive() {
@@ -76,21 +71,11 @@ export class TransportAbridged extends Transport {
         return await this.decrypt(buffer);
     }
     async send(buffer) {
-        if (!this.initialized) {
-            throw new ConnectionError("Transport not initialized");
-        }
         const bufferLength = buffer.length / 4;
         const header = new Uint8Array([bufferLength >= 0x7F ? 0x7F : bufferLength]);
         const length = bufferLength >= 0x7F ? bufferFromBigInt(bufferLength, 3) : new Uint8Array();
         const data = concat([header, length, buffer]);
         await __classPrivateFieldGet(this, _TransportAbridged_connection, "f").write(await this.encrypt(data));
     }
-    deinitialize() {
-        super.deinitialize();
-        __classPrivateFieldSet(this, _TransportAbridged_initialized, false, "f");
-    }
-    get initialized() {
-        return __classPrivateFieldGet(this, _TransportAbridged_initialized, "f");
-    }
 }
-_TransportAbridged_initialized = new WeakMap(), _TransportAbridged_connection = new WeakMap(), _TransportAbridged_obfuscated = new WeakMap();
+_TransportAbridged_connection = new WeakMap(), _TransportAbridged_obfuscated = new WeakMap();

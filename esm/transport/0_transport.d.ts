@@ -25,10 +25,8 @@ export declare abstract class Transport {
     } | null;
     protected encrypt(buffer: Uint8Array<ArrayBuffer>): Promise<Uint8Array>;
     protected decrypt(buffer: Uint8Array<ArrayBuffer>): Promise<Uint8Array<ArrayBuffer>>;
-    abstract get initialized(): boolean;
     abstract initialize(): MaybePromise<void>;
     abstract receive(): MaybePromise<Uint8Array>;
     abstract send(buffer: Uint8Array): MaybePromise<void>;
-    deinitialize(): void;
 }
 //# sourceMappingURL=0_transport.d.ts.map

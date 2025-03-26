@@ -141,7 +141,6 @@ class Session {
         __classPrivateFieldSet(this, _Session_disconnected, true, "f");
         if (this.transport.connection.connected) {
             this.transport.connection.close();
-            this.transport.transport.deinitialize();
         }
     }
 }
@@ -151,9 +150,6 @@ _Session_dc = new WeakMap(), _Session_cdn = new WeakMap(), _Session_lastConnect 
         setTimeout(() => {
             __classPrivateFieldGet(this, _Session_onConnectionStateChange, "f")?.call(this, connected);
         });
-    }
-    if (!connected) {
-        this.transport.transport.deinitialize();
     }
     if (__classPrivateFieldGet(this, _Session_lastState, "f") === connected) {
         return;

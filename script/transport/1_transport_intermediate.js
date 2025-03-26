@@ -29,7 +29,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _TransportIntermediate_connection, _TransportIntermediate_initialized, _TransportIntermediate_obfuscated;
+var _TransportIntermediate_connection, _TransportIntermediate_obfuscated;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TransportIntermediate = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
@@ -40,23 +40,16 @@ class TransportIntermediate extends _0_transport_js_1.Transport {
     constructor(connection, obfuscated = false) {
         super();
         _TransportIntermediate_connection.set(this, void 0);
-        _TransportIntermediate_initialized.set(this, false);
         _TransportIntermediate_obfuscated.set(this, void 0);
         __classPrivateFieldSet(this, _TransportIntermediate_connection, connection, "f");
         __classPrivateFieldSet(this, _TransportIntermediate_obfuscated, obfuscated, "f");
     }
     async initialize() {
-        if (!this.initialized) {
-            if (__classPrivateFieldGet(this, _TransportIntermediate_obfuscated, "f")) {
-                this.obfuscationParameters = await (0, _0_obfuscation_js_1.getObfuscationParameters)(0xEEEEEEEE, __classPrivateFieldGet(this, _TransportIntermediate_connection, "f"));
-            }
-            else {
-                await __classPrivateFieldGet(this, _TransportIntermediate_connection, "f").write(new Uint8Array([0xEE, 0xEE, 0xEE, 0xEE]));
-            }
-            __classPrivateFieldSet(this, _TransportIntermediate_initialized, true, "f");
+        if (__classPrivateFieldGet(this, _TransportIntermediate_obfuscated, "f")) {
+            this.obfuscationParameters = await (0, _0_obfuscation_js_1.getObfuscationParameters)(0xEEEEEEEE, __classPrivateFieldGet(this, _TransportIntermediate_connection, "f"));
         }
         else {
-            throw new Error("Transport already initialized");
+            await __classPrivateFieldGet(this, _TransportIntermediate_connection, "f").write(new Uint8Array([0xEE, 0xEE, 0xEE, 0xEE]));
         }
     }
     async receive() {
@@ -73,20 +66,10 @@ class TransportIntermediate extends _0_transport_js_1.Transport {
         return await this.decrypt(buffer);
     }
     async send(buffer) {
-        if (!this.initialized) {
-            throw new Error("Transport not initialized");
-        }
         const length = (0, _1_utilities_js_1.bufferFromBigInt)(buffer.length, 4);
         const data = (0, _0_deps_js_1.concat)([length, buffer]);
         await __classPrivateFieldGet(this, _TransportIntermediate_connection, "f").write(await this.encrypt(data));
     }
-    deinitialize() {
-        super.deinitialize();
-        __classPrivateFieldSet(this, _TransportIntermediate_initialized, false, "f");
-    }
-    get initialized() {
-        return __classPrivateFieldGet(this, _TransportIntermediate_initialized, "f");
-    }
 }
 exports.TransportIntermediate = TransportIntermediate;
-_TransportIntermediate_connection = new WeakMap(), _TransportIntermediate_initialized = new WeakMap(), _TransportIntermediate_obfuscated = new WeakMap();
+_TransportIntermediate_connection = new WeakMap(), _TransportIntermediate_obfuscated = new WeakMap();

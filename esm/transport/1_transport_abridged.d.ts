@@ -25,7 +25,5 @@ export declare class TransportAbridged extends Transport implements Transport {
     initialize(): Promise<void>;
     receive(): Promise<Uint8Array>;
     send(buffer: Uint8Array): Promise<void>;
-    deinitialize(): void;
-    get initialized(): boolean;
 }
 //# sourceMappingURL=1_transport_abridged.d.ts.map

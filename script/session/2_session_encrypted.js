@@ -234,11 +234,11 @@ _a = SessionEncrypted, _SessionEncrypted_id = new WeakMap(), _SessionEncrypted_a
                 message = await __classPrivateFieldGet(this, _SessionEncrypted_instances, "m", _SessionEncrypted_receive).call(this);
             }
             catch (err) {
+                __classPrivateFieldGet(this, _SessionEncrypted_L, "f").error("failed to receive message:", err);
                 if (!this.connected) {
                     break;
                 }
                 else {
-                    __classPrivateFieldGet(this, _SessionEncrypted_L, "f").error("failed to receive message:", err);
                     continue;
                 }
             }

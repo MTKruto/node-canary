@@ -264,7 +264,7 @@ async function _SessionEncrypted_onMessage(msgId, body) {
         id = reader.readInt32(false);
     }
     if (id == RPC_RESULT) {
-        __classPrivateFieldGet(this, _SessionEncrypted_instances, "m", _SessionEncrypted_onRpcResult).call(this, reader.buffer);
+        __classPrivateFieldGet(this, _SessionEncrypted_instances, "m", _SessionEncrypted_onRpcResult).call(this, msgId, reader.buffer);
         return;
     }
     if (!Mtproto.schema.identifierToName[id]) {
@@ -303,7 +303,8 @@ async function _SessionEncrypted_onMessage(msgId, body) {
     else {
         __classPrivateFieldGet(this, _SessionEncrypted_L, "f").debug(`unhandled MTProto type: ${repr(type)}`);
     }
-}, _SessionEncrypted_onRpcResult = async function _SessionEncrypted_onRpcResult(body) {
+}, _SessionEncrypted_onRpcResult = async function _SessionEncrypted_onRpcResult(msgId, body) {
+    __classPrivateFieldGet(this, _SessionEncrypted_toAcknowledge, "f").push(msgId);
     let reader = new TLReader(body);
     const reqMsgId = reader.readInt64();
     let id = reader.readInt32(false);

@@ -853,9 +853,6 @@ class Client extends Composer {
             if (!__classPrivateFieldGet(this, _Client_guaranteeUpdateDelivery, "f")) {
                 await this.storage.deleteUpdates();
             }
-            if (!__classPrivateFieldGet(this, _Client_apiId, "f")) {
-                __classPrivateFieldSet(this, _Client_apiId, await this.storage.getApiId() ?? 0, "f");
-            }
             __classPrivateFieldSet(this, _Client_storageInited, true, "f");
         }
     }, exports.handleMigrationError)](err) {
@@ -1071,6 +1068,9 @@ class Client extends Composer {
         await __classPrivateFieldGet(this, _Client_instances, "m", _Client_initStorage).call(this);
         await this.storage.importAuthString(authString);
         __classPrivateFieldSet(this, _Client_authStringImported, true, "f");
+        if (!__classPrivateFieldGet(this, _Client_apiId, "f")) {
+            __classPrivateFieldSet(this, _Client_apiId, await this.storage.getApiId() ?? 0, "f");
+        }
     }
     /**
      * Get a chat's inputPeer. Useful when calling API functions directly.

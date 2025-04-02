@@ -937,17 +937,11 @@ export class MessageManager {
     async blockUser(userId) {
         __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertUser("blockUser");
         const id = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(userId);
-        if (!(Api.is("user", id))) {
-            throw new InputError("Only users can be blocked or unblocked.");
-        }
         await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "contacts.block", id });
     }
     async unblockUser(userId) {
         __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertUser("unblockUser");
         const id = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(userId);
-        if (!(Api.is("user", id))) {
-            throw new InputError("Only users can be blocked or unblocked.");
-        }
         await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "contacts.unblock", id });
     }
     async setChatStickerSet(chatId, setName) {

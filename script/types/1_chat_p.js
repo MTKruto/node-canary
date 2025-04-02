@@ -27,6 +27,8 @@ const _0_restriction_reason_js_1 = require("./0_restriction_reason.js");
 function constructChatP(chat) {
     if (_2_tl_js_1.Api.is("user", chat)) {
         const id = Number(chat.id);
+        const usernames = chat.usernames?.map((v) => v.username);
+        const username = chat.username ?? usernames?.shift();
         const chat_ = {
             id,
             type: "private",
@@ -34,6 +36,8 @@ function constructChatP(chat) {
             color: chat.color?.color !== undefined ? chat.color.color : (0, _1_utilities_js_1.getColorFromPeerId)(id),
             firstName: chat.first_name || "",
             lastName: chat.last_name,
+            username,
+            also: usernames?.filter((v) => v != username),
             isScam: chat.scam || false,
             isFake: chat.fake || false,
             isSupport: chat.support || false,

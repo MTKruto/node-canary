@@ -24,6 +24,8 @@ import { constructRestrictionReason } from "./0_restriction_reason.js";
 export function constructChatP(chat) {
     if (Api.is("user", chat)) {
         const id = Number(chat.id);
+        const usernames = chat.usernames?.map((v) => v.username);
+        const username = chat.username ?? usernames?.shift();
         const chat_ = {
             id,
             type: "private",
@@ -31,6 +33,8 @@ export function constructChatP(chat) {
             color: chat.color?.color !== undefined ? chat.color.color : getColorFromPeerId(id),
             firstName: chat.first_name || "",
             lastName: chat.last_name,
+            username,
+            also: usernames?.filter((v) => v != username),
             isScam: chat.scam || false,
             isFake: chat.fake || false,
             isSupport: chat.support || false,

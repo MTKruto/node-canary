@@ -209,6 +209,6 @@ function repr(value) {
         return (0, _2_tl_js_1.repr)(value);
     }
 }
-exports.UPLOAD_REQUEST_PER_CONNECTION = 3;
+exports.UPLOAD_REQUEST_PER_CONNECTION = 2;
 exports.DOWNLOAD_POOL_SIZE = 1;
 exports.DOWNLOAD_REQUEST_PER_CONNECTION = 1;

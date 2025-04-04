@@ -27,7 +27,7 @@ async function constructBusinessConnection(connection, getEntity) {
         id: connection.connection_id,
         user: (0, _1_user_js_1.constructUser)((await getEntity({ ...connection, _: "peerUser" }))),
         date: (0, _1_utilities_js_1.fromUnixTimestamp)(connection.date),
-        canReply: !!connection.can_reply,
+        canReply: !!connection.rights?.reply,
         isEnabled: !connection.disabled,
     };
 }

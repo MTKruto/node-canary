@@ -190,7 +190,6 @@ export function repr(value) {
         return repr_(value);
     }
 }
-export const UPLOAD_POOL_SIZE = 3;
-export const UPLOAD_REQUEST_PER_CONNECTION = 2;
+export const UPLOAD_REQUEST_PER_CONNECTION = 3;
 export const DOWNLOAD_POOL_SIZE = 1;
 export const DOWNLOAD_REQUEST_PER_CONNECTION = 1;

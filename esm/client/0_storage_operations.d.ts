@@ -37,6 +37,7 @@ export declare const K: {
         key: () => StorageKeyPart[];
         accountId: () => StorageKeyPart[];
         accountType: () => StorageKeyPart[];
+        isPremium: () => StorageKeyPart[];
     };
     updates: {
         P: (string: string) => string;
@@ -141,6 +142,8 @@ export declare class StorageOperations {
     setAccountType(type: "user" | "bot"): Promise<void>;
     getAccountType(): Promise<"user" | "bot" | null>;
     get accountType(): "user" | "bot";
+    setIsPremium(isPremium: boolean): Promise<void>;
+    getIsPremium(): Promise<boolean | null>;
     updateStickerSetName(id: bigint, accessHash: bigint, name: string): Promise<void>;
     getStickerSetName(id: bigint, accessHash: bigint): MaybePromise<[string, Date] | null>;
     setServerSalt(serverSalt: bigint): Promise<void>;

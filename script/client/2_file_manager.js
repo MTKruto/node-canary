@@ -81,18 +81,21 @@ class FileManager {
         if (size == 0 || size < -1) {
             throw new _0_errors_js_1.InputError("Invalid file size.");
         }
+        const dc = __classPrivateFieldGet(this, _FileManager_c, "f").getDc();
+        const isPremium = await __classPrivateFieldGet(this, _FileManager_c, "f").getIsPremium();
+        const poolSize = (dc != "2" && dc != "4") || isPremium ? 8 : 4;
         const chunkSize = params?.chunkSize ?? __classPrivateFieldGet(_a, _a, "f", _FileManager_UPLOAD_MAX_CHUNK_SIZE);
         _a.validateChunkSize(chunkSize, __classPrivateFieldGet(_a, _a, "f", _FileManager_UPLOAD_MAX_CHUNK_SIZE));
         const fileId = (0, _1_utilities_js_1.getRandomId)();
         const isBig = contents instanceof Uint8Array ? contents.length > __classPrivateFieldGet(_a, _a, "f", _FileManager_BIG_FILE_THRESHOLD) : true;
         const whatIsUploaded = contents instanceof Uint8Array ? (isBig ? "big file" : "file") + " of size " + size : "stream";
-        __classPrivateFieldGet(this, _FileManager_Lupload, "f").debug("uploading " + whatIsUploaded + " with chunk size of " + chunkSize + " and pool size of " + _0_utilities_js_1.UPLOAD_POOL_SIZE + " and file ID of " + fileId);
+        __classPrivateFieldGet(this, _FileManager_Lupload, "f").debug("uploading " + whatIsUploaded + " with chunk size of " + chunkSize + " and pool size of " + poolSize + " and file ID of " + fileId);
         let result;
         if (contents instanceof Uint8Array) {
-            result = await __classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_uploadBuffer).call(this, contents, fileId, chunkSize, params?.signal);
+            result = await __classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_uploadBuffer).call(this, contents, fileId, chunkSize, poolSize, params?.signal);
         }
         else {
-            result = await __classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_uploadStream).call(this, contents, fileId, chunkSize, params?.signal);
+            result = await __classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_uploadStream).call(this, contents, fileId, chunkSize, poolSize, params?.signal);
         }
         __classPrivateFieldGet(this, _FileManager_Lupload, "f").debug(`[${fileId}] uploaded ` + result.parts + " part(s)");
         if (result.small) {
@@ -311,7 +314,7 @@ class FileManager {
     }
 }
 exports.FileManager = FileManager;
-_a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new WeakMap(), _FileManager_instances = new WeakSet(), _FileManager_uploadStream = async function _FileManager_uploadStream(stream, fileId, chunkSize, signal) {
+_a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new WeakMap(), _FileManager_instances = new WeakSet(), _FileManager_uploadStream = async function _FileManager_uploadStream(stream, fileId, chunkSize, poolSize, signal) {
     let part;
     let promises = new Array();
     let ms = 0.05;
@@ -321,21 +324,21 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
             ms = Math.max(ms * .8, 0.003);
         }
         promises.push(__classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_uploadPart).call(this, fileId, part.totalParts, !part.small, part.part, part.bytes, signal));
-        if (promises.length == _0_utilities_js_1.UPLOAD_POOL_SIZE * _0_utilities_js_1.UPLOAD_REQUEST_PER_CONNECTION) {
+        if (promises.length == poolSize * _0_utilities_js_1.UPLOAD_REQUEST_PER_CONNECTION) {
             await Promise.all(promises);
             promises = [];
         }
     }
     await Promise.all(promises);
     return { small: part.small, parts: part.totalParts };
-}, _FileManager_uploadBuffer = async function _FileManager_uploadBuffer(buffer, fileId, chunkSize, signal) {
+}, _FileManager_uploadBuffer = async function _FileManager_uploadBuffer(buffer, fileId, chunkSize, poolSize, signal) {
     const isBig = buffer.byteLength > __classPrivateFieldGet(_a, _a, "f", _FileManager_BIG_FILE_THRESHOLD);
     const partCount = Math.ceil(buffer.byteLength / chunkSize);
     let promises = new Array();
     let started = false;
     let ms = 0.05;
     main: for (let part = 0; part < partCount;) {
-        for (let i = 0; i < _0_utilities_js_1.UPLOAD_POOL_SIZE; ++i) {
+        for (let i = 0; i < poolSize; ++i) {
             for (let i = 0; i < _0_utilities_js_1.UPLOAD_REQUEST_PER_CONNECTION; ++i) {
                 const start = part * chunkSize;
                 const end = start + chunkSize;
@@ -351,7 +354,7 @@ _a = FileManager, _FileManager_c = new WeakMap(), _FileManager_Lupload = new Wea
                     ms = Math.max(ms * .8, 0.003);
                 }
                 promises.push(__classPrivateFieldGet(this, _FileManager_instances, "m", _FileManager_uploadPart).call(this, fileId, partCount, isBig, part++, bytes, signal));
-                if (promises.length == _0_utilities_js_1.UPLOAD_POOL_SIZE * _0_utilities_js_1.UPLOAD_REQUEST_PER_CONNECTION) {
+                if (promises.length == poolSize * _0_utilities_js_1.UPLOAD_REQUEST_PER_CONNECTION) {
                     await Promise.all(promises);
                     promises = [];
                 }

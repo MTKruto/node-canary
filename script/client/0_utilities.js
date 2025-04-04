@@ -19,7 +19,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DOWNLOAD_REQUEST_PER_CONNECTION = exports.DOWNLOAD_POOL_SIZE = exports.UPLOAD_REQUEST_PER_CONNECTION = exports.UPLOAD_POOL_SIZE = exports.resolve = void 0;
+exports.DOWNLOAD_REQUEST_PER_CONNECTION = exports.DOWNLOAD_POOL_SIZE = exports.UPLOAD_REQUEST_PER_CONNECTION = exports.resolve = void 0;
 exports.isHttpUrl = isHttpUrl;
 exports.getUsername = getUsername;
 exports.getChatListId = getChatListId;
@@ -209,7 +209,6 @@ function repr(value) {
         return (0, _2_tl_js_1.repr)(value);
     }
 }
-exports.UPLOAD_POOL_SIZE = 3;
-exports.UPLOAD_REQUEST_PER_CONNECTION = 2;
+exports.UPLOAD_REQUEST_PER_CONNECTION = 3;
 exports.DOWNLOAD_POOL_SIZE = 1;
 exports.DOWNLOAD_REQUEST_PER_CONNECTION = 1;

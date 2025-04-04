@@ -49,6 +49,7 @@ export const K = {
         key: () => [K.auth.P("key")],
         accountId: () => [K.auth.P("accountId")],
         accountType: () => [K.auth.P("accountType")],
+        isPremium: () => [K.auth.P("isPremium")],
     },
     updates: {
         P: (string) => `updates.${string}`,
@@ -339,6 +340,12 @@ export class StorageOperations {
             unreachable();
         }
         return __classPrivateFieldGet(this, _StorageOperations_accountType, "f");
+    }
+    async setIsPremium(isPremium) {
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.auth.isPremium(), isPremium);
+    }
+    async getIsPremium() {
+        return await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(K.auth.isPremium());
     }
     async updateStickerSetName(id, accessHash, name) {
         await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(K.cache.stickerSetName(id, accessHash), [name, new Date()]);

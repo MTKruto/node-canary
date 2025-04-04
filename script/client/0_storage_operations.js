@@ -52,6 +52,7 @@ exports.K = {
         key: () => [exports.K.auth.P("key")],
         accountId: () => [exports.K.auth.P("accountId")],
         accountType: () => [exports.K.auth.P("accountType")],
+        isPremium: () => [exports.K.auth.P("isPremium")],
     },
     updates: {
         P: (string) => `updates.${string}`,
@@ -342,6 +343,12 @@ class StorageOperations {
             (0, _0_deps_js_1.unreachable)();
         }
         return __classPrivateFieldGet(this, _StorageOperations_accountType, "f");
+    }
+    async setIsPremium(isPremium) {
+        await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.auth.isPremium(), isPremium);
+    }
+    async getIsPremium() {
+        return await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(exports.K.auth.isPremium());
     }
     async updateStickerSetName(id, accessHash, name) {
         await __classPrivateFieldGet(this, _StorageOperations_storage, "f").set(exports.K.cache.stickerSetName(id, accessHash), [name, new Date()]);

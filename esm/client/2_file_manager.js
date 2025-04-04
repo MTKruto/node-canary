@@ -55,7 +55,7 @@ export class FileManager {
         if (size == 0 || size < -1) {
             throw new InputError("Invalid file size.");
         }
-        const poolSize = __classPrivateFieldGet(this, _FileManager_c, "f").getUploadPoolSize();
+        const poolSize = await __classPrivateFieldGet(this, _FileManager_c, "f").getUploadPoolSize();
         const chunkSize = params?.chunkSize ?? __classPrivateFieldGet(_a, _a, "f", _FileManager_UPLOAD_MAX_CHUNK_SIZE);
         _a.validateChunkSize(chunkSize, __classPrivateFieldGet(_a, _a, "f", _FileManager_UPLOAD_MAX_CHUNK_SIZE));
         const fileId = getRandomId();

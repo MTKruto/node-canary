@@ -81,9 +81,7 @@ class FileManager {
         if (size == 0 || size < -1) {
             throw new _0_errors_js_1.InputError("Invalid file size.");
         }
-        const dc = __classPrivateFieldGet(this, _FileManager_c, "f").getDc();
-        const isPremium = await __classPrivateFieldGet(this, _FileManager_c, "f").getIsPremium();
-        const poolSize = (dc != "2" && dc != "4") || isPremium ? 8 : 4;
+        const poolSize = __classPrivateFieldGet(this, _FileManager_c, "f").getUploadPoolSize();
         const chunkSize = params?.chunkSize ?? __classPrivateFieldGet(_a, _a, "f", _FileManager_UPLOAD_MAX_CHUNK_SIZE);
         _a.validateChunkSize(chunkSize, __classPrivateFieldGet(_a, _a, "f", _FileManager_UPLOAD_MAX_CHUNK_SIZE));
         const fileId = (0, _1_utilities_js_1.getRandomId)();

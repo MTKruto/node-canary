@@ -18,20 +18,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { Api, Mtproto } from "../2_tl.js";
-import { DC } from "../3_transport.js";
 import { ConnectionState, EntityGetter, ID, ParseMode, Update } from "../3_types.js";
 import { InvokeParams } from "./0_params.js";
 import { StorageOperations } from "./0_storage_operations.js";
 export interface C {
     id: number;
-    getDc: () => DC;
+    getUploadPoolSize: () => Promise<number>;
     storage: StorageOperations;
     messageStorage: StorageOperations;
     guaranteeUpdateDelivery: boolean;
     setConnectionState: (connectionState: ConnectionState) => void;
     resetConnectionState: () => void;
     getSelfId: () => Promise<number>;
-    getIsPremium: () => Promise<boolean>;
     getInputPeer: (id: ID) => Promise<Api.InputPeer>;
     getInputChannel: (id: ID) => Promise<Api.inputChannel | Api.inputChannelFromMessage>;
     getInputUser: (id: ID) => Promise<Api.inputUserSelf | Api.inputUser | Api.inputUserFromMessage>;

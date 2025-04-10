@@ -19,8 +19,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.constructSelfDestructOption = constructSelfDestructOption;
 exports.selfDestructOptionToInt = selfDestructOptionToInt;
 const _0_errors_js_1 = require("../0_errors.js");
+const MAX_INT_32 = ~~(0xFFFFFFFF / 2);
+function constructSelfDestructOption(ttlSeconds) {
+    if (ttlSeconds == MAX_INT_32) {
+        return "afterOpen";
+    }
+    else {
+        return ttlSeconds;
+    }
+}
 function selfDestructOptionToInt(option) {
     if (option == "afterOpen") {
         return 2147483647;

@@ -27,6 +27,7 @@ import { LinkPreview } from "./0_link_preview.js";
 import { Location } from "./0_location.js";
 import { MessageEntity } from "./0_message_entity.js";
 import { RefundedPayment } from "./0_refunded_payment.js";
+import { SelfDestructOption } from "./0_self_destruct_option.js";
 import { Voice } from "./0_voice.js";
 import { Animation } from "./1_animation.js";
 import { Audio } from "./1_audio.js";
@@ -107,6 +108,8 @@ export interface _MessageBase {
     effectId?: string;
     /** Whether the message is scheduled. */
     scheduled?: boolean;
+    /** The message's self-destruct preference. */
+    selfDestruct?: SelfDestructOption;
 }
 /**
  * Properties shared between media message types.

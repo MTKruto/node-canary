@@ -18,6 +18,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { InputError } from "../0_errors.js";
+const MAX_INT_32 = ~~(0xFFFFFFFF / 2);
+export function constructSelfDestructOption(ttlSeconds) {
+    if (ttlSeconds == MAX_INT_32) {
+        return "afterOpen";
+    }
+    else {
+        return ttlSeconds;
+    }
+}
 export function selfDestructOptionToInt(option) {
     if (option == "afterOpen") {
         return 2147483647;

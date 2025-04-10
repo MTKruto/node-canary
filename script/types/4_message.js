@@ -25,6 +25,7 @@ exports.constructMessage = constructMessage;
 const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
+const _3_types_js_1 = require("../3_types.js");
 const _file_id_js_1 = require("./_file_id.js");
 const _file_id_js_2 = require("./_file_id.js");
 const _0_contact_js_1 = require("./0_contact.js");
@@ -439,6 +440,9 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
         caption: message_.message,
         captionEntities: message_.entities?.map(_0_message_entity_js_1.constructMessageEntity).filter((v) => !!v) ?? [],
     };
+    if (message_.media && "ttl_seconds" in message_.media && typeof message_.media.ttl_seconds === "number") {
+        messageMedia.selfDestruct = (0, _3_types_js_1.constructSelfDestructOption)(message_.media.ttl_seconds);
+    }
     if (_2_tl_js_1.Api.is("messageMediaPhoto", message_.media) || _2_tl_js_1.Api.is("messageMediaDocument", message_.media)) {
         messageMedia.hasMediaSpoiler = message_.media.spoiler || false;
     }

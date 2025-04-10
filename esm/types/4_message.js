@@ -20,6 +20,7 @@
 import { unreachable } from "../0_deps.js";
 import { cleanObject, fromUnixTimestamp, getLogger, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
+import { constructSelfDestructOption } from "../3_types.js";
 import { FileType, toUniqueFileId } from "./_file_id.js";
 import { serializeFileId } from "./_file_id.js";
 import { constructContact } from "./0_contact.js";
@@ -434,6 +435,9 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
         caption: message_.message,
         captionEntities: message_.entities?.map(constructMessageEntity).filter((v) => !!v) ?? [],
     };
+    if (message_.media && "ttl_seconds" in message_.media && typeof message_.media.ttl_seconds === "number") {
+        messageMedia.selfDestruct = constructSelfDestructOption(message_.media.ttl_seconds);
+    }
     if (Api.is("messageMediaPhoto", message_.media) || Api.is("messageMediaDocument", message_.media)) {
         messageMedia.hasMediaSpoiler = message_.media.spoiler || false;
     }

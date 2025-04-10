@@ -20,7 +20,6 @@
 import { unreachable } from "../0_deps.js";
 import { cleanObject, fromUnixTimestamp, getLogger, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
-import { constructSelfDestructOption } from "../3_types.js";
 import { FileType, toUniqueFileId } from "./_file_id.js";
 import { serializeFileId } from "./_file_id.js";
 import { constructContact } from "./0_contact.js";
@@ -30,6 +29,7 @@ import { constructLinkPreview } from "./0_link_preview.js";
 import { constructLocation } from "./0_location.js";
 import { constructMessageEntity } from "./0_message_entity.js";
 import { constructRefundedPayment } from "./0_refunded_payment.js";
+import { constructSelfDestructOption } from "./0_self_destruct_option.js";
 import { constructVoice } from "./0_voice.js";
 import { constructAnimation } from "./1_animation.js";
 import { constructAudio } from "./1_audio.js";

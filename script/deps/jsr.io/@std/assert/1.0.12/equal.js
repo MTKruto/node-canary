@@ -26,7 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.equal = equal;
 // Copyright 2018-2025 the Deno authors. MIT license.
 // This module is browser compatible.
-const dntShim = __importStar(require("../../../../../_dnt.shims.js"));
+const dntShim = __importStar(require("../../../../../_dnt.test_shims.js"));
 function isKeyedCollection(x) {
     return x instanceof Set || x instanceof Map;
 }

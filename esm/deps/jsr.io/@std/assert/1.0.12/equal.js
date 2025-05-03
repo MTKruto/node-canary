@@ -1,6 +1,6 @@
 // Copyright 2018-2025 the Deno authors. MIT license.
 // This module is browser compatible.
-import * as dntShim from "../../../../../_dnt.shims.js";
+import * as dntShim from "../../../../../_dnt.test_shims.js";
 function isKeyedCollection(x) {
     return x instanceof Set || x instanceof Map;
 }

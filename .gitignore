@@ -91,6 +91,14 @@
 /esm/deps/jsr.io/@roj/tgcrypto/0.4.1/dist/tgcrypto.js
 /script/deps/jsr.io/@roj/tgcrypto/0.4.1/dist/tgcrypto.js
 /script/deps/jsr.io/@roj/tgcrypto/0.4.1/dist/tgcrypto.js
+/esm/deps/jsr.io/@std/assert/1.0.12/assertion_error.js
+/esm/deps/jsr.io/@std/assert/1.0.12/assertion_error.d.ts
+/script/deps/jsr.io/@std/assert/1.0.12/assertion_error.js
+/script/deps/jsr.io/@std/assert/1.0.12/assertion_error.d.ts
+/esm/deps/jsr.io/@std/assert/1.0.12/equal.js
+/esm/deps/jsr.io/@std/assert/1.0.12/equal.d.ts
+/script/deps/jsr.io/@std/assert/1.0.12/equal.js
+/script/deps/jsr.io/@std/assert/1.0.12/equal.d.ts
 /esm/deps/jsr.io/@std/assert/1.0.12/instance_of.js
 /esm/deps/jsr.io/@std/assert/1.0.12/instance_of.d.ts
 /script/deps/jsr.io/@std/assert/1.0.12/instance_of.js

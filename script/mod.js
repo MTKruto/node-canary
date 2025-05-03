@@ -15,15 +15,15 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
-};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
     if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
+};
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.errors = exports.SYSTEM_VERSION = exports.SYSTEM_LANG_CODE = exports.LANG_PACK = exports.LANG_CODE = exports.INITIAL_DC = exports.DEVICE_MODEL = exports.APP_VERSION = exports.checkPassword = exports.setLogVerbosity = exports.setLoggingProvider = exports.setLogFilter = exports.getRandomId = exports.getColorName = exports.getColorFromPeerId = void 0;
@@ -47,6 +47,7 @@ exports.errors = exports.SYSTEM_VERSION = exports.SYSTEM_LANG_CODE = exports.LAN
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 require("./_dnt.polyfills.js");
+const dntShim = __importStar(require("./_dnt.shims.js"));
 var _1_utilities_js_1 = require("./1_utilities.js");
 Object.defineProperty(exports, "getColorFromPeerId", { enumerable: true, get: function () { return _1_utilities_js_1.getColorFromPeerId; } });
 Object.defineProperty(exports, "getColorName", { enumerable: true, get: function () { return _1_utilities_js_1.getColorName; } });
@@ -71,3 +72,63 @@ Object.defineProperty(exports, "SYSTEM_LANG_CODE", { enumerable: true, get: func
 Object.defineProperty(exports, "SYSTEM_VERSION", { enumerable: true, get: function () { return _4_constants_js_1.SYSTEM_VERSION; } });
 exports.errors = __importStar(require("./4_errors.js"));
 __exportStar(require("./5_client.js"), exports);
+const node_zlib_1 = require("node:zlib");
+// From https://github.com/ungap/compression-stream/blob/main/index.js with slight modifications.
+if (!("CompressionStream" in dntShim.dntGlobalThis)) {
+    // original idea: MIT License. Jimmy Wärting <https://jimmy.warting.se/opensource>
+    // @see https://github.com/oven-sh/bun/issues/1723#issuecomment-1774174194
+    class Stream {
+        constructor(compress, format) {
+            Object.defineProperty(this, "readable", {
+                enumerable: true,
+                configurable: true,
+                writable: true,
+                value: void 0
+            });
+            Object.defineProperty(this, "writable", {
+                enumerable: true,
+                configurable: true,
+                writable: true,
+                value: void 0
+            });
+            let handler;
+            if (format === "gzip") {
+                handler = compress ? (0, node_zlib_1.createGzip)() : (0, node_zlib_1.createGunzip)();
+            }
+            else if (format === "deflate") {
+                handler = compress ? (0, node_zlib_1.createDeflate)() : (0, node_zlib_1.createInflate)();
+            }
+            else if (format === "deflate-raw") {
+                handler = compress ? (0, node_zlib_1.createDeflateRaw)() : (0, node_zlib_1.createInflateRaw)();
+            }
+            else {
+                throw new TypeError([
+                    `Failed to construct '${this.constructor.name}'`,
+                    `Unsupported compression format: '${format}'`,
+                ].join(": "));
+            }
+            this.readable = new ReadableStream({
+                // @ts-ignore: why?
+                type: "bytes",
+                start: (controller) => {
+                    handler.on("data", (chunk) => controller.enqueue(chunk));
+                    handler.once("end", () => controller.close());
+                },
+            });
+            this.writable = new WritableStream({
+                write: (chunk) => void handler.write(chunk),
+                close: () => void handler.end(),
+            });
+        }
+    }
+    globalThis.CompressionStream = class CompressionStream extends Stream {
+        constructor(format) {
+            super(true, format);
+        }
+    };
+    globalThis.DecompressionStream = class DecompressionStream extends Stream {
+        constructor(format) {
+            super(false, format);
+        }
+    };
+}

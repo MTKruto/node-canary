@@ -251,7 +251,10 @@ export class StorageOperations {
         // @ts-ignore: TBD
         const buffer = (keyOrBuffer instanceof Uint8Array || Api.isValidObject(keyOrBuffer)) ? keyOrBuffer : await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(keyOrBuffer);
         if (buffer != null) {
-            if (Array.isArray(buffer)) {
+            if (buffer instanceof Uint8Array) {
+                return await Api.deserializeType("X", rleDecode(buffer));
+            }
+            else if (Array.isArray(buffer)) {
                 return await Api.deserializeType(buffer[0], rleDecode(buffer[1]));
             }
             else {

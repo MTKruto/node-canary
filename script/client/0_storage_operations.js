@@ -254,7 +254,10 @@ class StorageOperations {
         // @ts-ignore: TBD
         const buffer = (keyOrBuffer instanceof Uint8Array || _2_tl_js_1.Api.isValidObject(keyOrBuffer)) ? keyOrBuffer : await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(keyOrBuffer);
         if (buffer != null) {
-            if (Array.isArray(buffer)) {
+            if (buffer instanceof Uint8Array) {
+                return await _2_tl_js_1.Api.deserializeType("X", (0, _1_utilities_js_1.rleDecode)(buffer));
+            }
+            else if (Array.isArray(buffer)) {
                 return await _2_tl_js_1.Api.deserializeType(buffer[0], (0, _1_utilities_js_1.rleDecode)(buffer[1]));
             }
             else {

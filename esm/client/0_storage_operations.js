@@ -32,7 +32,7 @@ var _StorageOperations_instances, _StorageOperations_storage, _StorageOperations
 import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { base64DecodeUrlSafe, base64EncodeUrlSafe, bigIntFromBuffer, rleDecode, rleEncode, sha1, ZERO_CHANNEL_ID } from "../1_utilities.js";
-import { Api, TLReader, TLWriter } from "../2_tl.js";
+import { Api, TLReader, TLWriter, X } from "../2_tl.js";
 // key parts
 export const K = {
     connection: {
@@ -252,7 +252,7 @@ export class StorageOperations {
         const buffer = (keyOrBuffer instanceof Uint8Array || Api.isValidObject(keyOrBuffer)) ? keyOrBuffer : await __classPrivateFieldGet(this, _StorageOperations_storage, "f").get(keyOrBuffer);
         if (buffer != null) {
             if (buffer instanceof Uint8Array) {
-                return await Api.deserializeType("X", rleDecode(buffer));
+                return await Api.deserializeType(X, rleDecode(buffer));
             }
             else if (Array.isArray(buffer)) {
                 return await Api.deserializeType(buffer[0], rleDecode(buffer[1]));

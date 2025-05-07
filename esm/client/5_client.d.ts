@@ -851,7 +851,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param chatId The identifier of the chat that includes the messages.
      * @param untilMessageId The identifier of a message that will be marked as read, along with any other unread messages before it.
      */
-    readMessages(chatId: number, untilMessageId: number): Promise<void>;
+    readMessages(chatId: ID, untilMessageId: number): Promise<void>;
     /**
      * Start a bot. User-only.
      *
@@ -940,14 +940,14 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param chatId The identifier of the chat.
      * @param photo A photo to set as the chat's photo.
      */
-    setChatPhoto(chatId: number, photo: FileSource, params?: SetChatPhotoParams): Promise<void>;
+    setChatPhoto(chatId: ID, photo: FileSource, params?: SetChatPhotoParams): Promise<void>;
     /**
      * Delete a chat's photo.
      *
      * @method ch
      * @param chatId The identifier of the chat.
      */
-    deleteChatPhoto(chatId: number): Promise<void>;
+    deleteChatPhoto(chatId: ID): Promise<void>;
     /**
      * Ban a member from a chat.
      *
@@ -1494,7 +1494,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param messageId The identifier of the message to add the reaction to.
      * @param reactions The new reactions.
      */
-    setReactions(chatId: number, messageId: number, reactions: Reaction[], params?: SetReactionsParams): Promise<void>;
+    setReactions(chatId: ID, messageId: number, reactions: Reaction[], params?: SetReactionsParams): Promise<void>;
     /**
      * Make a reaction to a message.
      *
@@ -1503,7 +1503,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param messageId The identifier of the message to add the reaction to.
      * @param reaction The reaction to add.
      */
-    addReaction(chatId: number, messageId: number, reaction: Reaction, params?: AddReactionParams): Promise<void>;
+    addReaction(chatId: ID, messageId: number, reaction: Reaction, params?: AddReactionParams): Promise<void>;
     /**
      * Undo a reaction made to a message.
      *
@@ -1512,7 +1512,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param messageId The identifier of the message which the reaction was made to.
      * @param reaction The reaction to remove.
      */
-    removeReaction(chatId: number, messageId: number, reaction: Reaction): Promise<void>;
+    removeReaction(chatId: ID, messageId: number, reaction: Reaction): Promise<void>;
     /**
      * Create a story. User-only.
      *

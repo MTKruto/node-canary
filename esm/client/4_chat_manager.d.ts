@@ -53,8 +53,8 @@ export declare class ChatManager implements UpdateProcessor<ChatManagerUpdate> {
     disableJoinRequests(chatId: ID): Promise<void>;
     setChatStickerSet(chatId: ID, setName: string): Promise<void>;
     deleteChatStickerSet(chatId: ID): Promise<void>;
-    deleteChatPhoto(chatId: number): Promise<void>;
-    setChatPhoto(chatId: number, photo: FileSource, params?: SetChatPhotoParams): Promise<void>;
+    deleteChatPhoto(chatId: ID): Promise<void>;
+    setChatPhoto(chatId: ID, photo: FileSource, params?: SetChatPhotoParams): Promise<void>;
     addChatMember(chatId: ID, userId: ID, params?: AddChatMemberParams): Promise<import("../3_types.js").FailedInvitation[]>;
     addChatMembers(chatId: ID, userIds: ID[]): Promise<import("../3_types.js").FailedInvitation[]>;
     disableSlowMode(chatId: ID): Promise<void>;

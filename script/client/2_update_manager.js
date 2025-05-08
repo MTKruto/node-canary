@@ -263,7 +263,7 @@ class UpdateManager {
             return queue;
         }
         else {
-            queue = new _1_utilities_js_1.Queue(`handleUpdate-${boxId}`);
+            queue = new _1_utilities_js_1.Queue(`handleUpdate-${boxId}`, true);
             return queue;
         }
     }

@@ -3276,6 +3276,7 @@ _Client_handleCtxUpdate = async function _Client_handleCtxUpdate(update) {
     }
     catch (err) {
         __classPrivateFieldGet(this, _Client_L, "f").error("Failed to handle update:", err);
+        throw err;
     }
 }, _Client_queueHandleCtxUpdate = function _Client_queueHandleCtxUpdate(update) {
     __classPrivateFieldGet(this, _Client_updateManager, "f").getHandleUpdateQueue(UpdateManager.MAIN_BOX_ID).add(async () => {

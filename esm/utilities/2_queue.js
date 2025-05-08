@@ -28,10 +28,10 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Queue_instances, _Queue_logger, _Queue_busy, _Queue_check;
+var _Queue_instances, _Queue_logger, _Queue_throw, _Queue_busy, _Queue_check;
 import { getLogger } from "./1_logger.js";
 export class Queue {
-    constructor(name) {
+    constructor(name, throw_ = false) {
         _Queue_instances.add(this);
         _Queue_logger.set(this, void 0);
         Object.defineProperty(this, "functions", {
@@ -40,15 +40,17 @@ export class Queue {
             writable: true,
             value: new Array()
         });
+        _Queue_throw.set(this, void 0);
         _Queue_busy.set(this, false);
         __classPrivateFieldSet(this, _Queue_logger, getLogger(`q/${name}`), "f");
+        __classPrivateFieldSet(this, _Queue_throw, throw_, "f");
     }
     add(fn) {
         this.functions.push(fn);
         __classPrivateFieldGet(this, _Queue_instances, "m", _Queue_check).call(this);
     }
 }
-_Queue_logger = new WeakMap(), _Queue_busy = new WeakMap(), _Queue_instances = new WeakSet(), _Queue_check = function _Queue_check() {
+_Queue_logger = new WeakMap(), _Queue_throw = new WeakMap(), _Queue_busy = new WeakMap(), _Queue_instances = new WeakSet(), _Queue_check = function _Queue_check() {
     if (__classPrivateFieldGet(this, _Queue_busy, "f")) {
         return;
     }
@@ -57,14 +59,16 @@ _Queue_logger = new WeakMap(), _Queue_busy = new WeakMap(), _Queue_instances = n
     }
     const fn = this.functions.shift();
     if (fn !== undefined) {
-        fn()
-            .catch((err) => {
-            __classPrivateFieldGet(this, _Queue_logger, "f").error((typeof err === "object" && err != null && "stack" in err) ? err.stack : err);
-        })
+        const promise = fn()
             .finally(() => {
             __classPrivateFieldSet(this, _Queue_busy, false, "f");
             __classPrivateFieldGet(this, _Queue_instances, "m", _Queue_check).call(this);
         });
+        if (!__classPrivateFieldGet(this, _Queue_throw, "f")) {
+            promise.catch((err) => {
+                __classPrivateFieldGet(this, _Queue_logger, "f").error((typeof err === "object" && err != null && "stack" in err) ? err.stack : err);
+            });
+        }
     }
     else {
         __classPrivateFieldSet(this, _Queue_busy, false, "f");

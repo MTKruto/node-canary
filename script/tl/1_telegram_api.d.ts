@@ -508,6 +508,7 @@ export interface channel {
     stories_hidden_min?: true;
     stories_unavailable?: true;
     signature_profiles?: true;
+    autotranslation?: true;
     id: bigint;
     access_hash?: bigint;
     title: string;
@@ -1133,6 +1134,9 @@ export interface messageActionStarGiftUnique {
     from_id?: Peer;
     peer?: Peer;
     saved_id?: bigint;
+    resale_stars?: bigint;
+    can_transfer_at?: number;
+    can_resell_at?: number;
 }
 export interface messageActionPaidMessagesRefunded {
     _: "messageActionPaidMessagesRefunded";
@@ -1142,6 +1146,15 @@ export interface messageActionPaidMessagesRefunded {
 export interface messageActionPaidMessagesPrice {
     _: "messageActionPaidMessagesPrice";
     stars: bigint;
+}
+export interface messageActionConferenceCall {
+    _: "messageActionConferenceCall";
+    missed?: true;
+    active?: true;
+    video?: true;
+    call_id: bigint;
+    duration?: number;
+    other_participants?: Array<Peer>;
 }
 export interface dialog {
     _: "dialog";
@@ -2391,6 +2404,13 @@ export interface updatePaidReactionPrivacy {
 export interface updateSentPhoneCode {
     _: "updateSentPhoneCode";
     sent_code: auth_SentCode;
+}
+export interface updateGroupCallChainBlocks {
+    _: "updateGroupCallChainBlocks";
+    call: InputGroupCall;
+    sub_chain_id: number;
+    blocks: Array<Uint8Array>;
+    next_offset: number;
 }
 export interface updates_state {
     _: "updates.state";
@@ -4454,9 +4474,9 @@ export interface phoneCallDiscardReasonHangup {
 export interface phoneCallDiscardReasonBusy {
     _: "phoneCallDiscardReasonBusy";
 }
-export interface phoneCallDiscardReasonAllowGroupCall {
-    _: "phoneCallDiscardReasonAllowGroupCall";
-    encrypted_key: Uint8Array;
+export interface phoneCallDiscardReasonMigrateConferenceCall {
+    _: "phoneCallDiscardReasonMigrateConferenceCall";
+    slug: string;
 }
 export interface dataJSON {
     _: "dataJSON";
@@ -4699,7 +4719,6 @@ export interface phoneCallWaiting {
     participant_id: bigint;
     protocol: PhoneCallProtocol;
     receive_date?: number;
-    conference_call?: InputGroupCall;
 }
 export interface phoneCallRequested {
     _: "phoneCallRequested";
@@ -4711,7 +4730,6 @@ export interface phoneCallRequested {
     participant_id: bigint;
     g_a_hash: Uint8Array;
     protocol: PhoneCallProtocol;
-    conference_call?: InputGroupCall;
 }
 export interface phoneCallAccepted {
     _: "phoneCallAccepted";
@@ -4723,12 +4741,12 @@ export interface phoneCallAccepted {
     participant_id: bigint;
     g_b: Uint8Array;
     protocol: PhoneCallProtocol;
-    conference_call?: InputGroupCall;
 }
 export interface phoneCall {
     _: "phoneCall";
     p2p_allowed?: true;
     video?: true;
+    conference_supported?: true;
     id: bigint;
     access_hash: bigint;
     date: number;
@@ -4740,7 +4758,6 @@ export interface phoneCall {
     connections: Array<PhoneConnection>;
     start_date: number;
     custom_parameters?: DataJSON;
-    conference_call?: InputGroupCall;
 }
 export interface phoneCallDiscarded {
     _: "phoneCallDiscarded";
@@ -4750,7 +4767,6 @@ export interface phoneCallDiscarded {
     id: bigint;
     reason?: PhoneCallDiscardReason;
     duration?: number;
-    conference_call?: InputGroupCall;
 }
 export interface phoneConnection {
     _: "phoneConnection";
@@ -5065,6 +5081,10 @@ export interface channelAdminLogEventActionParticipantSubExtend {
     _: "channelAdminLogEventActionParticipantSubExtend";
     prev_participant: ChannelParticipant;
     new_participant: ChannelParticipant;
+}
+export interface channelAdminLogEventActionToggleAutotranslation {
+    _: "channelAdminLogEventActionToggleAutotranslation";
+    new_value: boolean;
 }
 export interface channelAdminLogEvent {
     _: "channelAdminLogEvent";
@@ -6056,11 +6076,14 @@ export interface help_promoData {
     _: "help.promoData";
     proxy?: true;
     expires: number;
-    peer: Peer;
-    chats: Array<Chat>;
-    users: Array<User>;
+    peer?: Peer;
     psa_type?: string;
     psa_message?: string;
+    pending_suggestions: Array<string>;
+    dismissed_suggestions: Array<string>;
+    custom_pending_suggestion?: PendingSuggestion;
+    chats: Array<Chat>;
+    users: Array<User>;
 }
 export interface videoSize {
     _: "videoSize";
@@ -6229,6 +6252,8 @@ export interface groupCall {
     record_video_active?: true;
     rtmp_stream?: true;
     listeners_hidden?: true;
+    conference?: true;
+    creator?: true;
     id: bigint;
     access_hash: bigint;
     participants_count: number;
@@ -6239,12 +6264,20 @@ export interface groupCall {
     unmuted_video_count?: number;
     unmuted_video_limit: number;
     version: number;
-    conference_from_call?: bigint;
+    invite_link?: string;
 }
 export interface inputGroupCall {
     _: "inputGroupCall";
     id: bigint;
     access_hash: bigint;
+}
+export interface inputGroupCallSlug {
+    _: "inputGroupCallSlug";
+    slug: string;
+}
+export interface inputGroupCallInviteMessage {
+    _: "inputGroupCallInviteMessage";
+    msg_id: number;
 }
 export interface groupCallParticipant {
     _: "groupCallParticipant";
@@ -6726,6 +6759,16 @@ export interface inputInvoicePremiumGiftStars {
     user_id: InputUser;
     months: number;
     message?: TextWithEntities;
+}
+export interface inputInvoiceBusinessBotTransferStars {
+    _: "inputInvoiceBusinessBotTransferStars";
+    bot: InputUser;
+    stars: bigint;
+}
+export interface inputInvoiceStarGiftResale {
+    _: "inputInvoiceStarGiftResale";
+    slug: string;
+    to_id: InputPeer;
 }
 export interface payments_exportedInvoice {
     _: "payments.exportedInvoice";
@@ -8086,6 +8129,8 @@ export interface starsTransaction {
     gift?: true;
     reaction?: true;
     stargift_upgrade?: true;
+    business_transfer?: true;
+    stargift_resale?: true;
     id: string;
     stars: StarsAmount;
     date: number;
@@ -8244,10 +8289,13 @@ export interface starGift {
     stars: bigint;
     availability_remains?: number;
     availability_total?: number;
+    availability_resale?: bigint;
     convert_stars: bigint;
     first_sale_date?: number;
     last_sale_date?: number;
     upgrade_stars?: bigint;
+    resell_min_stars?: bigint;
+    title?: string;
 }
 export interface starGiftUnique {
     _: "starGiftUnique";
@@ -8262,6 +8310,7 @@ export interface starGiftUnique {
     availability_issued: number;
     availability_total: number;
     gift_address?: string;
+    resell_stars?: bigint;
 }
 export interface payments_starGiftsNotModified {
     _: "payments.starGiftsNotModified";
@@ -8385,6 +8434,7 @@ export interface starGiftAttributePattern {
 export interface starGiftAttributeBackdrop {
     _: "starGiftAttributeBackdrop";
     name: string;
+    backdrop_id: number;
     center_color: number;
     edge_color: number;
     pattern_color: number;
@@ -8438,6 +8488,8 @@ export interface savedStarGift {
     upgrade_stars?: bigint;
     can_export_at?: number;
     transfer_stars?: bigint;
+    can_transfer_at?: number;
+    can_resell_at?: number;
 }
 export interface payments_savedStarGifts {
     _: "payments.savedStarGifts";
@@ -8456,6 +8508,10 @@ export interface inputSavedStarGiftChat {
     _: "inputSavedStarGiftChat";
     peer: InputPeer;
     saved_id: bigint;
+}
+export interface inputSavedStarGiftSlug {
+    _: "inputSavedStarGiftSlug";
+    slug: string;
 }
 export interface payments_starGiftWithdrawalUrl {
     _: "payments.starGiftWithdrawalUrl";
@@ -8524,6 +8580,45 @@ export interface contacts_sponsoredPeers {
     peers: Array<SponsoredPeer>;
     chats: Array<Chat>;
     users: Array<User>;
+}
+export interface starGiftAttributeIdModel {
+    _: "starGiftAttributeIdModel";
+    document_id: bigint;
+}
+export interface starGiftAttributeIdPattern {
+    _: "starGiftAttributeIdPattern";
+    document_id: bigint;
+}
+export interface starGiftAttributeIdBackdrop {
+    _: "starGiftAttributeIdBackdrop";
+    backdrop_id: number;
+}
+export interface starGiftAttributeCounter {
+    _: "starGiftAttributeCounter";
+    attribute: StarGiftAttributeId;
+    count: number;
+}
+export interface payments_resaleStarGifts {
+    _: "payments.resaleStarGifts";
+    count: number;
+    gifts: Array<StarGift>;
+    next_offset?: string;
+    attributes?: Array<StarGiftAttribute>;
+    attributes_hash?: bigint;
+    chats: Array<Chat>;
+    counters?: Array<StarGiftAttributeCounter>;
+    users: Array<User>;
+}
+export interface stories_canSendStoryCount {
+    _: "stories.canSendStoryCount";
+    count_remains: number;
+}
+export interface pendingSuggestion {
+    _: "pendingSuggestion";
+    suggestion: string;
+    title: TextWithEntities;
+    description: TextWithEntities;
+    url: string;
 }
 export interface invokeAfterMsg<T> {
     _: "invokeAfterMsg";
@@ -11821,6 +11916,12 @@ export interface channels_updatePaidMessagesPrice {
     send_paid_messages_stars: bigint;
     [R]?: Updates;
 }
+export interface channels_toggleAutotranslation {
+    _: "channels.toggleAutotranslation";
+    channel: InputChannel;
+    enabled: boolean;
+    [R]?: Updates;
+}
 export interface bots_sendCustomRequest {
     _: "bots.sendCustomRequest";
     custom_method: string;
@@ -12303,6 +12404,23 @@ export interface payments_canPurchaseStore {
     purpose: InputStorePaymentPurpose;
     [R]?: boolean;
 }
+export interface payments_getResaleStarGifts {
+    _: "payments.getResaleStarGifts";
+    sort_by_price?: true;
+    sort_by_num?: true;
+    attributes_hash?: bigint;
+    gift_id: bigint;
+    attributes?: Array<StarGiftAttributeId>;
+    offset: string;
+    limit: number;
+    [R]?: payments_ResaleStarGifts;
+}
+export interface payments_updateStarGiftPrice {
+    _: "payments.updateStarGiftPrice";
+    stargift: InputSavedStarGift;
+    resell_stars: bigint;
+    [R]?: Updates;
+}
 export interface stickers_createStickerSet {
     _: "stickers.createStickerSet";
     masks?: true;
@@ -12383,7 +12501,6 @@ export interface phone_requestCall {
     _: "phone.requestCall";
     video?: true;
     user_id: InputUser;
-    conference_call?: InputGroupCall;
     random_id: number;
     g_a_hash: Uint8Array;
     protocol: PhoneCallProtocol;
@@ -12454,7 +12571,8 @@ export interface phone_joinGroupCall {
     call: InputGroupCall;
     join_as: InputPeer;
     invite_hash?: string;
-    key_fingerprint?: bigint;
+    public_key?: bigint;
+    block?: Uint8Array;
     params: DataJSON;
     [R]?: Updates;
 }
@@ -12588,9 +12706,49 @@ export interface phone_saveCallLog {
 }
 export interface phone_createConferenceCall {
     _: "phone.createConferenceCall";
-    peer: InputPhoneCall;
-    key_fingerprint: bigint;
-    [R]?: phone_PhoneCall;
+    muted?: true;
+    video_stopped?: true;
+    join?: true;
+    random_id: number;
+    public_key?: bigint;
+    block?: Uint8Array;
+    params?: DataJSON;
+    [R]?: Updates;
+}
+export interface phone_deleteConferenceCallParticipants {
+    _: "phone.deleteConferenceCallParticipants";
+    only_left?: true;
+    kick?: true;
+    call: InputGroupCall;
+    ids: Array<bigint>;
+    block: Uint8Array;
+    [R]?: Updates;
+}
+export interface phone_sendConferenceCallBroadcast {
+    _: "phone.sendConferenceCallBroadcast";
+    call: InputGroupCall;
+    block: Uint8Array;
+    [R]?: Updates;
+}
+export interface phone_inviteConferenceCallParticipant {
+    _: "phone.inviteConferenceCallParticipant";
+    video?: true;
+    call: InputGroupCall;
+    user_id: InputUser;
+    [R]?: Updates;
+}
+export interface phone_declineConferenceCallInvite {
+    _: "phone.declineConferenceCallInvite";
+    msg_id: number;
+    [R]?: Updates;
+}
+export interface phone_getGroupCallChainBlocks {
+    _: "phone.getGroupCallChainBlocks";
+    call: InputGroupCall;
+    sub_chain_id: number;
+    offset: number;
+    limit: number;
+    [R]?: Updates;
 }
 export interface langpack_getLangPack {
     _: "langpack.getLangPack";
@@ -12762,7 +12920,7 @@ export interface chatlists_leaveChatlist {
 export interface stories_canSendStory {
     _: "stories.canSendStory";
     peer: InputPeer;
-    [R]?: boolean;
+    [R]?: stories_CanSendStoryCount;
 }
 export interface stories_sendStory {
     _: "stories.sendStory";
@@ -13171,6 +13329,7 @@ export interface Types {
     "messageActionStarGiftUnique": messageActionStarGiftUnique;
     "messageActionPaidMessagesRefunded": messageActionPaidMessagesRefunded;
     "messageActionPaidMessagesPrice": messageActionPaidMessagesPrice;
+    "messageActionConferenceCall": messageActionConferenceCall;
     "dialog": dialog;
     "dialogFolder": dialogFolder;
     "photoEmpty": photoEmpty;
@@ -13388,6 +13547,7 @@ export interface Types {
     "updateBotPurchasedPaidMedia": updateBotPurchasedPaidMedia;
     "updatePaidReactionPrivacy": updatePaidReactionPrivacy;
     "updateSentPhoneCode": updateSentPhoneCode;
+    "updateGroupCallChainBlocks": updateGroupCallChainBlocks;
     "updates.state": updates_state;
     "updates.differenceEmpty": updates_differenceEmpty;
     "updates.difference": updates_difference;
@@ -13760,7 +13920,7 @@ export interface Types {
     "phoneCallDiscardReasonDisconnect": phoneCallDiscardReasonDisconnect;
     "phoneCallDiscardReasonHangup": phoneCallDiscardReasonHangup;
     "phoneCallDiscardReasonBusy": phoneCallDiscardReasonBusy;
-    "phoneCallDiscardReasonAllowGroupCall": phoneCallDiscardReasonAllowGroupCall;
+    "phoneCallDiscardReasonMigrateConferenceCall": phoneCallDiscardReasonMigrateConferenceCall;
     "dataJSON": dataJSON;
     "labeledPrice": labeledPrice;
     "invoice": invoice;
@@ -13861,6 +14021,7 @@ export interface Types {
     "channelAdminLogEventActionChangeEmojiStickerSet": channelAdminLogEventActionChangeEmojiStickerSet;
     "channelAdminLogEventActionToggleSignatureProfiles": channelAdminLogEventActionToggleSignatureProfiles;
     "channelAdminLogEventActionParticipantSubExtend": channelAdminLogEventActionParticipantSubExtend;
+    "channelAdminLogEventActionToggleAutotranslation": channelAdminLogEventActionToggleAutotranslation;
     "channelAdminLogEvent": channelAdminLogEvent;
     "channels.adminLogResults": channels_adminLogResults;
     "channelAdminLogEventsFilter": channelAdminLogEventsFilter;
@@ -14055,6 +14216,8 @@ export interface Types {
     "groupCallDiscarded": groupCallDiscarded;
     "groupCall": groupCall;
     "inputGroupCall": inputGroupCall;
+    "inputGroupCallSlug": inputGroupCallSlug;
+    "inputGroupCallInviteMessage": inputGroupCallInviteMessage;
     "groupCallParticipant": groupCallParticipant;
     "phone.groupCall": phone_groupCall;
     "phone.groupParticipants": phone_groupParticipants;
@@ -14144,6 +14307,8 @@ export interface Types {
     "inputInvoiceStarGiftUpgrade": inputInvoiceStarGiftUpgrade;
     "inputInvoiceStarGiftTransfer": inputInvoiceStarGiftTransfer;
     "inputInvoicePremiumGiftStars": inputInvoicePremiumGiftStars;
+    "inputInvoiceBusinessBotTransferStars": inputInvoiceBusinessBotTransferStars;
+    "inputInvoiceStarGiftResale": inputInvoiceStarGiftResale;
     "payments.exportedInvoice": payments_exportedInvoice;
     "messages.transcribedAudio": messages_transcribedAudio;
     "help.premiumPromo": help_premiumPromo;
@@ -14416,6 +14581,7 @@ export interface Types {
     "payments.savedStarGifts": payments_savedStarGifts;
     "inputSavedStarGiftUser": inputSavedStarGiftUser;
     "inputSavedStarGiftChat": inputSavedStarGiftChat;
+    "inputSavedStarGiftSlug": inputSavedStarGiftSlug;
     "payments.starGiftWithdrawalUrl": payments_starGiftWithdrawalUrl;
     "paidReactionPrivacyDefault": paidReactionPrivacyDefault;
     "paidReactionPrivacyAnonymous": paidReactionPrivacyAnonymous;
@@ -14429,6 +14595,13 @@ export interface Types {
     "sponsoredPeer": sponsoredPeer;
     "contacts.sponsoredPeersEmpty": contacts_sponsoredPeersEmpty;
     "contacts.sponsoredPeers": contacts_sponsoredPeers;
+    "starGiftAttributeIdModel": starGiftAttributeIdModel;
+    "starGiftAttributeIdPattern": starGiftAttributeIdPattern;
+    "starGiftAttributeIdBackdrop": starGiftAttributeIdBackdrop;
+    "starGiftAttributeCounter": starGiftAttributeCounter;
+    "payments.resaleStarGifts": payments_resaleStarGifts;
+    "stories.canSendStoryCount": stories_canSendStoryCount;
+    "pendingSuggestion": pendingSuggestion;
 }
 export interface Functions<T = Function> {
     "invokeAfterMsg": invokeAfterMsg<T>;
@@ -14939,6 +15112,7 @@ export interface Functions<T = Function> {
     "channels.restrictSponsoredMessages": channels_restrictSponsoredMessages;
     "channels.searchPosts": channels_searchPosts;
     "channels.updatePaidMessagesPrice": channels_updatePaidMessagesPrice;
+    "channels.toggleAutotranslation": channels_toggleAutotranslation;
     "bots.sendCustomRequest": bots_sendCustomRequest;
     "bots.answerWebhookJSONQuery": bots_answerWebhookJSONQuery;
     "bots.setBotCommands": bots_setBotCommands;
@@ -15017,6 +15191,8 @@ export interface Functions<T = Function> {
     "payments.toggleChatStarGiftNotifications": payments_toggleChatStarGiftNotifications;
     "payments.toggleStarGiftsPinnedToTop": payments_toggleStarGiftsPinnedToTop;
     "payments.canPurchaseStore": payments_canPurchaseStore;
+    "payments.getResaleStarGifts": payments_getResaleStarGifts;
+    "payments.updateStarGiftPrice": payments_updateStarGiftPrice;
     "stickers.createStickerSet": stickers_createStickerSet;
     "stickers.removeStickerFromSet": stickers_removeStickerFromSet;
     "stickers.changeStickerPosition": stickers_changeStickerPosition;
@@ -15060,6 +15236,11 @@ export interface Functions<T = Function> {
     "phone.getGroupCallStreamRtmpUrl": phone_getGroupCallStreamRtmpUrl;
     "phone.saveCallLog": phone_saveCallLog;
     "phone.createConferenceCall": phone_createConferenceCall;
+    "phone.deleteConferenceCallParticipants": phone_deleteConferenceCallParticipants;
+    "phone.sendConferenceCallBroadcast": phone_sendConferenceCallBroadcast;
+    "phone.inviteConferenceCallParticipant": phone_inviteConferenceCallParticipant;
+    "phone.declineConferenceCallInvite": phone_declineConferenceCallInvite;
+    "phone.getGroupCallChainBlocks": phone_getGroupCallChainBlocks;
     "langpack.getLangPack": langpack_getLangPack;
     "langpack.getStrings": langpack_getStrings;
     "langpack.getDifference": langpack_getDifference;
@@ -15666,6 +15847,11 @@ export interface Enums {
     "DisallowedGiftsSettings": DisallowedGiftsSettings;
     "SponsoredPeer": SponsoredPeer;
     "contacts.SponsoredPeers": contacts_SponsoredPeers;
+    "StarGiftAttributeId": StarGiftAttributeId;
+    "StarGiftAttributeCounter": StarGiftAttributeCounter;
+    "payments.ResaleStarGifts": payments_ResaleStarGifts;
+    "stories.CanSendStoryCount": stories_CanSendStoryCount;
+    "PendingSuggestion": PendingSuggestion;
 }
 export type AnyType = Types[keyof Types];
 export type AnyFunction<T = Function> = Functions<T>[keyof Functions<T>];
@@ -15695,7 +15881,7 @@ export type ChatParticipants = chatParticipantsForbidden | chatParticipants;
 export type ChatPhoto = chatPhotoEmpty | chatPhoto;
 export type Message = messageEmpty | message | messageService;
 export type MessageMedia = messageMediaEmpty | messageMediaPhoto | messageMediaGeo | messageMediaContact | messageMediaUnsupported | messageMediaDocument | messageMediaWebPage | messageMediaVenue | messageMediaGame | messageMediaInvoice | messageMediaGeoLive | messageMediaPoll | messageMediaDice | messageMediaStory | messageMediaGiveaway | messageMediaGiveawayResults | messageMediaPaidMedia;
-export type MessageAction = messageActionEmpty | messageActionChatCreate | messageActionChatEditTitle | messageActionChatEditPhoto | messageActionChatDeletePhoto | messageActionChatAddUser | messageActionChatDeleteUser | messageActionChatJoinedByLink | messageActionChannelCreate | messageActionChatMigrateTo | messageActionChannelMigrateFrom | messageActionPinMessage | messageActionHistoryClear | messageActionGameScore | messageActionPaymentSentMe | messageActionPaymentSent | messageActionPhoneCall | messageActionScreenshotTaken | messageActionCustomAction | messageActionBotAllowed | messageActionSecureValuesSentMe | messageActionSecureValuesSent | messageActionContactSignUp | messageActionGeoProximityReached | messageActionGroupCall | messageActionInviteToGroupCall | messageActionSetMessagesTTL | messageActionGroupCallScheduled | messageActionSetChatTheme | messageActionChatJoinedByRequest | messageActionWebViewDataSentMe | messageActionWebViewDataSent | messageActionGiftPremium | messageActionTopicCreate | messageActionTopicEdit | messageActionSuggestProfilePhoto | messageActionRequestedPeer | messageActionSetChatWallPaper | messageActionGiftCode | messageActionGiveawayLaunch | messageActionGiveawayResults | messageActionBoostApply | messageActionRequestedPeerSentMe | messageActionPaymentRefunded | messageActionGiftStars | messageActionPrizeStars | messageActionStarGift | messageActionStarGiftUnique | messageActionPaidMessagesRefunded | messageActionPaidMessagesPrice;
+export type MessageAction = messageActionEmpty | messageActionChatCreate | messageActionChatEditTitle | messageActionChatEditPhoto | messageActionChatDeletePhoto | messageActionChatAddUser | messageActionChatDeleteUser | messageActionChatJoinedByLink | messageActionChannelCreate | messageActionChatMigrateTo | messageActionChannelMigrateFrom | messageActionPinMessage | messageActionHistoryClear | messageActionGameScore | messageActionPaymentSentMe | messageActionPaymentSent | messageActionPhoneCall | messageActionScreenshotTaken | messageActionCustomAction | messageActionBotAllowed | messageActionSecureValuesSentMe | messageActionSecureValuesSent | messageActionContactSignUp | messageActionGeoProximityReached | messageActionGroupCall | messageActionInviteToGroupCall | messageActionSetMessagesTTL | messageActionGroupCallScheduled | messageActionSetChatTheme | messageActionChatJoinedByRequest | messageActionWebViewDataSentMe | messageActionWebViewDataSent | messageActionGiftPremium | messageActionTopicCreate | messageActionTopicEdit | messageActionSuggestProfilePhoto | messageActionRequestedPeer | messageActionSetChatWallPaper | messageActionGiftCode | messageActionGiveawayLaunch | messageActionGiveawayResults | messageActionBoostApply | messageActionRequestedPeerSentMe | messageActionPaymentRefunded | messageActionGiftStars | messageActionPrizeStars | messageActionStarGift | messageActionStarGiftUnique | messageActionPaidMessagesRefunded | messageActionPaidMessagesPrice | messageActionConferenceCall;
 export type Dialog = dialog | dialogFolder;
 export type Photo = photoEmpty | photo;
 export type PhotoSize = photoSizeEmpty | photoSize | photoCachedSize | photoStrippedSize | photoSizeProgressive | photoPathSize;
@@ -15722,7 +15908,7 @@ export type messages_Chats = messages_chats | messages_chatsSlice;
 export type messages_ChatFull = messages_chatFull;
 export type messages_AffectedHistory = messages_affectedHistory;
 export type MessagesFilter = inputMessagesFilterEmpty | inputMessagesFilterPhotos | inputMessagesFilterVideo | inputMessagesFilterPhotoVideo | inputMessagesFilterDocument | inputMessagesFilterUrl | inputMessagesFilterGif | inputMessagesFilterVoice | inputMessagesFilterMusic | inputMessagesFilterChatPhotos | inputMessagesFilterPhoneCalls | inputMessagesFilterRoundVoice | inputMessagesFilterRoundVideo | inputMessagesFilterMyMentions | inputMessagesFilterGeo | inputMessagesFilterContacts | inputMessagesFilterPinned;
-export type Update = updateNewMessage | updateMessageID | updateDeleteMessages | updateUserTyping | updateChatUserTyping | updateChatParticipants | updateUserStatus | updateUserName | updateNewAuthorization | updateNewEncryptedMessage | updateEncryptedChatTyping | updateEncryption | updateEncryptedMessagesRead | updateChatParticipantAdd | updateChatParticipantDelete | updateDcOptions | updateNotifySettings | updateServiceNotification | updatePrivacy | updateUserPhone | updateReadHistoryInbox | updateReadHistoryOutbox | updateWebPage | updateReadMessagesContents | updateChannelTooLong | updateChannel | updateNewChannelMessage | updateReadChannelInbox | updateDeleteChannelMessages | updateChannelMessageViews | updateChatParticipantAdmin | updateNewStickerSet | updateStickerSetsOrder | updateStickerSets | updateSavedGifs | updateBotInlineQuery | updateBotInlineSend | updateEditChannelMessage | updateBotCallbackQuery | updateEditMessage | updateInlineBotCallbackQuery | updateReadChannelOutbox | updateDraftMessage | updateReadFeaturedStickers | updateRecentStickers | updateConfig | updatePtsChanged | updateChannelWebPage | updateDialogPinned | updatePinnedDialogs | updateBotWebhookJSON | updateBotWebhookJSONQuery | updateBotShippingQuery | updateBotPrecheckoutQuery | updatePhoneCall | updateLangPackTooLong | updateLangPack | updateFavedStickers | updateChannelReadMessagesContents | updateContactsReset | updateChannelAvailableMessages | updateDialogUnreadMark | updateMessagePoll | updateChatDefaultBannedRights | updateFolderPeers | updatePeerSettings | updatePeerLocated | updateNewScheduledMessage | updateDeleteScheduledMessages | updateTheme | updateGeoLiveViewed | updateLoginToken | updateMessagePollVote | updateDialogFilter | updateDialogFilterOrder | updateDialogFilters | updatePhoneCallSignalingData | updateChannelMessageForwards | updateReadChannelDiscussionInbox | updateReadChannelDiscussionOutbox | updatePeerBlocked | updateChannelUserTyping | updatePinnedMessages | updatePinnedChannelMessages | updateChat | updateGroupCallParticipants | updateGroupCall | updatePeerHistoryTTL | updateChatParticipant | updateChannelParticipant | updateBotStopped | updateGroupCallConnection | updateBotCommands | updatePendingJoinRequests | updateBotChatInviteRequester | updateMessageReactions | updateAttachMenuBots | updateWebViewResultSent | updateBotMenuButton | updateSavedRingtones | updateTranscribedAudio | updateReadFeaturedEmojiStickers | updateUserEmojiStatus | updateRecentEmojiStatuses | updateRecentReactions | updateMoveStickerSetToTop | updateMessageExtendedMedia | updateChannelPinnedTopic | updateChannelPinnedTopics | updateUser | updateAutoSaveSettings | updateStory | updateReadStories | updateStoryID | updateStoriesStealthMode | updateSentStoryReaction | updateBotChatBoost | updateChannelViewForumAsMessages | updatePeerWallpaper | updateBotMessageReaction | updateBotMessageReactions | updateSavedDialogPinned | updatePinnedSavedDialogs | updateSavedReactionTags | updateSmsJob | updateQuickReplies | updateNewQuickReply | updateDeleteQuickReply | updateQuickReplyMessage | updateDeleteQuickReplyMessages | updateBotBusinessConnect | updateBotNewBusinessMessage | updateBotEditBusinessMessage | updateBotDeleteBusinessMessage | updateNewStoryReaction | updateBroadcastRevenueTransactions | updateStarsBalance | updateBusinessBotCallbackQuery | updateStarsRevenueStatus | updateBotPurchasedPaidMedia | updatePaidReactionPrivacy | updateSentPhoneCode;
+export type Update = updateNewMessage | updateMessageID | updateDeleteMessages | updateUserTyping | updateChatUserTyping | updateChatParticipants | updateUserStatus | updateUserName | updateNewAuthorization | updateNewEncryptedMessage | updateEncryptedChatTyping | updateEncryption | updateEncryptedMessagesRead | updateChatParticipantAdd | updateChatParticipantDelete | updateDcOptions | updateNotifySettings | updateServiceNotification | updatePrivacy | updateUserPhone | updateReadHistoryInbox | updateReadHistoryOutbox | updateWebPage | updateReadMessagesContents | updateChannelTooLong | updateChannel | updateNewChannelMessage | updateReadChannelInbox | updateDeleteChannelMessages | updateChannelMessageViews | updateChatParticipantAdmin | updateNewStickerSet | updateStickerSetsOrder | updateStickerSets | updateSavedGifs | updateBotInlineQuery | updateBotInlineSend | updateEditChannelMessage | updateBotCallbackQuery | updateEditMessage | updateInlineBotCallbackQuery | updateReadChannelOutbox | updateDraftMessage | updateReadFeaturedStickers | updateRecentStickers | updateConfig | updatePtsChanged | updateChannelWebPage | updateDialogPinned | updatePinnedDialogs | updateBotWebhookJSON | updateBotWebhookJSONQuery | updateBotShippingQuery | updateBotPrecheckoutQuery | updatePhoneCall | updateLangPackTooLong | updateLangPack | updateFavedStickers | updateChannelReadMessagesContents | updateContactsReset | updateChannelAvailableMessages | updateDialogUnreadMark | updateMessagePoll | updateChatDefaultBannedRights | updateFolderPeers | updatePeerSettings | updatePeerLocated | updateNewScheduledMessage | updateDeleteScheduledMessages | updateTheme | updateGeoLiveViewed | updateLoginToken | updateMessagePollVote | updateDialogFilter | updateDialogFilterOrder | updateDialogFilters | updatePhoneCallSignalingData | updateChannelMessageForwards | updateReadChannelDiscussionInbox | updateReadChannelDiscussionOutbox | updatePeerBlocked | updateChannelUserTyping | updatePinnedMessages | updatePinnedChannelMessages | updateChat | updateGroupCallParticipants | updateGroupCall | updatePeerHistoryTTL | updateChatParticipant | updateChannelParticipant | updateBotStopped | updateGroupCallConnection | updateBotCommands | updatePendingJoinRequests | updateBotChatInviteRequester | updateMessageReactions | updateAttachMenuBots | updateWebViewResultSent | updateBotMenuButton | updateSavedRingtones | updateTranscribedAudio | updateReadFeaturedEmojiStickers | updateUserEmojiStatus | updateRecentEmojiStatuses | updateRecentReactions | updateMoveStickerSetToTop | updateMessageExtendedMedia | updateChannelPinnedTopic | updateChannelPinnedTopics | updateUser | updateAutoSaveSettings | updateStory | updateReadStories | updateStoryID | updateStoriesStealthMode | updateSentStoryReaction | updateBotChatBoost | updateChannelViewForumAsMessages | updatePeerWallpaper | updateBotMessageReaction | updateBotMessageReactions | updateSavedDialogPinned | updatePinnedSavedDialogs | updateSavedReactionTags | updateSmsJob | updateQuickReplies | updateNewQuickReply | updateDeleteQuickReply | updateQuickReplyMessage | updateDeleteQuickReplyMessages | updateBotBusinessConnect | updateBotNewBusinessMessage | updateBotEditBusinessMessage | updateBotDeleteBusinessMessage | updateNewStoryReaction | updateBroadcastRevenueTransactions | updateStarsBalance | updateBusinessBotCallbackQuery | updateStarsRevenueStatus | updateBotPurchasedPaidMedia | updatePaidReactionPrivacy | updateSentPhoneCode | updateGroupCallChainBlocks;
 export type updates_State = updates_state;
 export type updates_Difference = updates_differenceEmpty | updates_difference | updates_differenceSlice | updates_differenceTooLong;
 export type Updates = updatesTooLong | updateShortMessage | updateShortChatMessage | updateShort | updatesCombined | updates | updateShortSentMessage;
@@ -15820,7 +16006,7 @@ export type HighScore = highScore;
 export type messages_HighScores = messages_highScores;
 export type RichText = textEmpty | textPlain | textBold | textItalic | textUnderline | textStrike | textFixed | textUrl | textEmail | textConcat | textSubscript | textSuperscript | textMarked | textPhone | textImage | textAnchor;
 export type PageBlock = pageBlockUnsupported | pageBlockTitle | pageBlockSubtitle | pageBlockAuthorDate | pageBlockHeader | pageBlockSubheader | pageBlockParagraph | pageBlockPreformatted | pageBlockFooter | pageBlockDivider | pageBlockAnchor | pageBlockList | pageBlockBlockquote | pageBlockPullquote | pageBlockPhoto | pageBlockVideo | pageBlockCover | pageBlockEmbed | pageBlockEmbedPost | pageBlockCollage | pageBlockSlideshow | pageBlockChannel | pageBlockAudio | pageBlockKicker | pageBlockTable | pageBlockOrderedList | pageBlockDetails | pageBlockRelatedArticles | pageBlockMap;
-export type PhoneCallDiscardReason = phoneCallDiscardReasonMissed | phoneCallDiscardReasonDisconnect | phoneCallDiscardReasonHangup | phoneCallDiscardReasonBusy | phoneCallDiscardReasonAllowGroupCall;
+export type PhoneCallDiscardReason = phoneCallDiscardReasonMissed | phoneCallDiscardReasonDisconnect | phoneCallDiscardReasonHangup | phoneCallDiscardReasonBusy | phoneCallDiscardReasonMigrateConferenceCall;
 export type DataJSON = dataJSON;
 export type LabeledPrice = labeledPrice;
 export type Invoice = invoice;
@@ -15852,7 +16038,7 @@ export type CdnConfig = cdnConfig;
 export type LangPackString = langPackString | langPackStringPluralized | langPackStringDeleted;
 export type LangPackDifference = langPackDifference;
 export type LangPackLanguage = langPackLanguage;
-export type ChannelAdminLogEventAction = channelAdminLogEventActionChangeTitle | channelAdminLogEventActionChangeAbout | channelAdminLogEventActionChangeUsername | channelAdminLogEventActionChangePhoto | channelAdminLogEventActionToggleInvites | channelAdminLogEventActionToggleSignatures | channelAdminLogEventActionUpdatePinned | channelAdminLogEventActionEditMessage | channelAdminLogEventActionDeleteMessage | channelAdminLogEventActionParticipantJoin | channelAdminLogEventActionParticipantLeave | channelAdminLogEventActionParticipantInvite | channelAdminLogEventActionParticipantToggleBan | channelAdminLogEventActionParticipantToggleAdmin | channelAdminLogEventActionChangeStickerSet | channelAdminLogEventActionTogglePreHistoryHidden | channelAdminLogEventActionDefaultBannedRights | channelAdminLogEventActionStopPoll | channelAdminLogEventActionChangeLinkedChat | channelAdminLogEventActionChangeLocation | channelAdminLogEventActionToggleSlowMode | channelAdminLogEventActionStartGroupCall | channelAdminLogEventActionDiscardGroupCall | channelAdminLogEventActionParticipantMute | channelAdminLogEventActionParticipantUnmute | channelAdminLogEventActionToggleGroupCallSetting | channelAdminLogEventActionParticipantJoinByInvite | channelAdminLogEventActionExportedInviteDelete | channelAdminLogEventActionExportedInviteRevoke | channelAdminLogEventActionExportedInviteEdit | channelAdminLogEventActionParticipantVolume | channelAdminLogEventActionChangeHistoryTTL | channelAdminLogEventActionParticipantJoinByRequest | channelAdminLogEventActionToggleNoForwards | channelAdminLogEventActionSendMessage | channelAdminLogEventActionChangeAvailableReactions | channelAdminLogEventActionChangeUsernames | channelAdminLogEventActionToggleForum | channelAdminLogEventActionCreateTopic | channelAdminLogEventActionEditTopic | channelAdminLogEventActionDeleteTopic | channelAdminLogEventActionPinTopic | channelAdminLogEventActionToggleAntiSpam | channelAdminLogEventActionChangePeerColor | channelAdminLogEventActionChangeProfilePeerColor | channelAdminLogEventActionChangeWallpaper | channelAdminLogEventActionChangeEmojiStatus | channelAdminLogEventActionChangeEmojiStickerSet | channelAdminLogEventActionToggleSignatureProfiles | channelAdminLogEventActionParticipantSubExtend;
+export type ChannelAdminLogEventAction = channelAdminLogEventActionChangeTitle | channelAdminLogEventActionChangeAbout | channelAdminLogEventActionChangeUsername | channelAdminLogEventActionChangePhoto | channelAdminLogEventActionToggleInvites | channelAdminLogEventActionToggleSignatures | channelAdminLogEventActionUpdatePinned | channelAdminLogEventActionEditMessage | channelAdminLogEventActionDeleteMessage | channelAdminLogEventActionParticipantJoin | channelAdminLogEventActionParticipantLeave | channelAdminLogEventActionParticipantInvite | channelAdminLogEventActionParticipantToggleBan | channelAdminLogEventActionParticipantToggleAdmin | channelAdminLogEventActionChangeStickerSet | channelAdminLogEventActionTogglePreHistoryHidden | channelAdminLogEventActionDefaultBannedRights | channelAdminLogEventActionStopPoll | channelAdminLogEventActionChangeLinkedChat | channelAdminLogEventActionChangeLocation | channelAdminLogEventActionToggleSlowMode | channelAdminLogEventActionStartGroupCall | channelAdminLogEventActionDiscardGroupCall | channelAdminLogEventActionParticipantMute | channelAdminLogEventActionParticipantUnmute | channelAdminLogEventActionToggleGroupCallSetting | channelAdminLogEventActionParticipantJoinByInvite | channelAdminLogEventActionExportedInviteDelete | channelAdminLogEventActionExportedInviteRevoke | channelAdminLogEventActionExportedInviteEdit | channelAdminLogEventActionParticipantVolume | channelAdminLogEventActionChangeHistoryTTL | channelAdminLogEventActionParticipantJoinByRequest | channelAdminLogEventActionToggleNoForwards | channelAdminLogEventActionSendMessage | channelAdminLogEventActionChangeAvailableReactions | channelAdminLogEventActionChangeUsernames | channelAdminLogEventActionToggleForum | channelAdminLogEventActionCreateTopic | channelAdminLogEventActionEditTopic | channelAdminLogEventActionDeleteTopic | channelAdminLogEventActionPinTopic | channelAdminLogEventActionToggleAntiSpam | channelAdminLogEventActionChangePeerColor | channelAdminLogEventActionChangeProfilePeerColor | channelAdminLogEventActionChangeWallpaper | channelAdminLogEventActionChangeEmojiStatus | channelAdminLogEventActionChangeEmojiStickerSet | channelAdminLogEventActionToggleSignatureProfiles | channelAdminLogEventActionParticipantSubExtend | channelAdminLogEventActionToggleAutotranslation;
 export type ChannelAdminLogEvent = channelAdminLogEvent;
 export type channels_AdminLogResults = channels_adminLogResults;
 export type ChannelAdminLogEventsFilter = channelAdminLogEventsFilter;
@@ -15967,7 +16153,7 @@ export type MessageReplies = messageReplies;
 export type PeerBlocked = peerBlocked;
 export type stats_MessageStats = stats_messageStats;
 export type GroupCall = groupCallDiscarded | groupCall;
-export type InputGroupCall = inputGroupCall;
+export type InputGroupCall = inputGroupCall | inputGroupCallSlug | inputGroupCallInviteMessage;
 export type GroupCallParticipant = groupCallParticipant;
 export type phone_GroupCall = phone_groupCall;
 export type phone_GroupParticipants = phone_groupParticipants;
@@ -16020,7 +16206,7 @@ export type account_SavedRingtones = account_savedRingtonesNotModified | account
 export type NotificationSound = notificationSoundDefault | notificationSoundNone | notificationSoundLocal | notificationSoundRingtone;
 export type account_SavedRingtone = account_savedRingtone | account_savedRingtoneConverted;
 export type AttachMenuPeerType = attachMenuPeerTypeSameBotPM | attachMenuPeerTypeBotPM | attachMenuPeerTypePM | attachMenuPeerTypeChat | attachMenuPeerTypeBroadcast;
-export type InputInvoice = inputInvoiceMessage | inputInvoiceSlug | inputInvoicePremiumGiftCode | inputInvoiceStars | inputInvoiceChatInviteSubscription | inputInvoiceStarGift | inputInvoiceStarGiftUpgrade | inputInvoiceStarGiftTransfer | inputInvoicePremiumGiftStars;
+export type InputInvoice = inputInvoiceMessage | inputInvoiceSlug | inputInvoicePremiumGiftCode | inputInvoiceStars | inputInvoiceChatInviteSubscription | inputInvoiceStarGift | inputInvoiceStarGiftUpgrade | inputInvoiceStarGiftTransfer | inputInvoicePremiumGiftStars | inputInvoiceBusinessBotTransferStars | inputInvoiceStarGiftResale;
 export type payments_ExportedInvoice = payments_exportedInvoice;
 export type messages_TranscribedAudio = messages_transcribedAudio;
 export type help_PremiumPromo = help_premiumPromo;
@@ -16200,7 +16386,7 @@ export type payments_UniqueStarGift = payments_uniqueStarGift;
 export type messages_WebPagePreview = messages_webPagePreview;
 export type SavedStarGift = savedStarGift;
 export type payments_SavedStarGifts = payments_savedStarGifts;
-export type InputSavedStarGift = inputSavedStarGiftUser | inputSavedStarGiftChat;
+export type InputSavedStarGift = inputSavedStarGiftUser | inputSavedStarGiftChat | inputSavedStarGiftSlug;
 export type payments_StarGiftWithdrawalUrl = payments_starGiftWithdrawalUrl;
 export type PaidReactionPrivacy = paidReactionPrivacyDefault | paidReactionPrivacyAnonymous | paidReactionPrivacyPeer;
 export type account_PaidMessagesRevenue = account_paidMessagesRevenue;
@@ -16209,7 +16395,12 @@ export type BusinessBotRights = businessBotRights;
 export type DisallowedGiftsSettings = disallowedGiftsSettings;
 export type SponsoredPeer = sponsoredPeer;
 export type contacts_SponsoredPeers = contacts_sponsoredPeersEmpty | contacts_sponsoredPeers;
+export type StarGiftAttributeId = starGiftAttributeIdModel | starGiftAttributeIdPattern | starGiftAttributeIdBackdrop;
+export type StarGiftAttributeCounter = starGiftAttributeCounter;
+export type payments_ResaleStarGifts = payments_resaleStarGifts;
+export type stories_CanSendStoryCount = stories_canSendStoryCount;
+export type PendingSuggestion = pendingSuggestion;
 export declare const schema: Schema;
-export declare const LAYER = 201;
+export declare const LAYER = 203;
 export {};
 //# sourceMappingURL=1_telegram_api.d.ts.map

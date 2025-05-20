@@ -52,7 +52,7 @@ async function constructChat(fullChat, getEntity) {
         return (0, _1_utilities_js_1.cleanObject)({
             ...chatP,
             photo: fullChat.chat_photo && _2_tl_js_1.Api.is("photo", fullChat.chat_photo) ? (0, _1_photo_js_1.constructPhoto)(fullChat.chat_photo) : undefined,
-            videoChatId: fullChat.call ? String(fullChat.call.id) : undefined,
+            videoChatId: _2_tl_js_1.Api.is("inputGroupCall", fullChat.call) ? String(fullChat.call.id) : undefined,
         });
     }
     else if (_2_tl_js_1.Api.is("channelFull", fullChat)) {
@@ -63,7 +63,7 @@ async function constructChat(fullChat, getEntity) {
         return (0, _1_utilities_js_1.cleanObject)({
             ...chatP,
             photo: fullChat.chat_photo && _2_tl_js_1.Api.is("photo", fullChat.chat_photo) ? (0, _1_photo_js_1.constructPhoto)(fullChat.chat_photo) : undefined,
-            videoChatId: fullChat.call ? String(fullChat.call.id) : undefined,
+            videoChatId: _2_tl_js_1.Api.is("inputGroupCall", fullChat.call) ? String(fullChat.call.id) : undefined,
         });
     }
     (0, _0_deps_js_1.unreachable)();

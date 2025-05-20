@@ -523,7 +523,7 @@ _ChatListManager_c = new WeakMap(), _ChatListManager_chats = new WeakMap(), _Cha
         fullChat = (await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "channels.getFullChannel", channel: toInputChannel(inputPeer) })).full_chat;
     }
     await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setFullChat(chatId_, fullChat);
-    if (fullChat != null && "call" in fullChat && fullChat.call) {
+    if (fullChat != null && "call" in fullChat && Api.is("inputGroupCall", fullChat.call)) {
         await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setGroupCallAccessHash(fullChat.call.id, fullChat.call.access_hash);
     }
     return fullChat;

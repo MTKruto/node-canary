@@ -119,7 +119,7 @@ class VideoChatManager {
             await __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.setGroupCall(update.call.id, update.call);
             await __classPrivateFieldGet(this, _VideoChatManager_c, "f").storage.setGroupCallAccessHash(update.call.id, update.call.access_hash);
             if (fullChat != null) {
-                if (!("call" in fullChat) || !fullChat.call || fullChat.call.id != update.call.id) {
+                if (!("call" in fullChat) || !fullChat.call || !_2_tl_js_1.Api.is("inputGroupCall", fullChat.call) || fullChat.call.id != update.call.id) {
                     fullChat.call = { ...update.call, _: "inputGroupCall" };
                     updateFullChat = true;
                 }

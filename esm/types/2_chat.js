@@ -49,7 +49,7 @@ export async function constructChat(fullChat, getEntity) {
         return cleanObject({
             ...chatP,
             photo: fullChat.chat_photo && Api.is("photo", fullChat.chat_photo) ? constructPhoto(fullChat.chat_photo) : undefined,
-            videoChatId: fullChat.call ? String(fullChat.call.id) : undefined,
+            videoChatId: Api.is("inputGroupCall", fullChat.call) ? String(fullChat.call.id) : undefined,
         });
     }
     else if (Api.is("channelFull", fullChat)) {
@@ -60,7 +60,7 @@ export async function constructChat(fullChat, getEntity) {
         return cleanObject({
             ...chatP,
             photo: fullChat.chat_photo && Api.is("photo", fullChat.chat_photo) ? constructPhoto(fullChat.chat_photo) : undefined,
-            videoChatId: fullChat.call ? String(fullChat.call.id) : undefined,
+            videoChatId: Api.is("inputGroupCall", fullChat.call) ? String(fullChat.call.id) : undefined,
         });
     }
     unreachable();

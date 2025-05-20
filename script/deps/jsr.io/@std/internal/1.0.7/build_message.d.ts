@@ -21,7 +21,7 @@ import type { DiffResult, DiffType } from "./types.js";
 export declare function createColor(diffType: DiffType, 
 /**
  * TODO(@littledivy): Remove this when we can detect true color terminals. See
- * https://github.com/denoland/deno_std/issues/2575.
+ * https://github.com/denoland/std/issues/2575.
  */
 background?: boolean): (s: string) => string;
 /**

@@ -527,7 +527,7 @@ _ChatListManager_c = new WeakMap(), _ChatListManager_chats = new WeakMap(), _Cha
         fullChat = (await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "channels.getFullChannel", channel: (0, _0_utilities_js_1.toInputChannel)(inputPeer) })).full_chat;
     }
     await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setFullChat(chatId_, fullChat);
-    if (fullChat != null && "call" in fullChat && fullChat.call) {
+    if (fullChat != null && "call" in fullChat && _2_tl_js_1.Api.is("inputGroupCall", fullChat.call)) {
         await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setGroupCallAccessHash(fullChat.call.id, fullChat.call.access_hash);
     }
     return fullChat;

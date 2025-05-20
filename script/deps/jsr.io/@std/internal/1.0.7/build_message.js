@@ -28,7 +28,7 @@ const styles_js_1 = require("./styles.js");
 function createColor(diffType, 
 /**
  * TODO(@littledivy): Remove this when we can detect true color terminals. See
- * https://github.com/denoland/deno_std/issues/2575.
+ * https://github.com/denoland/std/issues/2575.
  */
 background = false) {
     switch (diffType) {

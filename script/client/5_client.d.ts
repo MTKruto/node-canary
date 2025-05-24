@@ -1125,14 +1125,14 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      */
     addChatMembers(chatId: ID, userIds: ID[]): Promise<FailedInvitation[]>;
     /**
-     * Open a chat. User-only.
+     * Open a chat.
      *
      * @method ch
      * @param chatId The chat to open.
      */
     openChat(chatId: ID): Promise<void>;
     /**
-     * Close a chat previously opened by openChat. User-only.
+     * Close a chat previously opened by openChat.
      *
      * @method ch
      * @param chatId The chat to close.

@@ -350,7 +350,6 @@ export class UpdateManager {
         __classPrivateFieldSet(this, _UpdateManager_updateHandler, handler, "f");
     }
     async openChat(chatId) {
-        __classPrivateFieldGet(this, _UpdateManager_c, "f").storage.assertUser("openChat");
         const channel = await __classPrivateFieldGet(this, _UpdateManager_c, "f").getInputChannel(chatId);
         const channelId = channel.channel_id;
         if (__classPrivateFieldGet(this, _UpdateManager_openChats, "f").has(channelId)) {
@@ -401,7 +400,6 @@ export class UpdateManager {
         __classPrivateFieldGet(this, _UpdateManager_openChats, "f").set(channelId, { controller, promise });
     }
     async closeChat(chatId) {
-        __classPrivateFieldGet(this, _UpdateManager_c, "f").storage.assertUser("closeChat");
         const { channel_id } = await __classPrivateFieldGet(this, _UpdateManager_c, "f").getInputChannel(chatId);
         const openChat = __classPrivateFieldGet(this, _UpdateManager_openChats, "f").get(channel_id);
         if (openChat) {

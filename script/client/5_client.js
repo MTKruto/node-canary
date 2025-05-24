@@ -2466,7 +2466,7 @@ class Client extends Composer {
         return await __classPrivateFieldGet(this, _Client_chatManager, "f").addChatMembers(chatId, userIds);
     }
     /**
-     * Open a chat. User-only.
+     * Open a chat.
      *
      * @method ch
      * @param chatId The chat to open.
@@ -2475,7 +2475,7 @@ class Client extends Composer {
         await __classPrivateFieldGet(this, _Client_updateManager, "f").openChat(chatId);
     }
     /**
-     * Close a chat previously opened by openChat. User-only.
+     * Close a chat previously opened by openChat.
      *
      * @method ch
      * @param chatId The chat to close.

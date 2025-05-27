@@ -44,6 +44,7 @@ export interface ChatMemberAdministrator extends _ChatMemberBase {
 /** @unlisted */
 export interface ChatMemberMember extends _ChatMemberBase {
     status: "member";
+    untilDate?: Date;
 }
 /** @unlisted */
 export interface ChatMemberRestricted extends _ChatMemberBase {

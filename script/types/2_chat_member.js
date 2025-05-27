@@ -74,7 +74,12 @@ async function constructChatMember(participant, getEntity) {
         });
     }
     else if (_2_tl_js_1.Api.is("channelParticipantSelf", participant)) {
-        (0, _0_deps_js_1.unreachable)(); // TODO: implement
+        const untilDate = participant.subscription_until_date ? (0, _1_utilities_js_1.fromUnixTimestamp)(participant.subscription_until_date) : undefined;
+        return (0, _1_utilities_js_1.cleanObject)({
+            status: "member",
+            user,
+            untilDate,
+        });
     }
     else if (_2_tl_js_1.Api.is("channelParticipantLeft", participant)) {
         return { status: "left", user };

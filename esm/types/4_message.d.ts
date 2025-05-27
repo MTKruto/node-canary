@@ -58,10 +58,8 @@ export interface _MessageBase {
     id: number;
     /** The identifier of the message's thread. */
     threadId?: number;
-    /** The user who sent the message. */
-    from?: User;
-    /** The chat which the message was sent on behalf of. */
-    senderChat?: ChatP;
+    /** The sender of the message. */
+    from: ChatP;
     /** The point in time in which the message was sent. */
     date: Date;
     /** The chat where the message was sent to. */

@@ -39,7 +39,7 @@ function constructTopic(message) {
     }
     const id = forumTopicCreated.id;
     const date = forumTopicCreated.date;
-    const creator = forumTopicCreated.from ? constructChatP(forumTopicCreated.from) : message.senderChat;
+    const creator = forumTopicCreated.from ? forumTopicCreated.from : message.from;
     const general = forumTopicCreated.id == 1;
     const closed = false;
     const hidden = false;
@@ -60,20 +60,5 @@ function constructTopic(message) {
         name,
         color,
         customEmoijId,
-    });
-}
-function constructChatP(user) {
-    return (0, _1_utilities_js_1.cleanObject)({
-        id: user.id,
-        type: "private",
-        color: user.color,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        username: user.username,
-        also: user.also,
-        isScam: user.isScam,
-        isFake: user.isFake,
-        isSupport: user.isSupport,
-        isVerified: user.isVerified,
     });
 }

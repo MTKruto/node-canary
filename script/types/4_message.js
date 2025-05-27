@@ -114,32 +114,18 @@ function assertMessageType(message, type) {
     return message;
 }
 async function getSender(message_, getEntity) {
-    if (_2_tl_js_1.Api.is("peerUser", message_.from_id)) {
-        const entity = await getEntity(message_.from_id);
+    const peer = message_.from_id ?? message_.peer_id;
+    if (_2_tl_js_1.Api.isOneOf(["peerChannel", "peerUser"], peer)) {
+        const entity = await getEntity(peer);
         if (entity) {
-            return { from: (0, _1_user_js_1.constructUser)(entity) };
+            return { from: (0, _1_chat_p_js_1.constructChatP)(entity) };
         }
         else {
             (0, _0_deps_js_1.unreachable)();
         }
     }
-    else if (_2_tl_js_1.Api.is("peerChannel", message_.from_id)) {
-        const entity = await getEntity(message_.from_id);
-        if (entity) {
-            return { senderChat: (0, _1_chat_p_js_1.constructChatP)(entity) };
-        }
-        else {
-            (0, _0_deps_js_1.unreachable)();
-        }
-    }
-    else if (_2_tl_js_1.Api.is("peerUser", message_.peer_id)) {
-        const entity = await getEntity(message_.peer_id);
-        if (entity) {
-            return { from: (0, _1_user_js_1.constructUser)(entity) };
-        }
-        else {
-            (0, _0_deps_js_1.unreachable)();
-        }
+    else {
+        (0, _0_deps_js_1.unreachable)();
     }
 }
 async function getReply(message_, chat, getMessage) {
@@ -165,6 +151,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage, ge
         chat,
         date: (0, _1_utilities_js_1.fromUnixTimestamp)(message_.date),
         isTopicMessage: message_.reply_to && _2_tl_js_1.Api.is("messageReplyHeader", message_.reply_to) && message_.reply_to.forum_topic ? true : false,
+        ...await getSender(message_, getEntity),
     };
     if (_2_tl_js_1.Api.is("messageReplyHeader", message_.reply_to) && message_.reply_to.reply_to_msg_id) {
         message.replyToMessageId = message_.reply_to.reply_to_top_id;
@@ -173,7 +160,6 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage, ge
     if (getReply_) {
         Object.assign(message, await getReply(message_, chat, getMessage));
     }
-    Object.assign(message, await getSender(message_, getEntity));
     if (_2_tl_js_1.Api.is("messageActionChatAddUser", message_.action) || _2_tl_js_1.Api.is("messageActionChatJoinedByLink", message_.action) || _2_tl_js_1.Api.is("messageActionChatJoinedByRequest", message_.action)) {
         const newChatMembers = new Array();
         const users = "users" in message_.action ? message_.action.users : [message_.from_id && "user_id" in message_.from_id ? message_.from_id.user_id : (0, _0_deps_js_1.unreachable)()];
@@ -370,6 +356,7 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
         senderBoostCount: message_.from_boosts_applied,
         effectId: message_.effect ? String(message_.effect) : undefined,
         scheduled: message_.from_scheduled ? true : undefined,
+        ...await getSender(message_, getEntity),
     };
     if (message_.reactions) {
         const recentReactions = message_.reactions.recent_reactions ?? [];
@@ -392,7 +379,6 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
     else if (getReply_) {
         Object.assign(message, await getReply(message_, chat_, getMessage));
     }
-    Object.assign(message, await getSender(message_, getEntity));
     if (message_.reply_markup) {
         message.replyMarkup = (0, _3_reply_markup_js_1.constructReplyMarkup)(message_.reply_markup);
     }

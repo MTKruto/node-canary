@@ -48,7 +48,6 @@ interface Shortcuts<T extends UpdateIntersection> {
     msg: T["message"] extends object ? T["message"] : T["editedMessage"] extends object ? T["editedMessage"] : T["scheduledMessage"] extends object ? T["scheduledMessage"] : T["callbackQuery"] extends object ? T["callbackQuery"]["message"] : undefined;
     chat: T["callbackQuery"] extends object ? NonNullable<T["callbackQuery"]["message"]>["chat"] | undefined : Shortcuts<T>["msg"] extends object ? Shortcuts<T>["msg"]["chat"] : T["messageReactions"] extends object ? T["messageReactions"]["chat"] : T["messageReactionCount"] extends object ? T["messageReactionCount"]["chat"] : T["myChatMember"] extends object ? T["myChatMember"]["chat"] : T["chatMember"] extends object ? T["chatMember"]["chat"] : undefined;
     from: T["callbackQuery"] extends object ? T["callbackQuery"]["from"] : T["inlineQuery"] extends object ? T["inlineQuery"]["from"] : T["chosenInlineResult"] extends object ? T["chosenInlineResult"]["from"] : T["message"] extends object ? T["message"]["from"] : T["editedMessage"] extends object ? T["editedMessage"]["from"] : T["scheduledMessage"] extends object ? T["scheduledMessage"]["from"] : T["preCheckoutQuery"] extends object ? T["preCheckoutQuery"]["from"] : undefined;
-    senderChat: Shortcuts<T>["msg"] extends object ? Shortcuts<T>["msg"]["senderChat"] : undefined;
 }
 type Filter<Q extends AnyLevelX> = FilterCore<Q> & Shortcuts<FilterCore<Q>>;
 export type FilterQuery = AnyLevelX;

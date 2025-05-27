@@ -213,7 +213,7 @@ class Client extends Composer {
             const reactions = "messageInteractions" in update ? update.messageInteractions : undefined;
             const mustGetMsg = () => {
                 if (msg !== undefined) {
-                    return { chatId: msg.chat.id, messageId: msg.id, businessConnectionId: msg.businessConnectionId, senderId: (msg.from ?? msg.senderChat)?.id, userId: msg.from?.id };
+                    return { chatId: msg.chat.id, messageId: msg.id, businessConnectionId: msg.businessConnectionId, senderId: msg.from?.id, userId: msg.from?.id };
                 }
                 else if (reactions !== undefined) {
                     return { chatId: reactions.chatId, messageId: reactions.messageId };
@@ -252,7 +252,6 @@ class Client extends Composer {
             const chat_ = "messageReactions" in update ? update.messageReactions.chat : "messageReactionCount" in update ? update.messageReactionCount.chat : "chatMember" in update ? update.chatMember.chat : "joinRequest" in update ? update.joinRequest.chat : "story" in update ? update.story.chat : undefined;
             const chat = chat_ ?? msg?.chat;
             const from = "callbackQuery" in update ? update.callbackQuery.from : "inlineQuery" in update ? update.inlineQuery.from : "chatMember" in update ? update.chatMember.from : "messageReactions" in update ? update.messageReactions.user : "preCheckoutQuery" in update ? update.preCheckoutQuery.from : "joinRequest" in update ? update.joinRequest.user : "businessConnection" in update ? update.businessConnection.user : msg?.from ? msg.from : undefined;
-            const senderChat = msg?.senderChat;
             const getReplyTo = (quote, chatId, messageId) => {
                 if ("story" in update) {
                     return { chatId: update.story.chat.id, storyId: update.story.id };
@@ -269,7 +268,6 @@ class Client extends Composer {
                 msg: msg,
                 chat: chat,
                 from: from,
-                senderChat: senderChat,
                 get toJSON() {
                     return () => update;
                 },

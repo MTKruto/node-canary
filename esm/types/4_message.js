@@ -109,32 +109,18 @@ export function assertMessageType(message, type) {
     return message;
 }
 async function getSender(message_, getEntity) {
-    if (Api.is("peerUser", message_.from_id)) {
-        const entity = await getEntity(message_.from_id);
+    const peer = message_.from_id ?? message_.peer_id;
+    if (Api.isOneOf(["peerChannel", "peerUser"], peer)) {
+        const entity = await getEntity(peer);
         if (entity) {
-            return { from: constructUser(entity) };
+            return { from: constructChatP(entity) };
         }
         else {
             unreachable();
         }
     }
-    else if (Api.is("peerChannel", message_.from_id)) {
-        const entity = await getEntity(message_.from_id);
-        if (entity) {
-            return { senderChat: constructChatP(entity) };
-        }
-        else {
-            unreachable();
-        }
-    }
-    else if (Api.is("peerUser", message_.peer_id)) {
-        const entity = await getEntity(message_.peer_id);
-        if (entity) {
-            return { from: constructUser(entity) };
-        }
-        else {
-            unreachable();
-        }
+    else {
+        unreachable();
     }
 }
 async function getReply(message_, chat, getMessage) {
@@ -160,6 +146,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage, ge
         chat,
         date: fromUnixTimestamp(message_.date),
         isTopicMessage: message_.reply_to && Api.is("messageReplyHeader", message_.reply_to) && message_.reply_to.forum_topic ? true : false,
+        ...await getSender(message_, getEntity),
     };
     if (Api.is("messageReplyHeader", message_.reply_to) && message_.reply_to.reply_to_msg_id) {
         message.replyToMessageId = message_.reply_to.reply_to_top_id;
@@ -168,7 +155,6 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage, ge
     if (getReply_) {
         Object.assign(message, await getReply(message_, chat, getMessage));
     }
-    Object.assign(message, await getSender(message_, getEntity));
     if (Api.is("messageActionChatAddUser", message_.action) || Api.is("messageActionChatJoinedByLink", message_.action) || Api.is("messageActionChatJoinedByRequest", message_.action)) {
         const newChatMembers = new Array();
         const users = "users" in message_.action ? message_.action.users : [message_.from_id && "user_id" in message_.from_id ? message_.from_id.user_id : unreachable()];
@@ -365,6 +351,7 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
         senderBoostCount: message_.from_boosts_applied,
         effectId: message_.effect ? String(message_.effect) : undefined,
         scheduled: message_.from_scheduled ? true : undefined,
+        ...await getSender(message_, getEntity),
     };
     if (message_.reactions) {
         const recentReactions = message_.reactions.recent_reactions ?? [];
@@ -387,7 +374,6 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
     else if (getReply_) {
         Object.assign(message, await getReply(message_, chat_, getMessage));
     }
-    Object.assign(message, await getSender(message_, getEntity));
     if (message_.reply_markup) {
         message.replyMarkup = constructReplyMarkup(message_.reply_markup);
     }

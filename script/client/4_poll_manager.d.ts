@@ -25,7 +25,7 @@ import { MessageManager } from "./3_message_manager.js";
 type C = C_ & {
     messageManager: MessageManager;
 };
-declare const pollManagerUpdates: readonly ["updateMessagePoll"];
+declare const pollManagerUpdates: readonly ["updateMessagePoll", "updateMessagePollVote"];
 type PollManagerUpdate = Api.Types[(typeof pollManagerUpdates)[number]];
 export declare class PollManager implements UpdateProcessor<PollManagerUpdate> {
     #private;

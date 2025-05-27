@@ -32,9 +32,10 @@ var _PollManager_instances, _PollManager_c, _PollManager_voteInner;
 import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { Api } from "../2_tl.js";
-import { constructPoll } from "../3_types.js";
+import { constructPoll, constructPollAnswer } from "../3_types.js";
 const pollManagerUpdates = [
     "updateMessagePoll",
+    "updateMessagePollVote",
 ];
 export class PollManager {
     constructor(c) {
@@ -57,21 +58,27 @@ export class PollManager {
         return Api.isOneOf(pollManagerUpdates, update);
     }
     async handleUpdate(update) {
-        await __classPrivateFieldGet(this, _PollManager_c, "f").storage.setPollResults(update.poll_id, update.results);
-        let poll = null;
-        if (update.poll) {
-            poll = update.poll;
-            await __classPrivateFieldGet(this, _PollManager_c, "f").storage.setPoll(poll.id, poll);
+        if (Api.is("updateMessagePoll", update)) {
+            await __classPrivateFieldGet(this, _PollManager_c, "f").storage.setPollResults(update.poll_id, update.results);
+            let poll = null;
+            if (update.poll) {
+                poll = update.poll;
+                await __classPrivateFieldGet(this, _PollManager_c, "f").storage.setPoll(poll.id, poll);
+            }
+            else {
+                poll = await __classPrivateFieldGet(this, _PollManager_c, "f").storage.getPoll(update.poll_id);
+            }
+            if (poll) {
+                const messageMediaPoll = { _: "messageMediaPoll", poll, results: update.results };
+                return { poll: constructPoll(messageMediaPoll) };
+            }
+            else {
+                return null;
+            }
         }
         else {
-            poll = await __classPrivateFieldGet(this, _PollManager_c, "f").storage.getPoll(update.poll_id);
-        }
-        if (poll) {
-            const messageMediaPoll = { _: "messageMediaPoll", poll, results: update.results };
-            return { poll: constructPoll(messageMediaPoll) };
-        }
-        else {
-            return null;
+            const pollAnswer = await constructPollAnswer(update, __classPrivateFieldGet(this, _PollManager_c, "f").getEntity);
+            return { pollAnswer };
         }
     }
 }

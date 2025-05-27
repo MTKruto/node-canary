@@ -103,6 +103,7 @@ export * from "./types/2_invite_link.js";
 export * from "./types/2_message_interactions.js";
 export * from "./types/2_message_reaction_count.js";
 export * from "./types/2_message_reactions.js";
+export * from "./types/2_poll_answer.js";
 export * from "./types/2_poll.js";
 export * from "./types/2_pre_checkout_query.js";
 export * from "./types/2_reply_to.js";

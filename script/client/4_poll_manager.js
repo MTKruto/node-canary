@@ -38,6 +38,7 @@ const _2_tl_js_1 = require("../2_tl.js");
 const _3_types_js_1 = require("../3_types.js");
 const pollManagerUpdates = [
     "updateMessagePoll",
+    "updateMessagePollVote",
 ];
 class PollManager {
     constructor(c) {
@@ -60,21 +61,27 @@ class PollManager {
         return _2_tl_js_1.Api.isOneOf(pollManagerUpdates, update);
     }
     async handleUpdate(update) {
-        await __classPrivateFieldGet(this, _PollManager_c, "f").storage.setPollResults(update.poll_id, update.results);
-        let poll = null;
-        if (update.poll) {
-            poll = update.poll;
-            await __classPrivateFieldGet(this, _PollManager_c, "f").storage.setPoll(poll.id, poll);
+        if (_2_tl_js_1.Api.is("updateMessagePoll", update)) {
+            await __classPrivateFieldGet(this, _PollManager_c, "f").storage.setPollResults(update.poll_id, update.results);
+            let poll = null;
+            if (update.poll) {
+                poll = update.poll;
+                await __classPrivateFieldGet(this, _PollManager_c, "f").storage.setPoll(poll.id, poll);
+            }
+            else {
+                poll = await __classPrivateFieldGet(this, _PollManager_c, "f").storage.getPoll(update.poll_id);
+            }
+            if (poll) {
+                const messageMediaPoll = { _: "messageMediaPoll", poll, results: update.results };
+                return { poll: (0, _3_types_js_1.constructPoll)(messageMediaPoll) };
+            }
+            else {
+                return null;
+            }
         }
         else {
-            poll = await __classPrivateFieldGet(this, _PollManager_c, "f").storage.getPoll(update.poll_id);
-        }
-        if (poll) {
-            const messageMediaPoll = { _: "messageMediaPoll", poll, results: update.results };
-            return { poll: (0, _3_types_js_1.constructPoll)(messageMediaPoll) };
-        }
-        else {
-            return null;
+            const pollAnswer = await (0, _3_types_js_1.constructPollAnswer)(update, __classPrivateFieldGet(this, _PollManager_c, "f").getEntity);
+            return { pollAnswer };
         }
     }
 }

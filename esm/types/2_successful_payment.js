@@ -17,13 +17,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { cleanObject } from "../1_utilities.js";
+import { cleanObject, decodeText } from "../1_utilities.js";
 import { constructOrderInfo } from "./1_order_info.js";
 export function constructSuccessfulPayment(action) {
     return cleanObject({
         currency: action.currency,
         totalAmount: Number(action.total_amount),
-        invoicePayload: new TextDecoder().decode(action.payload),
+        invoicePayload: decodeText(action.payload),
         telegramPaymentChargeId: action.charge.id,
         providerPaymentChargeId: action.charge.provider_charge_id,
         shippingOptionId: action.shipping_option_id,

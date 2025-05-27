@@ -24,7 +24,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _TLReader_instances, _TLReader_deserializeEnum, _TLReader_deserializeType, _TLReader_deserializeVector, _TLReader_deserializePrimitive;
-import { bigIntFromBuffer } from "../1_utilities.js";
+import { bigIntFromBuffer, decodeText } from "../1_utilities.js";
 import { analyzeOptionalParam, BOOL_FALSE, BOOL_TRUE, getOptionalParamInnerType, getVectorItemType, isOptionalParam, VECTOR, X } from "./0_utilities.js";
 export class TLError extends Error {
 }
@@ -101,7 +101,7 @@ export class TLReader {
         return bytes;
     }
     readString() {
-        return new TextDecoder().decode(this.readBytes());
+        return decodeText(this.readBytes());
     }
     async readType(name, schema) {
         if (isOptionalParam(name)) {

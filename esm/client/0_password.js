@@ -19,7 +19,7 @@
  */
 import * as dntShim from "../_dnt.shims.js";
 import { concat } from "../0_deps.js";
-import { bigIntFromBuffer, bufferFromBigInt, getRandomBigInt, mod, modExp, sha256 } from "../1_utilities.js";
+import { bigIntFromBuffer, bufferFromBigInt, encodeText, getRandomBigInt, mod, modExp, sha256 } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 export function isSafePrime(primeBytes, g) {
     // deno-fmt-ignore
@@ -88,7 +88,7 @@ export function pad(bigint) {
     }
 }
 export async function checkPassword(password_, ap) {
-    const password = new TextEncoder().encode(password_);
+    const password = encodeText(password_);
     const algo = ap.current_algo;
     if (!(Api.is("passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow", algo))) {
         throw new Error("Unexpected algorithm");

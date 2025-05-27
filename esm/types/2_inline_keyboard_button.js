@@ -19,7 +19,7 @@
  */
 import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
-import { cleanObject } from "../1_utilities.js";
+import { cleanObject, decodeText, encodeText } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { constructMiniAppInfo } from "./0_mini_app_info.js";
 export function constructInlineKeyboardButton(button_) {
@@ -27,7 +27,7 @@ export function constructInlineKeyboardButton(button_) {
         return { text: button_.text, url: button_.url };
     }
     else if (Api.is("keyboardButtonCallback", button_)) {
-        return { text: button_.text, callbackData: new TextDecoder().decode(button_.data) };
+        return { text: button_.text, callbackData: decodeText(button_.data) };
     }
     else if (Api.is("keyboardButtonWebView", button_) || Api.is("keyboardButtonSimpleWebView", button_)) {
         return { text: button_.text, miniApp: constructMiniAppInfo(button_.url) };
@@ -71,7 +71,7 @@ export async function inlineKeyboardButtonToTlObject(button, usernameResolver) {
         return { _: "keyboardButtonUrl", text: button.text, url: button.url };
     }
     else if ("callbackData" in button) {
-        return { _: "keyboardButtonCallback", text: button.text, data: new TextEncoder().encode(button.callbackData) };
+        return { _: "keyboardButtonCallback", text: button.text, data: encodeText(button.callbackData) };
     }
     else if ("miniApp" in button) {
         return { _: "keyboardButtonWebView", text: button.text, url: button.miniApp.url };

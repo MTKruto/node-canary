@@ -27,8 +27,7 @@ exports.parseMarkdown = parseMarkdown;
 const _0_deps_js_1 = require("../0_deps.js");
 const _3_types_js_1 = require("../3_types.js");
 const _0_errors_js_1 = require("../0_errors.js");
-const enc = new TextEncoder();
-const dec = new TextDecoder();
+const _1_utilities_js_1 = require("../1_utilities.js");
 exports.CODEPOINTS = {
     "\t": 9,
     "\r": 13,
@@ -104,7 +103,7 @@ function getLinkCustomEmojiId(url_) {
     }
 }
 function parseMarkdown(text_) {
-    const text = enc.encode(text_);
+    const text = (0, _1_utilities_js_1.encodeText)(text_);
     let resultSize = 0;
     let entities = [];
     let utf16Offset = 0;
@@ -117,7 +116,7 @@ function parseMarkdown(text_) {
             text[resultSize++] = text[i];
             continue;
         }
-        let reservedCharacters = enc.encode("_*[]()~`>#+-=|{}.!");
+        let reservedCharacters = (0, _1_utilities_js_1.encodeText)("_*[]()~`>#+-=|{}.!");
         if (nestedEntities.length !== 0) {
             switch (nestedEntities[nestedEntities.length - 1].type) {
                 case "code":
@@ -276,9 +275,9 @@ function parseMarkdown(text_) {
                             throw new Error(`Can't find the end of the URL that starts at offset ${urlBeginPos}.`);
                         }
                     }
-                    userId = getLinkUserId(dec.decode(url));
+                    userId = getLinkUserId((0, _1_utilities_js_1.decodeText)(url));
                     if (!userId) {
-                        const url_ = getUrl(dec.decode(url));
+                        const url_ = getUrl((0, _1_utilities_js_1.decodeText)(url));
                         if (!url_) {
                             skipEntity = true;
                         }
@@ -307,7 +306,7 @@ function parseMarkdown(text_) {
                     if (text[i] !== exports.CODEPOINTS[")"]) {
                         throw new _0_errors_js_1.InputError(`Can't find the end of the custom emoji URL that starts at offset ${urlBeginPos}.`);
                     }
-                    customEmojiId = getLinkCustomEmojiId(dec.decode(url));
+                    customEmojiId = getLinkCustomEmojiId((0, _1_utilities_js_1.decodeText)(url));
                     break;
                 }
                 default:
@@ -323,10 +322,10 @@ function parseMarkdown(text_) {
                     entities.push({ type: "customEmoji", offset: entityOffset, length: entityLength, customEmojiId });
                 }
                 else if (type == "textLink") {
-                    entities.push({ type, offset: entityOffset, length: entityLength, url: typeof argument === "string" ? argument : dec.decode(argument) });
+                    entities.push({ type, offset: entityOffset, length: entityLength, url: typeof argument === "string" ? argument : (0, _1_utilities_js_1.decodeText)(argument) });
                 }
                 else if (type == "pre") {
-                    entities.push({ type, offset: entityOffset, length: entityLength, language: typeof argument === "string" ? argument : dec.decode(argument) });
+                    entities.push({ type, offset: entityOffset, length: entityLength, language: typeof argument === "string" ? argument : (0, _1_utilities_js_1.decodeText)(argument) });
                 }
                 else if (type != "customEmoji") {
                     entities.push({ type, offset: entityOffset, length: entityLength });
@@ -340,5 +339,5 @@ function parseMarkdown(text_) {
         throw new _0_errors_js_1.InputError(`Can't find the end of the ${last.type} entity that starts at offset ${last.entityByteOffset}.`);
     }
     entities = (0, _3_types_js_1.sortMessageEntities)(entities);
-    return [dec.decode(text.slice(0, resultSize)), entities];
+    return [(0, _1_utilities_js_1.decodeText)(text.slice(0, resultSize)), entities];
 }

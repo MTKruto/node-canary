@@ -28,6 +28,7 @@ import { concat } from "../0_deps.js";
 import { TLError } from "./0_tl_error.js";
 import { analyzeOptionalParam, BOOL_FALSE, BOOL_TRUE, getOptionalParamInnerType, getVectorItemType, isOptionalParam, repr, VECTOR } from "./0_utilities.js";
 import { bufferFromBigInt } from "../utilities/0_buffer.js";
+import { encodeText } from "../1_utilities.js";
 export class TLWriter {
     constructor() {
         _TLWriter_instances.add(this);
@@ -90,7 +91,7 @@ export class TLWriter {
         return this;
     }
     writeString(string) {
-        this.writeBytes(new TextEncoder().encode(string));
+        this.writeBytes(encodeText(string));
         return this;
     }
     writeObject(value, schema) {

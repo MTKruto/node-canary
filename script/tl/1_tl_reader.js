@@ -105,7 +105,7 @@ class TLReader {
         return bytes;
     }
     readString() {
-        return new TextDecoder().decode(this.readBytes());
+        return (0, _1_utilities_js_1.decodeText)(this.readBytes());
     }
     async readType(name, schema) {
         if ((0, _0_utilities_js_1.isOptionalParam)(name)) {

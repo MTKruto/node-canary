@@ -31,7 +31,7 @@ function constructInlineKeyboardButton(button_) {
         return { text: button_.text, url: button_.url };
     }
     else if (_2_tl_js_1.Api.is("keyboardButtonCallback", button_)) {
-        return { text: button_.text, callbackData: new TextDecoder().decode(button_.data) };
+        return { text: button_.text, callbackData: (0, _1_utilities_js_1.decodeText)(button_.data) };
     }
     else if (_2_tl_js_1.Api.is("keyboardButtonWebView", button_) || _2_tl_js_1.Api.is("keyboardButtonSimpleWebView", button_)) {
         return { text: button_.text, miniApp: (0, _0_mini_app_info_js_1.constructMiniAppInfo)(button_.url) };
@@ -75,7 +75,7 @@ async function inlineKeyboardButtonToTlObject(button, usernameResolver) {
         return { _: "keyboardButtonUrl", text: button.text, url: button.url };
     }
     else if ("callbackData" in button) {
-        return { _: "keyboardButtonCallback", text: button.text, data: new TextEncoder().encode(button.callbackData) };
+        return { _: "keyboardButtonCallback", text: button.text, data: (0, _1_utilities_js_1.encodeText)(button.callbackData) };
     }
     else if ("miniApp" in button) {
         return { _: "keyboardButtonWebView", text: button.text, url: button.miniApp.url };

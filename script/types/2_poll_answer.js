@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.constructPollAnswer = constructPollAnswer;
 const _0_deps_js_1 = require("../0_deps.js");
+const _1_utilities_js_1 = require("../1_utilities.js");
 const _1_chat_p_js_1 = require("./1_chat_p.js");
 async function constructPollAnswer(update, getEntity) {
     const pollId = String(update.poll_id);
@@ -10,7 +11,7 @@ async function constructPollAnswer(update, getEntity) {
         (0, _0_deps_js_1.unreachable)();
     }
     const from = (0, _1_chat_p_js_1.constructChatP)(entity);
-    const optionIndexes = update.options.map((v) => v[0]);
+    const optionIndexes = update.options.map((v) => Number((0, _1_utilities_js_1.decodeText)(v)));
     return {
         pollId,
         from,

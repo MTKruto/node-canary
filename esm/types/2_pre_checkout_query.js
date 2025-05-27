@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { cleanObject } from "../1_utilities.js";
+import { cleanObject, decodeText } from "../1_utilities.js";
 import { constructOrderInfo } from "./1_order_info.js";
 import { constructUser } from "./1_user.js";
 export async function constructPreCheckoutQuery(query, getEntity) {
@@ -32,7 +32,7 @@ export async function constructPreCheckoutQuery(query, getEntity) {
         from,
         currency: query.currency,
         totalAmount: Number(query.total_amount),
-        invoicePayload: new TextDecoder().decode(query.payload),
+        invoicePayload: decodeText(query.payload),
         shippingOptionId: query.shipping_option_id,
         orderInfo: query.info ? constructOrderInfo(query.info) : undefined,
     });

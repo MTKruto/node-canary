@@ -28,7 +28,8 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _CallbackQueryManager_instances, _a, _CallbackQueryManager_c, _CallbackQueryManager_enc, _CallbackQueryManager_isExpired, _CallbackQueryManager_getPasswordCheck;
+var _CallbackQueryManager_instances, _a, _CallbackQueryManager_c, _CallbackQueryManager_isExpired, _CallbackQueryManager_getPasswordCheck;
+import { encodeText } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { constructCallbackQuery, constructCallbackQueryAnswer, validateCallbackQueryQuestion } from "../3_types.js";
 import { checkPassword } from "./0_password.js";
@@ -57,7 +58,7 @@ export class CallbackQueryManager {
         if (maybeAnswer != null && !__classPrivateFieldGet(_a, _a, "m", _CallbackQueryManager_isExpired).call(_a, maybeAnswer[1], maybeAnswer[0].cache_time)) {
             return constructCallbackQueryAnswer(maybeAnswer[0]);
         }
-        const answer = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").invoke({ _: "messages.getBotCallbackAnswer", peer, msg_id: messageId, data: "data" in question ? __classPrivateFieldGet(_a, _a, "f", _CallbackQueryManager_enc).encode(question.data) : undefined, game: question.type == "game" ? true : undefined, password: question.type == "password" ? await __classPrivateFieldGet(this, _CallbackQueryManager_instances, "m", _CallbackQueryManager_getPasswordCheck).call(this, question.password) : undefined });
+        const answer = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").invoke({ _: "messages.getBotCallbackAnswer", peer, msg_id: messageId, data: "data" in question ? encodeText(question.data) : undefined, game: question.type == "game" ? true : undefined, password: question.type == "password" ? await __classPrivateFieldGet(this, _CallbackQueryManager_instances, "m", _CallbackQueryManager_getPasswordCheck).call(this, question.password) : undefined });
         if (answer.cache_time >= 0) {
             await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").messageStorage.setCallbackQueryAnswer(peerId, messageId, questionKey, answer);
         }
@@ -76,4 +77,3 @@ _a = CallbackQueryManager, _CallbackQueryManager_c = new WeakMap(), _CallbackQue
     const ap = await __classPrivateFieldGet(this, _CallbackQueryManager_c, "f").invoke({ _: "account.getPassword" });
     return await checkPassword(password, ap);
 };
-_CallbackQueryManager_enc = { value: new TextEncoder() };

@@ -35,7 +35,7 @@ async function constructPreCheckoutQuery(query, getEntity) {
         from,
         currency: query.currency,
         totalAmount: Number(query.total_amount),
-        invoicePayload: new TextDecoder().decode(query.payload),
+        invoicePayload: (0, _1_utilities_js_1.decodeText)(query.payload),
         shippingOptionId: query.shipping_option_id,
         orderInfo: query.info ? (0, _1_order_info_js_1.constructOrderInfo)(query.info) : undefined,
     });

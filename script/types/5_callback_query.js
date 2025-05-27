@@ -48,7 +48,7 @@ async function constructCallbackQuery(callbackQuery, getEntity, getMessage) {
     const user = (0, _1_user_js_1.constructUser)(user_);
     const id = String(callbackQuery.query_id);
     const gameShortName = callbackQuery.game_short_name;
-    const data = callbackQuery.data !== undefined ? new TextDecoder().decode(callbackQuery.data) : undefined;
+    const data = callbackQuery.data !== undefined ? (0, _1_utilities_js_1.decodeText)(callbackQuery.data) : undefined;
     const chatInstance = callbackQuery.chat_instance == 0n ? "" : String(callbackQuery.chat_instance);
     if (_2_tl_js_1.Api.is("updateBotCallbackQuery", callbackQuery)) {
         const message = await getMessage(_2_tl_js_1.Api.peerToChatId(callbackQuery.peer), Number(callbackQuery.msg_id));

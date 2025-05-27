@@ -26,7 +26,7 @@ function constructSuccessfulPayment(action) {
     return (0, _1_utilities_js_1.cleanObject)({
         currency: action.currency,
         totalAmount: Number(action.total_amount),
-        invoicePayload: new TextDecoder().decode(action.payload),
+        invoicePayload: (0, _1_utilities_js_1.decodeText)(action.payload),
         telegramPaymentChargeId: action.charge.id,
         providerPaymentChargeId: action.charge.provider_charge_id,
         shippingOptionId: action.shipping_option_id,

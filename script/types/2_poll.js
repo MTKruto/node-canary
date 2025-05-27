@@ -26,7 +26,7 @@ const _1_poll_option_js_1 = require("./1_poll_option.js");
 function constructPoll(media_) {
     const poll = media_.poll;
     const correctOption = media_.results.results?.find((v) => v.correct)?.option;
-    const correctOptionId = correctOption !== undefined ? poll.answers.findIndex((v) => v.option.every((v, i) => correctOption[i] == v)) : undefined;
+    const correctOptionIndex = correctOption !== undefined ? poll.answers.findIndex((v) => v.option.every((v, i) => correctOption[i] == v)) : undefined;
     return (0, _1_utilities_js_1.cleanObject)({
         id: String(poll.id),
         question: poll.question.text,
@@ -37,7 +37,7 @@ function constructPoll(media_) {
         isAnonymous: !poll.public_voters,
         type: poll.quiz ? "quiz" : "regular",
         allowMultipleAnswers: poll.quiz ? undefined : poll.multiple_choice || false,
-        correctOptionId,
+        correctOptionIndex,
         explanation: media_.results.solution,
         explanationEntities: media_.results.solution_entities?.map(_0_message_entity_js_1.constructMessageEntity).filter((v) => v != null),
         openPeriod: poll.close_period,

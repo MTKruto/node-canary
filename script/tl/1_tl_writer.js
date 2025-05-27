@@ -31,6 +31,7 @@ const _0_deps_js_1 = require("../0_deps.js");
 const _0_tl_error_js_1 = require("./0_tl_error.js");
 const _0_utilities_js_1 = require("./0_utilities.js");
 const _0_buffer_js_1 = require("../utilities/0_buffer.js");
+const _1_utilities_js_1 = require("../1_utilities.js");
 class TLWriter {
     constructor() {
         _TLWriter_instances.add(this);
@@ -93,7 +94,7 @@ class TLWriter {
         return this;
     }
     writeString(string) {
-        this.writeBytes(new TextEncoder().encode(string));
+        this.writeBytes((0, _1_utilities_js_1.encodeText)(string));
         return this;
     }
     writeObject(value, schema) {

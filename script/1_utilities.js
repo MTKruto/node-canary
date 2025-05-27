@@ -44,6 +44,7 @@ __exportStar(require("./utilities/0_mutex.js"), exports);
 __exportStar(require("./utilities/0_object.js"), exports);
 __exportStar(require("./utilities/0_part_stream.js"), exports);
 __exportStar(require("./utilities/0_rle.js"), exports);
+__exportStar(require("./utilities/0_text.js"), exports);
 __exportStar(require("./utilities/0_types.js"), exports);
 __exportStar(require("./utilities/0_units.js"), exports);
 __exportStar(require("./utilities/1_auth.js"), exports);

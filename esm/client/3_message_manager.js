@@ -31,7 +31,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _MessageManager_instances, _a, _MessageManager_c, _MessageManager_LresolveFileId, _MessageManager_checkParams, _MessageManager_constructReplyMarkup, _MessageManager_resolveSendAs, _MessageManager_constructReplyTo, _MessageManager_sendDocumentInner, _MessageManager_sendMedia, _MessageManager_CAPTIONABLE_MESSAGE_TYPES, _MessageManager_editInlineMessageTextInner, _MessageManager_resolveInputMediaInner, _MessageManager_resolveInputMedia, _MessageManager_sendReaction, _MessageManager_getCachedVoiceTranscription, _MessageManager_cacheVoiceTranscription;
 import { contentType, unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
-import { getLogger, getRandomId, toUnixTimestamp } from "../1_utilities.js";
+import { encodeText, getLogger, getRandomId, toUnixTimestamp } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { getDc } from "../3_transport.js";
 import { constructVoiceTranscription, deserializeFileId, isMessageType, selfDestructOptionToInt } from "../3_types.js";
@@ -568,11 +568,11 @@ export class MessageManager {
             const text = typeof v === "string" ? v : v.text;
             const entities = typeof v === "string" ? [] : v.entities;
             const parseResult = await this.parseText(text, { parseMode: params?.optionParseMode, entities: entities });
-            return ({ _: "pollAnswer", option: new Uint8Array([i]), text: { _: "textWithEntities", text: parseResult[0], entities: parseResult[1] ?? [] } });
+            return ({ _: "pollAnswer", option: encodeText(String(i)), text: { _: "textWithEntities", text: parseResult[0], entities: parseResult[1] ?? [] } });
         }));
         const questionParseResult = await this.parseText(question, { parseMode: params?.questionParseMode, entities: params?.questionEntities });
         const poll = { _: "poll", id: getRandomId(), answers, question: { _: "textWithEntities", text: questionParseResult[0], entities: questionParseResult[1] ?? [] }, closed: params?.isClosed ? true : undefined, close_date: params?.closeDate ? toUnixTimestamp(params.closeDate) : undefined, close_period: params?.openPeriod ? params.openPeriod : undefined, multiple_choice: params?.allowMultipleAnswers ? true : undefined, public_voters: params?.isAnonymous === false ? true : undefined, quiz: params?.type == "quiz" ? true : undefined };
-        const media = { _: "inputMediaPoll", poll, correct_answers: params?.correctOptionIndex ? [new Uint8Array([params.correctOptionIndex])] : undefined, solution, solution_entities: solutionEntities };
+        const media = { _: "inputMediaPoll", poll, correct_answers: params?.correctOptionIndex !== undefined ? [encodeText(String(params.correctOptionIndex))] : undefined, solution, solution_entities: solutionEntities };
         const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({
             _: "messages.sendMedia",
             peer,
@@ -1036,7 +1036,7 @@ export class MessageManager {
             description,
             invoice,
             start_param: params?.startParameter,
-            payload: new TextEncoder().encode(payload),
+            payload: encodeText(payload),
             provider_data: { _: "dataJSON", data: params?.providerData ?? "null" },
             provider: params?.providerToken ?? "",
             photo: params?.photoUrl

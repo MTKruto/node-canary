@@ -251,7 +251,7 @@ class Client extends Composer {
             };
             const chat_ = "messageReactions" in update ? update.messageReactions.chat : "messageReactionCount" in update ? update.messageReactionCount.chat : "chatMember" in update ? update.chatMember.chat : "myChatMember" in update ? update.myChatMember.chat : "joinRequest" in update ? update.joinRequest.chat : "story" in update ? update.story.chat : undefined;
             const chat = chat_ ?? msg?.chat;
-            const from = "callbackQuery" in update ? update.callbackQuery.from : "inlineQuery" in update ? update.inlineQuery.from : "chatMember" in update ? update.chatMember.from : "messageReactions" in update ? update.messageReactions.user : "preCheckoutQuery" in update ? update.preCheckoutQuery.from : "joinRequest" in update ? update.joinRequest.from : "businessConnection" in update ? update.businessConnection.user : msg?.from ? msg.from : undefined;
+            const from = "callbackQuery" in update ? update.callbackQuery.from : "inlineQuery" in update ? update.inlineQuery.from : "chatMember" in update ? update.chatMember.from : "myChatMember" in update ? update.myChatMember.from : "messageReactions" in update ? update.messageReactions.user : "preCheckoutQuery" in update ? update.preCheckoutQuery.from : "joinRequest" in update ? update.joinRequest.from : "businessConnection" in update ? update.businessConnection.user : msg?.from ? msg.from : undefined;
             const getReplyTo = (quote, chatId, messageId) => {
                 if ("story" in update) {
                     return { chatId: update.story.chat.id, storyId: update.story.id };

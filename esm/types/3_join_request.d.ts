@@ -27,7 +27,7 @@ export interface JoinRequest {
     /** The chat that the user requested to join. */
     chat: ChatP;
     /** The user who made the join request. */
-    user: User;
+    from: User;
     /** The point in time in which the join request was made. */
     date: Date;
     /** The bio of the user who made the join request. */

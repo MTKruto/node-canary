@@ -33,11 +33,11 @@ export async function constructJoinRequest(update, getEntity) {
     if (!user_) {
         unreachable();
     }
-    const user = constructUser(user_);
+    const from = constructUser(user_);
     const inviteLink = update.invite && Api.is("chatInviteExported", update.invite) ? await constructInviteLink(update.invite, getEntity) : undefined;
     return cleanObject({
         chat,
-        user,
+        from,
         date: fromUnixTimestamp(update.date),
         bio: update.about,
         inviteLink,

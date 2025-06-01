@@ -1,10 +1,10 @@
 // Copyright 2018-2025 the Deno authors. MIT license.
 // This module is browser compatible.
 import { equal } from "./equal.js";
-import { buildMessage } from "../../internal/1.0.7/build_message.js";
-import { diff } from "../../internal/1.0.7/diff.js";
-import { diffStr } from "../../internal/1.0.7/diff_str.js";
-import { format } from "../../internal/1.0.7/format.js";
+import { buildMessage } from "../../internal/1.0.8/build_message.js";
+import { diff } from "../../internal/1.0.8/diff.js";
+import { diffStr } from "../../internal/1.0.8/diff_str.js";
+import { format } from "../../internal/1.0.8/format.js";
 import { AssertionError } from "./assertion_error.js";
 /**
  * Make an assertion that `actual` and `expected` are equal, deeply. If not

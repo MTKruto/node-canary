@@ -3294,101 +3294,71 @@ _Client_handleCtxUpdate = async function _Client_handleCtxUpdate(update) {
         }
     }
     if (__classPrivateFieldGet(this, _Client_messageManager, "f").canHandleUpdate(update)) {
-        promises.push(async () => {
-            const ctxUpdate = await __classPrivateFieldGet(this, _Client_messageManager, "f").handleUpdate(update);
-            if (!ctxUpdate) {
-                return;
-            }
-            try {
-                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, ctxUpdate);
-            }
-            finally {
-                if ("deletedMessages" in ctxUpdate) {
-                    for (const { chatId, messageId } of ctxUpdate.deletedMessages) {
-                        await this.messageStorage.setMessage(chatId, messageId, null);
-                        await __classPrivateFieldGet(this, _Client_chatListManager, "f").reassignChatLastMessage(chatId);
-                    }
-                }
-            }
-        });
+        promises.push(() => __classPrivateFieldGet(this, _Client_messageManager, "f").handleUpdate(update));
     }
     if (__classPrivateFieldGet(this, _Client_chatManager, "f").canHandleUpdate(update)) {
-        promises.push(async () => {
-            const ctxUpdate = await __classPrivateFieldGet(this, _Client_chatManager, "f").handleUpdate(update);
-            if (ctxUpdate) {
-                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, ctxUpdate);
-            }
-        });
+        promises.push(() => __classPrivateFieldGet(this, _Client_chatManager, "f").handleUpdate(update));
     }
     if (__classPrivateFieldGet(this, _Client_pollManager, "f").canHandleUpdate(update)) {
-        promises.push(async () => {
-            const ctxUpdate = await __classPrivateFieldGet(this, _Client_pollManager, "f").handleUpdate(update);
-            if (ctxUpdate) {
-                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, ctxUpdate);
-            }
-        });
+        promises.push(() => __classPrivateFieldGet(this, _Client_pollManager, "f").handleUpdate(update));
     }
     if (__classPrivateFieldGet(this, _Client_videoChatManager, "f").canHandleUpdate(update)) {
-        promises.push(async () => {
-            const ctxUpdate = await __classPrivateFieldGet(this, _Client_videoChatManager, "f").handleUpdate(update);
-            if (ctxUpdate) {
-                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, ctxUpdate);
-            }
-        });
+        promises.push(() => __classPrivateFieldGet(this, _Client_videoChatManager, "f").handleUpdate(update));
     }
     if (__classPrivateFieldGet(this, _Client_callbackQueryManager, "f").canHandleUpdate(update)) {
-        promises.push(async () => __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, await __classPrivateFieldGet(this, _Client_callbackQueryManager, "f").handleUpdate(update)));
+        promises.push(() => __classPrivateFieldGet(this, _Client_callbackQueryManager, "f").handleUpdate(update));
     }
     if (__classPrivateFieldGet(this, _Client_inlineQueryManager, "f").canHandleUpdate(update)) {
-        promises.push(async () => __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, await __classPrivateFieldGet(this, _Client_inlineQueryManager, "f").handleUpdate(update)));
+        promises.push(() => __classPrivateFieldGet(this, _Client_inlineQueryManager, "f").handleUpdate(update));
     }
     if (__classPrivateFieldGet(this, _Client_reactionManager, "f").canHandleUpdate(update)) {
-        promises.push(async () => {
-            const upd = await __classPrivateFieldGet(this, _Client_reactionManager, "f").handleUpdate(update);
-            if (upd) {
-                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, upd);
-            }
-        });
+        promises.push(() => __classPrivateFieldGet(this, _Client_reactionManager, "f").handleUpdate(update));
     }
     if (__classPrivateFieldGet(this, _Client_chatListManager, "f").canHandleUpdate(update)) {
         promises.push(() => __classPrivateFieldGet(this, _Client_chatListManager, "f").handleUpdate(update));
     }
     if (__classPrivateFieldGet(this, _Client_storyManager, "f").canHandleUpdate(update)) {
-        promises.push(async () => {
-            const ctxUpdate = await __classPrivateFieldGet(this, _Client_storyManager, "f").handleUpdate(update);
-            if (ctxUpdate) {
-                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, ctxUpdate);
-            }
-        });
+        promises.push(() => __classPrivateFieldGet(this, _Client_storyManager, "f").handleUpdate(update));
     }
     if (__classPrivateFieldGet(this, _Client_businessConnectionManager, "f").canHandleUpdate(update)) {
-        promises.push(async () => __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, await __classPrivateFieldGet(this, _Client_businessConnectionManager, "f").handleUpdate(update)));
+        promises.push(() => __classPrivateFieldGet(this, _Client_businessConnectionManager, "f").handleUpdate(update));
     }
     if (__classPrivateFieldGet(this, _Client_storyManager, "f").canHandleUpdate(update)) {
-        promises.push(async () => {
-            const ctxUpdate = await __classPrivateFieldGet(this, _Client_storyManager, "f").handleUpdate(update);
-            if (ctxUpdate) {
-                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, ctxUpdate);
-            }
-        });
+        promises.push(() => __classPrivateFieldGet(this, _Client_storyManager, "f").handleUpdate(update));
     }
     if (__classPrivateFieldGet(this, _Client_paymentManager, "f").canHandleUpdate(update)) {
-        promises.push(async () => {
-            const ctxUpdate = await __classPrivateFieldGet(this, _Client_paymentManager, "f").handleUpdate(update);
-            if (ctxUpdate) {
-                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, ctxUpdate);
-            }
-        });
+        promises.push(() => __classPrivateFieldGet(this, _Client_paymentManager, "f").handleUpdate(update));
     }
     if (__classPrivateFieldGet(this, _Client_translationsManager, "f").canHandleUpdate(update)) {
-        promises.push(async () => {
-            const ctxUpdate = await __classPrivateFieldGet(this, _Client_translationsManager, "f").handleUpdate(update);
-            if (ctxUpdate) {
-                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, ctxUpdate);
-            }
-        });
+        promises.push(() => __classPrivateFieldGet(this, _Client_translationsManager, "f").handleUpdate(update));
     }
-    return () => Promise.all(promises.map((v) => v()));
+    return Promise.resolve().then(async () => {
+        const updates = new Array();
+        for (const promise of promises) {
+            try {
+                const update = await promise();
+                if (update) {
+                    updates.push(update);
+                }
+            }
+            catch (err) {
+                __classPrivateFieldGet(this, _Client_L, "f").error("failed to construct update:", err);
+            }
+        }
+        for (const update of updates) {
+            try {
+                await __classPrivateFieldGet(this, _Client_instances, "m", _Client_handleCtxUpdate).call(this, update);
+            }
+            finally {
+                if ("deletedMessages" in update) {
+                    for (const { chatId, messageId } of update.deletedMessages) {
+                        await this.messageStorage.setMessage(chatId, messageId, null);
+                        await __classPrivateFieldGet(this, _Client_chatListManager, "f").reassignChatLastMessage(chatId);
+                    }
+                }
+            }
+        }
+    });
 }, _Client_getMe = async function _Client_getMe() {
     if (__classPrivateFieldGet(this, _Client_lastGetMe, "f") != null) {
         return __classPrivateFieldGet(this, _Client_lastGetMe, "f");

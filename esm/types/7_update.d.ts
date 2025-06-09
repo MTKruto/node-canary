@@ -36,6 +36,7 @@ import { PreCheckoutQuery } from "./2_pre_checkout_query.js";
 import { ChatMemberUpdated } from "./3_chat_member_updated.js";
 import { JoinRequest } from "./3_join_request.js";
 import { Story } from "./3_story.js";
+import { LinkPreview } from "./4_link_preview.js";
 import { Message } from "./5_message.js";
 import { CallbackQuery } from "./6_callback_query.js";
 import { ChatListItem } from "./6_chat_list_item.js";
@@ -434,6 +435,23 @@ export interface UpdateVoiceTranscription {
      */
     voiceTranscription: VoiceTranscription;
 }
+/**
+ * A link preview was updated.
+ *
+ * ```
+ * client.on("linkPreview", (ctx) => {
+ *   // ctx.linkPreview
+ * });
+ * ```
+ * @unlisted
+ */
+export interface UpdateLinkPreview {
+    /**
+     * The new link preview.
+     * @discriminator
+     */
+    linkPreview: LinkPreview;
+}
 /** @unlisted */
 export interface UpdateMap {
     message: UpdateNewMessage;
@@ -463,9 +481,10 @@ export interface UpdateMap {
     poll: UpdatePoll;
     pollAnswer: UpdatePollAnswer;
     voiceTranscription: UpdateVoiceTranscription;
+    linkPreview: UpdateLinkPreview;
 }
 /** @unlisted */
-export type UpdateIntersection = Partial<UpdateConnectionState & UpdateAuthorizationState & UpdateNewMessage & UpdateMessageEdited & UpdateMessageScheduled & UpdateMessagesDeleted & UpdateCallbackQuery & UpdateInlineQuery & UpdateChosenInlineResult & UpdateNewChat & UpdateEditedChat & UpdateDeletedChat & UpdateMessageInteractions & UpdateMessageReactionCount & UpdateMessageReactions & UpdateChatMember & UpdateMyChatMember & UpdateDeletedStory & UpdateNewStory & UpdateBusinessConnection & UpdateVideoChat & UpdatePreCheckoutQuery & UpdateJoinRequest & UpdateTranslations & UpdatePoll & UpdatePollAnswer & UpdateVoiceTranscription>;
+export type UpdateIntersection = Partial<UpdateConnectionState & UpdateAuthorizationState & UpdateNewMessage & UpdateMessageEdited & UpdateMessageScheduled & UpdateMessagesDeleted & UpdateCallbackQuery & UpdateInlineQuery & UpdateChosenInlineResult & UpdateNewChat & UpdateEditedChat & UpdateDeletedChat & UpdateMessageInteractions & UpdateMessageReactionCount & UpdateMessageReactions & UpdateChatMember & UpdateMyChatMember & UpdateDeletedStory & UpdateNewStory & UpdateBusinessConnection & UpdateVideoChat & UpdatePreCheckoutQuery & UpdateJoinRequest & UpdateTranslations & UpdatePoll & UpdatePollAnswer & UpdateVoiceTranscription & UpdateLinkPreview>;
 /** An incoming update. */
-export type Update = UpdateConnectionState | UpdateAuthorizationState | UpdateNewMessage | UpdateMessageEdited | UpdateMessageScheduled | UpdateMessagesDeleted | UpdateCallbackQuery | UpdateInlineQuery | UpdateChosenInlineResult | UpdateNewChat | UpdateEditedChat | UpdateDeletedChat | UpdateMessageInteractions | UpdateMessageReactionCount | UpdateMessageReactions | UpdateChatMember | UpdateMyChatMember | UpdateDeletedStory | UpdateNewStory | UpdateBusinessConnection | UpdateVideoChat | UpdatePreCheckoutQuery | UpdateJoinRequest | UpdateTranslations | UpdatePoll | UpdatePollAnswer | UpdateVoiceTranscription;
+export type Update = UpdateConnectionState | UpdateAuthorizationState | UpdateNewMessage | UpdateMessageEdited | UpdateMessageScheduled | UpdateMessagesDeleted | UpdateCallbackQuery | UpdateInlineQuery | UpdateChosenInlineResult | UpdateNewChat | UpdateEditedChat | UpdateDeletedChat | UpdateMessageInteractions | UpdateMessageReactionCount | UpdateMessageReactions | UpdateChatMember | UpdateMyChatMember | UpdateDeletedStory | UpdateNewStory | UpdateBusinessConnection | UpdateVideoChat | UpdatePreCheckoutQuery | UpdateJoinRequest | UpdateTranslations | UpdatePoll | UpdatePollAnswer | UpdateVoiceTranscription | UpdateLinkPreview;
 //# sourceMappingURL=7_update.d.ts.map

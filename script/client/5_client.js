@@ -29,7 +29,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _Client_instances, _Client_clients, _Client_downloadPools, _Client_uploadPools, _Client_guaranteeUpdateDelivery, _Client_accountManager, _Client_botInfoManager, _Client_businessConnectionManager, _Client_fileManager, _Client_networkStatisticsManager, _Client_paymentManager, _Client_reactionManager, _Client_translationsManager, _Client_updateManager, _Client_messageManager, _Client_videoChatManager, _Client_callbackQueryManager, _Client_chatListManager, _Client_chatManager, _Client_forumManager, _Client_giftManager, _Client_inlineQueryManager, _Client_pollManager, _Client_storyManager, _Client_managers, _Client_storage_, _Client_messageStorage_, _Client_parseMode, _Client_apiId, _Client_apiHash, _Client_transportProvider, _Client_publicKeys, _Client_outgoingMessages, _Client_persistCache, _Client_disableUpdates, _Client_authString, _Client_initialDc, _Client_L, _Client_LsignIn, _Client_LupdateGapRecoveryLoop, _Client_LhandleMigrationError, _Client_Lmin, _Client_setMainClient, _Client_newClient, _Client_disconnectAllClients, _Client_client_get, _Client_constructContext, _Client_propagateConnectionState, _Client_lastPropagatedConnectionState, _Client_stateChangeHandler, _Client_storageInited, _Client_initStorage, _Client_connectMutex, _Client_lastPropagatedAuthorizationState, _Client_propagateAuthorizationState, _Client_getSelfId, _Client_getIsPremium, _Client_lastUpdates, _Client_updateGapRecoveryLoopAbortController, _Client_startUpdateGapRecoveryLoop, _Client_updateGapRecoveryLoop, _Client_clientDisconnectionLoopAbortController, _Client_startClientDisconnectionLoop, _Client_clientDisconnectionLoop, _Client_getClient, _Client_getMainClientMutex, _Client_getMainClient, _Client_getDownloadClient, _Client_getUploadPoolSize, _Client_getUploadClient, _Client_setupClient, _Client_importAuthorization, _Client_invoke, _Client_handleInvokeError, _Client_authStringImported, _Client_getUserAccessHash, _Client_getChannelAccessHash, _Client_getInputPeerChatId, _Client_getInputPeerInner, _Client_getMinInputPeer, _Client_handleCtxUpdate, _Client_queueHandleCtxUpdate, _Client_handleUpdate, _Client_lastGetMe, _Client_getMe, _Client_previouslyConnected, _Client_lastConnectionState, _Client_onConnectionStateChange;
+var _Client_instances, _Client_clients, _Client_downloadPools, _Client_uploadPools, _Client_guaranteeUpdateDelivery, _Client_accountManager, _Client_botInfoManager, _Client_businessConnectionManager, _Client_fileManager, _Client_networkStatisticsManager, _Client_paymentManager, _Client_reactionManager, _Client_translationsManager, _Client_updateManager, _Client_messageManager, _Client_videoChatManager, _Client_callbackQueryManager, _Client_chatListManager, _Client_chatManager, _Client_forumManager, _Client_giftManager, _Client_inlineQueryManager, _Client_linkPreviewManager, _Client_pollManager, _Client_storyManager, _Client_managers, _Client_storage_, _Client_messageStorage_, _Client_parseMode, _Client_apiId, _Client_apiHash, _Client_transportProvider, _Client_publicKeys, _Client_outgoingMessages, _Client_persistCache, _Client_disableUpdates, _Client_authString, _Client_initialDc, _Client_L, _Client_LsignIn, _Client_LupdateGapRecoveryLoop, _Client_LhandleMigrationError, _Client_Lmin, _Client_setMainClient, _Client_newClient, _Client_disconnectAllClients, _Client_client_get, _Client_constructContext, _Client_propagateConnectionState, _Client_lastPropagatedConnectionState, _Client_stateChangeHandler, _Client_storageInited, _Client_initStorage, _Client_connectMutex, _Client_lastPropagatedAuthorizationState, _Client_propagateAuthorizationState, _Client_getSelfId, _Client_getIsPremium, _Client_lastUpdates, _Client_updateGapRecoveryLoopAbortController, _Client_startUpdateGapRecoveryLoop, _Client_updateGapRecoveryLoop, _Client_clientDisconnectionLoopAbortController, _Client_startClientDisconnectionLoop, _Client_clientDisconnectionLoop, _Client_getClient, _Client_getMainClientMutex, _Client_getMainClient, _Client_getDownloadClient, _Client_getUploadPoolSize, _Client_getUploadClient, _Client_setupClient, _Client_importAuthorization, _Client_invoke, _Client_handleInvokeError, _Client_authStringImported, _Client_getUserAccessHash, _Client_getChannelAccessHash, _Client_getInputPeerChatId, _Client_getInputPeerInner, _Client_getMinInputPeer, _Client_handleCtxUpdate, _Client_queueHandleCtxUpdate, _Client_handleUpdate, _Client_lastGetMe, _Client_getMe, _Client_previouslyConnected, _Client_lastConnectionState, _Client_onConnectionStateChange;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Client = exports.handleMigrationError = exports.restartAuth = exports.Composer = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
@@ -65,6 +65,7 @@ const _4_chat_manager_js_1 = require("./4_chat_manager.js");
 const _4_forum_manager_js_1 = require("./4_forum_manager.js");
 const _4_gift_manager_js_1 = require("./4_gift_manager.js");
 const _4_inline_query_manager_js_1 = require("./4_inline_query_manager.js");
+const _4_link_preview_manager_js_1 = require("./4_link_preview_manager.js");
 const _4_poll_manager_js_1 = require("./4_poll_manager.js");
 const _4_story_manager_js_1 = require("./4_story_manager.js");
 class Composer extends _1_composer_js_1.Composer {
@@ -105,6 +106,7 @@ class Client extends Composer {
             forumManager: __classPrivateFieldGet(this, _Client_forumManager, "f"),
             giftManager: __classPrivateFieldGet(this, _Client_giftManager, "f"),
             inlineQueryManager: __classPrivateFieldGet(this, _Client_inlineQueryManager, "f"),
+            linkPreviewManager: __classPrivateFieldGet(this, _Client_linkPreviewManager, "f"),
             pollManager: __classPrivateFieldGet(this, _Client_pollManager, "f"),
             storyManager: __classPrivateFieldGet(this, _Client_storyManager, "f"),
         }, "f"));
@@ -139,6 +141,7 @@ class Client extends Composer {
         _Client_forumManager.set(this, void 0);
         _Client_giftManager.set(this, void 0);
         _Client_inlineQueryManager.set(this, void 0);
+        _Client_linkPreviewManager.set(this, void 0);
         _Client_pollManager.set(this, void 0);
         _Client_storyManager.set(this, void 0);
         // deno-lint-ignore no-explicit-any
@@ -740,6 +743,7 @@ class Client extends Composer {
         __classPrivateFieldSet(this, _Client_forumManager, new _4_forum_manager_js_1.ForumManager({ ...c, messageManager }), "f");
         __classPrivateFieldSet(this, _Client_giftManager, new _4_gift_manager_js_1.GiftManager({ ...c, messageManager }), "f");
         __classPrivateFieldSet(this, _Client_inlineQueryManager, new _4_inline_query_manager_js_1.InlineQueryManager({ ...c, messageManager }), "f");
+        __classPrivateFieldSet(this, _Client_linkPreviewManager, new _4_link_preview_manager_js_1.LinkPreviewManager({ ...c, messageManager }), "f");
         __classPrivateFieldSet(this, _Client_pollManager, new _4_poll_manager_js_1.PollManager({ ...c, messageManager }), "f");
         __classPrivateFieldSet(this, _Client_storyManager, new _4_story_manager_js_1.StoryManager({ ...c, fileManager, messageManager }), "f");
         __classPrivateFieldGet(this, _Client_updateManager, "f").setUpdateHandler(__classPrivateFieldGet(this, _Client_instances, "m", _Client_handleUpdate).bind(this));
@@ -805,7 +809,7 @@ class Client extends Composer {
             unlock();
         }
     }
-    async [(_Client_clients = new WeakMap(), _Client_downloadPools = new WeakMap(), _Client_uploadPools = new WeakMap(), _Client_guaranteeUpdateDelivery = new WeakMap(), _Client_accountManager = new WeakMap(), _Client_botInfoManager = new WeakMap(), _Client_businessConnectionManager = new WeakMap(), _Client_fileManager = new WeakMap(), _Client_networkStatisticsManager = new WeakMap(), _Client_paymentManager = new WeakMap(), _Client_reactionManager = new WeakMap(), _Client_translationsManager = new WeakMap(), _Client_updateManager = new WeakMap(), _Client_messageManager = new WeakMap(), _Client_videoChatManager = new WeakMap(), _Client_callbackQueryManager = new WeakMap(), _Client_chatListManager = new WeakMap(), _Client_chatManager = new WeakMap(), _Client_forumManager = new WeakMap(), _Client_giftManager = new WeakMap(), _Client_inlineQueryManager = new WeakMap(), _Client_pollManager = new WeakMap(), _Client_storyManager = new WeakMap(), _Client_managers = new WeakMap(), _Client_storage_ = new WeakMap(), _Client_messageStorage_ = new WeakMap(), _Client_parseMode = new WeakMap(), _Client_apiId = new WeakMap(), _Client_apiHash = new WeakMap(), _Client_transportProvider = new WeakMap(), _Client_publicKeys = new WeakMap(), _Client_outgoingMessages = new WeakMap(), _Client_persistCache = new WeakMap(), _Client_disableUpdates = new WeakMap(), _Client_authString = new WeakMap(), _Client_initialDc = new WeakMap(), _Client_L = new WeakMap(), _Client_LsignIn = new WeakMap(), _Client_LupdateGapRecoveryLoop = new WeakMap(), _Client_LhandleMigrationError = new WeakMap(), _Client_Lmin = new WeakMap(), _Client_constructContext = new WeakMap(), _Client_lastPropagatedConnectionState = new WeakMap(), _Client_stateChangeHandler = new WeakMap(), _Client_storageInited = new WeakMap(), _Client_connectMutex = new WeakMap(), _Client_lastPropagatedAuthorizationState = new WeakMap(), _Client_lastUpdates = new WeakMap(), _Client_updateGapRecoveryLoopAbortController = new WeakMap(), _Client_clientDisconnectionLoopAbortController = new WeakMap(), _Client_getMainClientMutex = new WeakMap(), _Client_handleInvokeError = new WeakMap(), _Client_authStringImported = new WeakMap(), _Client_lastGetMe = new WeakMap(), _Client_previouslyConnected = new WeakMap(), _Client_lastConnectionState = new WeakMap(), _Client_instances = new WeakSet(), _Client_setMainClient = function _Client_setMainClient(client) {
+    async [(_Client_clients = new WeakMap(), _Client_downloadPools = new WeakMap(), _Client_uploadPools = new WeakMap(), _Client_guaranteeUpdateDelivery = new WeakMap(), _Client_accountManager = new WeakMap(), _Client_botInfoManager = new WeakMap(), _Client_businessConnectionManager = new WeakMap(), _Client_fileManager = new WeakMap(), _Client_networkStatisticsManager = new WeakMap(), _Client_paymentManager = new WeakMap(), _Client_reactionManager = new WeakMap(), _Client_translationsManager = new WeakMap(), _Client_updateManager = new WeakMap(), _Client_messageManager = new WeakMap(), _Client_videoChatManager = new WeakMap(), _Client_callbackQueryManager = new WeakMap(), _Client_chatListManager = new WeakMap(), _Client_chatManager = new WeakMap(), _Client_forumManager = new WeakMap(), _Client_giftManager = new WeakMap(), _Client_inlineQueryManager = new WeakMap(), _Client_linkPreviewManager = new WeakMap(), _Client_pollManager = new WeakMap(), _Client_storyManager = new WeakMap(), _Client_managers = new WeakMap(), _Client_storage_ = new WeakMap(), _Client_messageStorage_ = new WeakMap(), _Client_parseMode = new WeakMap(), _Client_apiId = new WeakMap(), _Client_apiHash = new WeakMap(), _Client_transportProvider = new WeakMap(), _Client_publicKeys = new WeakMap(), _Client_outgoingMessages = new WeakMap(), _Client_persistCache = new WeakMap(), _Client_disableUpdates = new WeakMap(), _Client_authString = new WeakMap(), _Client_initialDc = new WeakMap(), _Client_L = new WeakMap(), _Client_LsignIn = new WeakMap(), _Client_LupdateGapRecoveryLoop = new WeakMap(), _Client_LhandleMigrationError = new WeakMap(), _Client_Lmin = new WeakMap(), _Client_constructContext = new WeakMap(), _Client_lastPropagatedConnectionState = new WeakMap(), _Client_stateChangeHandler = new WeakMap(), _Client_storageInited = new WeakMap(), _Client_connectMutex = new WeakMap(), _Client_lastPropagatedAuthorizationState = new WeakMap(), _Client_lastUpdates = new WeakMap(), _Client_updateGapRecoveryLoopAbortController = new WeakMap(), _Client_clientDisconnectionLoopAbortController = new WeakMap(), _Client_getMainClientMutex = new WeakMap(), _Client_handleInvokeError = new WeakMap(), _Client_authStringImported = new WeakMap(), _Client_lastGetMe = new WeakMap(), _Client_previouslyConnected = new WeakMap(), _Client_lastConnectionState = new WeakMap(), _Client_instances = new WeakSet(), _Client_setMainClient = function _Client_setMainClient(client) {
         __classPrivateFieldGet(this, _Client_instances, "m", _Client_disconnectAllClients).call(this);
         __classPrivateFieldSet(this, _Client_clients, [client], "f");
         client.handlers.onUpdate = (updates) => {
@@ -2129,6 +2133,15 @@ class Client extends Composer {
     async transcribeVoice(chatId, messageId) {
         return await __classPrivateFieldGet(this, _Client_messageManager, "f").transcribeVoice(chatId, messageId);
     }
+    /**
+     * Get the link preview for a message that is about to be sent. User-only.
+     *
+     * @method ms
+     * @param text The message's text.
+     */
+    async getLinkPreview(text, params) {
+        return await __classPrivateFieldGet(this, _Client_linkPreviewManager, "f").getLinkPreview(text, params);
+    }
     //
     // ========================= POLLS ========================= //
     //
@@ -3315,6 +3328,9 @@ _Client_handleCtxUpdate = async function _Client_handleCtxUpdate(update) {
     }
     if (__classPrivateFieldGet(this, _Client_inlineQueryManager, "f").canHandleUpdate(update)) {
         promises.push(() => __classPrivateFieldGet(this, _Client_inlineQueryManager, "f").handleUpdate(update));
+    }
+    if (__classPrivateFieldGet(this, _Client_linkPreviewManager, "f").canHandleUpdate(update)) {
+        promises.push(() => __classPrivateFieldGet(this, _Client_linkPreviewManager, "f").handleUpdate(update));
     }
     if (__classPrivateFieldGet(this, _Client_reactionManager, "f").canHandleUpdate(update)) {
         promises.push(() => __classPrivateFieldGet(this, _Client_reactionManager, "f").handleUpdate(update));

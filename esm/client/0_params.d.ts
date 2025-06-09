@@ -19,7 +19,7 @@
  */
 import { MaybePromise } from "../1_utilities.js";
 import { DC } from "../3_transport.js";
-import { Birthday, BotCommandScope, ChatListItem, ChatMemberRights, FileSource, ID, InlineQueryResultButton, LinkPreview, MessageEntity, MessageSearchFilter, ParseMode, ReplyMarkup, SelfDestructOption, StoryInteractiveArea, StoryPrivacy } from "../3_types.js";
+import { Birthday, BotCommandScope, ChatListItem, ChatMemberRights, FileSource, ID, InlineQueryResultButton, InputLinkPreview, LinkPreview, MessageEntity, MessageSearchFilter, ParseMode, ReplyMarkup, SelfDestructOption, StoryInteractiveArea, StoryPrivacy } from "../3_types.js";
 import { ReplyTo } from "../types/2_reply_to.js";
 export interface InvokeParams {
     dc?: DC;
@@ -81,7 +81,7 @@ export interface SendMessageParams extends _SendCommon, _ReplyMarkupCommon {
     /** The message's entities. */
     entities?: MessageEntity[];
     /** The message's link preview. */
-    linkPreview?: LinkPreview;
+    linkPreview?: InputLinkPreview;
 }
 export interface SendChatActionParams extends _BusinessConnectionIdCommon {
     messageThreadId?: number;

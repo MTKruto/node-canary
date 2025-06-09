@@ -628,7 +628,10 @@ class MessageManager {
         if (!message) {
             throw new _0_errors_js_1.InputError("Message text cannot be empty.");
         }
-        const noWebpage = params?.linkPreview?.disable ? true : undefined;
+        if (params?.linkPreview && params.linkPreview.type != "input") {
+            throw new _0_errors_js_1.InputError("Expected link preview of type input.");
+        }
+        const noWebpage = params?.linkPreview && params.linkPreview.type == "input" && params.linkPreview.disable ? true : undefined;
         const invertMedia = params?.linkPreview?.aboveText ? true : undefined;
         let media = undefined;
         if (!noWebpage && params?.linkPreview?.url) {
@@ -1364,7 +1367,10 @@ _a = MessageManager, _MessageManager_c = new WeakMap(), _MessageManager_Lresolve
         throw new _0_errors_js_1.InputError("Message text cannot be empty.");
     }
     const id = await (0, _3_types_js_2.deserializeInlineMessageId)(inlineMessageId);
-    const noWebpage = params?.linkPreview?.disable ? true : undefined;
+    if (params?.linkPreview && params.linkPreview.type != "input") {
+        throw new _0_errors_js_1.InputError("Expected link preview of type input.");
+    }
+    const noWebpage = params?.linkPreview && params.linkPreview.type == "input" && params.linkPreview.disable ? true : undefined;
     const invertMedia = params?.linkPreview?.aboveText ? true : undefined;
     let media = undefined;
     if (!noWebpage && params?.linkPreview?.url) {

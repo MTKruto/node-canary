@@ -3332,7 +3332,7 @@ _Client_handleCtxUpdate = async function _Client_handleCtxUpdate(update) {
     if (__classPrivateFieldGet(this, _Client_translationsManager, "f").canHandleUpdate(update)) {
         promises.push(() => __classPrivateFieldGet(this, _Client_translationsManager, "f").handleUpdate(update));
     }
-    return Promise.resolve().then(async () => {
+    return () => Promise.resolve().then(async () => {
         const updates = new Array();
         for (const promise of promises) {
             try {

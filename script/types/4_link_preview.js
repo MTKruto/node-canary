@@ -28,7 +28,7 @@ const _1_audio_js_1 = require("./1_audio.js");
 const _1_document_js_1 = require("./1_document.js");
 const _1_photo_js_1 = require("./1_photo.js");
 const _3_gift_js_1 = require("./3_gift.js");
-function constructLinkPreview(media, invert) {
+async function constructLinkPreview(media, invert, getEntity) {
     if (_2_tl_js_1.Api.is("webPageNotModified", media.webpage)) {
         (0, _0_deps_js_1.unreachable)();
     }
@@ -211,7 +211,7 @@ function constructLinkPreview(media, invert) {
                     smallMedia,
                     largeMedia,
                     aboveText,
-                    gift: (0, _3_gift_js_1.constructGift)(gift),
+                    gift: await (0, _3_gift_js_1.constructGift)(gift, getEntity),
                 };
                 break;
             }

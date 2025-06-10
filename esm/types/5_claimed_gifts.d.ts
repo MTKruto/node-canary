@@ -18,6 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { Api } from "../2_tl.js";
+import { EntityGetter } from "./_getters.js";
 import { ClaimedGift } from "./4_claimed_gift.js";
 /** Gifts claimed by a user or a channel. */
 export interface ClaimedGifts {
@@ -28,5 +29,5 @@ export interface ClaimedGifts {
     /** Gifts claimed by the user. */
     gifts: ClaimedGift[];
 }
-export declare function constructClaimedGifts(savedStarGifts: Api.payments_SavedStarGifts): ClaimedGifts;
+export declare function constructClaimedGifts(savedStarGifts: Api.payments_SavedStarGifts, getEntity: EntityGetter): Promise<ClaimedGifts>;
 //# sourceMappingURL=5_claimed_gifts.d.ts.map

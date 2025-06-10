@@ -25,7 +25,7 @@ import { constructAudio } from "./1_audio.js";
 import { constructDocument } from "./1_document.js";
 import { constructPhoto } from "./1_photo.js";
 import { constructGift } from "./3_gift.js";
-export function constructLinkPreview(media, invert) {
+export async function constructLinkPreview(media, invert, getEntity) {
     if (Api.is("webPageNotModified", media.webpage)) {
         unreachable();
     }
@@ -208,7 +208,7 @@ export function constructLinkPreview(media, invert) {
                     smallMedia,
                     largeMedia,
                     aboveText,
-                    gift: constructGift(gift),
+                    gift: await constructGift(gift, getEntity),
                 };
                 break;
             }

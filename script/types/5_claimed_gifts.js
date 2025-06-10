@@ -23,11 +23,11 @@ exports.constructClaimedGifts = constructClaimedGifts;
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _4_claimed_gift_js_1 = require("./4_claimed_gift.js");
-function constructClaimedGifts(savedStarGifts) {
+async function constructClaimedGifts(savedStarGifts, getEntity) {
     return (0, _1_utilities_js_1.cleanObject)({
         all: savedStarGifts.count,
         offset: savedStarGifts.next_offset,
-        gifts: savedStarGifts.gifts.map((v) => {
+        gifts: await Promise.all(savedStarGifts.gifts.map((v) => {
             const fromId = v.from_id;
             if (_2_tl_js_1.Api.is("peerUser", fromId)) {
                 return [v, savedStarGifts.users.find((u) => _2_tl_js_1.Api.is("user", u) && u.id == fromId.user_id)];
@@ -41,6 +41,6 @@ function constructClaimedGifts(savedStarGifts) {
             else {
                 return [v, undefined];
             }
-        }).map((v) => (0, _4_claimed_gift_js_1.constructClaimedGift)(v[0], v[1])),
+        }).map((v) => (0, _4_claimed_gift_js_1.constructClaimedGift)(v[0], v[1], getEntity))),
     });
 }

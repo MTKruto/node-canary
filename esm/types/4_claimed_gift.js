@@ -23,11 +23,11 @@ import { Api } from "../2_tl.js";
 import { constructMessageEntity } from "./0_message_entity.js";
 import { constructChatP } from "./1_chat_p.js";
 import { constructGift } from "./3_gift.js";
-export function constructClaimedGift(savedStarGift, fromPeer) {
+export async function constructClaimedGift(savedStarGift, fromPeer, getEntity) {
     if (fromPeer && !Api.isOneOf(["user", "chat", "channel"], fromPeer)) {
         unreachable();
     }
-    const gift = constructGift(savedStarGift.gift);
+    const gift = await constructGift(savedStarGift.gift, getEntity);
     const date = fromUnixTimestamp(savedStarGift.date);
     const public_ = !!savedStarGift.unsaved;
     const sender = fromPeer ? constructChatP(fromPeer) : undefined;

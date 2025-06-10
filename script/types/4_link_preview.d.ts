@@ -18,6 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { Api } from "../2_tl.js";
+import { EntityGetter } from "./_getters.js";
 import { Audio } from "./1_audio.js";
 import { Document } from "./1_document.js";
 import { Photo } from "./1_photo.js";
@@ -183,5 +184,5 @@ export interface LinkPreviewGift extends _LinkPreviewLoadedBase {
  */
 export type LinkPreviewLoaded = LinkPreviewUnknown | LinkPreviewPhoto | LinkPreviewEmbeddedVideo | LinkPreviewExternalVideo | LinkPreviewVideo | LinkPreviewEmbeddedAudio | LinkPreviewExternalAudio | LinkPreviewAudio | LinkPreviewGift;
 export type LinkPreview = InputLinkPreview | LinkPreviewLoading | LinkPreviewNotLoaded | LinkPreviewLoaded;
-export declare function constructLinkPreview(media: Api.messageMediaWebPage, invert?: boolean): LinkPreview;
+export declare function constructLinkPreview(media: Api.messageMediaWebPage, invert: boolean | undefined, getEntity: EntityGetter): Promise<LinkPreview>;
 //# sourceMappingURL=4_link_preview.d.ts.map

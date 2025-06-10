@@ -46,7 +46,7 @@ class GiftManager {
         if (!(_2_tl_js_1.Api.is("payments.starGifts", gifts))) {
             (0, _0_deps_js_1.unreachable)();
         }
-        return gifts.gifts.map(_3_types_js_1.constructGift);
+        return await Promise.all(gifts.gifts.map((v) => (0, _3_types_js_1.constructGift)(v, __classPrivateFieldGet(this, _GiftManager_c, "f").getEntity)));
     }
     async getClaimedGifts(chatId, params) {
         __classPrivateFieldGet(this, _GiftManager_c, "f").storage.assertUser("getClaimedGifts");
@@ -60,7 +60,7 @@ class GiftManager {
         }
         const peer = await __classPrivateFieldGet(this, _GiftManager_c, "f").getInputPeer(chatId);
         const result = await __classPrivateFieldGet(this, _GiftManager_c, "f").invoke({ _: "payments.getSavedStarGifts", peer, offset, limit });
-        return (0, _3_types_js_1.constructClaimedGifts)(result);
+        return await (0, _3_types_js_1.constructClaimedGifts)(result, __classPrivateFieldGet(this, _GiftManager_c, "f").getEntity);
     }
     async sendGift(chatId, giftId, params) {
         const hide_name = params?.private ? true : undefined;

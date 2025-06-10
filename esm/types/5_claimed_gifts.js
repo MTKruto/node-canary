@@ -20,11 +20,11 @@
 import { cleanObject } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { constructClaimedGift } from "./4_claimed_gift.js";
-export function constructClaimedGifts(savedStarGifts) {
+export async function constructClaimedGifts(savedStarGifts, getEntity) {
     return cleanObject({
         all: savedStarGifts.count,
         offset: savedStarGifts.next_offset,
-        gifts: savedStarGifts.gifts.map((v) => {
+        gifts: await Promise.all(savedStarGifts.gifts.map((v) => {
             const fromId = v.from_id;
             if (Api.is("peerUser", fromId)) {
                 return [v, savedStarGifts.users.find((u) => Api.is("user", u) && u.id == fromId.user_id)];
@@ -38,6 +38,6 @@ export function constructClaimedGifts(savedStarGifts) {
             else {
                 return [v, undefined];
             }
-        }).map((v) => constructClaimedGift(v[0], v[1])),
+        }).map((v) => constructClaimedGift(v[0], v[1], getEntity))),
     });
 }

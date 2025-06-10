@@ -521,7 +521,7 @@ export async function constructMessage(message_, getEntity, getMessage, getStick
         m = { ...message, location };
     }
     else if (Api.is("messageMediaWebPage", message_.media)) {
-        const linkPreview = constructLinkPreview(message_.media, message_.invert_media);
+        const linkPreview = await constructLinkPreview(message_.media, message_.invert_media, getEntity);
         if (message_.message) {
             m = { ...messageText, linkPreview };
         }

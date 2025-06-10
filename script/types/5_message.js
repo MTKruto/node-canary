@@ -526,7 +526,7 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
         m = { ...message, location };
     }
     else if (_2_tl_js_1.Api.is("messageMediaWebPage", message_.media)) {
-        const linkPreview = (0, _4_link_preview_js_1.constructLinkPreview)(message_.media, message_.invert_media);
+        const linkPreview = await (0, _4_link_preview_js_1.constructLinkPreview)(message_.media, message_.invert_media, getEntity);
         if (message_.message) {
             m = { ...messageText, linkPreview };
         }

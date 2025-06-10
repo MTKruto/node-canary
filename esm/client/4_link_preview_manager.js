@@ -47,7 +47,7 @@ export class LinkPreviewManager {
             entities: entities_,
         });
         if (Api.is("messageMediaWebPage", result.media)) {
-            return constructLinkPreview(result.media);
+            return await constructLinkPreview(result.media, undefined, __classPrivateFieldGet(this, _LinkPreviewManager_c, "f").getEntity);
         }
         else {
             return null;
@@ -56,9 +56,9 @@ export class LinkPreviewManager {
     canHandleUpdate(update) {
         return Api.isOneOf(linkPreviewManagerUpdates, update);
     }
-    handleUpdate(update) {
-        const linkPreview = constructLinkPreview({ _: "messageMediaWebPage", webpage: update.webpage });
-        return Promise.resolve({ linkPreview });
+    async handleUpdate(update) {
+        const linkPreview = await constructLinkPreview({ _: "messageMediaWebPage", webpage: update.webpage }, undefined, __classPrivateFieldGet(this, _LinkPreviewManager_c, "f").getEntity);
+        return { linkPreview };
     }
 }
 _LinkPreviewManager_c = new WeakMap();

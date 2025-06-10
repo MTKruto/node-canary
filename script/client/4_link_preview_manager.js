@@ -50,7 +50,7 @@ class LinkPreviewManager {
             entities: entities_,
         });
         if (_2_tl_js_1.Api.is("messageMediaWebPage", result.media)) {
-            return (0, _3_types_js_1.constructLinkPreview)(result.media);
+            return await (0, _3_types_js_1.constructLinkPreview)(result.media, undefined, __classPrivateFieldGet(this, _LinkPreviewManager_c, "f").getEntity);
         }
         else {
             return null;
@@ -59,9 +59,9 @@ class LinkPreviewManager {
     canHandleUpdate(update) {
         return _2_tl_js_1.Api.isOneOf(linkPreviewManagerUpdates, update);
     }
-    handleUpdate(update) {
-        const linkPreview = (0, _3_types_js_1.constructLinkPreview)({ _: "messageMediaWebPage", webpage: update.webpage });
-        return Promise.resolve({ linkPreview });
+    async handleUpdate(update) {
+        const linkPreview = await (0, _3_types_js_1.constructLinkPreview)({ _: "messageMediaWebPage", webpage: update.webpage }, undefined, __classPrivateFieldGet(this, _LinkPreviewManager_c, "f").getEntity);
+        return { linkPreview };
     }
 }
 exports.LinkPreviewManager = LinkPreviewManager;

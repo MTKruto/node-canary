@@ -18,7 +18,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { Api } from "../2_tl.js";
+import { EntityGetter } from "./_getters.js";
 import { Sticker } from "./1_sticker.js";
+import { User } from "./1_user.js";
 import { GiftUpgradedComponent } from "./2_gift_upgraded_component.js";
 /**
  * An non-upgraded gift.
@@ -67,8 +69,8 @@ export interface GiftUpgraded {
     title: string;
     /** The unique index of the gift among others of the same type. */
     index: number;
-    /** The identifier of the user that owns the gift. */
-    ownerId: number;
+    /** The user that owns the gift. */
+    owner?: User;
     /** The count of the amount of upgraded gifts of the same type. */
     currentUpgrades: number;
     /** The maximum count of gifts of the same type that can be upgraded. */
@@ -78,7 +80,7 @@ export interface GiftUpgraded {
 }
 /** A gift. */
 export type Gift = GiftNonUpgraded | GiftUpgraded;
-export declare function constructGift(gift: Api.StarGift): Gift;
-export declare function constructGiftUpgraded(gift: Api.starGiftUnique): GiftUpgraded;
+export declare function constructGift(gift: Api.StarGift, getEntity: EntityGetter): Promise<Gift>;
+export declare function constructGiftUpgraded(gift: Api.starGiftUnique, getEntity: EntityGetter): Promise<GiftUpgraded>;
 export declare function constructGiftNonUpgraded(gift: Api.starGift): Gift;
 //# sourceMappingURL=3_gift.d.ts.map

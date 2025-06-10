@@ -18,6 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { Api } from "../2_tl.js";
+import { EntityGetter } from "./_getters.js";
 import { MessageEntity } from "./0_message_entity.js";
 import { ChatP } from "./1_chat_p.js";
 import { Gift } from "./3_gift.js";
@@ -40,5 +41,5 @@ export interface ClaimedGift {
     /** The amount of stars the gift would be worth. */
     convertionStars?: number;
 }
-export declare function constructClaimedGift(savedStarGift: Api.SavedStarGift, fromPeer?: Api.User | Api.Chat): ClaimedGift;
+export declare function constructClaimedGift(savedStarGift: Api.SavedStarGift, fromPeer: Api.User | Api.Chat | undefined, getEntity: EntityGetter): Promise<ClaimedGift>;
 //# sourceMappingURL=4_claimed_gift.d.ts.map

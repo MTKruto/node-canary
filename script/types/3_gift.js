@@ -27,33 +27,40 @@ const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _file_id_js_1 = require("./_file_id.js");
 const _1_sticker_js_1 = require("./1_sticker.js");
+const _1_user_js_1 = require("./1_user.js");
 const _2_gift_upgraded_component_js_1 = require("./2_gift_upgraded_component.js");
-function constructGift(gift) {
+async function constructGift(gift, getEntity) {
     if (_2_tl_js_1.Api.is("starGiftUnique", gift)) {
-        return constructGiftUpgraded(gift);
+        return await constructGiftUpgraded(gift, getEntity);
     }
     else {
         return constructGiftNonUpgraded(gift);
     }
 }
-function constructGiftUpgraded(gift) {
+async function constructGiftUpgraded(gift, getEntity) {
     const id = String(gift.id);
     const title = gift.title;
     const index = gift.num;
-    const ownerId = Number(gift.owner_id);
+    let owner;
+    if (gift.owner_id) {
+        const entity = await getEntity(gift.owner_id);
+        if (_2_tl_js_1.Api.is("user", entity)) {
+            owner = (0, _1_user_js_1.constructUser)(entity);
+        }
+    }
     const currentUpgrades = gift.availability_issued;
     const maxUpgrades = gift.availability_total;
     const components = gift.attributes.map(_2_gift_upgraded_component_js_1.constructGiftUpgradedComponent);
-    return {
+    return (0, _1_utilities_js_1.cleanObject)({
         type: "upgraded",
         id,
         title,
         index,
-        ownerId,
+        owner,
         currentUpgrades,
         maxUpgrades,
         components,
-    };
+    });
 }
 function constructGiftNonUpgraded(gift) {
     if (!_2_tl_js_1.Api.is("document", gift.sticker)) {

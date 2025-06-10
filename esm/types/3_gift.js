@@ -22,33 +22,40 @@ import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { FileType, serializeFileId, toUniqueFileId } from "./_file_id.js";
 import { constructSticker2 } from "./1_sticker.js";
+import { constructUser } from "./1_user.js";
 import { constructGiftUpgradedComponent } from "./2_gift_upgraded_component.js";
-export function constructGift(gift) {
+export async function constructGift(gift, getEntity) {
     if (Api.is("starGiftUnique", gift)) {
-        return constructGiftUpgraded(gift);
+        return await constructGiftUpgraded(gift, getEntity);
     }
     else {
         return constructGiftNonUpgraded(gift);
     }
 }
-export function constructGiftUpgraded(gift) {
+export async function constructGiftUpgraded(gift, getEntity) {
     const id = String(gift.id);
     const title = gift.title;
     const index = gift.num;
-    const ownerId = Number(gift.owner_id);
+    let owner;
+    if (gift.owner_id) {
+        const entity = await getEntity(gift.owner_id);
+        if (Api.is("user", entity)) {
+            owner = constructUser(entity);
+        }
+    }
     const currentUpgrades = gift.availability_issued;
     const maxUpgrades = gift.availability_total;
     const components = gift.attributes.map(constructGiftUpgradedComponent);
-    return {
+    return cleanObject({
         type: "upgraded",
         id,
         title,
         index,
-        ownerId,
+        owner,
         currentUpgrades,
         maxUpgrades,
         components,
-    };
+    });
 }
 export function constructGiftNonUpgraded(gift) {
     if (!Api.is("document", gift.sticker)) {

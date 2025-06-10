@@ -26,11 +26,11 @@ const _2_tl_js_1 = require("../2_tl.js");
 const _0_message_entity_js_1 = require("./0_message_entity.js");
 const _1_chat_p_js_1 = require("./1_chat_p.js");
 const _3_gift_js_1 = require("./3_gift.js");
-function constructClaimedGift(savedStarGift, fromPeer) {
+async function constructClaimedGift(savedStarGift, fromPeer, getEntity) {
     if (fromPeer && !_2_tl_js_1.Api.isOneOf(["user", "chat", "channel"], fromPeer)) {
         (0, _0_deps_js_1.unreachable)();
     }
-    const gift = (0, _3_gift_js_1.constructGift)(savedStarGift.gift);
+    const gift = await (0, _3_gift_js_1.constructGift)(savedStarGift.gift, getEntity);
     const date = (0, _1_utilities_js_1.fromUnixTimestamp)(savedStarGift.date);
     const public_ = !!savedStarGift.unsaved;
     const sender = fromPeer ? (0, _1_chat_p_js_1.constructChatP)(fromPeer) : undefined;

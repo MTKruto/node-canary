@@ -3281,6 +3281,15 @@ class Client extends Composer {
     async sellGift(userId, messageId) {
         await __classPrivateFieldGet(this, _Client_giftManager, "f").sellGift(userId, messageId);
     }
+    /**
+     * Get a gift using its slug.
+     *
+     * @method gf
+     * @param slug The slug of a gift.
+     */
+    async getGift(slug) {
+        return await __classPrivateFieldGet(this, _Client_giftManager, "f").getGift(slug);
+    }
 }
 exports.Client = Client;
 _Client_handleCtxUpdate = async function _Client_handleCtxUpdate(update) {

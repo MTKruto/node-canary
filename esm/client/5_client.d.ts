@@ -1755,5 +1755,12 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * @param messageId The identifier of the service message announcing the receival of the gift.
      */
     sellGift(userId: ID, messageId: number): Promise<void>;
+    /**
+     * Get a gift using its slug.
+     *
+     * @method gf
+     * @param slug The slug of a gift.
+     */
+    getGift(slug: string): Promise<Gift>;
 }
 //# sourceMappingURL=5_client.d.ts.map

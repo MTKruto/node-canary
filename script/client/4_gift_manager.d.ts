@@ -31,6 +31,7 @@ export declare class GiftManager {
     getClaimedGifts(chatId: ID, params?: GetClaimedGiftsParams): Promise<import("../3_types.js").ClaimedGifts>;
     sendGift(chatId: ID, giftId: string, params?: SendGiftParams): Promise<void>;
     sellGift(userId: ID, messageId: number): Promise<void>;
+    getGift(slug: string): Promise<import("../3_types.js").Gift>;
 }
 export {};
 //# sourceMappingURL=4_gift_manager.d.ts.map

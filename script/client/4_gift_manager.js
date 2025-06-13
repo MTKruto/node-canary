@@ -83,6 +83,17 @@ class GiftManager {
         }
         await __classPrivateFieldGet(this, _GiftManager_c, "f").invoke({ _: "payments.convertStarGift", stargift: { _: "inputSavedStarGiftUser", msg_id: message.id } });
     }
+    async getGift(slug) {
+        if (slug.length > 100) {
+            throw new _0_errors_js_1.InputError("Slug too long.");
+        }
+        slug = slug.toLowerCase();
+        if (!/^[a-z]+-[1-9][0-9]*$/.test(slug)) {
+            throw new _0_errors_js_1.InputError("Invalid slug.");
+        }
+        const result = await __classPrivateFieldGet(this, _GiftManager_c, "f").invoke({ _: "payments.getUniqueStarGift", slug });
+        return await (0, _3_types_js_1.constructGift)(result.gift, __classPrivateFieldGet(this, _GiftManager_c, "f").getEntity.bind(this));
+    }
 }
 exports.GiftManager = GiftManager;
 _GiftManager_c = new WeakMap();

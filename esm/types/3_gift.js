@@ -43,6 +43,8 @@ export async function constructGiftUpgraded(gift, getEntity) {
             owner = constructUser(entity);
         }
     }
+    const ownerName = gift.owner_name;
+    const ownerAddress = gift.owner_address;
     const currentUpgrades = gift.availability_issued;
     const maxUpgrades = gift.availability_total;
     const components = gift.attributes.map(constructGiftUpgradedComponent);
@@ -51,6 +53,8 @@ export async function constructGiftUpgraded(gift, getEntity) {
         id,
         title,
         index,
+        ownerName,
+        ownerAddress,
         owner,
         currentUpgrades,
         maxUpgrades,

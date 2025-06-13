@@ -69,6 +69,10 @@ export interface GiftUpgraded {
     title: string;
     /** The unique index of the gift among others of the same type. */
     index: number;
+    /** The name of the user that owns the gift. */
+    ownerName?: string;
+    /** The address of the TON wallet that owns the gift. */
+    ownerAddress?: string;
     /** The user that owns the gift. */
     owner?: User;
     /** The count of the amount of upgraded gifts of the same type. */

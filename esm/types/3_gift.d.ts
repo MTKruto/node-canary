@@ -81,6 +81,10 @@ export interface GiftUpgraded {
     maxUpgrades: number;
     /** The components of the gift. */
     components: GiftUpgradedComponent[];
+    /** The address of the gift in TON blockchain. */
+    address?: string;
+    /** The amount of stars that can be used to buy the gift.  */
+    price?: number;
 }
 /** A gift. */
 export type Gift = GiftNonUpgraded | GiftUpgraded;

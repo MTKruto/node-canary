@@ -53,6 +53,8 @@ async function constructGiftUpgraded(gift, getEntity) {
     const currentUpgrades = gift.availability_issued;
     const maxUpgrades = gift.availability_total;
     const components = gift.attributes.map(_2_gift_upgraded_component_js_1.constructGiftUpgradedComponent);
+    const address = gift.gift_address;
+    const price = gift.resell_stars !== undefined ? Number(gift.resell_stars) : undefined;
     return (0, _1_utilities_js_1.cleanObject)({
         type: "upgraded",
         id,
@@ -64,6 +66,8 @@ async function constructGiftUpgraded(gift, getEntity) {
         currentUpgrades,
         maxUpgrades,
         components,
+        address,
+        price,
     });
 }
 function constructGiftNonUpgraded(gift) {

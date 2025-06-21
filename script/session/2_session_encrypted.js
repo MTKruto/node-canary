@@ -390,14 +390,19 @@ async function _SessionEncrypted_onMessage(msgId, body) {
     const controller = __classPrivateFieldSet(this, _SessionEncrypted_pingLoopAbortController, new AbortController(), "f");
     let timeElapsed = 0;
     while (this.connected) {
-        const then = Date.now();
-        await (0, _0_deps_js_1.delay)(__classPrivateFieldGet(this, _SessionEncrypted_pingInterval, "f") - timeElapsed, { signal: controller.signal });
         try {
+            await (0, _0_deps_js_1.delay)(__classPrivateFieldGet(this, _SessionEncrypted_pingInterval, "f") - timeElapsed, { signal: controller.signal });
             if (!this.connected) {
                 continue;
             }
             controller.signal.throwIfAborted();
-            await __classPrivateFieldGet(this, _SessionEncrypted_instances, "m", _SessionEncrypted_sendPingDelayDisconnect).call(this, __classPrivateFieldGet(this, _SessionEncrypted_pingInterval, "f") / _0_deps_js_1.SECOND + 15);
+            const then = Date.now();
+            try {
+                await __classPrivateFieldGet(this, _SessionEncrypted_instances, "m", _SessionEncrypted_sendPingDelayDisconnect).call(this, __classPrivateFieldGet(this, _SessionEncrypted_pingInterval, "f") / _0_deps_js_1.SECOND + 15);
+            }
+            finally {
+                timeElapsed = Date.now() - then;
+            }
             controller.signal.throwIfAborted();
         }
         catch (err) {
@@ -408,9 +413,6 @@ async function _SessionEncrypted_onMessage(msgId, body) {
                 break;
             }
             __classPrivateFieldGet(this, _SessionEncrypted_LpingLoop, "f").error(err);
-        }
-        finally {
-            timeElapsed = Date.now() - then;
         }
     }
 }, _SessionEncrypted_sendPingDelayDisconnect = async function _SessionEncrypted_sendPingDelayDisconnect(disconnect_delay) {

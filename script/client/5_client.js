@@ -1527,6 +1527,7 @@ class Client extends Composer {
      *
      * @method ac
      * @param id The identifier of the business connection.
+     * @cache
      */
     async getBusinessConnection(id) {
         return await __classPrivateFieldGet(this, _Client_businessConnectionManager, "f").getBusinessConnection(id);
@@ -1917,6 +1918,7 @@ class Client extends Composer {
      * const message = await client.getMessages("@MTKruto", [210, 212]);
      * ```
      * @returns The retrieved messages.
+     * @cache
      */
     async getMessages(chatId, messageIds) {
         return await __classPrivateFieldGet(this, _Client_messageManager, "f").getMessages(chatId, messageIds);
@@ -1931,6 +1933,7 @@ class Client extends Composer {
      * const message = await client.getMessage("@MTKruto", 212);
      * ```
      * @returns The retrieved message.
+     * @cache
      */
     async getMessage(chatId, messageId) {
         return await __classPrivateFieldGet(this, _Client_messageManager, "f").getMessage(chatId, messageId);
@@ -2129,6 +2132,7 @@ class Client extends Composer {
      * @method ms
      * @param chatId The identifier of the chat that includes the message.
      * @param messageId The identifier of the message.
+     * @cache
      */
     async transcribeVoice(chatId, messageId) {
         return await __classPrivateFieldGet(this, _Client_messageManager, "f").transcribeVoice(chatId, messageId);
@@ -2180,6 +2184,7 @@ class Client extends Composer {
      * }
      * ```
      * @returns A generator yielding the contents of the file.
+     * @cache file
      */
     async *download(fileId, params) {
         for await (const chunk of __classPrivateFieldGet(this, _Client_fileManager, "f").download(fileId, params)) {
@@ -2192,6 +2197,7 @@ class Client extends Composer {
      * @method fs
      * @param id Identifier of one or more of custom emojis.
      * @returns The custom emoji documents.
+     * @cache
      */
     async getCustomEmojiStickers(id) {
         return await __classPrivateFieldGet(this, _Client_fileManager, "f").getCustomEmojiStickers(id);
@@ -2211,6 +2217,7 @@ class Client extends Composer {
      * Get a chat.
      *
      * @method ch
+     * @cache
      */
     async getChat(chatId) {
         return await __classPrivateFieldGet(this, _Client_chatListManager, "f").getChat(chatId);
@@ -2815,6 +2822,7 @@ class Client extends Composer {
      * @param messageId The message that includes at a button responsible for the callback query question.
      * @param question The callback query's question.
      * @returns The bot's answer to the callback query.
+     * @cache
      */
     async sendCallbackQuery(chatId, messageId, question) {
         return await __classPrivateFieldGet(this, _Client_callbackQueryManager, "f").sendCallbackQuery(chatId, messageId, question);
@@ -2838,6 +2846,7 @@ class Client extends Composer {
      * @param userId The ID of the bot to send the inline query to.
      * @param chatId The ID of the chat from which the inline query is sent.
      * @returns The bot's answer to the inline query.
+     * @cache
      */
     async sendInlineQuery(userId, chatId, params) {
         return await __classPrivateFieldGet(this, _Client_inlineQueryManager, "f").sendInlineQuery(userId, chatId, params);
@@ -3144,6 +3153,7 @@ class Client extends Composer {
      *
      * @method vc
      * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @cache
      */
     async getVideoChat(id) {
         return await __classPrivateFieldGet(this, _Client_videoChatManager, "f").getVideoChat(id);
@@ -3237,6 +3247,7 @@ class Client extends Composer {
      * Get translations. User-only.
      *
      * @method ta
+     * @cache
      */
     async getTranslations(params) {
         return await __classPrivateFieldGet(this, _Client_translationsManager, "f").getTranslations(params);

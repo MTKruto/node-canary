@@ -387,7 +387,7 @@ async function _SessionEncrypted_onMessage(msgId, body) {
     let timeElapsed = 0;
     while (this.connected) {
         try {
-            await delay(__classPrivateFieldGet(this, _SessionEncrypted_pingInterval, "f") - timeElapsed, { signal: controller.signal });
+            await delay(Math.max(0, __classPrivateFieldGet(this, _SessionEncrypted_pingInterval, "f") - timeElapsed), { signal: controller.signal });
             if (!this.connected) {
                 continue;
             }

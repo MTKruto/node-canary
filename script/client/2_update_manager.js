@@ -865,7 +865,7 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
     if (!chatIds.size) {
         return false;
     }
-    return (await Promise.all(chatIds.values().map((v) => __classPrivateFieldGet(this, _UpdateManager_c, "f").storage.getEntity(v)))).some((v) => !!v);
+    return (await Promise.all(chatIds.values().map((v) => __classPrivateFieldGet(this, _UpdateManager_c, "f").messageStorage.getEntity(v)))).some((v) => !!v);
 }, _UpdateManager_collectChatIds = function _UpdateManager_collectChatIds(object) {
     const chatIds = new Set();
     if (_2_tl_js_1.Api.is("messageFwdHeader", object)) {

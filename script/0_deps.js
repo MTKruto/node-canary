@@ -19,7 +19,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Parser = exports.initTgCrypto = exports.ige256Encrypt = exports.ige256Decrypt = exports.contentType = exports.encodeBase64 = exports.decodeBase64 = exports.toArrayBuffer = exports.SECOND = exports.MINUTE = exports.iterateReader = exports.concat = exports.delay = exports.isAbsolute = exports.toFileUrl = exports.basename = exports.extname = exports.join = exports.AssertionError = exports.unreachable = exports.assertEquals = exports.assertFalse = exports.assert = void 0;
+exports.Parser = exports.initTgCrypto = exports.ige256Encrypt = exports.ige256Decrypt = exports.contentType = exports.encodeBase64 = exports.decodeBase64 = exports.toArrayBuffer = exports.SECOND = exports.MINUTE = exports.format = exports.iterateReader = exports.concat = exports.delay = exports.isAbsolute = exports.toFileUrl = exports.basename = exports.extname = exports.join = exports.AssertionError = exports.unreachable = exports.assertEquals = exports.assertFalse = exports.assert = void 0;
 exports.extension = extension;
 var assert_js_1 = require("./deps/jsr.io/@std/assert/1.0.13/assert.js");
 Object.defineProperty(exports, "assert", { enumerable: true, get: function () { return assert_js_1.assert; } });
@@ -47,6 +47,8 @@ var concat_js_1 = require("./deps/jsr.io/@std/bytes/1.0.5/concat.js");
 Object.defineProperty(exports, "concat", { enumerable: true, get: function () { return concat_js_1.concat; } });
 var iterate_reader_js_1 = require("./deps/jsr.io/@std/io/0.225.2/iterate_reader.js");
 Object.defineProperty(exports, "iterateReader", { enumerable: true, get: function () { return iterate_reader_js_1.iterateReader; } });
+var format_js_1 = require("./deps/jsr.io/@std/datetime/0.225.4/format.js");
+Object.defineProperty(exports, "format", { enumerable: true, get: function () { return format_js_1.format; } });
 var constants_js_1 = require("./deps/jsr.io/@std/datetime/0.225.4/constants.js");
 Object.defineProperty(exports, "MINUTE", { enumerable: true, get: function () { return constants_js_1.MINUTE; } });
 Object.defineProperty(exports, "SECOND", { enumerable: true, get: function () { return constants_js_1.SECOND; } });

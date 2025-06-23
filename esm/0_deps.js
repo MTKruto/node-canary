@@ -30,6 +30,7 @@ export { isAbsolute } from "./deps/jsr.io/@std/path/1.0.9/is_absolute.js";
 export { delay } from "./deps/jsr.io/@std/async/1.0.12/mod.js";
 export { concat } from "./deps/jsr.io/@std/bytes/1.0.5/concat.js";
 export { iterateReader } from "./deps/jsr.io/@std/io/0.225.2/iterate_reader.js";
+export { format } from "./deps/jsr.io/@std/datetime/0.225.4/format.js";
 export { MINUTE, SECOND } from "./deps/jsr.io/@std/datetime/0.225.4/constants.js";
 export { toArrayBuffer } from "./deps/jsr.io/@std/streams/1.0.9/to_array_buffer.js";
 export { decodeBase64, encodeBase64 } from "./deps/jsr.io/@std/encoding/1.0.7/base64.js";

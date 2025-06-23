@@ -18,6 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 // deno-lint-ignore-file no-explicit-any
+import { format } from "../0_deps.js";
 import { getNumber, getString } from "./0_env.js";
 let verbosity = getNumber("LOG_VERBOSITY") || 0;
 export function setLogVerbosity(verbosity_) {
@@ -115,7 +116,7 @@ export function getLogger(scope) {
                 default:
                     fn = provider.log;
             }
-            fn(`[${verbosity_} ${scope}]`, ...args);
+            fn(`[${format(new Date(), "yyyy.MM.dd HH:mm:ss.SSS")} ${verbosity_} ${scope}]`, ...args);
         },
     };
 }

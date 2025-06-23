@@ -25,6 +25,7 @@ exports.setLogVerbosity = setLogVerbosity;
 exports.setLogFilter = setLogFilter;
 exports.setLoggingProvider = setLoggingProvider;
 exports.getLogger = getLogger;
+const _0_deps_js_1 = require("../0_deps.js");
 const _0_env_js_1 = require("./0_env.js");
 let verbosity = (0, _0_env_js_1.getNumber)("LOG_VERBOSITY") || 0;
 function setLogVerbosity(verbosity_) {
@@ -122,7 +123,7 @@ function getLogger(scope) {
                 default:
                     fn = provider.log;
             }
-            fn(`[${verbosity_} ${scope}]`, ...args);
+            fn(`[${(0, _0_deps_js_1.format)(new Date(), "yyyy.MM.dd HH:mm:ss.SSS")} ${verbosity_} ${scope}]`, ...args);
         },
     };
 }

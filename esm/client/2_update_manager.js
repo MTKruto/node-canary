@@ -28,13 +28,14 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _UpdateManager_instances, _a, _UpdateManager_c, _UpdateManager_updateState, _UpdateManager_updateHandler, _UpdateManager_LrecoverUpdateGap, _UpdateManager_LrecoverChannelUpdateGap, _UpdateManager_L$handleUpdate, _UpdateManager_L$processUpdates, _UpdateManager_LfetchState, _UpdateManager_LopenChat, _UpdateManager_Lmin, _UpdateManager_defaultDropPendingUpdates, _UpdateManager_mustDropPendingUpdates, _UpdateManager_state, _UpdateManager_getState, _UpdateManager_setState, _UpdateManager_extractMessages, _UpdateManager_extractMinPeerReferences, _UpdateManager_handleUpdateQueues, _UpdateManager_nonFirst, _UpdateManager_getChannelPtsWithDropPendingUpdatesCheck, _UpdateManager_checkGap, _UpdateManager_checkGapQts, _UpdateManager_checkChannelGap, _UpdateManager_channelUpdateQueues, _UpdateManager_processChannelPtsUpdateInner, _UpdateManager_queueUpdate, _UpdateManager_processChannelPtsUpdate, _UpdateManager_processPtsUpdateInner, _UpdateManager_ptsUpdateQueue, _UpdateManager_processPtsUpdate, _UpdateManager_processQtsUpdateInner, _UpdateManager_qtsUpdateQueue, _UpdateManager_processQtsUpdate, _UpdateManager_processUpdatesQueue, _UpdateManager_processUpdates, _UpdateManager_setUpdateStateDate, _UpdateManager_setUpdatePts, _UpdateManager_setUpdateQts, _UpdateManager_getLocalState, _UpdateManager_recoveringUpdateGap, _UpdateManager_recoverUpdateGapMutex, _UpdateManager_recoverChannelUpdateGap, _UpdateManager_handleUpdatesSet, _UpdateManager_handleStoredUpdates, _UpdateManager_handleUpdate, _UpdateManager_openChats;
+var _UpdateManager_instances, _a, _UpdateManager_c, _UpdateManager_updateState, _UpdateManager_updateHandler, _UpdateManager_LrecoverUpdateGap, _UpdateManager_LrecoverChannelUpdateGap, _UpdateManager_L$handleUpdate, _UpdateManager_L$processUpdates, _UpdateManager_LfetchState, _UpdateManager_LopenChat, _UpdateManager_Lmin, _UpdateManager_defaultDropPendingUpdates, _UpdateManager_mustDropPendingUpdates, _UpdateManager_state, _UpdateManager_getState, _UpdateManager_setState, _UpdateManager_extractMessages, _UpdateManager_extractMinPeerReferences, _UpdateManager_handleUpdateQueues, _UpdateManager_nonFirst, _UpdateManager_getChannelPtsWithDropPendingUpdatesCheck, _UpdateManager_checkGap, _UpdateManager_checkGapQts, _UpdateManager_checkChannelGap, _UpdateManager_channelUpdateQueues, _UpdateManager_processChannelPtsUpdateInner, _UpdateManager_queueUpdate, _UpdateManager_processChannelPtsUpdate, _UpdateManager_processPtsUpdateInner, _UpdateManager_ptsUpdateQueue, _UpdateManager_processPtsUpdate, _UpdateManager_processQtsUpdateInner, _UpdateManager_qtsUpdateQueue, _UpdateManager_processQtsUpdate, _UpdateManager_processUpdatesQueue, _UpdateManager_processUpdates, _UpdateManager_setUpdateStateDate, _UpdateManager_setUpdatePts, _UpdateManager_setUpdateQts, _UpdateManager_getLocalState, _UpdateManager_recoveringUpdateGap, _UpdateManager_recoverUpdateGapMutex, _UpdateManager_recoverChannelUpdateGap, _UpdateManager_handleUpdatesSet, _UpdateManager_handleStoredUpdates, _UpdateManager_handleUpdate, _UpdateManager_needsGetDifference, _UpdateManager_collectChatIds, _UpdateManager_collectChatIdsFromEntities, _UpdateManager_openChats;
 import { delay, SECOND, unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { getLogger, Mutex, Queue, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { PersistentTimestampInvalid } from "../3_errors.js";
 import { CHANNEL_DIFFERENCE_LIMIT_BOT, CHANNEL_DIFFERENCE_LIMIT_USER } from "../4_constants.js";
+import { peerToChatId } from "../tl/2_telegram.js";
 export class UpdateManager {
     constructor(c) {
         _UpdateManager_instances.add(this);
@@ -516,6 +517,9 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
             return;
         }
     }
+    if (await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_needsGetDifference).call(this, update)) {
+        await this.recoverUpdateGap("needsGetDifference");
+    }
     if (__classPrivateFieldGet(this, _UpdateManager_c, "f").guaranteeUpdateDelivery) {
         await __classPrivateFieldGet(this, _UpdateManager_c, "f").storage.setUpdate(_a.MAIN_BOX_ID, update);
     }
@@ -852,6 +856,156 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
     else {
         return Promise.resolve(() => Promise.resolve());
     }
+}, _UpdateManager_needsGetDifference = async function _UpdateManager_needsGetDifference(update) {
+    const chatIds = __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_collectChatIds).call(this, update);
+    if (!chatIds.size) {
+        return false;
+    }
+    return (await Promise.all(chatIds.values().map((v) => __classPrivateFieldGet(this, _UpdateManager_c, "f").storage.getEntity(v)))).some((v) => !!v);
+}, _UpdateManager_collectChatIds = function _UpdateManager_collectChatIds(object) {
+    const chatIds = new Set();
+    if (Api.is("messageFwdHeader", object)) {
+        if (object.from_id) {
+            chatIds.add(peerToChatId(object.from_id));
+        }
+        if (object.saved_from_peer) {
+            chatIds.add(peerToChatId(object.saved_from_peer));
+        }
+        return chatIds;
+    }
+    if (Api.isOfEnum("MessageMedia", object)) {
+        switch (object._) {
+            case "messageMediaContact":
+                if (object.user_id) {
+                    chatIds.add(peerToChatId({ _: "peerUser", user_id: object.user_id }));
+                }
+                break;
+            case "messageMediaStory":
+                chatIds.add(peerToChatId(object.peer));
+                break;
+            case "messageMediaGiveaway":
+                for (const chatId of object.channels.map((v) => peerToChatId({ _: "peerChannel", channel_id: v }))) {
+                    chatIds.add(chatId);
+                }
+                break;
+            case "messageMediaGiveawayResults":
+                chatIds.add(peerToChatId({ _: "peerChannel", channel_id: object.channel_id }));
+                for (const chatId of object.winners.map((user_id) => peerToChatId({ _: "peerUser", user_id }))) {
+                    chatIds.add(chatId);
+                }
+        }
+        return chatIds;
+    }
+    // messsages
+    if (!("message" in object)) {
+        return chatIds;
+    }
+    if (Api.is("messageEmpty", object.message)) {
+        return chatIds;
+    }
+    chatIds.add(peerToChatId(object.message.peer_id));
+    if (object.message.from_id) {
+        chatIds.add(peerToChatId(object.message.from_id));
+    }
+    if (Api.is("messageService", object.message)) {
+        switch (object.message.action._) {
+            case "messageActionChatCreate":
+            case "messageActionChatAddUser":
+            case "messageActionInviteToGroupCall":
+                for (const user_id of object.message.action.users) {
+                    chatIds.add(peerToChatId({ _: "peerUser", user_id }));
+                }
+                break;
+            case "messageActionChatDeleteUser":
+                chatIds.add(peerToChatId({ _: "peerUser", user_id: object.message.action.user_id }));
+                break;
+            case "messageActionChatMigrateTo":
+                chatIds.add(peerToChatId({ _: "peerChannel", channel_id: object.message.action.channel_id }));
+                break;
+            case "messageActionChannelMigrateFrom":
+                chatIds.add(peerToChatId({ _: "peerChat", chat_id: object.message.action.chat_id }));
+                break;
+            case "messageActionConferenceCall":
+                if (object.message.action.other_participants) {
+                    for (const participant of object.message.action.other_participants) {
+                        chatIds.add(peerToChatId(participant));
+                    }
+                }
+                break;
+            case "messageActionPaymentRefunded":
+                chatIds.add(peerToChatId(object.message.action.peer));
+                break;
+            case "messageActionGiftCode":
+                if (object.message.action.boost_peer) {
+                    chatIds.add(peerToChatId(object.message.action.boost_peer));
+                }
+                break;
+            case "messageActionRequestedPeer":
+                if (__classPrivateFieldGet(this, _UpdateManager_c, "f").storage.accountType === "user") {
+                    for (const peer of object.message.action.peers) {
+                        chatIds.add(peerToChatId(peer));
+                    }
+                }
+                break;
+            case "messageActionSetMessagesTTL":
+                if (object.message.action.auto_setting_from) {
+                    chatIds.add(peerToChatId({ _: "peerUser", user_id: object.message.action.auto_setting_from }));
+                }
+        }
+    }
+    else {
+        if (object.message.reply_to) {
+            switch (object.message.reply_to._) {
+                case "messageReplyHeader":
+                    if (object.message.reply_to.reply_to_peer_id) {
+                        chatIds.add(peerToChatId(object.message.reply_to.reply_to_peer_id));
+                    }
+                    if (object.message.reply_to.reply_from) {
+                        for (const chatId of __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_collectChatIds).call(this, object.message.reply_to.reply_from)) {
+                            chatIds.add(chatId);
+                        }
+                    }
+                    if (object.message.reply_to.quote_entities) {
+                        for (const chatId of __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_collectChatIdsFromEntities).call(this, object.message.reply_to.quote_entities)) {
+                            chatIds.add(chatId);
+                        }
+                    }
+                    if (object.message.reply_to.reply_media) {
+                        for (const chatId of __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_collectChatIds).call(this, object.message.reply_to.reply_media)) {
+                            chatIds.add(chatId);
+                        }
+                    }
+                    break;
+                case "messageReplyStoryHeader":
+                    chatIds.add(peerToChatId(object.message.reply_to.peer));
+            }
+        }
+        if (object.message.fwd_from) {
+            for (const chatId of __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_collectChatIds).call(this, object.message.fwd_from)) {
+                chatIds.add(chatId);
+            }
+        }
+        if (object.message.via_bot_id) {
+            chatIds.add(peerToChatId({ _: "peerUser", user_id: object.message.via_bot_id }));
+        }
+        if (object.message.entities) {
+            for (const chatId of __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_collectChatIdsFromEntities).call(this, object.message.entities)) {
+                chatIds.add(chatId);
+            }
+        }
+        if (object.message.media) {
+            for (const chatId of __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_collectChatIds).call(this, object.message.media)) {
+                chatIds.add(chatId);
+            }
+        }
+    }
+    return chatIds;
+}, _UpdateManager_collectChatIdsFromEntities = function _UpdateManager_collectChatIdsFromEntities(entities) {
+    const chatIds = new Array();
+    for (const user_id of entities.filter((v) => Api.is("messageEntityMentionName", v)).map((v) => v.user_id)) {
+        chatIds.push(peerToChatId({ _: "peerUser", user_id }));
+    }
+    return chatIds;
 };
 Object.defineProperty(UpdateManager, "QTS_COUNT", {
     enumerable: true,

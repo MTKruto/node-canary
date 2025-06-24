@@ -516,13 +516,13 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
     if (update.pts != 0) {
         if (checkGap) {
             await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_checkGap).call(this, update.pts, update.pts_count);
+            if (await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_needsGetDifference).call(this, update)) {
+                await this.recoverUpdateGap("needsGetDifference");
+            }
         }
         if (localState.pts + update.pts_count > update.pts) {
             return;
         }
-    }
-    if (await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_needsGetDifference).call(this, update)) {
-        await this.recoverUpdateGap("needsGetDifference");
     }
     if (__classPrivateFieldGet(this, _UpdateManager_c, "f").guaranteeUpdateDelivery) {
         await __classPrivateFieldGet(this, _UpdateManager_c, "f").storage.setUpdate(_a.MAIN_BOX_ID, update);
@@ -865,7 +865,7 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
     if (!chatIds.size) {
         return false;
     }
-    return (await Promise.all(chatIds.values().map((v) => __classPrivateFieldGet(this, _UpdateManager_c, "f").messageStorage.getEntity(v)))).some((v) => !!v);
+    return (await Promise.all(chatIds.values().map((v) => __classPrivateFieldGet(this, _UpdateManager_c, "f").messageStorage.getEntity(v)))).some((v) => !v);
 }, _UpdateManager_collectChatIds = function _UpdateManager_collectChatIds(object) {
     const chatIds = new Set();
     if (_2_tl_js_1.Api.is("messageFwdHeader", object)) {

@@ -1320,7 +1320,7 @@ export class Client extends Composer {
                     }
                     if (Api.isOfEnum("Update", result) || Api.isOfEnum("Updates", result)) {
                         return new Promise((resolve) => {
-                            __classPrivateFieldGet(this, _Client_updateManager, "f").processUpdates(result, true, null, () => resolve(result));
+                            __classPrivateFieldGet(this, _Client_updateManager, "f").processUpdates(result, true, Mtproto.is("ping", function_) ? null : function_, () => resolve(result));
                         });
                     }
                 }

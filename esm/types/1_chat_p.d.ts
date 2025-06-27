@@ -18,6 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { Api } from "../2_tl.js";
+import { ChatPhoto } from "./0_chat_photo.js";
 import { RestrictionReason } from "./0_restriction_reason.js";
 /** @unlisted */
 export type ChatType = "private" | "group" | "supergroup" | "channel";
@@ -35,7 +36,7 @@ export interface ChatPPrivate extends _ChatPBase {
     /** @discriminator */
     type: "private";
     /** Whether this is a bot's chat. */
-    isBot?: boolean;
+    isBot: boolean;
     /** The first name of the user. */
     firstName: string;
     /** The last name of the user. */
@@ -44,18 +45,26 @@ export interface ChatPPrivate extends _ChatPBase {
     username?: string;
     /** The user's additional usernames. */
     also?: string[];
+    /** The user's profile photo. */
+    photo?: ChatPhoto;
+    /** The user's [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag). */
+    languageCode?: string;
     /** Whether the user has been identified as scam. */
     isScam: boolean;
     /** Whether the user has been identified as an impersonator. */
     isFake: boolean;
-    /** Whether the user is official support. */
-    isSupport: boolean;
+    /** Whether the user is subscribed to Telegram Premium. */
+    isPremium: boolean;
     /** Whether the user has been verified. */
     isVerified: boolean;
+    /** Whether the user is official support. */
+    isSupport: boolean;
     /** Whether the user has been restricted. */
-    isRestricted?: boolean;
+    isRestricted: boolean;
     /** The reason why the user has been restricted. */
     restrictionReason?: RestrictionReason[];
+    /** Whether the user is a bot that has been added to the attachment menu by the current user. */
+    addedToAttachmentMenu?: boolean;
 }
 /** @unlisted */
 export interface ChatPGroup extends _ChatPBase {

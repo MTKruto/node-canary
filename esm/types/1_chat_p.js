@@ -20,6 +20,7 @@
 import { unreachable } from "../0_deps.js";
 import { cleanObject, getColorFromPeerId, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
+import { constructChatPhoto } from "./0_chat_photo.js";
 import { constructRestrictionReason } from "./0_restriction_reason.js";
 export function constructChatP(chat) {
     if (Api.is("user", chat)) {
@@ -34,15 +35,19 @@ export function constructChatP(chat) {
             firstName: chat.first_name || "",
             lastName: chat.last_name,
             username,
+            languageCode: chat.lang_code,
             also: usernames?.filter((v) => v != username),
             isScam: chat.scam || false,
             isFake: chat.fake || false,
-            isSupport: chat.support || false,
+            isPremium: chat.premium || false,
             isVerified: chat.verified || false,
+            isSupport: chat.support || false,
+            isRestricted: chat.restricted || false,
+            restrictionReason: chat.restriction_reason,
+            addedToAttachmentMenu: chat.bot ? chat.attach_menu_enabled || false : undefined,
         };
-        if (chat_.isBot) {
-            chat_.isRestricted = chat.restricted || false;
-            chat_.restrictionReason = chat.restriction_reason;
+        if (Api.is("userProfilePhoto", chat.photo)) {
+            chat_.photo = constructChatPhoto(chat.photo, chat_.id, chat.access_hash ?? 0n);
         }
         return cleanObject(chat_);
     }

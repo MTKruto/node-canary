@@ -19,6 +19,7 @@
  */
 import { Api } from "../2_tl.js";
 import { ChatPhoto } from "./0_chat_photo.js";
+import { RestrictionReason } from "./0_restriction_reason.js";
 /** A user. */
 export interface User {
     /** Unique identifier for this user or bot */
@@ -49,8 +50,12 @@ export interface User {
     isVerified: boolean;
     /** Whether the user is official support. */
     isSupport: boolean;
+    /** Whether the user has been restricted. */
+    isRestricted: boolean;
+    /** The reason why the user has been restricted. */
+    restrictionReason?: RestrictionReason[];
     /** Whether the user is a bot that has been added to the attachment menu by the current user. */
-    addedToAttachmentMenu: boolean;
+    addedToAttachmentMenu?: boolean;
 }
 export declare function constructUser(user_: Api.user): User;
 //# sourceMappingURL=1_user.d.ts.map

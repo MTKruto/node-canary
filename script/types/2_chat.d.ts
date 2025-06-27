@@ -45,7 +45,7 @@ export interface ChatGroup extends ChatBase, ChatPGroup {
     videoChatId?: string;
 }
 /** @unlisted */
-export interface ChatPrivate extends ChatBase, ChatPPrivate {
+export interface ChatPrivate extends ChatBase, Omit<ChatPPrivate, "photo"> {
     /** The user's birthday. */
     birthday?: Birthday;
     /** The written address of the business. */

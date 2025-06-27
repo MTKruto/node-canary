@@ -24,6 +24,7 @@ export function constructUser(user_) {
     const id = Number(user_.id);
     const usernames = user_.usernames?.map((v) => v.username);
     const username = user_.username ?? usernames?.shift();
+    console.log(user_);
     const user = {
         id,
         color: user_.color?.color !== undefined ? user_.color.color : getColorFromPeerId(id),
@@ -38,7 +39,9 @@ export function constructUser(user_) {
         isPremium: user_.premium || false,
         isVerified: user_.verified || false,
         isSupport: user_.support || false,
-        addedToAttachmentMenu: user_.attach_menu_enabled || false,
+        isRestricted: user_.restricted || false,
+        restrictionReason: user_.restriction_reason,
+        addedToAttachmentMenu: user_.bot ? user_.attach_menu_enabled || false : undefined,
     };
     if (Api.is("userProfilePhoto", user_.photo)) {
         user.photo = constructChatPhoto(user_.photo, user.id, user_.access_hash ?? 0n);

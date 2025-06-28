@@ -43,3 +43,21 @@ export async function constructJoinRequest(update, getEntity) {
         inviteLink,
     });
 }
+export async function constructJoinRequest2(peer, inviteImporter, getEntity) {
+    const chat_ = await getEntity(peer);
+    if (!chat_) {
+        unreachable();
+    }
+    const chat = constructChatP(chat_);
+    const user_ = await getEntity({ _: "peerUser", user_id: inviteImporter.user_id });
+    if (!user_) {
+        unreachable();
+    }
+    const from = constructUser(user_);
+    return cleanObject({
+        chat,
+        from,
+        date: fromUnixTimestamp(inviteImporter.date),
+        bio: inviteImporter.about,
+    });
+}

@@ -33,8 +33,9 @@ import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { toUnixTimestamp } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
-import { constructChatMemberUpdated, constructChatP, constructFailedInvitation, constructInviteLink, constructJoinRequest, slowModeDurationToSeconds } from "../3_types.js";
+import { constructChatMemberUpdated, constructChatP, constructFailedInvitation, constructInviteLink, constructJoinRequest, constructJoinRequest2, slowModeDurationToSeconds } from "../3_types.js";
 import { chatMemberRightsToTlObject, reactionToTlObject } from "../3_types.js";
+import { inputPeerToPeer } from "../tl/2_telegram.js";
 import { checkPassword } from "./0_password.js";
 import { canBeInputChannel, canBeInputUser, getLimit, toInputChannel, toInputUser } from "./0_utilities.js";
 const chatManagerUpdates = [
@@ -99,6 +100,26 @@ export class ChatManager {
             peer: await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId),
             link: params?.inviteLink,
         });
+    }
+    async getJoinRequests(chatId, params) {
+        __classPrivateFieldGet(this, _ChatManager_c, "f").storage.assertUser("getJoinRequests");
+        if (typeof params?.inviteLink === "string" && typeof params?.search === "string") {
+            throw new InputError("inviteLink and search cannot be specified together.");
+        }
+        const peer = await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId);
+        const offset_user = params?.fromUserId ? await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputUser(params.fromUserId) : { _: "inputUserEmpty" };
+        const { importers } = await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({
+            _: "messages.getChatInviteImporters",
+            requested: true,
+            peer,
+            link: params?.inviteLink,
+            q: params?.search,
+            offset_date: params?.fromDate ? toUnixTimestamp(params.fromDate) : 0,
+            offset_user,
+            limit: getLimit(params?.limit),
+        });
+        const peer_ = inputPeerToPeer(peer);
+        return await Promise.all(importers.map((v) => constructJoinRequest2(peer_, v, __classPrivateFieldGet(this, _ChatManager_c, "f").getEntity)));
     }
     // INVITE LINKS //
     async createInviteLink(chatId, params) {

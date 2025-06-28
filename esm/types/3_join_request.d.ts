@@ -30,10 +30,11 @@ export interface JoinRequest {
     from: User;
     /** The point in time in which the join request was made. */
     date: Date;
-    /** The bio of the user who made the join request. */
+    /** The bio of the user who made the join request. Bot-only. */
     bio?: string;
-    /** The invite link that the user used to make the join request. */
+    /** The invite link that the user used to make the join request. Bot-only. */
     inviteLink?: InviteLink;
 }
 export declare function constructJoinRequest(update: Api.updateBotChatInviteRequester, getEntity: EntityGetter): Promise<JoinRequest>;
+export declare function constructJoinRequest2(peer: Api.Peer, inviteImporter: Api.ChatInviteImporter, getEntity: EntityGetter): Promise<JoinRequest>;
 //# sourceMappingURL=3_join_request.d.ts.map

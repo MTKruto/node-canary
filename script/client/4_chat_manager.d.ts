@@ -20,7 +20,7 @@
 import { Api } from "../2_tl.js";
 import { ChatP, SlowModeDuration } from "../3_types.js";
 import { FileSource, ID, Reaction, Update } from "../3_types.js";
-import { AddChatMemberParams, ApproveJoinRequestsParams, BanChatMemberParams, CreateInviteLinkParams, DeclineJoinRequestsParams, GetCreatedInviteLinksParams, SetChatMemberRightsParams, SetChatPhotoParams, SetSignaturesEnabledParams } from "./0_params.js";
+import { AddChatMemberParams, ApproveJoinRequestsParams, BanChatMemberParams, CreateInviteLinkParams, DeclineJoinRequestsParams, GetCreatedInviteLinksParams, GetJoinRequestsParams, SetChatMemberRightsParams, SetChatPhotoParams, SetSignaturesEnabledParams } from "./0_params.js";
 import { UpdateProcessor } from "./0_update_processor.js";
 import { C as C_ } from "./1_types.js";
 import { FileManager } from "./2_file_manager.js";
@@ -40,6 +40,7 @@ export declare class ChatManager implements UpdateProcessor<ChatManagerUpdate> {
     declineJoinRequest(chatId: ID, userId: ID): Promise<void>;
     approveJoinRequests(chatId: ID, params?: ApproveJoinRequestsParams): Promise<void>;
     declineJoinRequests(chatId: ID, params?: DeclineJoinRequestsParams): Promise<void>;
+    getJoinRequests(chatId: ID, params?: GetJoinRequestsParams): Promise<import("../3_types.js").JoinRequest[]>;
     createInviteLink(chatId: ID, params?: CreateInviteLinkParams): Promise<import("../3_types.js").InviteLink>;
     getCreatedInviteLinks(chatId: ID, params?: GetCreatedInviteLinksParams): Promise<import("../3_types.js").InviteLink[]>;
     joinChat(chatId: ID): Promise<void>;

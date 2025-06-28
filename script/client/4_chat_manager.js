@@ -38,6 +38,7 @@ const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _3_types_js_1 = require("../3_types.js");
 const _3_types_js_2 = require("../3_types.js");
+const _2_telegram_js_1 = require("../tl/2_telegram.js");
 const _0_password_js_1 = require("./0_password.js");
 const _0_utilities_js_1 = require("./0_utilities.js");
 const chatManagerUpdates = [
@@ -102,6 +103,26 @@ class ChatManager {
             peer: await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId),
             link: params?.inviteLink,
         });
+    }
+    async getJoinRequests(chatId, params) {
+        __classPrivateFieldGet(this, _ChatManager_c, "f").storage.assertUser("getJoinRequests");
+        if (typeof params?.inviteLink === "string" && typeof params?.search === "string") {
+            throw new _0_errors_js_1.InputError("inviteLink and search cannot be specified together.");
+        }
+        const peer = await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId);
+        const offset_user = params?.fromUserId ? await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputUser(params.fromUserId) : { _: "inputUserEmpty" };
+        const { importers } = await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({
+            _: "messages.getChatInviteImporters",
+            requested: true,
+            peer,
+            link: params?.inviteLink,
+            q: params?.search,
+            offset_date: params?.fromDate ? (0, _1_utilities_js_1.toUnixTimestamp)(params.fromDate) : 0,
+            offset_user,
+            limit: (0, _0_utilities_js_1.getLimit)(params?.limit),
+        });
+        const peer_ = (0, _2_telegram_js_1.inputPeerToPeer)(peer);
+        return await Promise.all(importers.map((v) => (0, _3_types_js_1.constructJoinRequest2)(peer_, v, __classPrivateFieldGet(this, _ChatManager_c, "f").getEntity)));
     }
     // INVITE LINKS //
     async createInviteLink(chatId, params) {

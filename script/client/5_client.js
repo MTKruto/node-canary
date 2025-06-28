@@ -2463,6 +2463,15 @@ class Client extends Composer {
         await __classPrivateFieldGet(this, _Client_chatManager, "f").declineJoinRequests(chatId, params);
     }
     /**
+     * Get pending join requests in a chat. User-only.
+     *
+     * @method ch
+     * @param chatId The identifier of the chat that contains the join requests.
+     */
+    async getJoinRequests(chatId, params) {
+        return await __classPrivateFieldGet(this, _Client_chatManager, "f").getJoinRequests(chatId, params);
+    }
+    /**
      * Add a single user to a chat.
      *
      * @method ch

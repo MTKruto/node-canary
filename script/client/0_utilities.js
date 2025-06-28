@@ -35,6 +35,7 @@ exports.toInputUser = toInputUser;
 exports.canBeInputChannel = canBeInputChannel;
 exports.toInputChannel = toInputChannel;
 exports.repr = repr;
+exports.getLimit = getLimit;
 const _0_deps_js_1 = require("../0_deps.js");
 const _0_errors_js_1 = require("../0_errors.js");
 const _2_tl_js_1 = require("../2_tl.js");
@@ -207,6 +208,20 @@ function repr(value) {
     }
     else {
         return (0, _2_tl_js_1.repr)(value);
+    }
+}
+function getLimit(limit) {
+    if (typeof limit !== "number") {
+        return 100;
+    }
+    else if (limit < 1) {
+        return 1;
+    }
+    else if (limit > 100) {
+        return 100;
+    }
+    else {
+        return limit;
     }
 }
 exports.UPLOAD_REQUEST_PER_CONNECTION = 2;

@@ -190,6 +190,20 @@ export function repr(value) {
         return repr_(value);
     }
 }
+export function getLimit(limit) {
+    if (typeof limit !== "number") {
+        return 100;
+    }
+    else if (limit < 1) {
+        return 1;
+    }
+    else if (limit > 100) {
+        return 100;
+    }
+    else {
+        return limit;
+    }
+}
 export const UPLOAD_REQUEST_PER_CONNECTION = 2;
 export const DOWNLOAD_POOL_SIZE = 1;
 export const DOWNLOAD_REQUEST_PER_CONNECTION = 1;

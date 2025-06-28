@@ -36,6 +36,7 @@ const _0_deps_js_1 = require("../0_deps.js");
 const _0_errors_js_1 = require("../0_errors.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _3_types_js_1 = require("../3_types.js");
+const _0_utilities_js_1 = require("./0_utilities.js");
 class GiftManager {
     constructor(c) {
         _GiftManager_c.set(this, void 0);
@@ -51,13 +52,7 @@ class GiftManager {
     async getClaimedGifts(chatId, params) {
         __classPrivateFieldGet(this, _GiftManager_c, "f").storage.assertUser("getClaimedGifts");
         const offset = params?.offset ?? "";
-        let limit = params?.limit ?? 100;
-        if (limit > 100) {
-            limit = 100;
-        }
-        if (limit < 1) {
-            limit = 1;
-        }
+        const limit = (0, _0_utilities_js_1.getLimit)(params?.limit);
         const peer = await __classPrivateFieldGet(this, _GiftManager_c, "f").getInputPeer(chatId);
         const result = await __classPrivateFieldGet(this, _GiftManager_c, "f").invoke({ _: "payments.getSavedStarGifts", peer, offset, limit });
         return await (0, _3_types_js_1.constructClaimedGifts)(result, __classPrivateFieldGet(this, _GiftManager_c, "f").getEntity);

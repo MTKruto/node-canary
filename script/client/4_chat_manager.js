@@ -113,7 +113,7 @@ class ChatManager {
     }
     async getCreatedInviteLinks(chatId, params) {
         __classPrivateFieldGet(this, _ChatManager_c, "f").storage.assertUser("getCreatedInviteLinks");
-        const { invites } = await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "messages.getExportedChatInvites", peer: await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId), revoked: params?.revoked ? true : undefined, admin_id: params?.by ? await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputUser(params.by) : { _: "inputUserEmpty" }, limit: params?.limit ?? 100, offset_date: params?.afterDate ? (0, _1_utilities_js_1.toUnixTimestamp)(params.afterDate) : undefined, offset_link: params?.afterInviteLink });
+        const { invites } = await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "messages.getExportedChatInvites", peer: await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId), revoked: params?.revoked ? true : undefined, admin_id: params?.by ? await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputUser(params.by) : { _: "inputUserEmpty" }, limit: (0, _0_utilities_js_1.getLimit)(params?.limit), offset_date: params?.afterDate ? (0, _1_utilities_js_1.toUnixTimestamp)(params.afterDate) : undefined, offset_link: params?.afterInviteLink });
         return await Promise.all(invites.map((v) => _2_tl_js_1.Api.as("chatInviteExported", v)).map((v) => (0, _3_types_js_1.constructInviteLink)(v, __classPrivateFieldGet(this, _ChatManager_c, "f").getEntity)));
     }
     // JOINING AND LEAVING CHATS //

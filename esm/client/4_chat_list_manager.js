@@ -34,7 +34,7 @@ import { InputError } from "../0_errors.js";
 import { toUnixTimestamp } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { constructChat, constructChatListItem, constructChatListItem3, constructChatListItem4, constructChatMember, constructChatP, constructChatSettings, getChatListItemOrder } from "../3_types.js";
-import { canBeInputChannel, canBeInputUser, getChatListId, toInputChannel, toInputUser } from "./0_utilities.js";
+import { canBeInputChannel, canBeInputUser, getChatListId, getLimit, toInputChannel, toInputUser } from "./0_utilities.js";
 const chatListManagerUpdates = [
     "updateNewMessage",
     "updateNewChannelMessage",
@@ -231,7 +231,7 @@ export class ChatListManager {
         const peer = await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeer(chatId);
         if (canBeInputChannel(peer)) {
             const channel = toInputChannel(peer);
-            const participants = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "channels.getParticipants", channel, filter: { _: "channelParticipantsRecent" }, offset: params?.offset ?? 0, limit: params?.limit ?? 100, hash: 0n });
+            const participants = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "channels.getParticipants", channel, filter: { _: "channelParticipantsRecent" }, offset: params?.offset ?? 0, limit: getLimit(params?.limit), hash: 0n });
             if (Api.is("channels.channelParticipantsNotModified", participants)) {
                 unreachable();
             }
@@ -311,13 +311,7 @@ export class ChatListManager {
             throw new InputError("fromChatId must be a chat identifier.");
         }
         const user_id = await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputUser(userId);
-        let limit = params?.limit ?? 100;
-        if (limit <= 0) {
-            limit = 1;
-        }
-        if (limit > 100) {
-            limit = 100;
-        }
+        const limit = getLimit(params?.limit);
         const result = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "messages.getCommonChats", user_id, max_id: Api.chatIdToPeerId(max_id), limit });
         const chats = new Array();
         for (const chat of result.chats) {

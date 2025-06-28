@@ -234,7 +234,7 @@ class ChatListManager {
         const peer = await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeer(chatId);
         if ((0, _0_utilities_js_1.canBeInputChannel)(peer)) {
             const channel = (0, _0_utilities_js_1.toInputChannel)(peer);
-            const participants = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "channels.getParticipants", channel, filter: { _: "channelParticipantsRecent" }, offset: params?.offset ?? 0, limit: params?.limit ?? 100, hash: 0n });
+            const participants = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "channels.getParticipants", channel, filter: { _: "channelParticipantsRecent" }, offset: params?.offset ?? 0, limit: (0, _0_utilities_js_1.getLimit)(params?.limit), hash: 0n });
             if (_2_tl_js_1.Api.is("channels.channelParticipantsNotModified", participants)) {
                 (0, _0_deps_js_1.unreachable)();
             }
@@ -314,13 +314,7 @@ class ChatListManager {
             throw new _0_errors_js_1.InputError("fromChatId must be a chat identifier.");
         }
         const user_id = await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputUser(userId);
-        let limit = params?.limit ?? 100;
-        if (limit <= 0) {
-            limit = 1;
-        }
-        if (limit > 100) {
-            limit = 100;
-        }
+        const limit = (0, _0_utilities_js_1.getLimit)(params?.limit);
         const result = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "messages.getCommonChats", user_id, max_id: _2_tl_js_1.Api.chatIdToPeerId(max_id), limit });
         const chats = new Array();
         for (const chat of result.chats) {

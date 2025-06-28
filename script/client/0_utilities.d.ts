@@ -34,6 +34,7 @@ export declare function toInputUser(inputPeer: Api.InputPeer): Api.inputUserSelf
 export declare function canBeInputChannel(inputPeer: Api.InputPeer): inputPeer is Api.inputPeerChannel | Api.inputPeerChannelFromMessage;
 export declare function toInputChannel(inputPeer: Api.InputPeer): Api.inputChannel | Api.inputChannelFromMessage;
 export declare function repr(value: unknown): string | null;
+export declare function getLimit(limit: number | undefined): number;
 export declare const UPLOAD_REQUEST_PER_CONNECTION = 2;
 export declare const DOWNLOAD_POOL_SIZE = 1;
 export declare const DOWNLOAD_REQUEST_PER_CONNECTION = 1;

@@ -224,13 +224,7 @@ class MessageManager {
     }
     async getHistory(chatId, params) {
         __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertUser("getHistory");
-        let limit = params?.limit ?? 100;
-        if (limit <= 0) {
-            limit = 1;
-        }
-        else if (limit > 100) {
-            limit = 100;
-        }
+        const limit = (0, _0_utilities_js_1.getLimit)(params?.limit);
         let offsetId = params?.fromMessageId ?? 0;
         if (offsetId < 0) {
             offsetId = 0;
@@ -929,7 +923,7 @@ class MessageManager {
     }
     async searchMessages(chatId, query, params) {
         __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertUser("searchMessages");
-        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.search", peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId), q: query, add_offset: 0, filter: (0, _0_message_search_filter_js_1.messageSearchFilterToTlObject)(params?.filter ?? "empty"), hash: 0n, limit: params?.limit ?? 100, max_date: 0, max_id: 0, min_date: 0, min_id: 0, offset_id: params?.after ? params.after : 0, from_id: params?.from ? await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(params.from) : undefined });
+        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.search", peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId), q: query, add_offset: 0, filter: (0, _0_message_search_filter_js_1.messageSearchFilterToTlObject)(params?.filter ?? "empty"), hash: 0n, limit: (0, _0_utilities_js_1.getLimit)(params?.limit), max_date: 0, max_id: 0, min_date: 0, min_id: 0, offset_id: params?.after ? params.after : 0, from_id: params?.from ? await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(params.from) : undefined });
         if (!("messages" in result)) {
             (0, _0_deps_js_1.unreachable)();
         }

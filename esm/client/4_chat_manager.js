@@ -36,7 +36,7 @@ import { Api } from "../2_tl.js";
 import { constructChatMemberUpdated, constructChatP, constructFailedInvitation, constructInviteLink, constructJoinRequest, slowModeDurationToSeconds } from "../3_types.js";
 import { chatMemberRightsToTlObject, reactionToTlObject } from "../3_types.js";
 import { checkPassword } from "./0_password.js";
-import { canBeInputChannel, canBeInputUser, toInputChannel, toInputUser } from "./0_utilities.js";
+import { canBeInputChannel, canBeInputUser, getLimit, toInputChannel, toInputUser } from "./0_utilities.js";
 const chatManagerUpdates = [
     "updateChannelParticipant",
     "updateChatParticipant",
@@ -110,7 +110,7 @@ export class ChatManager {
     }
     async getCreatedInviteLinks(chatId, params) {
         __classPrivateFieldGet(this, _ChatManager_c, "f").storage.assertUser("getCreatedInviteLinks");
-        const { invites } = await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "messages.getExportedChatInvites", peer: await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId), revoked: params?.revoked ? true : undefined, admin_id: params?.by ? await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputUser(params.by) : { _: "inputUserEmpty" }, limit: params?.limit ?? 100, offset_date: params?.afterDate ? toUnixTimestamp(params.afterDate) : undefined, offset_link: params?.afterInviteLink });
+        const { invites } = await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "messages.getExportedChatInvites", peer: await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId), revoked: params?.revoked ? true : undefined, admin_id: params?.by ? await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputUser(params.by) : { _: "inputUserEmpty" }, limit: getLimit(params?.limit), offset_date: params?.afterDate ? toUnixTimestamp(params.afterDate) : undefined, offset_link: params?.afterInviteLink });
         return await Promise.all(invites.map((v) => Api.as("chatInviteExported", v)).map((v) => constructInviteLink(v, __classPrivateFieldGet(this, _ChatManager_c, "f").getEntity)));
     }
     // JOINING AND LEAVING CHATS //

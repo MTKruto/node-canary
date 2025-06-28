@@ -33,6 +33,7 @@ import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { Api } from "../2_tl.js";
 import { constructClaimedGifts, constructGift } from "../3_types.js";
+import { getLimit } from "./0_utilities.js";
 export class GiftManager {
     constructor(c) {
         _GiftManager_c.set(this, void 0);
@@ -48,13 +49,7 @@ export class GiftManager {
     async getClaimedGifts(chatId, params) {
         __classPrivateFieldGet(this, _GiftManager_c, "f").storage.assertUser("getClaimedGifts");
         const offset = params?.offset ?? "";
-        let limit = params?.limit ?? 100;
-        if (limit > 100) {
-            limit = 100;
-        }
-        if (limit < 1) {
-            limit = 1;
-        }
+        const limit = getLimit(params?.limit);
         const peer = await __classPrivateFieldGet(this, _GiftManager_c, "f").getInputPeer(chatId);
         const result = await __classPrivateFieldGet(this, _GiftManager_c, "f").invoke({ _: "payments.getSavedStarGifts", peer, offset, limit });
         return await constructClaimedGifts(result, __classPrivateFieldGet(this, _GiftManager_c, "f").getEntity);

@@ -39,7 +39,7 @@ import { assertMessageType, constructMessage as constructMessage_, deserializeIn
 import { messageSearchFilterToTlObject } from "../types/0_message_search_filter.js";
 import { parseHtml } from "./0_html.js";
 import { parseMarkdown } from "./0_markdown.js";
-import { canBeInputChannel, checkArray, checkMessageId, getUsername, isHttpUrl, toInputChannel } from "./0_utilities.js";
+import { canBeInputChannel, checkArray, checkMessageId, getLimit, getUsername, isHttpUrl, toInputChannel } from "./0_utilities.js";
 const FALLBACK_MIME_TYPE = "application/octet-stream";
 const STICKER_MIME_TYPES = ["image/webp", "video/webm", "application/x-tgsticker"];
 const messageManagerUpdates = [
@@ -221,13 +221,7 @@ export class MessageManager {
     }
     async getHistory(chatId, params) {
         __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertUser("getHistory");
-        let limit = params?.limit ?? 100;
-        if (limit <= 0) {
-            limit = 1;
-        }
-        else if (limit > 100) {
-            limit = 100;
-        }
+        const limit = getLimit(params?.limit);
         let offsetId = params?.fromMessageId ?? 0;
         if (offsetId < 0) {
             offsetId = 0;
@@ -926,7 +920,7 @@ export class MessageManager {
     }
     async searchMessages(chatId, query, params) {
         __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertUser("searchMessages");
-        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.search", peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId), q: query, add_offset: 0, filter: messageSearchFilterToTlObject(params?.filter ?? "empty"), hash: 0n, limit: params?.limit ?? 100, max_date: 0, max_id: 0, min_date: 0, min_id: 0, offset_id: params?.after ? params.after : 0, from_id: params?.from ? await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(params.from) : undefined });
+        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.search", peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId), q: query, add_offset: 0, filter: messageSearchFilterToTlObject(params?.filter ?? "empty"), hash: 0n, limit: getLimit(params?.limit), max_date: 0, max_id: 0, min_date: 0, min_id: 0, offset_id: params?.after ? params.after : 0, from_id: params?.from ? await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(params.from) : undefined });
         if (!("messages" in result)) {
             unreachable();
         }

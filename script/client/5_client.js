@@ -1639,7 +1639,7 @@ class Client extends Composer {
      * Send a document.
      *
      * @method ms
-     * @param chatId The identifier of The identifier of a chat to send the document to.
+     * @param chatId The identifier of a chat to send the document to.
      * @param document The document to send.
      * @returns The sent document.
      */
@@ -1912,7 +1912,7 @@ class Client extends Composer {
      * Retrieve multiple messages.
      *
      * @method ms
-     * @param chatId The identifier of The identifier of a chat to retrieve the messages from.
+     * @param chatId The identifier of a chat to retrieve the messages from.
      * @param messageIds The identifiers of the messages to retrieve.
      * @example ```ts
      * const message = await client.getMessages("@MTKruto", [210, 212]);
@@ -2723,7 +2723,7 @@ class Client extends Composer {
      *
      * @method ch
      * @param chatId The identifier of a channel.
-     * @param discussionChatId The identifier of The identifier of a chat to use as discussion for the channel.
+     * @param discussionChatId The identifier of a chat to use as discussion for the channel.
      */
     async setDiscussionChat(chatId, discussionChatId) {
         await __classPrivateFieldGet(this, _Client_chatManager, "f").setDiscussionChat(chatId, discussionChatId);

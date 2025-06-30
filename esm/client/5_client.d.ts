@@ -462,7 +462,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send a document.
      *
      * @method ms
-     * @param chatId The identifier of The identifier of a chat to send the document to.
+     * @param chatId The identifier of a chat to send the document to.
      * @param document The document to send.
      * @returns The sent document.
      */
@@ -687,7 +687,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Retrieve multiple messages.
      *
      * @method ms
-     * @param chatId The identifier of The identifier of a chat to retrieve the messages from.
+     * @param chatId The identifier of a chat to retrieve the messages from.
      * @param messageIds The identifiers of the messages to retrieve.
      * @example ```ts
      * const message = await client.getMessages("@MTKruto", [210, 212]);
@@ -1328,7 +1328,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      *
      * @method ch
      * @param chatId The identifier of a channel.
-     * @param discussionChatId The identifier of The identifier of a chat to use as discussion for the channel.
+     * @param discussionChatId The identifier of a chat to use as discussion for the channel.
      */
     setDiscussionChat(chatId: ID, discussionChatId: ID): Promise<void>;
     /**

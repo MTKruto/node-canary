@@ -315,7 +315,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
     /**
      * Get a chat's inputPeer. Useful when calling API functions directly.
      *
-     * @param id The identifier of the chat.
+     * @param id The identifier of a chat.
      */
     getInputPeer(id: ID): Promise<Api.InputPeer>;
     /**
@@ -444,7 +444,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send a text message.
      *
      * @method ms
-     * @param chatId The chat to send the message to.
+     * @param chatId The identifier of a chat to send the message to.
      * @param text The message's text.
      * @returns The sent text message.
      */
@@ -453,7 +453,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send a photo.
      *
      * @method ms
-     * @param chatId The chat to send the photo to.
+     * @param chatId The identifier of a chat to send the photo to.
      * @param photo The photo to send.
      * @returns The sent photo.
      */
@@ -462,7 +462,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send a document.
      *
      * @method ms
-     * @param chatId The chat to send the document to.
+     * @param chatId The identifier of The identifier of a chat to send the document to.
      * @param document The document to send.
      * @returns The sent document.
      */
@@ -471,7 +471,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send a sticker.
      *
      * @method ms
-     * @param chatId The chat to send the sticker to.
+     * @param chatId The identifier of a chat to send the sticker to.
      * @param document The sticker to send.
      * @returns The sent sticker.
      */
@@ -480,7 +480,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send a video.
      *
      * @method ms
-     * @param chatId The chat to send the video to.
+     * @param chatId The identifier of a chat to send the video to.
      * @param video The video to send.
      * @returns The sent video.
      */
@@ -489,7 +489,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send an animation.
      *
      * @method ms
-     * @param chatId The chat to send the animation to.
+     * @param chatId The identifier of a chat to send the animation to.
      * @param animation The animation to send.
      * @returns The sent animation.
      */
@@ -498,7 +498,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send a voice message.
      *
      * @method ms
-     * @param chatId The chat to send the voice message to.
+     * @param chatId The identifier of a chat to send the voice message to.
      * @param voice The voice to send.
      * @returns The sent voice message.
      */
@@ -507,7 +507,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send an audio file.
      *
      * @method ms
-     * @param chatId The chat to send the audio file to.
+     * @param chatId The identifier of a chat to send the audio file to.
      * @param audio The audio to send.
      * @returns The sent audio filr.
      */
@@ -516,7 +516,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send a media group.
      *
      * @method ms
-     * @param chatId The chat to send the media group to.
+     * @param chatId The identifier of a chat to send the media group to.
      * @param media The media to include in the media group. Animations are not allowed. All of them must be of the same media type, but an exception is that photos and videos can be mixed.
      * @returns The sent messages.
      */
@@ -525,7 +525,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send a video note.
      *
      * @method ms
-     * @param chatId The chat to send the video note to.
+     * @param chatId The identifier of a chat to send the video note to.
      * @param videoNote The video note to send.
      * @returns The sent video note.
      */
@@ -534,7 +534,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send a location.
      *
      * @method ms
-     * @param chatId The chat to send the location to.
+     * @param chatId The identifier of a chat to send the location to.
      * @param latitude The location's latitude.
      * @param longitude The location's longitude.
      * @returns The sent location.
@@ -544,7 +544,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send a contact.
      *
      * @method ms
-     * @param chatId The chat to send the contact to.
+     * @param chatId The identifier of a chat to send the contact to.
      * @param firstName The contact's first name.
      * @param number The contact's phone number.
      * @returns The sent contact.
@@ -554,7 +554,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send a dice.
      *
      * @method ms
-     * @param chatId The chat to send the dice to.
+     * @param chatId The identifier of a chat to send the dice to.
      * @returns The sent dice.
      */
     sendDice(chatId: ID, params?: SendDiceParams): Promise<MessageDice>;
@@ -562,7 +562,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send a venue.
      *
      * @method ms
-     * @param chatId The chat to send the venue to.
+     * @param chatId The identifier of a chat to send the venue to.
      * @param latitude The latitude of the venue.
      * @param longitude The longitude of the venue.
      * @param title The title of the venue.
@@ -574,7 +574,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send a poll.
      *
      * @method ms
-     * @param chatId The chat to send the poll to.
+     * @param chatId The identifier of a chat to send the poll to.
      * @param question The poll's question.
      * @param options The poll's options.
      * @returns The sent poll.
@@ -584,7 +584,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send an invoice. Bot-only.
      *
      * @method ms
-     * @param chatId The chat to send the invoice to.
+     * @param chatId The identifier of a chat to send the invoice to.
      * @param title The invoice's title.
      * @param description The invoice's description.
      * @param payload The invoice's payload.
@@ -597,8 +597,8 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Edit a message's text.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The message's identifier.
+     * @param chatId The identifier of the chat which the message belongs to.
+     * @param messageId The identifier of the message.
      * @param text The new text of the message.
      * @returns The edited text message.
      */
@@ -607,8 +607,8 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Edit a message's caption.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The message's identifier.
+     * @param chatId The identifier of the chat which the message belongs to.
+     * @param messageId The identifier of the message.
      * @param text The new caption of the message.
      * @returns The edited message.
      */
@@ -617,8 +617,8 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Edit a message's media.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The message's identifier.
+     * @param chatId The identifier of the chat which the message belongs to.
+     * @param messageId The identifier of the message.
      * @param media The new media of the message.
      * @returns The edited message.
      */
@@ -627,7 +627,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Edit an inline message's media.
      *
      * @method ms
-     * @param inlineMessageId The inline message's identifier.
+     * @param inlineMessageId The identifier of the inline message.
      * @param media The new media of the message.
      */
     editInlineMessageMedia(inlineMessageId: string, media: InputMedia, params?: EditInlineMessageMediaParams): Promise<void>;
@@ -635,7 +635,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Edit an inline message's text. Bot-only.
      *
      * @method ms
-     * @param inlineMessageId The inline message's identifier.
+     * @param inlineMessageId The identifier of the inline message.
      * @param text The new text of the message.
      */
     editInlineMessageText(inlineMessageId: string, text: string, params?: EditInlineMessageTextParams): Promise<void>;
@@ -643,15 +643,15 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Edit an inline message's caption. Bot-only.
      *
      * @method ms
-     * @param inlineMessageId The inline message's identifier.
+     * @param inlineMessageId The identifier of the inline message.
      */
     editInlineMessageCaption(inlineMessageId: string, params?: EditInlineMessageCaptionParams): Promise<void>;
     /**
      * Edit a message's reply markup.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The message's identifier.
+     * @param chatId The identifier of the chat which the message belongs to.
+     * @param messageId The identifier of the message.
      * @returns The edited message.
      */
     editMessageReplyMarkup(chatId: ID, messageId: number, params?: EditMessageReplyMarkupParams): Promise<Message>;
@@ -659,15 +659,15 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Edit an inline message's reply markup. Bot-only.
      *
      * @method ms
-     * @param inlineMessageId The inline message's identifier.
+     * @param inlineMessageId The identifier of the inline message.
      */
     editInlineMessageReplyMarkup(inlineMessageId: string, params?: EditMessageReplyMarkupParams): Promise<void>;
     /**
      * Edit a message's live location.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the messages.
-     * @param messageId The message's identifier.
+     * @param chatId The identifier of the chat which the message belongs to.
+     * @param messageId The identifier of the message.
      * @param latitude The new latitude.
      * @param longitude The new longitude.
      * @returns The edited location message.
@@ -677,7 +677,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Edit an inline message's live location. Bot-only.
      *
      * @method ms
-     * @param inlineMessageId The inline message's identifier.
+     * @param inlineMessageId The identifier of the inline message.
      * @param latitude The new latitude.
      * @param longitude The new longitude.
      * @returns The edited location message.
@@ -687,7 +687,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Retrieve multiple messages.
      *
      * @method ms
-     * @param chatId The identifier of the chat to retrieve the messages from.
+     * @param chatId The identifier of The identifier of a chat to retrieve the messages from.
      * @param messageIds The identifiers of the messages to retrieve.
      * @example ```ts
      * const message = await client.getMessages("@MTKruto", [210, 212]);
@@ -700,7 +700,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Retrieve a single message.
      *
      * @method ms
-     * @param chatId The identifier of the chat to retrieve the message from.
+     * @param chatId The identifier of a chat.
      * @param messageId The identifier of the message to retrieve.
      * @example ```ts
      * const message = await client.getMessage("@MTKruto", 212);
@@ -724,7 +724,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Delete multiple messages.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the messages.
+     * @param chatId The identifier of the chat which the message belongs to.
      * @param messageIds The identifiers of the messages to delete.
      */
     deleteMessages(chatId: ID, messageIds: number[], params?: DeleteMessagesParams): Promise<void>;
@@ -732,7 +732,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Delete a single message.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the message.
+     * @param chatId The identifier of the chat which the message belongs to.
      * @param messageId The identifier of the message to delete.
      */
     deleteMessage(chatId: ID, messageId: number, params?: DeleteMessageParams): Promise<void>;
@@ -740,7 +740,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Delete all messages sent by a specific member of a chat. User-only.
      *
      * @method ms
-     * @param chatId The identifier of the chat. Must be a supergroup.
+     * @param chatId The identifier of a chat. Must be a supergroup.
      * @param memberId The identifier of the member.
      */
     deleteChatMemberMessages(chatId: ID, memberId: ID): Promise<void>;
@@ -748,7 +748,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Delete multiple scheduled messages.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the scheduled messages.
+     * @param chatId The identifier of a chat.
      * @param messageIds The identifiers of the scheduled messages to delete.
      */
     deleteScheduledMessages(chatId: ID, messageIds: number[]): Promise<void>;
@@ -756,7 +756,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Delete a scheduled message.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the scheduled message.
+     * @param chatId The identifier of a chat.
      * @param messageId The identifier of the scheduled message to delete.
      */
     deleteScheduledMessage(chatId: ID, messageId: number): Promise<void>;
@@ -764,7 +764,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send multiple scheduled messages before their schedule.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the scheduled messages.
+     * @param chatId The identifier of a chat.
      * @param messageIds The identifiers of the scheduled messages to send.
      */
     sendScheduledMessages(chatId: ID, messageIds: number[]): Promise<Message[]>;
@@ -772,7 +772,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send a scheduled message before its schedule.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the scheduled message.
+     * @param chatId The identifier of a chat.
      * @param messageId The identifier of the scheduled message to send.
      */
     sendScheduledMessage(chatId: ID, messageId: number): Promise<Message>;
@@ -780,31 +780,31 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Pin a message in a chat.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The message's identifier.
+     * @param chatId The identifier of a chat.
+     * @param messageId The identifier of the message.
      */
     pinMessage(chatId: ID, messageId: number, params?: PinMessageParams): Promise<void>;
     /**
      * Unpin a pinned message.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The message's identifier.
+     * @param chatId The identifier of a chat.
+     * @param messageId The identifier of the message.
      */
     unpinMessage(chatId: ID, messageId: number, params?: UnpinMessageParams): Promise<void>;
     /**
      * Unpin all pinned messages.
      *
      * @method ms
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      */
     unpinMessages(chatId: ID): Promise<void>;
     /**
      * Forward multiple messages.
      *
      * @method ms
-     * @param from The identifier of the chat to forward the messages from.
-     * @param to The identifier of the chat to forward the messages to.
+     * @param from The identifier of a chat to forward the messages from.
+     * @param to The identifier of a chat to forward the messages to.
      * @param messageIds The identifiers of the messages to forward.
      * @returns The forwarded messages.
      */
@@ -813,8 +813,8 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Forward a single message.
      *
      * @method ms
-     * @param from The identifier of the chat to forward the message from.
-     * @param to The identifier of the chat to forward the message to.
+     * @param from The identifier of a chat to forward the message from.
+     * @param to The identifier of a chat to forward the message to.
      * @param messageId The identifier of the message to forward.
      * @returns The forwarded message.
      */
@@ -832,7 +832,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send a chat action.
      *
      * @method ms
-     * @param chatId The chat to send the chat action to.
+     * @param chatId The identifier of a chat to send the chat action to.
      * @param action The chat action.
      * @param messageThreadId The thread to send the chat action to.
      */
@@ -843,7 +843,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Search the messages of a chat. User-only.
      *
      * @method ms
-     * @param chatId The identifier of the chat to search the messages in.
+     * @param chatId The identifier of a chat.
      * @param query The message search query.
      */
     searchMessages(chatId: ID, query: string, params?: SearchMessagesParams): Promise<Message[]>;
@@ -851,8 +851,8 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Mark messages as read. User-only.
      *
      * @method ms
-     * @param chatId The identifier of the chat that includes the messages.
-     * @param untilMessageId The identifier of a message that will be marked as read, along with any other unread messages before it.
+     * @param chatId The identifier of the chat which the messages belong to.
+     * @param untilMessageId The identifier of the message that will be marked as read, along with any other unread messages before it.
      */
     readMessages(chatId: ID, untilMessageId: number): Promise<void>;
     /**
@@ -867,7 +867,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Transcribe a voice message. User-only.
      *
      * @method ms
-     * @param chatId The identifier of the chat that includes the message.
+     * @param chatId The identifier of the chat which the message belongs to.
      * @param messageId The identifier of the message.
      * @cache
      */
@@ -936,14 +936,14 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Get chat history. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat to get its history.
+     * @param chatId The identifier of a chat.
      */
     getHistory(chatId: ID, params?: GetHistoryParams): Promise<Message[]>;
     /**
      * Set a chat's available reactions. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      * @param availableReactions The new available reactions.
      */
     setAvailableReactions(chatId: ID, availableReactions: "none" | "all" | Reaction[]): Promise<void>;
@@ -951,7 +951,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Set a chat's photo.
      *
      * @method ch
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      * @param photo A photo to set as the chat's photo.
      */
     setChatPhoto(chatId: ID, photo: FileSource, params?: SetChatPhotoParams): Promise<void>;
@@ -959,14 +959,14 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Delete a chat's photo.
      *
      * @method ch
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      */
     deleteChatPhoto(chatId: ID): Promise<void>;
     /**
      * Ban a member from a chat.
      *
      * @method ch
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      * @param memberId The identifier of the member.
      */
     banChatMember(chatId: ID, memberId: ID, params?: BanChatMemberParams): Promise<void>;
@@ -974,7 +974,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Unban a member from a chat.
      *
      * @method ch
-     * @param chatId The identifier of the chat. Must be a supergroup.
+     * @param chatId The identifier of a chat. Must be a supergroup.
      * @param memberId The identifier of the member.
      */
     unbanChatMember(chatId: ID, memberId: ID): Promise<void>;
@@ -982,7 +982,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Kick a member from a chat. Same as a banChatMember call followed by unbanChatMember.
      *
      * @method ch
-     * @param chatId The identifier of the chat. Must be a supergroup.
+     * @param chatId The identifier of a chat. Must be a supergroup.
      * @param memberId The identifier of the member.
      */
     kickChatMember(chatId: ID, memberId: ID): Promise<void>;
@@ -990,15 +990,15 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Set the rights of a chat member.
      *
      * @method ch
-     * @param chatId The identifier of the chat. Must be a supergroup.
-     * @param memberId The identifier of a member.
+     * @param chatId The identifier of a chat. Must be a supergroup.
+     * @param memberId The identifier of the member.
      */
     setChatMemberRights(chatId: ID, memberId: ID, params?: SetChatMemberRightsParams): Promise<void>;
     /**
      * Get the administrators of a chat.
      *
      * @method ch
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      * @returns The chat's administrators.
      */
     getChatAdministrators(chatId: ID): Promise<ChatMember[]>;
@@ -1006,14 +1006,14 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Enable join requests in a chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat. Must be a channel or a supergroup.
+     * @param chatId The identifier of a chat. Must be a channel or a supergroup.
      */
     enableJoinRequests(chatId: ID): Promise<void>;
     /**
      * Disable join requests in a chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat. Must be a channel or a supergroup.
+     * @param chatId The identifier of a chat. Must be a channel or a supergroup.
      */
     disableJoinRequests(chatId: ID): Promise<void>;
     /**
@@ -1027,7 +1027,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Get the invite links created for a chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      * @returns The invite links created for the chat. This might be a subset of the results if they were less than `limit`. The parameters `afterDate` and `afterInviteLink` can be used for pagination.
      */
     getCreatedInviteLinks(chatId: ID, params?: GetCreatedInviteLinksParams): Promise<InviteLink[]>;
@@ -1035,21 +1035,21 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Join a chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat to join.
+     * @param chatId The identifier of a chat.
      */
     joinChat(chatId: ID): Promise<void>;
     /**
      * Leave a chat.
      *
      * @method ch
-     * @param chatId The identifier of the chat to leave.
+     * @param chatId The identifier of a chat.
      */
     leaveChat(chatId: ID): Promise<void>;
     /**
      * Get information on a user's chat membership.
      *
      * @method ch
-     * @param chatId The identifier of a chat that includes the user.
+     * @param chatId The identifier of a chat.
      * @param userId The identifier of the user.
      */
     getChatMember(chatId: ID, userId: ID): Promise<ChatMember>;
@@ -1057,14 +1057,14 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Get the members of a chat.
      *
      * @method ch
-     * @param chatId The chat to get its members.
+     * @param chatId The identifier of a chat.
      */
     getChatMembers(chatId: ID, params?: GetChatMembersParams): Promise<ChatMember[]>;
     /**
      * Set a chat's sticker set.
      *
      * @method ch
-     * @param chatId The identifier of the chat. Must be a supergroup.
+     * @param chatId The identifier of a chat. Must be a supergroup.
      * @param setName The name of the set.
      */
     setChatStickerSet(chatId: ID, setName: string): Promise<void>;
@@ -1072,14 +1072,14 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Delete a chat's sticker set.
      *
      * @method ch
-     * @param chatId The identifier of the chat. Must be a supergroup.
+     * @param chatId The identifier of a chat. Must be a supergroup.
      */
     deleteChatStickerSet(chatId: ID): Promise<void>;
     /**
      * Set the number of boosts required to circument a chat's default restrictions. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      * @param boosts The number of boosts required to circumvent its restrictions.
      */
     setBoostsRequiredToCircumventRestrictions(chatId: ID, boosts: number): Promise<void>;
@@ -1087,7 +1087,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Create an invite link.
      *
      * @method ch
-     * @param chatId The identifier of the chat to create the invite link for.
+     * @param chatId The identifier of a chat to create the invite link for.
      * @returns The newly created invite link.
      */
     createInviteLink(chatId: ID, params?: CreateInviteLinkParams): Promise<InviteLink>;
@@ -1095,7 +1095,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Approve a join request.
      *
      * @method ch
-     * @param chatId The identifier of the chat that contains the join request.
+     * @param chatId The identifier of a chat with the join request.
      * @param userId The user who made the join request.
      */
     approveJoinRequest(chatId: ID, userId: ID): Promise<void>;
@@ -1103,7 +1103,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Decline a join request.
      *
      * @method ch
-     * @param chatId The identifier of the chat that contains the join request.
+     * @param chatId The identifier of a chat with the join request.
      * @param userId The user who made the join request.
      */
     declineJoinRequest(chatId: ID, userId: ID): Promise<void>;
@@ -1111,28 +1111,28 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Approve all join requests. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat that contains the join requests.
+     * @param chatId The identifier of a chat with the join requests.
      */
     approveJoinRequests(chatId: ID, params?: ApproveJoinRequestsParams): Promise<void>;
     /**
      * Decline all join requests. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat that contains the join requests.
+     * @param chatId The identifier of a chat with the join requests.
      */
     declineJoinRequests(chatId: ID, params?: DeclineJoinRequestsParams): Promise<void>;
     /**
      * Get pending join requests in a chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat that contains the join requests.
+     * @param chatId The identifier of a chat with the join requests.
      */
     getJoinRequests(chatId: ID, params?: GetJoinRequestsParams): Promise<JoinRequest[]>;
     /**
      * Add a single user to a chat.
      *
      * @method ch
-     * @param chatId The identifier of the chat to add the user to.
+     * @param chatId The identifier of a chat to add the user to.
      * @param userId The identifier of the user to add to the chat.
      * @returns An array of FailedInvitation that has at most a length of 1. If empty, it means that the user was added.
      */
@@ -1149,14 +1149,14 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Open a chat.
      *
      * @method ch
-     * @param chatId The chat to open.
+     * @param chatId The identifier of a chat to open.
      */
     openChat(chatId: ID): Promise<void>;
     /**
      * Close a chat previously opened by openChat.
      *
      * @method ch
-     * @param chatId The chat to close.
+     * @param chatId The identifier of a chat to close.
      */
     closeChat(chatId: ID): Promise<void>;
     /**
@@ -1187,7 +1187,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Set the time to live of the messages of a chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      * @param messageTtl The time to live of the messages in seconds.
      */
     setMessageTtl(chatId: ID, messageTtl: number): Promise<void>;
@@ -1202,7 +1202,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Archive a single chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat to archive.
+     * @param chatId The identifier of a chat.
      */
     archiveChat(chatId: ID): Promise<void>;
     /**
@@ -1216,7 +1216,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Unarchive a single chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat to unarchive.
+     * @param chatId The identifier of a chat.
      */
     unarchiveChat(chatId: ID): Promise<void>;
     /**
@@ -1230,7 +1230,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Get the settings of a chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat to get the settings for.
+     * @param chatId The identifier of a chat.
      */
     getChatSettings(chatId: ID): Promise<ChatSettings>;
     /**
@@ -1282,7 +1282,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Hide or show the member list of a group to non-admins. User-only.
      *
      * @method ch
-     * @param chatId The identifier of a group.
+     * @param chatId The identifier of the group.
      * @param visible Whether the member list of the group should be visible.
      */
     setMemberListVisibility(chatId: ID, visible: boolean): Promise<void>;
@@ -1290,7 +1290,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Enable or disable topics in a group. User-only.
      *
      * @method ch
-     * @param chatId The identifier of a group.
+     * @param chatId The identifier of the group.
      * @param enabled Whether topics should be enabled in the group.
      */
     setTopicsEnabled(chatId: ID, enabled: boolean): Promise<void>;
@@ -1298,7 +1298,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Enable or disable automatic anti-spam in a group. User-only.
      *
      * @method ch
-     * @param chatId The identifier of a group.
+     * @param chatId The identifier of the group.
      * @param enabled Whether automatic anti-spam should be enabled in the group.
      */
     setAntispamEnabled(chatId: ID, enabled: boolean): Promise<void>;
@@ -1306,7 +1306,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Enable or disable post signatures in a channel. User-only.
      *
      * @method ch
-     * @param chatId The identifier of a channel.
+     * @param chatId The identifier of the channel.
      * @param enabled Whether post signatures should be enabled in the channel.
      */
     setSignaturesEnabled(chatId: ID, enabled: boolean, params?: SetSignaturesEnabledParams): Promise<void>;
@@ -1314,7 +1314,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Delete a chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat to delete.
+     * @param chatId The identifier of a chat.
      */
     deleteChat(chatId: ID): Promise<void>;
     /**
@@ -1328,7 +1328,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      *
      * @method ch
      * @param chatId The identifier of a channel.
-     * @param discussionChatId The identifier of the chat to use as discussion for the channel.
+     * @param discussionChatId The identifier of The identifier of a chat to use as discussion for the channel.
      */
     setDiscussionChat(chatId: ID, discussionChatId: ID): Promise<void>;
     /**
@@ -1409,13 +1409,13 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send a callback query. User-only.
      *
      * @method cq
-     * @param chatId The chat that includes the messsage.
-     * @param messageId The message that includes at a button responsible for the callback query question.
+     * @param botId The identifier of the bot to send the callback query to.
+     * @param messageId The identifier of the message that includes at a button responsible for the callback query question.
      * @param question The callback query's question.
      * @returns The bot's answer to the callback query.
      * @cache
      */
-    sendCallbackQuery(chatId: ID, messageId: number, question: CallbackQueryQuestion): Promise<CallbackQueryAnswer>;
+    sendCallbackQuery(botId: ID, messageId: number, question: CallbackQueryQuestion): Promise<CallbackQueryAnswer>;
     /**
      * Answer a callback query. Bot-only.
      *
@@ -1427,17 +1427,17 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Send an inline query. User-only.
      *
      * @method iq
-     * @param userId The ID of the bot to send the inline query to.
-     * @param chatId The ID of the chat from which the inline query is sent.
+     * @param botId The identifier of a bot to send the inline query to.
+     * @param chatId The identifier of the chat from which the inline query is sent.
      * @returns The bot's answer to the inline query.
      * @cache
      */
-    sendInlineQuery(userId: ID, chatId: ID, params?: SendInlineQueryParams): Promise<InlineQueryAnswer>;
+    sendInlineQuery(botId: ID, chatId: ID, params?: SendInlineQueryParams): Promise<InlineQueryAnswer>;
     /**
      * Answer an inline query. Bot-only.
      *
      * @method iq
-     * @param id The ID of the inline query to answer.
+     * @param id The identifier of the inline query to answer.
      * @param results The results to answer with.
      */
     answerInlineQuery(id: string, results: InlineQueryResult[], params?: AnswerInlineQueryParams): Promise<void>;
@@ -1548,15 +1548,16 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Retrieve multiple stories. User-only.
      *
      * @method st
-     * @param chatId The identifier of the chat to retrieve the stories from.
+     * @param chatId The identifier of a chat.
      * @param storyIds The identifiers of the stories to retrieve.
+     * @returns The retrieved stories.
      */
     getStories(chatId: ID, storyIds: number[]): Promise<Story[]>;
     /**
      * Retrieve a single story. User-only.
      *
      * @method st
-     * @param chatId The identifier of the chat to retrieve the story from.
+     * @param chatId The identifier of a chat.
      * @param storyId The identifier of the story to retrieve.
      * @returns The retrieved story.
      */
@@ -1565,7 +1566,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Delete multiple stories. User-only.
      *
      * @method st
-     * @param chatId The identifier of the chat to delete the stories from.
+     * @param chatId The identifier of a chat.
      * @param storyIds The identifiers of the stories to delete.
      */
     deleteStories(chatId: ID, storyIds: number[]): Promise<void>;
@@ -1573,7 +1574,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Delete a single story. User-only.
      *
      * @method st
-     * @param chatId The identifier of the chat to delete the story from.
+     * @param chatId The identifier of a chat.
      * @param storyId The identifier of the story to delete.
      */
     deleteStory(chatId: ID, storyId: number): Promise<void>;
@@ -1581,7 +1582,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Add multiple stories to highlights. User-only.
      *
      * @method st
-     * @param chatId The identifier of the chat that has the stories.
+     * @param chatId The identifier of a chat.
      * @param storyIds The identifiers of the stories to add to highlights.
      */
     addStoriesToHighlights(chatId: ID, storyIds: number[]): Promise<void>;
@@ -1589,7 +1590,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Add a single story to highlights. User-only.
      *
      * @method st
-     * @param chatId The identifier of the chat that has the story.
+     * @param chatId The identifier of a chat.
      * @param storyId The identifier of the story to add to highlights.
      */
     addStoryToHighlights(chatId: ID, storyId: number): Promise<void>;
@@ -1597,7 +1598,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Remove multiple stories from highlights. User-only.
      *
      * @method st
-     * @param chatId The identifier of the chat that has the stories.
+     * @param chatId The identifier of a chat.
      * @param storyIds The identifiers of the stories to remove from highlights.
      */
     removeStoriesFromHighlights(chatId: ID, storyIds: number[]): Promise<void>;
@@ -1605,7 +1606,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Remove a single story from highlights. User-only.
      *
      * @method st
-     * @param chatId The identifier of the chat that has the story.
+     * @param chatId The identifier of a chat.
      * @param storyId The identifier of the story to remove from highlights.
      */
     removeStoryFromHighlights(chatId: ID, storyId: number): Promise<void>;
@@ -1633,7 +1634,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Start a video chat. User-only.
      *
      * @method vc
-     * @param chatId The chat to start the video chat in.
+     * @param chatId The identifier of a chat to start the video chat in.
      * @returns The started video chat.
      */
     startVideoChat(chatId: ID, params?: StartVideoChatParams): Promise<VideoChatActive>;
@@ -1641,7 +1642,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Schedule a video chat. User-only.
      *
      * @method vc
-     * @param chatId The chat to schedule the video chat in.
+     * @param chatId The identifier of a chat to schedule the video chat in.
      * @param startAt A point in time within the future in which the video chat will be started.
      * @returns The scheduled video chat.
      */
@@ -1650,7 +1651,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Join a video chat. User-only.
      *
      * @method vc
-     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      * @param params_ WebRTC connection parameters.
      * @returns Parameters to be passed to the used WebRTC library.
      */
@@ -1659,21 +1660,21 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Leave a video chat. User-only.
      *
      * @method vc
-     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      */
     leaveVideoChat(id: string): Promise<void>;
     /**
      * Join a live stream. User-only.
      *
      * @method vc
-     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      */
     joinLiveStream(id: string): Promise<void>;
     /**
      * Get a video chat. User-only.
      *
      * @method vc
-     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      * @cache
      */
     getVideoChat(id: string): Promise<VideoChat>;
@@ -1681,14 +1682,14 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Get live stream channels. User-only.
      *
      * @method vc
-     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      */
     getLiveStreamChannels(id: string): Promise<LiveStreamChannel[]>;
     /**
      * Download a live stream chunk. User-only.
      *
      * @method vc
-     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      * @param channelId Stream channel ID.
      * @param scale Stream channel scale.
      * @param timestamp Millisecond timestamp of the chunk to download.
@@ -1734,7 +1735,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Add a contact. User-only.
      *
      * @method co
-     * @param userId The identifier of a user to add as contact.
+     * @param userId The identifier of the user to add as contact.
      */
     addContact(userId: ID, params?: AddContactParams): Promise<void>;
     /**
@@ -1754,14 +1755,14 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Get gifts claimed by a user or a channel. User-only.
      *
      * @method gf
-     * @param chatId The identifier of a user or a channel to get gifts for.
+     * @param chatId The identifier of the user or a channel to get gifts for.
      */
     getClaimedGifts(chatId: ID, params?: GetClaimedGiftsParams): Promise<ClaimedGifts>;
     /**
      * Send a gift.
      *
      * @method gf
-     * @param chatId The identifier of a user or a channel to send the gift to.
+     * @param chatId The identifier of the user or a channel to send the gift to.
      * @param giftId The identifier of the gift to send.
      */
     sendGift(chatId: ID, giftId: string, params?: SendGiftParams): Promise<void>;

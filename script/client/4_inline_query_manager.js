@@ -64,9 +64,9 @@ class InlineQueryManager {
             (0, _0_deps_js_1.unreachable)();
         }
     }
-    async sendInlineQuery(userId, chatId, params) {
+    async sendInlineQuery(botId_, chatId, params) {
         __classPrivateFieldGet(this, _InlineQueryManager_c, "f").storage.assertUser("sendInlineQuery");
-        const bot = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputUser(userId), peer = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputPeer(chatId), query = params?.query ?? "", offset = params?.offset ?? "";
+        const bot = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputUser(botId_), peer = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputPeer(chatId), query = params?.query ?? "", offset = params?.offset ?? "";
         const botId = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputPeerChatId(bot), peerId = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").getInputPeerChatId(peer);
         const maybeResults = await __classPrivateFieldGet(this, _InlineQueryManager_c, "f").messageStorage.getInlineQueryAnswer(botId, peerId, query, offset);
         if (maybeResults != null && !__classPrivateFieldGet(_a, _a, "m", _InlineQueryManager_isExpired).call(_a, maybeResults[1], maybeResults[0].cache_time)) {

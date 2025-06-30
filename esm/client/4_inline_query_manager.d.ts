@@ -34,7 +34,7 @@ export declare class InlineQueryManager implements UpdateProcessor<InlineQueryMa
     answerInlineQuery(id: string, results: InlineQueryResult[], params?: AnswerInlineQueryParams): Promise<void>;
     canHandleUpdate(update: Api.Update): update is InlineQueryManagerUpdate;
     handleUpdate(update: InlineQueryManagerUpdate): Promise<Update>;
-    sendInlineQuery(userId: ID, chatId: ID, params?: SendInlineQueryParams): Promise<import("../3_types.js").InlineQueryAnswer>;
+    sendInlineQuery(botId_: ID, chatId: ID, params?: SendInlineQueryParams): Promise<import("../3_types.js").InlineQueryAnswer>;
 }
 export {};
 //# sourceMappingURL=4_inline_query_manager.d.ts.map

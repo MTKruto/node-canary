@@ -1077,7 +1077,7 @@ export class Client extends Composer {
     /**
      * Get a chat's inputPeer. Useful when calling API functions directly.
      *
-     * @param id The identifier of the chat.
+     * @param id The identifier of a chat.
      */
     async getInputPeer(id) {
         if (id === "me" || id == await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getSelfId).call(this)) {
@@ -1613,7 +1613,7 @@ export class Client extends Composer {
      * Send a text message.
      *
      * @method ms
-     * @param chatId The chat to send the message to.
+     * @param chatId The identifier of a chat to send the message to.
      * @param text The message's text.
      * @returns The sent text message.
      */
@@ -1624,7 +1624,7 @@ export class Client extends Composer {
      * Send a photo.
      *
      * @method ms
-     * @param chatId The chat to send the photo to.
+     * @param chatId The identifier of a chat to send the photo to.
      * @param photo The photo to send.
      * @returns The sent photo.
      */
@@ -1635,7 +1635,7 @@ export class Client extends Composer {
      * Send a document.
      *
      * @method ms
-     * @param chatId The chat to send the document to.
+     * @param chatId The identifier of The identifier of a chat to send the document to.
      * @param document The document to send.
      * @returns The sent document.
      */
@@ -1646,7 +1646,7 @@ export class Client extends Composer {
      * Send a sticker.
      *
      * @method ms
-     * @param chatId The chat to send the sticker to.
+     * @param chatId The identifier of a chat to send the sticker to.
      * @param document The sticker to send.
      * @returns The sent sticker.
      */
@@ -1657,7 +1657,7 @@ export class Client extends Composer {
      * Send a video.
      *
      * @method ms
-     * @param chatId The chat to send the video to.
+     * @param chatId The identifier of a chat to send the video to.
      * @param video The video to send.
      * @returns The sent video.
      */
@@ -1668,7 +1668,7 @@ export class Client extends Composer {
      * Send an animation.
      *
      * @method ms
-     * @param chatId The chat to send the animation to.
+     * @param chatId The identifier of a chat to send the animation to.
      * @param animation The animation to send.
      * @returns The sent animation.
      */
@@ -1679,7 +1679,7 @@ export class Client extends Composer {
      * Send a voice message.
      *
      * @method ms
-     * @param chatId The chat to send the voice message to.
+     * @param chatId The identifier of a chat to send the voice message to.
      * @param voice The voice to send.
      * @returns The sent voice message.
      */
@@ -1690,7 +1690,7 @@ export class Client extends Composer {
      * Send an audio file.
      *
      * @method ms
-     * @param chatId The chat to send the audio file to.
+     * @param chatId The identifier of a chat to send the audio file to.
      * @param audio The audio to send.
      * @returns The sent audio filr.
      */
@@ -1701,7 +1701,7 @@ export class Client extends Composer {
      * Send a media group.
      *
      * @method ms
-     * @param chatId The chat to send the media group to.
+     * @param chatId The identifier of a chat to send the media group to.
      * @param media The media to include in the media group. Animations are not allowed. All of them must be of the same media type, but an exception is that photos and videos can be mixed.
      * @returns The sent messages.
      */
@@ -1712,7 +1712,7 @@ export class Client extends Composer {
      * Send a video note.
      *
      * @method ms
-     * @param chatId The chat to send the video note to.
+     * @param chatId The identifier of a chat to send the video note to.
      * @param videoNote The video note to send.
      * @returns The sent video note.
      */
@@ -1723,7 +1723,7 @@ export class Client extends Composer {
      * Send a location.
      *
      * @method ms
-     * @param chatId The chat to send the location to.
+     * @param chatId The identifier of a chat to send the location to.
      * @param latitude The location's latitude.
      * @param longitude The location's longitude.
      * @returns The sent location.
@@ -1735,7 +1735,7 @@ export class Client extends Composer {
      * Send a contact.
      *
      * @method ms
-     * @param chatId The chat to send the contact to.
+     * @param chatId The identifier of a chat to send the contact to.
      * @param firstName The contact's first name.
      * @param number The contact's phone number.
      * @returns The sent contact.
@@ -1747,7 +1747,7 @@ export class Client extends Composer {
      * Send a dice.
      *
      * @method ms
-     * @param chatId The chat to send the dice to.
+     * @param chatId The identifier of a chat to send the dice to.
      * @returns The sent dice.
      */
     async sendDice(chatId, params) {
@@ -1757,7 +1757,7 @@ export class Client extends Composer {
      * Send a venue.
      *
      * @method ms
-     * @param chatId The chat to send the venue to.
+     * @param chatId The identifier of a chat to send the venue to.
      * @param latitude The latitude of the venue.
      * @param longitude The longitude of the venue.
      * @param title The title of the venue.
@@ -1771,7 +1771,7 @@ export class Client extends Composer {
      * Send a poll.
      *
      * @method ms
-     * @param chatId The chat to send the poll to.
+     * @param chatId The identifier of a chat to send the poll to.
      * @param question The poll's question.
      * @param options The poll's options.
      * @returns The sent poll.
@@ -1783,7 +1783,7 @@ export class Client extends Composer {
      * Send an invoice. Bot-only.
      *
      * @method ms
-     * @param chatId The chat to send the invoice to.
+     * @param chatId The identifier of a chat to send the invoice to.
      * @param title The invoice's title.
      * @param description The invoice's description.
      * @param payload The invoice's payload.
@@ -1798,8 +1798,8 @@ export class Client extends Composer {
      * Edit a message's text.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The message's identifier.
+     * @param chatId The identifier of the chat which the message belongs to.
+     * @param messageId The identifier of the message.
      * @param text The new text of the message.
      * @returns The edited text message.
      */
@@ -1810,8 +1810,8 @@ export class Client extends Composer {
      * Edit a message's caption.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The message's identifier.
+     * @param chatId The identifier of the chat which the message belongs to.
+     * @param messageId The identifier of the message.
      * @param text The new caption of the message.
      * @returns The edited message.
      */
@@ -1822,8 +1822,8 @@ export class Client extends Composer {
      * Edit a message's media.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The message's identifier.
+     * @param chatId The identifier of the chat which the message belongs to.
+     * @param messageId The identifier of the message.
      * @param media The new media of the message.
      * @returns The edited message.
      */
@@ -1834,7 +1834,7 @@ export class Client extends Composer {
      * Edit an inline message's media.
      *
      * @method ms
-     * @param inlineMessageId The inline message's identifier.
+     * @param inlineMessageId The identifier of the inline message.
      * @param media The new media of the message.
      */
     async editInlineMessageMedia(inlineMessageId, media, params) {
@@ -1844,7 +1844,7 @@ export class Client extends Composer {
      * Edit an inline message's text. Bot-only.
      *
      * @method ms
-     * @param inlineMessageId The inline message's identifier.
+     * @param inlineMessageId The identifier of the inline message.
      * @param text The new text of the message.
      */
     async editInlineMessageText(inlineMessageId, text, params) {
@@ -1854,7 +1854,7 @@ export class Client extends Composer {
      * Edit an inline message's caption. Bot-only.
      *
      * @method ms
-     * @param inlineMessageId The inline message's identifier.
+     * @param inlineMessageId The identifier of the inline message.
      */
     async editInlineMessageCaption(inlineMessageId, params) {
         await __classPrivateFieldGet(this, _Client_messageManager, "f").editInlineMessageCaption(inlineMessageId, params);
@@ -1863,8 +1863,8 @@ export class Client extends Composer {
      * Edit a message's reply markup.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The message's identifier.
+     * @param chatId The identifier of the chat which the message belongs to.
+     * @param messageId The identifier of the message.
      * @returns The edited message.
      */
     async editMessageReplyMarkup(chatId, messageId, params) {
@@ -1874,7 +1874,7 @@ export class Client extends Composer {
      * Edit an inline message's reply markup. Bot-only.
      *
      * @method ms
-     * @param inlineMessageId The inline message's identifier.
+     * @param inlineMessageId The identifier of the inline message.
      */
     async editInlineMessageReplyMarkup(inlineMessageId, params) {
         await __classPrivateFieldGet(this, _Client_messageManager, "f").editInlineMessageReplyMarkup(inlineMessageId, params);
@@ -1883,8 +1883,8 @@ export class Client extends Composer {
      * Edit a message's live location.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the messages.
-     * @param messageId The message's identifier.
+     * @param chatId The identifier of the chat which the message belongs to.
+     * @param messageId The identifier of the message.
      * @param latitude The new latitude.
      * @param longitude The new longitude.
      * @returns The edited location message.
@@ -1896,7 +1896,7 @@ export class Client extends Composer {
      * Edit an inline message's live location. Bot-only.
      *
      * @method ms
-     * @param inlineMessageId The inline message's identifier.
+     * @param inlineMessageId The identifier of the inline message.
      * @param latitude The new latitude.
      * @param longitude The new longitude.
      * @returns The edited location message.
@@ -1908,7 +1908,7 @@ export class Client extends Composer {
      * Retrieve multiple messages.
      *
      * @method ms
-     * @param chatId The identifier of the chat to retrieve the messages from.
+     * @param chatId The identifier of The identifier of a chat to retrieve the messages from.
      * @param messageIds The identifiers of the messages to retrieve.
      * @example ```ts
      * const message = await client.getMessages("@MTKruto", [210, 212]);
@@ -1923,7 +1923,7 @@ export class Client extends Composer {
      * Retrieve a single message.
      *
      * @method ms
-     * @param chatId The identifier of the chat to retrieve the message from.
+     * @param chatId The identifier of a chat.
      * @param messageId The identifier of the message to retrieve.
      * @example ```ts
      * const message = await client.getMessage("@MTKruto", 212);
@@ -1951,7 +1951,7 @@ export class Client extends Composer {
      * Delete multiple messages.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the messages.
+     * @param chatId The identifier of the chat which the message belongs to.
      * @param messageIds The identifiers of the messages to delete.
      */
     async deleteMessages(chatId, messageIds, params) {
@@ -1961,7 +1961,7 @@ export class Client extends Composer {
      * Delete a single message.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the message.
+     * @param chatId The identifier of the chat which the message belongs to.
      * @param messageId The identifier of the message to delete.
      */
     async deleteMessage(chatId, messageId, params) {
@@ -1971,7 +1971,7 @@ export class Client extends Composer {
      * Delete all messages sent by a specific member of a chat. User-only.
      *
      * @method ms
-     * @param chatId The identifier of the chat. Must be a supergroup.
+     * @param chatId The identifier of a chat. Must be a supergroup.
      * @param memberId The identifier of the member.
      */
     async deleteChatMemberMessages(chatId, memberId) {
@@ -1981,7 +1981,7 @@ export class Client extends Composer {
      * Delete multiple scheduled messages.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the scheduled messages.
+     * @param chatId The identifier of a chat.
      * @param messageIds The identifiers of the scheduled messages to delete.
      */
     async deleteScheduledMessages(chatId, messageIds) {
@@ -1991,7 +1991,7 @@ export class Client extends Composer {
      * Delete a scheduled message.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the scheduled message.
+     * @param chatId The identifier of a chat.
      * @param messageId The identifier of the scheduled message to delete.
      */
     async deleteScheduledMessage(chatId, messageId) {
@@ -2001,7 +2001,7 @@ export class Client extends Composer {
      * Send multiple scheduled messages before their schedule.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the scheduled messages.
+     * @param chatId The identifier of a chat.
      * @param messageIds The identifiers of the scheduled messages to send.
      */
     async sendScheduledMessages(chatId, messageIds) {
@@ -2011,7 +2011,7 @@ export class Client extends Composer {
      * Send a scheduled message before its schedule.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the scheduled message.
+     * @param chatId The identifier of a chat.
      * @param messageId The identifier of the scheduled message to send.
      */
     async sendScheduledMessage(chatId, messageId) {
@@ -2021,8 +2021,8 @@ export class Client extends Composer {
      * Pin a message in a chat.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The message's identifier.
+     * @param chatId The identifier of a chat.
+     * @param messageId The identifier of the message.
      */
     async pinMessage(chatId, messageId, params) {
         await __classPrivateFieldGet(this, _Client_messageManager, "f").pinMessage(chatId, messageId, params);
@@ -2031,8 +2031,8 @@ export class Client extends Composer {
      * Unpin a pinned message.
      *
      * @method ms
-     * @param chatId The identifier of the chat that contains the message.
-     * @param messageId The message's identifier.
+     * @param chatId The identifier of a chat.
+     * @param messageId The identifier of the message.
      */
     async unpinMessage(chatId, messageId, params) {
         await __classPrivateFieldGet(this, _Client_messageManager, "f").unpinMessage(chatId, messageId, params);
@@ -2041,7 +2041,7 @@ export class Client extends Composer {
      * Unpin all pinned messages.
      *
      * @method ms
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      */
     async unpinMessages(chatId) {
         await __classPrivateFieldGet(this, _Client_messageManager, "f").unpinMessages(chatId);
@@ -2050,8 +2050,8 @@ export class Client extends Composer {
      * Forward multiple messages.
      *
      * @method ms
-     * @param from The identifier of the chat to forward the messages from.
-     * @param to The identifier of the chat to forward the messages to.
+     * @param from The identifier of a chat to forward the messages from.
+     * @param to The identifier of a chat to forward the messages to.
      * @param messageIds The identifiers of the messages to forward.
      * @returns The forwarded messages.
      */
@@ -2062,8 +2062,8 @@ export class Client extends Composer {
      * Forward a single message.
      *
      * @method ms
-     * @param from The identifier of the chat to forward the message from.
-     * @param to The identifier of the chat to forward the message to.
+     * @param from The identifier of a chat to forward the message from.
+     * @param to The identifier of a chat to forward the message to.
      * @param messageId The identifier of the message to forward.
      * @returns The forwarded message.
      */
@@ -2085,7 +2085,7 @@ export class Client extends Composer {
      * Send a chat action.
      *
      * @method ms
-     * @param chatId The chat to send the chat action to.
+     * @param chatId The identifier of a chat to send the chat action to.
      * @param action The chat action.
      * @param messageThreadId The thread to send the chat action to.
      */
@@ -2096,7 +2096,7 @@ export class Client extends Composer {
      * Search the messages of a chat. User-only.
      *
      * @method ms
-     * @param chatId The identifier of the chat to search the messages in.
+     * @param chatId The identifier of a chat.
      * @param query The message search query.
      */
     async searchMessages(chatId, query, params) {
@@ -2106,8 +2106,8 @@ export class Client extends Composer {
      * Mark messages as read. User-only.
      *
      * @method ms
-     * @param chatId The identifier of the chat that includes the messages.
-     * @param untilMessageId The identifier of a message that will be marked as read, along with any other unread messages before it.
+     * @param chatId The identifier of the chat which the messages belong to.
+     * @param untilMessageId The identifier of the message that will be marked as read, along with any other unread messages before it.
      */
     async readMessages(chatId, untilMessageId) {
         await __classPrivateFieldGet(this, _Client_messageManager, "f").readMessages(chatId, untilMessageId);
@@ -2126,7 +2126,7 @@ export class Client extends Composer {
      * Transcribe a voice message. User-only.
      *
      * @method ms
-     * @param chatId The identifier of the chat that includes the message.
+     * @param chatId The identifier of the chat which the message belongs to.
      * @param messageId The identifier of the message.
      * @cache
      */
@@ -2222,7 +2222,7 @@ export class Client extends Composer {
      * Get chat history. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat to get its history.
+     * @param chatId The identifier of a chat.
      */
     async getHistory(chatId, params) {
         return await __classPrivateFieldGet(this, _Client_messageManager, "f").getHistory(chatId, params);
@@ -2231,7 +2231,7 @@ export class Client extends Composer {
      * Set a chat's available reactions. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      * @param availableReactions The new available reactions.
      */
     async setAvailableReactions(chatId, availableReactions) {
@@ -2241,7 +2241,7 @@ export class Client extends Composer {
      * Set a chat's photo.
      *
      * @method ch
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      * @param photo A photo to set as the chat's photo.
      */
     async setChatPhoto(chatId, photo, params) {
@@ -2251,7 +2251,7 @@ export class Client extends Composer {
      * Delete a chat's photo.
      *
      * @method ch
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      */
     async deleteChatPhoto(chatId) {
         await __classPrivateFieldGet(this, _Client_chatManager, "f").deleteChatPhoto(chatId);
@@ -2260,7 +2260,7 @@ export class Client extends Composer {
      * Ban a member from a chat.
      *
      * @method ch
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      * @param memberId The identifier of the member.
      */
     async banChatMember(chatId, memberId, params) {
@@ -2270,7 +2270,7 @@ export class Client extends Composer {
      * Unban a member from a chat.
      *
      * @method ch
-     * @param chatId The identifier of the chat. Must be a supergroup.
+     * @param chatId The identifier of a chat. Must be a supergroup.
      * @param memberId The identifier of the member.
      */
     async unbanChatMember(chatId, memberId) {
@@ -2280,7 +2280,7 @@ export class Client extends Composer {
      * Kick a member from a chat. Same as a banChatMember call followed by unbanChatMember.
      *
      * @method ch
-     * @param chatId The identifier of the chat. Must be a supergroup.
+     * @param chatId The identifier of a chat. Must be a supergroup.
      * @param memberId The identifier of the member.
      */
     async kickChatMember(chatId, memberId) {
@@ -2291,8 +2291,8 @@ export class Client extends Composer {
      * Set the rights of a chat member.
      *
      * @method ch
-     * @param chatId The identifier of the chat. Must be a supergroup.
-     * @param memberId The identifier of a member.
+     * @param chatId The identifier of a chat. Must be a supergroup.
+     * @param memberId The identifier of the member.
      */
     async setChatMemberRights(chatId, memberId, params) {
         await __classPrivateFieldGet(this, _Client_chatManager, "f").setChatMemberRights(chatId, memberId, params);
@@ -2301,7 +2301,7 @@ export class Client extends Composer {
      * Get the administrators of a chat.
      *
      * @method ch
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      * @returns The chat's administrators.
      */
     async getChatAdministrators(chatId) {
@@ -2311,7 +2311,7 @@ export class Client extends Composer {
      * Enable join requests in a chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat. Must be a channel or a supergroup.
+     * @param chatId The identifier of a chat. Must be a channel or a supergroup.
      */
     async enableJoinRequests(chatId) {
         await __classPrivateFieldGet(this, _Client_chatManager, "f").enableJoinRequests(chatId);
@@ -2320,7 +2320,7 @@ export class Client extends Composer {
      * Disable join requests in a chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat. Must be a channel or a supergroup.
+     * @param chatId The identifier of a chat. Must be a channel or a supergroup.
      */
     async disableJoinRequests(chatId) {
         await __classPrivateFieldGet(this, _Client_chatManager, "f").disableJoinRequests(chatId);
@@ -2338,7 +2338,7 @@ export class Client extends Composer {
      * Get the invite links created for a chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      * @returns The invite links created for the chat. This might be a subset of the results if they were less than `limit`. The parameters `afterDate` and `afterInviteLink` can be used for pagination.
      */
     async getCreatedInviteLinks(chatId, params) {
@@ -2348,7 +2348,7 @@ export class Client extends Composer {
      * Join a chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat to join.
+     * @param chatId The identifier of a chat.
      */
     async joinChat(chatId) {
         await __classPrivateFieldGet(this, _Client_chatManager, "f").joinChat(chatId);
@@ -2357,7 +2357,7 @@ export class Client extends Composer {
      * Leave a chat.
      *
      * @method ch
-     * @param chatId The identifier of the chat to leave.
+     * @param chatId The identifier of a chat.
      */
     async leaveChat(chatId) {
         await __classPrivateFieldGet(this, _Client_chatManager, "f").leaveChat(chatId);
@@ -2366,7 +2366,7 @@ export class Client extends Composer {
      * Get information on a user's chat membership.
      *
      * @method ch
-     * @param chatId The identifier of a chat that includes the user.
+     * @param chatId The identifier of a chat.
      * @param userId The identifier of the user.
      */
     async getChatMember(chatId, userId) {
@@ -2376,7 +2376,7 @@ export class Client extends Composer {
      * Get the members of a chat.
      *
      * @method ch
-     * @param chatId The chat to get its members.
+     * @param chatId The identifier of a chat.
      */
     async getChatMembers(chatId, params) {
         return await __classPrivateFieldGet(this, _Client_chatListManager, "f").getChatMembers(chatId, params);
@@ -2385,7 +2385,7 @@ export class Client extends Composer {
      * Set a chat's sticker set.
      *
      * @method ch
-     * @param chatId The identifier of the chat. Must be a supergroup.
+     * @param chatId The identifier of a chat. Must be a supergroup.
      * @param setName The name of the set.
      */
     async setChatStickerSet(chatId, setName) {
@@ -2395,7 +2395,7 @@ export class Client extends Composer {
      * Delete a chat's sticker set.
      *
      * @method ch
-     * @param chatId The identifier of the chat. Must be a supergroup.
+     * @param chatId The identifier of a chat. Must be a supergroup.
      */
     async deleteChatStickerSet(chatId) {
         await __classPrivateFieldGet(this, _Client_messageManager, "f").deleteChatStickerSet(chatId);
@@ -2404,7 +2404,7 @@ export class Client extends Composer {
      * Set the number of boosts required to circument a chat's default restrictions. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      * @param boosts The number of boosts required to circumvent its restrictions.
      */
     async setBoostsRequiredToCircumventRestrictions(chatId, boosts) {
@@ -2414,7 +2414,7 @@ export class Client extends Composer {
      * Create an invite link.
      *
      * @method ch
-     * @param chatId The identifier of the chat to create the invite link for.
+     * @param chatId The identifier of a chat to create the invite link for.
      * @returns The newly created invite link.
      */
     async createInviteLink(chatId, params) {
@@ -2424,7 +2424,7 @@ export class Client extends Composer {
      * Approve a join request.
      *
      * @method ch
-     * @param chatId The identifier of the chat that contains the join request.
+     * @param chatId The identifier of a chat with the join request.
      * @param userId The user who made the join request.
      */
     async approveJoinRequest(chatId, userId) {
@@ -2434,7 +2434,7 @@ export class Client extends Composer {
      * Decline a join request.
      *
      * @method ch
-     * @param chatId The identifier of the chat that contains the join request.
+     * @param chatId The identifier of a chat with the join request.
      * @param userId The user who made the join request.
      */
     async declineJoinRequest(chatId, userId) {
@@ -2444,7 +2444,7 @@ export class Client extends Composer {
      * Approve all join requests. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat that contains the join requests.
+     * @param chatId The identifier of a chat with the join requests.
      */
     async approveJoinRequests(chatId, params) {
         await __classPrivateFieldGet(this, _Client_chatManager, "f").approveJoinRequests(chatId, params);
@@ -2453,7 +2453,7 @@ export class Client extends Composer {
      * Decline all join requests. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat that contains the join requests.
+     * @param chatId The identifier of a chat with the join requests.
      */
     async declineJoinRequests(chatId, params) {
         await __classPrivateFieldGet(this, _Client_chatManager, "f").declineJoinRequests(chatId, params);
@@ -2462,7 +2462,7 @@ export class Client extends Composer {
      * Get pending join requests in a chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat that contains the join requests.
+     * @param chatId The identifier of a chat with the join requests.
      */
     async getJoinRequests(chatId, params) {
         return await __classPrivateFieldGet(this, _Client_chatManager, "f").getJoinRequests(chatId, params);
@@ -2471,7 +2471,7 @@ export class Client extends Composer {
      * Add a single user to a chat.
      *
      * @method ch
-     * @param chatId The identifier of the chat to add the user to.
+     * @param chatId The identifier of a chat to add the user to.
      * @param userId The identifier of the user to add to the chat.
      * @returns An array of FailedInvitation that has at most a length of 1. If empty, it means that the user was added.
      */
@@ -2492,7 +2492,7 @@ export class Client extends Composer {
      * Open a chat.
      *
      * @method ch
-     * @param chatId The chat to open.
+     * @param chatId The identifier of a chat to open.
      */
     async openChat(chatId) {
         await __classPrivateFieldGet(this, _Client_updateManager, "f").openChat(chatId);
@@ -2501,7 +2501,7 @@ export class Client extends Composer {
      * Close a chat previously opened by openChat.
      *
      * @method ch
-     * @param chatId The chat to close.
+     * @param chatId The identifier of a chat to close.
      */
     async closeChat(chatId) {
         await __classPrivateFieldGet(this, _Client_updateManager, "f").closeChat(chatId);
@@ -2540,7 +2540,7 @@ export class Client extends Composer {
      * Set the time to live of the messages of a chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat.
+     * @param chatId The identifier of a chat.
      * @param messageTtl The time to live of the messages in seconds.
      */
     async setMessageTtl(chatId, messageTtl) {
@@ -2559,7 +2559,7 @@ export class Client extends Composer {
      * Archive a single chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat to archive.
+     * @param chatId The identifier of a chat.
      */
     async archiveChat(chatId) {
         await __classPrivateFieldGet(this, _Client_chatListManager, "f").archiveChat(chatId);
@@ -2577,7 +2577,7 @@ export class Client extends Composer {
      * Unarchive a single chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat to unarchive.
+     * @param chatId The identifier of a chat.
      */
     async unarchiveChat(chatId) {
         await __classPrivateFieldGet(this, _Client_chatListManager, "f").unarchiveChat(chatId);
@@ -2595,7 +2595,7 @@ export class Client extends Composer {
      * Get the settings of a chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat to get the settings for.
+     * @param chatId The identifier of a chat.
      */
     async getChatSettings(chatId) {
         return await __classPrivateFieldGet(this, _Client_chatListManager, "f").getChatSettings(chatId);
@@ -2661,7 +2661,7 @@ export class Client extends Composer {
      * Hide or show the member list of a group to non-admins. User-only.
      *
      * @method ch
-     * @param chatId The identifier of a group.
+     * @param chatId The identifier of the group.
      * @param visible Whether the member list of the group should be visible.
      */
     async setMemberListVisibility(chatId, visible) {
@@ -2671,7 +2671,7 @@ export class Client extends Composer {
      * Enable or disable topics in a group. User-only.
      *
      * @method ch
-     * @param chatId The identifier of a group.
+     * @param chatId The identifier of the group.
      * @param enabled Whether topics should be enabled in the group.
      */
     async setTopicsEnabled(chatId, enabled) {
@@ -2681,7 +2681,7 @@ export class Client extends Composer {
      * Enable or disable automatic anti-spam in a group. User-only.
      *
      * @method ch
-     * @param chatId The identifier of a group.
+     * @param chatId The identifier of the group.
      * @param enabled Whether automatic anti-spam should be enabled in the group.
      */
     async setAntispamEnabled(chatId, enabled) {
@@ -2691,7 +2691,7 @@ export class Client extends Composer {
      * Enable or disable post signatures in a channel. User-only.
      *
      * @method ch
-     * @param chatId The identifier of a channel.
+     * @param chatId The identifier of the channel.
      * @param enabled Whether post signatures should be enabled in the channel.
      */
     async setSignaturesEnabled(chatId, enabled, params) {
@@ -2701,7 +2701,7 @@ export class Client extends Composer {
      * Delete a chat. User-only.
      *
      * @method ch
-     * @param chatId The identifier of the chat to delete.
+     * @param chatId The identifier of a chat.
      */
     async deleteChat(chatId) {
         await __classPrivateFieldGet(this, _Client_chatManager, "f").deleteChat(chatId);
@@ -2719,7 +2719,7 @@ export class Client extends Composer {
      *
      * @method ch
      * @param chatId The identifier of a channel.
-     * @param discussionChatId The identifier of the chat to use as discussion for the channel.
+     * @param discussionChatId The identifier of The identifier of a chat to use as discussion for the channel.
      */
     async setDiscussionChat(chatId, discussionChatId) {
         await __classPrivateFieldGet(this, _Client_chatManager, "f").setDiscussionChat(chatId, discussionChatId);
@@ -2823,14 +2823,14 @@ export class Client extends Composer {
      * Send a callback query. User-only.
      *
      * @method cq
-     * @param chatId The chat that includes the messsage.
-     * @param messageId The message that includes at a button responsible for the callback query question.
+     * @param botId The identifier of the bot to send the callback query to.
+     * @param messageId The identifier of the message that includes at a button responsible for the callback query question.
      * @param question The callback query's question.
      * @returns The bot's answer to the callback query.
      * @cache
      */
-    async sendCallbackQuery(chatId, messageId, question) {
-        return await __classPrivateFieldGet(this, _Client_callbackQueryManager, "f").sendCallbackQuery(chatId, messageId, question);
+    async sendCallbackQuery(botId, messageId, question) {
+        return await __classPrivateFieldGet(this, _Client_callbackQueryManager, "f").sendCallbackQuery(botId, messageId, question);
     }
     /**
      * Answer a callback query. Bot-only.
@@ -2848,19 +2848,19 @@ export class Client extends Composer {
      * Send an inline query. User-only.
      *
      * @method iq
-     * @param userId The ID of the bot to send the inline query to.
-     * @param chatId The ID of the chat from which the inline query is sent.
+     * @param botId The identifier of a bot to send the inline query to.
+     * @param chatId The identifier of the chat from which the inline query is sent.
      * @returns The bot's answer to the inline query.
      * @cache
      */
-    async sendInlineQuery(userId, chatId, params) {
-        return await __classPrivateFieldGet(this, _Client_inlineQueryManager, "f").sendInlineQuery(userId, chatId, params);
+    async sendInlineQuery(botId, chatId, params) {
+        return await __classPrivateFieldGet(this, _Client_inlineQueryManager, "f").sendInlineQuery(botId, chatId, params);
     }
     /**
      * Answer an inline query. Bot-only.
      *
      * @method iq
-     * @param id The ID of the inline query to answer.
+     * @param id The identifier of the inline query to answer.
      * @param results The results to answer with.
      */
     async answerInlineQuery(id, results, params) {
@@ -2991,8 +2991,9 @@ export class Client extends Composer {
      * Retrieve multiple stories. User-only.
      *
      * @method st
-     * @param chatId The identifier of the chat to retrieve the stories from.
+     * @param chatId The identifier of a chat.
      * @param storyIds The identifiers of the stories to retrieve.
+     * @returns The retrieved stories.
      */
     async getStories(chatId, storyIds) {
         if (!storyIds.length) {
@@ -3004,7 +3005,7 @@ export class Client extends Composer {
      * Retrieve a single story. User-only.
      *
      * @method st
-     * @param chatId The identifier of the chat to retrieve the story from.
+     * @param chatId The identifier of a chat.
      * @param storyId The identifier of the story to retrieve.
      * @returns The retrieved story.
      */
@@ -3015,7 +3016,7 @@ export class Client extends Composer {
      * Delete multiple stories. User-only.
      *
      * @method st
-     * @param chatId The identifier of the chat to delete the stories from.
+     * @param chatId The identifier of a chat.
      * @param storyIds The identifiers of the stories to delete.
      */
     async deleteStories(chatId, storyIds) {
@@ -3025,7 +3026,7 @@ export class Client extends Composer {
      * Delete a single story. User-only.
      *
      * @method st
-     * @param chatId The identifier of the chat to delete the story from.
+     * @param chatId The identifier of a chat.
      * @param storyId The identifier of the story to delete.
      */
     async deleteStory(chatId, storyId) {
@@ -3035,7 +3036,7 @@ export class Client extends Composer {
      * Add multiple stories to highlights. User-only.
      *
      * @method st
-     * @param chatId The identifier of the chat that has the stories.
+     * @param chatId The identifier of a chat.
      * @param storyIds The identifiers of the stories to add to highlights.
      */
     async addStoriesToHighlights(chatId, storyIds) {
@@ -3045,7 +3046,7 @@ export class Client extends Composer {
      * Add a single story to highlights. User-only.
      *
      * @method st
-     * @param chatId The identifier of the chat that has the story.
+     * @param chatId The identifier of a chat.
      * @param storyId The identifier of the story to add to highlights.
      */
     async addStoryToHighlights(chatId, storyId) {
@@ -3055,7 +3056,7 @@ export class Client extends Composer {
      * Remove multiple stories from highlights. User-only.
      *
      * @method st
-     * @param chatId The identifier of the chat that has the stories.
+     * @param chatId The identifier of a chat.
      * @param storyIds The identifiers of the stories to remove from highlights.
      */
     async removeStoriesFromHighlights(chatId, storyIds) {
@@ -3065,7 +3066,7 @@ export class Client extends Composer {
      * Remove a single story from highlights. User-only.
      *
      * @method st
-     * @param chatId The identifier of the chat that has the story.
+     * @param chatId The identifier of a chat.
      * @param storyId The identifier of the story to remove from highlights.
      */
     async removeStoryFromHighlights(chatId, storyId) {
@@ -3107,7 +3108,7 @@ export class Client extends Composer {
      * Start a video chat. User-only.
      *
      * @method vc
-     * @param chatId The chat to start the video chat in.
+     * @param chatId The identifier of a chat to start the video chat in.
      * @returns The started video chat.
      */
     async startVideoChat(chatId, params) {
@@ -3117,7 +3118,7 @@ export class Client extends Composer {
      * Schedule a video chat. User-only.
      *
      * @method vc
-     * @param chatId The chat to schedule the video chat in.
+     * @param chatId The identifier of a chat to schedule the video chat in.
      * @param startAt A point in time within the future in which the video chat will be started.
      * @returns The scheduled video chat.
      */
@@ -3128,7 +3129,7 @@ export class Client extends Composer {
      * Join a video chat. User-only.
      *
      * @method vc
-     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      * @param params_ WebRTC connection parameters.
      * @returns Parameters to be passed to the used WebRTC library.
      */
@@ -3139,7 +3140,7 @@ export class Client extends Composer {
      * Leave a video chat. User-only.
      *
      * @method vc
-     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      */
     async leaveVideoChat(id) {
         await __classPrivateFieldGet(this, _Client_videoChatManager, "f").leaveVideoChat(id);
@@ -3148,7 +3149,7 @@ export class Client extends Composer {
      * Join a live stream. User-only.
      *
      * @method vc
-     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      */
     async joinLiveStream(id) {
         await __classPrivateFieldGet(this, _Client_videoChatManager, "f").joinLiveStream(id);
@@ -3157,7 +3158,7 @@ export class Client extends Composer {
      * Get a video chat. User-only.
      *
      * @method vc
-     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      * @cache
      */
     async getVideoChat(id) {
@@ -3167,7 +3168,7 @@ export class Client extends Composer {
      * Get live stream channels. User-only.
      *
      * @method vc
-     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      */
     async getLiveStreamChannels(id) {
         return await __classPrivateFieldGet(this, _Client_videoChatManager, "f").getLiveStreamChannels(id);
@@ -3176,7 +3177,7 @@ export class Client extends Composer {
      * Download a live stream chunk. User-only.
      *
      * @method vc
-     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      * @param channelId Stream channel ID.
      * @param scale Stream channel scale.
      * @param timestamp Millisecond timestamp of the chunk to download.
@@ -3240,7 +3241,7 @@ export class Client extends Composer {
      * Add a contact. User-only.
      *
      * @method co
-     * @param userId The identifier of a user to add as contact.
+     * @param userId The identifier of the user to add as contact.
      */
     async addContact(userId, params) {
         await __classPrivateFieldGet(this, _Client_accountManager, "f").addContact(userId, params);
@@ -3272,7 +3273,7 @@ export class Client extends Composer {
      * Get gifts claimed by a user or a channel. User-only.
      *
      * @method gf
-     * @param chatId The identifier of a user or a channel to get gifts for.
+     * @param chatId The identifier of the user or a channel to get gifts for.
      */
     async getClaimedGifts(chatId, params) {
         return await __classPrivateFieldGet(this, _Client_giftManager, "f").getClaimedGifts(chatId, params);
@@ -3281,7 +3282,7 @@ export class Client extends Composer {
      * Send a gift.
      *
      * @method gf
-     * @param chatId The identifier of a user or a channel to send the gift to.
+     * @param chatId The identifier of the user or a channel to send the gift to.
      * @param giftId The identifier of the gift to send.
      */
     async sendGift(chatId, giftId, params) {

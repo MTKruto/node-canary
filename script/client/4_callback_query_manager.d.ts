@@ -32,7 +32,7 @@ export declare class CallbackQueryManager implements UpdateProcessor<CallbackQue
     #private;
     constructor(c: C);
     answerCallbackQuery(id: string, params?: AnswerCallbackQueryParams): Promise<void>;
-    sendCallbackQuery(chatId: ID, messageId: number, question: CallbackQueryQuestion): Promise<import("../3_types.js").CallbackQueryAnswer>;
+    sendCallbackQuery(botId: ID, messageId: number, question: CallbackQueryQuestion): Promise<import("../3_types.js").CallbackQueryAnswer>;
     canHandleUpdate(update: Api.Update): update is CallbackQueryManagerUpdate;
     handleUpdate(update: CallbackQueryManagerUpdate): Promise<Update>;
 }

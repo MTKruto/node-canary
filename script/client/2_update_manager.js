@@ -260,7 +260,6 @@ class UpdateManager {
                         await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_processUpdates).call(this, update, false);
                     }
                     if (_2_tl_js_1.Api.is("updates.difference", difference)) {
-                        await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_setState).call(this, difference.state);
                         __classPrivateFieldGet(this, _UpdateManager_LrecoverUpdateGap, "f").debug("recovered from update gap");
                         break;
                     }
@@ -512,19 +511,13 @@ _a = UpdateManager, _UpdateManager_c = new WeakMap(), _UpdateManager_updateState
         await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_processChannelPtsUpdateInner).call(this, update, checkGap);
     });
 }, _UpdateManager_processPtsUpdateInner = async function _UpdateManager_processPtsUpdateInner(update, checkGap) {
-    let localState;
-    if (update.pts != 0) {
-        if (checkGap) {
-            await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_checkGap).call(this, update.pts, update.pts_count);
-            if (await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_needsGetDifference).call(this, update)) {
-                await this.recoverUpdateGap("needsGetDifference");
-            }
-            localState = await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_getLocalState).call(this);
+    if (update.pts != 0 && checkGap) {
+        await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_checkGap).call(this, update.pts, update.pts_count);
+        if (await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_needsGetDifference).call(this, update)) {
+            await this.recoverUpdateGap("needsGetDifference");
         }
     }
-    if (!localState) {
-        localState = await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_getLocalState).call(this);
-    }
+    const localState = await __classPrivateFieldGet(this, _UpdateManager_instances, "m", _UpdateManager_getLocalState).call(this);
     if (localState.pts + update.pts_count > update.pts) {
         return;
     }

@@ -20,7 +20,7 @@
 import { Api } from "../2_tl.js";
 import { UsernameResolver } from "./_getters.js";
 import { LoginUrl } from "./0_login_url.js";
-import { MiniAppInfo } from "./0_mini_app_info.js";
+import { MiniAppButtonInfo } from "./0_mini_app_button_info.js";
 /** @unlisted */
 export interface _InlineKeyboardButtonBase {
     /** The text of the button. */
@@ -58,7 +58,7 @@ export interface InlineKeyboardButtonMiniApp extends _InlineKeyboardButtonBase {
      * The mini app to launch.
      * @discriminator
      */
-    miniApp: MiniAppInfo;
+    miniApp: MiniAppButtonInfo;
 }
 /**
  * An inline keyboard button that, when pressed, logs the user into the specified URL.

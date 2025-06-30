@@ -20,7 +20,7 @@
 import { Api } from "../2_tl.js";
 import { ChatAdministratorRights } from "./0_chat_administrator_rights.js";
 import { KeyboardButtonPollType } from "./0_keyboard_button_poll_type.js";
-import { MiniAppInfo } from "./0_mini_app_info.js";
+import { MiniAppButtonInfo } from "./0_mini_app_button_info.js";
 /** @unlisted */
 export interface KeyboardButtonText {
     /** @discriminator */
@@ -67,7 +67,7 @@ export interface KeyboardButtonRequestPoll extends KeyboardButtonText {
 /** @unlisted */
 export interface KeyboardButtonMiniApp extends KeyboardButtonText {
     /** @discriminator */
-    miniApp: MiniAppInfo;
+    miniApp: MiniAppButtonInfo;
 }
 /** A button of a custom keyboard. */
 export type KeyboardButton = KeyboardButtonText | KeyboardButtonRequestUser | KeyboardButtonRequestChat | KeyboardButtonRequestContact | KeyboardButtonRequestLocation | KeyboardButtonRequestPoll | KeyboardButtonMiniApp;

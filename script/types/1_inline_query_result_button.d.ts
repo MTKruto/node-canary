@@ -17,13 +17,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { MiniAppInfo } from "./0_mini_app_info.js";
+import { MiniAppButtonInfo } from "./0_mini_app_button_info.js";
 /** A button to be shown along with the results of an inline query. */
 export interface InlineQueryResultButton {
     /** Label text on the button. */
     text: string;
     /** Description of the Mini App that will be launched when the user presses the button. */
-    miniApp?: MiniAppInfo;
+    miniApp?: MiniAppButtonInfo;
     /** Deep linking parameter for the /start message. */
     startParameter?: string;
 }

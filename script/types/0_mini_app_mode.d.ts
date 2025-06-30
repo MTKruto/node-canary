@@ -17,10 +17,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-/** The necessary information to launch a mini app. */
-export interface MiniAppInfo {
-    /** An HTTPS URL of the mini app to be opened with additional data. */
-    url: string;
-}
-export declare function constructMiniAppInfo(url: string): MiniAppInfo;
-//# sourceMappingURL=0_mini_app_info.d.ts.map
+/** A mini app mode. */
+export type MiniAppMode = "default" | "fullscreen" | "compact";
+//# sourceMappingURL=0_mini_app_mode.d.ts.map

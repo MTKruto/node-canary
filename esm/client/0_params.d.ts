@@ -20,6 +20,7 @@
 import { MaybePromise } from "../1_utilities.js";
 import { DC } from "../3_transport.js";
 import { Birthday, BotCommandScope, ChatListItem, ChatMemberRights, FileSource, ID, InlineQueryResultButton, InputLinkPreview, LinkPreview, MessageEntity, MessageSearchFilter, ParseMode, ReplyMarkup, SelfDestructOption, StoryInteractiveArea, StoryPrivacy } from "../3_types.js";
+import { MiniAppMode } from "../types/0_mini_app_mode.js";
 import { ReplyTo } from "../types/2_reply_to.js";
 export interface InvokeParams {
     dc?: DC;
@@ -602,5 +603,23 @@ export interface GetJoinRequestsParams {
     fromUserId?: ID;
     /** The maximum number of results to return. Must be in the range of 1-100. Defaults to 100. */
     limit?: number;
+}
+export interface OpenMiniAppParams {
+    /** The mode to open the mini app in. Defaults to the default mode. */
+    mode?: MiniAppMode;
+    /** The URL of the mini app to open. */
+    url?: string;
+    /** The start parameter to pass to the mini app. */
+    startParameter?: string;
+    /** Theme parameters encoded in JSON. */
+    themeParameters?: string;
+    /** Whether messages relevant to the mini app session should be sent silently. */
+    disableNotification?: boolean;
+    /** The identifier of a chat to send relevant messages on behalf of. */
+    sendAs?: ID;
+    /** Whether the mini app is being opened from the menu. */
+    fromMenu?: boolean;
+    /** Information on a message to which relevant messages should be replied to. */
+    replyTo?: ReplyTo;
 }
 //# sourceMappingURL=0_params.d.ts.map

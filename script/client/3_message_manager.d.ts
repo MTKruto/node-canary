@@ -20,7 +20,7 @@
 import { Api } from "../2_tl.js";
 import { InputMedia, PollOption, PriceTag, VoiceTranscription } from "../3_types.js";
 import { ChatAction, FileSource, FileType, ID, Message, MessageEntity, ParseMode, Reaction, Update, UsernameResolver } from "../3_types.js";
-import { AddReactionParams, DeleteMessagesParams, EditInlineMessageCaptionParams, EditInlineMessageMediaParams, EditInlineMessageTextParams, EditMessageCaptionParams, EditMessageLiveLocationParams, EditMessageMediaParams, EditMessageReplyMarkupParams, EditMessageTextParams, ForwardMessagesParams, GetHistoryParams, PinMessageParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendChatActionParams, SendContactParams, SendDiceParams, SendDocumentParams, SendInvoiceParams, SendLocationParams, SendMediaGroupParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetReactionsParams, type StartBotParams, StopPollParams, UnpinMessageParams } from "./0_params.js";
+import { AddReactionParams, DeleteMessagesParams, EditInlineMessageCaptionParams, EditInlineMessageMediaParams, EditInlineMessageTextParams, EditMessageCaptionParams, EditMessageLiveLocationParams, EditMessageMediaParams, EditMessageReplyMarkupParams, EditMessageTextParams, ForwardMessagesParams, GetHistoryParams, OpenMiniAppParams, PinMessageParams, SearchMessagesParams, SendAnimationParams, SendAudioParams, SendChatActionParams, SendContactParams, SendDiceParams, SendDocumentParams, SendInvoiceParams, SendLocationParams, SendMediaGroupParams, SendMessageParams, SendPhotoParams, SendPollParams, SendStickerParams, SendVenueParams, SendVideoNoteParams, SendVideoParams, SendVoiceParams, SetReactionsParams, type StartBotParams, StopPollParams, UnpinMessageParams } from "./0_params.js";
 import { UpdateProcessor } from "./0_update_processor.js";
 import { C as C_ } from "./1_types.js";
 import { FileManager } from "./2_file_manager.js";
@@ -105,6 +105,7 @@ export declare class MessageManager implements UpdateProcessor<MessageManagerUpd
     transcribeVoice(chatId: ID, messageId: number): Promise<VoiceTranscription>;
     resolveMessageLink(link: string): Promise<Message>;
     static parseMessageLink(link: string): [ID, number] | null;
+    openMiniApp(botId: ID, chatId: ID, params?: OpenMiniAppParams): Promise<import("../3_types.js").MiniAppInfo>;
 }
 export {};
 //# sourceMappingURL=3_message_manager.d.ts.map

@@ -17,14 +17,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { MiniAppButtonInfo } from "./0_mini_app_button_info.js";
-/** A button to be shown along with the results of an inline query. */
-export interface InlineQueryResultButton {
-    /** Label text on the button. */
-    text: string;
-    /** Description of the Mini App that will be launched when the user presses the button. */
-    miniApp?: MiniAppButtonInfo;
-    /** Deep linking parameter for the /start message. */
-    startParameter?: string;
+import { Api } from "../2_tl.js";
+import { MiniAppMode } from "./0_mini_app_mode.js";
+/** The necessary information to launch a mini app. */
+export interface MiniAppInfo {
+    /** An HTTPS URL of the mini app. */
+    url: string;
+    /** The mode to launch the mini app in. */
+    mode: MiniAppMode;
+    /** The identifier of the mini app session. */
+    queryId?: string;
 }
-//# sourceMappingURL=1_inline_query_result_button.d.ts.map
+export declare function constructMiniAppInfo(result: Api.webViewResultUrl): MiniAppInfo;
+//# sourceMappingURL=1_mini_app_info.d.ts.map

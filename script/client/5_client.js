@@ -2146,6 +2146,17 @@ class Client extends Composer {
     async getLinkPreview(text, params) {
         return await __classPrivateFieldGet(this, _Client_linkPreviewManager, "f").getLinkPreview(text, params);
     }
+    /**
+     * Open a mini app. User-only.
+     *
+     * @method ms
+     * @param botId The identifier of a bot with the mini app.
+     * @param chatId The identifier of the chat from which the mini app is opened.
+     * @cache
+     */
+    async openMiniApp(botId, chatId, params) {
+        return await __classPrivateFieldGet(this, _Client_messageManager, "f").openMiniApp(botId, chatId, params);
+    }
     //
     // ========================= POLLS ========================= //
     //

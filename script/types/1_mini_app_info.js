@@ -1,3 +1,4 @@
+"use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
  * Copyright (C) 2023-2025 Roj <https://roj.im/>
@@ -17,14 +18,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { MiniAppButtonInfo } from "./0_mini_app_button_info.js";
-/** A button to be shown along with the results of an inline query. */
-export interface InlineQueryResultButton {
-    /** Label text on the button. */
-    text: string;
-    /** Description of the Mini App that will be launched when the user presses the button. */
-    miniApp?: MiniAppButtonInfo;
-    /** Deep linking parameter for the /start message. */
-    startParameter?: string;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.constructMiniAppInfo = constructMiniAppInfo;
+const _1_utilities_js_1 = require("../1_utilities.js");
+function constructMiniAppInfo(result) {
+    return (0, _1_utilities_js_1.cleanObject)({
+        url: result.url,
+        mode: result.fullscreen ? "fullscreen" : result.fullsize ? "default" : "compact",
+        queryId: result.query_id ? String(result.query_id) : undefined,
+    });
 }
-//# sourceMappingURL=1_inline_query_result_button.d.ts.map

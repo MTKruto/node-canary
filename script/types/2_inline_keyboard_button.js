@@ -25,7 +25,7 @@ const _0_deps_js_1 = require("../0_deps.js");
 const _0_errors_js_1 = require("../0_errors.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
-const _0_mini_app_info_js_1 = require("./0_mini_app_info.js");
+const _0_mini_app_button_info_js_1 = require("./0_mini_app_button_info.js");
 function constructInlineKeyboardButton(button_) {
     if (_2_tl_js_1.Api.is("keyboardButtonUrl", button_)) {
         return { text: button_.text, url: button_.url };
@@ -34,7 +34,7 @@ function constructInlineKeyboardButton(button_) {
         return { text: button_.text, callbackData: (0, _1_utilities_js_1.decodeText)(button_.data) };
     }
     else if (_2_tl_js_1.Api.is("keyboardButtonWebView", button_) || _2_tl_js_1.Api.is("keyboardButtonSimpleWebView", button_)) {
-        return { text: button_.text, miniApp: (0, _0_mini_app_info_js_1.constructMiniAppInfo)(button_.url) };
+        return { text: button_.text, miniApp: (0, _0_mini_app_button_info_js_1.constructMiniAppButtonInfo)(button_.url) };
     }
     else if (_2_tl_js_1.Api.is("keyboardButtonUrlAuth", button_)) {
         return { text: button_.text, loginUrl: { url: button_.url, forwardText: button_.fwd_text } };

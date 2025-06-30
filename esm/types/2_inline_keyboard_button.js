@@ -21,7 +21,7 @@ import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
 import { cleanObject, decodeText, encodeText } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
-import { constructMiniAppInfo } from "./0_mini_app_info.js";
+import { constructMiniAppButtonInfo } from "./0_mini_app_button_info.js";
 export function constructInlineKeyboardButton(button_) {
     if (Api.is("keyboardButtonUrl", button_)) {
         return { text: button_.text, url: button_.url };
@@ -30,7 +30,7 @@ export function constructInlineKeyboardButton(button_) {
         return { text: button_.text, callbackData: decodeText(button_.data) };
     }
     else if (Api.is("keyboardButtonWebView", button_) || Api.is("keyboardButtonSimpleWebView", button_)) {
-        return { text: button_.text, miniApp: constructMiniAppInfo(button_.url) };
+        return { text: button_.text, miniApp: constructMiniAppButtonInfo(button_.url) };
     }
     else if (Api.is("keyboardButtonUrlAuth", button_)) {
         return { text: button_.text, loginUrl: { url: button_.url, forwardText: button_.fwd_text } };

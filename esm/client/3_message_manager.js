@@ -34,7 +34,7 @@ import { InputError } from "../0_errors.js";
 import { encodeText, getLogger, getRandomId, toUnixTimestamp } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { getDc } from "../3_transport.js";
-import { constructVoiceTranscription, deserializeFileId, isMessageType, selfDestructOptionToInt } from "../3_types.js";
+import { constructMiniAppInfo, constructVoiceTranscription, deserializeFileId, isMessageType, selfDestructOptionToInt } from "../3_types.js";
 import { assertMessageType, constructMessage as constructMessage_, deserializeInlineMessageId, FileType, messageEntityToTlObject, reactionEqual, reactionToTlObject, replyMarkupToTlObject } from "../3_types.js";
 import { messageSearchFilterToTlObject } from "../types/0_message_search_filter.js";
 import { parseHtml } from "./0_html.js";
@@ -1233,6 +1233,37 @@ export class MessageManager {
             }
         }
         return [peer, id];
+    }
+    async openMiniApp(botId, chatId, params) {
+        __classPrivateFieldGet(this, _MessageManager_c, "f").storage.assertUser("openMiniApp");
+        const from_bot_menu = params?.fromMenu ? true : undefined;
+        const silent = params?.disableNotification ? true : undefined;
+        const compact = params?.mode === "compact" ? true : undefined;
+        const fullscreen = params?.mode === "fullscreen" ? true : undefined;
+        const peer = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId);
+        const bot = await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputUser(botId);
+        const url = params?.url;
+        const start_param = params?.startParameter;
+        const theme_params = params?.themeParameters ? { _: "dataJSON", data: params.themeParameters } : undefined;
+        const platform = __classPrivateFieldGet(this, _MessageManager_c, "f").langPack ?? "";
+        const reply_to = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_constructReplyTo).call(this, params);
+        const send_as = params?.sendAs ? await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(params.sendAs) : undefined;
+        const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({
+            _: "messages.requestWebView",
+            from_bot_menu,
+            silent,
+            compact,
+            fullscreen,
+            peer,
+            bot,
+            url,
+            start_param,
+            theme_params,
+            platform,
+            reply_to,
+            send_as,
+        });
+        return constructMiniAppInfo(result);
     }
 }
 _a = MessageManager, _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(), _MessageManager_instances = new WeakSet(), _MessageManager_checkParams = function _MessageManager_checkParams(params) {

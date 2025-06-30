@@ -3129,7 +3129,7 @@ export class Client extends Composer {
      * Join a video chat. User-only.
      *
      * @method vc
-     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      * @param params_ WebRTC connection parameters.
      * @returns Parameters to be passed to the used WebRTC library.
      */
@@ -3140,7 +3140,7 @@ export class Client extends Composer {
      * Leave a video chat. User-only.
      *
      * @method vc
-     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      */
     async leaveVideoChat(id) {
         await __classPrivateFieldGet(this, _Client_videoChatManager, "f").leaveVideoChat(id);
@@ -3149,7 +3149,7 @@ export class Client extends Composer {
      * Join a live stream. User-only.
      *
      * @method vc
-     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      */
     async joinLiveStream(id) {
         await __classPrivateFieldGet(this, _Client_videoChatManager, "f").joinLiveStream(id);
@@ -3158,7 +3158,7 @@ export class Client extends Composer {
      * Get a video chat. User-only.
      *
      * @method vc
-     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      * @cache
      */
     async getVideoChat(id) {
@@ -3168,7 +3168,7 @@ export class Client extends Composer {
      * Get live stream channels. User-only.
      *
      * @method vc
-     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      */
     async getLiveStreamChannels(id) {
         return await __classPrivateFieldGet(this, _Client_videoChatManager, "f").getLiveStreamChannels(id);
@@ -3177,7 +3177,7 @@ export class Client extends Composer {
      * Download a live stream chunk. User-only.
      *
      * @method vc
-     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      * @param channelId Stream channel ID.
      * @param scale Stream channel scale.
      * @param timestamp Millisecond timestamp of the chunk to download.
@@ -3273,7 +3273,7 @@ export class Client extends Composer {
      * Get gifts claimed by a user or a channel. User-only.
      *
      * @method gf
-     * @param chatId The identifier of the user or a channel to get gifts for.
+     * @param chatId The identifier of a user or a channel to get gifts for.
      */
     async getClaimedGifts(chatId, params) {
         return await __classPrivateFieldGet(this, _Client_giftManager, "f").getClaimedGifts(chatId, params);
@@ -3282,7 +3282,7 @@ export class Client extends Composer {
      * Send a gift.
      *
      * @method gf
-     * @param chatId The identifier of the user or a channel to send the gift to.
+     * @param chatId The identifier of a user or a channel to send the gift to.
      * @param giftId The identifier of the gift to send.
      */
     async sendGift(chatId, giftId, params) {

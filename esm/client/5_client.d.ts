@@ -1651,7 +1651,7 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Join a video chat. User-only.
      *
      * @method vc
-     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      * @param params_ WebRTC connection parameters.
      * @returns Parameters to be passed to the used WebRTC library.
      */
@@ -1660,21 +1660,21 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Leave a video chat. User-only.
      *
      * @method vc
-     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      */
     leaveVideoChat(id: string): Promise<void>;
     /**
      * Join a live stream. User-only.
      *
      * @method vc
-     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      */
     joinLiveStream(id: string): Promise<void>;
     /**
      * Get a video chat. User-only.
      *
      * @method vc
-     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      * @cache
      */
     getVideoChat(id: string): Promise<VideoChat>;
@@ -1682,14 +1682,14 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Get live stream channels. User-only.
      *
      * @method vc
-     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      */
     getLiveStreamChannels(id: string): Promise<LiveStreamChannel[]>;
     /**
      * Download a live stream chunk. User-only.
      *
      * @method vc
-     * @param id The identifier of the video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
+     * @param id The identifier of a video chat retrieved from getChat, startVideoChat, or scheduleVideoChat.
      * @param channelId Stream channel ID.
      * @param scale Stream channel scale.
      * @param timestamp Millisecond timestamp of the chunk to download.
@@ -1755,14 +1755,14 @@ export declare class Client<C extends Context = Context> extends Composer<C> {
      * Get gifts claimed by a user or a channel. User-only.
      *
      * @method gf
-     * @param chatId The identifier of the user or a channel to get gifts for.
+     * @param chatId The identifier of a user or a channel to get gifts for.
      */
     getClaimedGifts(chatId: ID, params?: GetClaimedGiftsParams): Promise<ClaimedGifts>;
     /**
      * Send a gift.
      *
      * @method gf
-     * @param chatId The identifier of the user or a channel to send the gift to.
+     * @param chatId The identifier of a user or a channel to send the gift to.
      * @param giftId The identifier of the gift to send.
      */
     sendGift(chatId: ID, giftId: string, params?: SendGiftParams): Promise<void>;

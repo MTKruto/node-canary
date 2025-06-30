@@ -105,7 +105,6 @@ export declare class MessageManager implements UpdateProcessor<MessageManagerUpd
     transcribeVoice(chatId: ID, messageId: number): Promise<VoiceTranscription>;
     resolveMessageLink(link: string): Promise<Message>;
     static parseMessageLink(link: string): [ID, number] | null;
-    openMiniApp(): Promise<void>;
 }
 export {};
 //# sourceMappingURL=3_message_manager.d.ts.map

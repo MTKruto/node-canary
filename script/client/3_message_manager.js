@@ -1237,8 +1237,6 @@ class MessageManager {
         }
         return [peer, id];
     }
-    async openMiniApp() {
-    }
 }
 exports.MessageManager = MessageManager;
 _a = MessageManager, _MessageManager_c = new WeakMap(), _MessageManager_LresolveFileId = new WeakMap(), _MessageManager_instances = new WeakSet(), _MessageManager_checkParams = function _MessageManager_checkParams(params) {

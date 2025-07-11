@@ -1084,7 +1084,7 @@ export class Client extends Composer {
             return { _: "inputPeerSelf" };
         }
         const inputPeer = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getInputPeerInner).call(this, id);
-        if (((Api.is("inputPeerUser", inputPeer) || Api.is("inputPeerChannel", inputPeer)) && inputPeer.access_hash == 0n) && await this.storage.getAccountType() == "bot") {
+        if (((Api.is("inputPeerUser", inputPeer) || Api.is("inputPeerChannel", inputPeer)) && inputPeer.access_hash == 0n) && await this.storage.getAccountType() == "user") {
             if ("channel_id" in inputPeer) {
                 inputPeer.access_hash = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getChannelAccessHash).call(this, inputPeer.channel_id);
             }
@@ -1344,14 +1344,14 @@ export class Client extends Composer {
         }
     }, _Client_getUserAccessHash = async function _Client_getUserAccessHash(userId) {
         const users = await this.invoke({ _: "users.getUsers", id: [{ _: "inputUser", user_id: userId, access_hash: 0n }] });
-        const user = Api.as("user", users[0]);
+        const user = Api.is("user", users[0]) ? users[0] : undefined;
         if (user) {
             await this.messageStorage.setEntity(user);
         }
         return user?.access_hash ?? 0n;
     }, _Client_getChannelAccessHash = async function _Client_getChannelAccessHash(channelId) {
         const channels = await this.invoke({ _: "channels.getChannels", id: [{ _: "inputChannel", channel_id: channelId, access_hash: 0n }] });
-        const channel = Api.as("channel", channels.chats[0]);
+        const channel = Api.is("channel", channels.chats[0]) ? channels.chats[0] : undefined;
         if (channel) {
             await this.messageStorage.setEntity(channel);
         }

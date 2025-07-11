@@ -31,7 +31,7 @@ async function constructClaimedGift(savedStarGift, fromPeer, getEntity) {
         (0, _0_deps_js_1.unreachable)();
     }
     const gift = await (0, _3_gift_js_1.constructGift)(savedStarGift.gift, getEntity);
-    const date = (0, _1_utilities_js_1.fromUnixTimestamp)(savedStarGift.date);
+    const date = savedStarGift.date;
     const public_ = !!savedStarGift.unsaved;
     const sender = fromPeer ? (0, _1_chat_p_js_1.constructChatP)(fromPeer) : undefined;
     const message = savedStarGift.message?.text;

@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
+import { cleanObject } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { FileType, serializeFileId, toUniqueFileId } from "./_file_id.js";
 import { constructSticker2 } from "./1_sticker.js";
@@ -84,8 +84,8 @@ export function constructGiftNonUpgraded(gift) {
     const soldOut = limited ? !!gift.sold_out : undefined;
     const birthday = !!gift.birthday;
     const conversionPrice = Number(gift.convert_stars);
-    const firstSaleDate = limited ? gift.first_sale_date ? fromUnixTimestamp(gift.first_sale_date) : undefined : undefined;
-    const lastSaleDate = limited ? gift.last_sale_date ? fromUnixTimestamp(gift.last_sale_date) : undefined : undefined;
+    const firstSaleDate = limited ? gift.first_sale_date ? gift.first_sale_date : undefined : undefined;
+    const lastSaleDate = limited ? gift.last_sale_date ? gift.last_sale_date : undefined : undefined;
     const upgradePrice = gift.upgrade_stars ? Number(gift.upgrade_stars) : undefined;
     return cleanObject({
         type: "nonupgraded",

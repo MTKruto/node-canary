@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
+import { cleanObject } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { FileType, serializeFileId, toUniqueFileId } from "./_file_id.js";
 import { constructAudio } from "./1_audio.js";
@@ -38,7 +38,7 @@ export async function constructLinkPreview(media, invert, getEntity) {
             return cleanObject({
                 type: "loading",
                 id,
-                date: fromUnixTimestamp(media.webpage.date),
+                date: media.webpage.date,
                 url: media.webpage.url,
                 smallMedia,
                 largeMedia,

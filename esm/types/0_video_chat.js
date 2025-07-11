@@ -17,7 +17,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { fromUnixTimestamp } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 export function constructVideoChat(call) {
     const id = String(call.id);
@@ -37,7 +36,7 @@ export function constructVideoChat(call) {
                 type: "scheduled",
                 id,
                 title,
-                scheduledFor: fromUnixTimestamp(call.schedule_date),
+                scheduledFor: call.schedule_date,
                 liveStream,
                 participantCount,
             };

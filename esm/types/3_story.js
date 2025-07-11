@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
+import { cleanObject } from "../1_utilities.js";
 import { constructMessageEntity } from "./0_message_entity.js";
 import { constructChatP } from "./1_chat_p.js";
 import { constructStoryPrivacy } from "./1_story_privacy.js";
@@ -32,7 +32,7 @@ export async function constructStory(story, peer, getEntity) {
         unreachable();
     }
     const chat = constructChatP(entity);
-    const date = fromUnixTimestamp(story.date);
+    const date = story.date;
     const interactiveAreas = (story.media_areas ?? []).map(constructStoryInteractiveArea);
     const highlighted = story.pinned ? true : false;
     const content = constructStoryContent(story.media);

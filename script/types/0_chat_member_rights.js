@@ -43,10 +43,10 @@ function constructChatMemberRights(rights) {
         canManageTopics: rights.manage_topics ? true : undefined,
     });
 }
-function chatMemberRightsToTlObject(rights, untilDate) {
+function chatMemberRightsToTlObject(rights, until) {
     return {
         _: "chatBannedRights",
-        until_date: untilDate ? (0, _1_utilities_js_1.toUnixTimestamp)(untilDate) : 0,
+        until_date: until ?? 0,
         send_messages: rights?.canSendMessages !== false ? undefined : true,
         send_audios: rights?.canSendAudio !== false ? undefined : true,
         send_docs: rights?.canSendDocuments !== false ? undefined : true,

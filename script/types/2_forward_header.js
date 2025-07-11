@@ -32,7 +32,7 @@ async function constructForwardHeader(fwdHeader, getEntity) {
         }
         return (0, _1_utilities_js_1.cleanObject)({
             type: "channel",
-            date: (0, _1_utilities_js_1.fromUnixTimestamp)(fwdHeader.date),
+            date: fwdHeader.date,
             chat: (0, _1_chat_p_js_1.constructChatP)(chat),
             messageId: fwdHeader.channel_post,
             authorSignature: fwdHeader.post_author,
@@ -45,7 +45,7 @@ async function constructForwardHeader(fwdHeader, getEntity) {
         }
         return (0, _1_utilities_js_1.cleanObject)({
             type: "supergroup",
-            date: (0, _1_utilities_js_1.fromUnixTimestamp)(fwdHeader.date),
+            date: fwdHeader.date,
             chat: (0, _1_chat_p_js_1.constructChatP)(chat),
             title: fwdHeader.post_author,
         });
@@ -57,21 +57,21 @@ async function constructForwardHeader(fwdHeader, getEntity) {
         }
         return {
             type: "user",
-            date: (0, _1_utilities_js_1.fromUnixTimestamp)(fwdHeader.date),
+            date: fwdHeader.date,
             user: (0, _1_user_js_1.constructUser)(user),
         };
     }
     else if (fwdHeader.from_name) {
         return {
             type: "hidden",
-            date: (0, _1_utilities_js_1.fromUnixTimestamp)(fwdHeader.date),
+            date: fwdHeader.date,
             name: fwdHeader.from_name,
         };
     }
     else {
         return {
             type: "unsupported",
-            date: (0, _1_utilities_js_1.fromUnixTimestamp)(fwdHeader.date),
+            date: fwdHeader.date,
         };
     }
 }

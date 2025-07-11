@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { cleanObject, toUnixTimestamp } from "../1_utilities.js";
+import { cleanObject } from "../1_utilities.js";
 export function constructChatMemberRights(rights) {
     return cleanObject({
         canSendMessages: rights.send_messages ? true : false,
@@ -39,10 +39,10 @@ export function constructChatMemberRights(rights) {
         canManageTopics: rights.manage_topics ? true : undefined,
     });
 }
-export function chatMemberRightsToTlObject(rights, untilDate) {
+export function chatMemberRightsToTlObject(rights, until) {
     return {
         _: "chatBannedRights",
-        until_date: untilDate ? toUnixTimestamp(untilDate) : 0,
+        until_date: until ?? 0,
         send_messages: rights?.canSendMessages !== false ? undefined : true,
         send_audios: rights?.canSendAudio !== false ? undefined : true,
         send_docs: rights?.canSendDocuments !== false ? undefined : true,

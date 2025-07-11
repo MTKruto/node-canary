@@ -34,7 +34,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AccountManager = void 0;
 const _0_deps_js_1 = require("../0_deps.js");
 const _0_errors_js_1 = require("../0_errors.js");
-const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 const _3_types_js_1 = require("../3_types.js");
 const _0_utilities_js_1 = require("./0_utilities.js");
@@ -90,7 +89,7 @@ class AccountManager {
     async setEmojiStatus(id, params) {
         __classPrivateFieldGet(this, _AccountManager_c, "f").storage.assertUser("setEmojiStatus");
         const document_id = BigInt(id);
-        const until = params?.until ? (0, _1_utilities_js_1.toUnixTimestamp)(params.until) : undefined;
+        const until = params?.until;
         const emoji_status = { _: "emojiStatus", document_id, until };
         await __classPrivateFieldGet(this, _AccountManager_c, "f").invoke({ _: "account.updateEmojiStatus", emoji_status });
     }
@@ -98,7 +97,7 @@ class AccountManager {
         __classPrivateFieldGet(this, _AccountManager_c, "f").storage.assertBot("setUserEmojiStatus");
         const user_id = await __classPrivateFieldGet(this, _AccountManager_c, "f").getInputUser(userId);
         const document_id = BigInt(id);
-        const until = params?.until ? (0, _1_utilities_js_1.toUnixTimestamp)(params.until) : undefined;
+        const until = params?.until;
         const emoji_status = { _: "emojiStatus", document_id, until };
         await __classPrivateFieldGet(this, _AccountManager_c, "f").invoke({ _: "bots.updateUserEmojiStatus", user_id, emoji_status });
     }

@@ -32,7 +32,7 @@ export declare class VideoChatManager implements UpdateProcessor<VideoChatManage
     #private;
     constructor(c: C);
     startVideoChat(chatId: ID, params?: StartVideoChatParams): Promise<VideoChatActive>;
-    scheduleVideoChat(chatId: ID, startAt: Date, params?: StartVideoChatParams): Promise<VideoChatScheduled>;
+    scheduleVideoChat(chatId: ID, startAt: number, params?: StartVideoChatParams): Promise<VideoChatScheduled>;
     joinVideoChat(id: string, params: string, params_?: JoinVideoChatParams): Promise<string>;
     leaveVideoChat(id: string): Promise<void>;
     joinLiveStream(id: string): Promise<void>;

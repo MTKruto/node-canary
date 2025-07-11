@@ -49,9 +49,9 @@ export interface GiftNonUpgraded {
     /** The amount of Telegram Stars that the gift can be swapped with. */
     conversionPrice: number;
     /** The date of the first sale of the gift if sold out. */
-    firstSaleDate?: Date;
+    firstSaleDate?: number;
     /** The date of the last sale of the gift if sold out. */
-    lastSaleDate?: Date;
+    lastSaleDate?: number;
     /** The amount of stars required to upgrade the gift. */
     upgradePrice?: number;
 }

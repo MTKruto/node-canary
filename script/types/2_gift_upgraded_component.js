@@ -81,7 +81,7 @@ function constructGiftUpgradedComponent(attribute) {
                 type: "originalDetails",
                 senderId: attribute.sender_id ? Number(attribute.sender_id) : undefined,
                 recipientId: Number(attribute.recipient_id),
-                date: (0, _1_utilities_js_1.fromUnixTimestamp)(attribute.date),
+                date: attribute.date,
                 message: attribute.message?.text,
                 entities: attribute.message ? attribute.message.entities.map(_0_message_entity_js_1.constructMessageEntity).filter((v) => !!v) : undefined,
             });

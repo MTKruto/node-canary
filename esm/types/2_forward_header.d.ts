@@ -23,7 +23,7 @@ import { ChatPChannel, ChatPSupergroup } from "./1_chat_p.js";
 import { User } from "./1_user.js";
 /** @unlisted */
 export interface _ForwardHeaderCommon {
-    date: Date;
+    date: number;
 }
 /** @unlisted */
 export interface ForwardHeaderUser extends _ForwardHeaderCommon {

@@ -18,7 +18,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { fromUnixTimestamp } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { constructChatP } from "./1_chat_p.js";
 export function constructInactiveChat(chat_, lastActivity) {
@@ -27,7 +26,7 @@ export function constructInactiveChat(chat_, lastActivity) {
     }
     const chat = constructChatP(chat_);
     return {
-        lastActivity: fromUnixTimestamp(lastActivity),
+        lastActivity: lastActivity,
         chat,
     };
 }

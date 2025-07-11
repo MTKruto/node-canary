@@ -81,7 +81,7 @@ export interface GiftUpgradedComponentOriginalDetails {
     type: "originalDetails";
     senderId?: number;
     recipientId: number;
-    date: Date;
+    date: number;
     message?: string;
     entities?: MessageEntity[];
 }

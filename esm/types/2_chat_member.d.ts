@@ -44,14 +44,14 @@ export interface ChatMemberAdministrator extends _ChatMemberBase {
 /** @unlisted */
 export interface ChatMemberMember extends _ChatMemberBase {
     status: "member";
-    untilDate?: Date;
+    until?: number;
 }
 /** @unlisted */
 export interface ChatMemberRestricted extends _ChatMemberBase {
     status: "restricted";
     isMember: boolean;
     rights: ChatMemberRights;
-    untilDate?: Date;
+    until?: number;
 }
 /** @unlisted */
 export interface ChatMemberLeft extends _ChatMemberBase {
@@ -60,7 +60,7 @@ export interface ChatMemberLeft extends _ChatMemberBase {
 /** @unlisted */
 export interface ChatMemberBanned extends _ChatMemberBase {
     status: "banned";
-    untilDate?: Date;
+    until?: number;
 }
 /** A chat member. */
 export type ChatMember = ChatMemberCreator | ChatMemberAdministrator | ChatMemberMember | ChatMemberRestricted | ChatMemberLeft | ChatMemberBanned;

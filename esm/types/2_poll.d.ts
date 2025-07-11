@@ -49,7 +49,7 @@ export interface Poll {
     /** Duration of the poll in seconds. */
     openPeriod?: number;
     /** The time in which the poll will be closed. */
-    closeDate?: Date;
+    closeDate?: number;
 }
 export declare function constructPoll(media_: Api.messageMediaPoll): Poll;
 //# sourceMappingURL=2_poll.d.ts.map

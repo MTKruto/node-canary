@@ -41,7 +41,7 @@ async function constructLinkPreview(media, invert, getEntity) {
             return (0, _1_utilities_js_1.cleanObject)({
                 type: "loading",
                 id,
-                date: (0, _1_utilities_js_1.fromUnixTimestamp)(media.webpage.date),
+                date: media.webpage.date,
                 url: media.webpage.url,
                 smallMedia,
                 largeMedia,

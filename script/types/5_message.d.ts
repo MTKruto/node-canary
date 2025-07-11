@@ -61,7 +61,7 @@ export interface _MessageBase {
     /** The sender of the message. */
     from: ChatP;
     /** The point in time in which the message was sent. */
-    date: Date;
+    date: number;
     /** The chat where the message was sent to. */
     chat: ChatP;
     /** A link to the message. */
@@ -83,7 +83,7 @@ export interface _MessageBase {
     /** The inline bot that was used to send this message. */
     viaBot?: User;
     /** The point in time in which the message's last edit was made. */
-    editDate?: Date;
+    editDate?: number;
     /** Whether the contents of the message is protected. */
     hasProtectedContent?: boolean;
     /** The identifier of the message's media group. */
@@ -502,7 +502,7 @@ export interface MessageForumTopicReopened extends _MessageBase {
 export interface MessageVideoChatScheduled extends _MessageBase {
     /** @discriminator */
     videoChatScheduled: {
-        startDate: Date;
+        startDate: number;
     };
 }
 /**

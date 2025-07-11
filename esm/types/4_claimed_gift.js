@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
+import { cleanObject } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { constructMessageEntity } from "./0_message_entity.js";
 import { constructChatP } from "./1_chat_p.js";
@@ -28,7 +28,7 @@ export async function constructClaimedGift(savedStarGift, fromPeer, getEntity) {
         unreachable();
     }
     const gift = await constructGift(savedStarGift.gift, getEntity);
-    const date = fromUnixTimestamp(savedStarGift.date);
+    const date = savedStarGift.date;
     const public_ = !!savedStarGift.unsaved;
     const sender = fromPeer ? constructChatP(fromPeer) : undefined;
     const message = savedStarGift.message?.text;

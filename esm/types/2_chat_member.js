@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
+import { cleanObject } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { constructChatAdministratorRights } from "./0_chat_administrator_rights.js";
 import { constructChatMemberRights } from "./0_chat_member_rights.js";
@@ -51,13 +51,13 @@ export async function constructChatMember(participant, getEntity) {
         });
     }
     else if (Api.is("channelParticipantBanned", participant)) {
-        const untilDate = participant.banned_rights.until_date ? fromUnixTimestamp(participant.banned_rights.until_date) : undefined;
+        const until = participant.banned_rights.until_date ? participant.banned_rights.until_date : undefined;
         if (!participant.banned_rights.view_messages) {
             participant.peer;
             return cleanObject({
                 status: "banned",
                 user,
-                untilDate,
+                until,
             });
         }
         const isMember = participant.left ? true : false;
@@ -67,15 +67,15 @@ export async function constructChatMember(participant, getEntity) {
             user,
             isMember,
             rights,
-            untilDate,
+            until,
         });
     }
     else if (Api.is("channelParticipantSelf", participant)) {
-        const untilDate = participant.subscription_until_date ? fromUnixTimestamp(participant.subscription_until_date) : undefined;
+        const until = participant.subscription_until_date ? participant.subscription_until_date : undefined;
         return cleanObject({
             status: "member",
             user,
-            untilDate,
+            until,
         });
     }
     else if (Api.is("channelParticipantLeft", participant)) {

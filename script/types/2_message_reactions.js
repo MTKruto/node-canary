@@ -26,7 +26,7 @@ const _0_reaction_js_1 = require("./0_reaction.js");
 const _1_chat_p_js_1 = require("./1_chat_p.js");
 const _1_user_js_1 = require("./1_user.js");
 async function constructMessageReactions(update, getEntity) {
-    const date = (0, _1_utilities_js_1.fromUnixTimestamp)(update.date);
+    const date = update.date;
     const oldReactions = update.old_reactions.map((v) => (0, _0_reaction_js_1.constructReaction)(v));
     const newReactions = update.new_reactions.map((v) => (0, _0_reaction_js_1.constructReaction)(v));
     const messageId = update.msg_id;

@@ -17,11 +17,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { fromUnixTimestamp } from "../1_utilities.js";
 import { constructChatP } from "./1_chat_p.js";
 import { constructReactionCount } from "./1_reaction_count.js";
 export async function constructMessageReactionCount(update, getEntity) {
-    const date = fromUnixTimestamp(update.date);
+    const date = update.date;
     const reactions = update.reactions.map((v) => constructReactionCount(v));
     const entity = await getEntity(update.peer);
     if (entity) {

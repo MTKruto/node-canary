@@ -30,7 +30,7 @@ export interface Story {
     out: boolean;
     id: number;
     chat: ChatP;
-    date: Date;
+    date: number;
     edited: boolean;
     content: StoryContent;
     interactiveAreas: StoryInteractiveArea[];

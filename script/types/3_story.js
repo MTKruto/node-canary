@@ -35,7 +35,7 @@ async function constructStory(story, peer, getEntity) {
         (0, _0_deps_js_1.unreachable)();
     }
     const chat = (0, _1_chat_p_js_1.constructChatP)(entity);
-    const date = (0, _1_utilities_js_1.fromUnixTimestamp)(story.date);
+    const date = story.date;
     const interactiveAreas = (story.media_areas ?? []).map(_2_story_interactive_area_js_1.constructStoryInteractiveArea);
     const highlighted = story.pinned ? true : false;
     const content = (0, _2_story_content_js_1.constructStoryContent)(story.media);

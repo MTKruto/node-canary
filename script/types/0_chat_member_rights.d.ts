@@ -56,5 +56,5 @@ export interface ChatMemberRights {
     canManageTopics?: boolean;
 }
 export declare function constructChatMemberRights(rights: Api.chatBannedRights): ChatMemberRights;
-export declare function chatMemberRightsToTlObject(rights?: ChatMemberRights, untilDate?: Date): Api.chatBannedRights;
+export declare function chatMemberRightsToTlObject(rights?: ChatMemberRights, until?: number): Api.chatBannedRights;
 //# sourceMappingURL=0_chat_member_rights.d.ts.map

@@ -31,7 +31,6 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _ChatManager_instances, _ChatManager_c, _ChatManager_toggleJoinRequests, _ChatManager_toggleSlowMode;
 import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
-import { toUnixTimestamp } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { constructChatMemberUpdated, constructChatP, constructFailedInvitation, constructInviteLink, constructJoinRequest, constructJoinRequest2, slowModeDurationToSeconds } from "../3_types.js";
 import { chatMemberRightsToTlObject, reactionToTlObject } from "../3_types.js";
@@ -114,7 +113,7 @@ export class ChatManager {
             peer,
             link: params?.inviteLink,
             q: params?.search,
-            offset_date: params?.fromDate ? toUnixTimestamp(params.fromDate) : 0,
+            offset_date: params?.fromDate ?? 0,
             offset_user,
             limit: getLimit(params?.limit),
         });
@@ -126,12 +125,12 @@ export class ChatManager {
         if (params?.requireApproval && params?.limit) {
             throw new InputError("requireApproval cannot be true while limit is specified.");
         }
-        const result = await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "messages.exportChatInvite", peer: await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId), title: params?.title, expire_date: params?.expireAt ? toUnixTimestamp(params.expireAt) : undefined, request_needed: params?.requireApproval ? true : undefined, usage_limit: params?.limit });
+        const result = await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "messages.exportChatInvite", peer: await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId), title: params?.title, expire_date: params?.expireAt, request_needed: params?.requireApproval ? true : undefined, usage_limit: params?.limit });
         return await constructInviteLink(Api.as("chatInviteExported", result), __classPrivateFieldGet(this, _ChatManager_c, "f").getEntity);
     }
     async getCreatedInviteLinks(chatId, params) {
         __classPrivateFieldGet(this, _ChatManager_c, "f").storage.assertUser("getCreatedInviteLinks");
-        const { invites } = await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "messages.getExportedChatInvites", peer: await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId), revoked: params?.revoked ? true : undefined, admin_id: params?.by ? await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputUser(params.by) : { _: "inputUserEmpty" }, limit: getLimit(params?.limit), offset_date: params?.afterDate ? toUnixTimestamp(params.afterDate) : undefined, offset_link: params?.afterInviteLink });
+        const { invites } = await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "messages.getExportedChatInvites", peer: await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(chatId), revoked: params?.revoked ? true : undefined, admin_id: params?.by ? await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputUser(params.by) : { _: "inputUserEmpty" }, limit: getLimit(params?.limit), offset_date: params?.afterDate, offset_link: params?.afterInviteLink });
         return await Promise.all(invites.map((v) => Api.as("chatInviteExported", v)).map((v) => constructInviteLink(v, __classPrivateFieldGet(this, _ChatManager_c, "f").getEntity)));
     }
     // JOINING AND LEAVING CHATS //
@@ -188,7 +187,7 @@ export class ChatManager {
                 participant: member,
                 banned_rights: ({
                     _: "chatBannedRights",
-                    until_date: params?.untilDate ? toUnixTimestamp(params.untilDate) : 0,
+                    until_date: params?.until ?? 0,
                     view_messages: true,
                     send_messages: true,
                     send_media: true,
@@ -215,7 +214,7 @@ export class ChatManager {
     async setChatMemberRights(chatId, memberId, params) {
         const channel = await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputChannel(chatId);
         const member = await __classPrivateFieldGet(this, _ChatManager_c, "f").getInputPeer(memberId);
-        await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "channels.editBanned", channel, participant: member, banned_rights: chatMemberRightsToTlObject(params?.rights, params?.untilDate) });
+        await __classPrivateFieldGet(this, _ChatManager_c, "f").invoke({ _: "channels.editBanned", channel, participant: member, banned_rights: chatMemberRightsToTlObject(params?.rights, params?.until) });
     }
     // CHAT SETTINGS //
     async setAvailableReactions(chatId, availableReactions) {

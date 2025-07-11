@@ -27,7 +27,7 @@ export interface BusinessConnection {
     /** The business account that the connection is made with. */
     user: User;
     /** The point in time in which the connection was recently updated. */
-    date: Date;
+    date: number;
     /** Whether the bot can reply to older chats. */
     canReply: boolean;
     /** Whether the connection is active. */

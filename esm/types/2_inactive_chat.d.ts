@@ -22,7 +22,7 @@ import { ChatP } from "./1_chat_p.js";
 /** An inactive chat. */
 export interface InactiveChat {
     /** The time which the chat was last active. */
-    lastActivity: Date;
+    lastActivity: number;
     /** The chat that has been marked as inactive. */
     chat: ChatP;
 }

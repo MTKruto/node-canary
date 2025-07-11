@@ -34,7 +34,7 @@ function getChatListItemOrder(lastMessage, pinned) {
     if (!lastMessage) {
         return p + "0";
     }
-    return p + String((BigInt(Math.floor(lastMessage.date.getTime())) << 32n) + BigInt(lastMessage.id));
+    return p + String((BigInt(Math.floor(lastMessage.date)) << 32n) + BigInt(lastMessage.id));
 }
 async function constructChatListItem(chatId, pinned, lastMessageId, getEntity, getMessage) {
     const entity = await getEntity(_2_tl_js_1.Api.chatIdToPeer(chatId));

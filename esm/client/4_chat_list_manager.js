@@ -31,7 +31,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _ChatListManager_instances, _ChatListManager_c, _ChatListManager_sendChatUpdate, _ChatListManager_chats, _ChatListManager_archivedChats, _ChatListManager_getChatAnywhere, _ChatListManager_getChatList, _ChatListManager_pinnedChats, _ChatListManager_pinnedArchiveChats, _ChatListManager_storageHadPinnedChats, _ChatListManager_pinnedChatsLoaded, _ChatListManager_loadPinnedChats, _ChatListManager_fetchPinnedChats, _ChatListManager_getPinnedChats, _ChatListManager_updateOrAddChat, _ChatListManager_removeChat, _ChatListManager_handleUpdateFolderPeers, _ChatListManager_handleUpdatePinnedDialogs, _ChatListManager_handleUpdateChannel, _ChatListManager_handleUpdateChat, _ChatListManager_handleUpdateUser, _ChatListManager_getFullChat, _ChatListManager_checkChatTitle, _ChatListManager_createChannel, _ChatListManager_moveChatsToFolder, _ChatListManager_toggleBusinessBotsPaused;
 import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
-import { toUnixTimestamp } from "../1_utilities.js";
+import { fromUnixTimestamp } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { constructChat, constructChatListItem, constructChatListItem3, constructChatListItem4, constructChatMember, constructChatP, constructChatSettings, getChatListItemOrder } from "../3_types.js";
 import { canBeInputChannel, canBeInputUser, getChatListId, getLimit, toInputChannel, toInputUser } from "./0_utilities.js";
@@ -74,7 +74,7 @@ export class ChatListManager {
             if (chat) {
                 chat.order = getChatListItemOrder(message, chat.pinned);
                 chat.lastMessage = message;
-                await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setChat(listId, chatId, chat.pinned, message.id, message.date);
+                await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setChat(listId, chatId, chat.pinned, message.id, fromUnixTimestamp(message.date));
             }
             else {
                 const pinnedChats = await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getPinnedChats).call(this, listId);
@@ -83,7 +83,7 @@ export class ChatListManager {
                     unreachable();
                 }
                 __classPrivateFieldGet(this, _ChatListManager_chats, "f").set(chatId, chat);
-                await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setChat(listId, chatId, chat.pinned, chat.lastMessage?.id ?? 0, chat.lastMessage?.date ?? new Date(0));
+                await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setChat(listId, chatId, chat.pinned, chat.lastMessage?.id ?? 0, fromUnixTimestamp(chat.lastMessage?.date ?? 0));
             }
             if (sendUpdate) {
                 return () => __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_sendChatUpdate).call(this, chatId, !chat);
@@ -95,7 +95,7 @@ export class ChatListManager {
             if (chat) {
                 chat.order = getChatListItemOrder(message, chat.pinned);
                 chat.lastMessage = message;
-                await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setChat(listId, chatId, chat.pinned, message.id, message.date);
+                await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setChat(listId, chatId, chat.pinned, message.id, fromUnixTimestamp(message.date));
             }
             else {
                 const pinnedChats = await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getPinnedChats).call(this, listId);
@@ -128,7 +128,7 @@ export class ChatListManager {
             limit = 100;
         }
         const listId = getChatListId(from);
-        const dialogs = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "messages.getDialogs", limit, offset_id: after?.lastMessage?.id ?? 0, offset_date: after?.lastMessage?.date ? toUnixTimestamp(after.lastMessage.date) : 0, offset_peer: after ? await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeer(after.chat.id) : { _: "inputPeerEmpty" }, hash: 0n, folder_id: listId });
+        const dialogs = await __classPrivateFieldGet(this, _ChatListManager_c, "f").invoke({ _: "messages.getDialogs", limit, offset_id: after?.lastMessage?.id ?? 0, offset_date: after?.lastMessage?.date ?? 0, offset_peer: after ? await __classPrivateFieldGet(this, _ChatListManager_c, "f").getInputPeer(after.chat.id) : { _: "inputPeerEmpty" }, hash: 0n, folder_id: listId });
         const pinnedChats = await __classPrivateFieldGet(this, _ChatListManager_instances, "m", _ChatListManager_getPinnedChats).call(this, listId);
         if (!(Api.is("messages.dialogs", dialogs)) && !(Api.is("messages.dialogsSlice", dialogs))) {
             unreachable();
@@ -140,7 +140,7 @@ export class ChatListManager {
         for (const dialog of dialogs.dialogs) {
             const chat = await constructChatListItem4(dialog, dialogs, pinnedChats, __classPrivateFieldGet(this, _ChatListManager_c, "f").getEntity, __classPrivateFieldGet(this, _ChatListManager_c, "f").messageManager.getMessage.bind(__classPrivateFieldGet(this, _ChatListManager_c, "f").messageManager), __classPrivateFieldGet(this, _ChatListManager_c, "f").fileManager.getStickerSetName.bind(__classPrivateFieldGet(this, _ChatListManager_c, "f").fileManager));
             chats.push(chat);
-            await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setChat(listId, chat.chat.id, chat.pinned, chat.lastMessage?.id ?? 0, chat.lastMessage?.date ?? new Date(0));
+            await __classPrivateFieldGet(this, _ChatListManager_c, "f").storage.setChat(listId, chat.chat.id, chat.pinned, chat.lastMessage?.id ?? 0, fromUnixTimestamp(chat.lastMessage?.date ?? 0));
         }
         return chats;
     }

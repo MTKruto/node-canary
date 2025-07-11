@@ -17,13 +17,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { fromUnixTimestamp } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 export function constructGiveawayParameters(g) {
     const countries = g.countries_iso2 ?? [];
     const boostedChatId = Api.peerToChatId({ _: "peerChannel", channel_id: g.channels[0] });
     const additionalChatIds = g.channels.slice(1).map((v) => Api.peerToChatId({ _: "peerChannel", channel_id: v }));
     const onlyNewMembers = g.only_new_subscribers ? true : false;
-    const winnerSelectionDate = fromUnixTimestamp(g.until_date);
+    const winnerSelectionDate = g.until_date;
     return { boostedChatId, additionalChatIds, winnerSelectionDate, onlyNewMembers, countries };
 }

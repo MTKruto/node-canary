@@ -20,13 +20,12 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.constructBusinessConnection = constructBusinessConnection;
-const _1_utilities_js_1 = require("../1_utilities.js");
 const _1_user_js_1 = require("./1_user.js");
 async function constructBusinessConnection(connection, getEntity) {
     return {
         id: connection.connection_id,
         user: (0, _1_user_js_1.constructUser)((await getEntity({ ...connection, _: "peerUser" }))),
-        date: (0, _1_utilities_js_1.fromUnixTimestamp)(connection.date),
+        date: connection.date,
         canReply: !!connection.rights?.reply,
         isEnabled: !connection.disabled,
     };

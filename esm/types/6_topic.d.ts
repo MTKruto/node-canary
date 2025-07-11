@@ -21,7 +21,7 @@ import { ChatP } from "./1_chat_p.js";
 import { Message } from "./5_message.js";
 export interface Topic {
     id: number;
-    date: Date;
+    date: number;
     creator: ChatP;
     general: boolean;
     closed: boolean;

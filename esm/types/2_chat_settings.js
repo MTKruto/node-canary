@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
+import { cleanObject } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { constructUser } from "./1_user.js";
 export function constructChatSettings(settings_) {
@@ -35,13 +35,13 @@ export function constructChatSettings(settings_) {
         businessBotCanReply: settings_.settings.business_bot_can_reply || false,
         distance: settings_.settings.geo_distance,
         joinRequestChatTitle: settings_.settings.request_chat_title,
-        joinRequestDate: settings_.settings.request_chat_date ? fromUnixTimestamp(settings_.settings.request_chat_date) : undefined,
+        joinRequestDate: settings_.settings.request_chat_date ? settings_.settings.request_chat_date : undefined,
         businessBotUrl: settings_.settings.business_bot_manage_url,
         messagePrice: settings_.settings.charge_paid_message_stars ? Number(settings_.settings.charge_paid_message_stars) : undefined,
         registrationMonth: settings_.settings.registration_month,
         phoneCountry: settings_.settings.phone_country,
-        nameChangeDate: settings_.settings.name_change_date ? fromUnixTimestamp(settings_.settings.name_change_date) : undefined,
-        photoChangeDate: settings_.settings.photo_change_date ? fromUnixTimestamp(settings_.settings.photo_change_date) : undefined,
+        nameChangeDate: settings_.settings.name_change_date ? settings_.settings.name_change_date : undefined,
+        photoChangeDate: settings_.settings.photo_change_date ? settings_.settings.photo_change_date : undefined,
     };
     const bot = settings_.users.find((v) => v.id == settings_.settings.business_bot_id);
     if (Api.is("user", bot)) {

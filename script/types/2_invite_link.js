@@ -33,7 +33,7 @@ async function constructInviteLink(inviteLink_, getEntity) {
     const requiresApproval = inviteLink_.request_needed ? true : false;
     const revoked = inviteLink_.revoked ? true : false;
     const title = inviteLink_.title;
-    const expiresAt = inviteLink_.expire_date ? (0, _1_utilities_js_1.fromUnixTimestamp)(inviteLink_.expire_date) : undefined;
+    const expiresAt = inviteLink_.expire_date ? inviteLink_.expire_date : undefined;
     const limit = inviteLink_.usage_limit ? inviteLink_.usage_limit : undefined;
     const pendingJoinRequestCount = inviteLink_.requested;
     return (0, _1_utilities_js_1.cleanObject)({

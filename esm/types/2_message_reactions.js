@@ -17,13 +17,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
+import { cleanObject } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { constructReaction } from "./0_reaction.js";
 import { constructChatP } from "./1_chat_p.js";
 import { constructUser } from "./1_user.js";
 export async function constructMessageReactions(update, getEntity) {
-    const date = fromUnixTimestamp(update.date);
+    const date = update.date;
     const oldReactions = update.old_reactions.map((v) => constructReaction(v));
     const newReactions = update.new_reactions.map((v) => constructReaction(v));
     const messageId = update.msg_id;

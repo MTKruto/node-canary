@@ -31,7 +31,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _VideoChatManager_instances, _VideoChatManager_c, _VideoChatManager_createGroupCall, _VideoChatManager_getInputGroupCall, _VideoChatManager_getCall;
 import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
-import { getRandomId, toUnixTimestamp, ZERO_CHANNEL_ID } from "../1_utilities.js";
+import { getRandomId, ZERO_CHANNEL_ID } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { getDc } from "../3_transport.js";
 import { constructLiveStreamChannel, constructVideoChat } from "../3_types.js";
@@ -162,7 +162,7 @@ _VideoChatManager_c = new WeakMap(), _VideoChatManager_instances = new WeakSet()
     if (canBeInputUser(peer)) {
         throw new InputError("Video chats are only available for groups and channels.");
     }
-    const { updates } = await __classPrivateFieldGet(this, _VideoChatManager_c, "f").invoke({ _: "phone.createGroupCall", peer, random_id: getRandomId(true), title, rtmp_stream: liveStream, schedule_date: scheduleDate ? toUnixTimestamp(scheduleDate) : undefined }).then((v) => Api.as("updates", v));
+    const { updates } = await __classPrivateFieldGet(this, _VideoChatManager_c, "f").invoke({ _: "phone.createGroupCall", peer, random_id: getRandomId(true), title, rtmp_stream: liveStream, schedule_date: scheduleDate }).then((v) => Api.as("updates", v));
     const updateGroupCall = updates
         .find((v) => Api.is("updateGroupCall", v));
     if (!updateGroupCall) {

@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
+import { cleanObject } from "../1_utilities.js";
 import { constructChatP } from "./1_chat_p.js";
 import { constructUser } from "./1_user.js";
 export async function constructForwardHeader(fwdHeader, getEntity) {
@@ -29,7 +29,7 @@ export async function constructForwardHeader(fwdHeader, getEntity) {
         }
         return cleanObject({
             type: "channel",
-            date: fromUnixTimestamp(fwdHeader.date),
+            date: fwdHeader.date,
             chat: constructChatP(chat),
             messageId: fwdHeader.channel_post,
             authorSignature: fwdHeader.post_author,
@@ -42,7 +42,7 @@ export async function constructForwardHeader(fwdHeader, getEntity) {
         }
         return cleanObject({
             type: "supergroup",
-            date: fromUnixTimestamp(fwdHeader.date),
+            date: fwdHeader.date,
             chat: constructChatP(chat),
             title: fwdHeader.post_author,
         });
@@ -54,21 +54,21 @@ export async function constructForwardHeader(fwdHeader, getEntity) {
         }
         return {
             type: "user",
-            date: fromUnixTimestamp(fwdHeader.date),
+            date: fwdHeader.date,
             user: constructUser(user),
         };
     }
     else if (fwdHeader.from_name) {
         return {
             type: "hidden",
-            date: fromUnixTimestamp(fwdHeader.date),
+            date: fwdHeader.date,
             name: fwdHeader.from_name,
         };
     }
     else {
         return {
             type: "unsupported",
-            date: fromUnixTimestamp(fwdHeader.date),
+            date: fwdHeader.date,
         };
     }
 }

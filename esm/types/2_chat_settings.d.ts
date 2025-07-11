@@ -33,14 +33,14 @@ export interface ChatSettings {
     businessBotCanReply: boolean;
     distance?: number;
     joinRequestChatTitle?: string;
-    joinRequestDate?: Date;
+    joinRequestDate?: number;
     businessBot?: User;
     businessBotUrl?: string;
     messagePrice?: number;
     registrationMonth?: string;
     phoneCountry?: string;
-    nameChangeDate?: Date;
-    photoChangeDate?: Date;
+    nameChangeDate?: number;
+    photoChangeDate?: number;
 }
 export declare function constructChatSettings(settings_: Api.messages_peerSettings): ChatSettings;
 //# sourceMappingURL=2_chat_settings.d.ts.map

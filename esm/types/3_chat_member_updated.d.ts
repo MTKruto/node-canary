@@ -30,7 +30,7 @@ export interface ChatMemberUpdated {
     /** The one who made the change. */
     from: User;
     /** The point in time in which the chat member's status was changed. */
-    date: Date;
+    date: number;
     /** The old status of the chat member. */
     oldChatMember: ChatMember;
     /** The new status of the chat member. */

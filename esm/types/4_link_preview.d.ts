@@ -65,7 +65,7 @@ export interface LinkPreviewLoading extends _LinkPreviewBase {
     /** The URL of the link preview. */
     url?: string;
     /** The point in time in which the link preview started to load. */
-    date: Date;
+    date: number;
 }
 /**
  * A link preview that was not loaded.

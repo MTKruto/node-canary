@@ -149,7 +149,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage, ge
         out: message_.out ?? false,
         id: message_.id,
         chat,
-        date: (0, _1_utilities_js_1.fromUnixTimestamp)(message_.date),
+        date: message_.date,
         isTopicMessage: message_.reply_to && _2_tl_js_1.Api.is("messageReplyHeader", message_.reply_to) && message_.reply_to.forum_topic ? true : false,
         ...await getSender(message_, getEntity),
     };
@@ -271,7 +271,7 @@ async function constructServiceMessage(message_, chat, getEntity, getMessage, ge
         }
     }
     else if (_2_tl_js_1.Api.is("messageActionGroupCallScheduled", message_.action)) {
-        const videoChatScheduled = { startDate: new Date(message_.action.schedule_date * 1000) };
+        const videoChatScheduled = { startDate: message_.action.schedule_date };
         return { ...message, videoChatScheduled };
     }
     else if (_2_tl_js_1.Api.is("messageActionGroupCall", message_.action)) {
@@ -348,7 +348,7 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
         id: message_.id,
         chat: chat_,
         link,
-        date: (0, _1_utilities_js_1.fromUnixTimestamp)(message_.date),
+        date: message_.date,
         views: message_.views,
         forwards: message_.forwards,
         isTopicMessage: message_.reply_to && _2_tl_js_1.Api.is("messageReplyHeader", message_.reply_to) && message_.reply_to.forum_topic ? true : false,
@@ -410,8 +410,8 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
     if (message_.grouped_id != undefined) {
         message.mediaGroupId = String(message_.grouped_id);
     }
-    if (message_.edit_date != undefined) {
-        message.editDate = (0, _1_utilities_js_1.fromUnixTimestamp)(message_.edit_date);
+    if (message_.edit_date) {
+        message.editDate = message_.edit_date;
     }
     const messageText = {
         ...message,

@@ -20,7 +20,6 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.constructVideoChat = constructVideoChat;
-const _1_utilities_js_1 = require("../1_utilities.js");
 const _2_tl_js_1 = require("../2_tl.js");
 function constructVideoChat(call) {
     const id = String(call.id);
@@ -40,7 +39,7 @@ function constructVideoChat(call) {
                 type: "scheduled",
                 id,
                 title,
-                scheduledFor: (0, _1_utilities_js_1.fromUnixTimestamp)(call.schedule_date),
+                scheduledFor: call.schedule_date,
                 liveStream,
                 participantCount,
             };

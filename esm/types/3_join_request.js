@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
+import { cleanObject } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { constructChatP } from "./1_chat_p.js";
 import { constructUser } from "./1_user.js";
@@ -38,7 +38,7 @@ export async function constructJoinRequest(update, getEntity) {
     return cleanObject({
         chat,
         from,
-        date: fromUnixTimestamp(update.date),
+        date: update.date,
         bio: update.about,
         inviteLink,
     });
@@ -57,7 +57,7 @@ export async function constructJoinRequest2(peer, inviteImporter, getEntity) {
     return cleanObject({
         chat,
         from,
-        date: fromUnixTimestamp(inviteImporter.date),
+        date: inviteImporter.date,
         bio: inviteImporter.about,
     });
 }

@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
+import { cleanObject } from "../1_utilities.js";
 import { constructUser } from "./1_user.js";
 export async function constructInviteLink(inviteLink_, getEntity) {
     const entity = await getEntity({ _: "peerUser", user_id: inviteLink_.admin_id });
@@ -30,7 +30,7 @@ export async function constructInviteLink(inviteLink_, getEntity) {
     const requiresApproval = inviteLink_.request_needed ? true : false;
     const revoked = inviteLink_.revoked ? true : false;
     const title = inviteLink_.title;
-    const expiresAt = inviteLink_.expire_date ? fromUnixTimestamp(inviteLink_.expire_date) : undefined;
+    const expiresAt = inviteLink_.expire_date ? inviteLink_.expire_date : undefined;
     const limit = inviteLink_.usage_limit ? inviteLink_.usage_limit : undefined;
     const pendingJoinRequestCount = inviteLink_.requested;
     return cleanObject({

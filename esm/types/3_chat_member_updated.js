@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
+import { cleanObject } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { constructChatP } from "./1_chat_p.js";
 import { constructUser } from "./1_user.js";
@@ -36,7 +36,7 @@ export async function constructChatMemberUpdated(update, getEntity) {
     const userPeer = { ...update, _: "peerUser" };
     const chat = constructChatP(chat_);
     const from = constructUser(from_);
-    const date = fromUnixTimestamp(update.date);
+    const date = update.date;
     const oldChatMember = await constructChatMember(update.prev_participant ?? ({ _: "channelParticipantLeft", peer: userPeer }), getEntity);
     const newChatMember = await constructChatMember(update.new_participant ?? ({ _: "channelParticipantLeft", peer: userPeer }), getEntity);
     const viaSharedFolder = "via_chatlist" in update ? update.via_chatlist ? true : update.invite ? false : undefined : undefined;

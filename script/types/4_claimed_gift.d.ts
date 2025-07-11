@@ -25,7 +25,7 @@ import { Gift } from "./3_gift.js";
 /** A gift claimed by a user or a channel. */
 export interface ClaimedGift {
     /** The time when the gift was claimed. */
-    date: Date;
+    date: number;
     /** The gift. */
     gift: Gift;
     /** Whether the gift is publicly visible. */

@@ -42,7 +42,7 @@ async function constructJoinRequest(update, getEntity) {
     return (0, _1_utilities_js_1.cleanObject)({
         chat,
         from,
-        date: (0, _1_utilities_js_1.fromUnixTimestamp)(update.date),
+        date: update.date,
         bio: update.about,
         inviteLink,
     });
@@ -61,7 +61,7 @@ async function constructJoinRequest2(peer, inviteImporter, getEntity) {
     return (0, _1_utilities_js_1.cleanObject)({
         chat,
         from,
-        date: (0, _1_utilities_js_1.fromUnixTimestamp)(inviteImporter.date),
+        date: inviteImporter.date,
         bio: inviteImporter.about,
     });
 }

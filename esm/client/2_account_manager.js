@@ -31,7 +31,6 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _AccountManager_instances, _AccountManager_c, _AccountManager_toggleUsername, _AccountManager_getUserFull;
 import { unreachable } from "../0_deps.js";
 import { InputError } from "../0_errors.js";
-import { toUnixTimestamp } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { birthdayToTlObject, constructInactiveChat, constructUser } from "../3_types.js";
 import { canBeInputChannel, canBeInputUser, toInputChannel, toInputUser } from "./0_utilities.js";
@@ -87,7 +86,7 @@ export class AccountManager {
     async setEmojiStatus(id, params) {
         __classPrivateFieldGet(this, _AccountManager_c, "f").storage.assertUser("setEmojiStatus");
         const document_id = BigInt(id);
-        const until = params?.until ? toUnixTimestamp(params.until) : undefined;
+        const until = params?.until;
         const emoji_status = { _: "emojiStatus", document_id, until };
         await __classPrivateFieldGet(this, _AccountManager_c, "f").invoke({ _: "account.updateEmojiStatus", emoji_status });
     }
@@ -95,7 +94,7 @@ export class AccountManager {
         __classPrivateFieldGet(this, _AccountManager_c, "f").storage.assertBot("setUserEmojiStatus");
         const user_id = await __classPrivateFieldGet(this, _AccountManager_c, "f").getInputUser(userId);
         const document_id = BigInt(id);
-        const until = params?.until ? toUnixTimestamp(params.until) : undefined;
+        const until = params?.until;
         const emoji_status = { _: "emojiStatus", document_id, until };
         await __classPrivateFieldGet(this, _AccountManager_c, "f").invoke({ _: "bots.updateUserEmojiStatus", user_id, emoji_status });
     }

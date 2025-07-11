@@ -25,7 +25,7 @@ export interface GiveawayParameters {
     /** The identifiers of additional chats that the user must subscribe to in order to be eligible for the prizes. */
     additionalChatIds: number[];
     /** A point in time within the future in which the winners will be selected. */
-    winnerSelectionDate: Date;
+    winnerSelectionDate: number;
     /** Whether only new members of the chats will be eligible for the prizes. */
     onlyNewMembers: boolean;
     /** A list of countries that are eligible for the prizes. */

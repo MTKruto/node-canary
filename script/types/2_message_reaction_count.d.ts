@@ -28,7 +28,7 @@ export interface MessageReactionCount {
     /** The message's identifier. */
     messageId: number;
     /** The point in time in which the change was made. */
-    date: Date;
+    date: number;
     /** The reactions made to the post. */
     reactions: ReactionCount[];
 }

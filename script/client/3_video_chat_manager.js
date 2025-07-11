@@ -166,7 +166,7 @@ _VideoChatManager_c = new WeakMap(), _VideoChatManager_instances = new WeakSet()
     if ((0, _0_utilities_js_1.canBeInputUser)(peer)) {
         throw new _0_errors_js_1.InputError("Video chats are only available for groups and channels.");
     }
-    const { updates } = await __classPrivateFieldGet(this, _VideoChatManager_c, "f").invoke({ _: "phone.createGroupCall", peer, random_id: (0, _1_utilities_js_1.getRandomId)(true), title, rtmp_stream: liveStream, schedule_date: scheduleDate ? (0, _1_utilities_js_1.toUnixTimestamp)(scheduleDate) : undefined }).then((v) => _2_tl_js_1.Api.as("updates", v));
+    const { updates } = await __classPrivateFieldGet(this, _VideoChatManager_c, "f").invoke({ _: "phone.createGroupCall", peer, random_id: (0, _1_utilities_js_1.getRandomId)(true), title, rtmp_stream: liveStream, schedule_date: scheduleDate }).then((v) => _2_tl_js_1.Api.as("updates", v));
     const updateGroupCall = updates
         .find((v) => _2_tl_js_1.Api.is("updateGroupCall", v));
     if (!updateGroupCall) {

@@ -54,13 +54,13 @@ async function constructChatMember(participant, getEntity) {
         });
     }
     else if (_2_tl_js_1.Api.is("channelParticipantBanned", participant)) {
-        const untilDate = participant.banned_rights.until_date ? (0, _1_utilities_js_1.fromUnixTimestamp)(participant.banned_rights.until_date) : undefined;
+        const until = participant.banned_rights.until_date ? participant.banned_rights.until_date : undefined;
         if (!participant.banned_rights.view_messages) {
             participant.peer;
             return (0, _1_utilities_js_1.cleanObject)({
                 status: "banned",
                 user,
-                untilDate,
+                until,
             });
         }
         const isMember = participant.left ? true : false;
@@ -70,15 +70,15 @@ async function constructChatMember(participant, getEntity) {
             user,
             isMember,
             rights,
-            untilDate,
+            until,
         });
     }
     else if (_2_tl_js_1.Api.is("channelParticipantSelf", participant)) {
-        const untilDate = participant.subscription_until_date ? (0, _1_utilities_js_1.fromUnixTimestamp)(participant.subscription_until_date) : undefined;
+        const until = participant.subscription_until_date ? participant.subscription_until_date : undefined;
         return (0, _1_utilities_js_1.cleanObject)({
             status: "member",
             user,
-            untilDate,
+            until,
         });
     }
     else if (_2_tl_js_1.Api.is("channelParticipantLeft", participant)) {

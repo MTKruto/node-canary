@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { unreachable } from "../0_deps.js";
-import { cleanObject, fromUnixTimestamp } from "../1_utilities.js";
+import { cleanObject } from "../1_utilities.js";
 import { Api } from "../2_tl.js";
 import { FileType, serializeFileId, toUniqueFileId } from "./_file_id.js";
 import { constructMessageEntity } from "./0_message_entity.js";
@@ -78,7 +78,7 @@ export function constructGiftUpgradedComponent(attribute) {
                 type: "originalDetails",
                 senderId: attribute.sender_id ? Number(attribute.sender_id) : undefined,
                 recipientId: Number(attribute.recipient_id),
-                date: fromUnixTimestamp(attribute.date),
+                date: attribute.date,
                 message: attribute.message?.text,
                 entities: attribute.message ? attribute.message.entities.map(constructMessageEntity).filter((v) => !!v) : undefined,
             });

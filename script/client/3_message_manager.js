@@ -256,7 +256,7 @@ class MessageManager {
         const noforwards = params?.protectContent ? true : undefined;
         const sendAs = await __classPrivateFieldGet(this, _MessageManager_instances, "m", _MessageManager_resolveSendAs).call(this, params);
         const effect = params?.effectId ? BigInt(params.effectId) : undefined;
-        const schedule_date = params?.sendAt ? (0, _1_utilities_js_1.toUnixTimestamp)(params.sendAt) : undefined;
+        const schedule_date = params?.sendAt;
         const allow_paid_floodskip = params?.paidBroadcast ? true : undefined;
         let result;
         if (!noWebpage && params?.linkPreview?.url) {
@@ -338,7 +338,7 @@ class MessageManager {
             }),
             message: "",
             effect: params?.effectId ? BigInt(params.effectId) : undefined,
-            schedule_date: params?.sendAt ? (0, _1_utilities_js_1.toUnixTimestamp)(params.sendAt) : undefined,
+            schedule_date: params?.sendAt,
             allow_paid_floodskip: params?.paidBroadcast ? true : undefined,
         }, { businessConnectionId: params?.businessConnectionId });
         const message = (await this.updatesToMessages(chatId, result, params?.businessConnectionId))[0];
@@ -370,7 +370,7 @@ class MessageManager {
             }),
             message: "",
             effect: params?.effectId ? BigInt(params.effectId) : undefined,
-            schedule_date: params?.sendAt ? (0, _1_utilities_js_1.toUnixTimestamp)(params.sendAt) : undefined,
+            schedule_date: params?.sendAt,
             allow_paid_floodskip: params?.paidBroadcast ? true : undefined,
         }, { businessConnectionId: params?.businessConnectionId });
         const message = (await this.updatesToMessages(chatId, result, params?.businessConnectionId))[0];
@@ -399,7 +399,7 @@ class MessageManager {
             }),
             message: "",
             effect: params?.effectId ? BigInt(params.effectId) : undefined,
-            schedule_date: params?.sendAt ? (0, _1_utilities_js_1.toUnixTimestamp)(params.sendAt) : undefined,
+            schedule_date: params?.sendAt,
             allow_paid_floodskip: params?.paidBroadcast ? true : undefined,
         }, { businessConnectionId: params?.businessConnectionId });
         const message = (await this.updatesToMessages(chatId, result, params?.businessConnectionId))[0];
@@ -446,7 +446,7 @@ class MessageManager {
                 }),
             message: "",
             effect: params?.effectId ? BigInt(params.effectId) : undefined,
-            schedule_date: params?.sendAt ? (0, _1_utilities_js_1.toUnixTimestamp)(params.sendAt) : undefined,
+            schedule_date: params?.sendAt,
             allow_paid_floodskip: params?.paidBroadcast ? true : undefined,
         }, { businessConnectionId: params?.businessConnectionId });
         const message = (await this.updatesToMessages(chatId, result, params?.businessConnectionId))[0];
@@ -568,7 +568,7 @@ class MessageManager {
             return ({ _: "pollAnswer", option: (0, _1_utilities_js_1.encodeText)(String(i)), text: { _: "textWithEntities", text: parseResult[0], entities: parseResult[1] ?? [] } });
         }));
         const questionParseResult = await this.parseText(question, { parseMode: params?.questionParseMode, entities: params?.questionEntities });
-        const poll = { _: "poll", id: (0, _1_utilities_js_1.getRandomId)(), answers, question: { _: "textWithEntities", text: questionParseResult[0], entities: questionParseResult[1] ?? [] }, closed: params?.isClosed ? true : undefined, close_date: params?.closeDate ? (0, _1_utilities_js_1.toUnixTimestamp)(params.closeDate) : undefined, close_period: params?.openPeriod ? params.openPeriod : undefined, multiple_choice: params?.allowMultipleAnswers ? true : undefined, public_voters: params?.isAnonymous === false ? true : undefined, quiz: params?.type == "quiz" ? true : undefined };
+        const poll = { _: "poll", id: (0, _1_utilities_js_1.getRandomId)(), answers, question: { _: "textWithEntities", text: questionParseResult[0], entities: questionParseResult[1] ?? [] }, closed: params?.isClosed ? true : undefined, close_date: params?.closeDate, close_period: params?.openPeriod ? params.openPeriod : undefined, multiple_choice: params?.allowMultipleAnswers ? true : undefined, public_voters: params?.isAnonymous === false ? true : undefined, quiz: params?.type == "quiz" ? true : undefined };
         const media = { _: "inputMediaPoll", poll, correct_answers: params?.correctOptionIndex !== undefined ? [(0, _1_utilities_js_1.encodeText)(String(params.correctOptionIndex))] : undefined, solution, solution_entities: solutionEntities };
         const result = await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({
             _: "messages.sendMedia",
@@ -582,7 +582,7 @@ class MessageManager {
             media,
             message: "",
             effect: params?.effectId ? BigInt(params.effectId) : undefined,
-            schedule_date: params?.sendAt ? (0, _1_utilities_js_1.toUnixTimestamp)(params.sendAt) : undefined,
+            schedule_date: params?.sendAt,
             allow_paid_floodskip: params?.paidBroadcast ? true : undefined,
         }, { businessConnectionId: params?.businessConnectionId });
         const message = (await this.updatesToMessages(chatId, result, params?.businessConnectionId))[0];
@@ -1381,7 +1381,7 @@ _a = MessageManager, _MessageManager_c = new WeakMap(), _MessageManager_Lresolve
         message: caption ?? "",
         entities: captionEntities,
         effect: params?.effectId ? BigInt(params.effectId) : undefined,
-        schedule_date: params?.sendAt ? (0, _1_utilities_js_1.toUnixTimestamp)(params.sendAt) : undefined,
+        schedule_date: params?.sendAt,
         allow_paid_floodskip: params?.paidBroadcast ? true : undefined,
     }, { businessConnectionId: params?.businessConnectionId });
     return (await this.updatesToMessages(chatId, result, params?.businessConnectionId))[0];
@@ -1494,7 +1494,7 @@ _a = MessageManager, _MessageManager_c = new WeakMap(), _MessageManager_Lresolve
 }, _MessageManager_sendReaction = async function _MessageManager_sendReaction(chatId, messageId, reactions, params) {
     await __classPrivateFieldGet(this, _MessageManager_c, "f").invoke({ _: "messages.sendReaction", peer: await __classPrivateFieldGet(this, _MessageManager_c, "f").getInputPeer(chatId), msg_id: (0, _0_utilities_js_1.checkMessageId)(messageId), reaction: reactions.map((v) => (0, _3_types_js_2.reactionToTlObject)(v)), big: params?.big ? true : undefined, add_to_recent: params?.addToRecents ? true : undefined });
 }, _MessageManager_getCachedVoiceTranscription = async function _MessageManager_getCachedVoiceTranscription(message) {
-    const reference = await __classPrivateFieldGet(this, _MessageManager_c, "f").messageStorage.getVoiceTranscriptionReference(message.chat.id, message.id, message.editDate ?? message.date);
+    const reference = await __classPrivateFieldGet(this, _MessageManager_c, "f").messageStorage.getVoiceTranscriptionReference(message.chat.id, message.id, (0, _1_utilities_js_1.fromUnixTimestamp)(message.editDate ?? message.date));
     if (!reference) {
         return null;
     }
@@ -1504,7 +1504,7 @@ _a = MessageManager, _MessageManager_c = new WeakMap(), _MessageManager_Lresolve
     }
     return voiceTranscription;
 }, _MessageManager_cacheVoiceTranscription = async function _MessageManager_cacheVoiceTranscription(message, voiceTranscription) {
-    await __classPrivateFieldGet(this, _MessageManager_c, "f").messageStorage.setVoiceTranscriptionReference(message.chat.id, message.id, message.editDate ?? message.date, BigInt(voiceTranscription.id));
+    await __classPrivateFieldGet(this, _MessageManager_c, "f").messageStorage.setVoiceTranscriptionReference(message.chat.id, message.id, (0, _1_utilities_js_1.fromUnixTimestamp)(message.editDate ?? message.date), BigInt(voiceTranscription.id));
     await __classPrivateFieldGet(this, _MessageManager_c, "f").messageStorage.setVoiceTranscription(voiceTranscription);
     return voiceTranscription;
 };

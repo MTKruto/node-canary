@@ -39,7 +39,7 @@ async function constructChatMemberUpdated(update, getEntity) {
     const userPeer = { ...update, _: "peerUser" };
     const chat = (0, _1_chat_p_js_1.constructChatP)(chat_);
     const from = (0, _1_user_js_1.constructUser)(from_);
-    const date = (0, _1_utilities_js_1.fromUnixTimestamp)(update.date);
+    const date = update.date;
     const oldChatMember = await (0, _2_chat_member_js_1.constructChatMember)(update.prev_participant ?? ({ _: "channelParticipantLeft", peer: userPeer }), getEntity);
     const newChatMember = await (0, _2_chat_member_js_1.constructChatMember)(update.new_participant ?? ({ _: "channelParticipantLeft", peer: userPeer }), getEntity);
     const viaSharedFolder = "via_chatlist" in update ? update.via_chatlist ? true : update.invite ? false : undefined : undefined;

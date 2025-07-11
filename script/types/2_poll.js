@@ -41,6 +41,6 @@ function constructPoll(media_) {
         explanation: media_.results.solution,
         explanationEntities: media_.results.solution_entities?.map(_0_message_entity_js_1.constructMessageEntity).filter((v) => v != null),
         openPeriod: poll.close_period,
-        closeDate: poll.close_date ? new Date(poll.close_date * 1000) : undefined,
+        closeDate: poll.close_date,
     });
 }

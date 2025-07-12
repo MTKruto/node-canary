@@ -20,7 +20,6 @@
 import "./_dnt.polyfills.js";
 export * from "./utilities/0_bigint.js";
 export * from "./utilities/0_buffer.js";
-export * from "./utilities/0_cache_map.js";
 export * from "./utilities/0_color.js";
 export * from "./utilities/0_gzip.js";
 export * from "./utilities/0_hash.js";

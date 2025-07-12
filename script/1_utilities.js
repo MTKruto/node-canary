@@ -36,7 +36,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("./_dnt.polyfills.js");
 __exportStar(require("./utilities/0_bigint.js"), exports);
 __exportStar(require("./utilities/0_buffer.js"), exports);
-__exportStar(require("./utilities/0_cache_map.js"), exports);
 __exportStar(require("./utilities/0_color.js"), exports);
 __exportStar(require("./utilities/0_gzip.js"), exports);
 __exportStar(require("./utilities/0_hash.js"), exports);

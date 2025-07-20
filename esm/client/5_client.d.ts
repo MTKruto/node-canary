@@ -27,6 +27,7 @@ import { AddChatMemberParams, AddContactParams, AddReactionParams, AnswerCallbac
 import { StorageOperations } from "./0_storage_operations.js";
 import { ClientPlainParams } from "./1_client_plain.js";
 import { Composer as Composer_, Middleware, MiddlewareFn, MiddlewareObj, NextFunction } from "./1_composer.js";
+export type { FilterQuery, WithFilter } from "./0_filters.js";
 export interface Context {
     /** The client that received the update. */
     client: Client;

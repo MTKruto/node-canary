@@ -17,8 +17,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { TransportProvider } from "./2_transport_provider.js";
+import { TransportProvider } from "./1_transport_provider.js";
 export declare const transportProviderWebSocket: (params?: {
     wss?: boolean;
 }) => TransportProvider;
-//# sourceMappingURL=3_transport_provider_web_socket.d.ts.map
+//# sourceMappingURL=2_transport_provider_web_socket.d.ts.map

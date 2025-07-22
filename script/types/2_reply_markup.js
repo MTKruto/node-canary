@@ -1,3 +1,4 @@
+"use strict";
 /**
  * MTKruto - Cross-runtime JavaScript library for building Telegram clients
  * Copyright (C) 2023-2025 Roj <https://roj.im/>
@@ -17,17 +18,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { unreachable } from "../0_deps.js";
-import { cleanObject } from "../1_utilities.js";
-import { Api } from "../2_tl.js";
-import { constructKeyboardButton, keyboardButtonToTlObject } from "./1_keyboard_button.js";
-import { constructInlineKeyboardButton, inlineKeyboardButtonToTlObject } from "./2_inline_keyboard_button.js";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.constructReplyMarkup = constructReplyMarkup;
+exports.replyMarkupToTlObject = replyMarkupToTlObject;
+const _0_deps_js_1 = require("../0_deps.js");
+const _1_utilities_js_1 = require("../1_utilities.js");
+const _2_tl_js_1 = require("../2_tl.js");
+const _1_inline_keyboard_button_js_1 = require("./1_inline_keyboard_button.js");
+const _1_keyboard_button_js_1 = require("./1_keyboard_button.js");
 function constructInlineKeyboardMarkup(keyboard_) {
     const rows = new Array();
     for (const row_ of keyboard_.rows) {
         const row = new Array();
         for (const button_ of row_.buttons) {
-            row.push(constructInlineKeyboardButton(button_));
+            row.push((0, _1_inline_keyboard_button_js_1.constructInlineKeyboardButton)(button_));
         }
         rows.push(row);
     }
@@ -38,7 +42,7 @@ async function inlineKeyboardMarkupToTlObject(keyboard, usernameResolver) {
     for (const row of keyboard.inlineKeyboard) {
         const row_ = new Array();
         for (const button of row) {
-            row_.push(await inlineKeyboardButtonToTlObject(button, usernameResolver));
+            row_.push(await (0, _1_inline_keyboard_button_js_1.inlineKeyboardButtonToTlObject)(button, usernameResolver));
         }
         rows_.push({ _: "keyboardButtonRow", buttons: row_ });
     }
@@ -49,7 +53,7 @@ function constructReplyKeyboardMarkup(keyboard_) {
     for (const row_ of keyboard_.rows) {
         const row = new Array();
         for (const button_ of row_.buttons) {
-            row.push(constructKeyboardButton(button_));
+            row.push((0, _1_keyboard_button_js_1.constructKeyboardButton)(button_));
         }
         rows.push(row);
     }
@@ -66,14 +70,14 @@ function replyKeyboardMarkupToTlObject(replyMarkup) {
     for (const row of replyMarkup.keyboard) {
         const row_ = new Array();
         for (const button of row) {
-            row_.push(keyboardButtonToTlObject(button));
+            row_.push((0, _1_keyboard_button_js_1.keyboardButtonToTlObject)(button));
         }
         rows_.push({ _: "keyboardButtonRow", buttons: row_ });
     }
     return { _: "replyKeyboardMarkup", resize: replyMarkup.resizeKeyboard || undefined, single_use: replyMarkup.oneTimeKeyboard || undefined, selective: replyMarkup.selective || undefined, persistent: replyMarkup.isPersistent || undefined, rows: rows_, placeholder: replyMarkup.inputFieldPlaceholder };
 }
 function constructReplyKeyboardRemove(replyMarkup_) {
-    return cleanObject({ removeKeyboard: true, selective: replyMarkup_.selective });
+    return (0, _1_utilities_js_1.cleanObject)({ removeKeyboard: true, selective: replyMarkup_.selective });
 }
 function replyKeyboardRemoveToTlObject(replyMarkup) {
     return { _: "replyKeyboardHide", selective: replyMarkup.selective || undefined };
@@ -91,24 +95,24 @@ function constructForceReply(replyMarkup_) {
 function forceReplyToTlObject(replyMarkup) {
     return { _: "replyKeyboardForceReply", selective: replyMarkup.selective || undefined, placeholder: replyMarkup.inputFieldPlaceholder };
 }
-export function constructReplyMarkup(replyMarkup) {
-    if (Api.is("replyKeyboardMarkup", replyMarkup)) {
+function constructReplyMarkup(replyMarkup) {
+    if (_2_tl_js_1.Api.is("replyKeyboardMarkup", replyMarkup)) {
         return constructReplyKeyboardMarkup(replyMarkup);
     }
-    else if (Api.is("replyInlineMarkup", replyMarkup)) {
+    else if (_2_tl_js_1.Api.is("replyInlineMarkup", replyMarkup)) {
         return constructInlineKeyboardMarkup(replyMarkup);
     }
-    else if (Api.is("replyKeyboardHide", replyMarkup)) {
+    else if (_2_tl_js_1.Api.is("replyKeyboardHide", replyMarkup)) {
         return constructReplyKeyboardRemove(replyMarkup);
     }
-    else if (Api.is("replyKeyboardForceReply", replyMarkup)) {
+    else if (_2_tl_js_1.Api.is("replyKeyboardForceReply", replyMarkup)) {
         return constructForceReply(replyMarkup);
     }
     else {
-        unreachable();
+        (0, _0_deps_js_1.unreachable)();
     }
 }
-export async function replyMarkupToTlObject(replyMarkup, usernameResolver) {
+async function replyMarkupToTlObject(replyMarkup, usernameResolver) {
     if ("inlineKeyboard" in replyMarkup) {
         return await inlineKeyboardMarkupToTlObject(replyMarkup, usernameResolver);
     }
@@ -122,6 +126,6 @@ export async function replyMarkupToTlObject(replyMarkup, usernameResolver) {
         return forceReplyToTlObject(replyMarkup);
     }
     else {
-        unreachable();
+        (0, _0_deps_js_1.unreachable)();
     }
 }

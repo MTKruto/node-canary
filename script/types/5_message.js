@@ -51,8 +51,8 @@ const _1_video_js_1 = require("./1_video.js");
 const _2_forward_header_js_1 = require("./2_forward_header.js");
 const _2_game_js_1 = require("./2_game.js");
 const _2_poll_js_1 = require("./2_poll.js");
+const _2_reply_markup_js_1 = require("./2_reply_markup.js");
 const _2_successful_payment_js_1 = require("./2_successful_payment.js");
-const _3_reply_markup_js_1 = require("./3_reply_markup.js");
 const _4_link_preview_js_1 = require("./4_link_preview.js");
 const L = (0, _1_utilities_js_1.getLogger)("Message");
 const keys = {
@@ -380,7 +380,7 @@ async function constructMessage(message_, getEntity, getMessage, getStickerSetNa
         Object.assign(message, await getReply(message_, chat_, getMessage));
     }
     if (message_.reply_markup) {
-        message.replyMarkup = (0, _3_reply_markup_js_1.constructReplyMarkup)(message_.reply_markup);
+        message.replyMarkup = (0, _2_reply_markup_js_1.constructReplyMarkup)(message_.reply_markup);
     }
     if (message_.via_bot_id != undefined) {
         const viaBot = await getEntity({ _: "peerUser", user_id: message_.via_bot_id });

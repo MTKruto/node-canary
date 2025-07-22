@@ -30,6 +30,18 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
 }));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
@@ -50,40 +62,40 @@ exports.chatIdToPeer = chatIdToPeer;
 exports.chatIdToPeerId = chatIdToPeerId;
 exports.getChatIdPeerType = getChatIdPeerType;
 exports.inputPeerToPeer = inputPeerToPeer;
-const _1_telegram_api_js_1 = require("./1_telegram_api.js");
 const _1_tl_reader_js_1 = require("./1_tl_reader.js");
 const _1_tl_writer_js_1 = require("./1_tl_writer.js");
 const _0_deps_js_1 = require("../0_deps.js");
 const _1_utilities_js_1 = require("../1_utilities.js");
+const Api = __importStar(require("./1_telegram_api.js"));
 const _1_utilities_js_2 = require("./1_utilities.js");
 __exportStar(require("./1_telegram_api.js"), exports);
 async function deserializeType(name, bufferOrReader) {
     const reader = bufferOrReader instanceof Uint8Array ? new _1_tl_reader_js_1.TLReader(bufferOrReader) : bufferOrReader;
-    return await reader.readType(name, _1_telegram_api_js_1.schema);
+    return await reader.readType(name, Api.schema);
 }
 function serializeObject(object) {
-    return new _1_tl_writer_js_1.TLWriter().writeObject(object, _1_telegram_api_js_1.schema).buffer;
+    return new _1_tl_writer_js_1.TLWriter().writeObject(object, Api.schema).buffer;
 }
 function isValidObject(object) {
-    return (0, _1_utilities_js_2.isValidObject)(object, _1_telegram_api_js_1.schema);
+    return (0, _1_utilities_js_2.isValidObject)(object, Api.schema);
 }
 function assertIsValidObject(object) {
-    return (0, _1_utilities_js_2.assertIsValidObject)(object, _1_telegram_api_js_1.schema);
+    return (0, _1_utilities_js_2.assertIsValidObject)(object, Api.schema);
 }
 function is(name, value) {
-    return (0, _1_utilities_js_2.is)(name, value, _1_telegram_api_js_1.schema);
+    return (0, _1_utilities_js_2.is)(name, value, Api.schema);
 }
 function isOneOf(names, value) {
-    return (0, _1_utilities_js_2.isOneOf)(names, value, _1_telegram_api_js_1.schema);
+    return (0, _1_utilities_js_2.isOneOf)(names, value, Api.schema);
 }
 function isOfEnum(name, value) {
-    return (0, _1_utilities_js_2.isOfEnum)(name, value, _1_telegram_api_js_1.schema);
+    return (0, _1_utilities_js_2.isOfEnum)(name, value, Api.schema);
 }
 function as(name, value) {
-    return (0, _1_utilities_js_2.as)(name, value, _1_telegram_api_js_1.schema);
+    return (0, _1_utilities_js_2.as)(name, value, Api.schema);
 }
 function mustGetReturnType(name) {
-    return (0, _1_utilities_js_2.mustGetReturnType)(name, _1_telegram_api_js_1.schema);
+    return (0, _1_utilities_js_2.mustGetReturnType)(name, Api.schema);
 }
 const GENERIC_FUNCTIONS = [
     "invokeAfterMsg",

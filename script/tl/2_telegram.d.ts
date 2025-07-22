@@ -17,19 +17,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { AnyObject, AnyType, Enums, Functions, Types } from "./1_telegram_api.js";
 import { TLReader } from "./1_tl_reader.js";
 import * as Api from "./1_telegram_api.js";
 export * from "./1_telegram_api.js";
-export type DeserializedType = boolean | number | bigint | string | Uint8Array | AnyType | Array<DeserializedType>;
-export declare function deserializeType<T extends (keyof Types) | "X" | string>(name: T, bufferOrReader: TLReader | Uint8Array): Promise<T extends keyof Types ? Types[T] : DeserializedType>;
-export declare function serializeObject(object: AnyObject): Uint8Array;
-export declare function isValidObject(object: any): object is AnyType;
-export declare function assertIsValidObject(object: any): asserts object is AnyType;
-export declare function is<S extends keyof (Types & Functions)>(name: S, value: unknown): value is S extends keyof Types ? Types[S] : S extends keyof Functions ? Functions[S] : never;
-export declare function isOneOf<S extends keyof (Types & Functions)>(names: S[] | readonly S[], value: unknown): value is S extends keyof Types ? Types[S] : S extends keyof Functions ? Functions[S] : never;
-export declare function isOfEnum<S extends keyof Enums>(name: S, value: unknown): value is Enums[S];
-export declare function as<S extends keyof Types>(name: S, value: unknown): Types[S];
+export type DeserializedType = boolean | number | bigint | string | Uint8Array | Api.AnyType | Array<DeserializedType>;
+export declare function deserializeType<T extends (keyof Api.Types) | "X" | string>(name: T, bufferOrReader: TLReader | Uint8Array): Promise<T extends keyof Api.Types ? Api.Types[T] : DeserializedType>;
+export declare function serializeObject(object: Api.AnyObject): Uint8Array;
+export declare function isValidObject(object: any): object is Api.AnyType;
+export declare function assertIsValidObject(object: any): asserts object is Api.AnyType;
+export declare function is<S extends keyof (Api.Types & Api.Functions)>(name: S, value: unknown): value is S extends keyof Api.Types ? Api.Types[S] : S extends keyof Api.Functions ? Api.Functions[S] : never;
+export declare function isOneOf<S extends keyof (Api.Types & Api.Functions)>(names: S[] | readonly S[], value: unknown): value is S extends keyof Api.Types ? Api.Types[S] : S extends keyof Api.Functions ? Api.Functions[S] : never;
+export declare function isOfEnum<S extends keyof Api.Enums>(name: S, value: unknown): value is Api.Enums[S];
+export declare function as<S extends keyof Api.Types>(name: S, value: unknown): Api.Types[S];
 export declare function mustGetReturnType(name: string): string;
 export declare function isGenericFunction(value: unknown): value is Api.AnyGenericFunction<Api.AnyFunction>;
 export declare function getChannelChatId(channelId: bigint): number;

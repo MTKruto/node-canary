@@ -24,7 +24,7 @@ import { deserializeFileId, FileType, getPhotoFileId, serializeFileId } from "./
 import { constructMessageEntity } from "./0_message_entity.js";
 import { constructThumbnail } from "./0_thumbnail.js";
 import { getPhotoSizes } from "./1_photo.js";
-import { constructReplyMarkup, replyMarkupToTlObject } from "./3_reply_markup.js";
+import { constructReplyMarkup, replyMarkupToTlObject } from "./2_reply_markup.js";
 export function constructInlineQueryResult(result) {
     const id = result.id, title = result.title ?? "", type = result.type, description = result.description;
     if (Api.is("botInlineMessageMediaGeo", result.send_message)) {

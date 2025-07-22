@@ -19,8 +19,8 @@
  */
 import { Api } from "../2_tl.js";
 import { UsernameResolver } from "./_getters.js";
+import { InlineKeyboardButton } from "./1_inline_keyboard_button.js";
 import { KeyboardButton } from "./1_keyboard_button.js";
-import { InlineKeyboardButton } from "./2_inline_keyboard_button.js";
 /** @unlisted */
 export interface ReplyMarkupInlineKeyboard {
     /** @discriminator */
@@ -68,4 +68,4 @@ export interface ReplyMarkupForceReply {
 export type ReplyMarkup = ReplyMarkupInlineKeyboard | ReplyMarkupKeyboard | ReplyMarkupRemoveKeyboard | ReplyMarkupForceReply;
 export declare function constructReplyMarkup(replyMarkup: Api.ReplyMarkup): ReplyMarkup;
 export declare function replyMarkupToTlObject(replyMarkup: ReplyMarkup, usernameResolver: UsernameResolver): Promise<Api.ReplyMarkup>;
-//# sourceMappingURL=3_reply_markup.d.ts.map
+//# sourceMappingURL=2_reply_markup.d.ts.map

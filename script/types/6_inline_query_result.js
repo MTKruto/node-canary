@@ -28,7 +28,7 @@ const _file_id_js_1 = require("./_file_id.js");
 const _0_message_entity_js_1 = require("./0_message_entity.js");
 const _0_thumbnail_js_1 = require("./0_thumbnail.js");
 const _1_photo_js_1 = require("./1_photo.js");
-const _3_reply_markup_js_1 = require("./3_reply_markup.js");
+const _2_reply_markup_js_1 = require("./2_reply_markup.js");
 function constructInlineQueryResult(result) {
     const id = result.id, title = result.title ?? "", type = result.type, description = result.description;
     if (_2_tl_js_1.Api.is("botInlineMessageMediaGeo", result.send_message)) {
@@ -70,7 +70,7 @@ function constructInlineQueryResult(result) {
                 entities: (result.send_message.entities ?? []).map(_0_message_entity_js_1.constructMessageEntity).filter((v) => v != null),
                 linkPreview: _2_tl_js_1.Api.is("botInlineMessageMediaWebPage", result.send_message) ? { type: "unknown", id: "", url: result.send_message.url, smallMedia: result.send_message.force_small_media ?? false, largeMedia: result.send_message.force_large_media ?? false, aboveText: result.send_message.invert_media ?? false } : undefined,
             }),
-            replyMarkup: result.send_message.reply_markup ? (0, _3_reply_markup_js_1.constructReplyMarkup)(result.send_message.reply_markup) : undefined,
+            replyMarkup: result.send_message.reply_markup ? (0, _2_reply_markup_js_1.constructReplyMarkup)(result.send_message.reply_markup) : undefined,
         });
     }
     else if (_2_tl_js_1.Api.is("botInlineMessageMediaAuto", result.send_message)) {
@@ -116,7 +116,7 @@ function constructInlineQueryResult(result) {
                 entities: (result.send_message.entities ?? []).map(_0_message_entity_js_1.constructMessageEntity).filter((v) => v != null),
             }
             : undefined;
-        const replyMarkup = result.send_message.reply_markup ? (0, _3_reply_markup_js_1.constructReplyMarkup)(result.send_message.reply_markup) : undefined;
+        const replyMarkup = result.send_message.reply_markup ? (0, _2_reply_markup_js_1.constructReplyMarkup)(result.send_message.reply_markup) : undefined;
         switch (type) {
             case "audio": {
                 const a = attributes?.find((v) => _2_tl_js_1.Api.is("documentAttributeAudio", v));
@@ -314,7 +314,7 @@ async function inlineQueryResultToTlObject(result_, parseText, usernameResolver)
             }
             break;
     }
-    const replyMarkup = "replyMarkup" in result_ && result_.replyMarkup ? await (0, _3_reply_markup_js_1.replyMarkupToTlObject)(result_.replyMarkup, usernameResolver) : undefined;
+    const replyMarkup = "replyMarkup" in result_ && result_.replyMarkup ? await (0, _2_reply_markup_js_1.replyMarkupToTlObject)(result_.replyMarkup, usernameResolver) : undefined;
     if ("thumbnailUrl" in result_ && result_.thumbnailUrl) {
         thumb = { _: "inputWebDocument", url: result_.thumbnailUrl, size: 0, mime_type: "image/jpeg", attributes: [] };
     }

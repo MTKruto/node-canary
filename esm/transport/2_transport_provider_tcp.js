@@ -17,19 +17,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { Connection } from "../2_connection.js";
-import { Transport } from "./0_transport.js";
-export type DC = "1" | "2" | "3" | "4" | "5" | "1-test" | "2-test" | "3-test";
-export declare function getDcIps(dc: DC, version: "ipv4" | "ipv6"): [string, ...string[]];
-export interface TransportProviderParams {
-    dc: DC;
-    cdn: boolean;
+import { ConnectionTCP } from "../connection/1_connection_tcp.node.js";
+import { TransportAbridged } from "./1_transport_abridged.js";
+import { getDcId, getDcIps } from "./1_transport_provider.js";
+export function transportProviderTcp(params) {
+    return ({ dc, cdn }) => {
+        const connection = new ConnectionTCP(getDcIps(dc, params?.ipv6 ? "ipv6" : "ipv4")[0], 80);
+        const transport = new TransportAbridged(connection, params?.obfuscated);
+        return { connection, transport, dcId: getDcId(dc, cdn) };
+    };
 }
-export type TransportProvider = (params: TransportProviderParams) => {
-    connection: Connection;
-    transport: Transport;
-    dcId: number;
-};
-export declare function getDcId(dc: DC, cdn: boolean): number;
-export declare function getDc(dcId: number): DC;
-//# sourceMappingURL=2_transport_provider.d.ts.map

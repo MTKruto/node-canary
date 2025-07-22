@@ -17,9 +17,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { TransportProvider } from "./2_transport_provider.js";
-export declare function transportProviderTcp(params?: {
-    ipv6?: boolean;
-    obfuscated?: boolean;
-}): TransportProvider;
-//# sourceMappingURL=3_transport_provider_tcp.d.ts.map
+import { Connection } from "../2_connection.js";
+import { Transport } from "./0_transport.js";
+export type DC = "1" | "2" | "3" | "4" | "5" | "1-test" | "2-test" | "3-test";
+export declare function getDcIps(dc: DC, version: "ipv4" | "ipv6"): [string, ...string[]];
+export interface TransportProviderParams {
+    dc: DC;
+    cdn: boolean;
+}
+export type TransportProvider = (params: TransportProviderParams) => {
+    connection: Connection;
+    transport: Transport;
+    dcId: number;
+};
+export declare function getDcId(dc: DC, cdn: boolean): number;
+export declare function getDc(dcId: number): DC;
+//# sourceMappingURL=1_transport_provider.d.ts.map

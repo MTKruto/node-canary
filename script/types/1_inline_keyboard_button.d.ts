@@ -135,4 +135,4 @@ export interface InlineKeyboardButtonCopy extends _InlineKeyboardButtonBase {
 export type InlineKeyboardButton = InlineKeyboardButtonURL | InlineKeyboardButtonCallback | InlineKeyboardButtonMiniApp | InlineKeyboardButtonLogin | InlineKeyboardButtonSwitchInline | InlineKeyboardButtonSwitchInlineCurrent | InlineKeyboardButtonSwitchInlineChosen | InlineKeyboardButtonGame | InlineKeyboardButtonPay | InlineKeyboardButtonCopy;
 export declare function constructInlineKeyboardButton(button_: Api.KeyboardButton): InlineKeyboardButton;
 export declare function inlineKeyboardButtonToTlObject(button: InlineKeyboardButton, usernameResolver: UsernameResolver): Promise<Api.KeyboardButton>;
-//# sourceMappingURL=2_inline_keyboard_button.d.ts.map
+//# sourceMappingURL=1_inline_keyboard_button.d.ts.map

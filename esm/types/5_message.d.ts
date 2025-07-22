@@ -44,8 +44,8 @@ import { Video } from "./1_video.js";
 import { ForwardHeader } from "./2_forward_header.js";
 import { Game } from "./2_game.js";
 import { Poll } from "./2_poll.js";
+import { ReplyMarkup } from "./2_reply_markup.js";
 import { SuccessfulPayment } from "./2_successful_payment.js";
-import { ReplyMarkup } from "./3_reply_markup.js";
 import { LinkPreview } from "./4_link_preview.js";
 /**
  * Properties shared between all message types.

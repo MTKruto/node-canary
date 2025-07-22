@@ -1,1 +1,0 @@
-{"version":3,"file":"3_transport_provider_tcp.d.ts","sourceRoot":"","sources":["../../src/transport/3_transport_provider_tcp.ts"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;;;;;;GAkBG;AAIH,OAAO,EAAqB,iBAAiB,EAAE,MAAM,2BAA2B,CAAC;AAEjF,wBAAgB,oBAAoB,CAAC,MAAM,CAAC,EAAE;IAC5C,IAAI,CAAC,EAAE,OAAO,CAAC;IACf,UAAU,CAAC,EAAE,OAAO,CAAC;CACtB,GAAG,iBAAiB,CAMpB"}

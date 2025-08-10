@@ -26,6 +26,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.format = format;
+/** An inspect function conforming to the shape of `Deno.inspect` and `node:util`'s `inspect` */
+const dntShim = __importStar(require("../../../../../_dnt.shims.js"));
 /**
  * Converts the input into a string. Objects, Sets and Maps are sorted so as to
  * make tests less flaky.
@@ -44,12 +46,13 @@ exports.format = format;
  * assertEquals(format(new Map([[1, 2]])), "Map(1) {\n  1 => 2,\n}");
  * ```
  */
-const dntShim = __importStar(require("../../../../../_dnt.shims.js"));
 function format(v) {
     // deno-lint-ignore no-explicit-any
-    const { Deno } = dntShim.dntGlobalThis;
-    return typeof Deno?.inspect === "function"
-        ? Deno.inspect(v, {
+    const { Deno, process } = dntShim.dntGlobalThis;
+    const inspect = Deno?.inspect ??
+        process?.getBuiltinModule?.("node:util")?.inspect;
+    return typeof inspect === "function"
+        ? inspect(v, {
             depth: Infinity,
             sorted: true,
             trailingComma: true,
@@ -59,5 +62,35 @@ function format(v) {
             getters: true,
             strAbbreviateSize: Infinity,
         })
-        : `"${String(v).replace(/(?=["\\])/g, "\\")}"`;
+        : basicInspect(v);
+}
+const formatters = [
+    (v) => {
+        if (typeof v === "undefined")
+            return "undefined";
+        if (typeof v === "bigint")
+            return `${v}n`;
+        if (typeof v === "string" ||
+            typeof v === "number" ||
+            typeof v === "boolean" ||
+            v === null ||
+            Array.isArray(v) ||
+            [null, Object.prototype].includes(Object.getPrototypeOf(v))) {
+            return JSON.stringify(v, null, 2);
+        }
+    },
+    (v) => String(v),
+    (v) => Object.prototype.toString.call(v),
+];
+// for environments lacking both `Deno.inspect` and `process.inspect`
+function basicInspect(v) {
+    for (const fmt of formatters) {
+        try {
+            const result = fmt(v);
+            if (typeof result === "string")
+                return result;
+        }
+        catch { /* try the next one */ }
+    }
+    return "[[Unable to format value]]";
 }

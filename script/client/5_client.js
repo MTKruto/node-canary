@@ -1088,7 +1088,7 @@ class Client extends Composer {
             return { _: "inputPeerSelf" };
         }
         const inputPeer = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getInputPeerInner).call(this, id);
-        if (((_2_tl_js_1.Api.is("inputPeerUser", inputPeer) || _2_tl_js_1.Api.is("inputPeerChannel", inputPeer)) && inputPeer.access_hash == 0n) && await this.storage.getAccountType() == "user") {
+        if (((_2_tl_js_1.Api.is("inputPeerUser", inputPeer) || _2_tl_js_1.Api.is("inputPeerChannel", inputPeer)) && inputPeer.access_hash == 0n) && await this.storage.getAccountType() == "bot") {
             if ("channel_id" in inputPeer) {
                 inputPeer.access_hash = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getChannelAccessHash).call(this, inputPeer.channel_id);
             }
@@ -1096,7 +1096,7 @@ class Client extends Composer {
                 inputPeer.access_hash = await __classPrivateFieldGet(this, _Client_instances, "m", _Client_getUserAccessHash).call(this, inputPeer.user_id);
             }
         }
-        if ((_2_tl_js_1.Api.is("inputPeerUser", inputPeer) || _2_tl_js_1.Api.is("inputPeerChannel", inputPeer)) && inputPeer.access_hash == 0n && await this.storage.getAccountType() == "user") {
+        if ((_2_tl_js_1.Api.is("inputPeerUser", inputPeer) || _2_tl_js_1.Api.is("inputPeerChannel", inputPeer)) && inputPeer.access_hash == 0n) {
             throw new _0_errors_js_1.AccessError(`Cannot access the chat ${id} because there is no access hash for it.`);
         }
         return inputPeer;
